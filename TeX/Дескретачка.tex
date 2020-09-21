@@ -1,0 +1,500 @@
+\documentclass{book}
+%nerd stuff here
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+% Languages support
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+% Some fancy symbols
+\usepackage{textcomp}
+\usepackage{stmaryrd}
+% Math packages
+\usepackage{amsmath, amssymb, amsthm, amsfonts, mathrsfs, dsfont, mathtools}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{cancel}
+% Bold math
+\usepackage{bm}
+% Resizing
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+% Optional font for not math-based subjects
+%\usepackage{cmbright}
+
+\author{Коченюк Анатолий}
+\title{Дискретная математика }
+
+\usepackage{url}
+% Fancier tables and lists
+\usepackage{booktabs}
+\usepackage{enumitem}
+% Don't indent paragraphs, leave some space between them
+\usepackage{parskip}
+% Hide page number when page is empty
+\usepackage{emptypage}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{xcolor}
+% Some shortcuts
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\renewcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand{\p}[1]{#1^{\prime}}
+\newcommand{\pp}[1]{#1^{\prime\prime}}
+% Easily typeset systems of equations (French package) [like cases, but it aligns everything]
+\usepackage{systeme}
+\usepackage{lipsum}
+% limits are put below (optional for int)
+\let\svlim\lim\def\lim{\svlim\limits}
+%\let\svlim\int\def\int{\svlim\limits}
+% Command for short corrections
+% Usage: 1+1=\correct{3}{2}
+\definecolor{correct}{HTML}{009900}
+\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
+\newcommand\green[1]{{\color{correct}{#1}}}
+% Hide parts
+\newcommand\hide[1]{}
+% si unitx
+\usepackage{siunitx}
+\sisetup{locale = FR}
+% Environments
+% For box around Definition, Theorem, \ldots
+\usepackage{mdframed}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\newmdtheoremenv[nobreak=true]{definition}{Определение}
+\newmdtheoremenv[nobreak=true]{theorem}{Теорема}
+\newmdtheoremenv[nobreak=true]{lemma}{Лемма}
+\newmdtheoremenv[nobreak=true]{problem}{Задача}
+\newmdtheoremenv[nobreak=true]{property}{Свойство}
+\newmdtheoremenv[nobreak=true]{statement}{Утверждение}
+\newmdtheoremenv[nobreak=true]{corollary}{Следствие}
+\newtheorem*{note}{Замечание}
+\newtheorem*{example}{Пример}
+\renewcommand\qedsymbol{$\blacksquare$}
+% Fix some spacing
+% http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=\parskip \thm@postskip=0pt
+}
+\usepackage{xifthen}
+\def\testdateparts#1{\dateparts#1\relax}
+\def\dateparts#1 #2 #3 #4 #5\relax{
+    \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
+}
+
+\def\@lecture{}%
+\newcommand{\lecture}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@lecture{Lecture #1}%
+    }{%
+        \def\@lecture{Lecture #1: #3}%
+    }%
+    \subsection*{\@lecture}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+% Todonotes and inline notes in fancy boxes
+\usepackage{todonotes}
+\usepackage{tcolorbox}
+
+% Make boxes breakable
+\tcbuselibrary{breakable}
+\newenvironment{correction}{\begin{tcolorbox}[
+    arc=0mm,
+    colback=white,
+    colframe=green!60!black,
+    title=Correction,
+    fonttitle=\sffamily,
+    breakable
+]}{\end{tcolorbox}}
+% These are the fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% LE: left even
+% RO: right odd
+% CE, CO: center even, center odd
+% My name for when I print my lecture notes to use for an open book exam.
+% \fancyhead[LE,RO]{Gilles Castel}
+
+\fancyhead[RO,LE]{\@lecture} % Right odd,  Left even
+\fancyhead[RE,LO]{}          % Right even, Left odd
+
+\fancyfoot[RO,LE]{\thepage}  % Right odd,something additional 1  Left even
+\fancyfoot[RE,LO]{}          % Right even, Left odd
+\fancyfoot[C]{\leftmark}     % Center
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+\usepackage{tikz}
+\begin{document}
+    \maketitle
+    
+    \section{Введение}
+    Связаться:
+    \begin{itemize}
+        \item stankev@gmail.com Собирать культуру общения: указывать Фамилию, Имя
+        \item Телеграм @andrewzta  (для немедленного ответа. Если нет, оно утонет).
+        \item +79219034426 (для катастрофических ситуаций, ожидается, что звонить никто не будет) (ни в коем случае не писать смс)
+    \end{itemize}
+
+    Обращаться можно по методическим вопросам. Если проблема группы -- пишет староста.
+
+    Не писать по учебно-методическим проблемам (общежитие, медосмотр, армия ..) для этого есть зам. декана Харченко (легко найти контакты в ису)
+
+    Про отчётность будет на первой практике.
+
+    Лекции есть в ютубе andrewzta
+    \chapter{1 курс}
+    \section{Фундамент}
+
+        Множество -- неопределяемое понятие. Множество состоит из элементов. $a\in A$ а-маленькое принадлежит множеству А-большое
+
+        $A = \{2, 3, 9\}$
+
+        $A = \{n \mid n\text{ чётно}, n \in \N \}$ -- фильтр
+
+        $A, B:$
+        \begin{itemize}
+            \item $A\cup B = \{a \mid a\in A \text{ или } a\in B\}$
+            \item $A\cap B = \{a \mid a\in A \text{ и } a\in B\}$
+            \item $A\setminus B = \{a | a\in A \text{ и } a\not\in B\}$
+            \item $\overline{A} = \{a | a\not\in A\}$??? $U$ -- универсум
+
+                $\overline{A} = U\setminus A$
+            \item[] $A\setminus B = A\cap \overline{B}$
+            \item $A \triangle B = A\oplus B = (A\cup  B)\setminus (A\cap B)$
+        \end{itemize}
+
+
+
+        \begin{note}
+            Если множество -- любой набор чего-угодно возникает парадокс Рассела
+
+            $A = \{a|a\text{ -- множество, } a\not\in a\}$
+            
+            Вопрос лежит ли в себе $A$? 
+        \end{note}
+
+        \begin{definition}
+            [Пара]
+
+            $A, B$ -- множества. Мы можем рассмотреть множество пар, где первый элемент из $A$, а второй из $B$
+
+            $A \times B = \{(a,b) | a\in A, b\in B\}$
+
+            $A\times A = A^2$
+        \end{definition}
+
+        $(A\times B)\times C = \{(x,y)|x\in A\times B, y\in C\} = \{((a,b),y) |a\in A, b\in B, y\in C\}$ 
+   
+        $A\times (B\times C) = \{(a,(y,z))| a\in A, y\in B, z\in C\}$
+        
+        $A\times B\times C = \{(a,b,c)|a\in A, b\in B, c\in C\}$
+
+        Для простоты, здесь и далее эта операция будет считаться ассоциативной и первые две строчки будут давать то же, что третья -- множество троек.
+
+        $A\times A\times A = A^3$
+        $A^n = \begin{cases}
+            A&,n=1\\
+            A\times A^{n-1}&,n>1\\
+        \end{cases}$
+
+        $A^0 = \{[]\} = \{\varepsilon\}$ -- пустая последовательность.         
+        \begin{example}
+            $A = {2, 3, 9}$
+->    
+            $A\times A =\{(2,2),(2,3),(2,9),(3,2),(3,3),\ldots\}$ 
+        \end{example}
+
+        \begin{note}
+            У множества есть элемента и для любого элемента из универсума, он либо входит (1 раз) либо не входит.
+        \end{note}
+
+        \begin{definition}
+            Функция -- отображение, которое каждому элементу из одного множества ставит в соответветвие единственный элемент из другого множества
+
+            $f:A\to B$ 
+
+            График $\{(x,f(x))\}$.
+
+            Формально будем отождествлять функцию и её график.
+
+            $f\subset A\times B\quad \forall a\in A \exists ! b\in B\quad (a,b)\in f$
+        \end{definition}
+
+        \begin{note}
+            Не путайте принадлежность и включение
+
+            $a\in A$
+
+            $A, B, \forall a$ (если $a\in A$, то $a\in B$) $A\subset B$
+
+            $D_4 = \{n|n\text{ кратно } 4\}$
+
+            $E = \{n|n\text{ чётно}\}$
+
+            $D_4\subset E$
+
+            $\{2, 3, 9\} \subset  \{2, 3, 4, \ldots, 9\}$
+
+            $A\subset A$
+
+            $\O \subset A$
+
+            $A\subset U$
+        \end{note}
+
+        \begin{note}
+            Необязательно все $b$ попадают в график.
+            
+            $sqr:\N \to \N $ -- только квадраты чисел
+        \end{note}
+
+        \begin{definition}
+            $\forall b\in B\exists a\in A: b = f(a)$ -- сюръекция
+        \end{definition}
+
+        \begin{definition}
+            $\forall a\in A \forall b\in B\quad a\neq b \implies f(a)\neq f(b)$
+        \end{definition}
+
+        \begin{note}
+            Принцип Дирихле -- нет инъекции из большего в меньшее множества. Если кроликов больше, чем клеток, то какому-то кролику не хватит клетки
+        \end{note}
+
+        \begin{definition}
+            Если $f$ -- инъекция и сюръекция, то $f$ -- называется биекцией
+
+            Если между двумя конечными множествами есть биекция, то у низ равное количество элементов.
+        \end{definition}
+
+        \begin{definition}
+            Два множества называется равномощными, если между ними есть дикция
+        \end{definition}
+
+        $B^A$ -- множество функций из $A$ в $B$
+
+        $|A| = a, |B| = b\quad |A\times B| = a\cdot b\quad |B^A| = b^a$
+
+        $|A^{\O }| = 1$ эфемерная функция, которой ничего не передать
+
+        $\O ^A = \O , A \neq \O $
+
+        $\O ^{\O } = 1$
+       
+        \begin{definition}
+            $R\subset A\times B$ -- отношение (бинарное)
+
+        \end{definition}
+        \begin{example}
+            $A=B=\N \quad R = \{(a,b)|a<b\}\quad R= <$
+
+            $a\vdots b\quad 6\vdots 2\quad 6\not\vdots 5$
+
+            $A$ = люди, $B$ = собаки, $R = \{(a,b)|a\text{ -- хозяин} b\}$
+        \end{example}
+
+        Рассмотрим 5 классов отношение на квадрате множества:
+        \begin{enumerate}
+            \item рефлексивные $\forall a \quad aRa$
+
+                $RC(R)$ -- рефлексивное замыкание, включаем все пары $(a,a)$
+            \item антирефлексивные $\forall a \quad \neg aRa$
+            \item симметричные $aRb \implies bRa$
+            \item антисимметричные $aRb, a\neq b \implies \neg bRa$
+
+                или $aRb$ и $bRa \implies a=b$
+            \item транзитивность $aRb, bRc \implies  aRc$
+        \end{enumerate}
+        
+        \begin{definition}
+            1+3+5 -- рефлексивные, симметричные и тразитивные -- называются отношениями эквивалентности. 
+        \end{definition}
+        \begin{theorem}
+            $R$ -- отношение эквивалентности на $X$, то элементы $X$ можно разбить на классы эквивалентности так, что:
+
+            $a$ и $b$  в одном классе $\implies  aRb$
+            $a$ и $b$  в разных  классах $\implies \neg aRb$
+
+            множество таких классов обозначается $X / R$
+
+            $N / \equiv_3 = $
+            \begin{align*}
+                \{\{1,4,7,10,\ldots)\\
+                        \{2,5,8,11,\ldots)\}\\
+                        \{3,6,9,12,\ldots)\}\}\\
+            .\end{align*}   
+        \end{theorem}
+        \begin{note}
+            Отношение равномощности -- отношение эквивалентности.
+
+            Классы эквивалентности -- порядки. Для конечного случая обозначаются числами
+        \end{note}
+
+        \begin{definition}
+            1+4+5 -- рефлексивные, антисимметричные и транзитивные -- частичные порядки
+
+            Множество, на котором введён частичный порядок, то оно называется частично упорядоченным. (ч.у.м -- частично упорядоченное множество, poset -- partially organised set)
+        \end{definition}
+        
+        $R\subset X\times X$
+
+   $X, Y, Z\quad R:X\times Y\quad S:Y\times Z$
+
+   \begin{definition}
+       Композиция отношений: 
+
+       $T = R\circ S\quad xTy \iff \exists z: xRz \text{ и } zSy$
+
+       т.е. есть $z$, через который можно пройти, чтобы попасть в $y$ из $x$
+   \end{definition}
+
+    \begin{note}
+        $R\subseteq X\times X\quad S\subseteq X\times X$
+
+        $R\circ S \subseteq X\times X$
+        
+        $R\circ R\subseteq X\times X$ -- пройти два раза по стрелкам
+
+        $R^3 = R\circ R^2 = R^2\circ R$ -- пути длины ровно 3
+
+        $S\circ T\circ U$ -- идём по стрлке из $S$ в $T$, а потом в $U$
+    \end{note}
+
+    \begin{definition}
+        Транзитивное замыкание.
+
+        $R^+ = \bigcup\limits_{k=1}^{\infty } R^k$
+
+        $R^0 = \{(x,x)|x\in X\}$ -- они не включаются по дефолту в $R^+$
+
+        $R^* = \bigcup\limits_{k=0} ^{\infty } R^k = R^+ \cup R^0$ -- если между двумя вершинами существует какой-либо путь
+    \end{definition}
+    \begin{note}
+        Транзитивное замыкание -- транзитивно
+
+        Пусть $xR^+y \implies x R^i y$
+
+        Пусть $yR^+z \implies yR^j z$
+
+        $\implies x(R^i\circ R^j)z \implies  xR^k z$
+    \end{note}
+    \begin{note}
+        $\forall T:T$ -- транзитивно. $T\subset R \implies T^+ \subset R$
+    \end{note}
+    \begin{proof}
+        По индукции:
+
+        База: $R^1 \subset T$ -- дано
+
+        Переход: $R^i\subset T \implies  R^{i+1}\subset T$
+
+        $xR^{i+1}y \implies x(R\circ R^i)y\implies \exists z: xRz\&zR^iy \implies xTz\&zTy \implies xTy$ (по транзитивности $T$)
+    \end{proof}
+
+    \section{Булевы функции}
+
+    $\O $ -- пустое множество. С функциями из/в него всё достаточно грустно.
+
+    $\{unit\}$
+
+    $void$ -- ничего, константная функция
+
+    $\mathbb{B} = \{0,1\}$
+
+    $f:A_1\times A_2\times \ldots\times A_n \to B$  -- функция от нескольких аргументов. Из одного, но декартового произведения
+
+    Булева функция: $f:\mathbb{B}^n\to B$
+
+    $n=0$ -- ноль аргументов $\mathbb{B}^0 = \{[]\}$
+
+    $\mathbb{0}, \mathds{1}$
+     
+    $n=1\quad$
+    \begin{table}[htpb]
+        \centering
+        \caption{n=1}
+        \label{tab:n1}
+        \begin{tabular}{c|cccc}
+            x&$\mathbb{0}$&id&$\neg$&$\mathds{1}$\\\hline
+        0 &0  &0  &1  &1\\
+        1&0&1&0&1 \\
+        \end{tabular}
+    \end{table}
+   \begin{note}
+       Подобные таблицы называются таблицами истинности функций
+   \end{note} 
+    $n=2$
+    \begin{table}[htpb]
+        \centering
+        \caption{n=2}
+        \label{tab:n2}
+        \begin{tabular}{cc|cccccccccccccccc}
+            x&y  & $\mathbb{0}$ & $\land$   &$\not\to $  & $P_1$ & $\not\leftarrow$ & $P_2$ &$\oplus$ & $\vee$ & $\downarrow$ & = & $\neg P_2$ & $\leftarrow$ & $\neg P_1$ & $\to $ & $\uparrow$ & $\mathds{1}$ \\\hline
+         0&  0&  0& 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 &1  &1  &1 \\
+         0&  1&  0&  0& 0 & 0 &1  & 1 &  1&  1& 0 & 0 & 0 & 0 &1  & 1 & 1 & 1\\
+         1&  0&  0&  0&  1&  1& 0 &0  & 1 & 1 & 0 & 0 & 1 & 1 & 0 & 0 &1  &1 \\
+         1&  1&  0&  1&  0&  1& 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 1\\
+        \end{tabular}
+    \end{table}
+
+    С помощью стрелки Пирса ($\downarrow$) и штриха Шефера ($\uparrow$) можно выразить любую другую: $\neg x  = x \downarrow x$
+
+    \section{Задания булевых функций}
+
+    Самый простой способ -- таблица истинности
+
+    $\oplus_n$ -- $2^n$ значений. глупо их все отдельно описывать
+
+    \begin{enumerate}
+        \item Задание функции формулой.
+
+            Определим базисные функции, систему связок
+
+            например: $\land, \vee, \neg, \oplus$
+
+            $x_1 \oplus x_2 \oplus x_3 \ldots $
+
+            $\{f_1, f_2, .., f_n\}$ -- базисные.
+
+            строка -- формула. $f_i(x_1, \ldots, x_k)$ -- формула
+
+            \begin{definition}
+                Дерево разбора формулы. Если у функции арность -- $k$, то у ноды будет ровно $k$ сыновей
+            \end{definition}
+    \end{enumerate}
+
+    $\overline{F}$ --  функции, которые записываются формулами, используя $F$ (замыкание $F$)
+
+    \begin{theorem}
+        [Теорема о стандартном базисе] $\overline{\{\land, \vee, \neg\}} = \mathbb{B}$
+    \end{theorem}
+    \begin{proof}
+        Рассмотрим таблицу истинности функции $f$ Она принимает $n$ аргументов и в ней $2^n$ строк
+
+        Пусть $f\neq \mathbb{0}$. Рассмотрим строчки, в которых единицы.
+
+        По аргументам запишем с не -- аргументы, которые 0, и без не -- те, которые 1
+
+        $\neg x_1 \land \neg x_2 \land x_3 \land \neg x_4 \land x^5$ -- 1 на ровно одном наборе элементов. А теперь возьмём "или" по всем строкам, в которых $1$ 
+
+        Одна такая строка называется термом. 
+
+        Такая форма называется совершенной дизъюнктивной нормальная формой
+    \end{proof}
+    \begin{lemma}
+        Любая функция, кроме тождественного 0  -- есть СДНФ
+
+        $x\vee \neg x$ -- тождественный ноль
+    \end{lemma}
+ \end{document}

@@ -1,0 +1,304 @@
+\documentclass{book}
+%nerd stuff here
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+% Languages support
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+% Some fancy symbols
+\usepackage{textcomp}
+\usepackage{stmaryrd}
+% Math packages
+\usepackage{amsmath, amssymb, amsthm, amsfonts, mathrsfs, dsfont, mathtools}
+\usepackage{cancel}
+% Bold math
+\usepackage{bm}
+% Resizing
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+% Optional font for not math-based subjects
+%\usepackage{cmbright}
+
+\author{Коченюк Анатолий}
+\title{Линейный Анализ}
+
+\usepackage{url}
+% Fancier tables and lists
+\usepackage{booktabs}
+\usepackage{enumitem}
+% Don't indent paragraphs, leave some space between them
+\usepackage{parskip}
+% Hide page number when page is empty
+\usepackage{emptypage}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{xcolor}
+% Some shortcuts
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\renewcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand{\p}[1]{#1^{\prime}}
+\newcommand{\pp}[1]{#1^{\prime\prime}}
+% Easily typeset systems of equations (French package) [like cases, but it aligns everything]
+\usepackage{systeme}
+\usepackage{lipsum}
+% limits are put below (optional for int)
+\let\svlim\lim\def\lim{\svlim\limits}
+%\let\svlim\int\def\int{\svlim\limits}
+% Command for short corrections
+% Usage: 1+1=\correct{3}{2}
+\definecolor{correct}{HTML}{009900}
+\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
+\newcommand\green[1]{{\color{correct}{#1}}}
+% Hide parts
+\newcommand\hide[1]{}
+% si unitx
+\usepackage{siunitx}
+\sisetup{locale = FR}
+% Environments
+% For box around Definition, Theorem, \ldots
+\usepackage{mdframed}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\newmdtheoremenv[nobreak=true]{definition}{Определение}
+\newmdtheoremenv[nobreak=true]{theorem}{Теорема}
+\newmdtheoremenv[nobreak=true]{lemma}{Лемма}
+\newmdtheoremenv[nobreak=true]{problem}{Задача}
+\newmdtheoremenv[nobreak=true]{property}{Свойство}
+\newmdtheoremenv[nobreak=true]{statement}{Утверждение}
+\newmdtheoremenv[nobreak=true]{corollary}{Следствие}
+\newtheorem*{note}{Замечание}
+\newtheorem*{example}{Пример}
+\renewcommand\qedsymbol{$\blacksquare$}
+% Fix some spacing
+% http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=\parskip \thm@postskip=0pt
+}
+\usepackage{xifthen}
+\def\testdateparts#1{\dateparts#1\relax}
+\def\dateparts#1 #2 #3 #4 #5\relax{
+    \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
+}
+
+\def\@lecture{}%
+\newcommand{\lecture}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@lecture{Lecture #1}%
+    }{%
+        \def\@lecture{Lecture #1: #3}%
+    }%
+    \subsection*{\@lecture}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+% Todonotes and inline notes in fancy boxes
+\usepackage{todonotes}
+\usepackage{tcolorbox}
+
+% Make boxes breakable
+\tcbuselibrary{breakable}
+\newenvironment{correction}{\begin{tcolorbox}[
+    arc=0mm,
+    colback=white,
+    colframe=green!60!black,
+    title=Correction,
+    fonttitle=\sffamily,
+    breakable
+]}{\end{tcolorbox}}
+% These are the fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% LE: left even
+% RO: right odd
+% CE, CO: center even, center odd
+% My name for when I print my lecture notes to use for an open book exam.
+% \fancyhead[LE,RO]{Gilles Castel}
+
+\fancyhead[RO,LE]{\@lecture} % Right odd,  Left even
+\fancyhead[RE,LO]{}          % Right even, Left odd
+
+\fancyfoot[RO,LE]{\thepage}  % Right odd,something additional 1  Left even
+\fancyfoot[RE,LO]{}          % Right even, Left odd
+\fancyfoot[C]{\leftmark}     % Center
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+\usepackage{tikz}
+\begin{document}
+    \maketitle
+    \section{Введение}
+    Трифанов Александр Игоревич
+
+    Два модуля: аналитическая геометрия, линейная алгебра
+
+    Отчётность: дз, кр, лабы, рубежное тестирование, экзамен
+
+    дз (16 штук(8 в модуль) по 2 баллв)
+    
+    кр (4 (2 в модуль) 5 баллов)
+
+    лаба (1-2 по 5 баллов)
+
+    рубежный тест (1)
+
+
+
+    \chapter{I курс}
+    \section{Матрицы и операции над ними}
+
+    \begin{definition}
+        Матрица -- прямоугольная таблицв чисел
+    \end{definition}
+
+    $\begin{bmatrix} 
+        a_{11}&a_{12}&\ldots & a_{1n}\\
+        a_{21}&a_{22}&\ldots &a_{2n}\\
+        \vdots & \vdots & \ldots, \vdots\\
+        a_{m 1}& a_{m 2 } & \ldots & a_{m n}
+     \end{bmatrix} $
+
+     $a_{i,j}\in \R$ -- элементы матрицы
+
+     $a_{11}, a_{12}, \ldots, a_{1n}$ -- строка 1
+     
+     $a_{12}, a_{22}, a_{32}, \ldots, a_{m 2}$ -- столбец 2
+
+     $a_{ij}$ -- элемент на пересечении $i$-той строки и $j$-того столбца
+
+     В матрице выше $m$ строк и $n$ столюцов. $A_{m\times n}$ -- обозначение
+
+     \begin{note}
+         $n=m \implies A_{n\times n}$ -- квадратная матрица 
+
+         $\{a_{ii}\}_{i=1}^n$ -- диагональ матрицы $A_{n\times n}$
+     \end{note}
+
+     \begin{note}
+         $A = \| a_{ij} \|$ $B = \| b_{ij} \|$
+     \end{note}
+    
+     \begin{note}
+         $A=B \iff $
+         \begin{itemize}
+             \item одинаковые размеры
+             \item $\forall i, j a_{ij} = b_{ij}$
+         \end{itemize}
+     \end{note}
+
+     Операции с матрицами:
+     \begin{enumerate}
+         \item Умножение на число:
+
+             $B = \alpha \cdot A \iff  \forall i, j\quad b_{ij} = \alpha \cdot a_{ij}$
+         \item Сложение:
+
+             Пусть $A,B$ -- одинакового размера
+
+             $A+B = C :\quad c_{ij} = a_{ij} + b_{ij} \forall i,j$
+
+             \begin{note}
+                 $\sphericalangle \mathbb{O}: \mathbb{O} + A = A+ \mathbb{O} = A$
+
+                 $\mathbb{O}$ -- полностью состоит из нулей
+             \end{note}
+     \end{enumerate}
+
+     Свойства:
+     \begin{itemize}
+         \item коммутативность сложения (следует из коммутативности сложения чисел) $A+B = B+A$
+         \item ассоциативность (--||--) $(A+B)+C = A+(B+C)$
+         \item дистрибутивность $\alpha(A+B) = \alpha A + \alpha B$
+         \item $\forall A\quad -A = -1\cdot A:\quad A+(-A)= \mathbb{O}$ противоположный элемент по сложению
+     \end{itemize}
+
+     \begin{enumerate}
+         \item [3] Умножение матриц
+             
+             Пусть $A_{m\times l}, B_{l\times n}$
+
+             $C = A\cdot B\quad c_{ij} = \sum_{k=1}^{l} a_{ik}\cdot b_{kj}= C_{m\times n}$
+     \end{enumerate}
+\begin{note}
+    $A\cdot B \neq B\cdot A$
+
+    Для квадратных матриц вводится такое понятие, как коммутатор 
+
+    $[AB] = A\cdot B - B\cdot A$
+\end{note}
+
+\begin{example}
+    $A\cdot D = \begin{bmatrix} 1&2&0\\1&-1&1 \end{bmatrix} \cdot \begin{bmatrix} 1&2&3\\4&5&6\\7&8&9 \end{bmatrix}  = \begin{bmatrix} 9&12&15\\4&5&6 \end{bmatrix} $
+
+
+\end{example}
+
+    \begin{note}
+        $\sphericalangle I: A\cdot I = I\cdot A = A$
+
+        $I = \begin{bmatrix} 1&0&\ldots&0\\
+        0&1&\ldots&0\\ 
+        \vdots&\vdots&\vdots&\vdots\\
+        0&0&\ldots&1 \end{bmatrix} $
+    \end{note}
+
+    Свойства:
+    \begin{itemize}
+        \item некоммутативность $A\cdot B \neq B\cdot A$
+        \item ассоциативность $(A\cdot B)\cdot C = A\cdot (B\cdot C) $
+        \item дистрибутивность1  $A(B+C) = AB + AC$
+        \item дистрибутивноcть2 $\alpha (AB) = (\alpha A)B = A(\alpha B)$
+    \end{itemize}
+    \begin{definition}
+        
+    $\sphericalangle N\neq \mathbb{O}:\quad N^k = N\cdot N\cdot \ldots\cdot N = \mathbb{O}$
+
+    N -- нильпотентная матрица, $k$ -- её порядок нильпотентности
+    \end{definition}
+    \begin{example}
+        $\begin{bmatrix} 0& 1\\0&0\end{bmatrix} $
+    \end{example}
+
+    \begin{definition}
+        Идемпотентной матрица называется, если $N^k = I$
+
+        $k$ -- порядок идемпотентности
+
+        
+    \end{definition}
+
+    \begin{example}
+        $\begin{bmatrix} 1&0\\0&-1 \end{bmatrix} $
+    \end{example}
+
+    \begin{enumerate}
+        \item [4] Транспонирование
+
+            $A_{m\times n} = \| a_{ij} \|   $ Пусть $B = A^T = \| b_{ij} \| \implies  b_{ij} = a_{ji}$
+    \end{enumerate}
+
+    Свойства:
+    \begin{itemize}
+        \item $\left( \alpha \cdot A \right)^T = \alpha\cdot A^T $
+        \item $(A+B)^T = A^T + B^T$
+        \item $(AB)^T = B^T\cdot A^T$ -- проверить для себя
+    \end{itemize}
+
+    \begin{note}
+        $A:\quad A=A^T$ -- симметричная/симметрическая матрица.Любая квадратная матрица с симметричными относительно диагонали элементами.
+
+        $A:\quad A = -A^T$ -- антисимметричная матрица. На главной диагонали стоят нули
+
+        $\begin{bmatrix} a_1&a_2&a_3\\ 0&a_4&a_5\\0&0&a_6 \end{bmatrix} $ -- верхняя треугольная. Транспонированная -- нижняя треугольная матрица
+    \end{note}
+\end{document}

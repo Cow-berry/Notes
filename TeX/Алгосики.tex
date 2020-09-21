@@ -1,0 +1,428 @@
+\documentclass{book}
+%nerd stuff here
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+% Languages support
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+% Some fancy symbols
+\usepackage{textcomp}
+\usepackage{stmaryrd}
+% Math packages
+\usepackage{amsmath, amssymb, amsthm, amsfonts, mathrsfs, dsfont, mathtools}
+\usepackage{cancel}
+% Bold math
+\usepackage{bm}
+% Resizing
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+% Optional font for not math-based subjects
+%\usepackage{cmbright}
+
+\author{Коченюк Анатолий}
+\title{Алгоритмы и структуры данных}
+
+\usepackage{url}
+% Fancier tables and lists
+\usepackage{booktabs}
+\usepackage{enumitem}
+% Don't indent paragraphs, leave some space between them
+\usepackage{parskip}
+% Hide page number when page is empty
+\usepackage{emptypage}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{xcolor}
+% Some shortcuts
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\renewcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand{\p}[1]{#1^{\prime}}
+\newcommand{\pp}[1]{#1^{\prime\prime}}
+% Easily typeset systems of equations (French package) [like cases, but it aligns everything]
+\usepackage{systeme}
+\usepackage{lipsum}
+% limits are put below (optional for int)
+\let\svlim\lim\def\lim{\svlim\limits}
+%\let\svlim\int\def\int{\svlim\limits}
+% Command for short corrections
+% Usage: 1+1=\correct{3}{2}
+\definecolor{correct}{HTML}{009900}
+\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
+\newcommand\green[1]{{\color{correct}{#1}}}
+% Hide parts
+\newcommand\hide[1]{}
+% si unitx
+\usepackage{siunitx}
+\sisetup{locale = FR}
+% Environments
+% For box around Definition, Theorem, \ldots
+\usepackage{mdframed}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\newmdtheoremenv[nobreak=true]{definition}{Определение}
+\newmdtheoremenv[nobreak=true]{theorem}{Теорема}
+\newmdtheoremenv[nobreak=true]{lemma}{Лемма}
+\newmdtheoremenv[nobreak=true]{problem}{Задача}
+\newmdtheoremenv[nobreak=true]{property}{Свойство}
+\newmdtheoremenv[nobreak=true]{statement}{Утверждение}
+\newmdtheoremenv[nobreak=true]{corollary}{Следствие}
+\newtheorem*{note}{Замечание}
+\newtheorem*{example}{Пример}
+\renewcommand\qedsymbol{$\blacksquare$}
+% Fix some spacing
+% http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=\parskip \thm@postskip=0pt
+}
+\usepackage{xifthen}
+\def\testdateparts#1{\dateparts#1\relax}
+\def\dateparts#1 #2 #3 #4 #5\relax{
+    \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
+}
+
+\def\@lecture{}%
+\newcommand{\lecture}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@lecture{Lecture #1}%
+    }{%
+        \def\@lecture{Lecture #1: #3}%
+    }%
+    \subsection*{\@lecture}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+% Todonotes and inline notes in fancy boxes
+\usepackage{todonotes}
+\usepackage{tcolorbox}
+
+% Make boxes breakable
+\tcbuselibrary{breakable}
+\newenvironment{correction}{\begin{tcolorbox}[
+    arc=0mm,
+    colback=white,
+    colframe=green!60!black,
+    title=Correction,
+    fonttitle=\sffamily,
+    breakable
+]}{\end{tcolorbox}}
+% These are the fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% LE: left even
+% RO: right odd
+% CE, CO: center even, center odd
+% My name for when I print my lecture notes to use for an open book exam.
+% \fancyhead[LE,RO]{Gilles Castel}
+
+\fancyhead[RO,LE]{\@lecture} % Right odd,  Left even
+\fancyhead[RE,LO]{}          % Right even, Left odd
+
+\fancyfoot[RO,LE]{\thepage}  % Right odd,something additional 1  Left even
+\fancyfoot[RE,LO]{}          % Right even, Left odd
+\fancyfoot[C]{\leftmark}     % Center
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+\usepackage{tikz}
+\begin{document}
+    \maketitle
+    \section{Введение}
+    курс будет идти 4 семестра. 
+
+    1 лекций + 1 практика в неделю
+
+    баллы: практика -- выходишь к доске и делаешь задание.
+
+    практика -- до 30 баллов
+
+    0-25 -- по 5 баллов
+    25-40 -- по 3 балла
+    40+ -- по 1 баллу
+
+    лабораторные: 50 баллов
+
+    экзамен: в каком-то виде будет. до 20 баллов.
+
+    \chapter{I курс}
+    \section{Алгоритмы}
+
+    Алгоритм: входные данные $\to $ \tikz \draw (0,0) -- (0,1) -- (1,1) -- (1,0) -- cycle; $\to $ выходные данные
+
+    входной массив $a[0\ldots n-1]$, выходная сумма $\sum a_i$
+
+    \begin{verbatim}
+        S = 0           \\ 1
+        for i = 0 .. n-1\\ 1+2n
+            S+=a[i]     \\ 3n
+
+        print(S)        \\ 1
+
+    \end{verbatim}
+
+    Модель вычислений.
+
+    RAM - модель. симулирует ПК. За единицу времени можно достать/положить в любое место памяти.
+
+    Время работы (число операций)
+    В примере выше  $T(n) = 3+5n$
+
+    мотивация: 3 становится мальньким, а 5 -- не свойство алгоритма
+
+    $T(n) = O(n)$
+
+    $f(n) = O(g(n)) \iff \exists n_0, c\quad \forall n\geqslant n_0\quad f(n)\leqslant c\cdot g(n)$
+
+    $n_0 = 4, c = 6\quad 3+5n\leqslant 6n, n\geqslant 4\quad 3\leqslant n$
+
+    $f(n) = \Omega (g(n)) \iff --||-- f(n) \geqslant c g(n)$
+
+    $3+5n = \Omega(n)\quad n_0 =1, c=1$
+
+    $3+5n \geqslant n, n\geqslant 1$
+
+    $T(n) = O(n), T(n) = \Omega(n) \iff T(n) = \Theta(n)$
+
+    \begin{verbatim}
+        for i = 0 .. n-1
+            for j = 0 .. n-1
+        \end{verbatim}
+        -- $O(n^2)$
+
+    \begin{verbatim}
+    
+        for i = 0 .. n-1
+            for j = 0 .. i-1
+    \end{verbatim}
+
+    $\sum_{i=0}^{n-1} i =\sum  \frac{n\cdot (n-1)}{2} = \Theta(n^2)$
+
+    \begin{verbatim}
+        i=1
+        while i\cdot i<n
+            i++
+        i=1
+        while i < n
+            i=i\cdot \cdot 2
+    \end{verbatim}
+
+    $O(\sqrt{n}), O(\ln n) $
+
+    \begin{verbatim}
+        f(n):
+            if n=0
+                ..
+            else
+                f(n-1)
+    \end{verbatim}
+
+    $n$ рекурсивных вызовов $O(n)$
+
+
+    \begin{verbatim}
+        f(n):
+            if n=0
+                ..
+            else
+                f(n/2)
+                f(n/2)
+    \end{verbatim}
+
+    $2^{\ln  n} = n$
+
+    если добавить третий вызов: $2^{\log_2 n} = n^{\log_2 3}$
+
+    \section{Сортировки}
+    \subsection{Сортировка вставками}
+
+    Берём массив, идём слева направо: берём очередной элемент и двигаем в влево, пока он не упрётся
+
+    \begin{verbatim}
+        for i = 0 .. n-1
+            j=i
+            while j>0 and a[j]<a[j-1]
+                swap(a[j-1], a[j])
+                j--
+    \end{verbatim}
+
+    Докажем, что алгоритм работает. по индукции. Если часть отсортирована и мы рассматриваем новый элемент, то он будет двигаться, пока не вставиться на своё место и массив снова будет отсортированным.
+
+    Если массив отсортирован $(1,2,\ldots, n)$ -- $O(n)$
+
+    Если нет(n, n-1, \ldots, 1), то $O(n^2)$
+
+    Рассматривать мы дальше будем худшие случаи.
+
+    \subsection{Сортировка слияниями}
+
+    Слияние: из двух отсортированных массивов делает один отсортированный.
+
+   как найти первй элемент. Он наименьший, значит либо самый левые в массиве $a$, либо в массиве $b$. Мы забыли нужный первый элемент и свели к такой же задаче поменьше.
+
+    \begin{verbatim}
+        merge(a,b):
+            n = a.size()
+            m = b.size()
+            i=0, j=0
+            while i<n or j<m:
+                if j==m or (i<n and a[i]<b[j]):
+                    c[k++] = a[i++]
+                else
+                    c[k++] = b[j++]
+            return c
+    \end{verbatim}
+    $O(n+m)$
+
+    Сортировка: берём массив, делим его пополам, рекурсивно сортируем левую и правую часть, а потом сольём их в один отсортированный массив.
+
+    \begin{verbatim}
+        sort(a):
+            n = a.size()
+            if n<=1:
+                return a
+            al = [0, .. n/2-1]
+            ar = [n/2 .. n-1]
+            al = sort(al)
+            ar = sort(ar)
+            return merge(al, ar)
+    \end{verbatim}
+
+    порядка $n$ рекурсивных массивов.
+
+    $T(n) = 2 \cdot T(\frac{n}{2}) + n$
+
+    красиво и понятно: 
+
+    математически и хардкорно: по индукции $T(n) \leqslant \ln  n$
+
+    База: $n=1$ -- не взять из-за логарифма, но можоно на маленькие $n$ не обращать внимания
+
+    Переход:  $$T(n) = 2T(\frac{n}{2}) + n \leqslant 2\cdot \frac{n}{2}\ln  \frac{n}{2} + n = n(\ln  n-1)+n = n \ln  n + n(1-1) \leqslant \ln  n$$
+
+    \begin{theorem}
+        [Мастер-теорема]
+
+        $T(n) = aT\left( \frac{n}{b} \right) + f(n) $
+
+        Если без $f(n) = O(n^{\log _ba-\varepsilon})$, то $a^{\log _b^n} = n^{\log _ba}$
+
+        Если без $f(n) = O(n^{\log _ba+\varepsilon})$, тогда $T(n) = O(f(n))$
+
+        Если без $f(n) = O(n^{\log _ba})$, то $T(n) = n^{\ln _ba}\cdot \ln  n$
+    \end{theorem}
+%
+%    ---------------------------------
+%
+    \section{Структуры данных}
+
+    Структура, которая хранит данные
+
+    Операции: структура данных определляется операциями, которые она умеет исполнять
+
+    Массив:
+    \begin{itemize}
+        \item get(i) (return a[i])
+        \item put(i,v) (a[i] = v)
+    \end{itemize}
+
+    Время работы на каждую операцию
+
+    \subsection{Двоичная куча}
+
+    Куча:
+    \begin{itemize}
+        \item  храним множество ($x<y$)
+        \item insert(x) $\qquad A = A\cup \{x\}$
+        \item remove\_min() 
+    \end{itemize}
+
+    Варианты:
+    \begin{enumerate}
+        \item Массив
+            \begin{itemize}
+                \item  insert(x) $a[n++] = x$ (O(1))
+                    
+                \item remove\_min() (O(n))
+                    \begin{verbatim}
+                        j=0
+                        for i=1 .. n-1
+                            if a[i]<a[j]: j=i
+                        swap(a[j], a[n-1])
+                        return a[--n]
+                    \end{verbatim}
+            \end{itemize}
+        \item Отсортированный массив (по убыванию)
+            \begin{itemize}
+                \item remove\_min()
+                    \begin{verbatim}
+                        return a[--n]
+                    \end{verbatim}
+                \item insert(x)
+                    \begin{verbatim}
+                        a[n++] = x
+                        i=n-1
+                        while i >0 and a[i-1]<a[i]
+                            swap(a[i], a[i-1])
+                            i--
+                    \end{verbatim}
+            \end{itemize}
+            \item Куча. Двоичное дерево, каждого элемента -- 2 ребёнка. У каждого есть один родитель (кроме корня). В каждый узел положим по элементу. Заполняется по слоям. Правило: у дети больше родителя. Минимум в корне -- удобно находить.
+
+                Занумеруем все элементы слева направо. Из узла i идёт путь в $2i+1$ и $2i+2$
+
+                \begin{verbatim}
+                    insert(x)
+                        a[n++] = x
+                        i=n-1
+                        while i>0 and a[i]<a[(i-1)/2]
+                            swap(a[i], a[(i-1)/2])
+                            i = (i-1)/2     
+                \end{verbatim}
+
+                $O(\log n)$
+
+                Идея убирания минимума: поставить вверх вместо минимума последний элемент и сделать просеивание вниз.
+\newpage
+                \begin{verbatim}
+                    remove_min()
+                        res = a[i]
+                        a[0] = a[--n]
+                        i=0
+                        while True:
+                            j=i
+                            if 2i+1<n and a[2i+1]<a[j]:
+                                j=2i+1
+                            if 2i+2<n and a[2i+2]<a[j]:
+                                k=2i+2
+                            if j == i: break
+                            swap(a[i], a[j])
+                            i=j
+                        return res
+                \end{verbatim}
+    \end{enumerate}
+
+    \subsection{Сортировка Кучей (Heap Sort)}
+    \begin{verbatim}
+        sort(a):
+            for i = 1 .. n-1: insert(a[i])
+            for i = 1 .. n-1: remove_min()
+                
+        heap\_sort(a)
+            for i = 0 .. n-1
+                shift_up(i)
+            for i = n-1 .. 0
+                swap(a[0], a[i])
+                shift_down(0, i) // i -- размер кучи
+    \end{verbatim}
+        
+\end{document}
