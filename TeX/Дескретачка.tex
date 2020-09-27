@@ -448,7 +448,7 @@
         \end{tabular}
     \end{table}
 
-    С помощью стрелки Пирса ($\downarrow$) и штриха Шефера ($\uparrow$) можно выразить любую другую: $\neg x  = x \downarrow x$
+    С помощью стрелки Пирса ($\downarrow$) и штриха Шеффера ($\uparrow$) можно выразить любую другую: $\neg x  = x \downarrow x$
 
     \section{Задания булевых функций}
 
@@ -497,4 +497,200 @@
 
         $x\vee \neg x$ -- тождественный ноль
     \end{lemma}
+
+    Напоминание о способах задания функций:
+
+    $F\quad x_1, x_2, \ldots ,x_{n} f\in F$
+
+    $or(and(x, not(y)),or(0,z))$. Такие формы называются формулами. По формуле можно построить дерево разбора.
+
+    $\land, \lor, \neg$ 
+
+    СДНФ -- дизюнкция термов, где каждый терм -- коньюнкция литералов. Совершенная --  в каждом терме есть все переменные по одному разу
+
+    \begin{lemma}
+        $\sqsupset F$ -- некоторое множество. $\overline{F} = \mathbb{BF}$
+
+        $\sqsupset G$ -- некоторое множество функций $\forall f\in F\quad f\in \overline{G}$
+
+        Тогда с помощью $G$ можно выразить любую функцию $\overline{G} = \mathbb{BF}$
+    \end{lemma}
+    \begin{proof}
+        $G\to F\to \forall  \implies G\to \forall $ -- то, что нужно доказать
+
+        фиксируем функцию $h\in \mathbb{BF}$. Она каким-то деревом разбора выражается через функции $f\in F$. Каждая функция $f$ выражается через $g\in \overline{G}$, тогда подставим выражения функций $f$ через $g$  в узлах дерева и получим выражение функции $h$ через $\overline{G}$, значит люая функция выражается через $\overline{G} \implies \overline{G} = \mathbb{BF}$ 
+    \end{proof}
+
+    \begin{example}
+        $\{\oplus, \land, \mathbb{1}\}$
+
+        $x\land y = x\land y\qquad \neg x = x\oplus 1$ -- такая запись называется полиномом жегалкина
+
+        $x\lor y = (x\land y)\oplus x\oplus y$
+    \end{example}
+
+    $x\land y = xy\oplus y\oplus x$ -- $\land$ опускают
+
+    $(x\oplus y)(y\oplus z) = xy\oplus y\oplus xz\oplus yz$
+
+    $(x\oplus 1)(y\oplus 1) = xy\oplus x\oplus y\oplus 1$
+
+    $a\land a = a$ -- идемпотентность 
+
+    \begin{theorem}
+        Любая булева функция (кроме $\mathbb{0}$) имеет каноничный полином, причём единственный (с точностью до коммутативности и ассоциативности)
+    \end{theorem}
+    \begin{proof}
+        булевых функций от $n$ аргументов -- $2^{2^n}$
+
+        Мономов -- $2^n$. Каждый из них мы можем взять или не взять $\implies $ всего $2^{2^n}-1$, -1 из случая, где мы рассматриваем пустую сумму.
+
+        Есть инъекция из булевых функций в полиному Жегалкина. Это инъеция между равномощными множествами $\implies $ это биекция.
+    \end{proof}
+
+    \section{Линейный функции}
+
+    Полиному Жкгалкина, в которых нету $\land$
+
+    $x\oplus y\quad x\oplus y\oplus 1$
+
+    \begin{definition}
+        Функция называется линейной, если её канонический полином Жегалкина не сожержит $\land$
+    \end{definition}
+
+    \begin{statement}
+        Если $F$ содержит только линейный функции, то и $\overline{F}$ содержит только линейный функции
+    \end{statement}
+    \begin{proof}
+        $x_1\oplus x_2 \oplus x_3$
+
+        $x_7\oplus x_8 = (x_1\oplus x_2\oplus x_3)\ldots$ Заменяем и получаем  всё ещё сумму переменных или $\mathbb{1}$
+
+        Если формально, строим дерево, заменяем узлы на линейные фукнции, заменяем повторы, раскрываем скобки (пользуемся ассоциативностью $\oplus$) и получаем линейную функцию.
+    \end{proof}
+
+    \begin{statement}
+        Если $F$ содержит только функции, сохраняющие $0$, то и $\overline{F}$ тоже
+
+        аналогично для $1$
+    \end{statement}
+
+    \begin{definition}
+        Функция $f$ называется монотонной $\iff $ для двух наборов $x_1, x_2, \ldots, x_{n} \quad y_1, y_2, \ldots, y_{n} $, что $x_i\leqslant y_i\qquad 0<1$
+
+        \[
+            f(x_1, x_2, \ldots, x_{n} ) \leqslant f(y_1,y_2,\ldots,y_{n} )
+        .\] 
+    \end{definition}
+
+    \begin{statement}
+        Из монотонных функций не выразить немонотонную
+    \end{statement}
+    \begin{proof}
+        Доказывается индукцией по дереву разбора. Увеличили аргумента, увеличился уровень выше, выше и корень тоже
+    \end{proof}
+
+    \begin{definition}
+        Функция $f$ называется самодвойственная, если
+
+        $f(x_1, \ldots, x_{n} ) = \neg f(\neg x_1, \ldots, \neg x_{n} )$ 
+    \end{definition}
+        
+    \begin{statement}
+        Из самодвойственных функций тоже не выйти. Тоже деревом разборп
+    \end{statement}
+    Классы Поста:
+    \begin{enumerate}
+        \item $F_0$ -- сохраняющие $0$
+        \item $F_1$ -- сохраняющее $1$
+        \item $F_l$ -- линейные
+        \item $F_m$ -- монотонные
+        \item $F_s$ -- самодвойственные
+    \end{enumerate}
+
+    \begin{lemma}
+        $F\subseteq F_i, i\in\{0,1,l,m,s\} \implies \overline{F}\subseteq F_i$
+    \end{lemma}
+    \begin{corollary}
+        $\overline{F}$ -- не полно
+    \end{corollary}
+    \begin{theorem}
+        [критерий Поста] $F$ -- полное $\iff F \not\subseteq F_i$ для всех $i\in \{0,1,l,m,s\}$
+    \end{theorem}
+    \begin{proof}
+        $\implies $ Если нет, то все функции лежат внутри этого класса. Не будет включена $\uparrow$ например, не лежащая ни в одном классе Поста
+
+        $\impliedby $ $f_0\not\in F_0, f_1 \not\in F_1, f_l \not\in F_l, f_m \not\in F_m, f_s \not\in F_s$
+
+        $a(x) f_0\left(x, x, \ldots, x  \right) $
+
+        $a\left(  0 \right) = 1$
+
+        \begin{itemize}
+            \item[a] $a(1) = 1 \implies a(x) = 1$
+            \item[b] $a(1) = 0 \implies a(x) = \neg x$
+        \end{itemize}
+        $b(x) = f_1(x, x, \ldots, x)\quad b(1) = 0$
+        \begin{enumerate}
+            \item $b(1) = 0 \implies b(x) = \mathbb{0}$
+            \item $b(1) = 1 \implies  b(x) = \neg x$
+        \end{enumerate}
+
+        \begin{itemize}
+            \item [1a] $\mathbb{1~0}$
+            \item [1b] $\mathbb{0}, \neg$
+            \item [2a]  $\mathbb{1}, \neg$ 
+            \item [2b] $\neg, x$
+        \end{itemize}
+
+        \begin{itemize}
+            \item [1a] $\mathbb{1,0}\quad f_m(x_1, \ldots, x_{n} ) >f_m(y_1, \ldots, y_{n} )\quad x_i\leqslant y_i$ Значит первое -- 1, а второе -- 9
+
+                $f_m(x_1, \ldots, x_{n} )\\f_m(y_1, \ldots, x_{n} )\\f_m(y_1, \ldots, x_{n} )\\ \vdots\\ f_m(y_1, \ldots, y_{n} )$
+
+                В какой-то момент единица сменилась нулём на соседних строках
+
+                $f(y_1, \ldots, y_{i-1}, x_i, \ldots, x_{n} )=1$
+
+                $f(y_1, \ldots, y_{i-1}, y_i, \ldots, x_{n} )=0$
+
+                $x_i\leqslant y_i\quad x_i\neq y_i \implies x_i = 0, y_i = 1$
+
+                $c(z) = f_m(y_1, \ldots y_{i-1}, z, x_{i+1}, \ldots, x_{n} )$ здесь вместо x и y подставлены константы
+
+                $c(z) = \neg z$
+            \item [2b] $f_s\quad x_1, x_2, \ldots, x_{n} : f_s(x_1, x_2, \ldots, x_{n} ) = \neg f(\neg x_1, \ldots, \neg x_{n} ) = t$
+
+                $d(z) = f_s(z^{x_1}, z^{x_2}, \ldots, z^{x_{n} })\quad x^y = \begin{cases}
+                    x&, y=1\\
+                    \neg x&, y= 0 \\
+                \end{cases}$
+
+                $d(0) = t, d(1) = t$
+
+                $\begin{cases}
+                    t=1 \implies d(t) = \mathbb{1}\\
+                    t=0 \implies d(t) = \mathbb{0}
+                \end{cases}$
+        \end{itemize}
+        Итак мы получили $\mathbb{1,0},\neg$
+
+        Воспользуемся нелинейной функцией: $f_l$ среди нелинейных членов в полиноме Жегалкина выберем тот, в котором меньше всего переменных. Не умаляя общности скажим, что он выглядит как $xyu_1\dots u_k\quad k+2\geqslant 2$
+
+        $h(x,y) = f_l(x,y,\mathbb{1}, \mathbb{1}, \ldots, \mathbb{1}i, \mathbb{0}, \mathbb{0}, \ldots\mathbb{0})$ Вместо $u_k$ подставляем $\mathbb{1}$, а вместо остальных $\mathbb{0}$
+
+        $h(x,y)= xy[\oplus x][\oplus y][\oplus \mathbb{1}]$ -- восемь вариантов.
+
+        Если есть $\oplus 1$, напишем $\neg$
+
+        $xy[\oplus x][\oplus y]$       
+
+        $xy = x\land y$
+
+        $xy\oplus x\oplus y = x\lor y$
+
+        $xy\oplus x\quad h(x,\neg y) = x(y\oplus 1)\oplus x = xy$
+
+        $xy\oplus y\quad h(\neg x, y) = (x\oplus 1)y\oplus y = xy$
+    \end{proof}
  \end{document}
