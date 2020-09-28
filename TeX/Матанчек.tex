@@ -1356,6 +1356,348 @@ $
 
     $2 = |1 - (-1)|\leqslant |1-x_* + x_*-(-1)| \leqslant |1-x_*| + |x_* - (-1)| <2$
     \end{example}
+
+    \begin{definition}
+        Последовательность $\{x_n\}_{n=1}^{\infty }$ называется \underline{ограниченной}, если ограничено множество её значений $\{x_n\}_{n\in \N }$ 
+    \end{definition}
+
+    \begin{definition}
+        В метрическом пространстве \underline{сходящейся} последовательностью называется последовательность, у которой существует предел (в этом пространстве)
+    \end{definition}
+
+    \begin{theorem}
+        Сходящаяся в метрическом пространстве последовательность ограничена.
+    \end{theorem}
+    \begin{proof}
+        Рассмотрим $\{x_n\}_{n=1}^{\infty }$ -- сходящаяся в метрическом пространстве $(X,\rho)$ последовательность, т.е. $\exists x^*\in X\forall \varepsilon>0 \exists N\in \N :\forall n\in N \quad\rho( x_n,x^*)<\varepsilon$
+
+        $\sqsupset \varepsilon = 1, \sqsupset N = N(\varepsilon)$, т.е. $\forall n>N\quad \rho(x_n, x^*)<1$
+
+        $R = max\{\rho(x_1, x^*), \rho(x_2, x^*), \ldots, \rho(x_N, x^*), 1\} \implies \forall n\in \N  x_{n} \in B_r[x^*] \implies \{x_n\}$ -- ограничена
+    \end{proof}
+
+    \begin{theorem}
+        [предельный переход в неравенствах]
+
+        $\sqsupset \{x_{n} \}, \{y_{n} \}$ -- вещественные последовательности. $x_n\to x_*, y_n\to y_*\quad x_*, y_*\in \R\quad \forall n\quad x_{n} \leqslant y_{n} \implies  x_*\leqslant y_*$
+
+        Отметим, что из $x_{n} <y_{n} $ НЕ следует, что $x_*<y_*$.
+
+        Пример: $x_{n} =0, y_{n}  = \frac{1}{n}, x_* = y_* =  0$, но при этом $x_n<y_n \forall n\in \N $
+    \end{theorem}
+    \begin{proof}
+        от противного. $\sqsupset  x_*>y_*\quad \varepsilon = \frac{x_*-y_*}{2}$
+
+        Т.к. $x_{n} \to x_*$, то $\exists N_1\left( =N(\varepsilon) \right): \forall n\in \N , n>N_1\quad \left| x_n-x_* \right| <\varepsilon $
+
+        $\exists N_2\left( =N(\varepsilon) \right) \forall n>N_2\quad \left| y_n-y_* \right| <\varepsilon$
+
+        Если $N = \max\{N_1, N_2\}$ и $n\in \N ~n>N \implies \begin{cases}
+            \left| x_n-x_* \right| <\varepsilon\\
+            \left| y_n-y_* \right| <\varepsilon\\
+        \end{cases} \implies \begin{cases}
+            x_n-x_* >-\varepsilon\\
+            y_n-y_* >-\varepsilon\\
+        \end{cases} \implies \begin{cases}
+            x_n>x_*-\varepsilon = x_* - \frac{x_*-y_*}{2} = \frac{x_*+y_*}{2}\\
+            y_n<y_*+\varepsilon = y_* - \frac{x_*-y_*}{2} = \frac{x_*+y_*}{2}\\
+        \end{cases} \implies  y_n<x_n$ !!!
+    \end{proof}
+
+    Частные случаи(следствия):
+    Пусть $\{x_n\}$ -- вещественная последовательность
+    \begin{enumerate}
+        \item $\sqsupset \forall n\in \N \quad x_n\leqslant b, b\in \R$ и $\exists \lim_{n \to \infty} x_n \implies \lim_{n \to \infty} x_n\leqslant b$
+        \item $\ldots \geqslant a \ldots \implies  \lim_{n \to \infty} x_n\geqslant a$
+        \item $\sqsupset n\in \N \quad x_{n} \in[a,b]$ и $\exists \lim_{n \to \infty} x_n \implies \lim_{n \to \infty} x_n\in [a,b]$
+    \end{enumerate}
+
+    \begin{theorem}
+        [о зажатой последовательности. ``Принцип двух милиционеров'']
+        $\sqsupset \{x_n\}_{n=1}^{\infty }, \{y_{n} \}_{n=1}^{\infty }, \{z_n\}_{n=1}^{\infty }$ -- вещественные последовательности.
+
+        $\forall n\in \N  x_{n} \leqslant y_{n} \leqslant z_n$
+
+        Если $\lim_{n \to \infty} x_n = \lim_{n \to \infty}  z_n = a $ ( и пределы существуют), то $\exists \lim_{n \to \infty} y_n$ и $a = \lim_{n \to \infty} y_{n} $
+    \end{theorem}
+    \begin{proof}
+        $\sphericalangle\forall  \varepsilon>0$
+
+        Т.к. $x_n -> a$, то $\exists N_1\in \N : n\in \N , n\geqslant N_1 \implies \left| x_n-a \right| <\varepsilon$
+
+        Т.к. $z_n \to  a$, то $\exists N_2\in \N :n\in \N , n>N_2, \quad\left| z_n-a \right| <\varepsilon$
+
+        $N = \max\{N_1, N_2\}$, тогда $n\in \N \quad n>N$
+
+        $\begin{cases}
+            \left| x_n-a \right| <\varepsilon\\
+            \left| z_n-a \right| <\varepsilon\\
+        \end{cases}\quad \begin{cases}
+            x_n> a-\varepsilon\\
+            y_n<a+\varepsilon\\
+        \end{cases}$
+
+        $a-\varepsilon <x_n\leqslant y_{n} \leqslant z_n<a+\varepsilon \implies \left| y_n-a \right| <\varepsilon \implies y_n\to a$
+    \end{proof}
+    
+    \begin{definition}
+        $\sqsupset \{x_n\}_{n=1}^{\infty }$ -- числовая последовательность. 
+
+        $\{x_n\}_{n=1}^{\infty }$ называется \underline{бесконечно малой}, $x_{n} \to 0, n\to +\infty $
+    \end{definition}
+    
+    \begin{note}
+        $\{x_n\}_{n=1}^{\infty }$ -- б.м. $\iff \{\left| x_{n}  \right| \}_{n=1}^{\infty }$ -- б.м.
+
+        $\{x_n\}$ -- б.м. $\iff  \forall \varepsilon>0 \exists N = N(\varepsilon)\in \N: \forall n\in \N  n>N\quad \left| x_n \right| <\varepsilon \implies \left| x_n \right|  $ -- б.м. ($\left| \left| x_{n}  \right| -0 \right| <\varepsilon$)
+    \end{note}
+
+    \begin{definition}
+        Число $N$ из определения предела последовательности $x_{n} $ называется \underline{$\varepsilon$ -допуском} этой последовательности, Д$\left( \varepsilon \right) $ -- набор всех $\varepsilon$ -допусков для данной последовательности
+    \end{definition}
+
+    \begin{example}
+        Найти (какой-нибудь) $\varepsilon$-допуск для последовательности $\sqrt{\frac{n+1}{n}} = x_{n}  $ для $\varepsilon>0$
+    \end{example}
+    \begin{proof}
+        Найти $N\in \N :\forall n\in \N ~n>N\quad \left| \sqrt{\frac{n+1}{n}} -1 \right| <\varepsilon\qquad \sqrt{\frac{n+1}{n}-1} <\varepsilon \iff  \frac{1}{\sqrt{n} }<\varepsilon\quad n>\frac{1}{\varepsilon^2}\quad N = \left\lfloor \frac{1}{\varepsilon^2} \right\rfloor +1$
+    \end{proof}
+
+    \begin{definition}
+        $(X,K)\quad X$ -- множество, $K$ -- поле ($K = \R\lor K = \C$)
+
+        ``+'' определено в $X$, $\cdot $ на элемент $K$
+
+        $\forall x, y\in X\quad x+y\in X\qquad \forall \alpha \in K\quad \alpha\cdot k \in X$
+
+        $(X,K)$ называется векторным (линейным) пространством, если
+        \begin{enumerate}
+            \item $\forall x, y\in X\quad x+y = y+x$
+            \item $\forall x, y, z\in X\quad (x+y)+z = z + (y+z)$
+            \item $\exists 0\in X\quad x+0=x$
+            \item $\forall \alpha, \beta \in K, \forall x\in X\quad \alpha\cdot \left( \beta\cdot x \right)  = (\alpha\cdot \beta)\cdot x$
+            \item $\forall \alpha, \beta\in K\quad \forall x\in X\quad (\alpha+\beta)\cdot x = \alpha\cdot x + \beta\cdot x$
+            \item $\forall \alpha\in K\forall x, y\in X\quad \alpha\cdot (x+y) = \alpha\cdot x + \alpha\cdot y$
+            \item $\forall x\in X\quad 1\cdot x = x$
+        \end{enumerate}
+    \end{definition}
+
+    \begin{example}
+        \begin{enumerate}
+            \item $X=\R=K\quad X = \C = K\quad X=\C, K=\R$
+            \item $X = \R^n, K+\R$ -- основной пример векторного пространства.
+            \item $X = \{f:<a,b> \to \R\}, K = \R\qquad (\alpha\cdot f)(x) = \alpha\cdot f(x) \forall \alpha\in K, \forall f\in X\qquad (f_1+f_2)(x) = f_1(x) + f_2(x)$
+
+                $\mathbb{0}(x):\equiv 0$
+        \end{enumerate}
+    \end{example}
+
+    \begin{definition}
+        $\sqsupset (X,K)$ -- векторное пространство.
+
+        $p:X \to [0,+\infty )$ называется \underline{нормой} на $X$, если
+        \begin{enumerate}
+            \item $p(x) = 0 \iff  x = \mathbb{0}$ (невырожденность)
+            \item $\forall \alpha\in K\forall x\in X\quad p(\alpha x) = \left| \alpha \right| p(x)$ (положительная однородность)
+            \item $\forall x, y\in X\quad p(x+y)\leqslant p(x) + p(y)$ (неравенство треугольника)
+        \end{enumerate}
+
+        Функция $p:X\to [0,+\infty )$ и обладает свойствами $2, 3$ называется полунормой.
+    \end{definition}
+
+    Элементарные свойства полнормы:
+    \begin{enumerate}
+        \item $\forall  x, y\in X \forall \alpha, \beta\in K\quad p(\alpha x+\beta y) \leqslant |\alpha|p(x) + |\beta|p(y)$
+        \item $\forall x\in X\quad p(-x) = p(x)$
+        \item $p(x-y) \geqslant \left| p(x) - p(y) \right| $
+
+            $p(x) = p(x-y+y) \leqslant p(x-y) + p(y)$
+
+            $p(x) - p(y) \leqslant p(x-y)$
+            $p(y) - p(x) \leqslant p(y-x) =p(x-y)$
+    \end{enumerate}
+    \begin{note}
+        Норма порождает метрику. $(X, p)$, $X$ -- векторное пространство.
+
+        $\rho(x, y) = p(x-y) \leqslant p(x-z) + p(z-y) \leqslant  \rho(x, z) + \rho(z, y)$
+    \end{note}
+
+    \begin{note}
+        ``Обычное'' обозначение нормы $\|x\|$ вместо $p(x)$
+
+        $\|x\|_2 = \sqrt{\sum_{k=1}^{n} x_k^2} $ -- евклидова норма, $x\in \R^n$
+
+        $\|x\|_1 = \sum_{k=1}^{n} |x_k|$
+
+        $\|x\|_{\infty } = \max\limits_{k=1:n} |x_k|$
+
+        $\|x\|_p = \left( \sum_{k=1}^{n} |x_k|^p \right)^{\frac{1}{p}} , p\in [1, +\infty )$ -- норма (проверка позже)
+    \end{note}
+    \begin{example}
+        $F(x)$ -- строго монотонное возрастает, $F:\R\to \R$
+
+        $\rho_F(x,y) = \left| F(x) - F(y) \right| \forall x, y\in \R $
+
+        $\left| F(x) - F(z) \right|  = \left| F(x) - F(y) + F(y) + F(z) \right| \leqslant \left| F(x)  - F(y) \right|  + |F(y) - F(z)| = \rho(x, y) + \rho(y, z)$
+
+        ``$\|x\|$'' $ = \rho(x, )$ -- не обязательно положительно однородна, т.е не всякая метрика порождена нормой.
+    \end{example}
+    
+    Забегая вперёд:  $C[a,b] = \{f \text{-- непрерывная на } [a,b], f:[a,b] \to  \R \}\quad \|f\| = \max\limits_{x\in [a,b]} \{|f(x)|\}$. Упражнение: доказать, что это норма
+
+    \begin{definition}
+        $\sqsupset (X,K)$ -- векторное пространство.
+
+        $<x,y> :X\times Y \to  K, \quad <\cdot,\cdot>$ называется \underline{скалярным произведением} на $X$, если
+        \begin{enumerate}
+            \item $<x,x> \geqslant 0$ и $\forall x\in X\quad <x,x> = 0 \iff x=\mathbb{0} $
+            \item $\forall x, y, z \in X \forall \alpha, \beta \in K\quad <\alpha x+\beta y,z> = \alpha <x,z> + \beta <y,z>$
+            \item $\forall x, y\in X\quad <x,y> = \overline{<y,x>}$
+        \end{enumerate}
+    \end{definition}
+
+    Элементарные следствия:
+    \begin{enumerate}
+        \item $<z,\alpha x + \beta y> = \overline{\alpha}<z,x> + \overline{\beta}<z,y>$
+
+            $<z,\alpha x + \beta y> = \overline{<\alpha x + \beta y,z}  = \overline{\alpha<x,z> + \beta <y,z>} = \overline{\alpha}\overline{<x,z>} + \overline{\beta}\overline{<y,z>} = \overline{\alpha}<z,x> + \overline{\beta}<z,y>$
+        \item
+    \end{enumerate}
+
+    \begin{statement}
+        Если $(X,K)$ -- векторное пространство, $<\cdot , \cdot >$ -- скалярное произведение, то $\forall x, y\in X\quad \left| <x,y> \right| ^2\leqslant <x,x><y,y>$
+    \end{statement}
+    \begin{proof}
+        \begin{enumerate}
+            \item $y = \mathbb{0}, y = 0\cdot\mathbb{0}\quad <x,y> = <x,0\cdot \mathbb{0}> = 0$
+            \item $y\neq \mathbb{0} \implies <y,y>\neq 0\quad z = \frac{<x,y>}{<y,y>} \in K$
+
+                $0\leqslant <x-\alpha y, x - \alpha y> = <x,x> - \overline{\alpha} <x,y> - \alpha <x,y> + \alpha\cdot \overline{\alpha}<y,y>$
+
+               $0\leqslant <x,x> - Re \frac{<x,y>}{<y,y>} \cdot  <x,y> + \frac{<x,y>^2}{<y,y>}$
+           \item $2Re <x,y> \cdot  <x,y> - <x,y>^2 \leqslant <x,x><y,y>$ 
+        \end{enumerate}
+    \end{proof}
+
+   \begin{statement}
+        [неравенство Коши-Буняковского-Шварца]
+
+        $x = (x_1, \ldots, x_{n} )\quad y = (y_1, \ldots, y_{n} )$
+
+        $\left<x, y \right>_2 = \sum x_ky_k$
+
+        $\left<x, x \right> = \|x\|_2^2$
+
+        $\left<y, y \right> = \|y\|_2^2$
+
+        $\left( \sum_{k=1}^{n} x_ky_k \right) ^2 \leqslant \left( \sum_{k=1}^{n} x_k^2 \right) \left( \sum_{k=1}^{n} y_k^2 \right) $
+
+        $\sum_{k=1}^{n} |x_ky_k|\leqslant \sqrt{\sum_{k=1}^{n} x_k^2} \sqrt{\sum_{k=1}^{n} y_k^2} $
+    \end{statement}
+
+    \begin{theorem}
+        [О связи пределов и арифметических действий в нормированных пространствах]
+        $\sqsupset (X,K)$ -- нормированное векторное пространство (векторное пространство, снабжённое нормой)
+
+        $\{x_n\}_{n=1}^{\infty }, \{y_n\}_{n=1}^{\infty }$ последовательности в $X$, $\{\alpha_n\}_{n=1}^{\infty }$ в $K$
+
+        $x_{n} \to x, y_{n} \to y, x, y\in X\quad \alpha_n\to \alpha\in K$
+        Тогда 
+        \begin{enumerate}
+            \item $x_{n} \pm y_{n} \to  x\pm y$
+            \item $\alpha_n\cdot x_n \to \alpha x$
+            \item $\|x_n\| \to  \|x\|$
+            \item Если $X = \R \lor X = \C, K=X, y\neq 0, \forall n y_{n} \neq 0$, то $\frac{x_{n} }{y_{n} } \to \frac{x}{y}$
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        \begin{enumerate}
+            \item $x_{n} + y_{n} \to  x+y? $
+
+                $\forall \varepsilon>0 \exists \varepsilon$-допуск для $x_{n} +y_{n} $
+
+                $\sqsupset N_1\in $Д$(\frac{\varepsilon}{2}, \{x_{n} \})$
+
+                $\sqsupset N_2\in$Д$\left( \frac{\varpesilon}{2}, \{y_{n} \} \right) $
+
+                $N = \max\{N_1, N_2\}$, если $n\in \N , n>N$
+
+                $\|(x_{n} +y_{n} ) - (x+y)\|\leqslant \|x_{n} -x\| + \|y_{n} -y\| <\frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon$, т.о. $N\in $Д$\left( \varepsilon, \{x_{n} + y_{n} \} \right) $
+
+                Для разности аналогично
+
+                \begin{lemma}
+                    $\sqsupset \{a_n\}_{n=1}^{\infty }, \{b_n\}_{n=1}^{\infty }    $ -- числовые последовательности, $\{a_n\}$ -- ограничена, $\{b_n\}$ -- б.м. $\implies  \{a_nb_n\}$ -- б.м.
+                \end{lemma}
+                \begin{proof}
+                    [Доказательство леммы]
+
+                    $\{a_n\}$ -- ограничено $\implies \exists R>0: \forall n\in \N \quad |a_n| \leqslant R$
+
+                    $b_n$ -- б.м. $\implies $ для $\forall \varepsilon>0 \exists n\in \text{Д}\left( \frac{\varepsilon}{2}, \{b_n\} \right) $, т.е. $|b_n|<\frac{\varepsilon}{R} \forall n\in \N  ~ n>N$ Тогда $|a_nb_n| = |a_n| |b_n| <R\cdot \frac{\varepsilon}{R} = \varepsilon \implies N\in \text{Д}\left( \varpesilon, \{a_nb_n\} \right) \implies a_nb_n \to 0, n\to  +\infty  $
+                \end{proof}
+            Доказательство теоремы:
+
+        \item $\alpha_nx_n - \alpha x = \alpha_nx_n - \alpha x_n + \alpha x_n - \alpha x = (\alpha_n-\alpha)x_n + \alpha(x_n - x)$
+
+            $\|(\alpha_n - \alpha)\cdot x_n\| = |\alpha_n - \alpha|\|x_n\|\qquad \|\alpha(x_n-x)\| = |\alpha|\|x_n-x\|$
+
+            В каждой один из множителей ограничен, а другой бесконечно малый
+
+            $\implies  \|\alpha_nx_n - \alpha x\|$ -- б.м. $\implies  \alpha_nx_n - \alpha x \to  0 \implies  \alpha_nx_n \to  \alpha x$
+        \item $\left| \|x_{n} \| - \|x\| \right| \leqslant \|x_{n} -x\|$ -- б.м.
+
+        \item $\frac{x_{n} }{y_{n} } - \frac{x}{y} = x_n\cdot \frac{1}{y_n} \to  x\cdot \frac{1}{y} \impliedby (2)$, если $\frac{1}{y_{n} } \to  \frac{1}{y} \iff  \frac{1}{y_{n} } - \frac{1}{y}$ -- б.м. $\frac{y-y_{n} }{yy_{n} } = (y-y_{n} )\frac{1}{y}\frac{1}{y_{n} }$
+
+            $\varepsilon = \frac{1}{2}|y| >0\quad \sqsupset N \in \text{Д}\left( \varepsilon, \{y_{n} \} \right) \quad n>N \implies  |y_n-y| <\varepsilon$
+
+            $m = \min\{|y_1|, |y_2|, \ldots, |y_n|, \varepsilon\}$ и $m>0$
+
+            $\forall n\in N n\leqslant N \lor n>N\quad |y_n| \geqslant m \lor |y_n| \geqslant |y| - |y_n-y| = 2\varepsilon - \varepsilon = \varepsilon \geqslant m \implies  \left| \frac{1}{y_n} \right| \leqslant \frac{1}{m} \implies \{\frac{1}{y_{n} }\}$ -- ограничено
+
+           
+        \end{enumerate}
+    \end{proof}
+    \begin{definition}
+        $\sqsupset \{x_{n}\}_{n=1}^{\infty } $ -- вещественная последовательность
+
+        $\lim_{n \to \infty} x_n = +\infty  \iff  \forall M\in \R \exists N\in \N : \forall n\in \N , n>N\quad x_n>M$
+
+        $\lim_{n \to \infty} x_n = -\infty  \iff  \forall M\in \R \exists  N\in \N : \forall n\in \N , n>N\quad x_n<M$
+
+        $\sqsupset \{x_n\}_{n=1}^{\infty } \subset \C$
+
+        $\lim_{n \to \infty} x_n = \infty \iff \forall M\in \R\exists N\in \N : \forall n\in \N , n>N\quad |x_n| >M$
+    \end{definition}    
+    \begin{note}
+        \begin{enumerate}
+            \item $x_n \to \infty  \iff  |x_n| \to +\infty $
+            \item $x_n\to  +\infty  \lor x_n\to -\infty  \implies  x_n \to  \infty $ (обратное неверно: $x_n = (-1)^n\cdot n$
+        \end{enumerate}
+    \end{note}
+
+    \begin{definition}
+        Последовательности $x_n:\quad x_n\to \infty $ называются \underline{бесконечно большими}
+    \end{definition}
+    \begin{note}
+        $\{x_n\}$ -- б.б. $\implies $ неограничена (обратное неверно: $x_{n}  = (1+(-1)^n)\cdot n$ -- неограничена и не б.б.)
+    \end{note}
+    \begin{lemma}
+        [О связи бесконечно больших и бесконечно малых]
+
+        $\sqsupset  \{x_n\}_{n=1}^{\infty }$ -- числовая последовательность и $\forall n\in \N  \quad x_n\neq 0$. Тогда $x_{n} $ -- б.б. $\iff \frac{1}{x_{n} }$ -- б.м. 
+
+        $x_{n} $ -- б.м. $\iff  \frac{1}{x_{n} }$ -- б.б.
+    \end{lemma}
+    \begin{proof}
+        $x_{n} $ -- б.б. $\iff  \forall M>0 \exists  N\in \N : \forall n\in \N  n>N\quad |x_n| >M \iff \frac{1}{x_{n} }<\frac{1}{M}\quad M = \frac{1}{\varepsilon}$
+
+        $\iff \forall \varpesilon >0 \exists \ldots\ldots \left| \frac{1}{x_{n} } \right| <\varepsilon$
+    \end{proof}
+
+    $\{x_k\}_{k=1}^{\infty }, n\in \N \quad \{x_k\}_{n=k}^{\infty }$ -- хвост последовательности $x_k$
+
+    Если $\{x_k\}_{k=1}^{\infty }$, то последняя лемма применима к некоторому хвосту этой последовательности. 
 \end{document}
 
 
