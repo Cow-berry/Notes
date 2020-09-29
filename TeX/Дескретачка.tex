@@ -675,7 +675,7 @@
         \end{itemize}
         Итак мы получили $\mathbb{1,0},\neg$
 
-        Воспользуемся нелинейной функцией: $f_l$ среди нелинейных членов в полиноме Жегалкина выберем тот, в котором меньше всего переменных. Не умаляя общности скажим, что он выглядит как $xyu_1\dots u_k\quad k+2\geqslant 2$
+        Воспользуемся нелинейной функцией: $f_l$ среди нелинейных членов в полиноме Жегалкина выберем тот, в котором меньше всего переменных. Не умаляя общности скажем, что он выглядит как $xyu_1\dots u_k\quad k+2\geqslant 2$
 
         $h(x,y) = f_l(x,y,\mathbb{1}, \mathbb{1}, \ldots, \mathbb{1}i, \mathbb{0}, \mathbb{0}, \ldots\mathbb{0})$ Вместо $u_k$ подставляем $\mathbb{1}$, а вместо остальных $\mathbb{0}$
 
@@ -693,4 +693,143 @@
 
         $xy\oplus y\quad h(\neg x, y) = (x\oplus 1)y\oplus y = xy$
     \end{proof}
+
+\section{Преобразование Мёбиуса}
+$f(x_1, x_2, \ldots, x_{n} ) = x\vee y / x / y / 1$    
+
+$a_{xy}xy \oplus a_x x \oplus a_y y \oplus a_1$
+
+$f(x_1, x_2, \ldots, x_{n} ) = \bigoplus\limits_{\vec s \in \mathbb{B}^n} a_s \prod\limits_{i:s(i) = 1} x_i = \bigoplus\limits_{\vec s\leqslant \vec x} a_{\vec s}$
+
+$s(i) = 1 \implies  x(i) = 1 \iff  s\& x = s \iff s\leqslant x$ (покомпонентно)
+
+\begin{definition}
+    [Доминирование]
+
+    $\vec a \leqslant  \vec b \iff  \forall i\quad a_i\leqslant b_i$
+\end{definition}
+
+Таблица истинности:
+\begin{tabular}{cccc|c}
+    0&0&0&\ldots&$f_{00\ldots0}$\\
+    0& 0 & \ldots & 1& $f_{00\ldots_1}$\\
+     &&&&\\
+     &&&&\\
+    1&1&\ldots&1&$f_{11\ldots_1}$\\
+\end{tabular}
+
+$f\in \mathbb{B}^{2^n}$
+
+$\vec a = M\vec f\quad \vec f = M\vec a$
+
+$M_{xs} = [s\leqslant x]$
+
+Преобразование Мёбиуса -- матрица $M = \begin{pmatrix} 1&0&0&0\\1&1&0&0\\1&0&1&0\\1&1&1&1 \end{pmatrix}$
+
+
+
+\begin{theorem}
+    Преобразование матрицы --  инволюция ($M = M^{-1}$)
+
+    $\vec a_t = \bigoplus\limits_{x\leqslant t} f_x $
+\end{theorem}
+\begin{proof}
+    $\bigoplus\limits_{x\leqslant t}f_x = \bigoplus\limits_{x\leqslant t}\bigoplus\limits_{s\leqslant x} a_s = \bigoplus\limits_{s,x:s\leqslant x\leqslant t}a_s = \bigoplus\limits_S [(#x: s\leqslant x\leqslant t)\%2]a_s = a_t$
+
+    \begin{enumerate}
+        \item $s\not\leqslant t \implies  #x = 0$
+        \item $s=t \implies  #x = 1, s=x=t$
+        \item $s\leqslant t_1\quad s\neq ts$ -- нечётное число раз ксориться. $z$ различных разрядов, $z\leqslant 1\quad 2^{z}$
+    \end{enumerate}
+\end{proof}
+
+\begin{example}
+    $  \begin{pmatrix}1\\1\\1\\0  \end{pmatrix} $
+        $a_{11}=1, a_{01}=0, a_{10}=0, a_{00} = 1$
+
+        $xy\oplus 1$ -- штрих Шефера
+\end{example}
+
+\section{Схемы из функциональных элементов (Boolean Circuts)}
+
+\begin{definition}
+    Топологической сортировкой называется отображение $\varphi:V \to  \{1, \ldots, n\}\quad u\neq v \implies  \varphi(u)\neq \varphi(v)\quad uv\in E \implies  \varphi(u)<\varphi(v)$
+\end{definition}
+
+\begin{theorem}
+    Ациклический ориентированный граф имеет топологическую сортировку.
+\end{theorem}
+\begin{lemma}
+    Если $G$ ациклический граф, то существует вершина, из которой не выходит рёбер
+\end{lemma}
+\begin{proof}
+    [Доказательство леммы]
+    Возьмём вершину: если 
+
+\end{proof}
+\begin{proof}
+    [Доказательство теоремы]
+
+   $n=1$ дадим единственной вершине номер 1
+
+   $n>1\quad $ возьмём вершину из которой нет рёбер , дадим ей номер n и удалим её из графа. Граф от этого не стал иметь циклов, поэтому по индукционному предположению мы можем занумеровать оставшиеся $n-1$ элементов
+\end{proof}
+
+Вершины, в которых нет рёбер называются $x_1, x_2, \ldots, x_{n} $. Дальше идут внутренние вершины, обозначаемые функциями. Например, если обозначена $\land$, то в неё входит два ребра. Если некоммутативная функция, то указывается порядок. Исходящая степень может быть любой. Завершает всё вершина выхода
+
+\begin{figure}[ht]
+    \centering
+    \incfig{sceme}
+    \caption{sceme}
+    \label{fig:sceme}
+\end{figure}
+
+$x\oplus y = (x\land \neg y) \lor (\neg x \land y)$
+
+Дерево разбора легко превращается в схему.
+\begin{theorem}
+    Не существует формулы $len(\phi) = \overset{\sim }O(n)$ для $\oplus_n$ в $\{\land, \lor, \neg\}$
+\end{theorem}
+В схеме мы можем пересипользовать то, что в формуле пришлось бы повторять.
+
+$B$ -- базис
+
+ \begin{theorem}
+     Функцию $f$ можно задать формулой в базе $B \iff  f$ можно представить схемой 
+ \end{theorem}
+
+ \begin{definition}
+     Сложностью функции $f$ в базисе $B\quad size_B(f) = \min$ число функциональных элементов в схеме.
+ \end{definition}
+ \begin{definition}
+     Глубина схемы определяется рекурсивно: глубина входов -- 0, глубина вершины -- максимум из грубины входящих + 1
+
+     depth$_B(f)$ -- минимальная глубина схемы для функции.
+ \end{definition}
+
+ \begin{theorem}
+        $B_1, B_2$ -- базисы.
+
+        $\exists c\quad\forall f\quad size_{B_1}(f) \leqslant c\cdot size_{B_2}(f)$
+ \end{theorem}
+ \begin{proof}
+     $B_2 = \{b_1, b_2, \ldots, b_n\}$
+
+     $b_i$ выразим через $B_1$
+
+     $C\leqslant \max\limits_{b_i\in B_2} size_{B_1}(b_i)$
+
+     (оптимальная схема может быть лучше, поэтому $\leqslant $)
+ \end{proof}
+ \begin{theorem}
+     То же самое про глубину
+ \end{theorem}
+\begin{corollary}
+    $size(f)$ бзе базиса -- асимптотическое поведение не зависящее от базиса (по теоремам при переходе к другому базису всё отличается в константу) 
+\end{corollary}
+\begin{corollary}
+    $c_1 size_{B_2}(f) \leqslant size_{B_1}(f) \leqslant  c_2 size_{B_2}(f)$
+
+    Размер функции с точностью до константы не зависит от базиса
+\end{corollary}
  \end{document}
