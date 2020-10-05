@@ -1,4 +1,4 @@
-\documentclass{book}
+{book}
 %nerd stuff here
 \pdfminorversion=7
 \pdfsuppresswarningpagegroup=1
@@ -11,6 +11,7 @@
 \usepackage{stmaryrd}
 % Math packages
 \usepackage{amsmath, amssymb, amsthm, amsfonts, mathrsfs, dsfont, mathtools}
+\usepackage[bb=boondox]{mathalfa}
 \usepackage{cancel}
 % Bold math
 \usepackage{bm}
@@ -44,6 +45,7 @@
 \newcommand{\pp}[1]{#1^{\prime\prime}}
 \newcommand{\ov}[1]{\overline{#1}}
 \renewcommand\phi{\varphi}
+%\DeclareMathOperator{\Cl}{Cl}
 % Easily typeset systems of equations (French package) [like cases, but it aligns everything]
 \usepackage{systeme}
 \usepackage{lipsum}
@@ -1698,8 +1700,376 @@ $
     $\{x_k\}_{k=1}^{\infty }, n\in \N \quad \{x_k\}_{n=k}^{\infty }$ -- хвост последовательности $x_k$
 
     Если $\{x_k\}_{k=1}^{\infty }$, то последняя лемма применима к некоторому хвосту этой последовательности. 
+\begin{note}
+    $\overset{\land}{\C} = \C\cup \{\infty \}$
+\end{note}
+    \begin{theorem}
+        [Арифметические действия над бесконечно большими]
+
+        $\sqsupset \{x_{n} \}_{n=1}^{\infty }, \{y_{n} \}_{n=1}^{\infty }$
+
+        \begin{note}
+            $x_{n} \to \pm \infty $ имеет смысл тогда и только тогда, когда $x_{n} \in \R$
+        \end{note}
+
+        \begin{itemize}
+            \item [I)] Если $\{x_{n}\} \to +\infty , \{y_{n}\} $ ограничено снизу $\implies  x_{n} +y_{n} \to  +\infty $ 
+            \item [II)] Если $\{x_{n} \} \to -\infty , \{y_{n} \}$ ограничена сверху $\implies  x_{n} +y_{n} \to -\infty $
+            \item [III)] Если $\{x_{n} \} \to \infty$, $y_n\to a\in \C$ ограничено снизу $\implies x_{n} +y_{n} \to \infty $
+            \item [IV)] Если $\{\x_{n} } \to  +\infty(-\infty ) \quad \exists \delta >0: y_{n} >\delta \forall n\in \N  \implies x_{n} \cdot y_{n} \to +\infty (-\infty )$
+            \item [V)] Если $\{x_{n} \} \to +\infty (-\infty )\quad \exists \delta >0:\forall n\in \N \quad y_{n} <-\delta \implies x_{n} \cdot y_{n}  \to -\infty (+\infty )$
+            \item [VI)] Если $\{x_{n} \} \to  \infty \quad \exists \delta >0: \forall n\in \N  \quad |y_{n}|>\delta \implies x_{n} *y_{n}  \to \infty $
+            \item [VII)] Если $\{x_{n} \} \to a\in \C, \quad y_{n} \to \infty & \forall n\in \N \quad y_{n} \neq 0 \implies \frac{x_{n} }{y_{n} }  \to  0$
+            \item [VIII)] Если $x_{n} \to a\in \overset{\land}{\C}\setminus \{0\}, \quad y_{n} \to  0 \implies  \frac{x_{n} }{y_{n} }\to \infty $
+            \item [IX)] Если $\{x_{n} \} \to  \infty , \quad \forall n\in \N \quad y_{n} \neq 0\quad y_{n} \to a\in C \implies \frac{x_{n} }{y_{n} } \to \infty $
+        \end{itemize}
+    \end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item [(III)] $z_n\to \infty  \iff  \forall M>0 \exists N\in \N : \forall n>N, n\in \N \quad |z_n|>M$
+
+            $\sphericalangle \forall M>0$ По условию $y_{n} \to a\in \C \implies  \exists C: \forall n\in \N \quad |y_{n} |\leqslant C$
+
+            Т.к. $\{x_{n} \} \to \infty \exists \p N\in \N :\quad x_{n} >M+C \forall n>\p N, n\in \N $
+
+            $a_n = |x_{n} +y_{n} | \geqslant  |x_{n} | - |y_{n} | >M+C-C = M$
+
+            $N = \p N$
+        \item [(V)] $\forall M>0 \exists N\in \R: \forall n\in \N , n>N\quad x_{n} y_{n} <-M$
+
+            Т.к. $x_{n} \to +\infty $, то для  $\frac{M}{\delta} \exists \p N\in \N : \forall n>\p N\quad n\in \N \quad x_{n} >\frac{M}{\delta} \implies  x_{n}y_{n} <\frac{M}{\delta}\cdot (-\delta) = -M, \quad N = \p N$ 
+        \item[(IX)] $y_{n} \neq 0 \forall n\in \N $
+            \begin{enumerate}
+                \item $a\neq 0 \implies \frac{1}{y_{n} }\to \frac{1}{a}, \exists \delta >0: \left| \frac{1}{y_{n} } \right| >\delta$ (см теорему об арифметических действиях над сх. последовательностями) $\implies \frac{x_{n} }{y_{n} } \to \infty \infty $ (по пункту VI)
+            \end{enumerate}
+    \end{itemize}
+\end{proof}
+
+$\overset{\land}{\R} = \R\cup \{\infty \}$
+
+Окрестность точки $\infty $ в $\overset{\land}{\R}$ -- множество вида $\{\infty \}\cup \{x\in \R:|x|>R\}$
+
+\begin{note}
+    $x_{n} \to a\quad a\in \overset{\land}{\C}, a\in \ov{\R}, a\in \overset{\land}{\R} \iff  \forall $ окрестности $U_a$  впространстве  $X \exists $ окрестность $V_{+\infty }: \forall n\in \N \cap V_{+\infty } \implies  x_{n} \in U_a$ (ещё одна формулировка на языке окрестностей)
+\end{note}
+
+\begin{note}
+    [замечание к теореме]
+
+    $x_{n} \to \pm \infty (\infty ), y_{n} \to \pm \infty (\infty )\quad -\frac{\infty }{\infty }, \frac{0}{0}, \infty \cdot 0, +\infty +(-\infty ), \infty +(\infty )$ -- неопределённость, т.е. нет универсального утверждения про предел.
+\end{note}
+\begin{example}
+    $\frac{\infty }{\infty }$
+
+    \begin{enumerate}
+        \item $x_{n} =n=y_{n} \to \infty  \quad \frac{x_{n} }{y_{n} } \to 1$
+        \item $x_{n} =n^2, y_{n} =n \to \infty\quad \frac{x_{n} }{y_{n} } \to \infty  $
+        \item $x_{n} =n, y_{n} =n^2 \to \infty \quad \frac{x_{n} }{y_{n} } \to  0$
+        \item $x_{2n}=2n, x_{2n+1} = n^2\quad y_{2n} = x_{2n+1}, y_{2n+1} = x_{2n}$
+
+            $\not \exists \lim_{n \to \infty} \frac{x_{n} }{y_{n} } $ -- упражнение
+    \end{enumerate}
+\end{example}
+
+\begin{proof}
+    [Продолжение доказательства неравенства Коши-Буняковского-Шварца]
+
+    $\left| \left< x, y \right> \right| ^2 \leqslant \left<x, x \right> \cdot  \left< y, y \right> \forall $ скалярного произведение
+
+    \begin{example}
+        [Примеры скалярных произведений]
+
+        $C\left( [a,b] \right)  = \{f: f\text{ непрерывна на }[a,b]\}\qquad f:[a,b] \to  \R$
+
+        $<f,g> = \int \limits_a^b f(x)g(x)dx$
+
+        $\ell ^2 = \{(x_1, x_2, \ldots):x_k\in \C\quad \sqrt{ \sum_{k=1}^{\infty } \left| x_k \right|^2} <+\infty  \}\qquad \left< x,y \right> = \sum_{k=1}^{\infty } x_ky_k$
+    \end{example}
+
+    $y=0 \implies \left< x, y \right> = \left< x,\mathbb{0} \right> = \left< x, 0\cdot \mathbb{0} \right> = o\cdot \left< x, \mathbb{0} \right> = 0\qquad \left< y, y \right> = 0\implies $ КБШ верно
+
+    $y\neq 0 \implies  \left< y, y \right> >0\quad \lambda = \frac{\left< x, y \right>}{\left< y, y \right>}$
+
+    $0\leqslant \left< x-\lambda y, x-\lanbda y \right> = \left< x, x \right> - \lambda \left< y, x \right> - \left< x, \lambda y \right> + \left< \lambda x, \lambda y \right> = \left< x, x \right> - \lambda \left< y, x \right> - \ov{\lambda} \left< x, y \right> + \lambda \cdot  \ov{\lambda} \left< y, y \right> = \left< x, x \right> - \frac{\left| \left< x, y \right> \right| ^2}{\left< y, y \right>} - \frac{\left| \left< x, y \right> \right| ^2}{\left< y, y \right>} + \frac{\left| \left< x, y \right> \right| ^2}{\left< y, y \right>} \implies  \left< x, x \right>\cdot \left< y, y \right> - \left| \left< x, y \right> \right| ^2 \geqslant 0$ 
+
+    Равенство в КБШ $\iff  x-\lambda y = 0\quad x = \lambda y\quad (x$ коллинеарен $y)$  
+
+    $\left| \left< x, y \right> \right| ^2 \leqslant \left< x, x \right> \cdot  \left< y, y \right>$
+
+    $x = \left( x_1, x_2, \ldots, x_{n} ), y = \left( y_1, y_2, \ldots y_{n}  \right)  \in \R^n \right) $
+
+    $\left| \sum_{k=1}^{n} x_{k} y_{k}\right| \leqslant \sqrt{\sum_{k=1}^{n} x_k^2} \cdot \sqrt{\sum_{k=1}^{n} y_k^2}  $
+
+    $x\in \C^n, y\in \C^n\quad \left( |x_1|, \ldots, |x_{n} |\right), \left( |y_1|, \ldots, |y_{n} | \right)   $
+
+    $\sum_{k=1}^{n} |x_ky_k| \leqslant \sqrt{\sum_{k=1}^{n} |x_k|^2} \sqrt{\sum_{k=1}^{n} |y_k|^2}  $
+\end{proof}
+
+\begin{statement}
+    $\sqsupset (X, \mathcal{K})$ -- векторное пространство над полем $\mathcal{K}( = \R, \C)$, в котором определено скалярное произведение $ \left< x, y \right>$ Тогда $p(x) = \sqrt{\left< x, x \right>} $ есть норма на $X$
+\end{statement}
+\begin{proof}
+    $p(\lambda x) = |\lambda|p(x)\quad \lambda \in \mathcal{K}$
+
+    $\sqrt{\left< \lambda x, \lambda x \right>} = \sqrt{\lambda \cdot  \ov{\lambda} \left< x, x \right>}  = |\lambda| \cdot \sqrt{\left< x, x \right>} $
+
+    $p(x+y)\leqslant p(x) + p(y)$
+
+    $p^2(x+y) \overset ? {\leqslant } (p(x) + p(y))^2 = p^2(x) + p^2(y) + 2p(x)p(y) = \left< x, x \right> + \left< y, y \right> + 2\sqrt{\left< x, x \right> \left< y, y \right>} $
+
+    $p^2(x+y) = \left< x+y, x+y \right> = \left< x, x \right> + \left< y, y \right> + \left< x, y  \right> + \left< y, x \right>$
+
+    $2 Re\left<x, y \right> \leqslant 2 \left| \left< x,y \right> \right| \leqslant 2\sqrt{\left< x, x \right>} \sqrt{\left< y, y \right>} $
+\end{proof}
+
+Неравенство КБШ через норму: $\left| \left< x, y \right> \right| \leqslant \|x\| \cdot \|y\|\qquad \|x\| = P(x)$ для любой номрмы порождённой скалярным произведением.
+
+\begin{statement}
+    $\sqsupset \left( X, \mathcal{K} \right) $ -- векторное пространство со скалярным произведениемм $\left<\cdot , \cdot  \right>.$ Если  $\{x_{n} \}, \{y_{n} \} \subset X\quad x, y\in X\quad x_{n} \to x, y_{n} \to y\quad n \to  +\infty \quad \left<x_{n} , y_{n}  \right> \to \left< x, y \right>, n\to  +\infty $
+\end{statement}
+\begin{proof}
+    $\left< x_{n} , y_{n}  \right> - \left< x, y \right> \to 0$
+
+    $\left( \left<x_{n} , y_{n}  \right> - \left<x_{n} , y \right> \right)  + \left( \left< x_{n} , y \right> - \left< x, y \right> \right)  = \left< x_{n} , y_{n} -y \right> + \left< x_{n} -x, y_{n}  \right> \to 0$
+
+    Потому что $\left| \left< x_{n} , y_{n} -y \right> \right| \leqslant \|x_{n} \|\cdot \|y_{n} -y\| =  \text{ огр. } \cdot  (\to 0) \to 0$. И аналогично со второым
+
+    $$
+\end{proof}
+
+\section{Топологические свойства множеств в метрических пространствах}
+
+\begin{definition}
+    $\sqsupset \left( X, \rho \right) $ -- метрическое пространство. $E\subseteq X, a\in E$
+
+   $ 
+        a \text{ называется внутренней для } E\quad (a\in Int E) \text{ если } \exists R>0: B_E(a) \subset E
+    $ 
+\end{definition}
+
+\begin{definition}
+    Множество в метрическом пространстве называется \underline{открытым}, если $ E = Int E$
+
+    Для ``Остальных'' множеств верно $Int E \subseteq E$
+\end{definition}
+\begin{example}
+    \begin{enumerate}
+        \item $E = X, X = Int E,\quad X$ - открыто
+        \item $\O $ -- открыто
+        \item $(0,1)$ -- открытое множество $ R = \min \{1-a, a\}$
+    \end{enumerate}
+\end{example}
+
+\begin{statement}
+    В любом метрическом пространстве открытый шар является открытым множеством.
+\end{statement}
+\begin{proof}
+    $\sphericalangle \forall $ открытый шар $B_R(a)$ в метрическом пространстве  $(X, \rho)$
+
+    $\sphericalangle \forall b\in B_R(a) \implies  \rho(b,a)<r<R$
+
+    $\delta = R-r>0\quad \sphericalangle B = B_{\delta}(b)$
+
+    $\sqsupset c\in B \implies  \rho(c,a) \leqslant \rho(c,b) + \rho(b,a) < \delta + r = R-r +r = R$
+
+    Т.о. $b\in Int(B_R(a)) \implies  B_R(a)$ -- открытое
+\end{proof}
+
+\begin{note}
+    Свойство внутренней точки (и внутренности) зависит от объемлющего пространства. 
+
+    $ E\subseteq X,\quad E\subseteq Y, Int_X E \neq Int_Y E$ (может оказаться неравным)
+\end{note}
+\begin{example}
+    $E = [0,1], X=\R, Y = E\quad Int_X [0,1] = (0,1), Int_E E = [0,1]$
+\end{example}
+
+\begin{theorem}
+    [свойства откытых множеств в метрических пространствах]
+
+    $\sqsupset (X, \rho)$ -- произвольное метрическое пространство. Тогда 
+    \begin{enumerate}
+        \item [(I)]$\O , X$ -- открыты
+        \item [(II)] $\forall  \{O_i\}_{i\in I}$ -- открытых $ \implies  \bigcup\limits_{i \in  I} O_i$
+        \item [(III)] $\forall n\in \N \forall \{O_1, \ldots O_n\}$ открытых $\implies  O_1\cap \ldots \cap O_N$ открыто
+
+            \begin{note}
+                $O_n = \left( -\frac{1}{n}, \frac{1}{n} \right) \quad \bigcap\limits_{n\in \N } O_n = \{0\}$ -- не открыто
+            \end{note}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item [(II)] $\sqsupset x\in \bigcap\limits_{i \in  I} O_i \implies  \exists i\in I: x\in O_i\qquad O_i$ -- открыто $\implies x\in Int O_i \implies  \exists \delta >0:\quad B_{\delta}(x) \subseteq O_i \implies  B_{\delta}(x) \subseteq \bigcup\limits_{i \in  I}  O_i \implies  x\in Int\left( \bigcup\limits_{i \in  I} O_i \right)  \implies  \cup O_i$ -- открыто.
+        \item [(III)] $\sqsupset x\in \bigcap\limits_{i \in  I} O_i \implies \forall i = 1:n\quad x\in O_i \implies  \forall i = 1:N\quad \exists \delta_i>0: B_{\delta i}(x) \subseteq O_i$
+
+            $\delta = \min \{\delta_1, \ldots, \delta_n\} >0 \implies  B_{\delta}(x) \subseteq O_i \implies  B_{\delta}(x) = \bigcap\limits_{i=1} ^N O_i \implies  x\in Int \bigcap\limits_{i =1}^N \implies \cap O_i $ -- открыто
+    \end{itemize}
+\end{proof}
+
+\begin{definition}
+    $ $\\$X$ -- множество,  $\Omega \subseteq 2^X. \Omega$ называется \underline{топологической структурой} (или \underline{топологией}) на $X$, если
+     \begin{enumerate}
+        \item $\O , X\in \Omega$
+        \item $\forall \{O_i\}_{i\in I} \subseteq \Omega \implies  \bigcup\limits_{i \in  I} O_i \in \Omega$
+        \item $\forall N\in \N \forall O_1, \ldots, O_N \in \Omega \implies  O_1\cap \ldots\cap O_N \in \Omega$
+    \end{enumerate} 
+
+    При этом $(X, \Omega)$ называют \underline{топологическим пространством}. Элементы  $\Omega$ называют открытыми множествами в  $X$ (в  $(X, \Omega)$)
+
+    Т.о. любое метрическое пространство является топологическим.
+\end{definition}
+
+\begin{example}
+   \begin{enumerate}
+       \item $X$ --  $\forall $ множество $\quad \Omega = \{\O , X\}$ -- антидискретная (не метризуемо, если состоит больше, чем из одной точки)
+       \item $X$ --  $\forall $ множество, $\quad \Omega = 2^X$ -- дискретная топология.
+       \item $X = \R, \Omega = \{\R\setminus A: A \text{ -- конечное множество}\}$ или $\Omega_2 = \{\R\setminus A: A\text{ -- не более, чем счётное множество}\}$ или $\Omega_2 = \{(a, +\infty ):a\in \R\}$
+   \end{enumerate} 
+\end{example}
+
+\begin{definition}
+    $\sqsupset (X, \Omega)$ -- топологическое пространство, $E\subseteq X, a\in X$.
+
+    $a$ называется \underline{предельной}  для $R$ (или \underline{точкой сгущения}, $a\in \p E$) $\iff \forall $ открытого $O:\quad a\in O\quad O\setminus \{\a}\cap E\neq \O $
+
+    ``открытая окретсность'' точки $a$ в топологическом пространстве $X$ -- это любое открытое, содержащее точку  $a$
+
+    $\overset{\cdot } U(a) = U\setminus \{a\}$ -- проколотая окрестность точки $ a$
+\end{definition}
+
+\begin{statement}
+    $\sqsupset E\subseteq X, (X, \rho)$ -- метрическое пространство.
+
+    $a\in \p E \iff  \exists \{x_{n} \} \subseteq E\setminus \{a\}: x_{n} \to a, n\to +\infty $
+\end{statement}
+\begin{proof}
+    \begin{itemize}
+        \item [$\impliedby $] из определения
+        \item [$\implies $] $\sphericalangle B_{\frac{1}{n}}(a)\setminus \{a\} \cap E\neq \O  \implies  \exists x_n\in (B_{\frac{1}{n}}\setminus \{a\})\cap E\qquad \rho(x_{n} , a) <\frac{1}{n} \to 0, n\to +\infty  \implies  x_{n} \to a$
+    \end{itemize}
+\end{proof}
+
+\begin{definition}
+    Множество $E$  в топологическом пространстве  $(X, \Omega)$ называется замкнутым, если $\p E \subseteq E$
+\end{definition}
+\begin{example}
+    \begin{enumerate}
+        \item $E = (0,1]\quad \p E = [0,1]$
+        \item  $E = \{\frac{1}{k}\}_{k\in \N }, \p E = \{0\}$ 
+        \item $E = \R, \p E = \R$
+    \end{enumerate}
+\end{example}
+\begin{theorem}
+    В $\forall $ топологическом пространстве множество открыто тогда и только тогда, когда его дополнение замкнуто
+\end{theorem}
+\begin{proof}
+    $\sqsupset (X, \Omega)$ -- топологическое пространство, $\sqsupset O\subseteq X$
+
+    $O$ -- открыто. $F = X\setminus O\quad F$ -- замкнуто?
+
+    $\sphericalangle a\in \p F, a\in F?$
+
+    Пусть нет, тогда $a\in O \implies (O\setminus \{a\})\cap F = \O $ !!! $\implies  a\in F \implies F$ -- замкнуто 
+
+    $\sqsupset F$ -- замкнуто $\implies ?\quad O = X\setminus F$ -- открыто. Если $O = \O  \implies  O$ -- открыто.
+
+    Если $O\neq \O , \sphericalangle a\in O \implies a \not\in F \implies a\not\in \p F \implies \exists $ окрестность $U$ точки $a:\quad \left( U\setminus \{a\} \right) \cap F = \O \implies  U\cap F = \O $ (т.к. $a\not\in F$) $\implies  U\subset O = X\setminus F \implies  X\in U\subseteq O \implies x\in Int O \implies (a-\forall )O $ -- открытое.
+\end{proof}
+
+\begin{corollary}
+    \begin{enumerate}
+        \item $\sqsupset (X, \Omega)$ -- топологическое пространство. Тогда
+            \begin{enumerate}
+                \item [I)] $\O , X$ -- замкнутые
+                \item [II)] $\forall $ семейства $\{F_i\}_{i\in I}$ замкнутых  $\implies  \bigcap\limits_{i \in  I} f_i$ -- замкнуто
+                \item [III)] $\forall N\in \N , \forall \{F_1, \ldots, F_N\}$ замкнутых $F_1\cup \ldots\cup  F_N$ -- замкнуто.
+            \end{enumerate}
+    \end{enumerate}
+\end{corollary}
+
+\begin{definition}
+    $ \sqsupset (X, \Omega)$ -- топологическое пространство. $E\subseteq X, a\in E$
+
+    $a$ называется \underline{изолированной точкой} $E$, если  $\exists $ окрестность $U$ точки  $a: \quad U\cap E = \{a\}$
+\end{definition}
+
+\begin{definition}
+    $ \sqsupset (X, \rho)$ -- метрическое пространство, $E\subseteq X, a\in X$
+
+    $a$ называется \underline{точкой прикосновения}  $E \left( a\in Cl ~E \right) $, если $\forall $ окрестности $U$ точки $a$  $U\cap E \neq \O $
+
+    $Cl~E$ -- замыкание множества $E\qquad E\subseteq Cl~E$
+\end{definition}
+
+\begin{theorem}
+    [О замыкании]
+
+    $\sqsupset E \subseteq X, (x, \rho)$ -- топологическое пространство. Тогда
+    \begin{enumerate}
+        \item [(I)] $Cl E = E\cup \p E = \p E \cup (E\setminus \p E)$ -- последнее является множеством изолированных точек. 
+        \item [(II)]  $Cl E = \cap \{F: F \text{ -- замкнуто }, E\subseteq F\} $
+        \item [(III)] $Cl E$ -- минимальное (по включению) замкнутое, содержащее  $E$
+
+            (Если $F$ -- замкнуто, и  $E\subseteq F$, то $Cl E\subseteq F$) 
+        \item [(IV)] Если $X$ -- метрическое пространство, то  $x\in Cl E \iff \exists \{x_{n} \}_{n=1}^{\infty }: x_{n} \to x$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}
+        \item [(I)] $x\in Cl~E \iff \begin{cases}
+            x\in E\\
+            x\not\in E \quad \forall \text{ окрестности } U \text{ точки } x\quad \overline{\cdot}U\cap E \neq \O\\ 
+        \end{cases} \iff  \begin{cases}
+            x\in E\\
+            x\in \p E\\
+        \end{cases} \iff  x\in E\cup \p E$
+    \item [(II)] $c\in Cl~E\quad \sphericalangle F$ -- замкнутое  $: E\subseteq F \implies  x\in F \implies x\in$ Пр.ч (правой части)
+
+        $\sqsupset x\in$ Пр.ч. $=F$, если  $x\not\in Cl~E \implies  \exists $ окрестность $U$ точки $x:\quad U\cap E = \O $ 
+
+         $\sphericalangle F_1 = F\setminus U$ -- замкнуто, $ F_1\supseteq$, т.к. $ E\subseteq F\quad E\cap U\neq \O , \quad F = F_1 \cap \ldots\quad x\in F = F_1, x\not\in F_1$!!!
+     \item [III] $F$ -- правая часть равенства в II.  $F$ -- замкнуто как пересечение и  $\forall $ замкнутого $F_1: E\subseteq F_1 \implies F\subseteq F_1$ ( по определению пересечения)
+     \item [IV] $?x\in Cl ~E \iff  \begin{cases}
+             x \text{ изолированная для } E &x_{n} \equiv x\\
+             x \text{ предельная для } E & \text{ тога по характеристике предельной точки}
+     \end{cases}$
+    \end{enumerate}
+\end{proof}
+
+\begin{problem}
+    \begin{enumerate}
+        \item $Int(E)\subseteq E\qquad Int(Int(E)) = Int(E)$
+        \item $(Int~E)^c = Cl(E^c)$
+        \item  $Cl(Cl(E)) = CL(E)$
+        \item  $Int(A\cap B) = Int(A)\cap Int(B)$
+        
+            $Cl(A\cap B) = Cl(A)\cup Cl(B)$ 
+            
+            $Int(A\cup B)\neq Int(A) \cup Int(B)$ 
+
+            $CL(A\cap B) = \ldots$
+    \end{enumerate}
+\end{problem}
+
+\begin{note}
+    $Int~O$ -- наибольшее открытое множество, содержащееся в  $O$
+\end{note}
+
+\begin{definition}
+    $\sqsupset (X, \Omega)$ -- топологическое пространство, $E\subseteq X\quad a\in X$
+
+    $a$ называется \underline{граничной точкой} для  $E$, если  $\forall $ оксрестности $U$ точки  $a\qquad U\cap E\neq \O $ И $U\cap (E^c)\neq \O $
+
+    $Fr E = \{x: x\text{ -- граничная для } E\} = \partial E$
+\end{definition}
+
+\begin{example}
+    \begin{enumerate}
+        \item $X = \R, E = [0,1]\quad Int E = (0,1). Cl E = [0,1]\quad FrR = \{0, 1\}$
+        \item $X = \R^2m E = \{(x,0): x\in [0,1]\}\quad Int E = \O , ClE = E, FrE = R$
+        \item $ X = [0,1], E = [0,1]\quad Int E = E, ClE = E, Fr E = \O $
+    \end{enumerate}
+\end{example}
 \end{document}
-
-
-
 

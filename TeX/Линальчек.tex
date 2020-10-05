@@ -84,6 +84,7 @@
 \def\dateparts#1 #2 #3 #4 #5\relax{
     \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
 }
+\DeclareRobustCommand
 
 \def\@lecture{}%
 \newcommand{\lecture}[3]{
@@ -368,6 +369,69 @@
             1 & -1 & 3\\
             -1 & 4 & 0\\
             4 & -1 & -3\\
-        \end{vmatrix} = $
+        \end{vmatrix} = \ldots$
     \end{example}
+
+    \begin{example}
+        $\begin{vmatrix} 1 & 2 & 3 & 4\\ 0 & 2 & 5 & 6 \\ 0 & 0 & 3 & 7\\ 0 & 0 & 0 & 2\\ \end{vmatrix}  = 1\cdot 2\cdot 3\cdot 2 = 12$
+
+        В нижних (верхних) треугольных матрицах определитель -- просто произведение элементов
+    \end{example}
+
+    Свойства определителя:
+    \begin{enumerate}
+        \item $\begin{vmatrix} 0& 0 & \ldots & 0 \\ \ldots&\ldots&\ldots&\ldots\\\ldots&\ldots&\ldots&\ldots&\\\ldots&\ldots&\ldots&\ldots& \end{vmatrix} = 0$ 
+        \item $\begin{vmatrix} a_1 & a_2 & \ldots & a_n\\ b_1 & b_2 & \ldots & b_n\\ \ldots&\ldots&\ldots&\ldots\\ \end{vmatrix}  =  - \begin{vmatrix} b_1 & b_2 & \ldots & b_n\\ a_1 & a_2 & \ldots & a_n\\ \ldots&\ldots&\ldots&\ldots\\ \end{vmatrix}$ 
+        \item $\begin{vmatrix} 
+                    \ldots&\ldots&\ldots&\ldots\\
+                    a_1 & a_2 & \ldots & a_n\\
+                    b_1 & b_2 & \ldots & b_n\\ 
+                    \ldots & \ldots & \ldots & \ldots\\  
+                \end{vmatrix}  = 
+                \begin{vmatrix} 
+                    \ldots&\ldots&\ldots&\ldots\\
+                    a_1 & a_2 & \ldots & a_n\\
+                    \alpha_1\cdot a_1 + b_1 & \alpha_2\cdot a_2 + b_2 & \ldots & \alpha_n \cdot  a_n + b_n\\ 
+                \ldots & \ldots & \ldots & \ldots\\  \end{vmatrix} $
+        \item $\det(A^T) = \det(A)$ (всё, что работает со строчками, работает и со столбцами)
+        \item $
+            \begin{vmatrix}
+                a_{11} & a_{12} & \ldots & a_{1i}+c_1 & \ldots\\
+                a_{21} & a_{22} & \ldots & a_{2i}+c_2 & \ldots\\
+                \ldots& \ldots &\ldots&\ldots&\ldots\\
+            \end{vmatrix} = 
+            \begin{vmatrix}
+                a_{11} & a_{12} & \ldots & a_{1i} & \ldots\\
+                a_{21} & a_{22} & \ldots & a_{2i} & \ldots\\
+                \ldots& \ldots &\ldots&\ldots&\ldots\\
+            \end{vmatrix} + 
+            \begin{vmatrix}
+                a_{11} & a_{12} & \ldots & c_{1} & \ldots\\
+                a_{21} & a_{22} & \ldots & c_{2} & \ldots\\
+                \ldots& \ldots &\ldots&\ldots&\ldots\\
+            \end{vmatrix}$ 
+
+            $\det (A+B) \neq \det (A) + \det(B)$
+        \item $
+            \begin{vmatrix}
+                \ldots&\ldots&\ldots&\ldots\\
+                \alpha a_1 & \alpha a_2 & \ldots & \alpha a_n\\
+                \ldots&\ldots&\ldots&\ldots\\
+            \end{vmatrix} = \alpha 
+            \begin{vmatrix}
+                \ldots&\ldots&\ldots&\ldots\\
+                a_1 & a_2 & \ldots & a_n\\
+                \ldots&\ldots&\ldots&\ldots\\
+            \end{vmatrix}$
+    \end{enumerate}
+
+    \begin{example}
+         $\left. 
+             \begin{matrix}
+                 1280\\ 2848\\ 1184\\ 3072\\
+             \end{matrix}\right| \vdots~32$ 
+
+
+    \end{example}
+
 \end{document}

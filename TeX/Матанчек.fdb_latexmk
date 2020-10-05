@@ -1,0 +1,11 @@
+# Fdb version 3
+["pdflatex"] 1601892542 "Матанчек.tex" "Матанчек.pdf" "Матанчек" 1601892542
+  "/etc/texmf/web2c/texmf.cnf" 1594940150 475 c0e671620eb5563b2130f56340a5fde8 ""
+  "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
+  "/usr/share/texmf/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1594940224 8256356 55586164a8007a87338ed6fc61461260 ""
+  "Матанчек.aux" 1601890759 9604 02c721e2ac92907ca31737e8236f7605 "pdflatex"
+  "Матанчек.tex" 1601892540 97523 1930f3341d5d658bb1ed57d591179e04 ""
+  (generated)
+  "Матанчек.pdf"
+  "Матанчек.log"
