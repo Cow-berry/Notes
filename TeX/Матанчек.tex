@@ -1,4 +1,4 @@
-{book}
+\documentclass{book}
 %nerd stuff here
 \pdfminorversion=7
 \pdfsuppresswarningpagegroup=1
@@ -1716,10 +1716,10 @@ $
             \item [I)] Если $\{x_{n}\} \to +\infty , \{y_{n}\} $ ограничено снизу $\implies  x_{n} +y_{n} \to  +\infty $ 
             \item [II)] Если $\{x_{n} \} \to -\infty , \{y_{n} \}$ ограничена сверху $\implies  x_{n} +y_{n} \to -\infty $
             \item [III)] Если $\{x_{n} \} \to \infty$, $y_n\to a\in \C$ ограничено снизу $\implies x_{n} +y_{n} \to \infty $
-            \item [IV)] Если $\{\x_{n} } \to  +\infty(-\infty ) \quad \exists \delta >0: y_{n} >\delta \forall n\in \N  \implies x_{n} \cdot y_{n} \to +\infty (-\infty )$
+            \item [IV)] Если $\{x_{n} \} \to  +\infty(-\infty ) \quad \exists \delta >0: y_{n} >\delta \forall n\in \N  \implies x_{n} \cdot y_{n} \to +\infty (-\infty )$
             \item [V)] Если $\{x_{n} \} \to +\infty (-\infty )\quad \exists \delta >0:\forall n\in \N \quad y_{n} <-\delta \implies x_{n} \cdot y_{n}  \to -\infty (+\infty )$
             \item [VI)] Если $\{x_{n} \} \to  \infty \quad \exists \delta >0: \forall n\in \N  \quad |y_{n}|>\delta \implies x_{n} *y_{n}  \to \infty $
-            \item [VII)] Если $\{x_{n} \} \to a\in \C, \quad y_{n} \to \infty & \forall n\in \N \quad y_{n} \neq 0 \implies \frac{x_{n} }{y_{n} }  \to  0$
+            \item [VII)] Если $\{x_{n} \} \to a\in \C, \quad y_{n} \to \infty \& \forall n\in \N \quad y_{n} \neq 0 \implies \frac{x_{n} }{y_{n} }  \to  0$
             \item [VIII)] Если $x_{n} \to a\in \overset{\land}{\C}\setminus \{0\}, \quad y_{n} \to  0 \implies  \frac{x_{n} }{y_{n} }\to \infty $
             \item [IX)] Если $\{x_{n} \} \to  \infty , \quad \forall n\in \N \quad y_{n} \neq 0\quad y_{n} \to a\in C \implies \frac{x_{n} }{y_{n} } \to \infty $
         \end{itemize}
@@ -1790,7 +1790,7 @@ $\overset{\land}{\R} = \R\cup \{\infty \}$
 
     $y\neq 0 \implies  \left< y, y \right> >0\quad \lambda = \frac{\left< x, y \right>}{\left< y, y \right>}$
 
-    $0\leqslant \left< x-\lambda y, x-\lanbda y \right> = \left< x, x \right> - \lambda \left< y, x \right> - \left< x, \lambda y \right> + \left< \lambda x, \lambda y \right> = \left< x, x \right> - \lambda \left< y, x \right> - \ov{\lambda} \left< x, y \right> + \lambda \cdot  \ov{\lambda} \left< y, y \right> = \left< x, x \right> - \frac{\left| \left< x, y \right> \right| ^2}{\left< y, y \right>} - \frac{\left| \left< x, y \right> \right| ^2}{\left< y, y \right>} + \frac{\left| \left< x, y \right> \right| ^2}{\left< y, y \right>} \implies  \left< x, x \right>\cdot \left< y, y \right> - \left| \left< x, y \right> \right| ^2 \geqslant 0$ 
+    $0\leqslant \left< x-\lambda y, x-\lambda y \right> = \left< x, x \right> - \lambda \left< y, x \right> - \left< x, \lambda y \right> + \left< \lambda x, \lambda y \right> = \left< x, x \right> - \lambda \left< y, x \right> - \ov{\lambda} \left< x, y \right> + \lambda \cdot  \ov{\lambda} \left< y, y \right> = \left< x, x \right> - \frac{\left| \left< x, y \right> \right| ^2}{\left< y, y \right>} - \frac{\left| \left< x, y \right> \right| ^2}{\left< y, y \right>} + \frac{\left| \left< x, y \right> \right| ^2}{\left< y, y \right>} \implies  \left< x, x \right>\cdot \left< y, y \right> - \left| \left< x, y \right> \right| ^2 \geqslant 0$ 
 
     Равенство в КБШ $\iff  x-\lambda y = 0\quad x = \lambda y\quad (x$ коллинеарен $y)$  
 
@@ -1834,7 +1834,7 @@ $\overset{\land}{\R} = \R\cup \{\infty \}$
 
     Потому что $\left| \left< x_{n} , y_{n} -y \right> \right| \leqslant \|x_{n} \|\cdot \|y_{n} -y\| =  \text{ огр. } \cdot  (\to 0) \to 0$. И аналогично со второым
 
-    $$
+    
 \end{proof}
 
 \section{Топологические свойства множеств в метрических пространствах}
@@ -1931,7 +1931,7 @@ $\overset{\land}{\R} = \R\cup \{\infty \}$
 \begin{definition}
     $\sqsupset (X, \Omega)$ -- топологическое пространство, $E\subseteq X, a\in X$.
 
-    $a$ называется \underline{предельной}  для $R$ (или \underline{точкой сгущения}, $a\in \p E$) $\iff \forall $ открытого $O:\quad a\in O\quad O\setminus \{\a}\cap E\neq \O $
+    $a$ называется \underline{предельной}  для $R$ (или \underline{точкой сгущения}, $a\in \p E$) $\iff \forall $ открытого $O:\quad a\in O\quad O\setminus \{a\}\cap E\neq \O $
 
     ``открытая окретсность'' точки $a$ в топологическом пространстве $X$ -- это любое открытое, содержащее точку  $a$
 

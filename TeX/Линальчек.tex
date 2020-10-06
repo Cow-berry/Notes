@@ -84,7 +84,6 @@
 \def\dateparts#1 #2 #3 #4 #5\relax{
     \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
 }
-\DeclareRobustCommand
 
 \def\@lecture{}%
 \newcommand{\lecture}[3]{
@@ -433,5 +432,62 @@
 
 
     \end{example}
+TODO
+    -----
 
+    \section{Лекция 1 - Метод аналитической геометрии}
+
+      метод -- метод координат.
+
+      \begin{tikzpicture}
+          \draw (0,0) -- (2.5,1) node [above] {$\ell$ };
+          \fill (1.75,0.7) circle [radius=.03cm] node [below right] {\tiny $\mathcal X \leftrightarrow x\in \R$};
+          \fill (.5, .2) circle [radius=.03cm] node [below right] {$0$};
+          \fill (1, .4) circle [radius=.03] node [above] {$E$};
+      \end{tikzpicture} -- координатная линия
+
+      \begin{note}
+          Система координат на плоскости -- две координатные линии
+
+          \begin{tikzpicture}[scale = 0.8]
+              \draw (-1,0) -- (4, 0) node [above right] {$x$};
+              \draw (-0.6,-1) -- (2.4,4)  node [right] {$y$};
+              \fill (0,0) circle [radius = .03] node [below right] {$0$};
+          \end{tikzpicture}
+          \begin{tikzpicture}[scale=3]
+              \draw[->] (0,0,0) -- (0,0,1) node [below] {$x$};
+              \draw[->] (0,0,0) -- (0,1,0) node [right] {$z$};
+              \draw[->] (0,0,0) -- (1,0,0) node [below] {$y$};
+          \end{tikzpicture}
+      \end{note}
+
+      \begin{definition}
+          Система координат называется декартовой, если
+          \begin{enumerate}
+              \item Углы между координатными линиями прямые
+              \item Масштабы на осях одинаковые
+          \end{enumerate}
+      \end{definition}
+
+      \begin{tikzpicture}
+          \draw[<->] (1,2) -- (0,0) -- (3, 0);
+          \fill (1.5, 1) circle [radius=.04] node [above right] {P};
+          \fill (.5, 0) circle [radius=.04] node [below] {$E_x$};
+          \fill (.25, .5) circle [radius=.04] node [above left] {$E_y$};
+          \draw [dotted] (.25,.5) -- (3,.5);
+          \draw [dotted] (.5,1) node [left] {$y_p$}-- (3,1);
+          \draw [dotted] (.75,1.5) -- (3,1.5);
+          \draw [dotted] (.5,0) -- (1.5, 2);
+          \draw [dotted] (1,0) node [below] {$x_p$} -- (2, 2);
+          \draw [dotted] (1.5,0) -- (2.5, 2);
+          \draw [dotted] (2,0) -- (3, 2);
+      \end{tikzpicture}
+      $(x_p, y_p)$ -- координаты точки  $P$.
+
+      Полярная система координат:
+
+      \begin{tikzpicture}
+          \draw (3,0) -- (0,0) node [below] {$0$} --++ (30:2cm) node [above right] {$P$};
+          \draw (1,.3) node {$\varphi$}; 
+      \end{tikzpicture}
 \end{document}
