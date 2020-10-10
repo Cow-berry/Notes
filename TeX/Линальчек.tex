@@ -707,20 +707,187 @@ $\vec a(a_x, a_y, a_z)$
 \end{note}
 
 \begin{lemma}
-    $\left( \sum_{i=1}^{m} \lambda_i \vec a_i \right) _x = \sum_{i=1}^{m} \lambda _i\vec a_{i_x}$
+    $\left( \sum\limits_{i=1}^{m} \lambda_i \vec a_i \right) _x = \sum\limits_{i=1}^{m} \lambda _i\vec a_{i_x}$
 \end{lemma}
 
+\section{Лекция 4}
+
+\subsection{Скалярное произведение}
+
+$W = V / \sim $
+
+\begin{figure}[ht]
+    \centering
+    \incfig{scal}
+    \caption{скалярное произведение}
+    \label{fig:scal}
+\end{figure}
+
+\begin{definition}
+    $(\vec a\vec b) = \left| \vec  \right| \text{Пр}_{\vec a}^{\perp}\vec b$
+\end{definition}
+
+\begin{note}
+\begin{figure}[ht]
+    \centering
+    \incfig{note}
+    \caption{note}
+    \label{fig:note}
+\end{figure}
+
+$(\vec a\vec b) = \left| \vec a \right| \cdot  \left| \vec b \right| \cos gamma $
+\end{note}
 
 
+Алгебраические свойства:
+\begin{enumerate}
+    \item $\left( \vec a\vec b \right)  = \left( \vec b\vec a \right) $
+    \item $\left( \vec a+\vec b, \vec c \right)  = \left( \vec a, \vec c \right) + \left( \vec b, \vec c \right) $
+        \begin{proof}
+            $(\vec a + \vec b, \vec c) = \left| \vec c  \right| \text{Пр}_{\vec a}^{\perp} \left( \vec a + \vec b \right)  = \left| \vec c \right| \left( \text{Пр}_{\vec c}^{\perp} \vec a \right) $
+        \end{proof}
+    \item $(\lambda \vec a, \vec b) = \lambda (\vec a, \vec b)$
+\end{enumerate}
 
+Геометрические свойства:
+\begin{enumerate}
+    \item $\vec a \perp \vec b\quad \vec a\neq \vec 0 \neq \vec b \implies  (\vec a, \vec b) = 0
+        $
+    \item $(\vec a, \vec a) = \left| \vec a \right| ^2$
+    \item $\sqsupset \left| \vec a \right|  = 1 \implies  (\vec a, \vec b) = \text{Пр}_{\vec a}^{\perp}\vec b$ 
+        \begin{note}
+            $\text{Пр}_{\vec i}^{\perp}\vec b = (\vec i, \vec b)$
+        \end{note}
+\end{enumerate}
 
+Скалярное произведение в координатах:
+\begin{itemize}
+    \item Декартова Прямоугольная Система Координат.
+        \begin{array}
+            $\vec a = a_x\vec i + a_y\vec j + a_z\vec k$\\
+            $\vec b = b_x\vec i + b_y\vec j + b_z\vec k$\\
+        \end{array}
+        $(\vec a \vec b) = (a_x\vec i + a_y\vec j + a_z\vec k)(b_x\vec i + b_y\vec j + b_z\vec k) = a_xb_x + a_yb_y + a_zb_z$
 
+         $\cos \varphi = \frac{a_xb_x + a_yb_y + a_zb_z}{\sqrt{a_x^2 + a_y^2 + a_z^2}\cdot \sqrt{b_x^2 + b_y^2 + b_z^2}  }$
+     \item Произвольная Система Координат. 
+         
+         $\vec a = a_1\vec e_1 + a_2\vec e_2 + a_3\vec e_3 = \sum_{j=1}^{3} a_j\vec e_j$
+         
+         $\vec b = b_1\vec e_1 + b_2\vec e_2 + b_3\vec e_3 = \sum_{k=1}^{3} b_k\vec e_k$
 
+         $(\vec a, \vec b) = \left( \sum_{j=1}^{3} a_k\vec e_j \cdot \sum_{k=1}^{3} b_k\vec e_k \right)  = \sum_{j, k=1}^{3} a_jb_k(\vec e_j \vec e_k)$ -- достаточно знать скалярное произведение базисных векторов. $g_{jk} = \vec e_j\vec e_k$ называется метрическим тензором.
 
+         $(\vec a, \vec b) = \sum_{j, k=1}^{3} a_jb_kg_{jk}$
 
+         \begin{note}
+             В ДПСК $g_{jk} = \delta{jk} = \begin{cases}
+                 0 &, j\neq k\\
+                 1 &, j=k
+             \end{cases}\qquad \delta $ -- символ Кронекера
+         \end{note}
 
+         $g_{jk} = \begin{bmatrix} g_{11} & g_{12} & g_{13}\\ g_{21} & g_{22} & g_{23} \\ g_{31} & g_{32} & g_{33}\\ \end{bmatrix} $ -- матрица Грама
 
+         $a^T\cdot g\cdot b = (\vec a, \vec b)$
+\end{itemize}
 
+\subsection{Векторное произведение}
+
+$W = V / \sim $
+
+$\vec a, \vec b \in W$
+
+ $\vec a \times  \vec b = \left[ \vec a \vec b \right]  = \vec c$ -- вектор:
+ \begin{enumerate}
+     \item $\left| \vec c \right| = \left| \vec a \right| \cdot \left| \vec b \right| \cdot \sin \varphi  = \left| \vec a_{\perp} \right| \left| \vec b \right|  = \left| \vec a \right| \left| \vec b_{\perp} \right| $
+     \item $\vec c \perp \vec a\quad \vec c \perp \vec b\quad \{ \vec a, \vec b, \vec c\}$ -- правая тройка (Буравчик, штопор)
+
+\begin{figure}[ht]
+    \centering
+    \incfig{shtopor}
+    \caption{shtopor}
+    \label{fig:shtopor}
+\end{figure}
+ \end{enumerate}
+
+ Алгебраические свойства:
+ \begin{enumerate}
+     \item $\left[ \vec a, \vec b \right] = -\left[ \vec b, \vec a \right]  $
+     \item $\left[ \vec a + \vec b, \vec c \right]  = \left[ \vec a, \vec c \right]  + \left[ \vec b, \vec c \right] $
+         \begin{proof}
+             $[\vec a ,\vec c] = \left[ \vec a_{\perp}, \vec b \right] $ 
+
+             $\left[ \vec a_{\perp} + \vec b_{\perp}, \vec c \right] = \left[ \vec a_{\perp}, \vec c \right] + \left[ \vec b_{\perp}, \vec c \right]  $
+
+              Если нарисовать картиночку, там будут углы с перпендикулярными сторонами и всё будет хорошо.
+         \end{proof}
+     \item $\left[ \alpha \vec a, \vec b \right]  = \alpha \left[ \vec a, \vec b \right] $
+         \begin{proof}
+             $\vec m = \left[ \alpha\vec a, \vec b \right] \quad \vec n = \left[ \vec a, ]vec b \right] $ 
+
+             $\left| \vec m \right| = \left| \alpha \right| \left| \vec a \right| \left| \vec b \right| \sin (\alpha \vec a, \vec b)\qquad \left| n \right|  = \left| \vec a \right| \left| \vec b \right| \sin (\vec a, \vec b)$ 
+
+             Если $\alpha<0$, то у одного другая ориентация тройки, а у другого отрицательный множитель
+         \end{proof}
+ \end{enumerate}
+
+ Геометрические свойства:
+ \begin{enumerate}
+     \item $\vec a \parallel \vec b \Longleftrightarrow \left[ \vec a, \vec b \right] = \vec 0 $ 
+     \item $\left| \vec a \times \vec b \right| = \left| \vec a \right| \left| \vec b \right| \sin \varphi  = S_{\tikz[scale=0.1] \draw (0,0) -- (1,1) -- (3,1) -- (2,0) -- cycle;}$
+
+\begin{figure}[ht]
+    \centering
+    \incfig{couple}
+    \caption{couple}
+    \label{fig:couple}
+\end{figure}
+ \end{enumerate}
+
+ \begin{note}
+     $\vec i \times  \vec i = \vec j \times \vec j = k \times \vec k = \vec 0$
+     
+     $\vec i \times \vec j = \vec k\quad \vec i \times  \vec k = -\vec j\quad \vec j\times  \vec k = \vec i$
+
+     $[\vec a, \vec b] = (a_x\vec i + a_y\vec j + a_z\vec k) \times (b_x\vec i + b_y\vec j + b_z\vec k) = (a_xb_y - a_yb_x)\vec k + (a_zb_x-a_xb_z)\vec j  + (a_yb_z - a_zb_y)\vec i$
+
+     Можно упростить запоминание: $a_xb_y-a_yb_x = 
+     \begin{vmatrix}
+         a_x&a_y\\
+         b_x&b_y\\
+     \end{vmatrix}$ 
+
+     $=
+     \begin{vmatrix}
+         \vec i & \vec j & \vec k\\
+         a_x & a_y & a_x\\
+         b_x & b_y & b_z\\
+     \end{vmatrix}$
+
+     Хотя формально так делать плохо, потому что в матрице объекты разной природы: скаляры и векторы.
+ \end{note}
+
+Общий случай: 
+
+$\vec a = \sum_{m=1}^{3} a_m\vec e_m$
+
+$\vec b = \sum_{n=1}^{3} b_n\vec e_n$
+
+Точно: $e_m \times  e_m = \vec 0 \forall m$
+
+$\vec a \times  \vec b = 
+\begin{vmatrix}
+    a_1 & a_2\\ b_1 & b_2\\
+\end{vmatrix} \vec e_1 \times \vec e_2 - 
+\begin{vmatrix}
+    a_1 & a_3\\ b_1 & b_3
+\end{vmatrix} \vec e_1\times  \vec e_3 + 
+\begin{vmatrix}
+    a_2 & a_3\\ b_2 & b_3\\
+\end{vmatrix} \vec e_2 \times \vec e_3$
+
+$\vec e_1\vec e_2 = \sum_{i=1}^{3} \alpha_ie_i$
 
 \end{document}
 

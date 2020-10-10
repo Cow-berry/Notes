@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1602324034 "Линальчек.tex" "Линальчек.pdf" "Линальчек" 1602324034
+["pdflatex"] 1602331250 "Линальчек.tex" "Линальчек.pdf" "Линальчек" 1602331250
   "/etc/texmf/web2c/texmf.cnf" 1594940150 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/cowberry/.texlive2019/texmf-var/fonts/tfm/lh/lh-t2a/labx1000.tfm" 1596029474 3300 6abb8e321227ead2a8e929e5abc72bd3 ""
   "/home/cowberry/.texlive2019/texmf-var/fonts/tfm/lh/lh-t2a/labx1200.tfm" 1596029488 3308 eee81981029f67083258db36df06e523 ""
@@ -265,6 +265,10 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1594940192 4770781 1ed1abab22da9c3e2cc82e4db562318b ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1594940224 8256356 55586164a8007a87338ed6fc61461260 ""
+  "figures/couple.pdf" 1602329949 1153 2052b75003f9f7921224a916fccb26af ""
+  "figures/couple.pdf_tex" 1602329949 2471 26cac7fd0a42fa5c5881a6918c58dc06 ""
+  "figures/note.pdf" 1602326510 1947 0344053736fa55eb498d6925c73c19be ""
+  "figures/note.pdf_tex" 1602326510 2682 9c145e1056a05be35eb60cae4c86550b ""
   "figures/os.pdf" 1602321350 2953 48789580435b241f6f106b0ef0fe460d ""
   "figures/os.pdf_tex" 1602321350 2806 35194b03b651bdbc06c3a15a19138457 ""
   "figures/r1.pdf" 1602322575 1104 49b4d507924e6bcd80fc944de18e3fbb ""
@@ -273,9 +277,13 @@
   "figures/r2.pdf_tex" 1602323079 2821 6de3c1efff6e84417ca07fe31edf0f1c ""
   "figures/r3.pdf" 1602323510 1442 086275f0e93a3ba2a4ac125550080a52 ""
   "figures/r3.pdf_tex" 1602323510 2579 c26090b95504065bce8ce5b13906f910 ""
-  "Линальчек.aux" 1602324021 3229 8ff6ddcbead9b50f4ff608700844b504 "pdflatex"
-  "Линальчек.tex" 1602324033 29164 d5442e7c1a9e4a0043951482564c4c89 ""
+  "figures/scal.pdf" 1602326236 1126 3dcdae49cff554499c0cd8e2bd87025b ""
+  "figures/scal.pdf_tex" 1602326236 2320 ae3bae095a1fa8397313d2ec4eb815d6 ""
+  "figures/shtopor.pdf" 1602328708 2365 f7b627ad0fcd5d8a5c41452ac634f21a ""
+  "figures/shtopor.pdf_tex" 1602328708 2954 610196fa9715df65883e4867f94181a6 ""
+  "Линальчек.aux" 1602331140 4328 334d53b2a49abcf3d410d1e4a84fe322 "pdflatex"
+  "Линальчек.tex" 1602331250 36458 216afabb822f51ac489e700364e2edc2 ""
   (generated)
+  "Линальчек.log"
   "Линальчек.pdf"
   "Линальчек.aux"
-  "Линальчек.log"
