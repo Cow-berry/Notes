@@ -135,6 +135,12 @@
     \import{./figures/}{#1.pdf_tex}
 }
 \usepackage{tikz}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
 \begin{document}
     \maketitle
     \section{Введение}
@@ -490,4 +496,231 @@ TODO
           \draw (3,0) -- (0,0) node [below] {$0$} --++ (30:2cm) node [above right] {$P$};
           \draw (1,.3) node {$\varphi$}; 
       \end{tikzpicture}
+
+
+      (TODO)
+      -------------------------------------------
+      \section{Практика 3}
+
+      \subsection{Обратная матрица}
+
+      $\sqsupset A,B$ -- квадратные матрицы $n\times n$ 
+
+      Матричная алгебра:
+      \begin{enumerate}
+          \item $A+B$
+          \item  $\lambda\cdot A$
+          \item $A\cdot  B$
+      \end{enumerate}
+        \begin{definition}
+            [Обратная матрица]
+      $A^{-1}\qquad A^{-1}A = A A^{-1} = I$
+        \end{definition}
+      \begin{statement}
+          Обратная к $A$ матрица существует, если и только если  $\det A \neq 0$
+      \end{statement}
+   
+        \begin{problem}
+            $A = \begin{bmatrix} 5 & 1 & -2\\ 1 & 3 & -1\\ 8 & 4 & -1 \end{bmatrix}\qquad A^{-1} = ? $
+        \end{problem}
+        \begin{enumerate}
+            \item Метод союзной матрицы $A^{-1} = \frac{1}{\det A}\cdot \overset{\sim}A^T$ 
+                \begin{definition}
+                    $\overset{\sim }A$ союзная матрица -- матрица алгебраических дополнений элементов матрицы $A$
+                \end{definition}
+
+                $\det A = (-1)\cdot 7 + 3\cdot 11 + 1\cdot 12 = 38$
+
+                $\overset{\sim }A = \begin{bmatrix} 1 & -7 & -20\\-7 & 11 & -12\\ 5 & 3 & 14 \end{bmatrix} $
+
+                $A^{-1} = \frac{1}{38} \cdot \begin{bmatrix} 1 & -7 & 5 \\ -7 & 11 & 3\\ -20 & -12 & 14 \end{bmatrix} $ 
+
+                $\sphericalangle A\cdot A^{-1} = \frac{1}{38}\begin{bmatrix} 1 & -7 & 5 \\ -7 & 11 & 3\\ -20 & -12 & 14 \end{bmatrix}\begin{bmatrix} 5 & 1 & -2\\ 1 & 3 & -1\\ 8 & 4 & -1 \end{bmatrix} = \begin{bmatrix} 1 & 0 & 0\\ 0 & 1 & 0\\ 0 & 0 & 1 \end{bmatrix} $
+            \item Метод Гаусса 
+                $[A|I]\sim [I|A^{-1}]$
+                
+                Элементарные преобразования:
+                \begin{enumerate}
+                    \item Умножение на число $\lambda\neq 0$ одной строчки
+                    \item Перестановка двух любых строк
+                    \item Составление линейной комбинации строк
+                \end{enumerate}
+
+                $\begin{bmatrix}[ccc|ccc]
+                    5 & 1 & -2 & 1 & 0 & 0\\ 1 & 3 & -1 & 0 & 1 & 0\\ 8 & 4 & -1 & 0 & 0 & 1\\
+                    \end{bmatrix} \sim \begin{bmatrix} [ccc|ccc] 
+                1 & 3 & -1 & 0 & 1 & 0\\
+                5 & 1 & -2 & 1 & 0 & 0\\
+                8 & 4 & -1 & 0 & 0 & 1\\
+            \end{bmatrix} \sim \begin{bmatrix} [ccc|ccc] 
+                1 & 3 & -1 & 0 & 1 & 0\\
+                0 & -14 & 3 & 1 & -5 & 0\\
+                0 & -20 & 7 & 0 & -8 & 1\\
+            \end{bmatrix}   \sim \begin{bmatrix} [ccc|ccc] 
+                1 & 3 & -1 & 0 & 1 & 0\\
+                0 & -140 & 30 & 10 & -50 & 0\\
+                0 & -140 & 49 & 0 & -56 & 7
+            \end{bmatrix}  \sim \begin{bmatrix} [ccc|ccc] 
+                1 & 3 & -1 & 0 & 1 & 0\\
+                0 & -14 & 3 & 1 & -5 & 0\\
+                0 & 0 & 19 & -10 & -6 & 7\\
+            \end{bmatrix} \sim \ldots$
+        \end{enumerate}
+
+        Системы уравнений:
+
+        $\begin{cases}
+            2x+y+4z = -5\\
+            x+3y-6z=2\\
+            3x-2y+2z=9\\
+        \end{cases}$
+
+         Заметим, что стандартный способ решения таких систем: упрощение, складывание строк, домножение на число строк, их комбинация -- напоминают элементарные преобразования. Т.е. элементарные преобразования -- преобразования, приводящие к эквивалентной системе.
+
+         \begin{enumerate}
+             \item Метод Гаусса $\qquad \begin{bmatrix} [c c c|c] 2 & 1 & 4 & -5\\ 1 & 3 & -6 & 2\\ 3 & -2 & 2 & 9\\ \end{bmatrix} \sim \begin{bmatrix} [c c c|c] 1 & 3 & -6 & 2 \\ 2 & 1 & 4 & -5\\ 3 & -2 & 2 & 9 \end{bmatrix} \sim \begin{bmatrix} [c c c|c] 1 & 3 & -6 & 2\\ 0 & -5 & 16 & -9\\ 0 & -11 & 20 & 3\\ \end{bmatrix}\sim \begin{bmatrix} [c c c|c] 1 & 3 & -6 & 2\\ 0 & -55 & 176 & -99\\ 0 & -55 & 100&15\\ \end{bmatrix} \sim \begin{bmatrix} [c c c|c] 1 & 3 & -6 & 2\\ 0 & -5 & 16 & -9\\ 0 & 0 & -76 & 114\\ \end{bmatrix}   $ 
+
+                 $\begin{cases}
+                     x+3y-6z=2 & x =2\\
+                     -5y+16z=-9 & y=-3\\
+                     -76z=114 & z=-\frac{3}{2}\\
+                 \end{cases}$ 
+             \item Метод Крамера
+
+                 $\Delta = \begin{vmatrix} 2 & 1 & 4\\ 1 &3 & -6\\ 3 & -2 & 2\\  \end{vmatrix}  = 2\cdot (-6) + 1\cdot (-20) + 4\cdot (-11)  = -12 -20-44 = -76$
+
+                 $\Delta_x = \begin{vmatrix} -5 & 1 & 4\\ 2 & 3 & -6 \\ 9 & -2 & 2\\  \end{vmatrix} = (-5)\cdot (-6) - 1 \cdot 58 + 4\cdot (-22) = -152 $ 
+
+                 $x = \frac{\Delta_x}{\Delta} = \frac{-152}{-76} = 2$
+
+                 $\Delta_y = \begin{vmatrix} 2 & -5 & 4\\ 1 & 2 & -6\\ 3 & 9 & 2\\ \end{vmatrix} $
+             \item метод обратной матрицы
+
+                 $A = \begin{bmatrix} 2 & 1 & 4\\ 1 & 3 & 6\\ 3 & -2 & 2\\ \end{bmatrix}\quad X = \begin{bmatrix} x\\y\\z \end{bmatrix} \quad B = \begin{bmatrix} -5\\2\\9 \end{bmatrix}  $
+
+                 $AX = B\quad X = A^{-1}B$
+
+                 $A^{-1} = -\frac{1}{76}\begin{bmatrix} -6 & 20 & -11\\ -10 & -8 & 7\\ -18 & 16 & 5  \end{bmatrix}^T = \frac{1}{76}\begin{bmatrix} 6 & 10 & 18 \\ -20 & 8 & -16 \\ 11 & -7 & -5 \end{bmatrix}  $
+
+                 $A^{-1}B = X$
+        \end{enumerate}
+
+
+        \section{Лекция 3}
+
+        $V / \sim = W$ 
+
+        $\vec a + \vec b$
+
+        Напоминание:
+        \begin{enumerate}
+            \item $\exists -(\vec a)$
+            \item $\exists \vec 0$
+            \item $\lambda \vec a\quad \lambda (\vec a  + \vec b) = \lambda \vec a + \lmbda \vec b$
+        \end{enumerate}
+
+        \subsection{Проекция вектора на ось}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{os}
+    \caption{Проекция}
+    \label{fig:os}
+\end{figure}
+
+
+\begin{definition}
+    Проекцией вектора $\vec a$ на ось  $\gamma$ называется класс эквивалентности $a_l^{\parallel \gamma}$, содержащий вектор, начало которого совпадает с точкой пересечения оси  $l$ и прямой парралельной $\gamma$ и проходящей через начало вектора $\vec a$, а конец -- с точкой пересечения оси $l$ и прямой, параллельной  $\gamma$ и проходящей через конец вектора  $\vec a$
+\end{definition}
+
+Свойства проекции:
+\begin{enumerate}
+    \item $(\vec a + \vec b)_l^{\parallel \gamma} = \vec a_l^{\parallel \gamma} + \vec b_l^{\parallel \gamma}$
+    \item  $(\lambda \vec a)_l^{\parallel \gamma} = \lambda \vec a_l^{\parallel \gamma}$
+    \item [\underline{$\lim$}:]  $\left( \sum\limits_{i=1}^{m} \lambda_i\vec a_i \right)_l^{\parallel \gamma} = \sum\limits_{i=1}^{m} \lambda_i \vec a_{i_l}^{\parallel \gamma} $
+
+\end{enumerate}
+
+$\sqsupset \vec e$ -- вектор, параллельный $l$. Положим  $\left| \vec e \right| = 1 \implies  $ орт оси $l$
+
+$\sphericalangle \vec a_l^{\parallel \gamma} = \alpha \cdot \vec e\quad \alpha = (\text{Пр}_l^{\parallel \gamma}\vec a) \cdot  \vec e\qquad \alpha$ -- длина проекции $\vec a_l^{\parallel \gamma}$ на ось  $l$.
+
+\begin{lemma}
+$\text{Пр}_l^{\parallel \gamma} \left[ \sum_{i=1}^{m} \lambda_i \vec a_i \right] = \sum_{i=1}^{m} \lambda_i \text{Пр}_l^{\parallel \gamma} \vec a_i$
+\end{lemma}
+\begin{proof}
+    $\left( \sum_{i=1}^{m} \lambda_i \vec a_i \right) _l^{\parallel \gamma} = \sum_{i=1}^{m} \lambda_i \vevc a_{i_l}^{\parallel \gamma}$
+
+    $\text{Пр}_l^{\parallel \gamma}\left[\sum_{i=1}^{m} \lambda_i \vec a_i\right] = \sum_{i=1}^{m} \lambda _i \text{Пр}_l^{\parallel \gamma} \vec a_i \vec e $
+\end{proof}
+
+$\R^1$
+\begin{figure}[ht]
+    \centering
+    \incfig{r1}
+    \caption{r1}
+    \label{fig:r1}
+\end{figure}
+
+$\forall \vec a\qquad \vec a = x_a \vec e\quad x_a$ -- координата вектора $\vec a$ на ось $l$
+
+ $\R^2$
+
+\begin{figure}[ht]
+    \centering
+    \incfig{r2}
+    \caption{r2}
+    \label{fig:r2}
+\end{figure}
+
+$\vec a = \vec a_x^{\paralle y} + \vec a_y^{\parallel x} = \text{Пр}_y^{\paralle x}\vec a\vec \vec e_1 + \text{Пр}_y^{\parallel x} \vec a\vec e_2 = x_x\vec e_1 + a_y\vec e_2$
+
+\begin{definition}
+    Говорят, что в базисе $\{e_1, e_2\}$ вектор $\vec a$ имеет координаты  $\vec a(a_x,a_y)$
+\end{definition}
+
+$\R^3$
+
+\begin{figure}[ht]
+    \centering
+    \incfig{r3}
+    \caption{r3}
+    \label{fig:r3}
+\end{figure}
+
+$\vec a(a_x, a_y, a_z)$
+
+ \begin{note}
+     Если угол между осью $l$ и прямой  $\gamma$ прямой ( $l\perp \gamma) \implies \vec _l^{\parallel \gamma} = \vec a_l^{\perp} = \text{Пр}_l^{\perp} \vec a\cdot \vec e$ 
+
+     $l \perp \Gamma \implies \vec a+l^{\perp \Gamma} = \vec a_l^{\perp} = -||-$
+\end{note}
+В декартовой системе координат орты координатных осей обозначаются следующим образом:
+\begin{itemize}
+    \item [x] $\vec  e_1 = \vec i$ 
+    \item [y] $\vec e_2 = \vec j$
+    \item [z] $\vec e_3 = \vec k$
+\end{itemize}
+
+\begin{note}
+    $\vec a(1,2,3) \implies \vec a = 1\cdot \vec i + 2\cdot \vec j + 3\cdot \vec k$
+\end{note}
+
+\begin{lemma}
+    $\left( \sum_{i=1}^{m} \lambda_i \vec a_i \right) _x = \sum_{i=1}^{m} \lambda _i\vec a_{i_x}$
+\end{lemma}
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}
+
