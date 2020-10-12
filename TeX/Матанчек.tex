@@ -45,7 +45,10 @@
 \newcommand{\pp}[1]{#1^{\prime\prime}}
 \newcommand{\ov}[1]{\overline{#1}}
 \renewcommand\phi{\varphi}
-%\DeclareMathOperator{\Cl}{Cl}
+% Topology operators
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Fr}{Fr}
 % Easily typeset systems of equations (French package) [like cases, but it aligns everything]
 \usepackage{systeme}
 \usepackage{lipsum}
@@ -1123,12 +1126,12 @@
             \item[$\ov{1}$] $\forall (a,b)$ и $(c,d)$ равномощны
             \item $a<b \implies (a,b)\sim [a,b) \sim [a,b]$
             \item $\left( -\frac{\pi}{2}, \frac{\pi }{2} \right) \sim \R\quad (\tg)$
-    \begin{figure}[ht]
-        \centering
-        \incfig{circ}
-        \caption{circ}
-        \label{fig:circ}
-    \end{figure}
+            \begin{figure}[ht]
+                \centering
+                \incfig{circ}
+        	\caption{circ}
+        	\label{fig:circ}
+    	    \end{figure}
         \end{enumerate}
     \end{example}
 
@@ -1816,7 +1819,7 @@
     Неравенство КБШ через норму: $\left| \left< x, y \right> \right| \leqslant \|x\| \cdot \|y\|\quad \|x\| = P(x)$ для любой нормы порождённой скалярным произведением.
 
     \begin{statement}
-        $\sqsupset \left( X, \mathcal{K} \right) $ -- векторное пространство со скалярным произведениемм $\left<\cdot , \cdot  \right>$. 
+        Пусть $\left( X, \mathcal{K} \right)$~--- векторное пространство со скалярным произведениемм $\left<\cdot , \cdot  \right>$. 
         Если  $\{x_{n} \}, \{y_{n} \} \subset X\quad x, y\in X\quad x_{n} \to x, y_{n} \to y\quad n \to  +\infty$, то  $\left<x_{n} , y_{n}  \right> \to \left< x, y \right>, n\to  +\infty$.
     \end{statement}
     \begin{proof}
@@ -1830,19 +1833,19 @@
     \section{Топологические свойства множеств в метрических пространствах}
 
     \begin{definition}
-        $\sqsupset \left( X, \rho \right) $ -- метрическое пространство. $E\subseteq X, a\in E$
+        Пусть $\left( X, \rho \right)$~--- метрическое пространство. $E\subseteq X, a\in E$
 
-        $ a \text{ называется внутренней для } E\quad (a\in Int E) \text{ если } \exists R>0: B_E(a) \subset E $ 
+        $a$ называется внутренней для  $E\quad (a\in \Int E)$ если $\exists R>0: B_E(a) \subset E$. 
     \end{definition}
 
     \begin{definition}
-    Множество в метрическом пространстве называется \underline{открытым}, если $ E = Int E$.
+        Множество в метрическом пространстве называется \underline{открытым}, если $E = \Int E$.
 
-    Для ``Остальных'' множеств верно $Int E \subseteq E$.
+        Для ``Остальных'' множеств верно $\Int E \subset E$.
     \end{definition}
     \begin{example}
         \begin{enumerate}
-            \item $E = X, X = Int E,\quad X$ - открыто
+            \item $E = X,\ X = \Int E,\quad X$ - открыто
             \item $\O $ -- открыто
             \item $(0,1)$ -- открытое множество $ R = \min \{1-a, a\}$
     \end{enumerate}
@@ -1852,7 +1855,7 @@
         В любом метрическом пространстве открытый шар является открытым множеством.
     \end{statement}
     \begin{proof}
-        $\sphericalangle \forall $ открытый шар $B_R(a)$ в метрическом пространстве  $(X, \rho)$
+        $\sphericalangle$ открытый шар $B_R(a)$ в метрическом пространстве  $(X, \rho)$.
 
         $\sphericalangle \forall b\in B_R(a) \implies  \rho(b,a)<r<R$
 
@@ -1860,22 +1863,22 @@
 
         $\sqsupset c\in B \implies  \rho(c,a) \leqslant \rho(c,b) + \rho(b,a) < \delta + r = R-r +r = R$
 
-        Т.о. $b\in Int(B_R(a)) \implies  B_R(a)$ -- открытое
+        Т.о. $b\in Int(B_R(a)) \implies  B_R(a)$ -- открытое.
     \end{proof}
 
     \begin{note}
         Свойство внутренней точки (и внутренности) зависит от объемлющего пространства. 
 
-        $E\subseteq X,\quad E\subseteq Y, Int_X E \neq Int_Y E$ (может оказаться неравным).
+        $E\subseteq X,\quad E\subseteq Y,\ Int_X E \neq \Int_Y E$ (может оказаться неравным).
     \end{note}
     \begin{example}
-        $E = [0,1], X=\R, Y = E\quad Int_X [0,1] = (0,1), Int_E E = [0,1]$
+        $E = [0,1],\ X=\R,\ Y = E\quad \Int_X [0,1] = (0,1), \Int_E E = [0,1]$
     \end{example}
 
     \begin{theorem}
         [свойства открытых множеств в метрических пространствах]
 
-        $\sqsupset (X, \rho)$ -- произвольное метрическое пространство. 
+        Пусть $(X, \rho)$~--- произвольное метрическое пространство. 
         Тогда 
         \begin{enumerate}
             \item [(I)]$\O , X$ -- открыты
@@ -1897,9 +1900,9 @@
     \end{proof}
 
     \begin{definition}
-        Ё\\
-        $X$ -- множество,  $\Omega \subseteq 2^X. 
-        \Omega$ называется \underline{топологической структурой} (или \underline{топологией}) на $X$, если
+        ~\\
+        $X$ -- множество,  $\Omega \subseteq 2^X$. 
+        $\Omega$ называется \underline{топологической структурой} (или \underline{топологией}) на $X$, если
             \begin{enumerate}
                 \item $\O , X\in \Omega$
                 \item $\forall \{O_i\}_{i\in I} \subseteq \Omega \implies  \bigcup\limits_{i \in  I} O_i \in \Omega$
@@ -1909,323 +1912,166 @@
     При этом $(X, \Omega)$ называют \underline{топологическим пространством}. Элементы  $\Omega$ называют открытыми множествами в  $X$ (в  $(X, \Omega)$).
 
     Т.о. любое метрическое пространство является топологическим.
-\end{definition}
+    \end{definition}
 
-\begin{example}
-   \begin{enumerate}
-       \item $X$ --  $\forall $ множество $\quad \Omega = \{\O , X\}$ -- антидискретная (не метризуемо, если состоит больше, чем из одной точки)
-       \item $X$ --  $\forall $ множество, $\quad \Omega = 2^X$ -- дискретная топология.
-       \item $X = \R, \Omega = \{\R\setminus A: A \text{ -- конечное множество}\}$ или $\Omega_2 = \{\R\setminus A: A\text{ -- не более, чем счётное множество}\}$ или $\Omega_2 = \{(a, +\infty ):a\in \R\}$.
-   \end{enumerate} 
-\end{example}
+    \begin{example}
+       \begin{enumerate}
+            \item $X$~--- любое множество $\quad \Omega = \{\O , X\}$~--- антидискретная (не метризуемо, если состоит больше, чем из одной точки).
+            \item $X$~--- любое множество, $\quad \Omega = 2^X$~--- дискретная топология.
+            \item $X = \R, \Omega = \{\R\setminus A: A \text{ -- конечное множество}\}$ или $\Omega_2 = \{\R\setminus A: A\text{ -- не более, чем счётное множество}\}$ или $\Omega_2 = \{(a, +\infty ):a\in \R\}$.
+        \end{enumerate} 
+    \end{example}
 
-\begin{definition}
-    $\sqsupset (X, \Omega)$ -- топологическое пространство, $E\subseteq X, a\in X$.
+    \begin{definition}
+        Пусть $(X, \Omega)$ -- топологическое пространство, $E\subseteq X, a\in X$.
 
-    $a$ называется \underline{предельной}  для $R$ (или \underline{точкой сгущения}, $a\in \p E$) $\iff \forall $ открытого $O:\quad a\in O\quad O\setminus \{a\}\cap E\neq \O $
+        $a$ называется \underline{предельной}  для $R$ (или \underline{точкой сгущения}, $a\in \p E$) $\iff \forall $ открытого $O:\quad a\in O\quad O\setminus \{a\}\cap E\neq \O$.
 
-    ``открытая окретсность'' точки $a$ в топологическом пространстве $X$ -- это любое открытое, содержащее точку  $a$
+        ``Открытая окретсность'' точки $a$ в топологическом пространстве $X$ -- это любое открытое, содержащее точку $a$.
 
-    $\overset{\cdot } U(a) = U\setminus \{a\}$ -- проколотая окрестность точки $ a$
-\end{definition}
+        $\overset{\cdot } U(a) = U\setminus \{a\}$~--- проколотая окрестность точки $ a$.
+    \end{definition}
 
-\begin{statement}
-    $\sqsupset E\subseteq X, (X, \rho)$ -- метрическое пространство.
+    \begin{statement}
+        Пусть $E\subseteq X, (X, \rho)$~--- метрическое пространство.
 
-    $a\in \p E \iff  \exists \{x_{n} \} \subseteq E\setminus \{a\}: x_{n} \to a, n\to +\infty $
-\end{statement}
-\begin{proof}
-    \begin{itemize}
-        \item [$\impliedby$:] из определения
-        \item [$\implies $:] $\sphericalangle B_{\frac{1}{n}}(a)\setminus \{a\} \cap E\neq \O  \implies  \exists x_n\in (B_{\frac{1}{n}}\setminus \{a\})\cap E\qquad \rho(x_{n} , a) <\frac{1}{n} \to 0, n\to +\infty  \implies  x_{n} \to a$
-    \end{itemize}
-\end{proof}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{definition}
-    Множество $E$  в топологическом пространстве  $(X, \Omega)$ называется замкнутым, если $\p E \subseteq E$
-\end{definition}
-\begin{example}
-    \begin{enumerate}
-        \item $E = (0,1]\quad \p E = [0,1]$
-        \item  $E = \{\frac{1}{k}\}_{k\in \N }, \p E = \{0\}$ 
-        \item $E = \R, \p E = \R$
-    \end{enumerate}
-\end{example}
-\begin{theorem}
-    В $\forall $ топологическом пространстве множество открыто тогда и только тогда, когда его дополнение замкнуто
-\end{theorem}
-\begin{proof}
-    $\sqsupset (X, \Omega)$ -- топологическое пространство, $\sqsupset O\subseteq X$
+        $a\in \p E \iff  \exists \{x_{n} \} \subseteq E\setminus \{a\}: x_{n} \to a, n\to +\infty $
+    \end{statement}
+    \begin{proof}
+        \begin{itemize}
+            \item [$\impliedby$:] из определения.
+            \item [$\implies $:] $\sphericalangle B_{\frac{1}{n}}(a)\setminus \{a\} \cap E\neq \O  \implies  \exists x_n\in (B_{\frac{1}{n}}\setminus \{a\})\cap E\qquad \rho(x_{n} , a) <\frac{1}{n} \to 0, n\to +\infty  \implies  x_{n} \to a$
+        \end{itemize}
+    \end{proof}
 
-    $O$ -- открыто. $F = X\setminus O\quad F$ -- замкнуто?
-
-    $\sphericalangle a\in \p F, a\in F?$
-
-    Пусть нет, тогда $a\in O \implies (O\setminus \{a\})\cap F = \O $ !!! $\implies  a\in F \implies F$ -- замкнуто 
-
-    $\sqsupset F$ -- замкнуто $\implies ?\quad O = X\setminus F$ -- открыто. Если $O = \O  \implies  O$ -- открыто.
-
-    Если $O\neq \O , \sphericalangle a\in O \implies a \not\in F \implies a\not\in \p F \implies \exists $ окрестность $U$ точки $a:\quad \left( U\setminus \{a\} \right) \cap F = \O \implies  U\cap F = \O $ (т.к. $a\not\in F$) $\implies  U\subset O = X\setminus F \implies  X\in U\subseteq O \implies x\in Int O \implies (a-\forall )O $ -- открытое.
-\end{proof}
-
-\begin{corollary}
-    \begin{enumerate}
-        \item $\sqsupset (X, \Omega)$ -- топологическое пространство. Тогда
-            \begin{enumerate}
-                \item [I)] $\O , X$ -- замкнутые
-                \item [II)] $\forall $ семейства $\{F_i\}_{i\in I}$ замкнутых  $\implies  \bigcap\limits_{i \in  I} f_i$ -- замкнуто
-                \item [III)] $\forall N\in \N , \forall \{F_1, \ldots, F_N\}$ замкнутых $F_1\cup \ldots\cup  F_N$ -- замкнуто.
-            \end{enumerate}
-    \end{enumerate}
-\end{corollary}
-
-\begin{definition}
-    $ \sqsupset (X, \Omega)$ -- топологическое пространство. $E\subseteq X, a\in E$
-
-    $a$ называется \underline{изолированной точкой} $E$, если  $\exists $ окрестность $U$ точки  $a: \quad U\cap E = \{a\}$
-\end{definition}
-
-\begin{definition}
-    $ \sqsupset (X, \rho)$ -- метрическое пространство, $E\subseteq X, a\in X$
-
-    $a$ называется \underline{точкой прикосновения}  $E \left( a\in Cl ~E \right) $, если $\forall $ окрестности $U$ точки $a$  $U\cap E \neq \O $
-
-    $Cl~E$ -- замыкание множества $E\qquad E\subseteq Cl~E$
-\end{definition}
-
-\begin{theorem}
-    [О замыкании]
-
-    $\sqsupset E \subseteq X, (x, \rho)$ -- топологическое пространство. Тогда
-    \begin{enumerate}
-        \item [(I)] $Cl E = E\cup \p E = \p E \cup (E\setminus \p E)$ -- последнее является множеством изолированных точек. 
-        \item [(II)]  $Cl E = \cap \{F: F \text{ -- замкнуто }, E\subseteq F\} $
-        \item [(III)] $Cl E$ -- минимальное (по включению) замкнутое, содержащее  $E$
-
-            (Если $F$ -- замкнуто, и  $E\subseteq F$, то $Cl E\subseteq F$) 
-        \item [(IV)] Если $X$ -- метрическое пространство, то  $x\in Cl E \iff \exists \{x_{n} \}_{n=1}^{\infty }: x_{n} \to x$
-    \end{enumerate}
-\end{theorem}
-\begin{proof}
-    \begin{enumerate}
-        \item [(I)] $x\in Cl~E \iff \begin{cases}
-            x\in E\\
-            x\not\in E \quad \forall \text{ окрестности } U \text{ точки } x\quad \overline{\cdot}U\cap E \neq \O\\ 
-        \end{cases} \iff  \begin{cases}
-            x\in E\\
-            x\in \p E\\
-        \end{cases} \iff  x\in E\cup \p E$
-    \item [(II)] $c\in Cl~E\quad \sphericalangle F$ -- замкнутое  $: E\subseteq F \implies  x\in F \implies x\in$ Пр.ч (правой части)
-
-        $\sqsupset x\in$ Пр.ч. $=F$, если  $x\not\in Cl~E \implies  \exists $ окрестность $U$ точки $x:\quad U\cap E = \O $ 
-
-         $\sphericalangle F_1 = F\setminus U$ -- замкнуто, $ F_1\supseteq$, т.к. $ E\subseteq F\quad E\cap U\neq \O , \quad F = F_1 \cap \ldots\quad x\in F = F_1, x\not\in F_1$!!!
-     \item [III] $F$ -- правая часть равенства в II.  $F$ -- замкнуто как пересечение и  $\forall $ замкнутого $F_1: E\subseteq F_1 \implies F\subseteq F_1$ ( по определению пересечения)
-     \item [IV] $?x\in Cl ~E \iff  \begin{cases}
-             x \text{ изолированная для } E &x_{n} \equiv x\\
-             x \text{ предельная для } E & \text{ тога по характеристике предельной точки}
-     \end{cases}$
-    \end{enumerate}
-\end{proof}
-
-\begin{problem}
-    \begin{enumerate}
-        \item $Int(E)\subseteq E\qquad Int(Int(E)) = Int(E)$
-        \item $(Int~E)^c = Cl(E^c)$
-        \item  $Cl(Cl(E)) = CL(E)$
-        \item  $Int(A\cap B) = Int(A)\cap Int(B)$
-        
-            $Cl(A\cap B) = Cl(A)\cup Cl(B)$ 
-            
-            $Int(A\cup B)\neq Int(A) \cup Int(B)$ 
-
-            $CL(A\cap B) = \ldots$
-    \end{enumerate}
-\end{problem}
-
-\begin{note}
-    $Int~O$ -- наибольшее открытое множество, содержащееся в  $O$
-\end{note}
-
-\begin{definition}
-    $\sqsupset (X, \Omega)$ -- топологическое пространство, $E\subseteq X\quad a\in X$
-
-    $a$ называется \underline{граничной точкой} для  $E$, если  $\forall $ оксрестности $U$ точки  $a\qquad U\cap E\neq \O $ И $U\cap (E^c)\neq \O $
-
-    $Fr E = \{x: x\text{ -- граничная для } E\} = \partial E$
-\end{definition}
-
-\begin{example}
-    \begin{enumerate}
-        \item $X = \R, E = [0,1]\quad Int E = (0,1). Cl E = [0,1]\quad FrR = \{0, 1\}$
-        \item $X = \R^2, E = \{(x,0): x\in [0,1]\}\quad Int E = \O , ClE = E, FrE = R$
-        \item $ X = [0,1], E = [0,1]\quad Int E = E, ClE = E, Fr E = \O $
-    \end{enumerate}
-\end{example}
-
-\begin{definition}
-    $\sqsupset (X, \Omega)$ -- топологическое пространство
-
-    $Y\subseteq X \quad \Omega$ индуцирует топологию $\Omega \cap Y:=\left\{ O\cap Y:\quad O\in \Omega \right\} $ -- индуцированная на  $Y$ топология из $X$ 
-
-    $\bigcup\limits_{i \in  I} \left( O_i \cap Y \right)  = \left( \bigcup\limits_{i \in  I} O_i \right) \cap Y$ -- замкнуто относительно объединения.
-
+    \begin{definition}
+        Множество $E$  в топологическом пространстве  $(X, \Omega)$ называется замкнутым, если $\p E \subseteq E$.
+    \end{definition}
+    \begin{example}
+        \begin{enumerate}
+            \item $E = (0,1]\quad \p E = [0,1]$
+            \item  $E = \{\frac{1}{k}\}_{k\in \N }, \p E = \{0\}$ 
+            \item $E = \R, \p E = \R$
+        \end{enumerate}
+    \end{example}
+    \begin{theorem}
+        В любом топологическом пространстве множество открыто тогда и только тогда, когда его дополнение замкнуто.
+    \end{theorem}
+    \begin{proof}
+        Пусть $(X, \Omega)$ -- топологическое пространство и $O\subseteq X$.
+    
+        $O$ -- открыто. 
+        $F = X\setminus O\quad F$ -- замкнуто?.
+    
+        $\sphericalangle a\in \p F, a\in F?$.
+    
+        Пусть нет, тогда $a\in O \implies (O\setminus \{a\})\cap F = \O $ !!! $\implies  a\in F \implies F$ -- замкнуто. 
+    
+        Пусть $F$~--- замкнуто $\implies ?\quad O = X\setminus F$~--- открыто. 
+        Если $O = \O$,то $O$~--- открыто.
+    
+        Если $O\neq \O , \sphericalangle a\in O \implies a \not\in F \implies a\not\in \p F \implies \exists $ окрестность $U$ точки $a:\quad \left( U\setminus \{a\} \right) \cap F = \O \implies  U\cap F = \O $ (т.к. $a\not\in F$) $\implies  U\subset O = X\setminus F \implies  X\in U\subseteq O \implies x\in Int O \implies (a-\forall )O $~--- открытое.
+    \end{proof}
+    
+    \begin{corollary}
+        \begin{enumerate}
+            \item Пусть $(X, \Omega)$ -- топологическое пространство. 
+            Тогда
+                \begin{enumerate}
+                    \item [I)] $\O , X$ -- замкнутые
+                    \item [II)] $\forall $ семейства $\{F_i\}_{i\in I}$ замкнутых  $\implies  \bigcap\limits_{i \in  I} f_i$ -- замкнуто
+                    \item [III)] $\forall N\in \N , \forall \{F_1, \ldots, F_N\}$ замкнутых $F_1\cup \ldots\cup  F_N$ -- замкнуто.
+                \end{enumerate}
+        \end{enumerate}
+    \end{corollary}
+    
+    \begin{definition}
+        $ \sqsupset (X, \Omega)$ -- топологическое пространство. 
+        $E\subseteq X, a\in E$.
+    
+        $a$ называется \underline{изолированной точкой} $E$, если  $\exists $ окрестность $U$ точки  $a: \quad U\cap E = \{a\}$.
+    \end{definition}
+    
+    \begin{definition}
+        Пусть $(X, \rho)$~--- метрическое пространство, $E\subseteq X, a\in X$.
+    
+        $a$ называется \underline{точкой прикосновения}  $E \left( a\in Cl ~E \right) $, если $\forall $ окрестности $U$ точки $a$  $U\cap E \neq \O $.
+    
+        $\Cl E$ -- замыкание множества $E\qquad E\subseteq \Cl E$
+    \end{definition}
+    
+    \begin{theorem}
+        [О замыкании]
+    
+        Пусть $E \subseteq X, (x, \rho)$ -- топологическое пространство. 
+        Тогда
+        \begin{enumerate}
+            \item [(I)] $\Cl E = E\cup \p E = \p E \cup (E\setminus \p E)$ -- последнее является множеством изолированных точек. 
+            \item [(II)]  $\Cl E = \cap \{F: F \text{ -- замкнуто }, E\subseteq F\} $
+            \item [(III)] $\Cl E$ -- минимальное (по включению) замкнутое, содержащее  $E$
+    
+            (Если $F$~--- замкнуто, и $E\subseteq F$, то $\Cl E\subseteq F$) 
+            \item [(IV)] Если $X$~--- метрическое пространство, то  $x\in Cl E \iff \exists \{x_{n} \}_{n=1}^{\infty }: x_{n} \to x$.
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        \begin{enumerate}
+            \item [(I)] $x\in \Cl E \iff 
+            \begin{cases}
+                x\in E\\
+                x\not\in E \quad \forall \text{ окрестности } U \text{ точки } x\quad \overline{\cdot}U\cap E \neq \O\\ 
+            \end{cases} \iff  
+            \begin{cases}
+                x\in E\\
+                x\in \p E\\
+            \end{cases} \iff  x\in E\cup \p E$
+        \item [(II)] $c\in \Cl E\quad \sphericalangle F$ -- замкнутое$: E\subseteq F \implies  x\in F \implies x\in$ Пр.ч (правой части)
+    
+            $\sqsupset x\in$ Пр.ч. $=F$, если  $x\not\in \Cl E \implies  \exists $ окрестность $U$ точки $x:\quad U\cap E = \O $ 
+    
+             $\sphericalangle F_1 = F\setminus U$ -- замкнуто, $ F_1\supseteq$, т.к. $ E\subseteq F\quad E\cap U\neq \O , \quad F = F_1 \cap \ldots\quad x\in F = F_1, x\not\in F_1$!!!
+         \item [III] $F$ -- правая часть равенства в II.  
+         $F$ -- замкнуто как пересечение и для любого замкнутого $F_1: E\subseteq F_1 \implies F\subseteq F_1$ (по определению пересечения)
+         \item [IV] $?x\in \Cl E \iff  
+         \begin{cases}
+                 x \text{ изолированная для } E &x_{n} \equiv x\\
+                 x \text{ предельная для } E & \text{ тога по характеристике предельной точки}
+         \end{cases}$
+        \end{enumerate}
+    \end{proof}
+    
     \begin{problem}
-        $\Omega \cap Y = ``\Omega_Y''$ -- топологическая структура
+        \begin{enumerate}
+            \item $\Int E\subseteq E\qquad \Int(\Int(E)) = \Int E$
+            \item $(\Int E)^c = \Cl(E^c)$
+            \item  $\Cl(\Cl(E)) = \Cl(E)$
+            \item  $\Int(A\cap B) = \Int(A)\cap \Int(B)$
+            
+                $\Cl(A\cap B) = \Cl(A)\cup \Cl(B)$ 
+                
+                $\Int(A\cup B)\neq \Int(A) \cup \Int(B)$ 
+    
+                $\Cl(A\cap B) = \ldots$
+        \end{enumerate}
     \end{problem}
-\end{definition}
-
-\begin{note}
-    Если $(X, \rho)$ -- метрическое пространство.
-
-    $\Omega = \left\{ \exists \text{ семейство открытых шаров } \{B_I\}_{i\in I}: O = \bigcup\limits_{i \in  I}  B_i \right\} $
-
-    ($\forall O = \bigcup\limits_{x\in O} B_{r(x)}(x)$)
-\end{note}
-
-\begin{statement}
-    $\sqsupset (X, \rho)$ -- м.п., $Y\subseteq X$ Тогда $\Omega_Y$ совпадает с топологией, порождённой индуцированной метрикой.
-\end{statement}
-\begin{proof}
-    $\Omega_{\rho,Y} = \{O: \exists  \text{ открытые шары в } Y \{B_i\}_{i\in I}: O = \bigcup\limits_{i \in  I} B_i = \bigcup ( \ov{B_i} \cap Y) \}$
-
-    $\ov{B_i}$ -- шар с тем же центром и радиусом, но в $X$
-\end{proof}
-
-\begin{note}
-    $Y\subseteq X\quad O $ открыто в $Y \iff \exists \ov{O}$ открыто в $X:\quad O = \ov O \cap Y$
-
-    $\sqsupset F\subseteq Y\quad F$ -- замкнуто (в $Y$)  $\iff  \exists $ замкнутое $\ov F $ в  $X\quad F = \ov F\cap Y$
-\end{note}
-\begin{proof}
-    $F$ -- замкнуто в  $Y \iff  Y\setminus F\in \Omega_Y \iff  Y\setminus F = \ov O \cap Y$,(где $\ov O \in \Omega \iff  X\setminus \ov O$ -- замкнуто)
-
-    $F = Y\setminus \left( Y\setminus F \right)  = Y\setminus (\ov O\cap Y) = Y\setminus \ov O = Y\cap (X\setminus \ov O)$
-\end{proof}
-
-\begin{example}
-    Примеры:
-    \begin{enumerate}
-        \item $X = \R^2\quad Y = B_1(0)\cup \left\{ (2,0) \right\} \cup \left\{ (x,y): xy=1, x>0, y>0 \right\} $ 
-
-            $B_1[0] = B_1(0)$
-
-            $B_{\frac{1}{2}}[2] = \left\{ (2,0) \right\} \cup \{(x,\frac{1}{x}): (x-2)^2+\frac{1}{x^2}\leqslant \frac{1}{4}\}$
-
-        \item $Y$ -- график  $y(x) = \sin \frac{1}{x}, x\neq 0$
-
-            $\Cl E = Y\cup \left\{ (0,y):y\in [-1,1] \right\} $
-    \end{enumerate}
-\end{example}
-
-\begin{note}
-    Если $X$ -- метрическое пространство  $E\subseteq X$
-
-    $a\in \p E \iff \forall $ открытой окрестности $U$ точки  $a\quad \overset{\cdot}U \cap E$ бесконечно
-\end{note}
-
-\section{Компактность, сходимость в себе, полнота пространств}
-
-\begin{definition}
-    $\sqsupset (X, \Omega)$ -- т.пр. $\sqsupset E\subseteq X, \left\{ A_i \right\} _{i\in I}\subseteq X$
-
-    Если $E \subseteq \bigcup\limits_{i \in  I} A_i$, то говорят, что $\left\{ A_i \right\} _{i\in I}$ образует покрытие множества $E$ 
-\end{definition}
-
-\begin{definition}
-    $\sqsupset (X,\Omega)$ -- т.п. $K\subseteq X$
-
-    $K$ -- называется \underline{компактным} (в  $X$), если  $\forall $ покрытия $\left\{ O_i \right\} _{i\in I}$ множества $K$ открытыми можно извлечь конечное подпокрытие:  $\exists N: \exists i_1, i_2, \ldots i_n: K\subseteq O_{i_1}\cup O_{i_2} \cup  \ldots \cup  O_{i_n}$
-\end{definition}
-
-Элементарные свойства компактных множеств:
-\begin{statement}
-    Если $K$ -- компактно (в  $(X, \Omega)$) и  $F\subseteq K$ и $F$ -- замкнуто, то  $F$ -- компактно (в  $(X, \Omega)$)
-\end{statement}
-\begin{proof}
-    $\sphericalangle $ открытое покрытие  $\left\{ O_i \right\} _{i\in I}$ множества $F$
-
-    $\sphericalangle O = X\setminus F$ -- открытое $ \implies  \left\{ O_i \right\} _{i\in I} \cup \{O\}$ -- покрытие $ K$
-
-    $K$ -- компакт  $\implies \exists i_1, \ldots, i_n:\quad K\subseteq O_{i_1} \cup \ldots\cup O_{i_n} \cup O$
-
-    $F\subseteq O_{i_1} \cup  \ldots\cup O_{i_N} \implies $ (покрытие -- $\forall $) $F$ -- компакт
-\end{proof}
-\begin{statement}
-    $\sqsupset (X, \Omega)$ -- топ. пр-во $\quad K\subseteq X$. Тогда следующие утверждения равносильны
-    \begin{align}
-        K \text{ комп. в } X\\
-        $K$  \text{комп. в себе} \left( \text{комп в } (K, \Omega_K) \right) 
-    .\end{align}
-\end{statement}
-\begin{proof}
-     \begin{itemize}
-         \item []
-         \item [$1.1 \to 1.2$] $\sqsupset \left\{ G_i \right\} _{i\in I}$ -- открытое покрытие $K$  в  $K \implies  \forall i\in I \exists $ открытое в $X\quad O_i: G_i = O_i \cap K \implies  K \subseteq \bigcup\limits_{i \in  I} O_i \implies \exists i_1, \ldots, i_N: K\subseteq \bigcup\limits_{j=1}^n O_{i_j} \implies K\subseteq \left( \bigcup\limits_{j=1}^N O_{i_j}  \right)\cap K = \bigcup\limits_{j=1}^N\left( O_{i_j}\cap K \right) = \bigcup\limits_{j=1}^N G_{i_j}    $, т.о. $\left\{ G_{i_j} \right\} $ -- конечное подпокрытие $K$ в  $ K$
-         \item [$1.2\to 1.1$] $\sphericalangle \forall $ открытое покрытие $\left\{ O_i \right\} _{i\in I} K$ в $X. \sqsupset G_i = O_i\cap K$ -- открытые в $K$
-
-             $K\subseteq \bigcup\limits_{i \in  I} O_i \implies K\subseteq \left( \bigcup\limits_{i \in  I} O_i \right) \cap K = \bigcup\limits_{i \in  I} G_i$
-
-             Т.к. $K$ компактно в  $K$, то  $\exists  i_1, \ldots, i_N:\quad K\subseteq G_{i_1}\cup \ldots \cup g_{i_N} \implies K\subseteq O_{i_1}\cup \ldots \cup O_{i_N}$ $\left( G_{i_1}\subseteq O_{i_1} \ldots \right) $. Т.о. $\{O_{i_1}, \ldots, O_{i_N}\}$ -- конечное покрытие
-    \end{itemize}
-\end{proof}
-\begin{corollary}
-    $K\subseteq Y\subseteq X\quad (X, \Omega)$ -- т.п. Тогда $K$ компактно в  $Y \iff  K$ компактно в $X$
-\end{corollary}
-\begin{note}
-    $(0,1) = \bigcup\limits_{n=2}^{\infty }\left( \frac{1}{n}, 1 \right)  $ -- не извлекается конечное подпокрытие
-\end{note}
-\begin{statement}
-    $\sqsupset (X, \rho)$ -- м.п., $K$ -- компактно в  $X$. Тогда  $K$ замкнуто и ограничено (в  $X$)
-\end{statement}
-\begin{proof}
-    $\sqsupset a\in X\quad \left\{ B_n(a) \right\} _{n\in \N } \implies  K\subseteq X\subseteq \bigcup\limits_{n\in \N } B_n(a)$
-
-    Если $K$ компактно, то  $\exists n_1, \ldots, n_m: K\subseteq \bigcup\limits_{k=1}&m B_{n_k}(a) = B_N(a), N = \max\{n_1, \ldots, n_m\}$, т.е. $K$ ограничено
-
-     $K$ -- замкнуто?  $\iff X\setminus K$ -- открыто
-
-     $\sphericalangle \forall p\in X\setminus K$
-
-     $\forall q\in K\quad 0<\frac{\rho(q,p)}{2} = r_q \implies B_{r_q}(q)\cap B_{r_q}(p) = \O $ 
-
-     $\rho(x,y) >\rho(p,q) - \rho(p,y) - \rho(q,x) >2r_q-r_q-r_q=0$
-
-     $\left\{ B_{r_q}(q) \right\} _{q\in K}$ -- открытое покрытие $K \implies \left( K \text{ -- компакт } \right)  \exists q_1, \ldots, q_N: K\subseteq \bigcup\limits_{j=1}^N B_{r_{q_j}}(q_j), r = \min\left\{ r_{q_1}, \ldots, r_{q_N} \right\}  $ 
-
-     $B_r(p)\subseteq B_{r_{q_j}} (p)\qquad B_r(p)\cap B_{r_{q_j}}(q_j) \neq \O \quad \forall j=1:N \implies  B_{r}(p)\cap K\neq \O  \implies  B_r(p)\subseteq X\setminus K$
-
-     Т.о. $X\setminus K$ -- открыто
-\end{proof}
-
-Аксиома о вложенных промежутках справедлива и для ``обобщённых замкнутых промежутков''  $Q = [a_1, b_1]\times \ldots\times [a_n, b_n] \subseteq \R^n$ -- $\overline{\text{куб}}$
-
-$Q^{\left( j \right) } = \prod_{k=1}^{n} [a_k^{\left( j \right) }, b_k^{\left( j \right)}] \quad \forall j\in \N $ и $\forall k=1:n\quad \forall j\in \N \quad \left[ a_k^{\left( j+1 \right) }, b_k^{\left( j+1 \right) } \right] \subseteq\left[ a_k^{\left( j\right) }, b_k^{\left( j \right) } \right] $
-
-По аксиоме о вложенных промежутках $ \forall k=1:n\quad \exists c_k \subseteq \bigcap\limits_{j=1}^{\infty } [a_k^{\left( j \right) }, b_k^{\left( j \right) }] \implies  c = \left( c_1, \ldots, c_n \right) \in \prod_{k=1}^{n} [a_k^{\left( j \right) }, b_k^{\left( j \right) } ] \forall j\in \N $
-
-\begin{theorem}
-    [Гейне-Бореля] В $ \R^n$ любой замкнутых куб компактен 
-
-    $Q = [a_1, a_1+\delta] \times [a_2, a_2+\delta] \times \ldots\times [a_n, a_n+\delta]\quad \delta$ -- длина ребра
-\end{theorem}
-\begin{proof}
-\begin{figure}[ht]
-    \centering
-    \incfig{cube}
-    \caption{cube}
-    \label{fig:cube}
-\end{figure}
-
-От противного $\sqsupset \left\{ O_i \right\} _{i\in I}$ -- открытое покрытие куба $Q$, из которого нельзя извлечь конечного подпокрытия
-
- $Q_1 = Q;$ делением рёбер пополам представим $Q$  виде объединения  $2^N$ кубов со стороной  $\frac{\delta}{2}$ 
-
- Хотя бы один из них -- ``плохой'' (т.е. не имеет конечного подпокрытия в $\{O_i\}$)ю Назовём  $O_2, \ldots$
-
- В результате $\left\{ Q_j \right\} $ -- последовательность кубов
-
- $x, y\in \ov O\quad \ov O$ -- куб со стороной  $\Delta \implies  \|x-y\| \leqslant \Delta \cdot  \sqrt{n} \left( \|x-y\| = \sqrt{\sum_{k=1}^{n} (x_k-y_k)^2} = \sqrt{\sum_{k=1}^{n} \Delta^2} = \sqrt{n} \Delta   \right) $
-\end{proof}
+    
+    \begin{note}
+        $\Int O$~--- наибольшее открытое множество, содержащееся в $O$.
+    \end{note}
+    
+    \begin{definition}
+        Пусть $(X, \Omega)$ -- топологическое пространство, $E\subseteq X\quad a\in X$.
+    
+        $a$ называется \underline{граничной точкой} для  $E$, если  $\forall $ окрестности $U$ точки  $a\qquad U\cap E\neq \O $ И $U\cap (E^c)\neq \O $.
+    
+        $\Fr E = \{x: x\text{ -- граничная для } E\} = \partial E$
+    \end{definition}
+    
+    \begin{example}
+        \begin{enumerate}
+            \item $X = \R, E = [0,1]\quad \Int E = (0,1). \Cl E = [0,1]\quad \Fr R = \{0, 1\}$
+            \item $X = \R^2\ E = \{(x,0): x\in [0,1]\}\quad \Int E = \O , \Cl E = E, \Fr E = R$.
+            \item $ X = [0,1], E = [0,1]\quad \Int E = E, \Cl E = E, \Fr E = \O $
+        \end{enumerate}
+    \end{example}
 \end{document}
-
