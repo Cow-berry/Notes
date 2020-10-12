@@ -45,7 +45,10 @@
 \newcommand{\pp}[1]{#1^{\prime\prime}}
 \newcommand{\ov}[1]{\overline{#1}}
 \renewcommand\phi{\varphi}
-%\DeclareMathOperator{\Cl}{Cl}
+% Topology operators
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Fr}{Fr}
 % Easily typeset systems of equations (French package) [like cases, but it aligns everything]
 \usepackage{systeme}
 \usepackage{lipsum}
@@ -145,14 +148,13 @@
     \tableofcontents
     \newpage
     \section{Введение}
-    Семёнова Ольга Львовна
-
-    o\_ semenova@mail.ru
+    Преподаватель~--- Семёнова Ольга Львовна. 
+    Почта: o\_semenova@mail.ru
 
    
    Литература: \begin{enumerate}
        \item Виноградов О.Л. Курс Математического анализа
-       \item Виноградов, громов --||--
+       \item Виноградов, Громов --||--
        \item Фихтенгольц (курс)
        \item Зорич (курс, двухтомник)
        \item Кудрявцев (сборник задач, 1 том из трёх)
@@ -160,49 +162,51 @@
    \end{enumerate}
 
     \section{Баллы}
+    Практика -- 70/100.
+    Теория -- 30/100 -- 2-4 теста по теории (3 балла за присутствие на $\sim $всех лекциях.
 
-    практика -- 70/100\\
-    теория -- 30/100 -- 2-4 теста по теории (3 балла за присутствие на $\sim $всех лекциях
-
-    Если меньше 18/30 баллов, то всю теорию нужно будет пересдавать. Иначе можно воспользоваться этим как баллами за экзамен.
+    Если меньше 18/30 баллов, то всю теорию нужно будет пересдавать. 
+    Иначе можно воспользоваться этим как баллами за экзамен.
 
     \chapter{Множества, отображения, $\R$}
-
     \section{Множества}
-    ''Множество'' -- неопределямое слово. Синонимы: набор, совокупность, класс
+    ''Множество'' -- неопределямое слово. 
+    Синонимы: набор, совокупность, класс.
+    Множество состоит из элементов. 
+    \[M = \{1,3,7,9\},\ \N,\ \Q,\ \Z,\ \Z_+ = \{0,1,2,3,4,\ldots\},\ \R,\ \R_+.\]
 
-    Множество состоит из элементов. $M = \{1,3,7,9\}, \N , \Q, \Z , \Z_+ = \{0,1,2,3,4,\ldots\}, \R, \R_+$
-
-    способы описания:
+    Способы описания:
     \begin{itemize}
         \item явное описание $\{1, 2, 3\}$
-        \item через некоторое свойство $M = \{x: P(x)\}\quad :$ -- читается как ''таких что''. Тот же смысл имеет $\mid$.
-            $P(x)$ обозначает какое-то свойство.
-            $M = \{x:x\text{$x$ -- человек и $x$ 2002 г.р.}\}$
+        \item через некоторое свойство\\ 
+        $M = \{x: P(x)\}\quad :$~--- читается как ''таких что''. 
+        Тот же смысл имеет $\mid$.
+        $P(x)$ обозначает какое-то свойство.\\
+        $M = \{x:x\text{$x$ -- человек и $x$ 2002 г.р.}\}$
     \end{itemize}
     Кванторы:
     \begin{itemize}
         \item $\forall $ -- ''для любого'', любой, каждый, всякий $\ldots$
-        \item $\exists $ -- ''существует''
+        \item $\exists $ -- ''существует''.
     \end{itemize}
 
-    Пример: $\forall \varepsilon>0 \exists  \delta>0 :\ldots$
-
-   Для любого положительного эпсилон существует положительное число дельта, т.ч. $\ldots$
+    Пример: $\forall \varepsilon>0 \exists  \delta>0 :\ldots$\\
+    Для любого положительного эпсилон существует положительное число дельта, т.ч. $\ldots$
+   
     Обозначения:
     \begin{itemize}
-        \item $\iff $ -- равносильно
-        \item $\wedge$ -- ''и''
-        \item $\vee$ -- ''или''
-        \item $\sqsupset $ пусть
-        \item $\sphericalangle$ -- допустим, рассмотрим
+        \item $\iff $~--- равносильно
+        \item $\wedge$~--- ''и''
+        \item $\vee$~--- ''или''
+        \item $\sqsupset$~--- пусть
+        \item $\sphericalangle$~--- допустим, рассмотрим
     \end{itemize}
 
     \begin{note}
-        Множество всех множеств не существует
+        Множество всех множеств не существует.
 
-        $\neg$ -- отрицания
-
+        $\neg$ -- отрицание
+        
         $\neg \exists $ -- не существует
         
         $\O $ -- пустое множество
@@ -215,85 +219,87 @@
     \end{note}
     $\forall $ множества $M\quad \O \subseteq M$
 
-    $A = B \iff  \left( x\in A \iff x\in B \right)  \iff \begin{cases}
+    $A = B \iff  \left( x\in A \iff x\in B \right)  \iff 
+    \begin{cases}
         A\subseteq B\\
         B\subseteq A\\
     \end{cases}$
     
     
-        $A,B$ -- множества 
+    $A,B$ -- множества 
 
-        $A\cup B = \{x: (x\in A \vee x\in B)\}$
+    $A\cup B = \{x: (x\in A \vee x\in B)\}$
         
-        $A\cap B = \{x: (x\in A \wedge x\in B)\}$
+    $A\cap B = \{x: (x\in A \wedge x\in B)\}$
 
-        $x\in A\cap B \iff  \begin{cases}
-            x\in A\\
-            x\in B\\
-        \end{cases}$
+    $x\in A\cap B \iff  \begin{cases}
+        x\in A\\
+        x\in B\\
+    \end{cases}$
 
-        $A\setminus B = \{x:x \in A, x\not\in B \}$
+    $A\setminus B = \{x:x \in A, x\not\in B \}$
 
-        $A\subset C$
+    $A\subset C$
 
-        $A^c = X\setminus A$ -- дополнение $A$ в $X$
+    $A^c = X\setminus A$ -- дополнение $A$ в $X$
 
-        \begin{definition}
-            $A,X_{\alpha}$ -- множества, $\forall \alpha \in A$
+    \begin{definition}
+        $A,X_{\alpha}$ -- множества, $\forall \alpha \in A$
 
-            $\{X_{\alpha}\}_{\alpha\in A}$ -- семейство множеств
+        $\{X_{\alpha}\}_{\alpha\in A}$ -- семейство множеств
 
-            $A$ -- индексное множество
+        $A$ -- индексное множество
 
-            $\bigcup\limits_{\alpha\in A}X_{\alpha} = \{x:\exists \alpha\in A\quad x\in X_{\alpha}\} $
+        $\bigcup\limits_{\alpha\in A}X_{\alpha} = \{x:\exists \alpha\in A\quad x\in X_{\alpha}\} $
 
-            $\bigcap\limits_{\alpha\in A}X_{\alpha} = \{x: \forall \alpha\in A\quad x\in x_{\alpha}\} $
-        \end{definition}
+        $\bigcap\limits_{\alpha\in A}X_{\alpha} = \{x: \forall \alpha\in A\quad x\in x_{\alpha}\} $
+    \end{definition}
 
-        \begin{example}
-            $\{(x-1,x+1)\}_{x\in (0;1)}$
+    \begin{example}
+        $\{(x-1,x+1)\}_{x\in (0;1)}$
 
-            $\bigcup\limits_{x\in (0;1)}(x-1, x+1) = (-1,2) , \bigcap\limits_{x\in (0,1)} (x-1,x+1) = (0;1) $
+        $\bigcup\limits_{x\in (0;1)}(x-1, x+1) = (-1,2) , \bigcap\limits_{x\in (0,1)} (x-1,x+1) = (0;1) $
         \end{example}
 
-        \begin{definition}
-            [Формула Де Моргана]
+    \begin{definition}
+        [Формула Де Моргана]
 
-            $A,B\subseteq X$
+        $A,B\subseteq X$
 
-            $(A\cup B)^c = A^c\cap B^c$
+        $(A\cup B)^c = A^c\cap B^c$
 
-            $(A\cap B)^c = A^c\cup B^c$
+        $(A\cap B)^c = A^c\cup B^c$
                 
 
-            $\{A_i\}$ -- семейство
+        $\{A_i\}$ -- семейство
 
-            $(\bigcup\limits_{i\in I}A_i)^c  = \bigcap A_i^c$
+        $(\bigcup\limits_{i\in I}A_i)^c  = \bigcap A_i^c$
 
-            $\left( \bigcap\limits_{i \in  I} A_i \right) ^c = \bigcup A_i^c $
-        \end{definition}
-        \begin{note}
-            $A^{c c} = A$ -- проверить-упражнение
-        \end{note}
+        $\left( \bigcap\limits_{i \in  I} A_i \right) ^c = \bigcup A_i^c $
+    \end{definition}
+    \begin{note}
+        $A^{c c} = A$ -- проверить-упражнение
+    \end{note}
 
-        \begin{proof}
-            $x\in \left( \bigcup\limits_{i \in  I} A_i \right) ^c \iff  x\not\in \left( \bigcup\limits_{i \in  I} A_i \right) \iff \forall i\in I x\not\in A_i \iff  \forall i\in I x\in A_i^c \iff x\in \bigcap\limits_{i \in  I} A_i^c$
+    \begin{proof}
+        $x\in \left( \bigcup\limits_{i \in  I} A_i \right) ^c \iff  x\not\in \left( \bigcup\limits_{i \in  I} A_i \right) \iff \forall i\in I x\not\in A_i \iff  \forall i\in I x\in A_i^c \iff x\in \bigcap\limits_{i \in  I} A_i^c$
 
-            $\left( \bigcap A_i \right) ^c = \left( \bigcap A_i^{c c} \right) ^c = \left( \bigcup A_i^c \right) ^{c c} = \bigcup A_i$
+        $\left( \bigcap A_i \right) ^c = \left( \bigcap A_i^{c c} \right) ^c = \left( \bigcup A_i^c \right) ^{c c} = \bigcup A_i$
         \end{proof}
 
-        \begin{definition}
-            [упорядоченная пара]
-            $A,B$
+    \begin{definition}
+        [упорядоченная пара]
+        $A,B$
 
-            $(a,b)$ -- упорядоченная пара, $a\in A, b\in B$. В этой паре важен порядок
+        $(a,b)$ -- упорядоченная пара, $a\in A, b\in B$. 
+	    В этой паре важен порядок.
 
-            $\{a,b\}$ -- непорядоченная пара (двухэлементное множество), если $a\neq b$
+        $\{a,b\}$ -- неупорядоченная пара (двухэлементное множество), если $a\neq b$.
 
-            {a,a} = {a} (в множестве не различаются копии)
+        $\{a,a\} = \{a\}$ (в множестве не различаются копии).
             
-            Пример: координаты точек плоскости. 
-        \end{definition}
+        Пример: координаты точек плоскости. 
+    \end{definition}
 
         $X_1, \ldots, X_m\quad x_1\in X_1 \ldots x_m\in X_m\quad (x_{1}, \ldots, x_{m} )$ -- упорядоченная пара
 
@@ -316,138 +322,122 @@
         \end{example}
 
         \section{Отображения}
-        формальное определение, которое не будет использовано или потребовано нигде (в том числе на экзамене)
+        Формальное определение, которое не будет использовано или потребовано нигде (в том числе на экзамене).
         \begin{definition}
-           $X,Y$ -- множества
-
-           если $R\subset X\times Y$ и $(x,y_1)\in R \vee (x,y_2)\in R \iff y_1=y_2$
-
-
-
-    R называется отображением или графиком
+           $X,Y$ -- множества\\
+           Если $R\subset X\times Y$ и $(x,y_1)\in R \vee (x,y_2)\in R \iff y_1=y_2$, R называется отображением или графиком.
     \end{definition}
     
-        
-
     \begin{definition}
-            Отображение -- это тройка $(X,Y,f)$, где $X,Y$ -- множества, а $f$ -- некое правило по которому каждому элементу $x\in X$ сопоставляется некоторый единственный элемент $y\in Y$
+        Отображение -- это тройка $(X,Y,f)$, где $X,Y$ -- множества, а $f$ -- некое правило, по которому каждому элементу $x\in X$ сопоставляется некоторый единственный элемент $y\in Y$.
             
-            $f:X\to Y$ -- синоним. читают ''$f$ действует из $X$ в $Y$''
+        $f:X\to Y$ -- синоним. читают ''$f$ действует из $X$ в $Y$''
 
-            $X$ -- множество определения отображения
+        $X$ -- множество определения отображения
 
-            $Y$ -- множество значений
+        $Y$ -- множество значений
 
-            $\{y\in Y: \exists x\in X f(x) = y\}\subset Y$ (т.е. $Y$ -- необязательно точное множество значений)
+        $\{y\in Y: \exists x\in X f(x) = y\}\subset Y$ (т.е. $Y$ -- необязательно точное множество значений)
     \end{definition}
     
     \begin{example}
-        $x = \R, Y = \R \quad x\mapsto x^2$
+        $x = \R,\ Y = \R, \quad x\mapsto x^2$
 
-        если $y=f(x)$, то $y$ называется образом элемента $x$ при отображении $f$
+        Если $y=f(x)$, то $y$ называется образом элемента $x$ при отображении $f$.
     \end{example}
 
-    $A\subseteq X\quad f(A) = \{f(x): x\in A\}$ -- образ множества $A$ под действием $f$
+    $A\subseteq X\quad f(A) = \{f(x): x\in A\}$ -- образ множества $A$ под действием $f$.
 
     $B\subseteq Y\quad f^{-1}(B) = \{x:f(x)\in B\}$
 
     $f^{-1}(\{y\})$ -- необязательно одноэлементное.
 
-
-упражнения:
-\begin{enumerate}
-    \item $f(A\cup B), f(A)\cup f(B) $
-    \item $f(A\cap B), f(A) \cap f(B)
-$
+    Упражнения:
+    \begin{enumerate}
+        \item $f(A\cup B), f(A)\cup f(B) $
+        \item $f(A\cap B), f(A) \cap f(B)$
         $y\in f(A\cap B) \implies  \exists x\in A\cap B:f(x) = y. x\in A, x\in B, y\in f(A), y\in f(B) \implies  y\in f(A)\cap f(B)$
 
         $f(x) = const\quad f(A)\cap f(B)\neq \O , f(A\cap B) = \O$ , если $A\cap B = \O $
-    \item $f^{-1}(A\cup B), f^{-1}(A)\cup f^{-1}(B)$
-    \item $f(A\cap B), f(A) \cap f(B)$
-\end{enumerate}
+        \item $f^{-1}(A\cup B), f^{-1}(A)\cup f^{-1}(B)$
+        \item $f(A\cap B), f(A) \cap f(B)$
+    \end{enumerate}
 
-\begin{definition}
-    Если $f:X\to Y, g:X_1\to Y\quad X_1\subseteq X $
+    \begin{definition}
+        Если $f:X\to Y,\ g:X_1\to Y\quad X_1\subseteq X $ и  $\forall x\in X_1 \quad g(x) = f(x)$, то $g$ называется сужением $f$ на $X_1$.
 
-    и $\forall x\in X_1 \quad g(x) = f(x)$, то $g$ называется сужением $f$ на $X_1$
+        Обозначение: $g = f\mid_{x_1}$.
+        При этом $f$ называется продолжением $g$ с $X_1$ на $X$.
+    \end{definition}
 
-    Обозначение: $g = f\mid_{x_1}$
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}
+            \begin{axis}[
+                axis equal,
+                xmin= -1.57, xmax= 1.57,
+                ymin= -1.5, ymax = 1.5,
+                axis lines = middle,
+            ]
+            \addplot[domain=-1.57:1.57, samples=100,color=green]{sin(deg(x))};
+            \end{axis}
+        \end{tikzpicture}
+        \caption{sinus}
+        \label{sinus}
+    \end{figure}
 
-    При этом $f$ называется продолжением $g$ с $X_1$ на $X$
-\end{definition}
-
-\begin{figure}[h]
-    \centering
-    \begin{tikzpicture}
-        \begin{axis}[
-            axis equal,
-            xmin= -1.57, xmax= 1.57,
-            ymin= -1.5, ymax = 1.5,
-            axis lines = middle,
-        ]
-        \addplot[domain=-1.57:1.57, samples=100,color=green]{sin(deg(x))};
-        \end{axis}
-    \end{tikzpicture}
-    \caption{sinus}
-    \label{sinus}
-\end{figure}
-
-\begin{example}
-    $f(x) = \sin x\quad f\mid_{[-\frac{\pi}{2}, \frac{\pi}{2}]}$
-    
-\end{example}
+    \begin{example}
+        $f(x) = \sin x\quad f\mid_{[-\frac{\pi}{2}, \frac{\pi}{2}]}$
+    \end{example}
    
-\begin{definition}
-    Если $f:X\to Y, g:Y\to Z$
-
-    $g\circ f:X\to Z$
-
-    $g\circ f(x) = g(f(x)) \forall x\in X$
-
-    $g\circ f$ называется композицией $f$ и $g$
-\end{definition}
-\begin{example}
-    Изобразить эскизы графиков функций для всех случаев
+    \begin{definition}
+        Если $f:X\to Y,\ g:Y\to Z$, то $g\circ f:X\to Z$.\\
+        $g\circ f(x) = g(f(x))\ \forall x\in X$.\\
+        $g\circ f$ называется композицией $f$ и $g$.
+    \end{definition}
+    \begin{example}
+        Изобразить эскизы графиков функций для всех случаев
     \begin{enumerate}
         \item $f(x) = \sin  x, g(x) = x^2$
         \item $f(x) = x^2, g(x) = \sin  x$
-        \item f(x) = g(x)
+        \item $f(x) = g(x)$
 
-\begin{tikzpicture}[scale=2]
-	\draw[<->](0,1.5) -- (0,0) -- (1.5,0);
-	\draw (0,0) -- (0.5, 1);
-	\draw[dotted](0.5,0) -- (0.5,1);
-	\draw[dotted](0,1) -- (0.5,1);
-	\draw (0.5,0.5) -- (1,0);
-	\draw[dotted](0,0.5) -- (0.5,0.5);
-	\node[left] at (0,1) {1};
-	\node[below] at (1,0) {1};
-	\node[below] at (-0.1,0) {0};
-	\node[below] at (0.5,0) {$\frac{1}{2}$};
-	\node[left] at (0,0.5) {$\frac{1}{2}$};
-	
-\end{tikzpicture}
+    \begin{tikzpicture}[scale=2]
+   	    \draw[<->](0,1.5) -- (0,0) -- (1.5,0);
+	    \draw (0,0) -- (0.5, 1);
+	    \draw[dotted](0.5,0) -- (0.5,1);
+	    \draw[dotted](0,1) -- (0.5,1);
+	    \draw (0.5,0.5) -- (1,0);
+	    \draw[dotted](0,0.5) -- (0.5,0.5);
+	    \node[left] at (0,1) {1};
+	    \node[below] at (1,0) {1};
+	    \node[below] at (-0.1,0) {0};
+	    \node[below] at (0.5,0) {$\frac{1}{2}$};
+	    \node[left] at (0,0.5) {$\frac{1}{2}$};
+    \end{tikzpicture}
 
-построить $f^{(2)}, f^{(3)}, f^{(4)}$ без формул
+    Построить $f^{(2)}, f^{(3)}, f^{(4)}$ без формул.
     \end{enumerate}
-
-\end{example}
-   \begin{definition}
-       Пусть $f:X\to Y, f$ называется инъекцией, если $\begin{cases}
-           f(x_1) = y\\
-           f(x_2) = y\\
-       \end{cases} \implies  x_1=x_2$
-   \end{definition}
+    \end{example}
+    
+    \begin{definition}
+        Функция $f:X\to Y$ называется инъекцией, если 
+        $\begin{cases}
+        f(x_1) = y\\
+        f(x_2) = y\\
+        \end{cases} \implies  x_1=x_2$
+    \end{definition}
     \begin{example}
-        $f(x) = kx+b$ -- инъекция $,k\neq 0$
+    $f(x) = kx+b$ -- инъекция, $k\neq 0$
 
         $f(x) = \sin x$ -- не инъекция
 
     $f(x)\mid_{[-\frac{\pi}{2}, \frac{\pi}{2}]  }$ -- инъекция
-
     \end{example}
+    
     \begin{definition}
-        $f:X\to Y, f$ называется сюръекцией, если $\forall y\in Y\quad \exists x\in X:f(x) = y$
+        $f:X\to Y$ называется сюръекцией, если\\
+        $\forall y\in Y\quad \exists x\in X:f(x) = y$.
     \end{definition}
     \begin{example}
         $\sin :\R\to \R$ -- не сюъекция
@@ -466,53 +456,54 @@ $
     \end{example}
 
     \begin{definition}
-        $f:X\to Y, g:Y\to X$
-
-        $g$ называется обратным к $f$ отображением, если $f(x) = y \iff  x = g(y)$
-
+        $f:X\to Y, g:Y\to X$.
+        $g$ называется обратным к $f$ отображением, если $f(x) = y \iff  x = g(y)$.
         Обозначается: $g = f^{-1}$
     \end{definition}
     \begin{note}
         Обратимая функция должна быть биективной:
-        
-        Инъективной -- обратная иначе не будет функцией
-
-        Сюръективной -- обратная не будет определена на всём $Y$
+        \begin{enumerate}
+            \item Инъективной -- обратная иначе не будет функцией.
+            \item Сюръективной -- обратная иначе не будет определена на всём $Y$.
+        \end{enumerate}
     \end{note}
+    
     \begin{note}
-        $f^{-1}(A)$ -- обычно прообраз $A$ под действием $f$, а не образ обратной функции (которая может не существовать)
-   \end{note}
+        $f^{-1}(A)$ -- обычно прообраз $A$ под действием $f$, а не образ обратной функции (которая может не существовать).
+    \end{note}
 
-   \begin{example}
+    \begin{example}
        $\arcsin = (\sin _{[-\frac{\pi}{2}, \frac{\pi}{2}]  })^{-1}$
 
        $\log_a(x) = (a^x)^{-1}$
 
        $\sqrt{x} = (x_{2}\mid_{[0,+\infty )} , \sqrt[3](x) = (x^3)^{-1} $
-   \end{example}
-   \section{Вещественные числа}
+    \end{example}
+    
+    \section{Вещественные числа}
     \subsection{Аксиоматическое определение вещественных чисел}
 
-        $(\R, +, \cdot, \leqslant )$ -- множество и две операции, и отношение порядка, удовлетворяющее следующим 16 аксиомам:
+    $(\R, +, \cdot, \leqslant )$ -- множество, две операции и отношение порядка, удовлетворяющие следующим 16 аксиомам:
         
         Аксиомы поля:
         \begin{enumerate}
             \item $\forall a, b\in \R\quad a+b=b+a$ (коммутативность сложения)
             \item $\forall a, b, c\in \R\quad (a+b)+c = a+(b+c)$ (ассоциативность сложения)
             \item $\exists $ нейтральный элемент $0$ по сложению $\forall a\in \R\quad a+0=a$ (существование нейтрального элемента по сложению)
-            \item Существует обратный элемент по сложению. $\forall a\in \R \exists (-a)\in \R: \quad a+(-a) = 0$
+            \item Существует обратный элемент по сложению.\\
+            $\forall a\in \R\ \exists (-a)\in \R: \quad a+(-a) = 0$
             \item $\forall a, b\in \R\quad a\cdot b = b\cdot a$ (коммутативность умножения)
             \item $(a\cdot b)\cdot c = a\cdot (b\cdot c)$ (ассоциативность умножения)
             \item $\exists 1\in R\setminus \{0\}, \forall a\in \R\quad a\cdot 1 = a$
-            \item $\forall a\neq 0 \exists  a^{-1}\in \R: a\cdot a^{-1} = 1$
+            \item $\forall a\neq 0\ \exists  a^{-1}\in \R: a\cdot a^{-1} = 1$
             \item $(a+b)\cdot c = a\cdot c + b\cdot c$ (дистрибутивность)
         \end{enumerate}
-        примеры: $\R, \Q, \C, \{0,1\} (1+1=0,\text{ остальное как обычно}$
+        примеры: $\R, \Q, \C, \{0,1\} (1+1=0$,  остальное как обычно$)$.
 
         Элементарные следствия:
         \begin{itemize}
-            \item $\forall a\in K$ -- поля, обратный по сложению единственный. Если $b, \p b$ -- два обратных.$b= b+(a+\p b)=(b+a)+\p b = \p b$
-            \item обратный по умножению, нейтральные -- все единственны
+            \item $\forall a\in K$ -- поля, обратный по сложению единственный. Если $b, \p b$ -- два обратных, то $b= b+(a+\p b)=(b+a)+\p b = \p b$
+            \item обратный по умножению, нейтральные -- все единственны.
         \end{itemize}
         Аксиомы порядка:
         \begin{enumerate}
@@ -545,13 +536,14 @@ $
                 x\neq b\\
             \end{cases}$
         \end{note}
-        Аксиома Архимеда: $\forall x, y\in R: x>0, y>0 \exists  n\in \N : nx>y$
+        Аксиома Архимеда: $\forall x, y\in R: x>0, y>0\ \exists  n\in \N : nx>y$.
 
         Аксиома вложенных промежутков: 
         
-        $\forall \{[a_n, b_n]\}_{n\in \N }: \forall n\in \N [a_{n+1}, b_{n+1}] \subseteq [a_n, b_n]\quad \bigcap\limits_{n\in \N } [a_n, b_n]\neq \O  $
+        $\forall \{[a_n, b_n]\}_{n\in \N }: \forall n\in \N\ [a_{n+1}, b_{n+1}] \subseteq [a_n, b_n]\quad \bigcap\limits_{n\in \N } [a_n, b_n]\neq \O  $
 
-        В аксиоме о вложенных промежутках предполагается, что $\forall  n\in \N , [a_n, b_n] \neq \O  \iff  a_n \leqslant  b_n$
+        В аксиоме о вложенных промежутках предполагается, что\\
+        $\forall  n\in \N , [a_n, b_n] \neq \O  \iff  a_n \leqslant  b_n$
 
         $[a,b] = \{x\in \R,: a\leqslant x\leqslant b\}$ -- замкнутый отрезок, промежуток, сегмент, замкнутый промежуток
 
@@ -561,306 +553,300 @@ $
 
         $<a,b>$ -- некоторый промежуток $a\leqslant b, <a,b> \neq \O $
 
-        \begin{note}
-            [Расиширенная вещественная прямая]
+    \begin{note}
+        [Расиширенная вещественная прямая]
 
-            $\overline{R} = \R\cup \{+\infty \}\cup \{-\infty \}$
+        $\overline{R} = \R\cup \{+\infty \}\cup \{-\infty \}$
 
-            $\forall a\in \R\quad a + (+\infty ) = (+\infty ) + a = +\infty $
+        $\forall a\in \R\quad a + (+\infty ) = (+\infty ) + a = +\infty $
 
-            $a+(-\infty ) = (-\infty ) + a = -\infty $
+        $a+(-\infty ) = (-\infty ) + a = -\infty $
 
-            $(+\infty ) + (+\infty ) = +\infty $
+        $(+\infty ) + (+\infty ) = +\infty $
 
-            $(-\infty ) + (-\infty ) = -\infty $
+        $(-\infty ) + (-\infty ) = -\infty $
 
-            $(+\infty ) + (-\infty ), (-\infty ) + (+\infty )$ -- не определены
+        $(+\infty ) + (-\infty ), (-\infty ) + (+\infty )$ -- не определены
 
-            $\forall a>0$
-            \begin{itemize}
-                \item $(+\infty )\cdot a = a\cdot (+\infty ) = +\infty $
-                \item $(-\infty ) \cdot  a = a\cdot (-\infty ) = -\infty $
-                \item $\pm \infty \cdot (-1) = \mp \infty $
-                \item $(+\infty ) \cdot  (+\infty ) = (-\infty )\cdot (-\infty ) = +\infty $
-                \item $(+\infty )\cdot (-\infty ) = (-\infty )\cdot (+\infty ) = -\infty $
-                \item $(\pm \infty )\cdot 0, 0\cdot (\pm \infty )$ -- не определены
-            \end{itemize}
+        $\forall a>0$
+        \begin{itemize}
+            \item $(+\infty )\cdot a = a\cdot (+\infty ) = +\infty $
+            \item $(-\infty ) \cdot  a = a\cdot (-\infty ) = -\infty $
+            \item $\pm \infty \cdot (-1) = \mp \infty $
+            \item $(+\infty ) \cdot  (+\infty ) = (-\infty )\cdot (-\infty ) = +\infty $
+            \item $(+\infty )\cdot (-\infty ) = (-\infty )\cdot (+\infty ) = -\infty $
+            \item $(\pm \infty )\cdot 0, 0\cdot (\pm \infty )$ -- не определены
+        \end{itemize}
 
-            $\forall a\in \R$
-            \begin{itemize}
-                \item $+\infty \geqslant a\geqslant -\infty $
-            \end{itemize}
+        $\forall a\in \R$
+        \begin{itemize}
+            \item $+\infty \geqslant a\geqslant -\infty $
+        \end{itemize}
 
-            $[a,+\infty ] = [a,+\infty ) \cup \{+\infty \}$
+        $[a,+\infty ] = [a,+\infty ) \cup \{+\infty \}$
 
-            В ``$+\infty $'' иногда + опускают, но подразумевают её, если рассматривается $\ov R$
-        \end{note}
+        В ``$+\infty $'' иногда + опускают, но подразумевают её, если рассматривается $\ov R$
+    \end{note}
 
-        \section{Модуль}
+    \section{Модуль}
 
-        $a\in \R\qquad |a| = \begin{cases}
-            a&,\text{если} a\geqslant 0\\
-            -a&, \text{если} a<0\\
+    $a\in \R\qquad |a| = 
+    \begin{cases}
+        a&,\text{если} a\geqslant 0\\
+        -a&, \text{если} a<0\\
+    \end{cases}$
+
+    \begin{property}
+        $b=|a| \iff  
+        \begin{cases}
+            b\in \{a, -a\}\\
+            b\geqslant 0\\
         \end{cases}$
+    \end{property}
 
-        \begin{property}
-            $b=|a| \iff  \begin{cases}
-                b\in \{a, -a\}\\
-                b\geqslant 0\\
-            \end{cases}$
-        \end{property}
+    Элементарные свойства модуля:
+    \begin{enumerate}
+        \item $\forall a\in \R\quad |-a| =|a|$
+        \item $\forall a\in \R\quad \pm a \leqslant  |a|$
+        \item $\forall  a, b\in \R\quad |a\cdot b| = |a|\cdot |b|$
+        \item $\forall a\in \R, b\in \R\setminus \{0\}\quad(\left| \frac{a}{b} \right| ) = \frac{|a|}{|b|}$
+        \item $\forall a, b\in \R\quad \left| |a| - |b| \right| \leqslant |a\pm b| \leqslant |a|+|b|$
+    \end{enumerate}
+    \begin{note}
+        $a-b := a+(-b),\quad \frac{a}{b}:= a\cdot b^{-1}, b\neq 0$.
+    \end{note}
+    \begin{note}
+        $a\leqslant b\quad\forall c\in \R\quad a+c\leqslant b+c$
 
-        Элементарные свойства модуля:
-        \begin{enumerate}
-            \item $\forall a\in \R\quad |-a| =|a|$
-            \item $\forall a\in \R\quad \pm a \leqslant  |a|$
-            \item $\forall  a, b\in \R\quad |a\cdot b| = |a|\cdot |b|$
-            \item $\forall a\in \R, b\in \R\setminus \{0\}\quad(\left| \frac{a}{b} \right| ) = \frac{|a|}{|b|}$
-            \item $\forall a, b\in \R\quad \left| |a| - |b| \right| \leqslant |a\pm b| \leqslant |a|+|b|$
-        \end{enumerate}
-        \begin{note}
-            $a-b := a+(-b)$
+        $a\leqslant b\quad b\leqslant c \implies a\leqslant c$
 
-            $\frac{a}{b}:= a\cdot b^{-1}, b\neq 0$
-        \end{note}
-        \begin{note}
-            $a\leqslant b\quad\forall c\in \R\quad a+c\leqslant b+c$
+        $a\leqslant b, c\leqslant d\quad a+c\overset{?}{\leqslant} b+d$
 
-            $a\leqslant b\quad b\leqslant c \implies a\leqslant c$
+        $a+c\leqslant b+c\quad b+c\leqslant b+d \implies a+c\leqslant b+d$
+    \end{note}
+    \begin{proof}
+        $\forall a, b\in \R\quad \left| |a| - |b| \right| \leqslant |a\pm b| \leqslant |a|+|b|$
 
-            $a\leqslant b, c\leqslant d\quad a+c\overset{?}{\leqslant} b+d$
+        $\pm a\leqslant |a|,\ \pm b\leqslant |b|\quad \pm(a+b)\leqslant |a| + |b| $ (аксиома порядка 4)
 
-            $a+c\leqslant b+c\quad b+c\leqslant b+d \implies a+c\leqslant b+d$
-        \end{note}
-        \begin{proof}
-            $\forall a, b\in \R\quad \left| |a| - |b| \right| \leqslant |a\pm b| \leqslant |a|+|b|$
+        $\implies |a+b|\leqslant |a| + |b| \implies |a-b|\leqslant |a| + |-b| = |a| + |b|$
 
-            $\pm a\leqslant |a|,\pm b\leqslant |b|\quad \pm(a+b)\leqslant |a| + |b| $ (аксиома порядка 4)
+        $|a| = |a-b+b| \leqslant |a-b| + |b|$
 
-            $\implies |a+b|\leqslant |a| + |b| \implies |a-b|\leqslant |a| + |-b| = |a| + |b|$
+        $|a| - |b|\leqslant |a-b|\quad |b| - |a| \leqslant |b-a| = |a-b|$
 
-            $|a| = |a-b+b| \leqslant |a-b| + |b|$
+        $\left| |a| - |b| \right| =  \pm (|a| - |b|) \leqslant |a-b|$
+    \end{proof}
+    \begin{note}
+        $|+\infty | := +\infty \quad |-\infty | := +\infty $
+    \end{note}
 
-            $|a| - |b|\leqslant |a-b|\quad |b| - |a| \leqslant |b-a| = |a-b|$
+    \section{Комплексные числа}
+    $\C$ -- обозначение для множества комплексных чисел. \\
+    $\C = \{(x,y)|x\in \R, y\in \R\}$
 
-            $\left| |a| - |b| \right| =  \pm (|a| - |b|) \leqslant |a-b|$
-        \end{proof}
-        \begin{note}
-            $|+\infty | := +\infty \quad |-\infty | := +\infty $
-        \end{note}
+    \begin{tikzpicture}
+        \draw [<->] (0,1) -- (0,-1) -- (0,0) -- (-1,0) --  (1,0);
+    \end{tikzpicture}
+    Удобно представлять на плоскости.
 
-        \section{Комплексные числа}
-        $\C$ -- обозначение для множества комплексных чисел
+    $(x_1,y_1) + (x_2,y_2) := (x_1+x_2,y_1+y_2)$
 
-        $\C = \{(x,y)|x\in \R, y\in \R\}$
+    $(x_1,y_1)\cdot (x_2,y_2) = (x_1x_2-y_1y_2,x_1y_2+x_2y_1) $
+    \begin{note}
+        $\C$ -- поле
 
-        \begin{tikzpicture}
-            \draw [<->] (0,1) -- (0,-1) -- (0,0) -- (-1,0) --  (1,0);
+        Аксиомы для сложения очевидны.
 
-        \end{tikzpicture}
-        Удобно представлять на плоскости.
+        $0 = (0,0), \quad 1 = (1,0)$
 
-        $(x_1,y_1) + (x_2,y_2) := (x_1+x_2,y_1+y_2)$
+        $-(x,y) = (-x,-y)$
 
-        $(x_1,y_1)\cdot (x_2,y_2) = (x_1x_2-y_1y_2,x_1y_2+x_2y_1) $
-        \begin{note}
-            $\C$ -- поле
+        $(x,y) \cdot  (1,0) = (x,y)\ \forall x, y\in \R$
 
-            аксиомы для сложения очевидны.
+        $i = (0,1)\quad i^2 = (0,1) \cdot  (0,1) = (-1,0)$
+    \end{note}
 
-            $0 = (0,0)$
+    $\R \leftrightarrow \{(x,0) : x\in \R\}$ (именно такие пары, потому что так сохраняются операции)
 
-            $1 = (1,0)$
+    $F: \R \to \{(x,0)\}\quad F$ сохраняет + и сохраняет $\cdot$. 
 
-            $-(x,y) = (-x,-y)$
+    $(x_1,0) + (x_2,0) = (x_1+x_2,0) \quad  (x_1, 0) \cdot  (x_2,0) = (x_1x_2-0,0)$
 
-            $(x,y) \cdot  (1,0) = (x,y) \forall x, y\in \R$
+    \begin{tikzpicture}
+        \draw [<->] (0,1) -- (0,-1) -- (0,0) -- (-1,0) --  (1,0);
+    \end{tikzpicture}
 
-            $i = (0,1)$
+    Оси: вещественная(x) и мнимая(y)
 
-            $i^2 = (0,1) \cdot  (0,1) = (-1,0)$
-        \end{note}
+    $(0,y)^2 = (-y^2,0)\ \forall y\in \R$
 
-        $\R \leftrightarrow \{(x,0) : x\in \R\}$ (именно такие пары, потому что так сохраняются операции
+    $(x,y) = x+iy\quad i = (0,1)$ -- мнимая единица. 
+    Алгебраическая форма записи комплексных чисел.
 
-        $F: \R \to \{(x,0)\}\quad F$ сохраняет + и сохраняет $\cdot $ 
+    $z = x+iy\quad x$ -- вещественная часть $z,\quad y$ -- мнимая часть $z$
 
-        $(x_1,0) + (x_2,0) = (x_1+x_2,0)$
+    $Re z = x,\quad Im z = y\quad $ иногда встречается $rp, ip$ -- real/imaginary part.
 
-        $(x_1, 0) \cdot  (x_2,0) = (x_1x_2-0,0)$
+    \begin{note}
+        [Комплексное сопряжение]
+        $z = x+iy\quad \ov z = x-iy$ -- отражённое от оси $x$, если смотреть на плоскость.
 
-        \begin{tikzpicture}
-            \draw [<->] (0,1) -- (0,-1) -- (0,0) -- (-1,0) --  (1,0);
-        \end{tikzpicture}
+        $Re z = \frac{z+\ov z}{2}\qquad Im z = \frac{z-\ov z}{2i}$ -- вещественные числа!
+    \end{note}
 
+    \begin{note}
+        [Модуль и аргумент]
 
-        Оси: вещественная(x) и мнимая(y)
+        $|z| = \sqrt{z\cdot \ov z}  = \sqrt{x^2+y^2} $ 
 
-        $(0,y)^2 = (-y^2,0) \forall y\in \R$
+        $z\cdot \ov z = (x+iy)\cdot (x-iy) = x^2-(iy)^2 = x^2+y^2$
 
-        $(x,y) = x+iy\quad i = (0,1)$ -- мнимая единица. Алгебраическая форма записи комплексных чисел.
+        $r = |z|$
 
-        $z = x+iy\quad x$ -- вещественная часть $z,\quad y$ -- мнимая часть $z$
+        Аргумент -- угол (ориентированный) между осью $Ox$ и $\overset{\to }{Oz}$.
 
-        $Re z = x,\quad Im z = y\quad $ иногда встречается $rp, ip$ -- real/imaginary part
+        Аргументов много $Arg z, z\neq 0$ -- совокупность всех аргументов.
 
-        \begin{note}
-            [Комплексное сопряжение]
-            $z = x+iy\quad \ov z = x-iy$ -- отражённое от оси $x$, если смотреть на плоскость.
+        Если $\varphi_0\in Arg (z)$, то $Arg z = \{\varphi_0 + 2\pi\cdot k, k\in \Z \}$.
 
-            $Re z = \frac{z+\ov z}{2}\qquad Im z = \frac{z-\ov z}{2i}$ -- вещественные числа!
-        \end{note}
+        Если
+        $\begin{cases}
+            \varphi_0\in Arg z\\
+            \varphi_0\in (-\pi , \pi ]\\
+        \end{cases}$, 
+        то  $\varphi_0$ называется главным значением аргумента $\varphi_0 = arg(z)$. 
+    \end{note}
 
-        \begin{note}
-            [Модуль и аргумент]
+    $z = (x,y) = (r,\phi),r$ -- длина радиус-вектора, $\phi$ --  аргумент.
 
-            $|z| = \sqrt{z\cdot \ov z}  = \sqrt{x^2+y^2} $ 
+    $(r, \phi)$ -- полярные координаты, совмещённые с прямоугольными
+    \begin{note}
+        $r = \sqrt{x^2+y^2} $
 
-            ($z\cdot \ov z = (x+iy)\cdot (x-iy) = x^2-(iy)^2 = x^2+y^2$)
+        $x = r\cos \phi$
 
-            $r = |z|$
+        $y = r\cos \phi$
 
-            Аргумент -- угол (ориентированный) между осью $Ox$ и $\overset{\to }{Oz}$
+        $x>0\quad arg z = \arctg \frac{y}{x} = \arcsin \frac{y}{\sqrt{x^2+y^2} }$
 
-            Аргументов много $Arg z, z\neq 0$ -- совокупность всех аргументов
+        $y>0\quad arg z = \arccos \frac{x}{\sqrt{x^2+y^2} }$
 
-            Если $\varphi_0\in Arg (z)$, то $Arg z = \{\varphi_0 + 2\pi\cdot k, k\in \Z \}$
+        $y<0\quad arg z = -\arccos \frac{x}{\sqrt{x^2+y^2} } $
 
-            $\begin{cases}
-                \varphi_0\in Arg z\\
-                \varphi_0\in (-\pi , \pi ]\\
-            \end{cases} \implies  \varphi_0$ Называется главным значением аргумента $\varphi_0 = arg(z)$ 
-        \end{note}
+        $\begin{cases}
+            x<0\\
+            y>0\\
+        \end{cases}
+        \quad arg z = \arctg \frac{y}{x} + \pi$
 
-        $z = (x,y) = (r,\phi),r$ -- длина радиус-вектора, $\phi$ --  аргумент.
+        остальное -- упражнение
+    \end{note}
 
-        $(r, \phi)$ -- полярные координаты, совмещённые с прямоугольными
-        \begin{note}
-            $r = \sqrt{x^2+y^2} $
+    Изобразить кривую заданную в полярных координатах: 
+    \begin{enumerate}
+        \item $r = 3$
+        \item $r = \phi$ -- спираль Архимеда
+        \item $r = e^{\phi}$
+        \item $r = \frac{1}{\cos \phi}$
+        \item $r = \frac{2}{\sin \phi}$
+        \item $r = \frac{3}{\cos \phi + \sin \phi}$
+        \item $r = 1+\cos \phi$
+    \end{enumerate}
 
-            $x = r\cos \phi$
+    $(0,0)$ -- полюс
 
-            $y = r\cos \phi$
+    $r(\phi) \uparrow$ -- удаление от полюса
 
-            $x>0\quad arg z = \arctg \frac{y}{x} = \arcsin \frac{y}{\sqrt{x^2+y^2} }$
+    $z = x+iy = r(\cos \phi + i\sin \phi)$ -- в скобках точка на единичной окружности с аргументом таким же, что и у $z$.
 
-            $y>0\quad arg z = \arccos \frac{x}{\sqrt{x^2+y^2} }$
+    Это называется тригонометрической формой записи числа.
 
-            $y<0\quad arg z = -\arccos \frac{x}{\sqrt{x^2+y^2} } $
+    $-\frac{1}{2}(\cos \phi_0, \sin \phi_0) = \frac{1}{2} \cdot  \left( \cos (\phi_0+\pi ) + i\sin (\phi_0+\pi ) \right) $
 
-            $\begin{cases}
-                x<0\\
-                y>0\\
-            \end{cases}\quad arg z = \arctg \frac{y}{x} + \pi $
+    $e^{i\phi}:=\cos \phi + i\sin\phi\quad \phi\in \R$
 
-            остальное -- упражнение
-        \end{note}
+    $r\cdot e^{i\phi}$ -- экспоненциальная (показательная) форма числа.
 
-        Изобразить кривую заданную в полярных координатах 
-        \begin{enumerate}
-            \item $r = 3$
-            \item $r = \phi$ -- спираль Архимеда
-            \item $r = e^{\phi}$
-            \item $r = \frac{1}{\cos \phi}$
-            \item $r = \frac{2}{\sin \phi}$
-            \item $r = \frac{3}{\cos \phi + \sin \phi}$
-            \item $r = 1+\cos \phi$
-        \end{enumerate}
+    $\cos \phi = \frac{e^{i\phi} + e^{-i\phi}}{2}\quad \sin \phi = \frac{e^{i\phi} + e^{-i\phi}}{2i}$
 
-        $(0,0)$ -- полюс
+    Если $z_1 = r_1 \cdot  e^{i\phi_1}, z_2 = r_2 \cdot  e^{i\phi_2}$, то $z_1\cdot z_2 = r_1r_2\cdot e^{i\left( \phi_1 + \phi_2 \right) }$ (см. курс алгебра).
 
-        $r(\phi) \uparrow$ -- удаление от полюса
+    $n\in \N \quad z^n = r^n \cdot  (\cos (n\phi) + i\sin(n\phi))$ -- формула Муавра.
 
-        $z = x+iy = r(\cos \phi + i\sin \phi)$ -- в скобках точка на единичной окружности с аргументом таким же, что и у $z$
+    \section{Дополнение к разделу\\``Действия над множествами''}
 
-        Это называется тригонометрической формой записи числа.
-
-        $-\frac{1}{2}(\cos \phi_0, \sin \phi_0) = \frac{1}{2} \cdot  \left( \cos (\phi_0+\pi ) + i\sin (\phi_0+\pi ) \right) $
-
-        $e^{i\phi}:=\cos \phi + i\sin\phi\quad \phi\in \R$
-
-        $r\cdot e^{i\phi}$ -- экспоненциальная (показательная) форма числа
-
-        $\cos \phi = \frac{e^{i\phi} + e^{-i\phi}}{2}\quad \sin \phi = \frac{e^{i\phi} + e^{-i\phi}}{2i}$
-
-        Если $z_1 = r_1 \cdot  e^{i\phi_1}, z_2 = r_2 \cdot  e^{i\phi_2}$, то 
-
-        $z_1\cdot z_2 = r_1r_2\cdot e^{i\left( \phi_1 + \phi_2 \right) }$ (см. курс алгебра)
-
-        $n\in \N \quad z^n = r^n \cdot  (\cos (n\phi) + i\sin(n\phi))$ -- формула Муавра
-
-        \section{Дополнение к разделу\\``Действия над множествами''}
-
-        \begin{statement}
-            $\sqsupset B$ -- $\forall $ множество, $\{A_i\}_{i\in I} -- \forall $ семейство множеств
-
-            $B\cap \left( \bigcup\limits_{i \in  I} A_i \right)  = \bigcup\limits_{i \in  I} \left( B\cap A_i \right) $
-        \end{statement}
-        \begin{proof}
-            $x\in B\cap \left( \bigcup\limits_{i \in  I} A_i \right) \iff \begin{cases}
-                x\in B\\
-                x\in \cup A_i\\
-            \end{cases} \iff  \begin{cases}
-                x\in B\\
-                \exists i:x\in A_i\\
-            \end{cases} \iff  \exists i: \begin{cases}
-                x\in B\\
-                x\in A_i\\
-            \end{cases} \iff \exists i: x\in B\cap A_i \iff x\in  \bigcup\limits_{i \in  I} \left( B\cap A_i \right) $
+    \begin{statement}
+        $\sqsupset B$~--- множество, $\{A_i\}_{i\in I}$~--- семейство множеств. \\
+        $B\cap \left( \bigcup\limits_{i \in  I} A_i \right)  = \bigcup\limits_{i \in  I} \left( B\cap A_i \right) $
+    \end{statement}
+    \begin{proof}
+        $x\in B\cap \left( \bigcup\limits_{i \in  I} A_i \right) \iff \begin{cases}
+            x\in B\\
+            x\in \cup A_i\\
+        \end{cases} \iff  
+        \begin{cases}
+            x\in B\\
+            \exists i:x\in A_i\\
+        \end{cases} \iff  \exists i: 
+        \begin{cases}
+            x\in B\\
+            x\in A_i\\
+        \end{cases} \iff \exists i: x\in B\cap A_i \iff x\in  \bigcup\limits_{i \in  I} \left( B\cap A_i \right)$.
         \end{proof}
 
-        \section{Принцип математической индукции}
+    \section{Принцип математической индукции}
 
-       $P_n$ - утверждение, зависящее от $n$
+    $P_n$ - утверждение, зависящее от $n$
 
-       Если $\begin{cases}
-           P_1 \text{-- верно}\\
-           P_n \to P_{n+1}\\
-       \end{cases} \implies  \forall n\in \N\quad P_n$ -- верно
+    $\begin{cases}
+        P_1 \text{-- верно}\\
+        P_n \to P_{n+1}\\
+    \end{cases}\implies \forall n\in \N\quad P_n$ -- верно.
 
-       $\{n: P_n \text{-- верно}\}$ -- индуктивно $\implies  \N \subseteq \{n:P_n \text{ -- верно}\}$
+    $\{n: P_n \text{-- верно}\}$ -- индуктивно $\implies  \N \subseteq \{n:P_n \text{ -- верно}\}$
 
-       Первый шаг (проверка $P_1$) называется базой индукции, а второй -- переходом
+    Первый шаг (проверка $P_1$) называется базой индукции, а второй -- переходом
 
-       \begin{example}
-           $2^n\geqslant n^2\quad \forall n\geqslant 4, n\in \N $
+    \begin{example}
+        $2^n\geqslant n^2\quad \forall n\geqslant 4, n\in \N $
 
-           $P_4\quad 2^4\geqslant 4^2\quad 16\geqslant 16$ -- верно
+        $P_4\quad 2^4\geqslant 4^2\quad 16\geqslant 16$ -- верно
 
-           $\sqsupset P_n$ -- верно
+        $\sqsupset P_n$ -- верно
 
-           $P_{n+1}\quad 2^{n+1}\geqslant (n+1)^2$
+        $P_{n+1}:\quad 2^{n+1}\geqslant (n+1)^2$
 
-           $2^{n+1} = 2^n\cdot 2 \geqslant  n^2\cdot 2 \overset{?}{\geqslant} (n+1)^2 \iff \left( \frac{n+1}{n} \right)^2 \leqslant 2  $
+        $2^{n+1} = 2^n\cdot 2 \geqslant  n^2\cdot 2 \overset{?}{\geqslant} (n+1)^2 \iff \left( \frac{n+1}{n} \right)^2 \leqslant 2  $
 
-           $\frac{n+1}{n} = 1+\frac{1}{n}\leqslant 1+\frac{1}{4}$
+        $\frac{n+1}{n} = 1+\frac{1}{n}\leqslant 1+\frac{1}{4}$
 
-           $\left( 1+\frac{1}{n} \right) ^2 \leqslant \left( 1+\frac{1}{4} \right) ^2 = \frac{25}{16}\leqslant 2$
-       \end{example}
+        $\left( 1+\frac{1}{n} \right) ^2 \leqslant \left( 1+\frac{1}{4} \right) ^2 = \frac{25}{16}\leqslant 2$
+    \end{example}
 
 
-       \begin{definition}
-           $\forall n\in \N \quad n! := 1\cdot 2\cdot \ldots\cdot n$
+    \begin{definition}
+        $\forall n\in \N \quad n! := 1\cdot 2\cdot \ldots\cdot n$
 
-           $0! := 1$ -- соглашение
+        $0! := 1$ -- соглашение
 
-           $(n+k)! = n!\cdot (n+1) \cdot  \ldots \cdot  (n+k)$
+        $(n+k)! = n!\cdot (n+1) \cdot  \ldots \cdot  (n+k)$
 
-           $n!! = n\cdot (n-2) \cdot  \ldots$ (заканчивается либо 1, либо 2)
+        $n!! = n\cdot (n-2) \cdot  \ldots$ (заканчивается либо 1, либо 2)
 
-           $n$ -- чётно, $n!! = 2\cdot 4\cdot \ldots\cdot n$
+        $n$ -- чётно, $n!! = 2\cdot 4\cdot \ldots\cdot n$
 
-           $n$ -- нечётно, $n!! = 1\cdot 3\cdot 5\cdot \ldots\cdot n$
-       \end{definition}
+        $n$ -- нечётно, $n!! = 1\cdot 3\cdot 5\cdot \ldots\cdot n$
+    \end{definition}
 
-       \begin{definition}
-           [биноминальный коэффициент]
+    \begin{definition}
+        [биноминальный коэффициент]
 
-           $C_n^k = \frac{n!}{k!(n-k)!}$ -- биномиальный коэффициент, число сочетаний из $n$ по $k$
+        $C_n^k = \frac{n!}{k!(n-k)!}$ -- биномиальный коэффициент, число сочетаний из $n$ по $k$
 
-           $\begin{pmatrix} n\\k \end{pmatrix} $
-       \end{definition}
-       Элементарный свойства биномиальных кэффициентов:
+        $\begin{pmatrix} n\\k \end{pmatrix} $
+    \end{definition}
+    Элементарные свойства биномиальных кэффициентов:
        \begin{enumerate}
            \item $C_n^k = C_n^{n-k}$
            \item $C_n^0 = C_n^n = 1$
@@ -873,7 +859,7 @@ $
        $$1$$ $$1\quad 1$$ $$1\quad 2\quad 1$$ $$1\quad 3\quad 3\quad 1$$ $$1\quad 4\quad 6\quad 4\quad 1$$
 
        \begin{statement}
-           $\forall a, b\in \C\quad \forall n\in \Z _+\quad (a+b)^n = \sum_{k=0}^{n} C_n^ka^kb^{n-k}$ -- бином Ньютона
+           $\forall a, b\in \C\quad \forall n\in \Z _+\quad (a+b)^n = \sum_{k=0}^{n} C_n^ka^kb^{n-k}$ -- бином Ньютона.
        \end{statement}
 
        \begin{note}
@@ -882,28 +868,37 @@ $
            $\sum_{k=m}^{m+p} a_k := a_m + a_{m+1} + \ldots + a_{m+p}$
 
            $\prod_{k=m}^{m+p} a_k := a_m\cdot a_{m+1}\cdot \ldots\cdot a_{m+p} $
-       \end{note}
-        \begin{note}
-            $x^0:=1 \forall x\in \C $ -- определили функцию
         \end{note}
-       \begin{proof}
-           [Доказательство бинома по индукции]
-           База: $n=1\quad (a+b)^1 = \sum_{k=0}^{1} C_1^k a^kb^{1-k} = C_1^0 a^0b^1 + C_1^1a^1b^0 = a+b$
+        \begin{note}
+            $x^0:=1\ \forall x\in \C $ -- определили функцию
+        \end{note}
+        \begin{proof}
+            [Доказательство бинома по индукции]
+            База: $n=1\quad (a+b)^1 = \sum_{k=0}^{1} C_1^k a^kb^{1-k} = C_1^0 a^0b^1 + C_1^1a^1b^0 = a+b$
 
-           Переход: Пусть верно для $n$. Докажем для $n+1$
+            Переход: Пусть верно для $n$. Докажем для $n+1$:
+            \begin{equation*}
+                \begin{split}
+                (a+b)^{n+1} &= (a+b)^n(a+b) =
+                \left(\sum_{k=0}^{n} C_n^k a^k b^{n-k}\right) \cdot  (a+b) =\\ &=\sum_{k=0}^{n} C_n^k a^{k+1}b^{n-k} + \sum_{k=0}^{n} C_n^ka^kb^{n-k+1} \underset{(j=k+1)} =\\
+                &=\sum_{j=1}^{n+1} C_n^{j-1}a^jb^{n+1-j} + \sum_{k=0}^{n} C_n^k a^kb^{n+1-k} \underset{k=j}=\\
+                &=\sum_{k=1}^{n+1} C_n^{k-1} a^k b^{n+1-k} + \sum_{k=0}^{n} C_n^ka^kb^{n+1-k}  =\\ 
+                &=C_{n}^na^{n+1}b^0 + \sum_{k=1}^{n}\left( C_n^{k-1}a^kb^{n+1-k} + C_n^k a^kb^{n+1-k}\right) + C_n^0a^0b^{n+1}=\\ 
+                &= C_{n+1}^{n+1}a^{n+1}b^0 + \sum_{k=1}^{n} C_{n+1}^k a^{n+1}b^{n+1-k} + C_{n+1}^0 a^0b^{n+1} = \sum_{k=0}^{n+1} C_{n+1}^ka^kb^{n+1-k}
+               \end{split}
+           \end{equation*}
+           
 
-           $(a+b)^{n+1} = (a+b)^n(a+b) = \left(\sum_{k=0}^{n} C_n^k a^k b^{n-k}\right) \cdot  (a+b) = \sum_{k=0}^{n} C_n^k a^{k+1}b^{n-k} + \sum_{k=0}^{n} C_n^ka^kb^{n-k+1} \underset{(j=k+1)} = \sum_{j=1}^{n+1} C_n^{j-1}a^jb^{n+1-j} + \sum_{k=0}^{n} C_n^k a^kb^{n+1-k} \underset{k=j}= \sum_{k=1}^{n+1} C_n^{k-1} a^k b^{n+1-k} + \sum_{k=0}^{n} C_n^ka^kb^{n+1-k}  = C_{n}^na^{n+1}b^0 + \sum_{k=1}^{n}\left( C_n^{k-1}a^kb^{n+1-k} + C_n^k a^kb^{n+1-k}\right) + C_n^0a^0b^{n+1} = C_{n+1}^{n+1}a^{n+1}b^0 + \sum_{k=1}^{n} C_{n+1}^k a^{n+1}b^{n+1-k} + C_{n+1}^0 a^0b^{n+1} = \sum_{k=0}^{n+1} C_{n+1}^ka^kb^{n+1-k}$
-
-           \begin{align*}
-               (a+b)^{n+1} &= (a+b)^n(a+b) = \left(\sum_{k=0}^{n} C_n^k a^k b^{n-k}\right) \cdot  (a+b)\\  
-           .\end{align*}
+           %\begin{align*}
+            %   (a+b)^{n+1} &= (a+b)^n(a+b) = \left(\sum_{k=0}^{n} C_n^k a^k b^{n-k}\right) \cdot  (a+b)\\  
+           %\end{align*}
            что и требовалось доказать
        \end{proof}
     \section{Метрические пространства}
     \begin{definition}
         $\sqsupset X$ -- любое множество, а $\rho: X\times X \to [0,+\infty )$
 
-        Тогда пара $(X, \rho)$ называется метрическим пространствам, если функция $\phi$ удовлетворяет аксиомам метрики:
+        Тогда пара $(X, \rho)$ называется метрическим пространством, если функция $\phi$ удовлетворяет аксиомам метрики:
         \begin{enumerate}
             \item $\rho(x,y) = 0 \iff x = y$ (невырожденность)
             \item $\rho(x,y) = \rho(y,x)$ (симметричность)
@@ -914,29 +909,30 @@ $
     \end{definition}
     \begin{example}
         \begin{enumerate}
-            \item $(X, \rho_{D}$ -- метрическое пространство
+            \item $(X, \rho_{D})$ -- метрическое пространство
 
-                $\rho_D(x,y) = \begin{cases}
-                    0&, \text{если} x=y\\
-                    1&, \text{если} x\neq y\\
-                \end{cases}$
+            $\rho_D(x,y) = \begin{cases}
+                0&, \text{если} x=y\\
+                1&, \text{если} x\neq y\\
+            \end{cases}$
             \item $X=\R, \rho(x,y) = |x-y|$
 
-                $x-y = a, y-z = b\quad \rho(x,z) = |a-b|\leqslant |a| + |b| = \rho(x,y) + \rho(y,z)$
+            $x-y = a, y-z = b\quad \rho(x,z) = |a-b|\leqslant |a| + |b| = \rho(x,y) + \rho(y,z)$
 
-                Обычная или Евклидова метрика
+            Обычная или Евклидова метрика
             \item [$\overset{\sim }2$] $X = \C\quad \rho(z,w) = |z-w|$ (аксиома 3 будет проверена позже)
-            \item [$\overset{\sim }{\overset{\sim }{2}}$]  $X = \R^n, x = (x_1, \ldots, x_{n} ), y = (y_1, \ldots, y_{n} )$ $\rho(x,y) = \sqrt{\sum_{k=1}^{n} \left( x_k-y_k \right) ^2} $
+            \item [$\overset{\approx }{2}$]  $X = \R^n, x = (x_1, \ldots, x_{n} ), y = (y_1, \ldots, y_{n} )$ $\rho(x,y) = \sqrt{\sum_{k=1}^{n} \left( x_k-y_k \right) ^2}$.
 
-                $v = (v_1, \ldots, v_n)\quad \|v\| = \sqrt{\sum_{k=1}^{n} v_k^2} $ -- евклидова норма вектора $v$
+            $v = (v_1, \ldots, v_n)\quad \|v\| = \sqrt{\sum_{k=1}^{n} v_k^2} $ -- евклидова норма вектора $v$.
             \item $\sqsupset (X, \rho)$ -- метрическое пространство
 
-                $\sqsupset X_1\subseteq X\quad \rho_1 = \rho|_{X_1\times X_1}$
+            $\sqsupset X_1\subseteq X\quad \rho_1 = \rho|_{X_1\times X_1}$
 
-                $Тогда (X_1, \rho_1)$ -- есть метрическое пространство, а $\rho_1$ называется индуцированной метрикой.
-            \item $X$ -- множество станций метрополитена г. Санкт-Петербурга. Пусть между соседними станциями расстояние -- 2 минуты. $\rho(u,v) = \min$ длин путей из $u$ в $v$
+            Тогда $(X_1, \rho_1)$ -- есть метрическое пространство, а $\rho_1$ называется индуцированной метрикой.
+            \item $X$ -- множество станций метрополитена г. Санкт-Петербурга.
+            Пусть между соседними станциями расстояние -- 2 минуты. $\rho(u,v) = \min$ длин путей из $u$ в $v$
 
-               $\rho$ -- метрика
+            $\rho$ -- метрика
         \end{enumerate}
     \end{example}
 
@@ -949,13 +945,14 @@ $
     \end{definition}
     \begin{example}
         \begin{enumerate}
-            \item ($0 \vee 1$) $B_R(a) = \begin{cases}
-                    \{a\} &, \text{если } R\leqslant 1\\
-                    X&, \text{если } R>1\\
+            \item ($0 \vee 1$) $B_R(a) = 
+            \begin{cases}
+                \{a\} &, \text{если } R\leqslant 1\\
+                X&, \text{если } R>1\\
             \end{cases}$
-        \item $(a-R,a+R)$
-        \item круг (без окружности)
-        \item $n$-мерный шар
+            \item $(a-R,a+R)$
+            \item круг (без окружности)
+            \item $n$-мерный шар
         \end{enumerate}
 
         в $\R^n\quad \|v\|_1 = \sum_{k=1}^{n} |v_k|\quad \|v\|_{\infty } = \max\limits_{k=1:n} |v_k|$
@@ -972,12 +969,12 @@ $
 
     $\rho_1(x,y) = \|x-y\|_1\qquad \rho_{\infty }(x,y) = \|x-y\|_{\infty }$
 
-    Упражнение: Проверить, что $\rho_1, \rho_{\infty }$ -- метрики, нарисовать шар в $\R^2$ Относительно $\rho_1, \rho_{\infty }$
+    Упражнение: проверить, что $\rho_1, \rho_{\infty}$ -- метрики, нарисовать шар в $\R^2$ относительно $\rho_1, \rho_{\infty}$.
 
     \begin{definition}
-        $\sqsupset (X, \rho)$ -- метрическое пространство
-
-        $E \subseteq X, E $ Называется ограниченным, если  $$\exists a\in X, \exists R>0:\quad E\subseteq B_R(a) $$
+        Пусть $ (X, \rho)$ -- метрическое пространство.
+        $E \subseteq X, E $ называется ограниченным, если  
+        $$\exists a\in X, \exists R>0:\quad E\subseteq B_R(a) $$
     \end{definition}
 
     \begin{note}
@@ -985,22 +982,19 @@ $
     \end{note}
 
     \begin{definition}
-        $\sqsupset  E \subseteq \R\quad E$ называется ограниченным сверху, если \[
-        \exists m\in \R:\quad \forall x\in E\quad x\leqslant m
-        .\] 
+        Пусть $E \subseteq \R$. 
+        $E$ называется ограниченным сверху, если 
+        \[ \exists m\in \R:\quad \forall x\in E\quad x\leqslant m.\] 
 
-        При этом такое число $m$ называется \underline{мажорантой}
-
+        При этом такое число $m$ называется \underline{мажорантой}.
         Говорят: $m$ мажорирует $E$
 
-
         Аналогичное определение для ограниченности снизу. 
-        Соответствующее~$m$ Называется \underline{минорантой}
+        Соответствующее~$m$ называется \underline{минорантой}.
     \end{definition}
 
     \begin{statement}
-        $\sqsupset E\subseteq \R$
-
+        Пусть $E\subseteq \R$.
         \[
         E \text{ -- ограничено } \iff  \begin{cases}
             E \text{ --  ограничено сверху}\\
@@ -1009,54 +1003,58 @@ $
         .\] 
     \end{statement}
     \begin{proof}
-        $\implies $ По условию $\exists a: E\subseteq (a-R, a+R)$
+    \begin{itemize}
+        \item[$\implies:$]
+            по условию $\exists a: E\subseteq (a-R, a+R)$.
 
-        $M:=a+R$-- мажоранта $\implies E$ орграничено сверху. снизу -- аналогично    
+            $M:=a+R$-- мажоранта $\implies E$ ограничено сверху. 
+            Снизу -- аналогично.
+        
+            \item[$\impliedby:$]
+            $E$ -- ограничено сверху $\implies \exists M\in R: \forall x\in E\quad x\leqslant M$.
 
-        $\impliedby E$ -- ограничено сверху $\implies \exists M\in R: \forall x\in E\quad x\leqslant M$
+            $\ldots \exists m\in \exists : \forall x\in E\quad x\geqslant m$
 
-        $\ldots \exists m\in \exists : \forall x\in E\quad x\geqslant m$
+            $-x\leqslant -m \leqslant |m| \implies  |x| = max\{x, -x\}\leqslant max\{|M|, |m|\} = R$
 
-        $-x\leqslant -m \leqslant |m| \implies  |x| = max\{x, -x\}\leqslant max\{|M|, |m|\} = R$
-
-        $\implies  x\in B_R[0]$. Т.к. это верно $\forall x\in E$, то $E \subseteq  B_R[0]$
+            $\implies  x\in B_R[0]$. Т.к. это верно $\forall x\in E$, то $E    \subseteq  B_R[0]$
+        \end{itemize}
     \end{proof}
 
     \begin{note}
-        Если $E\subseteq \R$, то \[
-            E \text{ -- ограничено} \iff  \exists R:\quad \forall x\in E\quad |x|\leqslant R
-        .\] 
+        Если $E\subseteq \R$, то 
+        \[
+            E \text{ -- ограничено} \iff  \exists R:\quad \forall x\in E\quad |x|\leqslant R.
+        \] 
     \end{note}
 
     \begin{definition}
-        $E\subseteq R, M\in E$, тогда \[
-        M = \max E \iff  \forall x\in E\quad x\leqslant M
-        .\] 
+        $E\subseteq R, M\in E$, тогда 
+        \[ M = \max E \iff  \forall x\in E\quad x\leqslant M. \] 
 
-        $\min E$ аналогично
+        $\min E$ аналогично.
     \end{definition}
 
     \begin{statement}
-        $\forall E\subseteq R:\quad E$ -- конечно и $E\neq \O \quad \exists \max E, \min E$
+        $\forall E\subseteq R:\ E$ -- конечно и $E\neq \O \implies \exists \max E, \min E$
     \end{statement}
     \begin{definition}
         $E$ конечно, если $\exists  m\in \N $ и $\exists $ биекция $\phi:E \to \{1, 2, \ldots, n\}$
     \end{definition}
     \begin{proof}
-        [доказательство Утверждения]
-        По индукции по числу элементов в $E$
+        [Доказательство утверждения]
+        Индукцией по числу элементов в $E$.
 
         База: $m=1\quad E = \{x\}\quad \max E = \min E  = x$
 
         Переход: $m\to m+1$
 
-        Индукционное предаоложение: $\forall $ конечное множество из $M$ элементов имеет $\max$ и $\min$
+        Индукционное предположение: любое конечное множество из $M$ элементов имеет $\max$ и $\min$.
 
-        Пусть $E$ содержит $m+1$ элементов
+        Пусть $E$ содержит $m+1$ элементов.
+        $E = \{x_1, \ldots, x_{m}, x_{m+1} \} = \overset{\sim }E \cup \{x_{m+1}\}$.
 
-        $E = \{x_1, \ldots, x_{m}, x_{m+1} \} = \overset{\sim }E \cup \{x_{m+1}\}$
-
-        $M = \max \{\max \overset{\sim }E, x_{m+1}\}$
+        $M = \max \{\max \overset{\sim }E, x_{m+1}\}$.
 
         $\begin{cases}
             M\in \overset{\sim }E&\subseteq E\\
@@ -1066,14 +1064,14 @@ $
         $\begin{cases}
             M\geqslant x_{m+1}\\
             M\geqslant x \forall x\in \overset{\sim }E
-        \end{cases} \implies  M\geqslant x \forall x\in E$, т.о. $M = \max E$
+        \end{cases} \implies  M\geqslant x\ \forall x\in E$, т.о. $M = \max E$
     \end{proof}
 
     \begin{corollary}
         $\sqsupset E \subseteq \Z , E $ -- ограничено сверху (снизу). \\Тогда $\exists \max(\min) E$
     \end{corollary}
     \begin{proof}
-        По условию существует $M\in R: \forall x\in E\quad x\leqslant M, \overset{\sim }\sqsupset M \geqslant M$
+        По условию существует $M\in R: \forall x\in E\quad x\leqslant M, \overset{\sim }\sqsupset M \geqslant M$.
         
         $\sqsupset n\in E\quad \sphericalangle \overset{\sim }E = \{x\in E: n\leqslant x\leqslant \overset{\sim }M\}$
 
@@ -1117,24 +1115,23 @@ $
     \section{Равномощные множества}
 
     \begin{definition}
-        $\sqsupset A,B$ -- множества.
-
-        $A\sim B$ равномощны, если $\exists $ биекция между $A$ и $B$
+        Пусть $A,B$ -- множества.
+        $A$ равномощно $B$, если $\exists $ биекция между $A$ и $B$. 
+        Пишут  $A\sim B$.
     \end{definition}
     \begin{example}
         \begin{enumerate}
             \item $(a,b), a<b \sim (0,1)$
-
-                $f(x) = a+(b-a)\cdot x, x\in (0,1)$
-            \item [$\ov{1}$] $\forall (a,b)$ и $(c,d)$ равномощны
+            $f(x) = a+(b-a)\cdot x, x\in (0,1)$
+            \item[$\ov{1}$] $\forall (a,b)$ и $(c,d)$ равномощны
             \item $a<b \implies (a,b)\sim [a,b) \sim [a,b]$
             \item $\left( -\frac{\pi}{2}, \frac{\pi }{2} \right) \sim \R\quad (\tg)$
-\begin{figure}[ht]
-    \centering
-    \incfig{circ}
-    \caption{circ}
-    \label{fig:circ}
-\end{figure}
+            \begin{figure}[ht]
+                \centering
+                \incfig{circ}
+        	\caption{circ}
+        	\label{fig:circ}
+    	    \end{figure}
         \end{enumerate}
     \end{example}
 
@@ -1149,17 +1146,18 @@ $
     \end{note}
 
     \begin{definition}
-        Множество, равномощное $\N $ называется счётным
+        Множество, равномощное $\N$, называется счётным
     \end{definition}
     \begin{example}
         \begin{itemize}
-            \item $\{1, 4, 9, 16, \ldots\}$ -- счёттно. $f(x) = x^2$
-            \item $\Z  = \{0,1,-1,2,-2,3,-3,4,-4\}$ -- считаем ихнатуральными числами  в таком порядке
+            \item $\{1, 4, 9, 16, \ldots\}$ -- счётно. 
+            $f(x) = x^2$
+            \item $\Z  = \{0,1,-1,2,-2,3,-3,4,-4\}$ -- считаем их натуральными числами  в таком порядке.
             \item $\{m, m+1, m+2, \ldots\}, m\in \R\quad \phi(x) = m+x-1$
         \end{itemize}
     \end{example}
     \begin{theorem}
-        Любое бесконечное множество содержит счётное подмножество
+        Любое бесконечное множество содержит счётное подмножество.
     \end{theorem}
     \begin{proof}
         $\sqsupset X$ -- бесконечное множество. $\implies  \exists a_1\in X\quad X\setminus \{a_1   \}\neq \O $ (Иначе $X = \{a_1\}$!!!) $\implies \exists a_2\in X\setminus \{a_1\}\quad a_2\neq a_1$
@@ -1174,7 +1172,7 @@ $
     \end{definition} 
 
     \begin{note}
-        [уточнение понятие конечного]
+        [уточнение понятие конечного]~\\
         $X$ конечно $\iff \begin{cases}
             X\sim \{1, \ldots, n\}\\
             X = \O \\
@@ -1188,19 +1186,17 @@ $
         Любое подмножество счётного не более чем счётно.
     \end{note}
     \begin{proof}
-        $E$ -- счётно по условию $E = \{x_1, x_2, x_3, x_4, x_5 \ldots\}$
-
+        $E$ -- счётно по условию $E = \{x_1, x_2, x_3, x_4, x_5 \ldots\}$.
         В данном наборе есть элементы  из $X$. Пронумеруем их в порядке возникновения в наборе (*).
     \end{proof}
     \begin{theorem}
-        Произведение счётных множеств счётно.
-
+        Произведение счётных множеств счётно.\\
         $A,B$ -- счётны $\implies A\times B$ -- счётно
     \end{theorem}
     \begin{proof}
-        Если $A = B = \N $ $\N ^2$ счётно
+        Если $A = B = \N$, то $\N ^2$ счётно.
 
-        $\begin{bmatrix} (1,1)&(1,2)&(1,2)&\ldots\\ (2,1)&(2,2)&(2,3)&\ldots\\ (3,1)&(3,2)&(3,3)&\ldots\\ \vdots& \vdots& \vdots& \\\end{bmatrix} $ -- нумеруем по диагоналям
+        $\begin{bmatrix} (1,1)&(1,2)&(1,2)&\ldots\\ (2,1)&(2,2)&(2,3)&\ldots\\ (3,1)&(3,2)&(3,3)&\ldots\\ \vdots& \vdots& \vdots& \\ \end{bmatrix}$~--- нумеруем по диагоналям.
 
         $A\times B = \{(a_K, b_j)\}_{k,j\in \N }\qquad l\to (k,j)\qquad =\{(k,j)_l\}_{l\in \N }$
     \end{proof}
@@ -1213,27 +1209,28 @@ $
     \end{theorem}
         $\{\{A_j\}_{j\in J}:\quad J \text{ -- не более чем счётно} \quad \forall j\in J\quad A_j \text{ не более чем счётно}\}$
 
-        $\bigcup\limits_{j\in J} A_j$ -- не более чем счётно
-
-        Не умаляя общности (н.у.о.) $J = \N \vee J = \{1, 2, \ldots, n\}$
+        $\bigcup\limits_{j\in J} A_j$~--- не более чем счётно.
+        Не умаляя общности (н.у.о.)\\
+        $J = \N \vee J = \{1, 2, \ldots, n\}$
 
         Элементы $A_1, A_2, \ldots$ (счётных!) множеств можно занумеровать.
-
-        \[A_1:\quad a_{11}, a_{12} \ldots\]
-        \[A_2:\quad a_{21}, a_{22} \ldots\]
-        \[A_3:\quad a_{31}, a_{32} \ldots\]
-
+        \begin{align*}
+            A_1:\quad a_{11}, a_{12} \ldots\\
+            A_2:\quad a_{21}, a_{22} \ldots\\
+            A_3:\quad a_{31}, a_{32} \ldots\\
+        \end{align*}
         Перенумеруем по диагоналям лишь те, который встречаем в первый раз
 
     \begin{corollary}
         \begin{enumerate}
             \item 
-                $\Q$ счётно. $\Q = \bigcup\limits_{N\in \N } \Q_N\qquad \Q_N = \{\frac{p}{n}\}_{p\in \Z }$
-            \item $A = \{x: \exists \text{ многочлен с целыми коэффициенты } P(\cdot ):\quad P(x) = 0\}$
+            $\Q$ счётно. 
+            $\Q = \bigcup\limits_{N\in \N } \Q_N\qquad \Q_N = \{\frac{p}{n}\}_{p\in \Z }$
+            \item $A = \{x: \exists \text{ полином с целыми коэффициентами } P(\cdot):\ P(x) = 0\}$
 
-                $\mathds{P}_n = \{p(x) = a_0 + \ldots + a_nx^n:\quad a_0, \ldots, a_n\in \Z \}\quad \mathds{P}_n \leftrightarrow \Z ^{n+1}$
+            $\mathds{P}_n = \{p(x) = a_0 + \ldots + a_nx^n:\quad a_0, \ldots, a_n\in \Z \}\quad \mathds{P}_n \leftrightarrow \Z ^{n+1}$
 
-                $A_n = \{x:\exists p\in \mathds{P}_n: p(x) = 0\}\qquad A = \bigcup\limits_{n\in \N } A_n$
+            $A_n = \{x:\exists p\in \mathds{P}_n: p(x) = 0\}\qquad A = \bigcup\limits_{n\in \N } A_n$
         \end{enumerate}
 
     \end{corollary}
@@ -1248,17 +1245,19 @@ $
     \begin{proof}
         Доказательство от противного. 
 
-        $\sqsupset [a,b]$ -- счётен $\implies [a,b] = \{x_1, x_2, x_3, \ldots\}$
+        $\sqsupset [a,b]$ -- счётен $\implies [a,b] = \{x_1, x_2, x_3, \ldots\}$.
 
         $\sphericalangle$ три замкнутые ``трети'' $\Delta = b-a\qquad [a,a+\frac{\Delta}{3}], [a + \frac{\Delta}{3}, a + \frac{2\Delta}{3}], [a + \frac{2\Delta}{3}, b] $
 
-        $x_1 \not\in $ одной из третей. Эту треть назовём $I_1$. Повторим действие для $I_1$ и $x_2$
+        $x_1 \not\in $ одной из третей. 
+        Эту треть назовём $I_1$. 
+        Повторим действие для $I_1$ и $x_2$
 
         $I_2\subseteq I_1 \subseteq I_0 x_1\not\in I_1, x_2\not\in I_2$
 
         $I_n\subseteq I_{n-1}\subseteq  \ldots \subseteq  I_2\qquad x_{n} \not\in I_n $
 
-        По аксиоме №16 $\bigcap\limits_{n\in \N } I_n \neq \O \quad \sqsupset x\in \bigcap\limits_{n\in N} I_n \implies c\in [a,b] \implies \exists n: c = x_n\not\in I_n \implies c\not\in \bigcap\limits_{n\in \N } I_n$ !!!
+        По аксиоме № 16 $\bigcap\limits_{n\in \N } I_n \neq \O \quad \sqsupset x\in \bigcap\limits_{n\in N} I_n \implies c\in [a,b] \implies \exists n: c = x_n\not\in I_n \implies c\not\in \bigcap\limits_{n\in \N } I_n$ !!!
 
         Т.о. $[a,b]$ -- несчётно
     \end{proof}
@@ -1268,15 +1267,14 @@ $
         $X\sim [0,1]$, то говорят, что $X$ -- мощности континуум (мощности $\C$)
     \end{corollary}
     \begin{problem}
-         \begin{enumerate}
-             \item 
-        $\R\times\R\sim \R$
-    \item $X$ -- множество, то $X\not\sim 2^X\qquad 2^X= \{A:A\subseteq X\}$
+        \begin{enumerate}
+            \item $\R\times\R\sim \R$
+            \item Если $X$ -- множество, то $X\not\sim 2^X\qquad 2^X= \{A:A\subseteq X\}$
 
-        $X = \O \quad 2^X = \{\O \}$
+            $X = \O \quad 2^X = \{\O \}$
 
-        $X = \{a\}\quad 2^X = \{\O , \{a\}\}$
-    \item $\N ^{\N }\sim [0,1]$
+            $X = \{a\}\quad 2^X = \{\O , \{a\}\}$
+            \item $\N ^{\N }\sim [0,1]$
          \end{enumerate}
     \end{problem}
 
@@ -1288,50 +1286,47 @@ $
     \end{definition}
 
     \section{Предел числовой последовательности}
-
     \begin{definition}
-        $\sqsupset \{x_n\}_{n=1}^{\infty }$ последовательность вещественных чисел. $x_{+}\in \R$
-
+        Пусть $\{x_n\}_{n=1}^{\infty}$ последовательность вещественных чисел. $x_{+}\in \R$
         \[
-            \lim_{n \to \infty} x_n = x_+ \iff  \forall \varepsilon>0\exists N: \forall n>N \quad \left| x_n-x_+ \right| <\varepsilon
-        .\]
-
-        В метрическом пространстве $(X,\rho)$ шар $B_R(a)$ называется также $R$-окрестностью точки $a$
+            \lim_{n \to \infty} x_n := x_+ \iff  \forall \varepsilon>0\exists N: \forall n>N \quad \left| x_n-x_+ \right| <\varepsilon.
+        \]
+        В метрическом пространстве $(X,\rho)$ шар $B_R(a)$ называется также $R$-окрестностью точки $a$.
     \end{definition}
 
     \begin{definition}
-        [Определение предела на языке окретсностей]
-
+        [Определение предела на языке окрестностей]
         $$\lim_{n \to \infty} x_n = x_* \iff \forall \text{ окрестности $U$ точки } x_*\quad \exists N\in \N : \forall n>N\quad x_{n} \in U$$
     \end{definition}
     \begin{example}
             $x_n = \frac{1}{n} \forall n\in \N $
-                $x_* = 0$
+            $x_* = 0$
 
             $\forall \varepsilon > 0 \exists N: \forall n>N\quad \left| \frac{1}{n} - 0 \right|  = \frac{1}{n}<\varepsilon\qquad n>\frac{1}{\varepsilon}\quad N:= \left\lfloor \frac{1}{\varepsilon} \right\rfloor +1$
     \end{example}
     \begin{note}
-        Определение предела на ``языке окрестностей'' справедливо в случае последовательностей в метрическом пространстве
+        Определение предела на ``языке окрестностей'' справедливо в случае последовательностей в метрическом пространстве.
 
-        $x_n \to x_* \iff  \forall \varepsilon >0 \exists N: \forall n>N\quad \rho(x_n, x_*)<\varepsilon$
+        $x_n \to x_* \iff  \forall \varepsilon >0 \exists N: \forall n>N\quad \rho(x_n, x_*)<\varepsilon$.
     \end{note}
     \begin{statement}
-        $\sqsupset x_n=c\quad\forall n\in \N , c\in X, X$ -- метрическое пространство $\implies \lim_{n \to \infty } x_n = c$
+        Пусть $X$ -- метрическое пространство и $c\in X$. 
+        Если $\forall n\in \N , x_n = c$, то  $\lim_{n \to \infty } x_n = c$.
     \end{statement}
     \begin{proof}
-        $x_* = c\quad \forall n\in \N \quad \rho(x_n, x_*) = 0<\varepsilon \forall \varepsilon > 0$
+        $x_* = c\quad \forall n\in \N \quad \rho(x_n, x_*) = 0<\varepsilon\  \forall \varepsilon > 0$
 
         $N=1$
     \end{proof}
     \begin{note}
-        $\sqsupset \{x_n\}_{n=1}^{\infty }$ и $\{y_n\}_{n=1}^{\infty }$ -- последовательности в метрическом пространстве $X$ и $\exists m\in \N \quad x_n = y_n \forall n\geqslant m$. Тогда $\lim_{n \to \infty} x_n$ и $\lim_{n \to \infty} y_n$ совпадают (если существует один, то существует другой и равны при существовании)
+        $\sqsupset \{x_n\}_{n=1}^{\infty }$ и $\{y_n\}_{n=1}^{\infty }$ -- последовательности в метрическом пространстве $X$ и $\exists m\in \N \quad x_n = y_n\ \forall n\geqslant m$. 
+        Тогда $\lim_{n \to \infty} x_n$ и $\lim_{n \to \infty} y_n$ совпадают (если существует один, то существует другой и равны при существовании).
     \end{note}
     \begin{statement}
         [единственность предела]
-
         $\sqsupset (X, \rho), \{x_n\}_{n=1}^{\infty }\subseteq X, y, z\in X $
 
-        Если $x_n\to y$ и $x_n\to z$, то $y=z$
+        Если $x_n\to y$ и $x_n\to z$, то $y=z$.
     \end{statement}
     \begin{proof}
         Если $y\neq z$, то $\rho(y,z) = \Delta>0\quad \varepsilon = \frac{\Delta}{2}$
@@ -1342,7 +1337,8 @@ $
 
         $\forall n>N_2\quad \rho(x_n,z)<\varepsilon$
 
-        $\forall n\geqslant \max\{N_1, N_2\}\quad \begin{cases}
+        $\forall n\geqslant \max\{N_1, N_2\}\quad 
+        \begin{cases}
             \rho(x_{n} , y)<\varepsilon \\
             \rho(x_{n} , z)<\varepsilon\\
         \end{cases} \implies  \Delta = \rho(y,z) \leqslant  \rho(y, x_{n}) + \rho(x_{n} , z)<2\varepsilon = \Delta \implies \Delta<\Delta $ !!!
@@ -1360,18 +1356,18 @@ $
     \end{example}
 
     \begin{definition}
-        Последовательность $\{x_n\}_{n=1}^{\infty }$ называется \underline{ограниченной}, если ограничено множество её значений $\{x_n\}_{n\in \N }$ 
+        \underline{Ограниченной} называется такая последовательность $\{x_n\}_{n=1}^{\infty}$, что ограничено множество её значений $\{x_n\}_{n\in \N}$. 
     \end{definition}
 
     \begin{definition}
-        В метрическом пространстве \underline{сходящейся} последовательностью называется последовательность, у которой существует предел (в этом пространстве)
+        В метрическом пространстве \underline{сходящейся} последовательностью называется последовательность, у которой существует предел (в этом пространстве).
     \end{definition}
 
     \begin{theorem}
         Сходящаяся в метрическом пространстве последовательность ограничена.
     \end{theorem}
     \begin{proof}
-        Рассмотрим $\{x_n\}_{n=1}^{\infty }$ -- сходящаяся в метрическом пространстве $(X,\rho)$ последовательность, т.е. $\exists x^*\in X\forall \varepsilon>0 \exists N\in \N :\forall n\in N \quad\rho( x_n,x^*)<\varepsilon$
+        Пусть $\{x_n\}_{n=1}^{\infty }$ -- сходящаяся в метрическом пространстве $(X,\rho)$ последовательность, т.е. $\exists x^*\in X\forall \varepsilon>0 \exists N\in \N :\forall n\in N \quad\rho( x_n,x^*)<\varepsilon$
 
         $\sqsupset \varepsilon = 1, \sqsupset N = N(\varepsilon)$, т.е. $\forall n>N\quad \rho(x_n, x^*)<1$
 
@@ -1415,21 +1411,19 @@ $
     \end{enumerate}
 
     \begin{theorem}
-        [о зажатой последовательности. ``Принцип двух милиционеров'']
-        $\sqsupset \{x_n\}_{n=1}^{\infty }, \{y_{n} \}_{n=1}^{\infty }, \{z_n\}_{n=1}^{\infty }$ -- вещественные последовательности.
+        [о зажатой последовательности, ``Принцип двух милиционеров'']
+        Пусть $\{x_n\}_{n=1}^{\infty }, \{y_{n} \}_{n=1}^{\infty}, \{z_n\}_{n=1}^{\infty }$ -- вещественные последовательности, и $\forall n\in \N  x_{n} \leqslant y_{n} \leqslant z_n$.
 
-        $\forall n\in \N  x_{n} \leqslant y_{n} \leqslant z_n$
-
-        Если $\lim_{n \to \infty} x_n = \lim_{n \to \infty}  z_n = a $ ( и пределы существуют), то $\exists \lim_{n \to \infty} y_n$ и $a = \lim_{n \to \infty} y_{n} $
+        Если $\lim_{n \to \infty} x_n = \lim_{n \to \infty}  z_n = a $ (и пределы существуют), то $\exists \lim_{n \to \infty} y_n$ и $a = \lim_{n \to \infty} y_{n}$.
     \end{theorem}
     \begin{proof}
         $\sphericalangle\forall  \varepsilon>0$
 
-        Т.к. $x_n -> a$, то $\exists N_1\in \N : n\in \N , n\geqslant N_1 \implies \left| x_n-a \right| <\varepsilon$
+        Т.к. $x_n \to a$, то $\exists N_1\in \N : n\in \N,\ n\geqslant N_1 \implies \left| x_n-a \right| <\varepsilon$.
 
-        Т.к. $z_n \to  a$, то $\exists N_2\in \N :n\in \N , n>N_2, \quad\left| z_n-a \right| <\varepsilon$
+        Т.к. $z_n \to  a$, то $\exists N_2\in \N :n\in \N,\ n>N_2, \quad\left| z_n-a \right| <\varepsilon$.
 
-        $N = \max\{N_1, N_2\}$, тогда $n\in \N \quad n>N$
+        $N = \max\{N_1, N_2\}$, тогда $n\in \N \quad n>N$.
 
         $\begin{cases}
             \left| x_n-a \right| <\varepsilon\\
@@ -1451,7 +1445,7 @@ $
     \begin{note}
         $\{x_n\}_{n=1}^{\infty }$ -- б.м. $\iff \{\left| x_{n}  \right| \}_{n=1}^{\infty }$ -- б.м.
 
-        $\{x_n\}$ -- б.м. $\iff  \forall \varepsilon>0 \exists N = N(\varepsilon)\in \N: \forall n\in \N  n>N\quad \left| x_n \right| <\varepsilon \implies \left| x_n \right|  $ -- б.м. ($\left| \left| x_{n}  \right| -0 \right| <\varepsilon$)
+        $\{x_n\}$ -- б.м. $\iff  \forall \varepsilon>0 \exists N = N(\varepsilon)\in \N: \forall n\in \N  n>N\quad \left| x_n \right| <\varepsilon \implies \left| x_n \right|  $ -- б.м. ($\left| \left| x_{n}  \right| -0 \right| <\varepsilon$).
     \end{note}
 
     \begin{definition}
@@ -1462,7 +1456,8 @@ $
         Найти (какой-нибудь) $\varepsilon$-допуск для последовательности $\sqrt{\frac{n+1}{n}} = x_{n}  $ для $\varepsilon>0$
     \end{example}
     \begin{proof}
-        Найти $N\in \N :\forall n\in \N ~n>N\quad \left| \sqrt{\frac{n+1}{n}} -1 \right| <\varepsilon\qquad \sqrt{\frac{n+1}{n}-1} <\varepsilon \iff  \frac{1}{\sqrt{n} }<\varepsilon\quad n>\frac{1}{\varepsilon^2}\quad N = \left\lfloor \frac{1}{\varepsilon^2} \right\rfloor +1$
+        Найти $N\in \N :\forall n\in \N ~n>N\quad \left| \sqrt{\frac{n+1}{n}} -1 \right| <\varepsilon$\\ 
+        $\sqrt{\frac{n+1}{n}-1} <\varepsilon \iff  \frac{1}{\sqrt{n} }<\varepsilon\quad n>\frac{1}{\varepsilon^2}\quad N = \left\lfloor \frac{1}{\varepsilon^2} \right\rfloor +1$
     \end{proof}
 
     \begin{definition}
@@ -1495,7 +1490,7 @@ $
     \end{example}
 
     \begin{definition}
-        $\sqsupset (X,K)$ -- векторное пространство.
+        Пусть $(X,K)$ -- векторное пространство.
 
         $p:X \to [0,+\infty )$ называется \underline{нормой} на $X$, если
         \begin{enumerate}
@@ -1503,11 +1498,10 @@ $
             \item $\forall \alpha\in K\forall x\in X\quad p(\alpha x) = \left| \alpha \right| p(x)$ (положительная однородность)
             \item $\forall x, y\in X\quad p(x+y)\leqslant p(x) + p(y)$ (неравенство треугольника)
         \end{enumerate}
-
         Функция $p:X\to [0,+\infty )$ и обладает свойствами $2, 3$ называется полунормой.
     \end{definition}
 
-    Элементарные свойства полнормы:
+    Элементарные свойства полунормы:
     \begin{enumerate}
         \item $\forall  x, y\in X \forall \alpha, \beta\in K\quad p(\alpha x+\beta y) \leqslant |\alpha|p(x) + |\beta|p(y)$
         \item $\forall x\in X\quad p(-x) = p(x)$
@@ -1533,10 +1527,10 @@ $
 
         $\|x\|_{\infty } = \max\limits_{k=1:n} |x_k|$
 
-        $\|x\|_p = \left( \sum_{k=1}^{n} |x_k|^p \right)^{\frac{1}{p}} , p\in [1, +\infty )$ -- норма (проверка позже)
+        $\|x\|_p = \left( \sum_{k=1}^{n} |x_k|^p \right)^{\frac{1}{p}} , p\in [1, +\infty )$ -- норма (проверка позже).
     \end{note}
     \begin{example}
-        $F(x)$ -- строго монотонное возрастает, $F:\R\to \R$
+        $F(x)$ -- строго монотонно возрастает, $F:\R\to \R$
 
         $\rho_F(x,y) = \left| F(x) - F(y) \right| \forall x, y\in \R $
 
@@ -1545,7 +1539,8 @@ $
         ``$\|x\|$'' $ = \rho(x, )$ -- не обязательно положительно однородна, т.е не всякая метрика порождена нормой.
     \end{example}
     
-    Забегая вперёд:  $C[a,b] = \{f \text{-- непрерывная на } [a,b], f:[a,b] \to  \R \}\quad \|f\| = \max\limits_{x\in [a,b]} \{|f(x)|\}$. Упражнение: доказать, что это норма
+    Забегая вперёд:  $C[a,b] = \{f \text{-- непрерывная на } [a,b], f:[a,b] \to  \R \}\quad \|f\| = \max\limits_{x\in [a,b]} \{|f(x)|\}$. 
+    Упражнение: доказать, что это норма.
 
     \begin{definition}
         $\sqsupset (X,K)$ -- векторное пространство.
@@ -1574,16 +1569,16 @@ $
             \item $y = \mathbb{0}, y = 0\cdot\mathbb{0}\quad <x,y> = <x,0\cdot \mathbb{0}> = 0$
             \item $y\neq \mathbb{0} \implies <y,y>\neq 0\quad z = \frac{<x,y>}{<y,y>} \in K$
 
-                $0\leqslant <x-\alpha y, x - \alpha y> = <x,x> - \overline{\alpha} <x,y> - \alpha <x,y> + \alpha\cdot \overline{\alpha}<y,y>$
+            $0\leqslant <x-\alpha y, x - \alpha y> = <x,x> - \overline{\alpha} <x,y> - \alpha <x,y> + \alpha\cdot \overline{\alpha}<y,y>$
 
-               $0\leqslant <x,x> - Re \frac{<x,y>}{<y,y>} \cdot  <x,y> + \frac{<x,y>^2}{<y,y>}$
-           \item $2Re <x,y> \cdot  <x,y> - <x,y>^2 \leqslant <x,x><y,y>$ 
+            $0\leqslant <x,x> - Re \frac{<x,y>}{<y,y>} \cdot  <x,y> + \frac{<x,y>^2}{<y,y>}$
+            \item $2Re <x,y> \cdot  <x,y> - <x,y>^2 \leqslant <x,x><y,y>$ 
         \end{enumerate}
     \end{proof}
 
    \begin{statement}
         [неравенство Коши-Буняковского-Шварца]
-
+        ~\\
         $x = (x_1, \ldots, x_{n} )\quad y = (y_1, \ldots, y_{n} )$
 
         $\left<x, y \right>_2 = \sum x_ky_k$
@@ -1599,9 +1594,9 @@ $
 
     \begin{theorem}
         [О связи пределов и арифметических действий в нормированных пространствах]
-        $\sqsupset (X,K)$ -- нормированное векторное пространство (векторное пространство, снабжённое нормой)
+        Пусть $(X,K)$~--- нормированное векторное пространство (векторное пространство, снабжённое нормой).
 
-        $\{x_n\}_{n=1}^{\infty }, \{y_n\}_{n=1}^{\infty }$ последовательности в $X$, $\{\alpha_n\}_{n=1}^{\infty }$ в $K$
+        $\{x_n\}_{n=1}^{\infty }, \{y_n\}_{n=1}^{\infty }$ последовательности в $X$, $\{\alpha_n\}_{n=1}^{\infty }$ в $K$.
 
         $x_{n} \to x, y_{n} \to y, x, y\in X\quad \alpha_n\to \alpha\in K$
         Тогда 
@@ -1616,7 +1611,7 @@ $
         \begin{enumerate}
             \item $x_{n} + y_{n} \to  x+y? $
 
-                $\forall \varepsilon>0 \exists \varepsilon$-допуск для $x_{n} +y_{n} $
+                $\forall \varepsilon>0\ \exists \varepsilon$-допуск для $x_{n} +y_{n} $
 
                 $\sqsupset N_1\in $Д$(\frac{\varepsilon}{2}, \{x_{n} \})$
 
@@ -1626,17 +1621,18 @@ $
 
                 $\|(x_{n} +y_{n} ) - (x+y)\|\leqslant \|x_{n} -x\| + \|y_{n} -y\| <\frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon$, т.о. $N\in $Д$\left( \varepsilon, \{x_{n} + y_{n} \} \right) $
 
-                Для разности аналогично
+                Для разности аналогично.
 
                 \begin{lemma}
-                    $\sqsupset \{a_n\}_{n=1}^{\infty }, \{b_n\}_{n=1}^{\infty }    $ -- числовые последовательности, $\{a_n\}$ -- ограничена, $\{b_n\}$ -- б.м. $\implies  \{a_nb_n\}$ -- б.м.
+                    Пусть $\{a_n\}_{n=1}^{\infty }, \{b_n\}_{n=1}^{\infty }    $ -- числовые последовательности, $\{a_n\}$ -- ограничена, $\{b_n\}$ -- б.м. $\implies  \{a_nb_n\}$ -- б.м.
                 \end{lemma}
                 \begin{proof}
                     [Доказательство леммы]
 
                     $\{a_n\}$ -- ограничено $\implies \exists R>0: \forall n\in \N \quad |a_n| \leqslant R$
 
-                    $b_n$ -- б.м. $\implies $ для $\forall \varepsilon>0 \exists n\in \text{Д}\left( \frac{\varepsilon}{2}, \{b_n\} \right) $, т.е. $|b_n|<\frac{\varepsilon}{R} \forall n\in \N  ~ n>N$ Тогда $|a_nb_n| = |a_n| |b_n| <R\cdot \frac{\varepsilon}{R} = \varepsilon \implies N\in \text{Д}\left( \varepsilon, \{a_nb_n\} \right) \implies a_nb_n \to 0, n\to  +\infty  $
+                    $b_n$ -- б.м. $\implies$ для $\forall \varepsilon>0\ \exists n\in \text{Д}\left( \frac{\varepsilon}{2}, \{b_n\} \right) $, т.е. $|b_n|<\frac{\varepsilon}{R}\ \forall n\in \N  ~ n>N$. 
+                    Тогда $|a_nb_n| = |a_n| |b_n| <R\cdot \frac{\varepsilon}{R} = \varepsilon \implies N\in \text{Д}\left( \varepsilon, \{a_nb_n\} \right) \implies a_nb_n \to 0, n\to  +\infty  $
                 \end{proof}
             Доказательство теоремы:
 
@@ -1651,13 +1647,11 @@ $
 
         \item $\frac{x_{n} }{y_{n} } - \frac{x}{y} = x_n\cdot \frac{1}{y_n} \to  x\cdot \frac{1}{y} \impliedby (2)$, если $\frac{1}{y_{n} } \to  \frac{1}{y} \iff  \frac{1}{y_{n} } - \frac{1}{y}$ -- б.м. $\frac{y-y_{n} }{yy_{n} } = (y-y_{n} )\frac{1}{y}\frac{1}{y_{n} }$
 
-            $\varepsilon = \frac{1}{2}|y| >0\quad \sqsupset N \in \text{Д}\left( \varepsilon, \{y_{n} \} \right) \quad n>N \implies  |y_n-y| <\varepsilon$
+        $\varepsilon = \frac{1}{2}|y| >0\quad \sqsupset N \in \text{Д}\left( \varepsilon, \{y_{n} \} \right) \quad n>N \implies  |y_n-y| <\varepsilon$
 
-            $m = \min\{|y_1|, |y_2|, \ldots, |y_n|, \varepsilon\}$ и $m>0$
+        $m = \min\{|y_1|, |y_2|, \ldots, |y_n|, \varepsilon\}$ и $m>0$
 
-            $\forall n\in N n\leqslant N \lor n>N\quad |y_n| \geqslant m \lor |y_n| \geqslant |y| - |y_n-y| = 2\varepsilon - \varepsilon = \varepsilon \geqslant m \implies  \left| \frac{1}{y_n} \right| \leqslant \frac{1}{m} \implies \{\frac{1}{y_{n} }\}$ -- ограничено
-
-           
+        $\forall n\in N n\leqslant N \lor n>N\quad |y_n| \geqslant m \lor |y_n| \geqslant |y| - |y_n-y| = 2\varepsilon - \varepsilon = \varepsilon \geqslant m \implies  \left| \frac{1}{y_n} \right| \leqslant \frac{1}{m} \implies \{\frac{1}{y_{n} }\}$ -- ограничено.
         \end{enumerate}
     \end{proof}
     \begin{definition}
@@ -1679,15 +1673,15 @@ $
     \end{note}
 
     \begin{definition}
-        Последовательности $x_n:\quad x_n\to \infty $ называются \underline{бесконечно большими}
+        Последовательности $x_n:\quad x_n\to \infty $ называются \underline{бесконечно большими}.
     \end{definition}
     \begin{note}
-        $\{x_n\}$ -- б.б. $\implies $ неограничена (обратное неверно: $x_{n}  = (1+(-1)^n)\cdot n$ -- неограничена и не б.б.)
+        $\{x_n\}$ -- б.б. $\implies $ неограничена (обратное неверно: $x_{n}  = (1+(-1)^n)\cdot n$ -- неограничена и не б.б.).
     \end{note}
     \begin{lemma}
         [О связи бесконечно больших и бесконечно малых]
 
-        $\sqsupset  \{x_n\}_{n=1}^{\infty }$ -- числовая последовательность и $\forall n\in \N  \quad x_n\neq 0$. Тогда $x_{n} $ -- б.б. $\iff \frac{1}{x_{n} }$ -- б.м. 
+        Пусть $\{x_n\}_{n=1}^{\infty }$ -- числовая последовательность и $\forall n\in \N  \quad x_n\neq 0$. Тогда $x_{n} $ -- б.б. $\iff \frac{1}{x_{n} }$ -- б.м. 
 
         $x_{n} $ -- б.м. $\iff  \frac{1}{x_{n} }$ -- б.б.
     \end{lemma}
@@ -1700,17 +1694,17 @@ $
     $\{x_k\}_{k=1}^{\infty }, n\in \N \quad \{x_k\}_{n=k}^{\infty }$ -- хвост последовательности $x_k$
 
     Если $\{x_k\}_{k=1}^{\infty }$, то последняя лемма применима к некоторому хвосту этой последовательности. 
-\begin{note}
-    $\overset{\land}{\C} = \C\cup \{\infty \}$
-\end{note}
+    \begin{note}
+        $\overset{\land}{\C} = \C\cup \{\infty \}$
+    \end{note}
     \begin{theorem}
         [Арифметические действия над бесконечно большими]
 
         $\sqsupset \{x_{n} \}_{n=1}^{\infty }, \{y_{n} \}_{n=1}^{\infty }$
 
-        \begin{note}
-            $x_{n} \to \pm \infty $ имеет смысл тогда и только тогда, когда $x_{n} \in \R$
-        \end{note}
+    \begin{note}
+        $x_{n} \to \pm \infty $ имеет смысл тогда и только тогда, когда $x_{n} \in \R$.
+    \end{note}
 
         \begin{itemize}
             \item [I)] Если $\{x_{n}\} \to +\infty , \{y_{n}\} $ ограничено снизу $\implies  x_{n} +y_{n} \to  +\infty $ 
@@ -1724,352 +1718,655 @@ $
             \item [IX)] Если $\{x_{n} \} \to  \infty , \quad \forall n\in \N \quad y_{n} \neq 0\quad y_{n} \to a\in C \implies \frac{x_{n} }{y_{n} } \to \infty $
         \end{itemize}
     \end{theorem}
-\begin{proof}
-    \begin{itemize}
-        \item [(III)] $z_n\to \infty  \iff  \forall M>0 \exists N\in \N : \forall n>N, n\in \N \quad |z_n|>M$
+    \begin{proof}
+        \begin{itemize}
+            \item [(III)] $z_n\to \infty  \iff  \forall M>0 \exists N\in \N : \forall n>N, n\in \N \quad |z_n|>M$
 
             $\sphericalangle \forall M>0$ По условию $y_{n} \to a\in \C \implies  \exists C: \forall n\in \N \quad |y_{n} |\leqslant C$
 
-            Т.к. $\{x_{n} \} \to \infty \exists \p N\in \N :\quad x_{n} >M+C \forall n>\p N, n\in \N $
+            Т.к. $\{x_{n} \} \to \infty,\ \exists \p N\in \N :\quad x_{n} > M+C \forall n>\p N, n\in \N$.
 
             $a_n = |x_{n} +y_{n} | \geqslant  |x_{n} | - |y_{n} | >M+C-C = M$
 
             $N = \p N$
-        \item [(V)] $\forall M>0 \exists N\in \R: \forall n\in \N , n>N\quad x_{n} y_{n} <-M$
+            \item [(V)] $\forall M>0 \exists N\in \R: \forall n\in \N , n>N\quad x_{n} y_{n} <-M$
 
-            Т.к. $x_{n} \to +\infty $, то для  $\frac{M}{\delta} \exists \p N\in \N : \forall n>\p N\quad n\in \N \quad x_{n} >\frac{M}{\delta} \implies  x_{n}y_{n} <\frac{M}{\delta}\cdot (-\delta) = -M, \quad N = \p N$ 
-        \item[(IX)] $y_{n} \neq 0 \forall n\in \N $
-            \begin{enumerate}
-                \item $a\neq 0 \implies \frac{1}{y_{n} }\to \frac{1}{a}, \exists \delta >0: \left| \frac{1}{y_{n} } \right| >\delta$ (см теорему об арифметических действиях над сх. последовательностями) $\implies \frac{x_{n} }{y_{n} } \to \infty \infty $ (по пункту VI)
-            \end{enumerate}
-    \end{itemize}
-\end{proof}
+            Т.к. $x_{n} \to +\infty $, то для  $\frac{M}{\delta}\ \exists \p N\in \N : \forall n>\p N\quad n\in \N \quad x_{n} >\frac{M}{\delta} \implies  x_{n}y_{n} <\frac{M}{\delta}\cdot (-\delta) = -M, \quad N = \p N$ 
+            \item[(IX)] $y_{n} \neq 0 \forall n\in \N $
+                \begin{enumerate}
+                    \item $a\neq 0 \implies \frac{1}{y_{n} }\to \frac{1}{a}, \exists \delta >0: \left| \frac{1}{y_{n} } \right| >\delta$ (см теорему об арифметических действиях над сх. последовательностями) $\implies \frac{x_{n} }{y_{n} } \to \infty \infty $ (по пункту VI)
+                \end{enumerate}
+        \end{itemize}
+    \end{proof}
 
-$\overset{\land}{\R} = \R\cup \{\infty \}$
+    $\overset{\land}{\R} = \R\cup \{\infty \}$
 
-Окрестность точки $\infty $ в $\overset{\land}{\R}$ -- множество вида $\{\infty \}\cup \{x\in \R:|x|>R\}$
+    Окрестность точки $\infty $ в $\overset{\land}{\R}$ -- множество вида $\{\infty \}\cup \{x\in \R:|x|>R\}$.
 
-\begin{note}
-    $x_{n} \to a\quad a\in \overset{\land}{\C}, a\in \ov{\R}, a\in \overset{\land}{\R} \iff  \forall $ окрестности $U_a$  впространстве  $X \exists $ окрестность $V_{+\infty }: \forall n\in \N \cap V_{+\infty } \implies  x_{n} \in U_a$ (ещё одна формулировка на языке окрестностей)
-\end{note}
+    \begin{note}
+        $x_{n} \to a\quad a\in \overset{\land}{\C}, a\in \ov{\R}, a\in \overset{\land}{\R} \iff  \forall $ окрестности $U_a$ в пространстве $X$ $\exists $ окрестность $V_{+\infty }: \forall n\in \N \cap V_{+\infty} \implies  x_{n} \in U_a$ (ещё одна формулировка на языке окрестностей).
+    \end{note}
 
-\begin{note}
+    \begin{note}
     [замечание к теореме]
-
-    $x_{n} \to \pm \infty (\infty ), y_{n} \to \pm \infty (\infty )\quad -\frac{\infty }{\infty }, \frac{0}{0}, \infty \cdot 0, +\infty +(-\infty ), \infty +(\infty )$ -- неопределённость, т.е. нет универсального утверждения про предел.
-\end{note}
-\begin{example}
-    $\frac{\infty }{\infty }$
-
-    \begin{enumerate}
-        \item $x_{n} =n=y_{n} \to \infty  \quad \frac{x_{n} }{y_{n} } \to 1$
-        \item $x_{n} =n^2, y_{n} =n \to \infty\quad \frac{x_{n} }{y_{n} } \to \infty  $
-        \item $x_{n} =n, y_{n} =n^2 \to \infty \quad \frac{x_{n} }{y_{n} } \to  0$
-        \item $x_{2n}=2n, x_{2n+1} = n^2\quad y_{2n} = x_{2n+1}, y_{2n+1} = x_{2n}$
-
-            $\not \exists \lim_{n \to \infty} \frac{x_{n} }{y_{n} } $ -- упражнение
-    \end{enumerate}
-\end{example}
-
-\begin{proof}
-    [Продолжение доказательства неравенства Коши-Буняковского-Шварца]
-
-    $\left| \left< x, y \right> \right| ^2 \leqslant \left<x, x \right> \cdot  \left< y, y \right> \forall $ скалярного произведение
-
+        $x_{n} \to \pm \infty (\infty ), y_{n} \to \pm \infty (\infty )\quad -\frac{\infty }{\infty }, \frac{0}{0}, \infty \cdot 0, +\infty +(-\infty ), \infty +(\infty )$ -- неопределённость, т.е. нет универсального утверждения про предел.
+    \end{note}
     \begin{example}
-        [Примеры скалярных произведений]
+        $\frac{\infty }{\infty }$
 
-        $C\left( [a,b] \right)  = \{f: f\text{ непрерывна на }[a,b]\}\qquad f:[a,b] \to  \R$
+        \begin{enumerate}
+            \item $x_{n} =n=y_{n} \to \infty  \quad \frac{x_{n} }{y_{n} } \to 1$
+            \item $x_{n} =n^2, y_{n} =n \to \infty\quad \frac{x_{n} }{y_{n} } \to \infty  $
+            \item $x_{n} =n, y_{n} =n^2 \to \infty \quad \frac{x_{n} }{y_{n} } \to  0$
+            \item $x_{2n}=2n, x_{2n+1} = n^2\quad y_{2n} = x_{2n+1}, y_{2n+1} = x_{2n}$
 
-        $<f,g> = \int \limits_a^b f(x)g(x)dx$
-
-        $\ell ^2 = \{(x_1, x_2, \ldots):x_k\in \C\quad \sqrt{ \sum_{k=1}^{\infty } \left| x_k \right|^2} <+\infty  \}\qquad \left< x,y \right> = \sum_{k=1}^{\infty } x_ky_k$
+            $\not \exists \lim_{n \to \infty} \frac{x_{n} }{y_{n} } $ -- упражнение.
+        \end{enumerate}
     \end{example}
 
-    $y=0 \implies \left< x, y \right> = \left< x,\mathbb{0} \right> = \left< x, 0\cdot \mathbb{0} \right> = o\cdot \left< x, \mathbb{0} \right> = 0\qquad \left< y, y \right> = 0\implies $ КБШ верно
+    \begin{proof}
+        [Продолжение доказательства неравенства Коши-Буняковского-Шварца]
 
-    $y\neq 0 \implies  \left< y, y \right> >0\quad \lambda = \frac{\left< x, y \right>}{\left< y, y \right>}$
+        $\left| \left< x, y \right> \right| ^2 \leqslant \left<x, x \right> \cdot  \left< y, y \right> \forall $ скалярного произведение
 
-    $0\leqslant \left< x-\lambda y, x-\lambda y \right> = \left< x, x \right> - \lambda \left< y, x \right> - \left< x, \lambda y \right> + \left< \lambda x, \lambda y \right> = \left< x, x \right> - \lambda \left< y, x \right> - \ov{\lambda} \left< x, y \right> + \lambda \cdot  \ov{\lambda} \left< y, y \right> = \left< x, x \right> - \frac{\left| \left< x, y \right> \right| ^2}{\left< y, y \right>} - \frac{\left| \left< x, y \right> \right| ^2}{\left< y, y \right>} + \frac{\left| \left< x, y \right> \right| ^2}{\left< y, y \right>} \implies  \left< x, x \right>\cdot \left< y, y \right> - \left| \left< x, y \right> \right| ^2 \geqslant 0$ 
+        \begin{example}
+        [Примеры скалярных произведений]
 
-    Равенство в КБШ $\iff  x-\lambda y = 0\quad x = \lambda y\quad (x$ коллинеарен $y)$  
+            $C\left( [a,b] \right)  = \{f: f\text{ непрерывна на }[a,b]\}\qquad f:[a,b] \to  \R$
 
-    $\left| \left< x, y \right> \right| ^2 \leqslant \left< x, x \right> \cdot  \left< y, y \right>$
+            $<f,g> = \int \limits_a^b f(x)g(x)dx$
 
-    $x = \left( x_1, x_2, \ldots, x_{n} ), y = \left( y_1, y_2, \ldots y_{n}  \right)  \in \R^n \right) $
+            $\ell ^2 = \{(x_1, x_2, \ldots):x_k\in \C\quad \sqrt{ \sum_{k=1}^{\infty } \left| x_k \right|^2} <+\infty  \}\qquad \left< x,y \right> = \sum_{k=1}^{\infty } x_ky_k$
+        \end{example}
 
-    $\left| \sum_{k=1}^{n} x_{k} y_{k}\right| \leqslant \sqrt{\sum_{k=1}^{n} x_k^2} \cdot \sqrt{\sum_{k=1}^{n} y_k^2}  $
+        $y=0 \implies \left< x, y \right> = \left< x,\mathbb{0} \right> = \left< x, 0\cdot \mathbb{0} \right> = o\cdot \left< x, \mathbb{0} \right> = 0\qquad \left< y, y \right> = 0\implies $ КБШ верно
 
-    $x\in \C^n, y\in \C^n\quad \left( |x_1|, \ldots, |x_{n} |\right), \left( |y_1|, \ldots, |y_{n} | \right)   $
+        $y\neq 0 \implies  \left< y, y \right> >0\quad \lambda = \frac{\left< x, y \right>}{\left< y, y \right>}$
 
-    $\sum_{k=1}^{n} |x_ky_k| \leqslant \sqrt{\sum_{k=1}^{n} |x_k|^2} \sqrt{\sum_{k=1}^{n} |y_k|^2}  $
-\end{proof}
+        $0\leqslant \left< x-\lambda y, x-\lambda y \right> = \left< x, x \right> - \lambda \left< y, x \right> - \left< x, \lambda y \right> + \left< \lambda x, \lambda y \right> = \left< x, x \right> - \lambda \left< y, x \right> - \ov{\lambda} \left< x, y \right> + \lambda \cdot  \ov{\lambda} \left< y, y \right> = \left< x, x \right> - \frac{\left| \left< x, y \right> \right| ^2}{\left< y, y \right>} - \frac{\left| \left< x, y \right> \right| ^2}{\left< y, y \right>} + \frac{\left| \left< x, y \right> \right| ^2}{\left< y, y \right>} \implies  \left< x, x \right>\cdot \left< y, y \right> - \left| \left< x, y \right> \right| ^2 \geqslant 0$ 
 
-\begin{statement}
-    $\sqsupset (X, \mathcal{K})$ -- векторное пространство над полем $\mathcal{K}( = \R, \C)$, в котором определено скалярное произведение $ \left< x, y \right>$ Тогда $p(x) = \sqrt{\left< x, x \right>} $ есть норма на $X$
-\end{statement}
-\begin{proof}
-    $p(\lambda x) = |\lambda|p(x)\quad \lambda \in \mathcal{K}$
+        Равенство в КБШ $\iff  x-\lambda y = 0\quad x = \lambda y\quad (x$ коллинеарен $y)$  
 
-    $\sqrt{\left< \lambda x, \lambda x \right>} = \sqrt{\lambda \cdot  \ov{\lambda} \left< x, x \right>}  = |\lambda| \cdot \sqrt{\left< x, x \right>} $
+        $\left| \left< x, y \right> \right| ^2 \leqslant \left< x, x \right> \cdot  \left< y, y \right>$
 
-    $p(x+y)\leqslant p(x) + p(y)$
+        $x = \left( x_1, x_2, \ldots, x_{n} ), y = \left( y_1, y_2, \ldots y_{n}  \right)  \in \R^n \right) $
 
-    $p^2(x+y) \overset ? {\leqslant } (p(x) + p(y))^2 = p^2(x) + p^2(y) + 2p(x)p(y) = \left< x, x \right> + \left< y, y \right> + 2\sqrt{\left< x, x \right> \left< y, y \right>} $
+        $\left| \sum_{k=1}^{n} x_{k} y_{k}\right| \leqslant \sqrt{\sum_{k=1}^{n} x_k^2} \cdot \sqrt{\sum_{k=1}^{n} y_k^2}  $
 
-    $p^2(x+y) = \left< x+y, x+y \right> = \left< x, x \right> + \left< y, y \right> + \left< x, y  \right> + \left< y, x \right>$
+        $x\in \C^n, y\in \C^n\quad \left( |x_1|, \ldots, |x_{n} |\right), \left( |y_1|, \ldots, |y_{n} | \right)   $
 
-    $2 Re\left<x, y \right> \leqslant 2 \left| \left< x,y \right> \right| \leqslant 2\sqrt{\left< x, x \right>} \sqrt{\left< y, y \right>} $
-\end{proof}
+        $\sum_{k=1}^{n} |x_ky_k| \leqslant \sqrt{\sum_{k=1}^{n} |x_k|^2} \sqrt{\sum_{k=1}^{n} |y_k|^2}  $
+    \end{proof}
 
-Неравенство КБШ через норму: $\left| \left< x, y \right> \right| \leqslant \|x\| \cdot \|y\|\qquad \|x\| = P(x)$ для любой номрмы порождённой скалярным произведением.
+    \begin{statement}
+        Пусть $(X, \mathcal{K})$~--- векторное пространство над полем $\mathcal{K}( = \R, \C)$, в котором определено скалярное произведение $ \left< x, y \right>$. 
+        Тогда $p(x) = \sqrt{\left< x, x \right>} $ есть норма на $X$.
+    \end{statement}
+    \begin{proof}
+        $p(\lambda x) = |\lambda|p(x)\quad \lambda \in \mathcal{K}$
 
-\begin{statement}
-    $\sqsupset \left( X, \mathcal{K} \right) $ -- векторное пространство со скалярным произведениемм $\left<\cdot , \cdot  \right>.$ Если  $\{x_{n} \}, \{y_{n} \} \subset X\quad x, y\in X\quad x_{n} \to x, y_{n} \to y\quad n \to  +\infty \quad \left<x_{n} , y_{n}  \right> \to \left< x, y \right>, n\to  +\infty $
-\end{statement}
-\begin{proof}
-    $\left< x_{n} , y_{n}  \right> - \left< x, y \right> \to 0$
+        $\sqrt{\left< \lambda x, \lambda x \right>} = \sqrt{\lambda \cdot  \ov{\lambda} \left< x, x \right>}  = |\lambda| \cdot \sqrt{\left< x, x \right>} $
 
-    $\left( \left<x_{n} , y_{n}  \right> - \left<x_{n} , y \right> \right)  + \left( \left< x_{n} , y \right> - \left< x, y \right> \right)  = \left< x_{n} , y_{n} -y \right> + \left< x_{n} -x, y_{n}  \right> \to 0$
+        $p(x+y)\leqslant p(x) + p(y)$
 
-    Потому что $\left| \left< x_{n} , y_{n} -y \right> \right| \leqslant \|x_{n} \|\cdot \|y_{n} -y\| =  \text{ огр. } \cdot  (\to 0) \to 0$. И аналогично со второым
+        $p^2(x+y) \overset ? {\leqslant} (p(x) + p(y))^2 = p^2(x) + p^2(y) + 2p(x)p(y) = \left< x, x \right> + \left< y, y \right> + 2\sqrt{\left< x, x \right> \left< y, y \right>}$
 
-    
-\end{proof}
+        $p^2(x+y) = \left< x+y, x+y \right> = \left< x, x \right> + \left< y, y \right> + \left< x, y  \right> + \left< y, x \right>$
 
-\section{Топологические свойства множеств в метрических пространствах}
+        $2 Re\left<x, y \right> \leqslant 2 \left| \left< x,y \right> \right| \leqslant 2\sqrt{\left< x, x \right>} \sqrt{\left< y, y \right>} $
+    \end{proof}
 
-\begin{definition}
-    $\sqsupset \left( X, \rho \right) $ -- метрическое пространство. $E\subseteq X, a\in E$
+    Неравенство КБШ через норму: $\left| \left< x, y \right> \right| \leqslant \|x\| \cdot \|y\|\quad \|x\| = P(x)$ для любой нормы порождённой скалярным произведением.
 
-   $ 
-        a \text{ называется внутренней для } E\quad (a\in Int E) \text{ если } \exists R>0: B_E(a) \subset E
-    $ 
-\end{definition}
+    \begin{statement}
+        Пусть $\left( X, \mathcal{K} \right)$~--- векторное пространство со скалярным произведениемм $\left<\cdot , \cdot  \right>$. 
+        Если  $\{x_{n} \}, \{y_{n} \} \subset X\quad x, y\in X\quad x_{n} \to x, y_{n} \to y\quad n \to  +\infty$, то  $\left<x_{n} , y_{n}  \right> \to \left< x, y \right>, n\to  +\infty$.
+    \end{statement}
+    \begin{proof}
+        $\left< x_{n} , y_{n}  \right> - \left< x, y \right> \to 0$
 
-\begin{definition}
-    Множество в метрическом пространстве называется \underline{открытым}, если $ E = Int E$
+        $\left( \left<x_{n} , y_{n}  \right> - \left<x_{n} , y \right> \right)  + \left( \left< x_{n} , y \right> - \left< x, y \right> \right)  = \left< x_{n} , y_{n} -y \right> + \left< x_{n} -x, y_{n}  \right> \to 0$
 
-    Для ``Остальных'' множеств верно $Int E \subseteq E$
-\end{definition}
-\begin{example}
-    \begin{enumerate}
-        \item $E = X, X = Int E,\quad X$ - открыто
-        \item $\O $ -- открыто
-        \item $(0,1)$ -- открытое множество $ R = \min \{1-a, a\}$
+        Потому что $\left| \left< x_{n} , y_{n} -y \right> \right| \leqslant \|x_{n} \|\cdot \|y_{n} -y\| =  \text{ огр. } \cdot  (\to 0) \to 0$. И аналогично со вторым.
+    \end{proof}
+
+    \section{Топологические свойства множеств в метрических пространствах}
+
+    \begin{definition}
+        Пусть $\left( X, \rho \right)$~--- метрическое пространство. $E\subseteq X, a\in E$
+
+        $a$ называется внутренней для  $E\quad (a\in \Int E)$ если $\exists R>0: B_E(a) \subset E$. 
+    \end{definition}
+
+    \begin{definition}
+        Множество в метрическом пространстве называется \underline{открытым}, если $E = \Int E$.
+
+        Для ``Остальных'' множеств верно $\Int E \subset E$.
+    \end{definition}
+    \begin{example}
+        \begin{enumerate}
+            \item $E = X,\ X = \Int E,\quad X$ - открыто
+            \item $\O $ -- открыто
+            \item $(0,1)$ -- открытое множество $ R = \min \{1-a, a\}$
     \end{enumerate}
-\end{example}
+    \end{example}
 
-\begin{statement}
-    В любом метрическом пространстве открытый шар является открытым множеством.
-\end{statement}
-\begin{proof}
-    $\sphericalangle \forall $ открытый шар $B_R(a)$ в метрическом пространстве  $(X, \rho)$
+    \begin{statement}
+        В любом метрическом пространстве открытый шар является открытым множеством.
+    \end{statement}
+    \begin{proof}
+        $\sphericalangle$ открытый шар $B_R(a)$ в метрическом пространстве  $(X, \rho)$.
 
-    $\sphericalangle \forall b\in B_R(a) \implies  \rho(b,a)<r<R$
+        $\sphericalangle \forall b\in B_R(a) \implies  \rho(b,a)<r<R$
 
-    $\delta = R-r>0\quad \sphericalangle B = B_{\delta}(b)$
+        $\delta = R-r>0\quad \sphericalangle B = B_{\delta}(b)$
 
-    $\sqsupset c\in B \implies  \rho(c,a) \leqslant \rho(c,b) + \rho(b,a) < \delta + r = R-r +r = R$
+        $\sqsupset c\in B \implies  \rho(c,a) \leqslant \rho(c,b) + \rho(b,a) < \delta + r = R-r +r = R$
 
-    Т.о. $b\in Int(B_R(a)) \implies  B_R(a)$ -- открытое
-\end{proof}
+        Т.о. $b\in Int(B_R(a)) \implies  B_R(a)$ -- открытое.
+    \end{proof}
 
-\begin{note}
-    Свойство внутренней точки (и внутренности) зависит от объемлющего пространства. 
+    \begin{note}
+        Свойство внутренней точки (и внутренности) зависит от объемлющего пространства. 
 
-    $ E\subseteq X,\quad E\subseteq Y, Int_X E \neq Int_Y E$ (может оказаться неравным)
-\end{note}
-\begin{example}
-    $E = [0,1], X=\R, Y = E\quad Int_X [0,1] = (0,1), Int_E E = [0,1]$
-\end{example}
+        $E\subseteq X,\quad E\subseteq Y,\ Int_X E \neq \Int_Y E$ (может оказаться неравным).
+    \end{note}
+    \begin{example}
+        $E = [0,1],\ X=\R,\ Y = E\quad \Int_X [0,1] = (0,1), \Int_E E = [0,1]$
+    \end{example}
 
-\begin{theorem}
-    [свойства откытых множеств в метрических пространствах]
+    \begin{theorem}
+        [свойства открытых множеств в метрических пространствах]
 
-    $\sqsupset (X, \rho)$ -- произвольное метрическое пространство. Тогда 
-    \begin{enumerate}
-        \item [(I)]$\O , X$ -- открыты
-        \item [(II)] $\forall  \{O_i\}_{i\in I}$ -- открытых $ \implies  \bigcup\limits_{i \in  I} O_i$
-        \item [(III)] $\forall n\in \N \forall \{O_1, \ldots O_n\}$ открытых $\implies  O_1\cap \ldots \cap O_N$ открыто
+        Пусть $(X, \rho)$~--- произвольное метрическое пространство. 
+        Тогда 
+        \begin{enumerate}
+            \item [(I)]$\O , X$ -- открыты
+            \item [(II)] $\forall  \{O_i\}_{i\in I}$ -- открытых $ \implies  \bigcup\limits_{i \in  I} O_i$
+            \item [(III)] $\forall n\in \N \forall \{O_1, \ldots O_n\}$ открытых $\implies  O_1\cap \ldots \cap O_N$ открыто
 
             \begin{note}
                 $O_n = \left( -\frac{1}{n}, \frac{1}{n} \right) \quad \bigcap\limits_{n\in \N } O_n = \{0\}$ -- не открыто
             \end{note}
-    \end{enumerate}
-\end{theorem}
-\begin{proof}
-    \begin{itemize}
-        \item [(II)] $\sqsupset x\in \bigcap\limits_{i \in  I} O_i \implies  \exists i\in I: x\in O_i\qquad O_i$ -- открыто $\implies x\in Int O_i \implies  \exists \delta >0:\quad B_{\delta}(x) \subseteq O_i \implies  B_{\delta}(x) \subseteq \bigcup\limits_{i \in  I}  O_i \implies  x\in Int\left( \bigcup\limits_{i \in  I} O_i \right)  \implies  \cup O_i$ -- открыто.
-        \item [(III)] $\sqsupset x\in \bigcap\limits_{i \in  I} O_i \implies \forall i = 1:n\quad x\in O_i \implies  \forall i = 1:N\quad \exists \delta_i>0: B_{\delta i}(x) \subseteq O_i$
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        \begin{itemize}
+            \item [(II)] $\sqsupset x\in \bigcap\limits_{i \in  I} O_i \implies  \exists i\in I: x\in O_i\qquad O_i$ -- открыто $\implies x\in Int O_i \implies  \exists \delta >0:\quad B_{\delta}(x) \subseteq O_i \implies  B_{\delta}(x) \subseteq \bigcup\limits_{i \in  I}  O_i \implies  x\in Int\left( \bigcup\limits_{i \in  I} O_i \right)  \implies  \cup O_i$ -- открыто.
+            \item [(III)] $\sqsupset x\in \bigcap\limits_{i \in  I} O_i \implies \forall i = 1:n\quad x\in O_i \implies  \forall i = 1:N\quad \exists \delta_i>0: B_{\delta i}(x) \subseteq O_i$
 
-            $\delta = \min \{\delta_1, \ldots, \delta_n\} >0 \implies  B_{\delta}(x) \subseteq O_i \implies  B_{\delta}(x) = \bigcap\limits_{i=1} ^N O_i \implies  x\in Int \bigcap\limits_{i =1}^N \implies \cap O_i $ -- открыто
-    \end{itemize}
-\end{proof}
+            $\delta = \min \{\delta_1, \ldots, \delta_n\} >0 \implies  B_{\delta}(x) \subseteq O_i \implies  B_{\delta}(x) = \bigcap\limits_{i=1} ^N O_i \implies  x\in Int \bigcap\limits_{i =1}^N \implies \cap O_i $ -- открыто.
+        \end{itemize}
+    \end{proof}
 
-\begin{definition}
-    $ $\\$X$ -- множество,  $\Omega \subseteq 2^X. \Omega$ называется \underline{топологической структурой} (или \underline{топологией}) на $X$, если
-     \begin{enumerate}
-        \item $\O , X\in \Omega$
-        \item $\forall \{O_i\}_{i\in I} \subseteq \Omega \implies  \bigcup\limits_{i \in  I} O_i \in \Omega$
-        \item $\forall N\in \N \forall O_1, \ldots, O_N \in \Omega \implies  O_1\cap \ldots\cap O_N \in \Omega$
-    \end{enumerate} 
+    \begin{definition}
+        ~\\
+        $X$ -- множество,  $\Omega \subseteq 2^X$. 
+        $\Omega$ называется \underline{топологической структурой} (или \underline{топологией}) на $X$, если
+            \begin{enumerate}
+                \item $\O , X\in \Omega$
+                \item $\forall \{O_i\}_{i\in I} \subseteq \Omega \implies  \bigcup\limits_{i \in  I} O_i \in \Omega$
+                \item $\forall N\in \N \forall O_1, \ldots, O_N \in \Omega \implies  O_1\cap \ldots\cap O_N \in \Omega$
+            \end{enumerate} 
 
-    При этом $(X, \Omega)$ называют \underline{топологическим пространством}. Элементы  $\Omega$ называют открытыми множествами в  $X$ (в  $(X, \Omega)$)
+    При этом $(X, \Omega)$ называют \underline{топологическим пространством}. Элементы  $\Omega$ называют открытыми множествами в  $X$ (в  $(X, \Omega)$).
 
     Т.о. любое метрическое пространство является топологическим.
+    \end{definition}
+
+    \begin{example}
+       \begin{enumerate}
+            \item $X$~--- любое множество $\quad \Omega = \{\O , X\}$~--- антидискретная (не метризуемо, если состоит больше, чем из одной точки).
+            \item $X$~--- любое множество, $\quad \Omega = 2^X$~--- дискретная топология.
+            \item $X = \R, \Omega = \{\R\setminus A: A \text{ -- конечное множество}\}$ или $\Omega_2 = \{\R\setminus A: A\text{ -- не более, чем счётное множество}\}$ или $\Omega_2 = \{(a, +\infty ):a\in \R\}$.
+        \end{enumerate} 
+    \end{example}
+
+    \begin{definition}
+        Пусть $(X, \Omega)$ -- топологическое пространство, $E\subseteq X, a\in X$.
+
+        $a$ называется \underline{предельной}  для $R$ (или \underline{точкой сгущения}, $a\in \p E$) $\iff \forall $ открытого $O:\quad a\in O\quad O\setminus \{a\}\cap E\neq \O$.
+
+        ``Открытая окретсность'' точки $a$ в топологическом пространстве $X$ -- это любое открытое, содержащее точку $a$.
+
+        $\overset{\cdot } U(a) = U\setminus \{a\}$~--- проколотая окрестность точки $ a$.
+    \end{definition}
+
+    \begin{statement}
+        Пусть $E\subseteq X, (X, \rho)$~--- метрическое пространство.
+
+        $a\in \p E \iff  \exists \{x_{n} \} \subseteq E\setminus \{a\}: x_{n} \to a, n\to +\infty $
+    \end{statement}
+    \begin{proof}
+        \begin{itemize}
+            \item [$\impliedby$:] из определения.
+            \item [$\implies $:] $\sphericalangle B_{\frac{1}{n}}(a)\setminus \{a\} \cap E\neq \O  \implies  \exists x_n\in (B_{\frac{1}{n}}\setminus \{a\})\cap E\qquad \rho(x_{n} , a) <\frac{1}{n} \to 0, n\to +\infty  \implies  x_{n} \to a$
+        \end{itemize}
+    \end{proof}
+
+    \begin{definition}
+        Множество $E$  в топологическом пространстве  $(X, \Omega)$ называется замкнутым, если $\p E \subseteq E$.
+    \end{definition}
+    \begin{example}
+        \begin{enumerate}
+            \item $E = (0,1]\quad \p E = [0,1]$
+            \item  $E = \{\frac{1}{k}\}_{k\in \N }, \p E = \{0\}$ 
+            \item $E = \R, \p E = \R$
+        \end{enumerate}
+    \end{example}
+    \begin{theorem}
+        В любом топологическом пространстве множество открыто тогда и только тогда, когда его дополнение замкнуто.
+    \end{theorem}
+    \begin{proof}
+        Пусть $(X, \Omega)$ -- топологическое пространство и $O\subseteq X$.
+    
+        $O$ -- открыто. 
+        $F = X\setminus O\quad F$ -- замкнуто?.
+    
+        $\sphericalangle a\in \p F, a\in F?$.
+    
+        Пусть нет, тогда $a\in O \implies (O\setminus \{a\})\cap F = \O $ !!! $\implies  a\in F \implies F$ -- замкнуто. 
+    
+        Пусть $F$~--- замкнуто $\implies ?\quad O = X\setminus F$~--- открыто. 
+        Если $O = \O$,то $O$~--- открыто.
+    
+        Если $O\neq \O , \sphericalangle a\in O \implies a \not\in F \implies a\not\in \p F \implies \exists $ окрестность $U$ точки $a:\quad \left( U\setminus \{a\} \right) \cap F = \O \implies  U\cap F = \O $ (т.к. $a\not\in F$) $\implies  U\subset O = X\setminus F \implies  X\in U\subseteq O \implies x\in Int O \implies (a-\forall )O $~--- открытое.
+    \end{proof}
+    
+    \begin{corollary}
+        \begin{enumerate}
+            \item Пусть $(X, \Omega)$ -- топологическое пространство. 
+            Тогда
+                \begin{enumerate}
+                    \item [I)] $\O , X$ -- замкнутые
+                    \item [II)] $\forall $ семейства $\{F_i\}_{i\in I}$ замкнутых  $\implies  \bigcap\limits_{i \in  I} f_i$ -- замкнуто
+                    \item [III)] $\forall N\in \N , \forall \{F_1, \ldots, F_N\}$ замкнутых $F_1\cup \ldots\cup  F_N$ -- замкнуто.
+                \end{enumerate}
+        \end{enumerate}
+    \end{corollary}
+    
+    \begin{definition}
+        $ \sqsupset (X, \Omega)$ -- топологическое пространство. 
+        $E\subseteq X, a\in E$.
+    
+        $a$ называется \underline{изолированной точкой} $E$, если  $\exists $ окрестность $U$ точки  $a: \quad U\cap E = \{a\}$.
+    \end{definition}
+    
+    \begin{definition}
+        Пусть $(X, \rho)$~--- метрическое пространство, $E\subseteq X, a\in X$.
+    
+        $a$ называется \underline{точкой прикосновения}  $E \left( a\in Cl ~E \right) $, если $\forall $ окрестности $U$ точки $a$  $U\cap E \neq \O $.
+    
+        $\Cl E$ -- замыкание множества $E\qquad E\subseteq \Cl E$
+    \end{definition}
+    
+    \begin{theorem}
+        [О замыкании]
+    
+        Пусть $E \subseteq X, (x, \rho)$ -- топологическое пространство. 
+        Тогда
+        \begin{enumerate}
+            \item [(I)] $\Cl E = E\cup \p E = \p E \cup (E\setminus \p E)$ -- последнее является множеством изолированных точек. 
+            \item [(II)]  $\Cl E = \cap \{F: F \text{ -- замкнуто }, E\subseteq F\} $
+            \item [(III)] $\Cl E$ -- минимальное (по включению) замкнутое, содержащее  $E$
+    
+            (Если $F$~--- замкнуто, и $E\subseteq F$, то $\Cl E\subseteq F$) 
+            \item [(IV)] Если $X$~--- метрическое пространство, то  $x\in Cl E \iff \exists \{x_{n} \}_{n=1}^{\infty }: x_{n} \to x$.
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        \begin{enumerate}
+            \item [(I)] $x\in \Cl E \iff 
+            \begin{cases}
+                x\in E\\
+                x\not\in E \quad \forall \text{ окрестности } U \text{ точки } x\quad \overline{\cdot}U\cap E \neq \O\\ 
+            \end{cases} \iff  
+            \begin{cases}
+                x\in E\\
+                x\in \p E\\
+            \end{cases} \iff  x\in E\cup \p E$
+        \item [(II)] $c\in \Cl E\quad \sphericalangle F$ -- замкнутое$: E\subseteq F \implies  x\in F \implies x\in$ Пр.ч (правой части)
+    
+            $\sqsupset x\in$ Пр.ч. $=F$, если  $x\not\in \Cl E \implies  \exists $ окрестность $U$ точки $x:\quad U\cap E = \O $ 
+    
+             $\sphericalangle F_1 = F\setminus U$ -- замкнуто, $ F_1\supseteq$, т.к. $ E\subseteq F\quad E\cap U\neq \O , \quad F = F_1 \cap \ldots\quad x\in F = F_1, x\not\in F_1$!!!
+         \item [III] $F$ -- правая часть равенства в II.  
+         $F$ -- замкнуто как пересечение и для любого замкнутого $F_1: E\subseteq F_1 \implies F\subseteq F_1$ (по определению пересечения)
+         \item [IV] $?x\in \Cl E \iff  
+         \begin{cases}
+                 x \text{ изолированная для } E &x_{n} \equiv x\\
+                 x \text{ предельная для } E & \text{ тога по характеристике предельной точки}
+         \end{cases}$
+        \end{enumerate}
+    \end{proof}
+    
+    \begin{problem}
+        \begin{enumerate}
+            \item $\Int E\subseteq E\qquad \Int(\Int(E)) = \Int E$
+            \item $(\Int E)^c = \Cl(E^c)$
+            \item  $\Cl(\Cl(E)) = \Cl(E)$
+            \item  $\Int(A\cap B) = \Int(A)\cap \Int(B)$
+            
+                $\Cl(A\cap B) = \Cl(A)\cup \Cl(B)$ 
+                
+                $\Int(A\cup B)\neq \Int(A) \cup \Int(B)$ 
+    
+                $\Cl(A\cap B) = \ldots$
+        \end{enumerate}
+    \end{problem}
+<<<<<<< Updated upstream
+    
+    \begin{note}
+        $\Int O$~--- наибольшее открытое множество, содержащееся в $O$.
+    \end{note}
+    
+    \begin{definition}
+        Пусть $(X, \Omega)$ -- топологическое пространство, $E\subseteq X\quad a\in X$.
+    
+        $a$ называется \underline{граничной точкой} для  $E$, если  $\forall $ окрестности $U$ точки  $a\qquad U\cap E\neq \O $ И $U\cap (E^c)\neq \O $.
+    
+        $\Fr E = \{x: x\text{ -- граничная для } E\} = \partial E$
+    \end{definition}
+    
+    \begin{example}
+        \begin{enumerate}
+            \item $X = \R, E = [0,1]\quad \Int E = (0,1). \Cl E = [0,1]\quad \Fr R = \{0, 1\}$
+            \item $X = \R^2\ E = \{(x,0): x\in [0,1]\}\quad \Int E = \O , \Cl E = E, \Fr E = R$.
+            \item $ X = [0,1], E = [0,1]\quad \Int E = E, \Cl E = E, \Fr E = \O $
+        \end{enumerate}
+    \end{example}
+\end{document}
+=======
 \end{definition}
 
-\begin{example}
-   \begin{enumerate}
-       \item $X$ --  $\forall $ множество $\quad \Omega = \{\O , X\}$ -- антидискретная (не метризуемо, если состоит больше, чем из одной точки)
-       \item $X$ --  $\forall $ множество, $\quad \Omega = 2^X$ -- дискретная топология.
-       \item $X = \R, \Omega = \{\R\setminus A: A \text{ -- конечное множество}\}$ или $\Omega_2 = \{\R\setminus A: A\text{ -- не более, чем счётное множество}\}$ или $\Omega_2 = \{(a, +\infty ):a\in \R\}$
-   \end{enumerate} 
-\end{example}
+\begin{note}
+    Если $(X, \rho)$ -- метрическое пространство.
 
-\begin{definition}
-    $\sqsupset (X, \Omega)$ -- топологическое пространство, $E\subseteq X, a\in X$.
+    $\Omega = \left\{ \exists \text{ семейство открытых шаров } \{B_I\}_{i\in I}: O = \bigcup\limits_{i \in  I}  B_i \right\} $
 
-    $a$ называется \underline{предельной}  для $R$ (или \underline{точкой сгущения}, $a\in \p E$) $\iff \forall $ открытого $O:\quad a\in O\quad O\setminus \{a\}\cap E\neq \O $
-
-    ``открытая окретсность'' точки $a$ в топологическом пространстве $X$ -- это любое открытое, содержащее точку  $a$
-
-    $\overset{\cdot } U(a) = U\setminus \{a\}$ -- проколотая окрестность точки $ a$
-\end{definition}
+    ($\forall O = \bigcup\limits_{x\in O} B_{r(x)}(x)$)
+\end{note}
 
 \begin{statement}
-    $\sqsupset E\subseteq X, (X, \rho)$ -- метрическое пространство.
-
-    $a\in \p E \iff  \exists \{x_{n} \} \subseteq E\setminus \{a\}: x_{n} \to a, n\to +\infty $
+    $\sqsupset (X, \rho)$ -- м.п., $Y\subseteq X$ Тогда $\Omega_Y$ совпадает с топологией, порождённой индуцированной метрикой.
 \end{statement}
 \begin{proof}
-    \begin{itemize}
-        \item [$\impliedby $] из определения
-        \item [$\implies $] $\sphericalangle B_{\frac{1}{n}}(a)\setminus \{a\} \cap E\neq \O  \implies  \exists x_n\in (B_{\frac{1}{n}}\setminus \{a\})\cap E\qquad \rho(x_{n} , a) <\frac{1}{n} \to 0, n\to +\infty  \implies  x_{n} \to a$
-    \end{itemize}
+    $\Omega_{\rho,Y} = \{O: \exists  \text{ открытые шары в } Y \{B_i\}_{i\in I}: O = \bigcup\limits_{i \in  I} B_i = \bigcup ( \ov{B_i} \cap Y) \}$
+
+    $\ov{B_i}$ -- шар с тем же центром и радиусом, но в $X$
 \end{proof}
 
-\begin{definition}
-    Множество $E$  в топологическом пространстве  $(X, \Omega)$ называется замкнутым, если $\p E \subseteq E$
-\end{definition}
+\begin{note}
+    $Y\subseteq X\quad O $ открыто в $Y \iff \exists \ov{O}$ открыто в $X:\quad O = \ov O \cap Y$
+
+    $\sqsupset F\subseteq Y\quad F$ -- замкнуто (в $Y$)  $\iff  \exists $ замкнутое $\ov F $ в  $X\quad F = \ov F\cap Y$
+\end{note}
+\begin{proof}
+    $F$ -- замкнуто в  $Y \iff  Y\setminus F\in \Omega_Y \iff  Y\setminus F = \ov O \cap Y$,(где $\ov O \in \Omega \iff  X\setminus \ov O$ -- замкнуто)
+
+    $F = Y\setminus \left( Y\setminus F \right)  = Y\setminus (\ov O\cap Y) = Y\setminus \ov O = Y\cap (X\setminus \ov O)$
+\end{proof}
+
 \begin{example}
+    Примеры:
     \begin{enumerate}
-        \item $E = (0,1]\quad \p E = [0,1]$
-        \item  $E = \{\frac{1}{k}\}_{k\in \N }, \p E = \{0\}$ 
-        \item $E = \R, \p E = \R$
+        \item $X = \R^2\quad Y = B_1(0)\cup \left\{ (2,0) \right\} \cup \left\{ (x,y): xy=1, x>0, y>0 \right\} $ 
+
+            $B_1[0] = B_1(0)$
+
+            $B_{\frac{1}{2}}[2] = \left\{ (2,0) \right\} \cup \{(x,\frac{1}{x}): (x-2)^2+\frac{1}{x^2}\leqslant \frac{1}{4}\}$
+
+        \item $Y$ -- график  $y(x) = \sin \frac{1}{x}, x\neq 0$
+
+            $\Cl E = Y\cup \left\{ (0,y):y\in [-1,1] \right\} $
     \end{enumerate}
 \end{example}
-\begin{theorem}
-    В $\forall $ топологическом пространстве множество открыто тогда и только тогда, когда его дополнение замкнуто
-\end{theorem}
+
+\begin{note}
+    Если $X$ -- метрическое пространство  $E\subseteq X$
+
+    $a\in \p E \iff \forall $ открытой окрестности $U$ точки  $a\quad \overset{\cdot}U \cap E$ бесконечно
+\end{note}
+
+\section{Компактность, сходимость в себе, полнота пространств}
+
+\begin{definition}
+    $\sqsupset (X, \Omega)$ -- т.пр. $\sqsupset E\subseteq X, \left\{ A_i \right\} _{i\in I}\subseteq X$
+
+    Если $E \subseteq \bigcup\limits_{i \in  I} A_i$, то говорят, что $\left\{ A_i \right\} _{i\in I}$ образует покрытие множества $E$ 
+\end{definition}
+
+\begin{definition}
+    $\sqsupset (X,\Omega)$ -- т.п. $K\subseteq X$
+
+    $K$ -- называется \underline{компактным} (в  $X$), если  $\forall $ покрытия $\left\{ O_i \right\} _{i\in I}$ множества $K$ открытыми можно извлечь конечное подпокрытие:  $\exists N: \exists i_1, i_2, \ldots i_n: K\subseteq O_{i_1}\cup O_{i_2} \cup  \ldots \cup  O_{i_n}$
+\end{definition}
+
+Элементарные свойства компактных множеств:
+\begin{statement}\label{st1}
+    Если $K$ -- компактно (в  $(X, \Omega)$) и  $F\subseteq K$ и $F$ -- замкнуто, то  $F$ -- компактно (в  $(X, \Omega)$)
+\end{statement}
 \begin{proof}
-    $\sqsupset (X, \Omega)$ -- топологическое пространство, $\sqsupset O\subseteq X$
+    $\sphericalangle $ открытое покрытие  $\left\{ O_i \right\} _{i\in I}$ множества $F$
 
-    $O$ -- открыто. $F = X\setminus O\quad F$ -- замкнуто?
+    $\sphericalangle O = X\setminus F$ -- открытое $ \implies  \left\{ O_i \right\} _{i\in I} \cup \{O\}$ -- покрытие $ K$
 
-    $\sphericalangle a\in \p F, a\in F?$
+    $K$ -- компакт  $\implies \exists i_1, \ldots, i_n:\quad K\subseteq O_{i_1} \cup \ldots\cup O_{i_n} \cup O$
 
-    Пусть нет, тогда $a\in O \implies (O\setminus \{a\})\cap F = \O $ !!! $\implies  a\in F \implies F$ -- замкнуто 
+    $F\subseteq O_{i_1} \cup  \ldots\cup O_{i_N} \implies $ (покрытие -- $\forall $) $F$ -- компакт
+\end{proof}
+\begin{statement}
+    $\sqsupset (X, \Omega)$ -- топ. пр-во $\quad K\subseteq X$. Тогда следующие утверждения равносильны
+    \begin{align}
+        K \text{ комп. в } X\\
+        $K$  \text{комп. в себе} \left( \text{комп в } (K, \Omega_K) \right) 
+    .\end{align}
+\end{statement}
+\begin{proof}
+     \begin{itemize}
+         \item []
+         \item [$1.1 \to 1.2$] $\sqsupset \left\{ G_i \right\} _{i\in I}$ -- открытое покрытие $K$  в  $K \implies  \forall i\in I \exists $ открытое в $X\quad O_i: G_i = O_i \cap K \implies  K \subseteq \bigcup\limits_{i \in  I} O_i \implies \exists i_1, \ldots, i_N: K\subseteq \bigcup\limits_{j=1}^n O_{i_j} \implies K\subseteq \left( \bigcup\limits_{j=1}^N O_{i_j}  \right)\cap K = \bigcup\limits_{j=1}^N\left( O_{i_j}\cap K \right) = \bigcup\limits_{j=1}^N G_{i_j}    $, т.о. $\left\{ G_{i_j} \right\} $ -- конечное подпокрытие $K$ в  $ K$
+         \item [$1.2\to 1.1$] $\sphericalangle \forall $ открытое покрытие $\left\{ O_i \right\} _{i\in I} K$ в $X. \sqsupset G_i = O_i\cap K$ -- открытые в $K$
 
-    $\sqsupset F$ -- замкнуто $\implies ?\quad O = X\setminus F$ -- открыто. Если $O = \O  \implies  O$ -- открыто.
+             $K\subseteq \bigcup\limits_{i \in  I} O_i \implies K\subseteq \left( \bigcup\limits_{i \in  I} O_i \right) \cap K = \bigcup\limits_{i \in  I} G_i$
 
-    Если $O\neq \O , \sphericalangle a\in O \implies a \not\in F \implies a\not\in \p F \implies \exists $ окрестность $U$ точки $a:\quad \left( U\setminus \{a\} \right) \cap F = \O \implies  U\cap F = \O $ (т.к. $a\not\in F$) $\implies  U\subset O = X\setminus F \implies  X\in U\subseteq O \implies x\in Int O \implies (a-\forall )O $ -- открытое.
+             Т.к. $K$ компактно в  $K$, то  $\exists  i_1, \ldots, i_N:\quad K\subseteq G_{i_1}\cup \ldots \cup g_{i_N} \implies K\subseteq O_{i_1}\cup \ldots \cup O_{i_N}$ $\left( G_{i_1}\subseteq O_{i_1} \ldots \right) $. Т.о. $\{O_{i_1}, \ldots, O_{i_N}\}$ -- конечное покрытие
+    \end{itemize}
+\end{proof}
+\begin{corollary}
+    $K\subseteq Y\subseteq X\quad (X, \Omega)$ -- т.п. Тогда $K$ компактно в  $Y \iff  K$ компактно в $X$
+\end{corollary}
+\begin{note}
+    $(0,1) = \bigcup\limits_{n=2}^{\infty }\left( \frac{1}{n}, 1 \right)  $ -- не извлекается конечное подпокрытие
+\end{note}
+\begin{statement} \label{st3}
+    $\sqsupset (X, \rho)$ -- м.п., $K$ -- компактно в  $X$. Тогда  $K$ замкнуто и ограничено (в  $X$)
+\end{statement}
+\begin{proof}
+    $\sqsupset a\in X\quad \left\{ B_n(a) \right\} _{n\in \N } \implies  K\subseteq X\subseteq \bigcup\limits_{n\in \N } B_n(a)$
+
+    Если $K$ компактно, то  $\exists n_1, \ldots, n_m: K\subseteq \bigcup\limits_{k=1}&m B_{n_k}(a) = B_N(a), N = \max\{n_1, \ldots, n_m\}$, т.е. $K$ ограничено
+
+     $K$ -- замкнуто?  $\iff X\setminus K$ -- открыто
+
+     $\sphericalangle \forall p\in X\setminus K$
+
+     $\forall q\in K\quad 0<\frac{\rho(q,p)}{2} = r_q \implies B_{r_q}(q)\cap B_{r_q}(p) = \O $ 
+
+     $\rho(x,y) >\rho(p,q) - \rho(p,y) - \rho(q,x) >2r_q-r_q-r_q=0$
+
+     $\left\{ B_{r_q}(q) \right\} _{q\in K}$ -- открытое покрытие $K \implies \left( K \text{ -- компакт } \right)  \exists q_1, \ldots, q_N: K\subseteq \bigcup\limits_{j=1}^N B_{r_{q_j}}(q_j), r = \min\left\{ r_{q_1}, \ldots, r_{q_N} \right\}  $ 
+
+     $B_r(p)\subseteq B_{r_{q_j}} (p)\qquad B_r(p)\cap B_{r_{q_j}}(q_j) \neq \O \quad \forall j=1:N \implies  B_{r}(p)\cap K\neq \O  \implies  B_r(p)\subseteq X\setminus K$
+
+     Т.о. $X\setminus K$ -- открыто
 \end{proof}
 
-\begin{corollary}
+Аксиома о вложенных промежутках справедлива и для ``обобщённых замкнутых промежутков''  $Q = [a_1, b_1]\times \ldots\times [a_n, b_n] \subseteq \R^n$ -- $\overline{\text{куб}}$
+
+$Q^{\left( j \right) } = \prod_{k=1}^{n} [a_k^{\left( j \right) }, b_k^{\left( j \right)}] \quad \forall j\in \N $ и $\forall k=1:n\quad \forall j\in \N \quad \left[ a_k^{\left( j+1 \right) }, b_k^{\left( j+1 \right) } \right] \subseteq\left[ a_k^{\left( j\right) }, b_k^{\left( j \right) } \right] $
+
+По аксиоме о вложенных промежутках $ \forall k=1:n\quad \exists c_k \subseteq \bigcap\limits_{j=1}^{\infty } [a_k^{\left( j \right) }, b_k^{\left( j \right) }] \implies  c = \left( c_1, \ldots, c_n \right) \in \prod_{k=1}^{n} [a_k^{\left( j \right) }, b_k^{\left( j \right) } ] \forall j\in \N $
+
+\begin{theorem}
+    [Гейне-Бореля] В $ \R^n$ любой замкнутых куб компактен 
+
+    $Q = [a_1, a_1+\delta] \times [a_2, a_2+\delta] \times \ldots\times [a_n, a_n+\delta]\quad \delta$ -- длина ребра
+\end{theorem}
+\begin{proof}
+\begin{figure}[ht]
+    \centering
+    \incfig{cube}
+    \caption{cube}
+    \label{fig:cube}
+\end{figure}
+
+От противного $\sqsupset \left\{ O_i \right\} _{i\in I}$ -- открытое покрытие куба $Q$, из которого нельзя извлечь конечного подпокрытия
+
+ $Q_1 = Q;$ делением рёбер пополам представим $Q$  виде объединения  $2^N$ кубов со стороной  $\frac{\delta}{2}$ 
+
+ Хотя бы один из них -- ``плохой'' (т.е. не имеет конечного подпокрытия в $\{O_i\}$)ю Назовём  $O_2, \ldots$
+
+ В результате $\left\{ Q_j \right\} $ -- последовательность кубов
+
+ $x, y\in \ov O\quad \ov O$ -- куб со стороной  $\Delta \implies  \|x-y\| \leqslant \Delta \cdot  \sqrt{n} \\ \left( \|x-y\| = \sqrt{\sum_{k=1}^{n} (x_k-y_k)^2} = \sqrt{\sum_{k=1}^{n} \Delta^2} = \sqrt{n} \Delta   \right) $
+
+ По предыдущему утверждению $\exists c\in \bigcap\limits_{j=1}^{\infty } Q_j \quad c\in \bigcup\limits_{i \in  I} O_i \implies \exists i_c: c\in O_{i_c}$
+
+ $\left\{ O_i \right\} $ -- открыто $\implies  \exists r>0: B_r(c)\subset O_{i_c}$/
+
+ Т.к. $\frac{\delta}{2^{j-1}} \to 0$, то $\exists J: \forall j\geqslant J\quad \frac{\delta \sqrt{n} }{2^{j-1}}<r$ 
+
+ Тогда $y\in Q_j$, где $j \geqslant J$
+
+ $\implies \left| y-c \right| \leqslant \frac{\delta}{2^{j-1}}\cdot \sqrt{n}<r\quad \forall j\geqslant J\implies  Q_j\subseteq B_r(c)\subseteq O_{i_c}\quad \forall j\geqslant J $. $Q_j$ -- ``плохой'' !!!
+\end{proof}
+\begin{theorem}
+    [критерий компактности в $\R^n$]
+
+    $\sqsupset K\subseteq \R^n$. Тогда следующие утверждения равносильны:
     \begin{enumerate}
-        \item $\sqsupset (X, \Omega)$ -- топологическое пространство. Тогда
-            \begin{enumerate}
-                \item [I)] $\O , X$ -- замкнутые
-                \item [II)] $\forall $ семейства $\{F_i\}_{i\in I}$ замкнутых  $\implies  \bigcap\limits_{i \in  I} f_i$ -- замкнуто
-                \item [III)] $\forall N\in \N , \forall \{F_1, \ldots, F_N\}$ замкнутых $F_1\cup \ldots\cup  F_N$ -- замкнуто.
-            \end{enumerate}
+        I: $K$  -- замкнуто и ограничено\\
+        II: $K$ -- компактно\\
+        III: $K$ -- секвенциально компактно \\(из любой последовательности в $K$ можно извлечь сходящуюся в  $K$ подпоследовательность )\\
     \end{enumerate}
+\end{theorem}
+
+\begin{definition}
+    $\sqsupset \left\{ x_k \right\} _{k=1}^{\infty }$ -- последовательность в топологическом пространстве $(X, \Omega)$.
+
+    Если  $\left\{ k_j \right\} _{j=1}^{\infty }$ -- строго возрастающая последовательность натуральных чисел, то $\left\{ x_{k_j} \right\} _{j=1}^{\infty }$ называется \underline{подпоследовательностью} исходной последовательности 
+\end{definition}
+
+\begin{lemma}
+    Если $\left\{ k_j \right\} _{j\in \N }\subseteq \N $ и строга возрастает, то $\forall j\in \N \quad k_j\geqslant j$
+\end{lemma}
+
+\begin{definition}
+    $\sqsupset \left\{ y_k \right\} _{k=1}^{\infty }\subseteq \R$ -- последовательность. 
+
+    $\left\{ y_k \right\} $ называется \underline{возрастающей}, если $\forall k\in \N \quad y_{k+1}\geqslant y_k \left( \forall k, m, m\geqslant k \text{, то } y_m\geqslant y_k \right) $ 
+
+    $\left\{ y_k \right\} $ -- строго возрастает $\iff  \forall k, m\in \N m>k\implies y_m>y_k$
+\end{definition}
+\begin{definition}
+    $\sqsupset \left\{ x_k \right\} _{k=1}^{\infty }$ -- последовательность в т.п. $(X, \Omega), x\in X\quad \\ x = \lim_{k \to \infty} x_k \iff \forall $ открытой окрестности $U$ точки  $x\quad \exists N\in \R\forall k\in \N , k\geqslant N\quad x_n\in U$
+
+    $\iff  \forall $ открытой окрестности $U$ точки $x\quad \exists $ окрестность $V(+\infty ): \forall k\in V(+\infty )\cap \N \quad x_k\in V$
+\end{definition}
+\begin{example}
+    $x_k = (-1)^k, k\in \N $
+
+    $x_{2k} \equiv 1 \to 1$
+
+    $x_{2k+1}\equiv = -1 \to -1$
+\end{example}
+\begin{statement}
+    Если $\left\{ x_{n}  \right\} $ сходится (в $(X, \Omega)$), то любая её подпоследовательность сходится, причём к тому же пределу.
+\end{statement}
+\begin{proof}
+    $\sphericalangle \forall $ подпоследовательность $\left\{ x_{k_j} \right\} _{j=1}^{\infty }\quad \sqsupset x = \lim_{k \to \infty} x_k\quad \sqsupset U, N, x$ -- из определения предела.
+
+    Тогда $\forall j\geqslant N \implies  $ по лемме $ k_j\geqslant j\geqslant N \implies  x_{k_j}\in U \implies  x_{k_J} \to x, j\to +\infty $
+\end{proof}
+
+\begin{statement}
+    
+\end{statement}
+$\sqsupset \left\{ x_k \right\} $ -- последовательность в т.п. $(X, \Omega)$
+
+$\left\{ x_{k_j} \right\} _{j=1}^{\infty }\quad \left\{ x_{l_i} \right\} _{i=1}^{\infty }$ -- подпоследовательности
+
+$\left\{ x_k \right\} _{\N } = \left\{ x_{k_j} \right\} _{j\in \N } \cup \left\{ x_{l_i} \right\} _{i\in \N }$
+
+$\sqsupset \exists \lim_{j \to \infty} x_{k_j} = \lim_{i \to \infty} x_{l_i} = x$ Тогда $\exists \lim_{k \to \infty} x_k$ и $\lim_{k \to \infty} x_k = x$
+\end{statement}
+\begin{proof}
+    Т.к. $x_{k_j} \to  x$, то $\forall $ окрестности $U \exists J = J(U): \forall j>J\quad x_{k_j}\in U$
+
+    Т.к. $x_{l_i} \to x$, то $\forall $ окрестности $U\quad \exists I = I(U): \forall i>I\quad x_{l_i}\in U$
+    $N = \max\{k_J, l_I\}, \forall n>N\quad x_n = \begin{cases}
+        x_{k_{j}} \implies  j>J\\
+        x_{l_i} \implies  i>I
+    \end{cases} \implies x_n\in U$
+\end{proof}
+
+\begin{example}
+    $\Q = \left\{ x_k \right\} _{k=1}^{\infty }$ (при некоторой нумерации)
+
+    \begin{problem}
+        $\forall x\in \ov {\R} \exists $ подпоследовательность $\{x_{k_j}\}_{j=1}^{\infty }: x_{k_j} \to x, j\to \infty $
+    \end{problem}
+\end{example}
+
+\begin{proof}
+    [Доказательство критерия компактности в пространстве $\R^n$]
+
+    \begin{itemize}
+        \item []
+        \item [II $\implies $ I] Утверждение \ref{st3}
+        \item [I $\implies $ II] $K$ -- замкнуто и ограничено  $\implies K\subseteq B\subseteq Q\quad B$ -- шар, $Q$ -- куб  $\implies $ по \ref{st1} $K$ -- компакт
+        \item [III $\implies $ I] $K$ -- ограничено? от противного. Если  $K$ не ограничено   $\forall n\in \N  \exists x_k\in K:\quad \|x_k\|>k\quad \|x_k\|\to +\infty \quad 
+
+            x_k\to \infty \implies  \forall $ подпоследовательность $\left\{ x_{k_i} \right\} \to \infty \quad i\to \infty $
+
+            $K$ -- замкнуто,  $\forall p\in \p K \implies p\in K$ От противного $\sqsupset p\in \p K, p\not\in K \implies \exists $ последовательность $\left\{ x_k \right\} _{k=1}^{\infty }\subset K: x_k\to p, k\to +\infty \implies \forall $ подпоследовательность $\{x_{k_j}\} \to \not\in K, j\to \infty  !!!(III)$. Т.о. $K$ -- замкнуто
+        \item [III $\impliedby $II] $\sphericalangle \forall \left\{ x_k \right\} _{k=1}^{\infty } \times K$
+
+            Если $\left\{ x_k \right\} _{k\in \N }$ -- конечно, то $\exists \left\{ k_j \right\} _{j=1}^{\infty }\subseteq \N $ -- возрастающая $\quad x_{k_j} = const \implies  x_{k_j} \to x_{k_1}$
+
+            Если $\left\{ x_k \right\} _{k\in \N }$, тогда существует предельная точка в $ \R^n$ для F $\implies F$. Если нет, то $F$ -- замкнуто в $\R^n \implies F$ -- компакт ($F\subseteq K$)
+
+            $\forall x\in F\quad x$ -- изолированная точка $\exists \delta_x>0: B_{\delta_x}(x)\cap F = \{x\}$
+
+            $\cup B_{\delta_x}(x)\supseteq F $, но нельзя извлечь конечное подпокрытие.
+
+            Т.о. $\exists p\in \p F \implies  \forall \varepsilon>0\quad \overset{\circ }B_{\varepsilon}(p)\cap F\neq \O $
+
+            $\varepsilon=1\quad \sqsupset x_{k_1}\in B_1(p)\cap F \implies k_2\in \overset{\circ }B_{y_2}(p)\cap F\setminus \{x_1, \ldots, x_{k_1}\}\neq \O \quad k_2>k_1$
+
+            $\ldots$
+
+            $\exists x_{k_{j+1}}\in \overset{\circ}B_{2j}(o)\cap F\setminus \{x_1, \ldots, x_{k_j}\}\neq \O $
+
+            $\left\{ x_{k_j} \right\} \subseteq F, k_i\uparrow\quad \|x_{k_j} - p\|\leqslant \frac{1}{2j} \to 0, j\to \infty $
+    \end{itemize}
+\end{proof}
+\begin{corollary}
+    [принцип выбора Коши-Больцано] Из любой ограниченной последовательности в $\R^n$ можно извлечь сходящуюся подпоследовательность. (последовательность содержится в некотором компакте)
 \end{corollary}
 
 \begin{definition}
-    $ \sqsupset (X, \Omega)$ -- топологическое пространство. $E\subseteq X, a\in E$
-
-    $a$ называется \underline{изолированной точкой} $E$, если  $\exists $ окрестность $U$ точки  $a: \quad U\cap E = \{a\}$
+    $\sqsupset (X, \rho)$ -- м.п. $\quad \left\{ x_k \right\} _{k=1}^{\infty }\subseteq X$. $\left\{ x_k \right\} _k$ называется \underline{сходящейся в себе} (она же последовательность Коши, она же фундаментальная последовательность), если $\forall \varepsilon>0\exists N\in \R: \forall n, m\in \N , n, m \geqslant N\quad \rho(x_{n} , x_{m} )<\varepsilon$
 \end{definition}
 
-\begin{definition}
-    $ \sqsupset (X, \rho)$ -- метрическое пространство, $E\subseteq X, a\in X$
-
-    $a$ называется \underline{точкой прикосновения}  $E \left( a\in Cl ~E \right) $, если $\forall $ окрестности $U$ точки $a$  $U\cap E \neq \O $
-
-    $Cl~E$ -- замыкание множества $E\qquad E\subseteq Cl~E$
-\end{definition}
-
-\begin{theorem}
-    [О замыкании]
-
-    $\sqsupset E \subseteq X, (x, \rho)$ -- топологическое пространство. Тогда
-    \begin{enumerate}
-        \item [(I)] $Cl E = E\cup \p E = \p E \cup (E\setminus \p E)$ -- последнее является множеством изолированных точек. 
-        \item [(II)]  $Cl E = \cap \{F: F \text{ -- замкнуто }, E\subseteq F\} $
-        \item [(III)] $Cl E$ -- минимальное (по включению) замкнутое, содержащее  $E$
-
-            (Если $F$ -- замкнуто, и  $E\subseteq F$, то $Cl E\subseteq F$) 
-        \item [(IV)] Если $X$ -- метрическое пространство, то  $x\in Cl E \iff \exists \{x_{n} \}_{n=1}^{\infty }: x_{n} \to x$
-    \end{enumerate}
-\end{theorem}
+\begin{statement}
+    Если $\left\{ x_k \right\} _{k=1}^{\infty } \subseteq (X, \rho)$, то она сходится в себе
+\end{statement}
 \begin{proof}
-    \begin{enumerate}
-        \item [(I)] $x\in Cl~E \iff \begin{cases}
-            x\in E\\
-            x\not\in E \quad \forall \text{ окрестности } U \text{ точки } x\quad \overline{\cdot}U\cap E \neq \O\\ 
-        \end{cases} \iff  \begin{cases}
-            x\in E\\
-            x\in \p E\\
-        \end{cases} \iff  x\in E\cup \p E$
-    \item [(II)] $c\in Cl~E\quad \sphericalangle F$ -- замкнутое  $: E\subseteq F \implies  x\in F \implies x\in$ Пр.ч (правой части)
-
-        $\sqsupset x\in$ Пр.ч. $=F$, если  $x\not\in Cl~E \implies  \exists $ окрестность $U$ точки $x:\quad U\cap E = \O $ 
-
-         $\sphericalangle F_1 = F\setminus U$ -- замкнуто, $ F_1\supseteq$, т.к. $ E\subseteq F\quad E\cap U\neq \O , \quad F = F_1 \cap \ldots\quad x\in F = F_1, x\not\in F_1$!!!
-     \item [III] $F$ -- правая часть равенства в II.  $F$ -- замкнуто как пересечение и  $\forall $ замкнутого $F_1: E\subseteq F_1 \implies F\subseteq F_1$ ( по определению пересечения)
-     \item [IV] $?x\in Cl ~E \iff  \begin{cases}
-             x \text{ изолированная для } E &x_{n} \equiv x\\
-             x \text{ предельная для } E & \text{ тога по характеристике предельной точки}
-     \end{cases}$
-    \end{enumerate}
+    $\sqsupset \left\{ x_k \right\} $ сходится $\implies \exists x\in X: \forall \varepsilon>0\quad \exists N\in \R\quad \forall n\in \N , n\geqslant \N \quad \rho(x_{n} , x)<\frac{\varepsilon}{2}$. Тогда $\forall n, m\geqslant \N , n, m\in \N \quad \eho(x_{n} , x_{m} )\leqslant \rho(x_{n} , x) + \rho(x_{m} , x)<\frac{\varepsilon}{2}\cdot 2 = \varpesilon \implies \left\{ x_k \right\} _{k=1}^{\infty }$ сходится в себе
 \end{proof}
-
-\begin{problem}
-    \begin{enumerate}
-        \item $Int(E)\subseteq E\qquad Int(Int(E)) = Int(E)$
-        \item $(Int~E)^c = Cl(E^c)$
-        \item  $Cl(Cl(E)) = CL(E)$
-        \item  $Int(A\cap B) = Int(A)\cap Int(B)$
-        
-            $Cl(A\cap B) = Cl(A)\cup Cl(B)$ 
-            
-            $Int(A\cup B)\neq Int(A) \cup Int(B)$ 
-
-            $CL(A\cap B) = \ldots$
-    \end{enumerate}
-\end{problem}
-
-\begin{note}
-    $Int~O$ -- наибольшее открытое множество, содержащееся в  $O$
-\end{note}
-
-\begin{definition}
-    $\sqsupset (X, \Omega)$ -- топологическое пространство, $E\subseteq X\quad a\in X$
-
-    $a$ называется \underline{граничной точкой} для  $E$, если  $\forall $ оксрестности $U$ точки  $a\qquad U\cap E\neq \O $ И $U\cap (E^c)\neq \O $
-
-    $Fr E = \{x: x\text{ -- граничная для } E\} = \partial E$
-\end{definition}
-
-\begin{example}
-    \begin{enumerate}
-        \item $X = \R, E = [0,1]\quad Int E = (0,1). Cl E = [0,1]\quad FrR = \{0, 1\}$
-        \item $X = \R^2m E = \{(x,0): x\in [0,1]\}\quad Int E = \O , ClE = E, FrE = R$
-        \item $ X = [0,1], E = [0,1]\quad Int E = E, ClE = E, Fr E = \O $
-    \end{enumerate}
-\end{example}
 \end{document}
+    
 
+>>>>>>> Stashed changes
