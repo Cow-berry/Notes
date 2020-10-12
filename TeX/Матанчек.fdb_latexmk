@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1602492040 "Матанчек.tex" "Матанчек.pdf" "Матанчек" 1602492040
+["pdflatex"] 1602497335 "Матанчек.tex" "Матанчек.pdf" "Матанчек" 1602497335
   "/etc/texmf/web2c/texmf.cnf" 1594940150 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/cowberry/.texlive2019/texmf-var/fonts/tfm/lh/lh-t2a/labx1000.tfm" 1596029474 3300 6abb8e321227ead2a8e929e5abc72bd3 ""
   "/home/cowberry/.texlive2019/texmf-var/fonts/tfm/lh/lh-t2a/labx1200.tfm" 1596029488 3308 eee81981029f67083258db36df06e523 ""
@@ -322,9 +322,9 @@
   "figures/circ.pdf_tex" 1600676076 2871 09535d35151bc86052acfee2e11af4bc ""
   "figures/cube.pdf" 1602491624 1216 a9a41f7dfc9c6e06c07e82911065d73f ""
   "figures/cube.pdf_tex" 1602491624 2176 3dff521cc6d8912a88a2e4d176182028 ""
-  "Матанчек.aux" 1602491913 10988 e8a194bc323bad33a3618441a12dffe6 "pdflatex"
-  "Матанчек.tex" 1602492038 108298 6cde6df945988637a135e89259054ef2 ""
-  "Матанчек.toc" 1602491913 1614 bf954fa3ae7eac4945573abae839fd04 "pdflatex"
+  "Матанчек.aux" 1602497325 12010 bd831c1db29883e339809cb82f514386 "pdflatex"
+  "Матанчек.tex" 1602497334 117469 943a7d9a247c279f9818b3440dc67b25 ""
+  "Матанчек.toc" 1602497325 1614 bf954fa3ae7eac4945573abae839fd04 "pdflatex"
   (generated)
   "Матанчек.pdf"
   "Матанчек.toc"

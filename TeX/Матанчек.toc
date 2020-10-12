@@ -14,4 +14,3 @@
 \contentsline {section}{\numberline {1.9}Равномощные множества}{22}%
 \contentsline {section}{\numberline {1.10}Предел числовой последовательности}{26}%
 \contentsline {section}{\numberline {1.11}Топологические свойства множеств в метрических пространствах}{37}%
-\contentsline {section}{\numberline {1.12}Компактность, сходимость в себе, полнота пространств}{43}%
