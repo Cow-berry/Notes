@@ -616,7 +616,7 @@ TODO
         \begin{enumerate}
             \item $\exists -(\vec a)$
             \item $\exists \vec 0$
-            \item $\lambda \vec a\quad \lambda (\vec a  + \vec b) = \lambda \vec a + \lmbda \vec b$
+            \item $\lambda \vec a\quad \lambda (\vec a  + \vec b) = \lambda \vec a + \lambda \vec b$
         \end{enumerate}
 
         \subsection{Проекция вектора на ось}
@@ -649,7 +649,7 @@ $\sphericalangle \vec a_l^{\parallel \gamma} = \alpha \cdot \vec e\quad \alpha =
 $\text{Пр}_l^{\parallel \gamma} \left[ \sum_{i=1}^{m} \lambda_i \vec a_i \right] = \sum_{i=1}^{m} \lambda_i \text{Пр}_l^{\parallel \gamma} \vec a_i$
 \end{lemma}
 \begin{proof}
-    $\left( \sum_{i=1}^{m} \lambda_i \vec a_i \right) _l^{\parallel \gamma} = \sum_{i=1}^{m} \lambda_i \vevc a_{i_l}^{\parallel \gamma}$
+    $\left( \sum_{i=1}^{m} \lambda_i \vec a_i \right) _l^{\parallel \gamma} = \sum_{i=1}^{m} \lambda_i \vec a_{i_l}^{\parallel \gamma}$
 
     $\text{Пр}_l^{\parallel \gamma}\left[\sum_{i=1}^{m} \lambda_i \vec a_i\right] = \sum_{i=1}^{m} \lambda _i \text{Пр}_l^{\parallel \gamma} \vec a_i \vec e $
 \end{proof}
@@ -673,7 +673,7 @@ $\forall \vec a\qquad \vec a = x_a \vec e\quad x_a$ -- координата ве
     \label{fig:r2}
 \end{figure}
 
-$\vec a = \vec a_x^{\paralle y} + \vec a_y^{\parallel x} = \text{Пр}_y^{\paralle x}\vec a\vec \vec e_1 + \text{Пр}_y^{\parallel x} \vec a\vec e_2 = x_x\vec e_1 + a_y\vec e_2$
+$\vec a = \vec a_x^{\parallel y} + \vec a_y^{\parallel x} = \text{Пр}_y^{\parallel x}\vec a\vec \vec e_1 + \text{Пр}_y^{\parallel x} \vec a\vec e_2 = x_x\vec e_1 + a_y\vec e_2$
 
 \begin{definition}
     Говорят, что в базисе $\{e_1, e_2\}$ вектор $\vec a$ имеет координаты  $\vec a(a_x,a_y)$
@@ -691,7 +691,7 @@ $\R^3$
 $\vec a(a_x, a_y, a_z)$
 
  \begin{note}
-     Если угол между осью $l$ и прямой  $\gamma$ прямой ( $l\perp \gamma) \implies \vec _l^{\parallel \gamma} = \vec a_l^{\perp} = \text{Пр}_l^{\perp} \vec a\cdot \vec e$ 
+     Если угол между осью $l$ и прямой  $\gamma$ прямой ( $l\perp \gamma ) \implies \vec a_l^{\parallel \gamma} = \vec a_l^{\perp} = \text{Пр}_l^{\perp} \vec a\cdot \vec e$ 
 
      $l \perp \Gamma \implies \vec a+l^{\perp \Gamma} = \vec a_l^{\perp} = -||-$
 \end{note}
@@ -724,7 +724,7 @@ $W = V / \sim $
 \end{figure}
 
 \begin{definition}
-    $(\vec a\vec b) = \left| \vec  \right| \text{Пр}_{\vec a}^{\perp}\vec b$
+    $(\vec a\vec b) = \left| \vec a \right| \text{Пр}_{\vec a}^{\perp}\vec b$
 \end{definition}
 
 \begin{note}
@@ -763,10 +763,10 @@ $(\vec a\vec b) = \left| \vec a \right| \cdot  \left| \vec b \right| \cos gamma 
 Скалярное произведение в координатах:
 \begin{itemize}
     \item Декартова Прямоугольная Система Координат.
-        \begin{array}
-            $\vec a = a_x\vec i + a_y\vec j + a_z\vec k$\\
-            $\vec b = b_x\vec i + b_y\vec j + b_z\vec k$\\
-        \end{array}
+        \begin{itemize}
+            \item [] $\vec a = a_x\vec i + a_y\vec j + a_z\vec k$
+            \item [] $\vec b = b_x\vec i + b_y\vec j + b_z\vec k$
+        \end{itemize}
         $(\vec a \vec b) = (a_x\vec i + a_y\vec j + a_z\vec k)(b_x\vec i + b_y\vec j + b_z\vec k) = a_xb_x + a_yb_y + a_zb_z$
 
          $\cos \varphi = \frac{a_xb_x + a_yb_y + a_zb_z}{\sqrt{a_x^2 + a_y^2 + a_z^2}\cdot \sqrt{b_x^2 + b_y^2 + b_z^2}  }$
