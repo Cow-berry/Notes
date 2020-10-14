@@ -824,4 +824,153 @@ $m_1 = \frac{2l+r}{3}\quad m_2 = \frac{l+2r}{3}$
 \end{verbatim}
 
 $O(\log _{\frac{3}{2}} \frac{r-l}{EPS} )$
+
+\section{Стеки и очереди}
+\begin{definition}
+    Стек -- ``стаканчик''.
+
+    \tikz [scale=0.3] \draw (0,5) -- (0,0) -- (2,0) -- (2,5); 
+
+    .push(A) -- добавить сверху элемент А
+    
+    .push(B), .push(C)
+
+    .pop() -> C -- вернуть самый верхний элемент
+
+    LIFO -- last in first out
+
+\end{definition}
+
+\begin{verbatim}
+    a = [A,B,C, \ldots] -- первые n элементов заполнены
+
+    push(x):
+        a[n++]=x
+    pop(x):
+        return a[--n]
+\end{verbatim}
+
+\begin{definition}
+   Очередь -- ``очередь в магазин'' 
+
+   голова очереди -- то место, которое обрабатывается
+
+   хвост очереди -- то, куда добавляются новые элементы
+\end{definition}
+
+\begin{verbatim}
+    a = [A,B,C,D,E,F, \ldots]
+    head -- первый неудалённый элемент
+    tail -- на первый свободный
+
+    add(x):
+        a[tail++] = x
+    remove():
+        return a[head++]
+\end{verbatim}
+
+\begin{definition}
+    Дек -- можно класть и доставать с обоих концов. Когда точно не знаешь нужна тебе очередь или стек.
+\end{definition}
+
+В обоих реализациях мы считаем, что у нас бесконечно большой массив.
+
+
+решение 1: Пусть мы знаем, что в очереди $n$ элементов.
+зациклить массив в очереди, чтобы когда место справа закончится, добавлять в начало.
+
+Но что если мы не знаем сколько элементов максимум.
+
+Сделаем стек, не зная сколько в нём максимум элементов.
+
+\begin{verbatim}
+    a = [x, x, x]
+    a'= [x, x, x, _, _, _]
+
+    Если не влезает -- расширять в 2 раза.
+
+    push(x):
+        if n = a.size():
+            a' = new int[2*n]
+            copy(a[0..n-1] -> a'[0..n-1])
+            a = a'
+        a[n++] = x
+\end{verbatim}
+
+\section{Амортизационный анализ}
+$o_1, o_2, \ldots, o_k$ -- операции, проделанные в таком порядке
+
+$T(o_i)$ -- время работы операции
+
+$\widetilde{T}\left(o_i \right) $ -- амортизированные время работы (выбирается нами)
+
+Амортизированное время хорошее, если $\sum \widetilde{T}(o_i) \geqslant \sum T(0_i)$
+
+Пусть мы хотим $\widetilde{T}(o_i)\leqslant c \implies \sum\limits_k T(o_i)\leqslant c\cdot k$
+
+Пусть мы делаем $k$ пушей
+
+$\sum T \leqslant  k + \underbrace{2^p}\limits_{\leqslant 2k} \leqslant 3k\quad \widetilde{T}(push) = 3$
+
+\subsection{Метод потенциалов}:
+
+$\Phi$ -- потенциал (выбираемый опять же нами)
+
+$\widetilde{T} = T + \Delta \Phi$
+
+ $\Phi_0 = 0, \quad \Phi\geqslant 0$
+
+ $\sum \widetilde T = \sum T + \sum \underbrace{\Delta\Phi}\limits_{=\Phi_{\text{к}=\Phi_0}} \geqslant \sum T$
+
+ Цель: $\Phi = ?\quad \widetilde T = O(1)$
+
+ $\Phi=$ (число элементов правой половине массива)$\cdot 2$
+
+ $\widetilde T = 1 +1 = O(1)$
+
+ $\sum \widetilde T = n-n+1 = O(1)$
+
+\subsection{Метод бухгалтерского учёта (метод с монетами)}
+\begin{verbatim}
+    put_coin(x) // ~T = x
+    take_coin(x) // ~T = -x
+
+    [2r, 2r, 2r, 2r] -> [2r, 2r, 2r, 2r, _, _, _, _]
+
+    мы "тратим" 4 рубля, чтобы увеличить массив из 4 элементов в 2 раза. Для копирования: берём + тратим = n + (-n)  
+
+\end{verbatim}
+
+Теперь про $pop$
+
+ \begin{verbatim}
+    pop():
+        return a[--n]
+\end{verbatim}
+
+Если сначала много запушить, а потом много запопить, то останется много свободного места, которое мы не используем
+
+Если массив заполнен меньше, чем на половину, можно сужать его в два раза. Но тогда на границе половины, если чередовать, то он будет постоянно сужаться-расширяться.
+
+\begin{verbatim}
+    pop():
+        if n <= a.size()/4: ..
+\end{verbatim}
+
+В правой половине массив лежат монетки по 2 рубля для расширения.
+
+Когда делаем pop, то кладём по рублю и копим для сужения. 
+
+\begin{verbatim}
+    add(x):
+        s2.push(x)
+    remove(x):
+        if s1.empty():
+            while !s2.empty:
+                s1.push(s2.pop())
+        return s1.pop()
+\end{verbatim}
+
+
 \end{document}
+
