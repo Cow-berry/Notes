@@ -777,7 +777,7 @@
     \section{Дополнение к разделу\\``Действия над множествами''}
 
     \begin{statement}
-        $\sqsupset B$~--- множество, $\{A_i\}_{i\in I}$~--- семейство множеств. \\
+        Пусть $B$~--- множество, $\{A_i\}_{i\in I}$~--- семейство множеств. \\
         $B\cap \left( \bigcup\limits_{i \in  I} A_i \right)  = \bigcup\limits_{i \in  I} \left( B\cap A_i \right) $
     \end{statement}
     \begin{proof}
@@ -896,7 +896,7 @@
        \end{proof}
     \section{Метрические пространства}
     \begin{definition}
-        $\sqsupset X$ -- любое множество, а $\rho: X\times X \to [0,+\infty )$
+        Пусть $X$~--- любое множество, а $\rho: X\times X \to [0,+\infty )$.
 
         Тогда пара $(X, \rho)$ называется метрическим пространством, если функция $\phi$ удовлетворяет аксиомам метрики:
         \begin{enumerate}
@@ -978,7 +978,7 @@
     \end{definition}
 
     \begin{note}
-        Эквивалентное определение: те же слова, но $B_R[a]$
+        Эквивалентное определение: те же слова, но $B_R[a]$.
     \end{note}
 
     \begin{definition}
@@ -1068,7 +1068,8 @@
     \end{proof}
 
     \begin{corollary}
-        $\sqsupset E \subseteq \Z , E $ -- ограничено сверху (снизу). \\Тогда $\exists \max(\min) E$
+        Пусть $E \subseteq \Z , E $ -- ограничено сверху (снизу).\\
+        Тогда $\exists \max(\min) E$.
     \end{corollary}
     \begin{proof}
         По условию существует $M\in R: \forall x\in E\quad x\leqslant M, \overset{\sim }\sqsupset M \geqslant M$.
@@ -1084,9 +1085,8 @@
         $x\geqslant n\qquad x\in \overset{\sim }E \implies x\leqslant C$
     \end{proof}
     \begin{corollary}
-        $\sqsupset E\subseteq \N \quad E\neq \O $ Тогда $\exists \min E$
-
-        (вытекает из следствия 1, т.к. $\N $ ограничено снизу)
+        Пусть $E\subseteq \N \quad E\neq \O$. 
+        Тогда $\exists \min E$ (вытекает из следствия 1, т.к. $\N $ ограничено снизу).
     \end{corollary}
 
     $\left\lfloor x \right\rfloor$ -- целая часть числа. $\left\lfloor x \right\rfloor = \max\{k\in \Z :l\leqslant x\}$ (Существует по следствию 1)
@@ -1096,9 +1096,7 @@
     $x-1< \left\lfloor x \right\rfloor \leqslant x$
 
     \begin{statement}
-        $\Q$ плотно в $\R$
-
-        $\forall a, b\in \R, a<b\quad \exists c\in \Q\cap (a,b)$
+        $\Q$ плотно в $\R$, т.е $\forall a, b\in \R,\ a<b\quad \exists c\in \Q\cap (a,b)$
     \end{statement}
     \begin{proof}
         $b-a>0 \implies \frac{1}{b-a}>0\quad\newline \exists N\in \N: N>\frac{1}{b-a} \iff  b-a>\frac{1}{N}$
@@ -1126,12 +1124,12 @@
             \item[$\ov{1}$] $\forall (a,b)$ и $(c,d)$ равномощны
             \item $a<b \implies (a,b)\sim [a,b) \sim [a,b]$
             \item $\left( -\frac{\pi}{2}, \frac{\pi }{2} \right) \sim \R\quad (\tg)$
-            \begin{figure}[ht]
-                \centering
-                \incfig{circ}
-        	\caption{circ}
-        	\label{fig:circ}
-    	    \end{figure}
+	    \begin{figure}[ht]
+		\centering
+		\incfig{circ}
+		\caption{circ}
+		\label{fig:circ}
+	    \end{figure}
         \end{enumerate}
     \end{example}
 
@@ -1160,7 +1158,7 @@
         Любое бесконечное множество содержит счётное подмножество.
     \end{theorem}
     \begin{proof}
-        $\sqsupset X$ -- бесконечное множество. $\implies  \exists a_1\in X\quad X\setminus \{a_1   \}\neq \O $ (Иначе $X = \{a_1\}$!!!) $\implies \exists a_2\in X\setminus \{a_1\}\quad a_2\neq a_1$
+        Пусть $X$~--- бесконечное множество. $\implies  \exists a_1\in X\quad X\setminus \{a_1   \}\neq \O $ (Иначе $X = \{a_1\}$!!!) $\implies \exists a_2\in X\setminus \{a_1\}\quad a_2\neq a_1$
 
         Так можно продолжать для любого $n$. $X\setminus \{a_1, \ldots, a_n\}\neq \O $ (иначе $X$ конечно) $\implies \exists a_{n+1}\in X\setminus \{a_1, \ldots, a_n\}, \quad a{n+1}\not\in \{a_1, \ldots, a_n\}$
 
@@ -1279,10 +1277,10 @@
     \end{problem}
 
     \begin{definition}
-        $\sqsupset X$ -- любое множество
-        Отображение из $\N $ в $X$ называется последовательностью в $X$
+        Пусть $X$~--- любое множество.
+        Отображение из $\N $ в $X$ называется последовательностью в $X$.
 
-        вместо $f(n), n\in \N \quad f:\N \to X$ используют $\{x_n\}_{n=1}^{\infty }$ или $\left( x_n \right) _{n=1}^{\infty }\qquad n\to x_n\in X$
+        Вместо $f(n), n\in \N \quad f:\N \to X$ используют $\{x_n\}_{n=1}^{\infty }$ или $\left( x_n \right) _{n=1}^{\infty }\qquad n\to x_n\in X$
     \end{definition}
 
     \section{Предел числовой последовательности}
@@ -1319,13 +1317,13 @@
         $N=1$
     \end{proof}
     \begin{note}
-        $\sqsupset \{x_n\}_{n=1}^{\infty }$ и $\{y_n\}_{n=1}^{\infty }$ -- последовательности в метрическом пространстве $X$ и $\exists m\in \N \quad x_n = y_n\ \forall n\geqslant m$. 
+        Пусть $\{x_n\}_{n=1}^{\infty }$ и $\{y_n\}_{n=1}^{\infty }$ -- последовательности в метрическом пространстве $X$ и $\exists m\in \N \quad x_n = y_n\ \forall n\geqslant m$. 
         Тогда $\lim_{n \to \infty} x_n$ и $\lim_{n \to \infty} y_n$ совпадают (если существует один, то существует другой и равны при существовании).
     \end{note}
     \begin{statement}
         [единственность предела]
-        $\sqsupset (X, \rho), \{x_n\}_{n=1}^{\infty }\subseteq X, y, z\in X $
-
+        Пусть $(X, \rho),\\
+        \{x_n\}_{n=1}^{\infty }\subseteq X,\ y, z\in X $.
         Если $x_n\to y$ и $x_n\to z$, то $y=z$.
     \end{statement}
     \begin{proof}
@@ -1377,7 +1375,8 @@
     \begin{theorem}
         [предельный переход в неравенствах]
 
-        $\sqsupset \{x_{n} \}, \{y_{n} \}$ -- вещественные последовательности. $x_n\to x_*, y_n\to y_*\quad x_*, y_*\in \R\quad \forall n\quad x_{n} \leqslant y_{n} \implies  x_*\leqslant y_*$
+        Пусть $\{x_{n} \}, \{y_{n} \}$ -- вещественные последовательности. 
+        $x_n\to x_*, y_n\to y_*\quad x_*, y_*\in \R\quad \forall n\quad x_{n} \leqslant y_{n} \implies  x_*\leqslant y_*$
 
         Отметим, что из $x_{n} <y_{n} $ НЕ следует, что $x_*<y_*$.
 
@@ -1437,9 +1436,9 @@
     \end{proof}
     
     \begin{definition}
-        $\sqsupset \{x_n\}_{n=1}^{\infty }$ -- числовая последовательность. 
+        Пусть $\{x_n\}_{n=1}^{\infty }$~--- числовая последовательность. 
 
-        $\{x_n\}_{n=1}^{\infty }$ называется \underline{бесконечно малой}, $x_{n} \to 0, n\to +\infty $
+        $\{x_n\}_{n=1}^{\infty }$ называется \underline{бесконечно малой}, если $x_{n} \to 0, n\to +\infty$.
     \end{definition}
     
     \begin{note}
@@ -1543,7 +1542,7 @@
     Упражнение: доказать, что это норма.
 
     \begin{definition}
-        $\sqsupset (X,K)$ -- векторное пространство.
+        Пусть $(X,K)$ -- векторное пространство.
 
         $<x,y> :X\times Y \to  K, \quad <\cdot,\cdot>$ называется \underline{скалярным произведением} на $X$, если
         \begin{enumerate}
@@ -1562,7 +1561,7 @@
     \end{enumerate}
 
     \begin{statement}
-        Если $(X,K)$ -- векторное пространство, $<\cdot , \cdot >$ -- скалярное произведение, то $\forall x, y\in X\quad \left| <x,y> \right| ^2\leqslant <x,x><y,y>$
+        Если $(X,K)$ -- векторное пространство, $<\cdot , \cdot >$ -- скалярное произведение, то $\forall x, y\in X\quad \left| <x,y> \right| ^2\leqslant <x,x><y,y>$.
     \end{statement}
     \begin{proof}
         \begin{enumerate}
@@ -1655,7 +1654,7 @@
         \end{enumerate}
     \end{proof}
     \begin{definition}
-        $\sqsupset \{x_{n}\}_{n=1}^{\infty } $ -- вещественная последовательность
+        Пусть $\{x_{n}\}_{n=1}^{\infty }$~--- вещественная последовательность.
 
         $\lim_{n \to \infty} x_n = +\infty  \iff  \forall M\in \R \exists N\in \N : \forall n\in \N , n>N\quad x_n>M$
 
@@ -1700,22 +1699,22 @@
     \begin{theorem}
         [Арифметические действия над бесконечно большими]
 
-        $\sqsupset \{x_{n} \}_{n=1}^{\infty }, \{y_{n} \}_{n=1}^{\infty }$
+        Пусть $\{x_{n} \}_{n=1}^{\infty }, \{y_{n} \}_{n=1}^{\infty}$~--- последовательности.
 
     \begin{note}
         $x_{n} \to \pm \infty $ имеет смысл тогда и только тогда, когда $x_{n} \in \R$.
     \end{note}
 
         \begin{itemize}
-            \item [I)] Если $\{x_{n}\} \to +\infty , \{y_{n}\} $ ограничено снизу $\implies  x_{n} +y_{n} \to  +\infty $ 
-            \item [II)] Если $\{x_{n} \} \to -\infty , \{y_{n} \}$ ограничена сверху $\implies  x_{n} +y_{n} \to -\infty $
-            \item [III)] Если $\{x_{n} \} \to \infty$, $y_n\to a\in \C$ ограничено снизу $\implies x_{n} +y_{n} \to \infty $
-            \item [IV)] Если $\{x_{n} \} \to  +\infty(-\infty ) \quad \exists \delta >0: y_{n} >\delta \forall n\in \N  \implies x_{n} \cdot y_{n} \to +\infty (-\infty )$
-            \item [V)] Если $\{x_{n} \} \to +\infty (-\infty )\quad \exists \delta >0:\forall n\in \N \quad y_{n} <-\delta \implies x_{n} \cdot y_{n}  \to -\infty (+\infty )$
-            \item [VI)] Если $\{x_{n} \} \to  \infty \quad \exists \delta >0: \forall n\in \N  \quad |y_{n}|>\delta \implies x_{n} *y_{n}  \to \infty $
-            \item [VII)] Если $\{x_{n} \} \to a\in \C, \quad y_{n} \to \infty \& \forall n\in \N \quad y_{n} \neq 0 \implies \frac{x_{n} }{y_{n} }  \to  0$
-            \item [VIII)] Если $x_{n} \to a\in \overset{\land}{\C}\setminus \{0\}, \quad y_{n} \to  0 \implies  \frac{x_{n} }{y_{n} }\to \infty $
-            \item [IX)] Если $\{x_{n} \} \to  \infty , \quad \forall n\in \N \quad y_{n} \neq 0\quad y_{n} \to a\in C \implies \frac{x_{n} }{y_{n} } \to \infty $
+            \item [I)] Если $x_n \to +\infty , \{y_{n}\}$ ограничено снизу, то $x_{n} +y_{n} \to  +\infty$ 
+            \item [II)] Если $x_{n}  \to -\infty , \{y_{n} \}$ ограничена сверху, то $x_{n} +y_{n} \to -\infty$
+            \item [III)] Если $x_{n} \to \infty$, $y_n\to a\in \C$ ограничено снизу, то $x_{n} +y_{n} \to \infty$
+            \item [IV)] Если $x_{n} \to  +\infty(-\infty )$ и $\exists \delta>0: y_{n} >\delta\ \forall n\in \N$, то $x_{n} \cdot y_{n} \to +\infty (-\infty )$
+            \item [V)] Если $x_{n} \to +\infty (-\infty )$ и $\exists \delta >0:\forall n\in \N \quad y_{n} <-\delta$, то $x_{n} \cdot y_{n}  \to -\infty (+\infty )$
+            \item [VI)] Если $x_{n} \to  \infty $ и  $\exists \delta >0: \forall n\in \N  \quad |y_{n}|>\delta$, то  $x_{n} \cdot y_{n}  \to \infty$
+            \item [VII)] Если $x_{n} \to a\in \C, \quad y_{n} \to \infty\ \&\ \forall n\in \N \quad y_{n} \neq 0$, то $\frac{x_{n} }{y_{n} }  \to  0$
+            \item [VIII)] Если $x_{n} \to a\in \overset{\land}{\C}\setminus \{0\}, \quad y_{n} \to  0$, то  $\frac{x_{n} }{y_{n} }\to \infty$.
+            \item [IX)] Если $x_{n} \to \infty$ и  $\forall n\in \N \quad y_{n} \neq 0\quad y_{n} \to a\in C$, то $\frac{x_{n} }{y_{n} } \to \infty$
         \end{itemize}
     \end{theorem}
     \begin{proof}
@@ -1986,18 +1985,17 @@
     \end{corollary}
     
     \begin{definition}
-        $ \sqsupset (X, \Omega)$ -- топологическое пространство. 
-        $E\subseteq X, a\in E$.
+        Пусть $(X, \Omega)$ -- топологическое пространство и $E\subseteq X, a\in E$.
     
-        $a$ называется \underline{изолированной точкой} $E$, если  $\exists $ окрестность $U$ точки  $a: \quad U\cap E = \{a\}$.
+        $a$ называется \underline{изолированной точкой} $E$, если  $\exists$ окрестность $U$ точки  $a: \quad U\cap E = \{a\}$.
     \end{definition}
     
     \begin{definition}
-        Пусть $(X, \rho)$~--- метрическое пространство, $E\subseteq X, a\in X$.
+        Пусть $(X, \Omega)$~--- топологическое пространство и $E\subseteq X, a\in X$.
     
-        $a$ называется \underline{точкой прикосновения}  $E \left( a\in Cl ~E \right) $, если $\forall $ окрестности $U$ точки $a$  $U\cap E \neq \O $.
+        $a$ называется \underline{точкой прикосновения} $E \left( a\in Cl ~E \right) $, если $\forall $ окрестности $U$ точки $a$  $U\cap E \neq \O $.
     
-        $\Cl E$ -- замыкание множества $E\qquad E\subseteq \Cl E$
+        $\Cl E$ -- замыкание множества $E\qquad E\subseteq \Cl E$.
     \end{definition}
     
     \begin{theorem}
@@ -2016,7 +2014,7 @@
     \end{theorem}
     \begin{proof}
         \begin{enumerate}
-            \item [(I)] $x\in \Cl E \iff 
+            \item [(I)] \( x\in \Cl E \iff 
             \begin{cases}
                 x\in E\\
                 x\not\in E \quad \forall \text{ окрестности } U \text{ точки } x\quad \overline{\cdot}U\cap E \neq \O\\ 
@@ -2024,7 +2022,7 @@
             \begin{cases}
                 x\in E\\
                 x\in \p E\\
-            \end{cases} \iff  x\in E\cup \p E$
+            \end{cases} \iff  x\in E\cup \p E \)
         \item [(II)] $c\in \Cl E\quad \sphericalangle F$ -- замкнутое$: E\subseteq F \implies  x\in F \implies x\in$ Пр.ч (правой части)
     
             $\sqsupset x\in$ Пр.ч. $=F$, если  $x\not\in \Cl E \implies  \exists $ окрестность $U$ точки $x:\quad U\cap E = \O $ 
@@ -2047,14 +2045,13 @@
             \item  $\Cl(\Cl(E)) = \Cl(E)$
             \item  $\Int(A\cap B) = \Int(A)\cap \Int(B)$
             
-                $\Cl(A\cap B) = \Cl(A)\cup \Cl(B)$ 
+                $\Cl(A\cup B) = \Cl(A)\cup \Cl(B)$ 
                 
                 $\Int(A\cup B)\neq \Int(A) \cup \Int(B)$ 
     
                 $\Cl(A\cap B) = \ldots$
         \end{enumerate}
     \end{problem}
-
     
     \begin{note}
         $\Int O$~--- наибольшее открытое множество, содержащееся в $O$.
@@ -2076,295 +2073,3 @@
         \end{enumerate}
     \end{example}
 \end{document}
-=======
-\end{definition}
-
-\begin{note}
-    Если $(X, \rho)$ -- метрическое пространство.
-
-    $\Omega = \left\{ \exists \text{ семейство открытых шаров } \{B_I\}_{i\in I}: O = \bigcup\limits_{i \in  I}  B_i \right\} $
-
-    ($\forall O = \bigcup\limits_{x\in O} B_{r(x)}(x)$)
-\end{note}
-
-\begin{statement}
-    $\sqsupset (X, \rho)$ -- м.п., $Y\subseteq X$ Тогда $\Omega_Y$ совпадает с топологией, порождённой индуцированной метрикой.
-\end{statement}
-\begin{proof}
-    $\Omega_{\rho,Y} = \{O: \exists  \text{ открытые шары в } Y \{B_i\}_{i\in I}: O = \bigcup\limits_{i \in  I} B_i = \bigcup ( \ov{B_i} \cap Y) \}$
-
-    $\ov{B_i}$ -- шар с тем же центром и радиусом, но в $X$
-\end{proof}
-
-\begin{note}
-    $Y\subseteq X\quad O $ открыто в $Y \iff \exists \ov{O}$ открыто в $X:\quad O = \ov O \cap Y$
-
-    $\sqsupset F\subseteq Y\quad F$ -- замкнуто (в $Y$)  $\iff  \exists $ замкнутое $\ov F $ в  $X\quad F = \ov F\cap Y$
-\end{note}
-\begin{proof}
-    $F$ -- замкнуто в  $Y \iff  Y\setminus F\in \Omega_Y \iff  Y\setminus F = \ov O \cap Y$,(где $\ov O \in \Omega \iff  X\setminus \ov O$ -- замкнуто)
-
-    $F = Y\setminus \left( Y\setminus F \right)  = Y\setminus (\ov O\cap Y) = Y\setminus \ov O = Y\cap (X\setminus \ov O)$
-\end{proof}
-
-\begin{example}
-    Примеры:
-    \begin{enumerate}
-        \item $X = \R^2\quad Y = B_1(0)\cup \left\{ (2,0) \right\} \cup \left\{ (x,y): xy=1, x>0, y>0 \right\} $ 
-
-            $B_1[0] = B_1(0)$
-
-            $B_{\frac{1}{2}}[2] = \left\{ (2,0) \right\} \cup \{(x,\frac{1}{x}): (x-2)^2+\frac{1}{x^2}\leqslant \frac{1}{4}\}$
-
-        \item $Y$ -- график  $y(x) = \sin \frac{1}{x}, x\neq 0$
-
-            $\Cl E = Y\cup \left\{ (0,y):y\in [-1,1] \right\} $
-    \end{enumerate}
-\end{example}
-
-\begin{note}
-    Если $X$ -- метрическое пространство  $E\subseteq X$
-
-    $a\in \p E \iff \forall $ открытой окрестности $U$ точки  $a\quad \overset{\cdot}U \cap E$ бесконечно
-\end{note}
-
-\section{Компактность, сходимость в себе, полнота пространств}
-
-\begin{definition}
-    $\sqsupset (X, \Omega)$ -- т.пр. $\sqsupset E\subseteq X, \left\{ A_i \right\} _{i\in I}\subseteq X$
-
-    Если $E \subseteq \bigcup\limits_{i \in  I} A_i$, то говорят, что $\left\{ A_i \right\} _{i\in I}$ образует покрытие множества $E$ 
-\end{definition}
-
-\begin{definition}
-    $\sqsupset (X,\Omega)$ -- т.п. $K\subseteq X$
-
-    $K$ -- называется \underline{компактным} (в  $X$), если  $\forall $ покрытия $\left\{ O_i \right\} _{i\in I}$ множества $K$ открытыми можно извлечь конечное подпокрытие:  $\exists N: \exists i_1, i_2, \ldots i_n: K\subseteq O_{i_1}\cup O_{i_2} \cup  \ldots \cup  O_{i_n}$
-\end{definition}
-
-Элементарные свойства компактных множеств:
-\begin{statement}\label{st1}
-    Если $K$ -- компактно (в  $(X, \Omega)$) и  $F\subseteq K$ и $F$ -- замкнуто, то  $F$ -- компактно (в  $(X, \Omega)$)
-\end{statement}
-\begin{proof}
-    $\sphericalangle $ открытое покрытие  $\left\{ O_i \right\} _{i\in I}$ множества $F$
-
-    $\sphericalangle O = X\setminus F$ -- открытое $ \implies  \left\{ O_i \right\} _{i\in I} \cup \{O\}$ -- покрытие $ K$
-
-    $K$ -- компакт  $\implies \exists i_1, \ldots, i_n:\quad K\subseteq O_{i_1} \cup \ldots\cup O_{i_n} \cup O$
-
-    $F\subseteq O_{i_1} \cup  \ldots\cup O_{i_N} \implies $ (покрытие -- $\forall $) $F$ -- компакт
-\end{proof}
-\begin{statement}
-    $\sqsupset (X, \Omega)$ -- топ. пр-во $\quad K\subseteq X$. Тогда следующие утверждения равносильны
-    \begin{align}
-        K \text{ комп. в } X\\
-        $K$  \text{комп. в себе} \left( \text{комп в } (K, \Omega_K) \right) 
-    .\end{align}
-\end{statement}
-\begin{proof}
-     \begin{itemize}
-         \item []
-         \item [$1.1 \to 1.2$] $\sqsupset \left\{ G_i \right\} _{i\in I}$ -- открытое покрытие $K$  в  $K \implies  \forall i\in I \exists $ открытое в $X\quad O_i: G_i = O_i \cap K \implies  K \subseteq \bigcup\limits_{i \in  I} O_i \implies \exists i_1, \ldots, i_N: K\subseteq \bigcup\limits_{j=1}^n O_{i_j} \implies K\subseteq \left( \bigcup\limits_{j=1}^N O_{i_j}  \right)\cap K = \bigcup\limits_{j=1}^N\left( O_{i_j}\cap K \right) = \bigcup\limits_{j=1}^N G_{i_j}    $, т.о. $\left\{ G_{i_j} \right\} $ -- конечное подпокрытие $K$ в  $ K$
-         \item [$1.2\to 1.1$] $\sphericalangle \forall $ открытое покрытие $\left\{ O_i \right\} _{i\in I} K$ в $X. \sqsupset G_i = O_i\cap K$ -- открытые в $K$
-
-             $K\subseteq \bigcup\limits_{i \in  I} O_i \implies K\subseteq \left( \bigcup\limits_{i \in  I} O_i \right) \cap K = \bigcup\limits_{i \in  I} G_i$
-
-             Т.к. $K$ компактно в  $K$, то  $\exists  i_1, \ldots, i_N:\quad K\subseteq G_{i_1}\cup \ldots \cup g_{i_N} \implies K\subseteq O_{i_1}\cup \ldots \cup O_{i_N}$ $\left( G_{i_1}\subseteq O_{i_1} \ldots \right) $. Т.о. $\{O_{i_1}, \ldots, O_{i_N}\}$ -- конечное покрытие
-    \end{itemize}
-\end{proof}
-\begin{corollary}
-    $K\subseteq Y\subseteq X\quad (X, \Omega)$ -- т.п. Тогда $K$ компактно в  $Y \iff  K$ компактно в $X$
-\end{corollary}
-\begin{note}
-    $(0,1) = \bigcup\limits_{n=2}^{\infty }\left( \frac{1}{n}, 1 \right)  $ -- не извлекается конечное подпокрытие
-\end{note}
-\begin{statement} \label{st3}
-    $\sqsupset (X, \rho)$ -- м.п., $K$ -- компактно в  $X$. Тогда  $K$ замкнуто и ограничено (в  $X$)
-\end{statement}
-\begin{proof}
-    $\sqsupset a\in X\quad \left\{ B_n(a) \right\} _{n\in \N } \implies  K\subseteq X\subseteq \bigcup\limits_{n\in \N } B_n(a)$
-
-    Если $K$ компактно, то  $\exists n_1, \ldots, n_m: K\subseteq \bigcup\limits_{k=1}&m B_{n_k}(a) = B_N(a), N = \max\{n_1, \ldots, n_m\}$, т.е. $K$ ограничено
-
-     $K$ -- замкнуто?  $\iff X\setminus K$ -- открыто
-
-     $\sphericalangle \forall p\in X\setminus K$
-
-     $\forall q\in K\quad 0<\frac{\rho(q,p)}{2} = r_q \implies B_{r_q}(q)\cap B_{r_q}(p) = \O $ 
-
-     $\rho(x,y) >\rho(p,q) - \rho(p,y) - \rho(q,x) >2r_q-r_q-r_q=0$
-
-     $\left\{ B_{r_q}(q) \right\} _{q\in K}$ -- открытое покрытие $K \implies \left( K \text{ -- компакт } \right)  \exists q_1, \ldots, q_N: K\subseteq \bigcup\limits_{j=1}^N B_{r_{q_j}}(q_j), r = \min\left\{ r_{q_1}, \ldots, r_{q_N} \right\}  $ 
-
-     $B_r(p)\subseteq B_{r_{q_j}} (p)\qquad B_r(p)\cap B_{r_{q_j}}(q_j) \neq \O \quad \forall j=1:N \implies  B_{r}(p)\cap K\neq \O  \implies  B_r(p)\subseteq X\setminus K$
-
-     Т.о. $X\setminus K$ -- открыто
-\end{proof}
-
-Аксиома о вложенных промежутках справедлива и для ``обобщённых замкнутых промежутков''  $Q = [a_1, b_1]\times \ldots\times [a_n, b_n] \subseteq \R^n$ -- $\overline{\text{куб}}$
-
-$Q^{\left( j \right) } = \prod_{k=1}^{n} [a_k^{\left( j \right) }, b_k^{\left( j \right)}] \quad \forall j\in \N $ и $\forall k=1:n\quad \forall j\in \N \quad \left[ a_k^{\left( j+1 \right) }, b_k^{\left( j+1 \right) } \right] \subseteq\left[ a_k^{\left( j\right) }, b_k^{\left( j \right) } \right] $
-
-По аксиоме о вложенных промежутках $ \forall k=1:n\quad \exists c_k \subseteq \bigcap\limits_{j=1}^{\infty } [a_k^{\left( j \right) }, b_k^{\left( j \right) }] \implies  c = \left( c_1, \ldots, c_n \right) \in \prod_{k=1}^{n} [a_k^{\left( j \right) }, b_k^{\left( j \right) } ] \forall j\in \N $
-
-\begin{theorem}
-    [Гейне-Бореля] В $ \R^n$ любой замкнутых куб компактен 
-
-    $Q = [a_1, a_1+\delta] \times [a_2, a_2+\delta] \times \ldots\times [a_n, a_n+\delta]\quad \delta$ -- длина ребра
-\end{theorem}
-\begin{proof}
-\begin{figure}[ht]
-    \centering
-    \incfig{cube}
-    \caption{cube}
-    \label{fig:cube}
-\end{figure}
-
-От противного $\sqsupset \left\{ O_i \right\} _{i\in I}$ -- открытое покрытие куба $Q$, из которого нельзя извлечь конечного подпокрытия
-
- $Q_1 = Q;$ делением рёбер пополам представим $Q$  виде объединения  $2^N$ кубов со стороной  $\frac{\delta}{2}$ 
-
- Хотя бы один из них -- ``плохой'' (т.е. не имеет конечного подпокрытия в $\{O_i\}$)ю Назовём  $O_2, \ldots$
-
- В результате $\left\{ Q_j \right\} $ -- последовательность кубов
-
- $x, y\in \ov O\quad \ov O$ -- куб со стороной  $\Delta \implies  \|x-y\| \leqslant \Delta \cdot  \sqrt{n} \\ \left( \|x-y\| = \sqrt{\sum_{k=1}^{n} (x_k-y_k)^2} = \sqrt{\sum_{k=1}^{n} \Delta^2} = \sqrt{n} \Delta   \right) $
-
- По предыдущему утверждению $\exists c\in \bigcap\limits_{j=1}^{\infty } Q_j \quad c\in \bigcup\limits_{i \in  I} O_i \implies \exists i_c: c\in O_{i_c}$
-
- $\left\{ O_i \right\} $ -- открыто $\implies  \exists r>0: B_r(c)\subset O_{i_c}$/
-
- Т.к. $\frac{\delta}{2^{j-1}} \to 0$, то $\exists J: \forall j\geqslant J\quad \frac{\delta \sqrt{n} }{2^{j-1}}<r$ 
-
- Тогда $y\in Q_j$, где $j \geqslant J$
-
- $\implies \left| y-c \right| \leqslant \frac{\delta}{2^{j-1}}\cdot \sqrt{n}<r\quad \forall j\geqslant J\implies  Q_j\subseteq B_r(c)\subseteq O_{i_c}\quad \forall j\geqslant J $. $Q_j$ -- ``плохой'' !!!
-\end{proof}
-\begin{theorem}
-    [критерий компактности в $\R^n$]
-
-    $\sqsupset K\subseteq \R^n$. Тогда следующие утверждения равносильны:
-    \begin{enumerate}
-        I: $K$  -- замкнуто и ограничено\\
-        II: $K$ -- компактно\\
-        III: $K$ -- секвенциально компактно \\(из любой последовательности в $K$ можно извлечь сходящуюся в  $K$ подпоследовательность )\\
-    \end{enumerate}
-\end{theorem}
-
-\begin{definition}
-    $\sqsupset \left\{ x_k \right\} _{k=1}^{\infty }$ -- последовательность в топологическом пространстве $(X, \Omega)$.
-
-    Если  $\left\{ k_j \right\} _{j=1}^{\infty }$ -- строго возрастающая последовательность натуральных чисел, то $\left\{ x_{k_j} \right\} _{j=1}^{\infty }$ называется \underline{подпоследовательностью} исходной последовательности 
-\end{definition}
-
-\begin{lemma}
-    Если $\left\{ k_j \right\} _{j\in \N }\subseteq \N $ и строга возрастает, то $\forall j\in \N \quad k_j\geqslant j$
-\end{lemma}
-
-\begin{definition}
-    $\sqsupset \left\{ y_k \right\} _{k=1}^{\infty }\subseteq \R$ -- последовательность. 
-
-    $\left\{ y_k \right\} $ называется \underline{возрастающей}, если $\forall k\in \N \quad y_{k+1}\geqslant y_k \left( \forall k, m, m\geqslant k \text{, то } y_m\geqslant y_k \right) $ 
-
-    $\left\{ y_k \right\} $ -- строго возрастает $\iff  \forall k, m\in \N m>k\implies y_m>y_k$
-\end{definition}
-\begin{definition}
-    $\sqsupset \left\{ x_k \right\} _{k=1}^{\infty }$ -- последовательность в т.п. $(X, \Omega), x\in X\quad \\ x = \lim_{k \to \infty} x_k \iff \forall $ открытой окрестности $U$ точки  $x\quad \exists N\in \R\forall k\in \N , k\geqslant N\quad x_n\in U$
-
-    $\iff  \forall $ открытой окрестности $U$ точки $x\quad \exists $ окрестность $V(+\infty ): \forall k\in V(+\infty )\cap \N \quad x_k\in V$
-\end{definition}
-\begin{example}
-    $x_k = (-1)^k, k\in \N $
-
-    $x_{2k} \equiv 1 \to 1$
-
-    $x_{2k+1}\equiv = -1 \to -1$
-\end{example}
-\begin{statement}
-    Если $\left\{ x_{n}  \right\} $ сходится (в $(X, \Omega)$), то любая её подпоследовательность сходится, причём к тому же пределу.
-\end{statement}
-\begin{proof}
-    $\sphericalangle \forall $ подпоследовательность $\left\{ x_{k_j} \right\} _{j=1}^{\infty }\quad \sqsupset x = \lim_{k \to \infty} x_k\quad \sqsupset U, N, x$ -- из определения предела.
-
-    Тогда $\forall j\geqslant N \implies  $ по лемме $ k_j\geqslant j\geqslant N \implies  x_{k_j}\in U \implies  x_{k_J} \to x, j\to +\infty $
-\end{proof}
-
-\begin{statement}
-    
-\end{statement}
-$\sqsupset \left\{ x_k \right\} $ -- последовательность в т.п. $(X, \Omega)$
-
-$\left\{ x_{k_j} \right\} _{j=1}^{\infty }\quad \left\{ x_{l_i} \right\} _{i=1}^{\infty }$ -- подпоследовательности
-
-$\left\{ x_k \right\} _{\N } = \left\{ x_{k_j} \right\} _{j\in \N } \cup \left\{ x_{l_i} \right\} _{i\in \N }$
-
-$\sqsupset \exists \lim_{j \to \infty} x_{k_j} = \lim_{i \to \infty} x_{l_i} = x$ Тогда $\exists \lim_{k \to \infty} x_k$ и $\lim_{k \to \infty} x_k = x$
-\end{statement}
-\begin{proof}
-    Т.к. $x_{k_j} \to  x$, то $\forall $ окрестности $U \exists J = J(U): \forall j>J\quad x_{k_j}\in U$
-
-    Т.к. $x_{l_i} \to x$, то $\forall $ окрестности $U\quad \exists I = I(U): \forall i>I\quad x_{l_i}\in U$
-    $N = \max\{k_J, l_I\}, \forall n>N\quad x_n = \begin{cases}
-        x_{k_{j}} \implies  j>J\\
-        x_{l_i} \implies  i>I
-    \end{cases} \implies x_n\in U$
-\end{proof}
-
-\begin{example}
-    $\Q = \left\{ x_k \right\} _{k=1}^{\infty }$ (при некоторой нумерации)
-
-    \begin{problem}
-        $\forall x\in \ov {\R} \exists $ подпоследовательность $\{x_{k_j}\}_{j=1}^{\infty }: x_{k_j} \to x, j\to \infty $
-    \end{problem}
-\end{example}
-
-\begin{proof}
-    [Доказательство критерия компактности в пространстве $\R^n$]
-
-    \begin{itemize}
-        \item []
-        \item [II $\implies $ I] Утверждение \ref{st3}
-        \item [I $\implies $ II] $K$ -- замкнуто и ограничено  $\implies K\subseteq B\subseteq Q\quad B$ -- шар, $Q$ -- куб  $\implies $ по \ref{st1} $K$ -- компакт
-        \item [III $\implies $ I] $K$ -- ограничено? от противного. Если  $K$ не ограничено   $\forall n\in \N  \exists x_k\in K:\quad \|x_k\|>k\quad \|x_k\|\to +\infty \quad 
-
-            x_k\to \infty \implies  \forall $ подпоследовательность $\left\{ x_{k_i} \right\} \to \infty \quad i\to \infty $
-
-            $K$ -- замкнуто,  $\forall p\in \p K \implies p\in K$ От противного $\sqsupset p\in \p K, p\not\in K \implies \exists $ последовательность $\left\{ x_k \right\} _{k=1}^{\infty }\subset K: x_k\to p, k\to +\infty \implies \forall $ подпоследовательность $\{x_{k_j}\} \to \not\in K, j\to \infty  !!!(III)$. Т.о. $K$ -- замкнуто
-        \item [III $\impliedby $II] $\sphericalangle \forall \left\{ x_k \right\} _{k=1}^{\infty } \times K$
-
-            Если $\left\{ x_k \right\} _{k\in \N }$ -- конечно, то $\exists \left\{ k_j \right\} _{j=1}^{\infty }\subseteq \N $ -- возрастающая $\quad x_{k_j} = const \implies  x_{k_j} \to x_{k_1}$
-
-            Если $\left\{ x_k \right\} _{k\in \N }$, тогда существует предельная точка в $ \R^n$ для F $\implies F$. Если нет, то $F$ -- замкнуто в $\R^n \implies F$ -- компакт ($F\subseteq K$)
-
-            $\forall x\in F\quad x$ -- изолированная точка $\exists \delta_x>0: B_{\delta_x}(x)\cap F = \{x\}$
-
-            $\cup B_{\delta_x}(x)\supseteq F $, но нельзя извлечь конечное подпокрытие.
-
-            Т.о. $\exists p\in \p F \implies  \forall \varepsilon>0\quad \overset{\circ }B_{\varepsilon}(p)\cap F\neq \O $
-
-            $\varepsilon=1\quad \sqsupset x_{k_1}\in B_1(p)\cap F \implies k_2\in \overset{\circ }B_{y_2}(p)\cap F\setminus \{x_1, \ldots, x_{k_1}\}\neq \O \quad k_2>k_1$
-
-            $\ldots$
-
-            $\exists x_{k_{j+1}}\in \overset{\circ}B_{2j}(o)\cap F\setminus \{x_1, \ldots, x_{k_j}\}\neq \O $
-
-            $\left\{ x_{k_j} \right\} \subseteq F, k_i\uparrow\quad \|x_{k_j} - p\|\leqslant \frac{1}{2j} \to 0, j\to \infty $
-    \end{itemize}
-\end{proof}
-\begin{corollary}
-    [принцип выбора Коши-Больцано] Из любой ограниченной последовательности в $\R^n$ можно извлечь сходящуюся подпоследовательность. (последовательность содержится в некотором компакте)
-\end{corollary}
-
-\begin{definition}
-    $\sqsupset (X, \rho)$ -- м.п. $\quad \left\{ x_k \right\} _{k=1}^{\infty }\subseteq X$. $\left\{ x_k \right\} _k$ называется \underline{сходящейся в себе} (она же последовательность Коши, она же фундаментальная последовательность), если $\forall \varepsilon>0\exists N\in \R: \forall n, m\in \N , n, m \geqslant N\quad \rho(x_{n} , x_{m} )<\varepsilon$
-\end{definition}
-
-\begin{statement}
-    Если $\left\{ x_k \right\} _{k=1}^{\infty } \subseteq (X, \rho)$, то она сходится в себе
-\end{statement}
-\begin{proof}
-    $\sqsupset \left\{ x_k \right\} $ сходится $\implies \exists x\in X: \forall \varepsilon>0\quad \exists N\in \R\quad \forall n\in \N , n\geqslant \N \quad \rho(x_{n} , x)<\frac{\varepsilon}{2}$. Тогда $\forall n, m\geqslant \N , n, m\in \N \quad \eho(x_{n} , x_{m} )\leqslant \rho(x_{n} , x) + \rho(x_{m} , x)<\frac{\varepsilon}{2}\cdot 2 = \varpesilon \implies \left\{ x_k \right\} _{k=1}^{\infty }$ сходится в себе
-\end{proof}
-\end{document}
-
