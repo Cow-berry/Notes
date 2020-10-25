@@ -2235,6 +2235,7 @@ $Q^{\left( j \right) } = \prod_{k=1}^{n} [a_k^{\left( j \right) }, b_k^{\left( j
  Тогда $y\in Q_j$, где $j \geqslant J$
 
  $\implies \left| y-c \right| \leqslant \frac{\delta}{2^{j-1}}\cdot \sqrt{n}<r\quad \forall j\geqslant J\implies  Q_j\subseteq B_r(c)\subseteq O_{i_c}\quad \forall j\geqslant J $. $Q_j$ -- ``плохой'' !!!
+<<<<<<< Updated upstream
 \end{proof}
 \begin{theorem}
     [критерий компактности в $\R^n$]
@@ -2256,6 +2257,136 @@ $Q^{\left( j \right) } = \prod_{k=1}^{n} [a_k^{\left( j \right) }, b_k^{\left( j
 \begin{lemma}
     Если $\left\{ k_j \right\} _{j\in \N }\subseteq \N $ и строга возрастает, то $\forall j\in \N \quad k_j\geqslant j$
 \end{lemma}
+=======
+\end{proof}
+\begin{theorem}
+    [критерий компактности в $\R^n$]
+
+    $\sqsupset K\subseteq \R^n$. Тогда следующие утверждения равносильны:
+    \begin{enumerate}
+        I: $K$  -- замкнуто и ограничено\\
+        II: $K$ -- компактно\\
+        III: $K$ -- секвенциально компактно \\(из любой последовательности в $K$ можно извлечь сходящуюся в  $K$ подпоследовательность )\\
+    \end{enumerate}
+\end{theorem}
+
+\begin{definition}
+    $\sqsupset \left\{ x_k \right\} _{k=1}^{\infty }$ -- последовательность в топологическом пространстве $(X, \Omega)$.
+
+    Если  $\left\{ k_j \right\} _{j=1}^{\infty }$ -- строго возрастающая последовательность натуральных чисел, то $\left\{ x_{k_j} \right\} _{j=1}^{\infty }$ называется \underline{подпоследовательностью} исходной последовательности 
+\end{definition}
+
+\begin{lemma}
+    Если $\left\{ k_j \right\} _{j\in \N }\subseteq \N $ и строга возрастает, то $\forall j\in \N \quad k_j\geqslant j$
+\end{lemma}
+
+\begin{definition}
+    $\sqsupset \left\{ y_k \right\} _{k=1}^{\infty }\subseteq \R$ -- последовательность. 
+
+    $\left\{ y_k \right\} $ называется \underline{возрастающей}, если $\forall k\in \N \quad y_{k+1}\geqslant y_k \left( \forall k, m, m\geqslant k \text{, то } y_m\geqslant y_k \right) $ 
+
+    $\left\{ y_k \right\} $ -- строго возрастает $\iff  \forall k, m\in \N m>k\implies y_m>y_k$
+\end{definition}
+\begin{definition}
+    $\sqsupset \left\{ x_k \right\} _{k=1}^{\infty }$ -- последовательность в т.п. $(X, \Omega), x\in X\quad \\ x = \lim_{k \to \infty} x_k \iff \forall $ открытой окрестности $U$ точки  $x\quad \exists N\in \R\forall k\in \N , k\geqslant N\quad x_n\in U$
+
+    $\iff  \forall $ открытой окрестности $U$ точки $x\quad \exists $ окрестность $V(+\infty ): \forall k\in V(+\infty )\cap \N \quad x_k\in V$
+\end{definition}
+\begin{example}
+    $x_k = (-1)^k, k\in \N $
+
+    $x_{2k} \equiv 1 \to 1$
+
+    $x_{2k+1}\equiv = -1 \to -1$
+\end{example}
+\begin{statement}
+    Если $\left\{ x_{n}  \right\} $ сходится (в $(X, \Omega)$), то любая её подпоследовательность сходится, причём к тому же пределу.
+\end{statement}
+\begin{proof}
+    $\sphericalangle \forall $ подпоследовательность $\left\{ x_{k_j} \right\} _{j=1}^{\infty }\quad \sqsupset x = \lim_{k \to \infty} x_k\quad \sqsupset U, N, x$ -- из определения предела.
+
+    Тогда $\forall j\geqslant N \implies  $ по лемме $ k_j\geqslant j\geqslant N \implies  x_{k_j}\in U \implies  x_{k_J} \to x, j\to +\infty $
+\end{proof}
+
+\begin{statement}
+    
+\end{statement}
+$\sqsupset \left\{ x_k \right\} $ -- последовательность в т.п. $(X, \Omega)$
+
+$\left\{ x_{k_j} \right\} _{j=1}^{\infty }\quad \left\{ x_{l_i} \right\} _{i=1}^{\infty }$ -- подпоследовательности
+
+$\left\{ x_k \right\} _{\N } = \left\{ x_{k_j} \right\} _{j\in \N } \cup \left\{ x_{l_i} \right\} _{i\in \N }$
+
+$\sqsupset \exists \lim_{j \to \infty} x_{k_j} = \lim_{i \to \infty} x_{l_i} = x$ Тогда $\exists \lim_{k \to \infty} x_k$ и $\lim_{k \to \infty} x_k = x$
+\end{statement}
+\begin{proof}
+    Т.к. $x_{k_j} \to  x$, то $\forall $ окрестности $U \exists J = J(U): \forall j>J\quad x_{k_j}\in U$
+
+    Т.к. $x_{l_i} \to x$, то $\forall $ окрестности $U\quad \exists I = I(U): \forall i>I\quad x_{l_i}\in U$
+    $N = \max\{k_J, l_I\}, \forall n>N\quad x_n = \begin{cases}
+        x_{k_{j}} \implies  j>J\\
+        x_{l_i} \implies  i>I
+    \end{cases} \implies x_n\in U$
+\end{proof}
+
+\begin{example}
+    $\Q = \left\{ x_k \right\} _{k=1}^{\infty }$ (при некоторой нумерации)
+
+    \begin{problem}
+        $\forall x\in \ov {\R} \exists $ подпоследовательность $\{x_{k_j}\}_{j=1}^{\infty }: x_{k_j} \to x, j\to \infty $
+    \end{problem}
+\end{example}
+
+\begin{proof}
+    [Доказательство критерия компактности в пространстве $\R^n$]
+
+    \begin{itemize}
+        \item []
+        \item [II $\implies $ I] Утверждение \ref{st3}
+        \item [I $\implies $ II] $K$ -- замкнуто и ограничено  $\implies K\subseteq B\subseteq Q\quad B$ -- шар, $Q$ -- куб  $\implies $ по \ref{st1} $K$ -- компакт
+        \item [III $\implies $ I] $K$ -- ограничено? от противного. Если  $K$ не ограничено   $\forall n\in \N  \exists x_k\in K:\quad \|x_k\|>k\quad \|x_k\|\to +\infty \quad 
+
+            x_k\to \infty \implies  \forall $ подпоследовательность $\left\{ x_{k_i} \right\} \to \infty \quad i\to \infty $
+
+            $K$ -- замкнуто,  $\forall p\in \p K \implies p\in K$ От противного $\sqsupset p\in \p K, p\not\in K \implies \exists $ последовательность $\left\{ x_k \right\} _{k=1}^{\infty }\subset K: x_k\to p, k\to +\infty \implies \forall $ подпоследовательность $\{x_{k_j}\} \to \not\in K, j\to \infty  !!!(III)$. Т.о. $K$ -- замкнуто
+        \item [III $\impliedby $II] $\sphericalangle \forall \left\{ x_k \right\} _{k=1}^{\infty } \times K$
+
+            Если $\left\{ x_k \right\} _{k\in \N }$ -- конечно, то $\exists \left\{ k_j \right\} _{j=1}^{\infty }\subseteq \N $ -- возрастающая $\quad x_{k_j} = const \implies  x_{k_j} \to x_{k_1}$
+
+            Если $\left\{ x_k \right\} _{k\in \N }$, тогда существует предельная точка в $ \R^n$ для F $\implies F$. Если нет, то $F$ -- замкнуто в $\R^n \implies F$ -- компакт ($F\subseteq K$)
+
+            $\forall x\in F\quad x$ -- изолированная точка $\exists \delta_x>0: B_{\delta_x}(x)\cap F = \{x\}$
+
+            $\cup B_{\delta_x}(x)\supseteq F $, но нельзя извлечь конечное подпокрытие.
+
+            Т.о. $\exists p\in \p F \implies  \forall \varepsilon>0\quad \overset{\circ }B_{\varepsilon}(p)\cap F\neq \O $
+
+            $\varepsilon=1\quad \sqsupset x_{k_1}\in B_1(p)\cap F \implies k_2\in \overset{\circ }B_{y_2}(p)\cap F\setminus \{x_1, \ldots, x_{k_1}\}\neq \O \quad k_2>k_1$
+
+            $\ldots$
+
+            $\exists x_{k_{j+1}}\in \overset{\circ}B_{2j}(o)\cap F\setminus \{x_1, \ldots, x_{k_j}\}\neq \O $
+
+            $\left\{ x_{k_j} \right\} \subseteq F, k_i\uparrow\quad \|x_{k_j} - p\|\leqslant \frac{1}{2j} \to 0, j\to \infty $
+    \end{itemize}
+\end{proof}
+\begin{corollary}
+    [принцип выбора Коши-Больцано] Из любой ограниченной последовательности в $\R^n$ можно извлечь сходящуюся подпоследовательность. (последовательность содержится в некотором компакте)
+\end{corollary}
+
+\begin{definition}
+    $\sqsupset (X, \rho)$ -- м.п. $\quad \left\{ x_k \right\} _{k=1}^{\infty }\subseteq X$. $\left\{ x_k \right\} _k$ называется \underline{сходящейся в себе} (она же последовательность Коши, она же фундаментальная последовательность), если $\forall \varepsilon>0\exists N\in \R: \forall n, m\in \N , n, m \geqslant N\quad \rho(x_{n} , x_{m} )<\varepsilon$
+\end{definition}
+
+\begin{statement}
+    Если $\left\{ x_k \right\} _{k=1}^{\infty } \subseteq (X, \rho)$, то она сходится в себе
+\end{statement}
+\begin{proof}
+    $\sqsupset \left\{ x_k \right\} $ сходится $\implies \exists x\in X: \forall \varepsilon>0\quad \exists N\in \R\quad \forall n\in \N , n\geqslant \N \quad \rho(x_{n} , x)<\frac{\varepsilon}{2}$. Тогда $\forall n, m\geqslant \N , n, m\in \N \quad \eho(x_{n} , x_{m} )\leqslant \rho(x_{n} , x) + \rho(x_{m} , x)<\frac{\varepsilon}{2}\cdot 2 = \varpesilon \implies \left\{ x_k \right\} _{k=1}^{\infty }$ сходится в себе
+\end{proof}
+\end{document}
+    
+>>>>>>> Stashed changes
 
 \begin{definition}
     $\sqsupset \left\{ y_k \right\} _{k=1}^{\infty }\subseteq \R$ -- последовательность. 
