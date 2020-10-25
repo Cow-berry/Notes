@@ -1015,4 +1015,215 @@ $\exists n_0: n>n_0 \implies  n+\frac{2^n}{3n}\leqslant 2^n$
 
 
 \end{proof}
+
+\begin{definition}
+    Алфавит $\Sigma$ -- любое непустое конечное множество.
+\end{definition}
+
+Последовательность символов: $\Sigma^2\quad \Sigma^3 \ldots \bigcup\limits_{k=0}^{\infty }\Sigma^k =: \Sigma^*$ -- множество всех слов (или подстрочек) над алфавитом $\Sigma$
+
+$\Sigma^0 = \{\varepsilon\}$
+
+$\alpha, \beta$ -- два слова.
+
+ \begin{definition}
+    $\alpha \beta$ -- конкатенация  $\Sigma^*\times \Sigma^*\to \Sigma^*$
+
+    $\alpha\in \Sigma^k\quad\beta\in \Sigma^l\quad \gamma = \alpha\beta \in \Sigma^{k+l}$
+
+    $\gamma[i] = \begin{cases}
+        \alpha[i]&,i\leqslant k\\
+        \beta[i-k]&,i>k\\
+    \end{cases}$ 
+\end{definition}
+Свойства конкатенации:
+\begin{enumerate}
+    \item $(\alpha\beta)\gamma = \alpha(\beta\gamma)$
+    \item  $\alpha \varepsilon = \epsilon\alpha=\alpha$
+\end{enumerate}
+
+Структуру с ассоциативностью и нейстральным элементом называют \underline{моноидом}
+
+\begin{definition}
+$\Sigma, \Pi$ -- алфавиты
+
+    Обобщённым кодом $\phi$ называется функция  \[
+    \varphi:\Sigma^* \to \Pi^*
+    .\] 
+\end{definition}
+
+\begin{definition}
+    Код называется \underline{декодируемым} (или однозначным), если $\alpha\neq \beta\implies \varphi(\alpha)\neq \varphi(\beta)$
+
+    Или, что то же самое, $\varphi$ -- инъективная функция.
+\end{definition}
+
+\begin{note}
+    $zip: \Sigma^* \to \Sigma^*$ -- однозначное декодируемый. Не требует, чтобы любая последовательность символов была валидным кодом, в который могло что-то зашифроваться.
+
+    $jpeg:\Sigma^* \to \Sigma^*$ -- сжатие с потерями. Когда декодируем, получаем другой файл. Несколько файлов могут сжаться в один код.
+
+    $png$ -- сжатие без потерь
+
+    Транслитерация фамилий в паспорте  $A\to A\quad C\to S\quad $ Ч $\to CH$
+\end{note}
+
+\begin{definition}
+    Разделяемый код: каждый символ кодирует отдельно $\varphi:\Sigma \to  \Pi^*$
+
+    $\varphi(c_1c_2c_3\ldots c_n) = \varphi(c_1)\varphi(c_2) \ldots \varphi(c_n)$
+\end{definition}
+
+На время будем считать $\Sigma=\Pi$
+
+ \begin{statement}
+    Не существует кода $\Sigma^*\to \Sigma^*$, который не увеличивает любой текст, а некоторые уменьшает
+\end{statement}
+\begin{proof}
+    Длины 0 меньше точно незакодировать
+
+    Длины 1 не можем опять.
+
+    Длины 2, опять та же проблемы, все тексты меньше уже заняты.
+\end{proof}
+
+\begin{note}
+    Но $zip$ то всё сжимает..
+
+    ( $zip$ архив точно не сожмёт дальше)
+\end{note}
+
+$S$ -- строка. Хотим построить для неё оптимальный код. Какой?
+
+$\Sigma = \{c_1, c_2, \ldots, c_n\}\quad p_i$ -- количество вхождений $c_i$  в  $S$
+
+$\varphi:\Sigma \to \mathbb{B}^*$ -- двоичный код. $l_i = len(\varphi(c_i))\quad len(\varphi(s)) = \sum\limits_{i=1}^{k} l_ip_i$
+
+\begin{itemize}
+    \item Префиксный код
+    \item код Хаффмана
+    \item неравенство Крафта-МакМиллана
+\end{itemize}
+
+\begin{definition}
+    $\varphi$ -- префиксный код, если  \[
+        \forall a, b\in \Sigma\quad \varphi(a) \text{ не префикс } \varphi(b)
+    .\] 
+\end{definition}
+
+\begin{example}
+    \begin{tabular}{cc}
+        a&0\\
+        b&00\\
+        c&11\\
+    \end{tabular}
+Это не префиксный код, потому что $a$ префикс  $b$
+
+
+    \begin{tabular}{cc}
+        a&0\\
+        b&00\\
+        c&11\\
+    \end{tabular}
+
+    Это уже префиксный код
+
+    \begin{tabular}{c|c|c|c|c|c|c|c|c}
+        0&0&10&10&11&11&11&10&0\\
+        a&a&b&b&c&c&c&b&a\\
+    \end{tabular}
+\end{example}
+
+\begin{lemma}
+    Префиксный код однозначно декодируемый
+\end{lemma}
+
+Можно строить дерево двоичного кода.
+\begin{figure}[ht]
+    \centering
+    \incfig{tree}
+    \caption{tree}
+    \label{fig:tree}
+\end{figure}
+
+Сиволам, которые встречаются чаще, хотелось бы выдать меньший код
+\begin{problem}
+    Префиксный код, $\Sigma l_ip_i \to \min$
+\end{problem}
+\begin{lemma}
+    [1]
+    $\exists $ дерево оптимального, когда два символа с минимальным $p_i$ являются братьями на максимальной глубине.
+\end{lemma}
+\begin{proof}
+    Рассмотрим дерево, расммотрим две минимальные вершины. Не может быть, чтобы брата не было (иначе у минимальной вершины можно было бы отрезать последний символ, оставив код префиксным.
+
+    Если два брата соотвествуют минимальным $p_i$ -- всё.
+
+    Если нет,  $p_i, p_j$ -- минимальные  $p_k, p_l$ -- самые глубокие
+
+     $p_i, p_j$ -- два самых минимальных $ \implies p_j\leqslant p_k, p_j\leqslant p_l$
+
+     $p_k, p_l$ -- два самых глубоких  $\implies l_i\leqslant l_k]quad l_j\leqslant l_l$
+
+     $\sum_{t} l_tp_t = \sum_{t\neq i,j,k,l}l_tp_t+p_il_i+p_jl_j+p_kl_k+p_ll_l$ 
+
+     $\sum_{t} \p l_tp_t = \sum_{t\neq i,j,k,l} l_tp_i+p_jl_k+p_jl_l+p_kl_i+p_ll_j$ 
+
+     Их разность $= p_i(l_i-l_k) + p_j(l_j-l_l) - p_k(l_i-l_k) - p_l(l_j-l_l)$
+\end{proof}
+\begin{example}
+    \begin{tabular}{ccc}
+        a&b&c\\2&2&3\\
+    \end{tabular}
+
+    $a = x 0\quad b = x 1$
+
+    Пусть мы объединили $a$ и  $b$  в один символ  $x$
+
+     $aabbc c c c =x x x x c c c$
+
+     $\sum_{a,b\to x}p_il_i = \sum_{i\neq x} p_il_i + p_xl_x = \sum_{i\neq x} p_il_i + p_a(l_a-1) + p_b(l_b-1) = \sum_{i(a,b)\text{отдельно}}p_il_i-p_a-p_b$
+\end{example}
+
+\begin{example}
+    Код Хаффмана
+
+\begin{figure}[ht]
+    \centering
+    \incfig{haff}
+    \caption{haff}
+    \label{fig:haff}
+\end{figure}
+\end{example}
+
+\begin{theorem}
+    [Неравенство Крафта-МакМиллана]
+
+    $S\quad c_1\ldots c_k$
+
+    Можно построить однозначно декодируемый двоичный код слов  $l_i$
+
+    \[
+        \iff \sum_{i=1}^{k} s^{-l_i} \leqslant 1
+    .\] 
+\end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item []
+        \item [$\impliedby $] $l_1\leqslant l_2\leqslant \ldots l_k$
+
+            $2^{-l_1} \geqslant  2^{-l_2} \geqslant  \ldots \geqslant  2^{-l_k}$
+
+\begin{figure}[ht]
+    \centering
+    \incfig{отрезки}
+    \caption{отрезки}
+    \label{fig:отрезки}
+\end{figure}
+
+$2^{-l_1}+ \ldots + 2^{-l_i-1}<\frac{1}{2}\quad \times 2^{l_i}$ 
+
+$-$
+    \end{itemize}
+\end{proof}
  \end{document}
