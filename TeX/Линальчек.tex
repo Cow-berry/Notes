@@ -73,6 +73,7 @@
 \newtheorem*{note}{Замечание}
 \newtheorem*{example}{Пример}
 \renewcommand\qedsymbol{$\blacksquare$}
+\newcommand\vect[1]{\overset{\longrightarrow}{#1}}
 % Fix some spacing
 % http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
 \makeatletter
@@ -887,7 +888,633 @@ $\vec a \times  \vec b =
     a_2 & a_3\\ b_2 & b_3\\
 \end{vmatrix} \vec e_2 \times \vec e_3$
 
-$\vec e_1\vec e_2 = \sum_{i=1}^{3} \alpha_ie_i$
+$\vec e_1\vec e_2 = \sum\limits_{i=1}^{3} \alpha_ie_i$
+
+\section{Практика 4: Векторная Алгебра}
+    \begin{example}
+\begin{figure}[ht]
+    \centering
+    \incfig{vec}
+    \caption{vec}
+    \label{fig:vec}
+\end{figure}
+$\frac{\left| AC \right| }{\left| CB \right| } = \frac{n}{m}$ 
+
+$\vec r_C = ?$
+
+$\vec r_C = \frac{n}{m+n} \left( \vec r_B - \vec r_A \right)  + \vec r_A$
+    \end{example}
+
+    \begin{itemize}
+        \item [п1] Скалярное произведение $(\vec a, \vec b) = \left| \vec a \right| \Pr_{\vec a}^{\perp}\vec b$
+    \end{itemize}
+
+    \begin{example}
+        $\sqsupset \left| \vec a \right|  = 1\quad \left| \vec b \right|  = 2\qquad (\vec a - \vec b)^2 + (\vec a + 2\vec b)^2=20$
+
+        $\left| \vec  a\right|^2 + 2(\vec a, \vec b) + \left| \vec b \right|^2 + \left| \vec a \right| ^2 + 4(\vec a, \vec b) + 4\left| \vec b \right| ^2 = 20  $
+
+        $2(\vec a, \vec b) = -2 \implies (\vec a, \vec b) = -1\quad \cos  \varphi = -\frac{1}{2}\quad \varphi = \frac{2\pi }{3}$
+    \end{example}
+
+    \begin{example}
+        $\vec a(1, 2, 1)\quad \vec b\left( 2, 3, 1,  \right) $ 
+
+        $\Pr_{\vec a}(\vec a + \vec b) = \Pr_{\vec a}\vec a + \Pr_{\vec a} \vec b = \left| a \right| + \frac{(\vec a,\vec b)}{\left| \vec a \right| }$
+    
+    Теперь посчитаем то же самое. но пусть вектора заданы в косоугольном базисе.
+
+    $\vec a = 2\vec m + \vec n\quad \vec b = 3\vec m - 2\vec n\qquad \left| \vec m \right| =2 \quad \left| \vec n \right|  = 3\quad \angle(\vec m, \vec n) = \frac{\pi }{4}$
+
+    Проекция и скалярное произведение не зависят от базиса.
+
+    $\left| \vec a \right|^2  = (2\vec m + 2\vec n)^2 = 4\vec |m|^2 + 4(\vec m, \vec n) + \vec |n|^2$
+    \end{example}
+    \begin{example}
+\begin{figure}[ht]
+    \centering
+    \incfig{trive}
+    \caption{trive}
+    \label{fig:trive}
+\end{figure}
+
+$\vec{AB} = 2\vec e_1 - 6\vec e_2\quad \vec{AC} = 3\vec e_1 + \vec e_2\quad \left| \vec e_1 \right|  = \left| \vec e_2 \right| =1\quad \angle\left( \vec e_1, \vec e_2 \right)  = \frac{\pi}{2} $ 
+
+$\cos\alpha = \frac{(\vec{AB}, \vec {AC}}{\left| \vec{AB} \right| \cdot \left| \vec{AC} \right| } = 0\quad \alpha = \frac{\pi }{2}$
+
+Аналогично остальные, вектор третеьй стороны можно выразить из двух других, как радиус векторов из $A$
+    \end{example}
+
+\begin{example}
+    $A(1, 2, 3)\quad B(1, 1, 1)\quad C(1, 0, 1)$ -- три точки параллелограмма
+
+    $O(1, 1, 2)\quad \vect{OB}(0,0,-1)\quad \vect{OC}(0,-1,-1)\quad \cos\varphi = \frac{\left( \vect{OB}, \vec{OC} \right) }{\left| \vect{OB} \right| \left| \vect{OC} \right| } = \frac{1}{1\cdot \sqrt{2} }$
+\end{example}
+
+\begin{example}
+    $\vec a = \alpha \vec m + \beta \vec n\quad \vec b = \gamma \vec m + \delta \vec n\quad \vec a \not\parallel \vec b\quad \left| \vec n \right|,\left| \vec m \right| , \left| \vec m \vec n \right| $ -- знаем
+
+    $\cos\varphi = \frac{\left| \vec a \right| ^2 - \left| \vec b \right| ^2}{\left| \vec a + \vec b \right| \cdot \left| \vec a - \vec b \right| }$ 
+
+    $\left| \vec a \right| ^2 = (\vec a, \vec a) = \left( \alpha \vec m + \beta \vec n \right) ^2$, для $\vec b$ так же
+
+    Проверка того, что параллелограмм $\frac{\alpha}{\gamma} \neq \frac{\beta}{\delta}$ 
+
+
+\end{example}
+ \begin{example}
+\begin{figure}[ht]
+    \centering
+    \incfig{pr}
+    \caption{pr}
+    \label{fig:pr}
+\end{figure}
+
+$\vec x(1, 2, 2)\quad \vec e_1(1, -1, 1)\quad \vec e_2(-2, 0, 1)$
+
+$\p {\vec x} = \alpha \vec e_1 + \beta \vec e_2$
+
+$\vec x = \p {\vec x} + \vec z$
+
+$\vec x = \alpha \vec e_1 + \beta \vec e_2 + \vec z\quad \begin{cases}
+   (\vec x, \vec e_1) = \alpha(\vec e_1, \vec e_1) + \beta (\vec e_1, \vec e_2)\\
+   (\vec x, \vec e_2) = \alpha (\vec e_1, \vec e_2) + \beta (\vec e_2, \vec e_2)
+\end{cases} $
+
+$\begin{cases}
+    3\alpha-\beta =1\\
+    -\alpha+5\beta = 0\\
+\end{cases}
+\quad \begin{cases}
+    \alpha = \frac{5}{14}\\
+    \beta = \frac{1}{14}\\
+\end{cases}$
+ \end{example}
+
+ \subsection{Векторное произведение}
+
+ $\left| \vec c \right| = \left| \vec a \right| \cdot \left| \vec b \right|\sin(\varphi)  $
+
+ При векторном произведении можно не учитывать компоненту 
+
+ \begin{example}
+     $[\vec a-\vec b, \vec a + \vec b] = [\vec a, \vec a]+[\vec a, \vec b] - [\vec b, \vec a] + [\vec b, \vec b] = 0 + [\vec a, \vec b] + [\vec a, \vec b] + 0  = 2[\vec a, \vec b]$
+
+     Получается площадь образуемого параллелограмма.
+ \end{example}
+
+\begin{example}
+\begin{figure}[ht]
+    \centering
+    \incfig{paral}
+    \caption{paral}
+    \label{fig:paral}
+\end{figure}
+\end{example}
+
+\section{Лекция 5}
+\subsection{Смешанное произведение}
+
+\begin{definition}
+    $\sqsupset \vec a, \vec b, \vec c$
+
+    Смешанным произведением векторов $\vec a, \vec b$ и  $\vec c$ называется число  $w$
+
+     \[
+         w = (\vec a, [\vec b, \vec c])
+     .\] 
+    $w$ -- псевдоскаляр
+\end{definition}
+
+\begin{note}
+    Алгебраические свойства:
+    \begin{enumerate}
+        \item Общие свойства векторного и скалярного произведений
+        \item $\vec a, \vec b, \vec c$ -- компланарны  $\iff (\vec a, [\vec b, \vec c]) = 0$
+        \item $\left( \vec a, \left[ \vec b, \vec c \right]  \right)  = \left| \vec a \right| \left| \left[ \vec b, \vec c \right]  \right|\cdot \cos \left( \vec a, [\vec b , \vec c] \right)  = \left| \vec a \right| \left| \vec b \right| \left| \vec c \right|  \sin (\vec b, \vec c)\cos \left( \vec a, \left[ \vec b, \vec c \right]  \right) $
+
+            получается объём следующего параллелограмма (рисунок)
+            \begin{note}
+                $V_{\text{Пар}}$ -- ориентированный объём 
+
+                $\begin{cases}
+                    V>0&,(\vec a, \vec b, \vec c) \text{ -- правая тройка }\\
+                    V<0&,(\vec a, \vec b, \vec c) \text{ -- левая тройка }\\
+                \end{cases}$
+            \end{note}
+        \item $\sphericalangle \left( [\vec a, \vec b], \vec c \right) = \left( \vec a, \left[ \vec b, \vec c \right]  \right)  = (\vec a, \vec b, \vec c) = (\vec c, \vec a, \vec b) = (\vec b, \vec c, \vec a $
+
+            $\sphericalangle (\vec b, \vec a, \vec c) = \left( \left[ \vec b, \vec c \right] , \vec c \right) = -\left( \vec a, \vec b, \vec c \right) $
+\begin{figure}[ht]
+    \centering
+    \incfig{mixed}
+    \caption{mixed}
+    \label{fig:mixed}
+\end{figure}
+    \end{enumerate}
+\end{note}
+
+\subsection{Смешанное произведение а координатах}
+
+\begin{enumerate}
+    \item Базис $\vec i, \vec j, \vec k\quad \vec i\vec j\vec k=1$
+
+        $\vec a(a_x, a_y, a_z),\quad \vec b(b_x, b_y, b_z)\quad \vec c(c_x, c_y, c_z)$
+
+        $\vec a \vec b\vec c = (a_x\vec i + a_y\vec j + a_z\vec k)\left( b_x\vec i + b_y\vec j + b_z\vec k \right) \left( c_x\vec i + c_y\vec j + c_z\vec k \right) = (a_x\vec i + a_y\vec j + a_z\vec k) \left( \begin{vmatrix} b_x&b_y\\c_x&c_y \end{vmatrix} \vec k - \begin{vmatrix} b_x&b_z\\c_x&c_z \end{vmatrix}\vec j  + \begin{vmatrix} b_y&b_z\\c_y&c_z \end{vmatrix} \vec i \right)  = a_x \begin{vmatrix} b_y&b_z\\c_y&c_z \end{vmatrix} - a_y \begin{vmatrix} b_x&b_z\\c_x&c_z \end{vmatrix} + a_z \begin{vmatrix} b_x&b_y\\c_x&c_y \end{vmatrix}  = \begin{vmatrix} a_x&a_y&a_z\\b_x&b_y&b_z\\c_x&c_y&c_z \end{vmatrix} (\vec i \vec j \vec k) $ -- число элементарных объёмов, которые помещаются в задаваемый параллелепипед
+    \item Произвольный базис. $\vec e_1, \vec e_2, \vec e_3$
+
+        $\vec a(a_1, a_2, a_3)\quad \vec b(b_1, b_2, b_3)\quad \vec c (c_1, c_2, c_3)$
+
+        $(\vec a, \vec b,\vec c) = (a_1\vec e_1 + a_2\vec e_2 + a_3\vec e_3)(b_1\vec e_1 + b_2\vec e_2 + b_3\vec e_3)(c_1\vec e_1 + c_2\vec e_2 + c_3\vec e_3) = \begin{bmatrix} a_1&a_2&a_3\\b_1&b_2&b_3\\c_1&c_2&c_3 \end{bmatrix} \cdot \left( \vec e_1, \vec e_2, \vec e_3 \right)$, где $\vec e_1 \vec e_2 \vec e_3$ -- объём параллелепипеда для меры
+\end{enumerate}
+
+\subsection{Двойное векторное произведение}
+
+$\vec a, \vec b, \vec c\quad \vec v = \left[ \vec a, \left[ \vec b, \vec c \right]  \right] $
+
+\begin{figure}[ht]
+    \centering
+    \incfig{dvec}
+    \caption{dvec}
+    \label{fig:dvec}
+\end{figure}
+
+$\vec v = \alpha \vec b + \beta \vec c$
+
+ \begin{enumerate}
+     \item $\vec v = \vec b\left( \vec a \vec c \right)  - \vec c(\vec a\vec b)$
+         \begin{proof}
+             $\left[ \vec b, \vec c \right]  = (b_yb_z-c_yc_z)\vec i - \left( b_xc_z - c_xb_z \right) \vec j + \left( b_yc_z-c_yb_z \right) \vec k$
+
+             $[\vec a, [\vec b, \vec c] ]= \left(a_y(b_xc_y-c_xb_y) + a_z\left( b_xc_z-c_xb_z \right) \right)\vec i - \left( a_x\left( b_xc_y-c_xb_y \right) - a_z\left( b_yc_z - b_zc_y \right)  \right) \vec j + \left( a_x\left( b_zc_x - c_zb_x \right)  - a_y\left( b_yc_z - b_zc_y \right)  \right) \vec k$ 
+
+             $v_x = b_x\left( a_xc_x+a_yc_y+a_zc_z \right)  - c_x\left( a_xb_x + a_yb_y+a_zc_z \right) $
+
+             $\sphericalangle a_yb_xc_y-a_yc_xb_y + a_zb_xc_z - a_zc_xb_z = b_x(a_yc_y+a_zc_z)-c_x \left( a_yb_y+a_zb_z \right)  + a_xb_xc_x - a_xb_xc_x = \vec v_x$ 
+
+             Дальше то же самое для второй и третьей компонент (Упражнение: дома проделать для одной из оставшихся координат)
+         \end{proof}
+\end{enumerate}
+
+
+\begin{theorem}
+    [Тождество Бьянки]
+
+    $\left[ \vec a, \left[ \vec b , \vec c \right]  \right] + \left[ \vec b , \left[ \vec c, \vec a \right]  \right] + \left[ \vec c, \left[ \vec a, \vec b \right]  \right] = \vec 0$
+\end{theorem}
+\begin{proof}
+    $\vec b( \vec a\vec c)-\vec c(\vec a\vec b) + \vec c(\vec b\vec a)  - \vec a(\vec b \vec c) - \vec b(\vec c\vec a) = \vec 0$
+\end{proof}
+
+$d(f,g) = (df)(g) + (f)(dg)$
+
+ $\left[ \vec a, \left[ \vec b, \vec c \right]  \right]  = \left[ \left[ \vec a, \vec b \right] \vec c \right] +\left[ \vec b, \left[ \vec a, \vec c \right]  \right] $
+
+ Позволяет считать двойное векторное произведение некоторым аналогом дифференцирования.
+ \section{Лекция 6}
+
+ \subsection{Аналитическая геометрия}
+ \subsubsection{Прямые и плоскости}
+
+ \begin{enumerate}
+     \item Прямая на плоскости.
+
+         $P_1, P_2$ -- произвольные различные точки на плоскости.
+
+         Прямая -- геометрическое место точек, равноудалённых от этих двух.
+
+         $\left| PP_1 \right|  = \left| PP_2 \right| $
+
+         Пусть $O$ -- точка отсчёта.  $\vec r_1 = \vect{OP_1},\vec r_2 =  \vect{OP_2}$ -- два радиус вектора
+
+         $\left| \vec r - \vec r_1 \right|^2 = \left| \vec r - \vec r_2 \right|  $
+
+         $\left|\vec  r_2 \right| - 2\left( \vec r\vec r_1 \right) + \left| \vec r_1 \right| ^2 = \left| \vec r \right| -2\left( \vec r\vec r_2 \right) +\left| \vec r_2 \right| ^2$
+
+         $2\left( \vec r,-\vec r_1-\vec r_2 \right) = \left| \vec r_2 \right| ^2-\left| r_1 \right| ^2 = \left( \vec r_2-\vec r_1, \vec r_2+\vec r_1 \right)  $
+
+         $\left( \vec r - \frac{\vec r_2+\vec r_1}{2}, \vec r_2-\vec r_1 \right) =0 \iff \vec r - \underbrace{\frac{\vec r_2+\vec r_1}{2}}\limits_{\vec r_0} \perp \underbrace{\vec r_2-\vec r_1}\limits_{\vec n}$
+
+         $\vec r-\vec r_0\perp \vec n\quad (\vec r-\vec r_0, \vec n) = 0\quad\\ (\vec r, \vec n) = (\vec r_0, \vec n)$ -- нормальное уравнение прямой
+\begin{figure}[ht]
+    \centering
+    \incfig{line}
+    \caption{line}
+    \label{fig:line}
+\end{figure}
+ \[
+     \left( \vec r\vec n \right) = \left( \vec r_0 \vec n \right)  
+.\] 
+Способы задания:
+\begin{enumerate}
+    \item В ДПСК $\vec r(x,y), \vec n(a,b),\vec r_0(x_0,y_0)$
+
+         \[
+             ax+by = ax_0+by_0 = -c \qquad a(x-x_0)+b(y-y_0) = 0
+        .\] 
+        \[
+        ax+by+c=0
+        .\]
+        Последнее -- общее уравнение прямой.
+
+
+    \item $\vec r-\vec r_0 \parallel \vec s \implies \exists t: \vec r-\vec r_0 = \vec s t$
+
+        $\vec r = \vec r_0 + \vec st\quad\vec s$ -- направляющий вектор, любой ненулевой, смотрящий вдоль прямой
+    \item $\vec z(x,y)\quad \vec r_0(x_0,y_0)\quad \vec s(\alpha, \beta)$
+
+        $\begin{cases}
+            x = x_0+\alpha t\\
+            y = y_0+\beta t\\
+        \end{cases}$ -- параметрическое уравнение прямой.
+    \item $\frac{x-x_0}{\alpha} = \frac{y-y_0}{\beta}$ -- каноническое уравнение прямой.
+\end{enumerate}
+\begin{example}
+    $l:\quad2x+3y-1=0$ Рассмотрим  $A(1,1)$, которая не лежит на прямой
+
+    $\p l:\quad2(x-1) + 3(y-1) = 0$ -- уравнение прямой, проходящей через  $A$ параллельно  $\ell$
+
+    $\pp l:\quad \frac{x-1}{2} = \frac{y-1}{3}$ -- уравнение прямой, проходящей через $A$ перпендикулярно  $\ell $ (её направляющая -- нормаль изначальной)
+\end{example}
+\begin{example}
+    $\frac{x-5}{2} = \frac{y-1}{4}\quad A(1,1)$ 
+
+    $\p l:\quad \frac{x-1}{2} = \frac{y-1}{4}$
+
+    $\pp l: 2(x-1) + 4(y-1) = 0$
+\end{example}
+\item Уравнение прямой с произвольным параметром
+
+    $ax+by+c=0\quad | \cdot \frac{1}{\sqrt{a^2+b^2} }$ 
+
+    $Ax+By+C=0$
+
+\begin{figure}[ht]
+    \centering
+    \incfig{radvec}
+    \caption{radvec}
+    \label{fig:radvec}
+\end{figure}
+
+$C = \frac{c}{\sqrt{a^2+b^2} } = -(\vec r_0, \vec n^0)$
+
+$C$ -- прицельный параметр -- (по модулю) расстояние от прямой до начала координат.
+\item Уравнение прямой в отрезках.
+
+     \[
+    ax+by=-c
+    .\] 
+
+    $\frac{ax}{-c} + \frac{by}{-c} = 1$ 
+
+    $\frac{x}{p} + \frac{y}{q} = 1$ 
+
+\begin{figure}[ht]
+    \centering
+    \incfig{отрезок}
+    \caption{отрезок}
+    \label{fig:отрезок}
+\end{figure}
+\item Уравнение с угловыми коэффициентами.
+
+    $\frac{a}{b}x + y = -\frac{c}{b}$ 
+
+    $y = kx+l$
+
+\begin{figure}[ht]
+    \centering
+    \incfig{coeff}
+    \caption{coeff}
+    \label{fig:coeff}
+\end{figure}
+$\tg \varphi = k$
+\item Уравнение прямой через две точки
+
+     \[
+     \frac{x-x_1}{x_2-x_1} = \frac{y-y_1}{y_2-y_1}
+     .\] 
+
+     $\vec r = \vec r_1 + (\vec r_2-\vec r_1)t$
+\end{enumerate}
+
+Взаимное расположение прямых:
+\begin{enumerate}
+    \item Найти угол между прямыми:
+
+        $l_1:\quad (\vec r\vec n_1) = D_1$
+
+        $l_2:\quad (\vec r, \vec n_2) = D_2$
+
+        $\angle \left( l_1, l_2 \right)  = \angle\left( \vec n_1, \vec n_2 \right)  = \varphi$
+
+        $\cos\varphi = \frac{(\vec n_1, \vec n_2)}{\left| \vec n_1 \right| \left| \vec n_2 \right| }$
+
+    \item Точка пересечения
+        $\left( \vec r_1, \vec n_1 \right)  = D_1$
+        
+        $\left( \vec r_2, \vec n_2 \right)  = D_2$
+
+        $\vec n_1(a_1, b_1)\quad \vec n_2\left( a_2, b_2 \right) \quad \frac{a_1}{a_2}\neq \frac{b_1}{b_2}$ 
+
+        $\vec r_0$ -- радиус вектор токи пересечения прямых
+
+        $a_1x+b_1y=D_1\quad a_2x+b_2y = D_2$
+
+        $\triangle = a_1b_2-a_2b_1\neq 0$
+
+        $\triangle_x = D_1b_2-b_1D_2$
+
+        $\triangle_y = a_1D_2-a_2D_1$
+
+        $x = \frac{D_1b_2-b_1D_2}{a_1b_2-a_2b_1}$ 
+
+        $y = \frac{a_1D_2-a_2D_1}{a_1b_2-a_2b_1}$ 
+
+        Подойдём с другой стороны:
+
+        $l_1: \vec r = \vec r_1 + \vec s_1 t$
+
+        $l_2: \vec r = \vec r_2 + \vec s_2 t$
+
+        $\vec s_1 \not\parallel s_2\quad \frac{\alpha_1}{\alpha_2}\neq \frac{\beta_1}{\beta_2}$ 
+
+        $\vec r_1 + \vec s_1t = \vec r_2+\vec s_2 t$
+
+        $\vec s_1t-\vec s_2t = \vec r_2-\vec r_1$
+
+        $\alpha_1t_1-\alpha_2t_1 = x_2-x_1$
+
+        $\beta_1t_1-\beta_2t_1 = y_2-y_1$
+
+        $\triangle = \alpha_1\beta_2-\alpha_2\beta_1\neq 0$
+    \item Есть прямая $\ell $ и точка $P\not\in \ell $
+
+        $(\vec r, \vec n)=D = \left( \vec r_0, \vec n \right) \quad \ell, P_0 $
+
+        $\vec r_p\quad P$
+
+        Сначала найдём ортогональную проекцию точки  $P$ -- точку  $Q$
+
+        $\vec r_Q = \vec r_P+\vect{PQ} = \vec r_P-\alpha\vec n$
+
+        $\left| QP \right| = (\vect{P_0P}, \vec n_0) = \frac{ \left(\vect{P_0P}, \vec n \right)}{\left| \vec n \right| } $ 
+
+        $\vect{QP} = \left| QP \right| \vec n = \frac{\left( \vect{P_0P}, \vec n \right) }{\left| \vec n \right| ^2}\vec n = \frac{\left( \vec r_p-\vec r_0, \vec n \right) }{\left| \vec n \right| ^2}\vec n$ 
+        $\vec r_q = \vec r_p-\vect{QP} = \vec r_p - \frac{\left( \vec r_p, \vec n \right) -D}{\left| \vec n \right| ^2}\vec n$ 
+
+        $II: \quad \left( \vec r_q, \vec n \right)  = \left( \vec r_p, \vec n \right) - \alpha \left| \vec n \right| ^2$
+
+        $D = \left( \vec r_p, \vec n \right) -\alpha \left| \vec n \right| ^2 \implies \alpha = \frac{\left( \vec r_0, \vec n \right) -D}{\left| \vec n \right| }$
+
+        Расстояние от $P$ до  $\ell \quad \rho(P, \ell ) = \left| \vect{QP} \right| = \frac{\left( \vec r_p, \vec n \right) -D}{\left| \vec n \right| }$
+
+        В координатах: $\rho(P, \ell ) = \frac{ax_p+by_p-D}{\sqrt{a^2+b^2} }$
+\end{enumerate}
+
+Плоскость -- множество точек пространство, равноудалённых от фиксированных точек.
+
+$\left| P_1P \right|  = \left| P_2P \right| $
+
+$\left( \vec r_0- \frac{\vec r_1+\vec r_2}{2}, \vec r_1-\vec r_2 \right) = 0 $ 
+
+$\left( \vec r , \vec n \right) = \left( \vec r_0, \vec n \right) =D $ -- нормальное векторное уравнение плоскости
+
+ДПСК: $\vec n(A,B,C)$
+
+$\left( \vec r-\vec r_0, \vec n \right) = 0\quad A(x-x_0) + B(y-y_0) + C(z-z_0) = 0 $
+
+$\left( \vec r, \vec n \right)  = D\quad Ax+By+Cz=D$ -- общее уравнение плоскости
+
+Параметрическое уравнение плоскости
+
+$\vec r = \vec r_0 + \vect{P_0P} = \vec r_0 + \alpha\vec m + \beta \vec q$ -- векторное параметрическое уравнение плоскости
+
+ДПСК: $\begin{cases}
+    x = x_0+\alpha m_1+\beta q_1\\
+    y = y_0+\alpha m_2 + \beta q_2\\
+    z = z_0+\alpha m_2 + \beta q_3\\
+\end{cases}\quad \vec m(m_1, m_2, m_3)\quad \vec q(q_1, q_2, q_3)$
+
+Плоскость можно задать через три точки. $P_1, P_2, P_3$
+
+Если нам нужна нормаль, образуем два вектора $\vec r_2-\vec r_1\quad \vec r_3 - \vec r_1$
+
+$\vec n = \left[ \vec r_2-\vec r_1, \vec r_3-\vec r_1 \right]\quad \vec r_0 = \vec r_1 $ 
+
+$(\vec r, \vec n) = (\vec r_1, \vec n)$
+
+$\left( \vec r-\vec r_1, \vec n \right) $
+
+$\left( \vec r-\vec r_1, \vec r_2-\vec r_1, \vec r_3-\vec r_1 \right) = 0$ 
+
+ДПСК:  $
+\begin{vmatrix}
+    x-x_1&y-y_1&z-z_1\\
+    x_2-x_1&y_2-y_1&z_1-z_1\\
+    x_3-x_1&y_3-y_1&z_3-z_1\\
+\end{vmatrix} = 0$
+
+Для паремтрического уравнения: $\vec r = \vec r_0 + \alpha \left( \vec r_2-\vec r_1 \right)  + \beta \left( \vec r_3-\vec r_1 \right) $ 
+
+Уравнение плоскости с прицельным параметром. $Ax+By+Cz+D = 0\quad \frac{1}{\sqrt{A^2+B^2+C^2} }$ 
+
+$\frac{A}{\sqrt{A^2+B^2+C^2} }x + \frac{B}{\sqrt{A^2+B^2+C^2} }y + \frac{C}{\sqrt{A^2+B^2+C^2} }z + \frac{D}{\sqrt{A^2+B^2+C^2} } = 0\quad \frac{D}{\sqrt{A^2+B^2+C^2} }$ -- прицельный параметр
+
+$D = \left( \vec r_0, \vec n \right)\quad $ Прицельный параметр: $ \left( \vec r_0, \vec n \right) / \left| \vec n \right| $
+
+Взаимное расположение плоскостей:
+$(\vec r, \vec n_1) = D_1\quad (\vec r, \vec n_2)=D_2$ -- две плоскости
+
+\begin{figure}[ht]
+    \centering
+    \incfig{плоскости}
+    \caption{плоскости}
+    \label{fig:плоскости}
+\end{figure}
+\begin{enumerate}
+    \item Угол
+
+        $\angle \left( \mathscr L_1, \mathscr L_2 \right)  = \angle\left( \vec n_1, \vec n_2 \right) $
+    \item Пересечение
+
+        $\left[ \vec n_1, \vec n_2 \right] \neq 0$
+    \item Параллельность
+
+        $\vec n_1 \parallel \vec n_2\implies \vec n_2 = \lambda \vec n_1$
+
+        $\left( \vec r_2-\vec r_1, \vec n \right) =0\quad \left( \vec r_2-\vec r_1, \vec n_1 \right)  = \left( \vec r_2, \vec n_1 \right) -D = \frac{D_2}{\lambda} - D_1 \left( = \frac{\left| \vec n_1 \right| }{\left| \vec n_2 \right| }D_2-D_1\neq 0  \right) $ 
+
+        $\left( \vec r, \lambda \vec n_1 \right) =D_2\quad D_1 = \frac{D_2}{\lambda}\quad \lambda = \frac{D_2}{D_1} = \frac{\left| \vec n_2 \right| }{\left| \vec n_1 \right| }$
+    \item Совпадение
+        $\frac{D_2}{\left| \vec n_2 \right| } = \frac{D_1}{\left| \vec n_1 \right| }$
+\end{enumerate}
+
+\begin{example}
+    Даны плоскость и точка, не лежащая на плоскости. найдём точку проекции.
+
+\begin{figure}[ht]
+    \centering
+    \incfig{проекция}
+    \caption{проекция}
+    \label{fig:проекция}
+\end{figure}
+
+$\mathscr L\quad \left( \vec r, \vec n \right) =D$
+
+$P\quad \vec r_1$
+
+$\vec r_Q -?$
+
+$\vec r_Q = \vec r_1 + \vect{PQ} = \vec r_1 + \frac{\left( \vec r_0-\vec r_1, \vec n \right) }{\left| \vec n \right| ^2}\vec n = \vec r_1 + \frac{D - \left( \vec r_1, \vec n \right) }{\left| \vec n \right| ^2}\vec n$ 
+
+$\rho\left( P, \mathscr L \right)  = \left| \vect{PQ} \right|  = \left| \frac{D-\left( \vec r, \vec n \right) }{|\vec n|^2} \right| $ 
+
+
+\end{example}
+
+Прямая в пространстве.
+
+Три точки задают прямую, равноудалённую от них всех
+
+\begin{figure}[ht]
+    \centering
+    \incfig{прямая-через-3-точки}
+    \caption{прямая-через-3-точки}
+    \label{fig:прямая через 3 точки}
+\end{figure}
+
+$\left| PP_1 \right| = \left| PP_2 \right|  = \left| PP_3 \right|  $
+
+#вывод будет позже
+
+$\vec s$ -- нормаль к плоскости, образованной тремя точками.
+
+$\vec r = \vec r_0 + \vect{P_0P} = \vec r_0 + \vec st$ -- векторное параметрическое уравнение прямой
+
+ДПСК:
+$\begin{cases}
+    x = x_0+\alpha t\\
+    y = y_0+\beta t\\
+    z = z_0+\gamma t\\
+\end{cases}\quad \vec s\left( \alpha, \beta, \gamma \right) \quad \vec r_0\left( x_0, y_0, z_0 \right) \quad \vrc r\left( x, y, z \right) $ 
+
+Векторное уравнение: $\vec r = \vec r_0 + \vec st\quad \times \vec s$
+
+$\left[ \vec r, \vec s \right] = \left[ \vec r_0, \vec s \right]  = \vec b$
+
+$\frac{x-x_0}{\alpha} = \frac{y-y_0}{\beta} = \frac{z-z_0}{\gamma}$ -- каноническое уравнение прямой (выразили $t$ и приравняли)
+
+Через две точки $\frac{x-x_0}{x_1-x_0} = \frac{y-y_0}{y_1-y_0} = \frac{z-z_0}{z_1-z_0}$ 
+
+Через две пересекающиеся плоскости. $\begin{cases}
+    \left( \vec r, \vec n_1 \right) =D_1\\
+    \left( \vec r, \vec n_2 \right) =D_2\\
+\end{cases}\quad [\vec n_1, \vec n_2]\neq 0$
+
+$\vec s = \left[ \vec n_1, \vec n_2 \right] $ 
+
+Прямая(взаимное расположение)
+
+$\ell_1\quad [\vec r, \vec s_1] = \vec b_1$
+
+$\ell_2\quad [\vec r, \vec s_2] = \vec b_2$
+
+\begin{enumerate}
+    \item $\ell_1 \parallel \ell_2  $
+
+        $\left[ \vec s_1, \vec s_2 \right] = 0 \implies \vec s_2 = \lambda \vec s_1$
+
+        $\left[ \vec r_1-\vec r_2, \vec s \right] \neq 0$ 
+    \item $\ell_1 = \ell_2  $
+
+        $[\vec s_1, \vec s_2] = 0$
+
+        $\left[ \vec r_1-\vec r_2, \vec s \right] = 0$
+
+    \item [] Плоскость через $\ell_1 \parallel \ell_2 $
+
+        $\vec n = \left[ \vec r_1-\vec r_2, \vec s\right] $
+
+        $\left( \vec r, \vec n \right)  = \left( \vec r_0, \vec n \right) $
+
+        $\left( \vec r-\vec r_0, \vec r_1-\vec r_2, \vec s \right) = 0$ -- уравнение плоскости
+    \item Скрещивание $\ell_1 \times \ell_2 $
+
+        $(\vec n = ) \left[ \vec s_1, \vec s_2 \right] \neq 0$ 
+
+        $\left( \vec r_2-\vec r_1, \vec n \right) \neq 0\quad \left( \vec r_2-\vec r_1, \vec s_1, \vec s_2 \right) \neq 0$
+\end{enumerate}
+
+\begin{example}
+    Есть прямая, есть точка. Найти отогональную проекцию этой точки на прямую.
+
+    \begin{tikzpicture}
+        \draw (0,0) node {$\ell$} -- (2, 1)l
+        \draw (1,.5) node {$Q$} --++(-.5,-1)node {$P$};
+    \end{tikzpicture}
+
+    $[\vec r, \vec s] = \vec b$
+
+    $\vec r_p\quad P$
+
+     $\vec r_Q -?$
+
+     $\vec r_Q = \vec r_p + \vect{PQ}$
+
+     $(\vec r, \vec s) = (\vec r_p, \vec s)$ -- плоскость
+
+     $\left[ \vec s, \left[ \vec r, \vec s \right]  \right]  = \vec r(\vec s \vec s) - \vec s(\vec s \vec r) = \left[ \vec b, \vec s \right]  $ 
+
+     $\vec r_Q\left| \vec s \right| ^2 - \vec s\left( \vec r_p\vec s \right) - \left[ \vec b, \vec s \right] $
+\end{example}
+
+
+
+
+
+
+
 
 \end{document}
 
