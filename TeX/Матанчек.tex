@@ -143,6 +143,20 @@
 }
 \usepackage{tikz}
 \usepackage{pgfplots}
+
+\makeatletter
+\newenvironment{sqcases}{%
+  \matrix@check\sqcases\env@sqcases
+}{%
+  \endarray\right.%
+}
+\def\env@sqcases{%
+  \let\@ifnextchar\new@ifnextchar
+  \left\lbrack
+  \def\arraystretch{1.2}%
+  \array{@{}l@{\quad}l@{}}%
+}
+\makeatother
 \begin{document}
     \maketitle
     \tableofcontents
@@ -2235,8 +2249,7 @@ $Q^{\left( j \right) } = \prod_{k=1}^{n} [a_k^{\left( j \right) }, b_k^{\left( j
  Тогда $y\in Q_j$, где $j \geqslant J$
 
  $\implies \left| y-c \right| \leqslant \frac{\delta}{2^{j-1}}\cdot \sqrt{n}<r\quad \forall j\geqslant J\implies  Q_j\subseteq B_r(c)\subseteq O_{i_c}\quad \forall j\geqslant J $. $Q_j$ -- ``плохой'' !!!
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+
 \end{proof}
 \begin{theorem}
     [критерий компактности в $\R^n$]
@@ -2258,18 +2271,16 @@ $Q^{\left( j \right) } = \prod_{k=1}^{n} [a_k^{\left( j \right) }, b_k^{\left( j
 \begin{lemma}
     Если $\left\{ k_j \right\} _{j\in \N }\subseteq \N $ и строга возрастает, то $\forall j\in \N \quad k_j\geqslant j$
 \end{lemma}
-=======
-=======
->>>>>>> Stashed changes
-\end{proof}
+
+%\end{proof}
 \begin{theorem}
     [критерий компактности в $\R^n$]
 
     $\sqsupset K\subseteq \R^n$. Тогда следующие утверждения равносильны:
     \begin{enumerate}
-        I: $K$  -- замкнуто и ограничено\\
-        II: $K$ -- компактно\\
-        III: $K$ -- секвенциально компактно \\(из любой последовательности в $K$ можно извлечь сходящуюся в  $K$ подпоследовательность )\\
+        \item[I]: $K$  -- замкнуто и ограничено\\
+        \item[II]: $K$ -- компактно\\
+        \item[III]: $K$ -- секвенциально компактно \\(из любой последовательности в $K$ можно извлечь сходящуюся в  $K$ подпоследовательность )\\
     \end{enumerate}
 \end{theorem}
 
@@ -2313,7 +2324,6 @@ $Q^{\left( j \right) } = \prod_{k=1}^{n} [a_k^{\left( j \right) }, b_k^{\left( j
 
 \begin{statement}
     
-\end{statement}
 $\sqsupset \left\{ x_k \right\} $ -- последовательность в т.п. $(X, \Omega)$
 
 $\left\{ x_{k_j} \right\} _{j=1}^{\infty }\quad \left\{ x_{l_i} \right\} _{i=1}^{\infty }$ -- подпоследовательности
@@ -2347,9 +2357,7 @@ $\sqsupset \exists \lim_{j \to \infty} x_{k_j} = \lim_{i \to \infty} x_{l_i} = x
         \item []
         \item [II $\implies $ I] Утверждение \ref{st3}
         \item [I $\implies $ II] $K$ -- замкнуто и ограничено  $\implies K\subseteq B\subseteq Q\quad B$ -- шар, $Q$ -- куб  $\implies $ по \ref{st1} $K$ -- компакт
-        \item [III $\implies $ I] $K$ -- ограничено? от противного. Если  $K$ не ограничено   $\forall n\in \N  \exists x_k\in K:\quad \|x_k\|>k\quad \|x_k\|\to +\infty \quad 
-
-            x_k\to \infty \implies  \forall $ подпоследовательность $\left\{ x_{k_i} \right\} \to \infty \quad i\to \infty $
+        \item [III $\implies $ I] $K$ -- ограничено? от противного. Если  $K$ не ограничено   $\forall n\in \N  \exists x_k\in K:\quad \|x_k\|>k\quad \|x_k\|\to +\infty \quad  x_k\to \infty \implies  \forall $ подпоследовательность $\left\{ x_{k_i} \right\} \to \infty \quad i\to \infty $
 
             $K$ -- замкнуто,  $\forall p\in \p K \implies p\in K$ От противного $\sqsupset p\in \p K, p\not\in K \implies \exists $ последовательность $\left\{ x_k \right\} _{k=1}^{\infty }\subset K: x_k\to p, k\to +\infty \implies \forall $ подпоследовательность $\{x_{k_j}\} \to \not\in K, j\to \infty  !!!(III)$. Т.о. $K$ -- замкнуто
         \item [III $\impliedby $II] $\sphericalangle \forall \left\{ x_k \right\} _{k=1}^{\infty } \times K$
@@ -2374,116 +2382,7 @@ $\sqsupset \exists \lim_{j \to \infty} x_{k_j} = \lim_{i \to \infty} x_{l_i} = x
     \end{itemize}
 \end{proof}
 \begin{corollary}
-    [принцип выбора Коши-Больцано] Из любой ограниченной последовательности в $\R^n$ можно извлечь сходящуюся подпоследовательность. (последовательность содержится в некотором компакте)
-\end{corollary}
-
-\begin{definition}
-    $\sqsupset (X, \rho)$ -- м.п. $\quad \left\{ x_k \right\} _{k=1}^{\infty }\subseteq X$. $\left\{ x_k \right\} _k$ называется \underline{сходящейся в себе} (она же последовательность Коши, она же фундаментальная последовательность), если $\forall \varepsilon>0\exists N\in \R: \forall n, m\in \N , n, m \geqslant N\quad \rho(x_{n} , x_{m} )<\varepsilon$
-\end{definition}
-
-\begin{statement}
-    Если $\left\{ x_k \right\} _{k=1}^{\infty } \subseteq (X, \rho)$, то она сходится в себе
-\end{statement}
-\begin{proof}
-    $\sqsupset \left\{ x_k \right\} $ сходится $\implies \exists x\in X: \forall \varepsilon>0\quad \exists N\in \R\quad \forall n\in \N , n\geqslant \N \quad \rho(x_{n} , x)<\frac{\varepsilon}{2}$. Тогда $\forall n, m\geqslant \N , n, m\in \N \quad \eho(x_{n} , x_{m} )\leqslant \rho(x_{n} , x) + \rho(x_{m} , x)<\frac{\varepsilon}{2}\cdot 2 = \varpesilon \implies \left\{ x_k \right\} _{k=1}^{\infty }$ сходится в себе
-\end{proof}
-\end{document}
-    
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-
-\begin{definition}
-    $\sqsupset \left\{ y_k \right\} _{k=1}^{\infty }\subseteq \R$ -- последовательность. 
-
-    $\left\{ y_k \right\} $ называется \underline{возрастающей}, если $\forall k\in \N \quad y_{k+1}\geqslant y_k \left( \forall k, m, m\geqslant k \text{, то } y_m\geqslant y_k \right) $ 
-
-    $\left\{ y_k \right\} $ -- строго возрастает $\iff  \forall k, m\in \N m>k\implies y_m>y_k$
-\end{definition}
-\begin{definition}
-    $\sqsupset \left\{ x_k \right\} _{k=1}^{\infty }$ -- последовательность в т.п. $(X, \Omega), x\in X\quad \\ x = \lim_{k \to \infty} x_k \iff \forall $ открытой окрестности $U$ точки  $x\quad \exists N\in \R\forall k\in \N , k\geqslant N\quad x_n\in U$
-
-    $\iff  \forall $ открытой окрестности $U$ точки $x\quad \exists $ окрестность $V(+\infty ): \forall k\in V(+\infty )\cap \N \quad x_k\in V$
-\end{definition}
-\begin{example}
-    $x_k = (-1)^k, k\in \N $
-
-    $x_{2k} \equiv 1 \to 1$
-
-    $x_{2k+1}\equiv = -1 \to -1$
-\end{example}
-\begin{statement}
-    Если $\left\{ x_{n}  \right\} $ сходится (в $(X, \Omega)$), то любая её подпоследовательность сходится, причём к тому же пределу.
-\end{statement}
-\begin{proof}
-    $\sphericalangle \forall $ подпоследовательность $\left\{ x_{k_j} \right\} _{j=1}^{\infty }\quad \sqsupset x = \lim_{k \to \infty} x_k\quad \sqsupset U, N, x$ -- из определения предела.
-
-    Тогда $\forall j\geqslant N \implies  $ по лемме $ k_j\geqslant j\geqslant N \implies  x_{k_j}\in U \implies  x_{k_J} \to x, j\to +\infty $
-\end{proof}
-
-\begin{statement}
-    
-$\sqsupset \left\{ x_k \right\} $ -- последовательность в т.п. $(X, \Omega)$
-
-$\left\{ x_{k_j} \right\} _{j=1}^{\infty }\quad \left\{ x_{l_i} \right\} _{i=1}^{\infty }$ -- подпоследовательности
-=======
->>>>>>> Stashed changes
-
-$\left\{ x_k \right\} _{\N } = \left\{ x_{k_j} \right\} _{j\in \N } \cup \left\{ x_{l_i} \right\} _{i\in \N }$
-
-$\sqsupset \exists \lim_{j \to \infty} x_{k_j} = \lim_{i \to \infty} x_{l_i} = x$ Тогда $\exists \lim_{k \to \infty} x_k$ и $\lim_{k \to \infty} x_k = x$
-\end{statement}
-\begin{proof}
-    Т.к. $x_{k_j} \to  x$, то $\forall $ окрестности $U \exists J = J(U): \forall j>J\quad x_{k_j}\in U$
-
-    Т.к. $x_{l_i} \to x$, то $\forall $ окрестности $U\quad \exists I = I(U): \forall i>I\quad x_{l_i}\in U$
-    $N = \max\{k_J, l_I\}, \forall n>N\quad x_n = \begin{cases}
-        x_{k_{j}} \implies  j>J\\
-        x_{l_i} \implies  i>I
-    \end{cases} \implies x_n\in U$
-\end{proof}
-
-\begin{example}
-    $\Q = \left\{ x_k \right\} _{k=1}^{\infty }$ (при некоторой нумерации)
-
-    \begin{problem}
-        $\forall x\in \ov {\R} \exists $ подпоследовательность $\{x_{k_j}\}_{j=1}^{\infty }: x_{k_j} \to x, j\to \infty $
-    \end{problem}
-\end{example}
-
-\begin{proof}
-    [Доказательство критерия компактности в пространстве $\R^n$]
-
-    \begin{itemize}
-        \item []
-        \item [II $\implies $ I] Утверждение \ref{st3}
-        \item [I $\implies $ II] $K$ -- замкнуто и ограничено  $\implies K\subseteq B\subseteq Q\quad B$ -- шар, $Q$ -- куб  $\implies $ по \ref{st1} $K$ -- компакт
-        \item [III $\implies $ I] $K$ -- ограничено? от противного. Если  $K$ не ограничено   $\forall n\in \N  \exists x_k\in K:\quad \|x_k\|>k\quad \|x_k\|\to +\infty \quad 
-            x_k\to \infty \implies  \forall $ подпоследовательность $\left\{ x_{k_i} \right\} \to \infty \quad i\to \infty $
-
-            $K$ -- замкнуто,  $\forall p\in \p K \implies p\in K$ От противного $\sqsupset p\in \p K, p\not\in K \implies \exists $ последовательность $\left\{ x_k \right\} _{k=1}^{\infty }\subset K: x_k\to p, k\to +\infty \implies \forall $ подпоследовательность $\{x_{k_j}\} \to \not\in K, j\to \infty  !!!(III)$. Т.о. $K$ -- замкнуто
-        \item [III $\impliedby $II] $\sphericalangle \forall \left\{ x_k \right\} _{k=1}^{\infty } \times K$
-
-            Если $\left\{ x_k \right\} _{k\in \N }$ -- конечно, то $\exists \left\{ k_j \right\} _{j=1}^{\infty }\subseteq \N $ -- возрастающая $\quad x_{k_j} = const \implies  x_{k_j} \to x_{k_1}$
-
-            Если $\left\{ x_k \right\} _{k\in \N }$, тогда существует предельная точка в $ \R^n$ для F $\implies F$. Если нет, то $F$ -- замкнуто в $\R^n \implies F$ -- компакт ($F\subseteq K$)
-
-            $\forall x\in F\quad x$ -- изолированная точка $\exists \delta_x>0: B_{\delta_x}(x)\cap F = \{x\}$
-
-            $\cup B_{\delta_x}(x)\supseteq F $, но нельзя извлечь конечное подпокрытие.
-
-            Т.о. $\exists p\in \p F \implies  \forall \varepsilon>0\quad \overset{\circ }B_{\varepsilon}(p)\cap F\neq \O $
-
-            $\varepsilon=1\quad \sqsupset x_{k_1}\in B_1(p)\cap F \implies k_2\in \overset{\circ }B_{y_2}(p)\cap F\setminus \{x_1, \ldots, x_{k_1}\}\neq \O \quad k_2>k_1$
-
-            $\ldots$
-
-            $\exists x_{k_{j+1}}\in \overset{\circ}B_{2j}(o)\cap F\setminus \{x_1, \ldots, x_{k_j}\}\neq \O $
-
-            $\left\{ x_{k_j} \right\} \subseteq F, k_i\uparrow\quad \|x_{k_j} - p\|\leqslant \frac{1}{2j} \to 0, j\to \infty $
-    \end{itemize}
-\end{proof}
-\begin{corollary}
-    [принцип выбора Коши-Больцано] Из любой ограниченной последовательности в $\R^n$ можно извлечь сходящуюся подпоследовательность. (последовательность содержится в некотором компакте)
+    [принцип выбора Больцано-Вейерштрасса] Из любой ограниченной последовательности в $\R^n$ можно извлечь сходящуюся подпоследовательность. (последовательность содержится в некотором компакте)
 \end{corollary}
 
 \begin{definition}
@@ -2496,4 +2395,587 @@ $\sqsupset \exists \lim_{j \to \infty} x_{k_j} = \lim_{i \to \infty} x_{l_i} = x
 \begin{proof}
     $\sqsupset \left\{ x_k \right\} $ сходится $\implies \exists x\in X: \forall \varepsilon>0\quad \exists N\in \R\quad \forall n\in \N , n\geqslant \N \quad \rho(x_{n} , x)<\frac{\varepsilon}{2}$. Тогда $\forall n, m\geqslant \N , n, m\in \N \quad \rho(x_{n} , x_{m} )\leqslant \rho(x_{n} , x) + \rho(x_{m} , x)<\frac{\varepsilon}{2}\cdot 2 = \varepsilon \implies \left\{ x_k \right\} _{k=1}^{\infty }$ сходится в себе
 \end{proof}
+
+\begin{lemma}
+    $\sqsupset \{x_{n} \}$ сходится в себе и $\subseteq (X, \rho)$
+
+    Тогда:
+    \begin{enumerate}
+        \item $\{x_{n} \}$ ограничена
+        \item Если существует сходящаяся подпоследовательность $\{x_{n_k}\}$, то сама последовательность  $\{x_{n} \}$ сходится
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    $\{x_{n} \}$ сходится в себе $\iff  \forall \varepsilon >0 \exists N \in \R\quad \forall n, m \geqslant  N , n, m\in \N \quad \rho(x_{n} , x_{m} )<\varepsilon$
+
+    $\sphericalangle \varepsilon = 1\quad \sqsupset N = N\left( \varepsilon \right) $ из определения сходимости в себе.
+
+    $C = \max\{\rho\left( x_2, x_1 \right), \rho\left( x_3, x_1 \right), \ldots, \rho\left( x_{N-1} , x_1 \right), \rho\left( x_N, x_1 \right) +1   \}$ 
+
+    $B_C[x_1]$
+
+    $\sphericalangle x_{n} \implies \begin{sqcases}
+        n<N \implies \rho(x_n, x_1)\leqslant X\\
+        n>N \implies \rho\left( x_{n} , x_1 \right) \leqslant \rho\left( x_{n} , x_N \right) +\rho\left( xN, x_1 \right) \leqslant =C\\
+    \end{sqcases}$
+
+    Теперь о втором пункте.
+
+    $\sqsupset x_{n_k}\to x\in X, k\to \infty \quad x_{n} \to x?$
+
+    $\sphericalangle \varepsilon>0\quad \exists K: \rho\left( x_{n_k}, x \right)<\frac{\varepsilon}{2} \forall k:k\geqslant K, k\in \N  $
+
+    $x_{n} $ сх. в себе, то $\exists N_1\in \R:\quad \forall n, m\in \N \quad n, m\geqslant N\quad \rho\left( x_{n} , x_{m}  \right) <\frac{\varepsilon}{2}$ 
+
+    $N = \max{N_1, K}$
+
+    Если $n\geqslant N$, то $\rho\left( x_{n} , x \right) \leqslant \rho\left( x_{n} , x_{n_N} \right) +\rho\left( x_{n_N}, x \right)< \frac{\varepsilon}{2} + \frac{\varepsilon}{2}=\varepsilon  $
+\end{proof}
+
+\begin{theorem}
+    \begin{enumerate}
+        \item В произвольном метрическом пространстве любая сходящаяся последовательность фундаментальна
+        \item В пространствах $\R^n$ сходимость последовательности равносильна её фундаментальности.
+    \end{enumerate}
+    Второе утверждение -- критерий Коши-Больцано
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}
+        \item уже доказано
+        \item Половина доказана.
+
+            $\sqsupset \{x_{n}\}_{n=1}^{\infty } $ фундаментальна. Надо проверить, что она сходится.
+
+            Фундаментальность по лемме $\implies $ ограниченность. По принципу выбора $\implies \exists $ сходящаяся подпоследовательность. По лемме $\implies $ сходимость.
+    \end{enumerate}
+\end{proof}
+
+\begin{example}
+    $X=R\quad F(x) = \frac{x}{1+\left| x \right| }$ 
+
+        $x>0& F(x)=1-\frac{1}{1+x} \uparrow \text{ на } (0, +\infty )$
+
+        $\rho_F(x, y) = \left| F(x) - F(y) \right| $
+
+        $\rho_F(n, m) = \left| \frac{n}{1+n}-\frac{m}{1+m} \right| = \frac{|n-m|}{(1+n)(1+m)}<\varepsilon \impliedby N: \frac{1}{N}<\varepsilon\quad m, n>N$
+
+        $\{n\}_{n=1}^{\infty }$ -- фундментальна или сходится в себе, но не имеет предела
+
+        $F(\pm\infty ) = \pm 1$ (заменили функцию её пределом)
+
+        Получаем пролжением метрики на всю $\ov {\R}$ Тогда $\{n\}\to +\infty $
+\end{example}
+
+\begin{definition}
+    Метрическое пространство $(X,\rho)$ называется \underline{полным}, если любая фундаментальная последовательность в нём сходится.
+\end{definition}
+
+\section{Супремум и инфимум. Монотонная последовательность}
+
+\begin{definition}
+    Последовательного вложенных промежутков $\{[a_n, b_n]\}_{n=1}^{\infty }\quad a_n, b_n\in \R\quad a_n\leqslant a{n+1}\leqslant b_{n+1}\leqslant b_n \forall n\in \N $ называется \underline{стягивающейся}, если $b_n-a_n\to 0, n\to \infty $ 
+\end{definition}
+\begin{theorem}
+    Пусть $\{[a_n, b_n]\}$ -- стягивающаяся последовательность промежутков. Тогда:
+    \begin{enumerate}
+        \item $\exists ! C\in \R\quad \{C\} = \bigcap\limits_{n=1}^{\infty }[a_n, b_n] $ 
+        \item $a_n\to C\quad b_n\to C$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    По аксиоме 16 $\bigcap\limits_{n=1}^{\infty }[a_n, b_n]\neq \O  $ 
+
+    $\sqsupset c, d\in \bigcap\limits_{n=1}^{\infty }[a_n, b_n] \implies  \forall n\in \N \quad a_n\leqslant c\leqslant b_n\quad a_n\leqslant d\leqslant b_n \quad -b_n\leqslant -d\leqslant -a_n$ 
+
+    $a_n-b_n \to 0\leqslant c-d\leqslant b_n-a_n\to 0 \implies c-d\to 0\implies c=d$
+
+    \begin{align*}
+        b_n-(b_n-a_n) &= a_n\leqslant c\\
+                      &\leqslant c-(b_n-a_n)\to c
+    .\end{align*}
+    $\implies a_n\to C$
+
+    $b_n = a_n+(b_n-a_n)\to c+0=c$
+\end{proof}
+Упражнение:
+
+$C_0 = [0,1]$
+
+$C_1 = [0,1] \setminus (\frac{1}{3}, \frac{2}{3}) = [0,\frac{1}{3}] \cup  [\frac{2}{3}, 1]$ 
+
+$C_2 = C_1 \setminus (\frac{1}{9}, \frac{2}{9}) \setminus (\frac{7}{9}, \frac{8}{9})$, \ldots
+
+\begin{tikzpicture}[xscale=3, yscale=0.3]
+    \draw (0,0) -- (1,0);
+    \draw (0,-1) -- (.33, -1);
+    \draw(.66, -1) -- (1,-1);
+    \draw(0,-2) -- ({1/9},-2);
+    \draw({2/9},-2) -- ({1/3},-2);
+    \draw({2/3},-2) -- ({7/9},-2);
+    \draw({8/9},-2) -- (1,-2);
+    \foreach \x in {0,2, 6, 8, 18, 20, 24, 26} {
+        \draw ({\x/27}, -3) -- ({(\x+1)/27}, -3)
+    }
+\end{tikzpicture}
+
+$C = \bigcap\limits_{k=0}^{\infty }C_k$
+
+Проверить, что $C$ несчётно (и  $C\sim [0,1]$)
+
+$C$ -- Канторово множества, множество Кантора
+
+\begin{definition}
+    $\sqsupset E\subseteq \R\quad M\in \ov{\R}$
+
+    $M$ называется \underline{мажорантой} для  $E$, если  $\forall x\in E\quad x\leqslant M$
+
+    (\underline{миноранта})
+\end{definition}
+
+\begin{definition}
+    $E \subseteq \R\\\quad \sup E = \begin{cases}
+        +\infty &, \text{ если } E \text{ не ограничено сверху}\\
+        \min\{C:C \text{ -- мажоранта для } E\}&, \text{ если } E \text{ ограничено сверху}\\
+        -\infty &, E = \O 
+    \end{cases}$
+
+    Названия: супремум, точная верхняя граница
+\end{definition}
+
+TODO: дописать 1.5 пары
+
+\section{Предел отображения, предел функции}
+
+\begin{definition}
+    $\sqsupset (X, \Omega_X), (Y, \Omega_Y)$ -- топологические пространства.
+
+    $f:E\to Y\quad E\subseteq X, a\in \p E, A\in Y$
+
+    $A = \lim_a f \iff \forall $ окр. $U(A) \exists $ окр. $V(a):\quad f\left( \overset{\cdot }V(a)\cap E \right) \subseteq U(A)$
+
+    $\left( \iff  \forall x\in \overset{\cdot }V(a)\cap E \implies f(x)\in U(A) \right) $
+\end{definition}
+
+\begin{definition}
+    [по Коши]
+
+    $\sqsupset  (X, \rho_x), (Y, \rho_y)$ -- метрические пространства. $E\subseteq X\quad a\in \p E$
+
+    $f:X\to Y$
+
+    $A = \lim_a f \iff \forall \varepsilon>0\exists \delta >0:\forall x\in E: \rho_x(x, a)<\delta \implies \rho_y(f(x), A)<\varepsilon$
+\end{definition}
+\begin{definition}
+    [опр (по Коши) для функциий]
+
+    $E\subseteq \R, a\in \p E, f:E\to \R\quad A\in \R$
+
+    $A = \lim_af \iff \forall \varepsilon>0\exists \delta >0: \forall x\in E, 0<|x-a|<\delta \implies \left| f(x)-A \right| <\varepsilon$
+\end{definition}
+
+\begin{definition}
+    [по Гейне]
+    $\sqsupset (X, \Omega_X), (Y, \Omega_Y)$ -- топологические пространства
+
+    $E\subseteq X, a\in \p R, f:E\to Y, A\in Y$
+
+    $\lim_a f=A\iff \forall $ последовательности $\{x_{n} \}_{n=1}^{\infty }\subseteq E\setminus \{a\}: x_{n} \to a$, при $n\to \infty  \implies  f(x_n) \to A, n\to \infty $
+\end{definition}
+
+\begin{note}
+    Если $\{x_{n}\}_{n=1}^{\infty }$ из определения (по Гейне), то назовём $\{x_{n} \}_{n=1}^{\infty }$ последовательностью Гейне для $f$ и точки  $a$
+\end{note}
+
+\begin{theorem}
+    В метрических пространствах определения предела по Гейне и по Коши равносильны.
+
+    $A = H\lim_af \iff A =C\lim_af $
+\end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item []
+        \item [$\impliedby $] $\sqsupset A = C\lim_af; \sphericalangle \{x_{n} \}$ -- последовательность Гейне для $f$  в точке  $a$.  $\sphericalangle \forall $ окрестность $U(A) \implies \exists $ окрестность $V(a):\quad f\left( \overset{\cdot }V\cap E \right) \subseteq U(A); x_{n} \to a, x_{n} \neq a \implies \exists N: \forall n\geqslant N\quad x_{n} \in \overset{\cdot }V(a) \implies  f(x_{n} )\in U(A) \implies f(x_{n} )\to A$
+        \item [$\implies $] $\sqsupset A = H\lim_af$. От противного  $A = C\lim_af$
+
+            $\exists \varepsilon_0>0:\forall \delta>0\quad f\left(\overset{\cdot }B_{\delta}(a) \cap E \right)\not\subseteq B_{\varepsilon}(A) $ 
+
+            $\exists x_{\delta}\in \overset{\cdot }B_{\delta}(A)\cap E:\quad \rho\left( f(x_{\delta}), A \right) \geqslant \varepsilon$
+
+            $\forall n\in \N \quad \delta = \frac{1}{n}\quad \{x_{\frac{1}{n}}\}_{n=1}^{\infty }\subseteq E\setminus \{a\}\quad \rho\left( x_{\frac{1}{n}}, a \right) <\frac{1}{n}$ 
+
+                $x_{\frac{1}{n}}\to a$, но $\rho\left( f(x), A \right) \geqslant \varepsilon_0 \implies f\left( x_{\frac{1}{n}} \right) \not\to A, n\to \infty $, что противоречит наличию предела по Гейне !!!
+    \end{itemize}
+\end{proof}
+
+\begin{note}
+    Если  $(X, \Omega_x), (Y, \Omega_y)$ -- топологические пространства  $A\in Y$ и $\exists $ набор окрестностей $\{V_n(a)\}_{n=1}^{\infty }:\forall $ окр. $V(a) \exists N: \forall n\geqslant N\quad V_n(a)\subseteq V(a)$, теоретически также верно
+\end{note}
+
+В случае если $f:E\to \R\quad E\subseteq \R\quad a\in \p E, A\in \ov R, \widehat{\R}$, используется определение через окрестности.
+
+Варианты определения через параметры:
+\begin{enumerate}
+    \item $a = -\infty \quad A\in \R\quad f:E\subseteq \R\to \R\quad E$ -- неограниченно снизу
+
+        $A = \lim_{-\infty }f \iff \forall \varepsilon>0\exists M\in \R:\forall x<M, x\in E \implies \left| f(x)-A \right| <\varepsilon$
+    \item $A = \infty , a = \infty \quad \infty  = \lim_{\infty } f \iff \forall \mathscr{E}\in \R\exists M\in \R: \forall x\in E: \left| x \right| >M \implies \left| f(x) \right| >\mathscr{E}$
+    \item $\ldots$
+\end{enumerate}
+
+\begin{problem}
+Определения по Коши и по Гейне эквивалентны и в случае $A, a\in \ov {\R}, \widehat{e} {\R}$
+
+$V_n(+\infty ) = (n, +\infty ) \forall n\in \N $
+\end{problem}
+
+\begin{example}
+    \begin{enumerate}
+        \item $\lim_{x \to \pm\infty } \frac{a_nx^n + a_{n-1}x^{n-1} + \ldots + a_0}{b_mx^m + b_{m-1}x^{n-1} + \ldots + b_0} = \lim_{x \to \pm\infty } \frac{a_n x^n}{b_mx^m}$
+    \end{enumerate}
+\end{example}
+
+\begin{theorem}
+    [единственность предела]
+
+    $\sqsupset (X, \Omega_X), (Y, \Omega_Y)$ -- м.п. $E\subseteq X, a\in \p E$
+
+    $f:E\to Y\quad A, B\in Y\quad \begin{cases}
+        A = \lim_af\\
+        B = \lim_af\\
+    \end{cases} \implies A=B$
+\end{theorem}
+\begin{proof}
+    $\sphericalangle \forall $ последовательность Гейне для  $f$ и точки  $a\quad \{x_{n} \} \implies $ по определению предела по Гейне $f(x_{n} ) \to A, f(x_{n} )\to B, n\to \infty \implies A=B$ (по свойствам предела последовательности) 
+\end{proof}
+
+\begin{definition}
+    $\sqsupset f: X\to Y ,\quad X, Y$ -- м.п. $a\in \p E$
+
+    $f$ называется \underline{локально ограниченной} в точке $a$ отображения, если  $\exists $ окр. $U(a):\quad f|_{U(a)\cap E}$ ограничено (т.к. $\exists R>0\exists r>0\exists B\in Y:\quad f\left( B(a)\cap E \right) \subseteq B_r(b)$)
+\end{definition}
+
+\begin{theorem}
+    [локальная ограниченность отображения, имеющего предел]
+
+    $\sqsupset X, Y$ -- м.п. $E\subseteq X, a\in \p E\quad f:E\to Y, \exists \lim_af =A\in Y$. Тогда $f$ \underline{локально ограничена} в точке $a$
+\end{theorem}
+\begin{proof}
+    По Коши для $\varepsilon=1\exists B(a):\quad f\left( \overset{\cdot }B(a)\cap E \right) \subseteq B_1(A)$
+
+    Если $a\in E \implies f\left( B(a)\cap E \right) \subseteq B_1(A)\cap B_{\rho(f(a), A)}[A] \subseteq B_R(a)\quad$ 
+
+    $ R = \max\{1, 2\rho(f(x), A)\}$
+\end{proof}
+
+\begin{theorem}
+    [для функций]
+
+    Если $f:E\to \R, a\in \p E\cap \ov{\R}, A\in \R$
+
+    $A = \lim_af$ Тогда  $\exists $ окр $U(a)$ и $ \exists c>0: |f(x)|\leqslant C \forall x\in U(a)\cap E$ 
+
+    Аналогичное определение для $\C$
+\end{theorem}
+
+\begin{statement}
+    [об отделённости от нуля]
+
+    $\sqsupset E\subseteq \R(\C), f:E\to \R$ (или $\C$) $A = \lim_af$
+
+    $A\in \ov{\R}\setminus \{0\}$ (или $A\in \widehat{\R}\setminus \{0\}$ или $A\in \widehat{\C}\setminus \{0\}$)
+
+    Тогда $\exists $ окр. $U(a): f(x)\neq 0 \forall x\in \overset{\cdot }(a)\cap E$
+\end{statement}
+\begin{proof}
+    От противного $\sqsupset \forall $ окр. $U(a) \exists x\in \overset{\cdot }U(a)\cap E$
+
+    $f(x) = 0$
+
+    Тогда $\forall \in \N \exists x_{n} \in \overset{\cdot }U(a)\cap E\quad f(x_{n} )=0$
+
+    (если $a$ -- конечное,  $U_n = B_{y_n}(a), \begin{cases}
+        a = +\infty &, U_n = (n, +\infty )\\
+        a = \infty &, U_n = \{x:|x|>n\}
+    \end{cases}$
+
+    $x_{n} \to a, n\to \infty \quad x_{n} \neq a \forall n\in \N  \implies \{x_{n} \}$ -- последовательность Гейне $f(x_{n} )\to A\neq 0, n\to \infty  \implies $ !!!
+\end{proof}
+
+\begin{note}
+    Кроме ``$\lim_af=A$'' используется ``$\lim_{x \to a} f(x)=A$'' или ``$f(x)\to A, x\to a$''
+\end{note}
+
+\begin{theorem}
+    [об арифметических действиях над пределами]
+
+    $\sqsupset f, g\in X\to Y\quad (Y, \|\cdot \|)$ -- нормированное пространство, $(X, \rho)$ -- метрическое пространство
+
+     $\lambda:E\to K\quad K$ -- поле, отвечающее $Y$
+
+     $a\in \p E\quad \exists \lim_af=A\quad \lim_ag = B\quad A, B\in Y$
+
+     $\exists \lim_a\lambda = l\in K$
+
+     \begin{enumerate}
+         \item $\exists \lim_{x \to a} \lambda(x)\cdot f(x) = l\cdot A$
+         \item $\lim_{x \to a} \left( f(x)\pm g(x) \right) =A\pm B$
+         \item[4.] $Y=\R$ или $\C \implies \lim_{x \to a} f(x)\cdot g(x) = AB$
+         \item[5.] $\exists \lim_{x \to a} \|f(x)\| = \|A\|$
+     \end{enumerate}
+\end{theorem}
+\begin{proof}
+    Всё доказывается через последовательности.
+\end{proof}
+
+    Если $Y = \R^n\quad f:E\to Y\quad E\subseteq X$ -- м.п.в
+
+    $f(x) = y = (y_1, \ldots, y_{n})$
+
+    $f_k:x\to y_k\quad f_k$ --  $k$ -я координатная функция отображения  $f$
+
+    $A\in Y\quad A = (A_1, \ldots, A_n)$
+
+    $A = \lim_{x \to a} f \iff \forall l = 1:n\quad \lim_{x \to a} f_k(a) = A_k$
+\begin{note}
+    $\{x_{n} \}$ -- п. Гейне для $f$ и точки  $a \iff \{x_{n} \}$ -- п. Гейне для $a$ и  $f_k\quad \forall k = 1:n$
+
+    $A = \lim_{x \to a} f \iff f(x_m)\to A, m\to \infty  \forall $п. Гейне $\{x_m\}_{n=1}^{\infty } \iff \forall k=1:n\quad f_k(x_m)\to A_k, m\to \infty  \iff \forall k=1:n\quad A_k = \lim_{x \to a} f_k(x)$
+\end{note}
+
+\begin{example}
+    $f(x, y) = \begin{pmatrix} x+y\\xy\\x^2+y^2 \end{pmatrix} $ 
+
+    $\lim_{(2,1)}f = \begin{pmatrix} 3\\2\\5 \end{pmatrix}  $
+
+    $\not\exists \lim_{(x, y)\to \infty }f $ ни в $\ov{\R}^3$, ни в  $\widehat{\R}^3$
+\end{example}
+
+\begin{note}
+    Теорема об арифметических действиях в случае $Y = \ov{\R}$ (или $\widehat{\C}$) выполнена, если правая часть равенства определена в $Y$
+\end{note}
+
+\begin{theorem}
+    $\sqsupset f, g:R\to \R\quad E\subseteq \C, a\in \p E$
+
+    $\sqsupset \forall x\in E\setminus \{a\}\quad f(x)\leqslant g(x)$ и $\exists \lim _af, \lim_ag \in \ov{\R}$
+
+    Тогда $\lim_af\leqslant \lim_ag$
+\end{theorem}
+\begin{proof}
+    Если $\{x_{n} \}$ -- п. Гейне для $f$ и $a$, то и для  $g$  и $a$
+
+    $\forall n\in \N \quad f(x_{n} )\leqslant g(x_{n} )\implies \lim_{n \to \infty} f(x_{n} ) = \lim_{n \to \infty} f(x_{n} )\leqslant \lim_{n \to \infty} g(x_{n} ) = \lim_{n \to \infty} g(x)$
+\end{proof}
+
+\begin{theorem}
+   [о сжатой функции или теорема ``о трёх милиционерах'']
+
+   $\sqsupset f, g,h :E\subseteq \C\to \R\quad a\in \p E\quad \forall x\in E\setminus \{a\}\quad f(x)\leqslant g(x)\leqslant h(x)$
+
+   и $\exists \lim_af, lim_ah$ и $\lim_af = \lim_ah = A$
+
+   Тогда  $\exists \lim_ag$ и $\lim_ag = A$
+\end{theorem}
+\begin{proof}
+    (доказательство с помощью последовательностей)
+\end{proof}
+
+    \begin{note}
+        Если $f:E\subseteq X\to Y\quad X, Y$ -- м.п. 
+
+        $\forall $ посл. Гейне $\{x_{n} \}$ для $f$ и точки  $a$
+
+        $\exists \lim_{n \to \infty} f(x_{n} )$, то все такие пределы равны между собой $\left( \implies \lim_{x \to a} f(x) \right) $ 
+
+        (Если $\{x_{n} \}_{n=1}^{\infty }\quad \{y_{n} \}_{n=1}^{\infty }$ -- п. Гейне
+
+        $f(x_{n} )\to A\quad f(y_{n} )\to B\quad n\to \infty $)
+
+        $\{z_n\}_n = \{x_1, y_1, x_1, y_2, \ldots\}$ -- п. Гейне
+
+        $f(z_n)\to A\quad f(z_n)\to B \implies A = B$
+    \end{note}
+
+    \begin{note}
+        $\sqsupset f, g, h:E\subseteq X \to Y\quad X, Y$ -- м.п. $a\in \p E\cap E$
+
+        $\sqsupset f(x) = g(x) \forall x\in E\setminus \{a\}$
+
+        $\exists $ окр $U(a):\quad f(x) = h(x)\forall x\in \overset{\cdot}U(a)$
+
+        Тогда $\lim_{a} f = \lim_ag = \lim_ah$ (если существует один, то существуют два других, в случае существования равны)
+    \end{note}
+
+\begin{theorem}
+    $f:E\to \R$ (или в $\C$) $a\in \p E\quad E\subseteq X$ -- м.п.
+
+    Следующие утверждения равносильны:
+    \begin{enumerate}
+        \item $\exists \lim_af\in \R$ (или $\C$)
+        \item $\forall \varepsilon>0\exists $ окр $U(a):\forall x_1,x 2\in \overset{\cdot }U(a)\cap E\quad \left| f(x_1) - f(x_2) \right| <\varepsilon$ -- критерий Коши-Больцано для функций
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item []
+        \item [$1\implies 2$] $\sqsupset A = \lim_af$ -- конечный предел
+
+            $\forall \varepsilon>0\exists U(a):\left| f(x)-A \right| <\frac{\varepsilon}{2} \forall x\in \p U(a)\cap E$ 
+
+            Тогда если $x_1, x_2\in \overset{\cdot }U(a) \implies \left| f(x_1) - f(x_2) \right| = \left| f(x_1)-A+A-f(x_2) \right| \leqslant \left| f(x_1)-A \right|  + \left| f(x_2)-A \right| <\varepsilon$
+        \item [$1\impliedby 2$] $\sphericalangle $ п Гейне $\{x_{n} \}$ для $f$ и  $a\quad x_{n} \to a$
+
+            $\forall \varepsilon>0\exists$ окр $U(a):(2)$. Т.к. $x_{n} \to a$, то $\exists N\in \R: \forall n\geqslant N\quad x_{n} n\in \overset{\cdot }U(a) \implies \{f(x_{n} )\}$ -- сходится в себе
+
+            $\left| f(x_{n} ) - f(x_{m} ) \right| <\varepsilon\quad n, m\geqslant N$
+
+            $\implies \exists \lim_{n \to \infty} f(x_{n} ) \implies \exists \lim_a f$ (т.к. $\{x_{n} \}$ -- произвольная последовательность)
+    \end{itemize}
+\end{proof}
+
+\section{Символы $\sim , O, o$}
+
+\begin{definition}
+    $\sqsupset f:D_f\to \R\left( \C \right) $
+
+    $g:D_g\to \R\ldots$
+
+    $\alpha:F_{\alpha}\to \R\ldots$
+
+    $D_f, D_g, D_h\subseteq \C\quad a\in \widehat{\C}, a\in \ov {\R}\quad \exists $ окр $U(a): $
+
+     \[
+         \overset{\cdot }U(a)\cap D_f = \overset{\cdot }U(a) \cap D_y = \overset{\cdot }U(a) \cap D_{\alpha} = D
+    .\] 
+
+    И  $f(x) = \alpha(x)\cdot g(x) \forall x\in D$
+
+    Тогда пишут:
+    \begin{itemize}
+        \item $f\sim h, x\to a \iff  \alpha(x)\to 1, x\to a$ ($f$ асимптотически равна или эквивалентна  $g$ в окрестности точки  $a$) 
+        \item $f = O(g), x\to a  \iff \alpha(x)$ локально ограничено в точке $a$ ( $f$ равно О-большому от  $g$)
+        \item  $f(x) = o(g(x)), x\to a \iff  \alpha(x) \to 0, x\to a$ ($f$ равно о-малому от  $g$)
+    \end{itemize}
+\end{definition}
+
+Элементарные свойства:
+\begin{enumerate}
+    \item $f\sim g$  в точке $a \implies \begin{cases}
+            f = O\left( g \right) \\
+            g = O\left( f \right) \\
+    \end{cases}, x\to a$ 
+
+    $f = o(g) \implies f = O(g)$
+    \item Асимптотическое равенство есть  отношение эквивалентности:
+        \begin{itemize}
+            \item $f\sim f$
+            \item $f\sim g \iff  g\sim f$\\
+            \item $f\sim g, g\sim h \implies f\sim h$
+        \end{itemize}
+
+        Всё в одной точке
+    \item $f\sim g, x\to a \iff f = g + o(g), x\to a \iff g = f + o(f), x\to a$
+    \item Если $f\to L\in \R\setminus \{0\}, x\to a\quad g(x)\equiv L \forall x\in D_f$
+
+        Тогда $f(x) \sim g, x\to a$
+
+        $f = \frac{f}{L}\cdot g \to 1\cdot L$ 
+    \item Если $f\sim \ov f, x\to a$, то $\lim_{x \to a} f = \lim_{x \to a} \ov f$
+    \item Если $f\sim \ov f\quad g\sim \ov g \implies f\cdot g\sim \ov f \cdot  \ov g$
+
+        Если $g(x)\neq 0$  в некоторой окрестности точки $a\implies \frac{f}{g}\sim \frac{\ov f}{\ov g}$
+        Если $\begin{array}{c}
+            f\sim \ov f\\
+            g\sim \ov g
+        \end{array}, x\to a \nRightarrow f\pm g \sim \ov f\pm \ov g $
+\end{enumerate}
+
+\begin{example}
+    $f(x) = x+1 \sim \ov f = x$
+
+    $g(x) = -x\sim \ov g = g = -x$
+
+    $f(x) + g(x) = 1\not\sim 0$
+
+    $\sin x\sim x$
+
+    $-x\sim -x$
+
+    $\sin x-x\sim \frac{x^3}{2}$ -- упражнение
+\end{example}
+
+$x\to +\infty \quad \sqrt{x+1}-\sqrt{x}\sim Cx^{p}\quad p\in \R, C\in \R  $ 
+
+$= \frac{1}{\sqrt{x+1}+\sqrt{x}  } = \frac{1}{\sqrt{x} } \cdot  \frac{1}{1+\sqrt{\frac{x+1}{x}} }\sim \frac{\frac{1}{2}}{\sqrt{x} }$
+
+Упражнения: Исходя из $\sin x\sim x, x\to 0$ выяснить, что $\tg x\sim x, \arcsin x\sim x, \arctg x\sim x, \cos x\sim 1, 1-\cos x\sim \frac{x^2}{2}$
+
+$\lim_{x \to 0} \frac{e^x-1}{x} = \lim_{x \to 0} \frac{f(x) - f(0)}{x - 0} = \p f(0) = 1\quad f(x) = e^x \implies e^x-1\sim x, x\to 0\quad t\sim \ln (1+t), x\to 0, t\to 0$ 
+
+Достаточные условия: $\sqsupset D_g, D_f$ как в определении $O, o, \sim $
+
+$g \neq 0$ в некоторой окрестности $a$
+
+Если  $\frac{f(x)}{g(x)} \to 1, x\to a \implies  f(x) \sim g(x)$
+
+Если $\frac{f(x) }{g(x)}\to 0, x\to a\implies f(x) = o(g(x))$
+
+Если $\frac{f(x)}{g(x)}$ имеет конечный предел $\implies  f = O(g), x\to a$
+
+\begin{definition}
+    $f\asymp g , x\to a \iff \begin{cases}
+        f = O(g)\\
+        g = O(f)
+    \end{cases} x\to a$ 
+
+    ($f = \Theta(g), f = \Omega(g)$)
+\end{definition}
+
+Упражнение: $f(x) = \sin x $ найти функцию, которая будет $o(\sin x)$ при $x\to +\infty $
+
+     $x\to +\infty \quad x^m = O(x^n) \iff  m<n$
+
+     $x\to 0+\quad x^m = o(x^n) \iff m>n$
+
+     $x\to 0 x^2 = o(x)\quad x^3 = o\left( x^2 \right) $
+
+\begin{note}
+    \begin{enumerate}
+        \item 
+    $o(f) + o(f) = o(f)$
+
+    равенства в одну стороны  $f = o(g)$. Возможно более подходящим было бы  $f \in o(g)$
+
+    (если $g = o(f), h = o(f) \implies f + h = o(f)$) 
+\item $o(Cf) = o(f) = C\left( o(f) \right) $
+\item  $O(o(f)) = o(f)$ 
+
+\item $o(o(f)) = o(f)$
+\item $O(O(f)) = O(f)$
+\item  $O(f)\cdot O(g) = O(fg)$
+\item $o(f)\cdot o(g) = o(fg)$
+    \end{enumerate}
+
+
+
+\end{note}
+\begin{note}
+    $\forall p\in \R, p=const\quad (1+x)^p-1\sim px, x\to 0$
+
+    Если $p\in \N \quad (1+x)^p-1 = 1+px + \frac{p(p-1)}{2}x^2 + \ldots + x^p-1 \sim px$ 
+
+    $f(x) = (1+x)^p\quad \lim_{x \to 0} \frac{f(x)-f(0}{x} = \p f(0) = p$
+\end{note}
+
+$ \lim_{x \to 0} \frac{\sqrt{1+3x} - \sqrt[3]{1-2x}  }{\sqrt[4]{1+\frac{x}{3}} + \sqrt[5]{1+\frac{x}{2}}} = \frac{C_1}{C_2}$
+
+Знаменатель $\sim C_1x$
+
+Числитель $C_2x$
+
+$(1+x)^p-1\sim px\iff (1+x)^p-1 = px + o(x)$
+
+$\sqrt{1+3x}-1 = \frac{3}{2}x+o(x)\quad \sqrt[3]{1-2x}-1 = -\frac{2}{3}x+o(x)  $ 
+
+Числитель $\frac{3}{2}x+o(x) -\left( -\frac{2}{3}x + o(x) \right)  = \frac{13}{6}x + o(x)\sim \frac{13}{6}$
 \end{document}
