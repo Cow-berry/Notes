@@ -1426,7 +1426,7 @@ $\rho\left( P, \mathscr L \right)  = \left| \vect{PQ} \right|  = \left| \frac{D-
 
 $\left| PP_1 \right| = \left| PP_2 \right|  = \left| PP_3 \right|  $
 
-#вывод будет позже
+(вывод будет позже)
 
 $\vec s$ -- нормаль к плоскости, образованной тремя точками.
 
@@ -1437,7 +1437,7 @@ $\begin{cases}
     x = x_0+\alpha t\\
     y = y_0+\beta t\\
     z = z_0+\gamma t\\
-\end{cases}\quad \vec s\left( \alpha, \beta, \gamma \right) \quad \vec r_0\left( x_0, y_0, z_0 \right) \quad \vrc r\left( x, y, z \right) $ 
+\end{cases}\quad \vec s\left( \alpha, \beta, \gamma \right) \quad \vec r_0\left( x_0, y_0, z_0 \right) \quad \vec r\left( x, y, z \right) $ 
 
 Векторное уравнение: $\vec r = \vec r_0 + \vec st\quad \times \vec s$
 
@@ -1490,8 +1490,8 @@ $\ell_2\quad [\vec r, \vec s_2] = \vec b_2$
     Есть прямая, есть точка. Найти отогональную проекцию этой точки на прямую.
 
     \begin{tikzpicture}
-        \draw (0,0) node {$\ell$} -- (2, 1)l
-        \draw (1,.5) node {$Q$} --++(-.5,-1)node {$P$};
+        \draw (0,0) node {$\ell$} -- (2, 1);
+        \draw (1,.5) node {$Q$} -- ++(-.5,-1) node {$P$};
     \end{tikzpicture}
 
     $[\vec r, \vec s] = \vec b$
@@ -1508,11 +1508,168 @@ $\ell_2\quad [\vec r, \vec s_2] = \vec b_2$
 
      $\vec r_Q\left| \vec s \right| ^2 - \vec s\left( \vec r_p\vec s \right) - \left[ \vec b, \vec s \right] $
 \end{example}
+\section{Практика }
+
+\begin{example}
+    Даны две прямые, заданные параметрическими уравнениями:
+
+    $l_1:\quad \begin{cases}
+        x = 1+2t\\y=1-t
+    \end{cases}$ 
+
+    $l_2:\quad \begin{cases}
+        x = 2-t\\
+        y = 2+t
+    \end{cases}$ 
+
+    \begin{enumerate}
+        \item Параллельны ли они?
+
+            Набавляющие вектора $\vec s_1(2, -1)\quad \vec s_2 (-1, 1) \implies \vec s_1 \not\parallel s_2 \implies $ пересекаеются
+        \item Найти точку пересечения
+
+            $1+2t=2-t \implies t = \frac{1}{3} \implies x = \frac{5}{3}$
+
+            $1-t = 2+t \implies t = -\frac{1}{2} \implies y = \frac{3}{2}$ 
+
+            $l_1:\quad \frac{x-1}{2} = \frac{y-1}{-1}\quad \begin{cases}
+                x+2y = +3\\
+                x+y = 4\\
+            \end{cases}$
+
+            $l_2:\quad \frac{x-2}{-1} = \frac{y-2}{1}$
+
+            $y = -1, x = 5$ -- точка пересечение. верхний способ не работает, там разные  $t$
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    $l_1:\quad 2x+y+2 = 0\\ l_2:4x+y+1=0\\ $
+
+    $A(1, 2)\quad AB=AC\quad l=?$, чтобы проходила через  $BC$
+
+     Можно найти точку пересечения прямых  $O = l_1\cap l_2$
+
+     $\begin{cases}
+         2x+y = -2\\
+         4x+y = -1
+     \end{cases} \implies  2x=1\quad x = \frac{1}{2}\quad y = -3\quad O(\frac{1}{2}, -3)\quad OA(\frac{1}{2}, 5) \implies \p O(\frac{3}{2}, 7)$ 
+
+     $2(x-\frac{3}{2}) + (y-7) = 0$ 
+
+     $2x+y -10 = 0$
+
+    $C = \p l\cap l_2\quad \begin{cases}
+        2x+y=10\\ 4x+y = -1
+    \end{cases}\quad \begin{cases}
+        x = -\frac{11}{2}\\
+        y = 21\\
+    \end{cases} \implies l: \frac{x-1}{-\frac{11}{2}-1} = \frac{y-2}{21-2} $ -- ответ
+\end{example}
+
+\begin{example}
+    $A(1, 3)\quad B(2, 5)$ -- две вершины треугольника.  $H(1,4)$ -- точка пересечения высот этого треугольника. Найти треться точку треугольника $C$
+
+    $\vect{AB} = (1, 2) \implies l = 1(x-1) +2(y-4) = 0\quad x+2y=3$
+
+    $\vect{AH}(0,1) \implies \p l: y=5$ 
+
+    $C = l\cap \p l \implies C(-1, 5)$
+\end{example}
+
+Плоскости:
+
+$(\vec r\vec n) = (\vec r_0, \vec n) = \alpha$
+
+$Ax+By+Cz+\alpha = 0\quad \vec r = \vec r_0 + ]alpha \vec q + \beta \vec m$
+
+\begin{example}
+    $A(1, 1, 1)\quad B(2, 3, -1)\quad \vec a(0, -1, 2)$
+
+    $\vect{AB}(1, 2, -2)$
+
+    $\vec r = \vec r_a + \alpha \vec a + \beta \vect{AB}$
+\end{example}
+
+\begin{example}
+    $A(1, 1, -1)$
+
+     $\alpha_1: 2x-y+5z+3 = 0\\ \alpha_2: x+3y-z-7=0$
+
+      $\alpha: \alpha \perp \alpha 1, \alpha\perp \alpha_2\quad A\in \alpha\quad \alpha ?$
+
+      $\vec n_1(2, -1, 5)\quad \vec n_2(1, 3, -1) \implies \vec n_1 \not\parallel \vec n_2 \implies  \vec r = \vec r_a + \alpha \vec n_1 + \beta \vec n_2$
+\end{example}
+
+\begin{example}
+    $\alpha: 2x+3y+6z-12=0$
+
+    Вычислить объём фигуры, ограниченной тремя координатными и заданной плоскостями. 
+
+     $\frac{x}{6} + \frac{y}{4} + \frac{z}{2} = 1 \implies $ Знаем пересечения плоскости с координатными плоскостями.
+
+     $V = 8$
+\end{example}
+
+\begin{example}
+    $L = \begin{cases}
+        x+2y-3z-5=0\\
+        2x-y+z+2=0
+    \end{cases}$ -- уравнение прямой через пересечение непараллельных плоскостей.
+
+    Найти каноническое уравнение прямой.
+
+    $\vec n_1(1, 2, -3)\quad \vec n_2(2, -1, 1)$
+
+    $\vec n = \vec n_1 \times \vec n_2$
+
+    $\vec n =
+    \begin{vmatrix}
+        \vec i&\vec j &\vec k\\ 1 & 2 & -3\\ 2 & -1 & 1\\
+    \end{vmatrix} = -\vec i - u\vec j - 5\vec k$
+
+    $\sqsupset z = 0\quad \begin{cases}
+        x+2y=5\\ 2+-y=-2
+    \end{cases}\quad -5y = -12\quad \begin{cases}
+        y = \frac{12}{5}\\ x = \frac{1}{5}
+    \end{cases}$ 
+
+    $\frac{x-\frac{1}{5}}{-1} = \frac{y - \frac{12}{5}}{-7} = \frac{z-0}{-5}$
+\end{example}
+
+\begin{example}
+    $L:\quad \frac{x}{1} = \frac{y-3}{-2} = \frac{z-3}{-1} ( = t)\quad \alpha: x++2y+3z+3 = 0$ 
+
+    $\sqsupset P = L\cap \alpha\quad P -?$
+
+    $\vec s(1, -2, -1)\quad \vec n (1, 2, 3)$
+
+     $\begin{cases}
+         x = t\\
+         y = 3-2t\\
+         z = 3-t\\
+     \end{cases}$ -- вставляем в урванение для плоскости
+
+     $t + 2(3-2t)+3(3-t)+3 = 0$
+
+     $-6t = -18 \implies t = 3 \implies \begin{cases}
+         x=3\\
+         y = -3\\
+         z = 0\\
+     \end{cases}$
 
 
+\end{example}
 
+\begin{example}
+    $L:\quad \frac{x-2}{6} = \frac{y+1}{-5} = \frac{z-5}{4}$ 
 
+    $\alpha: x-3y + 2z-7 = 0$
 
+    Найти проекцию прямой  $L$ на плоскость  $\alpha$
+
+     $\vec n \times \vec s$
+\end{example}
 
 
 

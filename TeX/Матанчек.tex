@@ -2453,7 +2453,7 @@ $\sqsupset \exists \lim_{j \to \infty} x_{k_j} = \lim_{i \to \infty} x_{l_i} = x
 \begin{example}
     $X=R\quad F(x) = \frac{x}{1+\left| x \right| }$ 
 
-        $x>0& F(x)=1-\frac{1}{1+x} \uparrow \text{ на } (0, +\infty )$
+        $x>0$ и $F(x)=1-\frac{1}{1+x} \uparrow \text{ на } (0, +\infty )$
 
         $\rho_F(x, y) = \left| F(x) - F(y) \right| $
 
@@ -2514,7 +2514,7 @@ $C_2 = C_1 \setminus (\frac{1}{9}, \frac{2}{9}) \setminus (\frac{7}{9}, \frac{8}
     \draw({2/3},-2) -- ({7/9},-2);
     \draw({8/9},-2) -- (1,-2);
     \foreach \x in {0,2, 6, 8, 18, 20, 24, 26} {
-        \draw ({\x/27}, -3) -- ({(\x+1)/27}, -3)
+        \draw ({\x/27}, -3) -- ({(\x+1)/27}, -3);
     }
 \end{tikzpicture}
 
@@ -2540,9 +2540,172 @@ $C$ -- Канторово множества, множество Кантора
     \end{cases}$
 
     Названия: супремум, точная верхняя граница
+
+    $\inf E = \ldots$ -- инфимум
 \end{definition}
 
-TODO: дописать 1.5 пары
+\begin{note}
+    Если $E\neq \O$, то $\exists x\in E:\quad \inf E\leqslant x\leqslant \sup E \implies \inf E\leqslant \sup E$ (кроме случая $E=\O $)
+\end{note}
+
+\begin{theorem}
+    в $\ov{\R}\quad \sup E, \inf E$ существуют у всякого $E\subseteq \R$. Если $E$ ограничено сверху (снизу), то  $\sup E$ конечен ($\inf E$ конечен)
+\end{theorem}
+
+\begin{note}
+    $E\subseteq \R, R$ -- огр. $\implies $ в $\R\exists \sup E, \inf E$
+\end{note}
+
+\begin{proof}
+    $\sphericalangle E\neq \O $ -- огр. сверху. Докажем, что $\sup E$ существует и конечен 
+
+    $\sqsupset I = [a,b]$ -- отрезок. Назовём $I$ ``хорошим'', если:
+     \begin{enumerate}
+        \item $I\cap E\neq \O $
+        \item $I \cap \mathscr{M}  \neq \O $, где $\mathscr{M}$ -- множество всех мажорант $E$
+    \end{enumerate}
+
+    \begin{note}
+        [Критерий супремумы и инф]
+
+        $\sqsupset E\neq \O \subseteq \R, M\in \ov{\R}$. Тогда $M = \sup E \iff  \forall $ окр $U(M)\quad U(M)\cap (-\infty , M)\cap E\neq \O \qquad (M, +\infty )\cap E=\O $
+    \end{note}
+
+    Т.к. $E\neq \O \exists x\in E. $ Т.к. $E$ -- огр сверху,  $\exists M\in \mathscr{M}\cap \R$
+
+    $I_1 = [x, M]\neq \O , I_1$ -- хороший
+
+    $\sqsupset c = \frac{x+M}{2}$. Один из отрезков $[x, c]$ или  $[c, M]$ -- хороший
+
+    Если  $[c, M]\cap E\neq \O $, то $[c, M]$ -- хороший
+
+    Если  $[c, M]\cap E=\O \implies C\in \mathscr{M} \implies [x,c]$ -- хороший
+
+    Рассмотрим хорошую половину в качестве $I_2$.
+
+    Повторим действия, ...
+
+    В результате $\{I_n\}$ -- последовательность стягивающихся вложенных замкнутых промежутков, потому что длинна  $I_n = |I_n| = \frac{M-x}{2^{n-1}} \to 0 $ 
+
+    Следовательно, по теореме о стягивающихся промежутках $\exists c: \bigcap\limits_{n=1}^{\infty }I_n = \{c\}$ , и $ a_n\to c, b_n\to c$, где $a_n, b_n$ -- концы  $I_n$
+
+     $c = \sup E?$
+
+     $\forall n b_n$ -- мажоранта. $\forall x\in E\quad x\leqslant b_n \implies x\leqslant c \implies c\in \mathscr{M}\quad? \forall \varepsilon>0\quad (c-\varepsilon, c)\cap E\neq \O $
+
+     Т.к. $\left| I_n \right| \to 0$, то $\exists N: \forall n\geqslant N:\quad \left| I_n \right| <\varepsilon$ 
+
+     $I_n\cap E\neq \O \implies \exists x_n\in [a_n, b_n]\cap E \implies x_n\in [a_n, c]\cap E$
+
+     $x>a_n = b_n-(b_n-a_n)\geqslant c - (b_n-a_n)>c-\varepsilon\implies c = \sup E$
+\end{proof}
+
+\begin{note}
+    Если $E\subseteq D\subseteq \R$, то  \[
+    \sup E\leqslant \sup D
+    .\] 
+    \[
+    \inf E\geqslant \sup D
+    .\] 
+\end{note}
+
+\begin{definition}
+    $E\subseteq \R\quad f:E\to \R$
+
+    $f$ называется \underline{возрастающей на $E$}  $\iff \forall x_1, x_2\in E:\quad x_1\leqslant x_2 \implies  f(x_1)\leqslant f(x_2)$
+
+    $f$ называется \underline{строго возрастающей на $E$}  $\iff \forall x_1, x_2\in E:\quad x_1<x_2 \implies  f(x_1)< f(x_2)$
+
+    Убывающие аналогично
+   
+$\{x_{n}\}_{n=1}^{\infty }$ называется возрастающей $\iff  \forall n, m\in \N :n\leqslant m\implies x_n\leqslant x_m$
+
+$\{x_{n}\}_{n=1}^{\infty }$ называется строго возрастающей $\iff  \forall n, m\in \N :n< m\implies x_n< x_m$
+\end{definition}
+
+\begin{note}
+    $\{x_{n} \}_{n=1}^{\infty }$ возрастает (строго возрастает) $\iff \forall n\in \N \quad x_n\leqslant x_{n+1}\left( x_n<x_{n+1} \right) $
+\end{note}
+
+\begin{definition}
+    $\{x_{n} \}$ -- монотонная (строго монотонная) $\iff \begin{sqcases}
+        \{x_n\}_n \text{-- возрастающая}\\
+        \{x_n\}_n \text{-- убывающая}\\
+    \end{sqcases}\left( \begin{sqcases}
+        \{x_n\}_n \text{-- строго возрастающая}\\
+        \{x_n\}_n \text{-- строго убывающая}\\
+    \end{sqcases} \right) $
+\end{definition}
+
+\begin{theorem}
+    В $\ov{\R}$ предел любой возрастающей (убывающей) последовательности существует и равен её супремуму (инфимуму)
+\end{theorem}
+
+\begin{note}
+    Любая ограниченная монотонная вещественная последовательность сходится
+\end{note}
+
+$\sup_Ef = \sup f(E)$
+
+$\sup\{x_{n}\} = \sup\{x_1, x_2, \ldots, x_{n} \}$
+
+\begin{proof}
+    $\sqsupset \{x_{n} \}_{n=1}^{\infty }$ возрастает. $\sqsupset M = \sup\{x_{n} \}\in (-\infty , +\infty ]$
+
+    По критерию супремума $\forall $ окр $U(M)\quad \exists x_{n_U}\in U(M)\cap (-\infty , M)$
+
+    Тогда $\forall n\geqslant n_U\quad x_n\geqslant x_{n_U}\quad x_n\leqslant M \implies x_n\in U(M)$ Т.о. $x_n\to M, n\to \infty $
+\end{proof}
+
+\begin{statement}
+    неравенство Бернулли
+
+    \[
+        (a+x)^n\geqslant 1+nx\quad \forall n\in \N \forall x>-1
+    .\] 
+\end{statement}
+\begin{proof}
+    Докажем методом мат. индукции. 
+
+    База: $(1+x)^1\geqslant 1+1\cdot x$
+
+    Переход $n\to n+1$: $ (1+x)^{n+1} = (1+x)^n(1+x)\geqslant (1+nx)(1+x) = 1+nx+x+nx^2\geqslant 1+(n+1)x$
+\end{proof}
+
+\begin{theorem}
+    $x_{n}  = \left\{ (1+\frac{1}{n})^n \right\} _{n=1}^{\infty }$ и $y_{n} = \left\{ \left( 1+\frac{1}{n} \right) ^{n+1} \right\}_{n=1}^{\infty } $ сходятся.
+
+    (доказательство было на практике)
+
+    $e = \lim_{n \to \infty} \left( 1+\frac{1}{n} \right) ^n\left( =\lim_{n \to \infty } \left( 1+\frac{1}{n} \right) ^{n+1} \right)$
+
+    $x_n\leqslant e\leqslant y_{n} \forall n\in \N $
+
+    $e\approx 2,71828182845\ldots$
+\end{theorem}
+
+\begin{statement}
+    [формула Герона]
+
+    $a, x_0>0, x_{n} = \frac{1}{2\left( \frac{a}{x_{n-1}} + x_{n-1} \right) } \forall n\in \N $
+
+    Тогда $x_n\to \sqrt{a}, n\to \infty  $
+\end{statement}
+\begin{proof}
+    $x_{n}  = f(x_{n-1})$, где $f(x) = \frac{1}{2}\left( \frac{a}{x}+x \right)  = \frac{\sqrt{a} }{2}\left( \frac{\sqrt{a} }{x} + \frac{x}{\sqrt{a} } \right) $ 
+
+    $\forall t>0\quad t + \frac{1}{t}\geqslant 2$ Минимум достигается при $t=1 \implies f$ имеет минимум в $x = \sqrt{a} $ 
+
+    $x_{n+1}\geqslant x_n\forall n\in \N $
+
+    $x_{n+1} - x_n = \frac{1}{2}\left( \frac{a}{x_n} + x_n \right) -x_n = \frac{1}{2}\frac{a-x_n^2}{x_n}<0 \impliedby x_n>\sqrt{a} \impliedby x_n = f(x_{n-1}), x_{n-1}>0 $ по индукции
+
+    $f(x)\geqslant \sqrt{a} \forall x>0 $
+\end{proof}
+
+ 
+
+TODO: дописать 0.5 пары
 
 \section{Предел отображения, предел функции}
 

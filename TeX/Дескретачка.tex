@@ -1202,9 +1202,9 @@ $\varphi:\Sigma \to \mathbb{B}^*$ -- двоичный код. $l_i = len(\varphi
     $S\quad c_1\ldots c_k$
 
     Можно построить однозначно декодируемый двоичный код слов  $l_i$
-
+    тогда и только тогда, когда
     \[
-        \iff \sum_{i=1}^{k} s^{-l_i} \leqslant 1
+         \sum_{i=1}^{k} s^{-l_i} \leqslant 1
     .\] 
 \end{theorem}
 \begin{proof}
@@ -1214,6 +1214,33 @@ $\varphi:\Sigma \to \mathbb{B}^*$ -- двоичный код. $l_i = len(\varphi
 
             $2^{-l_1} \geqslant  2^{-l_2} \geqslant  \ldots \geqslant  2^{-l_k}$
 
+            $2^{-l_1}+ \ldots + 2^{-l_i-1}<\frac{1}{2}\quad \times 2^{l_i}$ 
+        \item [$\implies $] Пусть есть префиксный код. Запишем в листья его дерева $2^{-d}, d$ -- глубина. После этого запишем в узлах сумму детей. Тогда в корне будет  число $\leqslant 2^0=1$
+
+            Теперь пусть его однозначно декодируемый код. 0 и 1 заменим на a и b, чтобы они не интерпретировались как числа.
+
+            $\begin{array}{c}
+                с_1\to aba\\
+                c_2\to ab\\
+                \vdots \to  aa\\
+                c_n \to bbb\\
+            \end{array}$
+
+            Сложим их $(aba+ab+aa+bbb)^k = abaaba \ldots aba + abab\ldots ab + \ldots + bbbbbb\ldots bbb$ $n^k$ слагаемых. 
+
+            $L = \max l_i$ максимальная длина слова в сумме --  $kL$
+
+            Подставим  $a=\frac{1}{2}\quad b=\frac{1}{2}$ в равенство
+
+            $(\sum 2^{-li})^k = $ длины от $1$ до  $kL$ и все слова различны
+
+            (слова длины 1)  + (слова длины 2) + $ \ldots $ + (слова длины kL)
+
+            Для $i$ каждое слово вычислится в  $(\frac{1}{2})^i$ и они все различны, т.е. их максимум $2^i$, значит скобка не превышает $1$
+
+            Значит  $\left( \sum 2^{-li} \right)^k \leqslant kL \forall k$
+
+            Если сумма слева $>1$, то там растущае экспонента и она обгонит линейно растущую, значит  сумма $\leqslant 1$, что и требовалось.
 \begin{figure}[ht]
     \centering
     \incfig{отрезки}
@@ -1221,9 +1248,105 @@ $\varphi:\Sigma \to \mathbb{B}^*$ -- двоичный код. $l_i = len(\varphi
     \label{fig:отрезки}
 \end{figure}
 
-$2^{-l_1}+ \ldots + 2^{-l_i-1}<\frac{1}{2}\quad \times 2^{l_i}$ 
 
 $-$
     \end{itemize}
 \end{proof}
- \end{document}
+
+\begin{note}
+    Код Хаффмана -- оптимальный префиксный $\implies $
+\end{note}
+
+Пусть есть код с буквами $a, b$ и букв  $a$ очень много
+
+ $0\quad aaaaaaaaaa$
+
+  $10\quad a$ 
+
+  $11\quad b$
+
+  \section{Арифметическое кодирование}
+
+  $c_1, c_2, \ldots, c_n$ -- символы, которые встречаются $f_1, f_2, \ldots, f_n$ раз
+
+  $\sum f_i =L$ -- длина текста, который мы хотим закодировать
+
+   $p_i = \frac{f_i}{L}$ 
+
+   $abacaba\quad p_a = \frac{4}{7}\quad p_b = \frac{2}{7}\quad p_c = \frac{1}{7}$
+
+   Алгоритм: $l=0, r=1$ Делим в пропорциях  $p_i$-ых (порядок не важен, но должен быть одинаков у кодировщика и декодировщика) Далее берём следующую букву, выделяем соответствующий отрезок, зумимся в него и повторяем операцию, расмматривая его как изначальный.
+
+    \begin{enumerate}
+        \item $2^{-q}\leqslant r-l$
+
+            $\impliedby -q\leqslant \log _2 (l-r)$ 
+
+            $\impliedby q\geqslant -\log _2(l-r)$
+            
+            Но также $q\leqslant \left\lceil -\log _2(l-r) \right\rceil $
+
+            $l-r = \prod_{i=1}^L pc_i = \left( \prod_{i=1}^L p_i^{p_i} \right) ^L$
+
+            $-\log _2(l-r) = -L\log _2\left( \prod_{i=1}^{L}p_i^{p_i}\right)  = -L \sum_{i=1}^{n} p_i\log _2p_i$
+
+            $q\leqslant \Theta L, \Theta = \sum_{i=1}^{n} p_i\log _2p_i$ -- энтропия 
+
+   \end{enumerate}
+
+   \subsection{RLE-кодирование}
+
+   Running length encoding. $abbbbaaaaabbbbbb\quad 1a4b5a5b$
+   \subsection{MTF-кодирование}
+   Move to front
+
+   $abbbbaaaaabbbbbccccccccaa$
+
+   $\begin{array}{ccc}
+       a&b&c\\0&1&2
+   \end{array}$
+
+   $a\to 0, b\to 1$ но мы перемещаем $b$  в начало
+
+    $\begin{array}{ccc}
+        b&a&c\\
+    \end{array}$ 
+    
+    $b\to 0, b\to 0, \ldots, b\to 0, a\to 1, a\to 0 \ldots,b\to 1, b\to 0\ldots,c\to 2,c\to 0$
+
+    $0100010000100002000000020$ -- резкий переход по частотам в сторону  $0$
+
+     $\to bzip2$ -- BWT Barrows Wheeler Transform :
+
+     $abacaba\$\quad \$$ 
+
+      $\begin{array}{c}
+          \$avacaba\\
+          a\$abacab\\
+          aba\$abac\\
+          acaba\$ab\\
+          abacaba\$\\
+          ba\$abaca\\
+          bacaba\$a\\
+          caba\$aba\\
+      \end{array}$
+
+      последний столбец -- результат $abcb\$aaa$ 
+
+
+      Text $\to $ BWT $\to $ MTF $\to $ AE/Haff
+
+      \subsection{LZ77-78}
+
+      $abacaba$
+
+      $abac(4,3)$ -- отступи на 4 назад и повтори 3.
+
+      $ababababc\quad ab(2,2)(4,4)c\qquad ab(2,6)c$
+
+       $\begin{array}{cc}
+           a&0\\b&1\\c&2\\&\\ab&3\\ba&4\\ac&5\\ca&6\\aba&7\\a\$&8\\
+       \end{array}$
+
+       $010230$
+   \end{document}
