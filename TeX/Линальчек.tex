@@ -1671,6 +1671,175 @@ $Ax+By+Cz+\alpha = 0\quad \vec r = \vec r_0 + ]alpha \vec q + \beta \vec m$
      $\vec n \times \vec s$
 \end{example}
 
+\section{Практика: Кривые второго порядка на плоскости}
+
+\begin{definition}
+    Эллипс -- геометрическое место точек, сумма расстояний от которых до выбранных точек (называемых фокусами) постоянна.
+
+%\begin{figure}[ht]
+%    \centering
+%    \incfig{ellips}
+%    \caption{ellips}
+%    \label{fig:ellips}
+%\end{figure}
+
+$F_1, F_2$ -- фокусы
+
+$a$ -- длина большой полуоси
+
+ $b$ -- длина малой полуоси
+
+  $c$ -- фокусное расстояние  $c^2=a^2-b^2$
+
+  В Декартовой системе координат. $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$ 
+
+  $\varepsilon = \frac{c}{a} \in [0,1]$ -- эксцентриситет
+
+  $\varepsilon=0 \implies $ окружность $a^2=b^2=R^2$
+
+  $\varepsilon=1 \implies  a=c$
+
+  Уравнение касательной в точке $(x_0, y_0)$ \[
+  \frac{x x_0}{a^2} + \frac{y y_0}{b^2} = 1
+  .\] 
+  Директриса эллипса $x = \pm d = \pm \frac{a}{\varepsilon}$
+\end{definition}
+\begin{example}
+    Фокусы эллипса $(\pm 1, 0)$
+
+    $M(\sqrt{3}, \frac{\sqrt{3} }{2}) \in E $ 
+
+    Построить уравнение эллипса $E$
+\end{example}
+\begin{proof}
+    $c = 1 = a^2-b^2$
+
+     $\frac{3}{a^2} + \frac{3}{4 * b^2} = 1$
+
+     Два уравнения с двумя неизвестными $\implies  b=\sqrt{3}\quad a=2\quad \implies \frac{x^2}{4} + \frac{y^2}{3} = 1 $
+\end{proof}
+
+\begin{example}
+    Директрисы $x = \pm 4$
+
+    Фокусы всесте с верхней и нижней точкой образуют квадрат
+
+    Найти уравнение эллипса
+\end{example}
+\begin{proof}
+    $b = c \implies a^2-b^2=c^2\quad a^2 = 2c^2\quad a = \sqrt{2}c $
+
+    $d = \frac{a}{\varepsilon} = \frac{a^2}{c} = \frac{2c^2}{c} = 4 \implies c = 2\implies b = 2\quad a = 2\sqrt{2} $ 
+
+    $\frac{x^2}{8} + \frac{y^2}{4} = 1$
+\end{proof}
+
+\begin{definition}
+    Гипербола -- геометрическое место точек, (модуль)  разность расстояний от которой до заданных точек есть число постоянное
+
+    $\left| \left| F_1P \right|  - \left| F_2P \right|  \right|  = const$
+
+%\begin{figure}[ht]
+%    \centering
+%    \incfig{hyperbola}
+%    \caption{hyperbola}
+%    \label{fig:hyperbola}
+%\end{figure}
+
+    $F_1, F_2$ -- фокусы гиперболы
+
+    Уравнение гиперболы    $\frac{x^2}{a^2} - \frac{y^2}{b^2}=1$ 
+
+    $c^2 = a^2+b^2$
+
+    Уравнение асимптот $y = \pm \frac{b}{a}x$ 
+
+    Уравнение касательной в точке $(x_0, y_0)$\[
+    \frac{x x_0}{a^2} - \frac{y y_0}{b^2} = 1
+    .\] 
+
+    Уравнение директрисы  $x = \pm d = \frac{a}{\varepsilon}$ 
+
+    $\varepsilon = \frac{c}{a}\in [1, \infty )$ 
+
+    $\varepsilon=1 \implies a=c$
+
+    $\varepsilon \to \infty \implies b\to \infty $ -- две прямые, проходящие через фокусы вертикально.
+
+\end{definition}
+\begin{example}
+    Доказать, что отрезок касательной к гиперболе, заключённый между её асимптотами точкой касания делится пополам.
+\begin{figure}[ht]
+    \centering
+    \incfig{zodacha}
+    \caption{zodacha}
+    \label{fig:zodacha}
+\end{figure}
+
+$\left| AP \right|  = \left| BP \right| $
+\end{example}
+\begin{proof}
+    $\begin{cases}
+        \frac{x x_0}{a^2} - \frac{y y_0}{b^2} = 1\\
+        y = \pm \frac{b}{a}x
+    \end{cases}$ 
+
+    \[
+    A:\quad \frac{x_Ax_0}{a^2} - \frac{b}{a}\frac{x_A y_0}{b^2} = 1\implies x_A = \frac{1}{\frac{x_0}{a^2} - \frac{y_0}{ab}} = \frac{a^2b}{x_0b-y_0a}
+    .\] 
+    \[
+    B:\quad \frac{x_B x_0}{a^2} + \frac{b}{a}\frac{x_by_0}{b^2} = 1 \implies  x_B = \frac{a^2b}{x_0b+y_0a}
+    .\] 
+
+    $x_A + x_B = a^2 b \frac{2x_0b}{x_0^2b^2-y_0^2a^2} = \frac{2x_0}{\frac{x_0^2}{a^2} - \frac{y_0^2}{b^2}} = 2x_0$
+\end{proof}
+
+\begin{definition}
+    Парабола -- геометрическое место точек, равноудалённых от заданной прямой и точки
+
+    $\rho(l, F) = |PF|$
+
+%\begin{figure}[ht]
+%    \centering
+%    \incfig{parabola}
+%    \caption{parabola}
+%    \label{fig:parabola}
+%\end{figure}
+
+$F$ -- фокус параболы
+Уравнение  $y^2 = 2px$
+
+Уравнение касательной $yy_0 = p(x+x_0)$
+\end{definition}
+
+\begin{example}
+    $y^2 = 4.5 x$
+
+    $M: \rho(l, M) = 9.125$
+
+     $\left| OM \right| -?$
+\end{example}
+\begin{proof}
+    $\frac{p}{2} = 1.125$ 
+
+    $M_x = 8\implies M_y = 36$
+
+    $\left| OM \right|^2 = x_M^2 + y_M^2 = 36+64 =100 $
+\end{proof}
+\begin{example}
+    Найти касательную к параболе $y^2 = 16x$, проходящую через точку $(1,5)$
+\end{example}
+\begin{proof}
+    $\begin{cases}
+        yy_0 = p(x+x_0)\\
+        y_0^2 = 2px
+    \end{cases}$ 
+
+    $yy_0 = p\left( x + \frac{y_0^2}{2p} \right) $
+
+    $y_My_0 = p\left( x_M + \frac{y_0^2}{2p} \right) \implies y_0 = \ldots$
+\end{proof}
+
 
 
 \end{document}

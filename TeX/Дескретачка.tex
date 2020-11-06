@@ -14,6 +14,7 @@
 \usepackage[bb=boondox]{mathalfa}
 \usepackage{cancel}
 % Bold math
+\usepackage{ulem}
 \usepackage{bm}
 % Resizing
 %\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
@@ -1349,4 +1350,198 @@ $-$
        \end{array}$
 
        $010230$
+
+\section{Избыточное кодирование}
+
+\subsection{бит чётности}
+Например перед каждыми 8 битами будет стоять бит чётности и если его значение не совпадает с чётностью 8-ю битов, то будет понятно, что память повредилась.. После этого 
+
+\begin{definition}
+    [расстояние Хэмминга]
+    Пусть мы пользуемся кодирование постоянной длины.
+
+    $H(x, y)$ -- количество позиций  $i:x[i]\neq y[i]$
+
+    $H(001101, 101000) = 3$
+\end{definition}
+\begin{note}
+    А расстояние ли оно? Вспомним матан
+
+    \begin{enumerate}
+        \item $d(x, y)\geqslant 0$
+        \item $d(x, y)=0 \iff x==y$ 
+        \item  $d(x, y) = d(y,x)$
+        \item $d(x, y) + d(y, z)\geqslant d(x, z)$
+    \end{enumerate}
+
+   количество $\geqslant 0$
+
+   ноль, только если нет различий
+
+   Определение не учитывает порядок $x, y$
+
+   Если вхоидит в  $d(x, z)$, то входит в  $d(x, y) + d(y,z)$
+
+   Всё выполняется, и правда расстояние
+\end{note}
+
+\begin{example}
+    $ex:\sum \to  \mathscr{B}^n$
+
+    $\sphericalangle \min\limits_{x, y\in \sum}H(c(x), c(y))$ -- эта величина характеризует насколько далеко находятся кодовые слова, т.е. насколько много нужно повредить, чтобы получить другой символ
+\end{example}
+
+\begin{definition}
+    Код обнаруживает $d$ ошибок, если  $\min\limits_{x, y\in \Sigma} H(c(x), c(y)) = d(c) > k$
+
+    Если повредить  $\leqslant k$ битов в $c$ мы получим  $\p c$, но оно не может быть корректным, значит мы точно поймём, что слово повредилось.
+\end{definition}
+
+\begin{example}
+    $c:\mathbb{B}^8 \to \mathbb{B}^9$
+
+    $d(c) = 2$ Хотя бы два бита будут различаться. А значит такой код обнаруживает одну ошибку, согласно определения
+\end{example}
+
+\begin{definition}
+    Код $c$ исправляет  $k$ ошибок, если  $d(c)>2k$
+
+    Внесём в слово  $a$  $\leqslant k$ ошибок. Получим $\p a$. Кодировщик может восстановить символ, найдя код, отличающийся от  $\p a$ не более, чем в $k$ битах
+
+    $H(a,\p a)\leqslant k\quad H(a, b)\leqslant k\quad H(a, b)\leqslant 2k ?!! $
+\end{definition}
+
+\begin{statement}
+    Если код $c$ исправляет  $k$ ошибок, тогда он обнаруживает  $2k$ ошибок
+\end{statement}
+
+\begin{statement}
+    Если код $c$ обнаруживает   $k$ ошибок, тогда он исправляет  $\left\lfloor \frac{k}{2} \right\rfloor$ ошибок
+\end{statement}
+
+\begin{statement}
+    $\forall k\exists $ код, который обнаруживает $k$ ошибок
+
+     $\Sigma\quad \left| \Sigma \right| \leqslant 2^n $
+
+     Сделаем код $c_i = i_2$ (в двоичной записи)
+
+     Повторим  $k+1$ раз каждый бит
+
+     $c:\Sigma \to \mathscr{B}^{(k+1)n}$ -- он может обнаружить $k$ ошибок 
+\end{statement}
+
+\begin{definition}
+    $\mathbb{B}^n, x\in \mathbb{B}^n, r\in \Z ^+$
+
+    Шаром $S(x,r) = \left\{ y| H(x,y)\leqslant r \right\} $
+
+    $S(0000,1) = \{0000,0001,0010,0100,1000\}$
+\end{definition}
+
+\begin{definition}
+    $V(n,r)$ -- объём шара с радиусом $r$
+
+    объём не зависит от центра --  $n$
+\end{definition}
+\begin{note}
+    $V(n,r) = |S(x,r)| \forall x\in \mathbb{B}^n$
+
+    $S(x,r) = \{z|z=t\oplus x\oplus y, t\in S(y,r)\}$
+
+    $H(x,z) = |\{i|x[i]\neq z[i]\}|$
+
+    $y = x\oplus (x\oplus y)$
+
+    $t = z\oplus(x\oplus y)$
+
+    $H(y,t) = \left| \{i|y[i]\neq t[i]\} \right| = \left| x[i] \oplus(x[i]\oplus y[i]\neq z[i]\oplus (x[i]\oplus y[i]) \right|   = \ldots$
+\end{note}
+
+\begin{lemma}
+    $x\neq y\in \Sigma\quad c$ -- код, исправляющий $k$ ошибок
+
+    То  $S(c(x), k) \cap S(c(y), k)\neq 0$
+
+    $z\in S\left( c(x), k \right) \cap S\left( c(y), k \right) $
+
+    $H(c(x), z)\leqslant k\quad H(c(y), z)\leqslant k \implies H(c(x), c(y))\leqslant 2k$
+\end{lemma}
+
+\begin{theorem}
+    [граница Хемминга]
+
+    $c$ -- код для  $m$ -символьного алфавита, исправляющий  $k$ ошибок
+
+    $c:\Sigma \to \mathbb{B}^n$, то $m\cdot V(n, k)\leqslant 2^n$
+\end{theorem}
+\begin{example}
+    3 символа. испр. 1 ошибку. $m=3?$
+
+    $3\cdot V(3,1)\leqslant 2^3$
+
+    $3\cdot 4\not\leqslant  2^3$
+\end{example}
+    $\log _2n + \log _2V(n, k)\leqslant n$
+
+    $\frac{\log _2m}{n}\leqslant 1 - \frac{\log _2V(n, k)}{n}$ 
+
+    первое -- скорость передачи, которая уменьшилась на $\frac{\log _2 V(n, k)}{n}$
+\begin{proof}
+    $\mathbb{B}^n\quad x_1= c(1)\quad $ испр.  $k$ ошибок
+
+    $S(x_1, 2k)$ запрещены, т.к. слишком близко к $x_1$
+
+    $x_2\in \mathbb{B}^n \setminus S(x_1, 2k)\quad x_2 = c(2)$
+
+    $x_3\in \mathbb{B}^n\setminus \left( \bigcup\limits_{i=1}^{2} S(x_i, 2k) \right) $
+\end{proof}
+
+\begin{theorem} [граница Гильберта]
+    Если $m\cdot V(n, 2k)\leqslant 2^n$, то $\exists $ код $c:\Sigma \to \mathbb{B}^n$, исправляющий $2k$ ошибок  $|\Sigma| = m$
+\end{theorem}
+    $V(n,r) = 1+n+ \frac{n(n-1)}{2} +\ldots + C_n^r$
+
+    $r=1\quad V(n, 1) = 1+n$
+
+    $m(n+2)\leqslant 2^n$
+
+    $m\leqslant \frac{2^n}{n+1}$
+
+\subsection{Код Хемминга}
+
+Занумеруем биты от $1$ до  $n$
+
+Биты в коде Хемминга делятся на информационные и контрольные. Контрольные -- те, у которых номер позиции это степень двойки.
+
+Пусть $\left| \Sigma \right| \leqslant 128$
+
+Код постоянной длинны $\to \mathbb{B}^7$
+
+Контрольному биту соответствуют позиции $P_i = \{j|j\&2^i = 2^i\}$. контрольный бит равен ксору всех битов его множества. 
+
+\begin{theorem}
+     Код Хемминга исправляет одну ошибку
+\end{theorem}
+\begin{proof}
+    
+
+     $\forall x, y\quad H(x, y)\geqslant 3$
+
+     Различается $\geqslant 3$ инф бита -- ОК
+
+     различается  $1$ инф бит  $\implies \geqslant 2$ Различных контрольных бит. Суммарно расстояние хотя бы 3.
+
+     Различаются $2$ инф бита. Пусть у них номера  $j_1, j_2$ У них есть хотя бы одна позиция, в которой они различаются ($j_1\oplus j_2\neq 0$), значит есть контрольный бит, учитывающий одно и не учитывающий другой. Хотя бы $s$-ый контрольный бит различаются  $\implies $ 
+\end{proof}
+
+\begin{note}
+    В коде $12\ldots_2^{s-1}\ldots|\xout{2^s}$
+
+    $2^s-1-s$ -- инф. бит  $s$ контрольных
+
+     $2^s-1-s+s\leqslant 2^s-1$ -- здесь неравенство выполняется как равенство.
+
+     $\log (m) + \log (n+1)\leqslant n$
+\end{note}
    \end{document}
