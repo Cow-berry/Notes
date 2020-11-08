@@ -2705,12 +2705,175 @@ $\sup\{x_{n}\} = \sup\{x_1, x_2, \ldots, x_{n} \}$
 
     $x_{n+1} - x_n = \frac{1}{2}\left( \frac{a}{x_n} + x_n \right) -x_n = \frac{1}{2}\frac{a-x_n^2}{x_n}<0 \impliedby x_n>\sqrt{a} \impliedby x_n = f(x_{n-1}), x_{n-1}>0 $ по индукции
 
-    $f(x)\geqslant \sqrt{a} \forall x>0 $
+    $f(x)\geqslant \sqrt{a}\quad \forall x>0 $
+
+    Т.о. $\{x_{n} \}_{n=1}^{\infty }\downarrow$ и ограничено снизу $\sqrt{a}  \implies \exists \lim_{n \to \infty} x_{n}  = L\in \R$
+
+    Перейдём к пределу в рекуррентном соотношении
+
+    $L = \frac{1}{2}\left( \frac{a}{L} + L \right) $ 
+
+    $L = \frac{a}{L}\quad L^2=a\quad L\geqslant 0$, т.к. $x_{n} \geqslant 0 \implies L = \sqrt{a} $
 \end{proof}
 
- 
+\begin{statement}
+    $\sqsupset \{x_{n} \}$ -- вещественная последовательность $x_{n} >0\quad \forall n\in \N $ 
 
-TODO: дописать 0.5 пары
+    $\exists \lim_{n \to \infty} \frac{x_{n+1} }{x_{n} } = L<1 \implies x_{n} \to 0$
+\end{statement}
+
+Частные случаи:
+\begin{enumerate}
+    \item $\frac{n}{a^n}\to 0\quad \forall a>1$ 
+    \item $\frac{n^k}{a^n}\to 0\quad \forall  k\in \N $ 
+    \item $\frac{a^n}{n!} \to 0$ 
+    \item $\frac{n!}{n^n}$
+\end{enumerate}
+
+\begin{definition}
+    $\sqsupset \{x_{n} \}_{n=1}^{\infty }\subseteq \R$
+
+    $\forall n\in \N \ov {x_{n}} = \sup\{x_{n} , x_{n+1} , x_{n+2} \ldots\}  $  (для ограниченной сверху)
+
+    $\{\ov {x_n}\}$-- верхняя огибающая последовательности
+
+    $\underline{x_{n} } = \inf \{\ldots\}$ (для ограниченной снизу)
+\end{definition}
+
+Элементарные свойства:
+\begin{enumerate}
+    \item $\underline{x_{n} } \leqslant x_{n} \leqslant \ov {x_{n} }\quad \forall n\in \N $
+    \item $\{\ov {x_{n}}\downarrow\quad \{\underline{x_{n} }\}\uparrow $
+\end{enumerate}
+
+\begin{example}
+    $x_{n}  = \frac{\left( -1 \right) ^n}{n}\quad -1, \frac{1}{2}, -\frac{1}{3}, \frac{1}{4}, -\frac{1}{5}, \frac{1}{6}, \ldots$ 
+
+    $\ov{x_{n} }, \frac{1}{2}, \frac{1}{2}, \frac{1}{4}, \frac{1}{4}, \frac{1}{6}, \frac{1}{6}$
+
+    $\underline{x_{n}}, -1, -\frac{1}{3}, -\frac{1}{3}, -\frac{1}{5}, -\frac{1}{5}, \ldots$
+\end{example}
+
+\begin{definition}
+    $\sqsupset \{x_{n}\}_{n=1}^{\infty } $ -- произвольная вещественная последовательность
+
+    $\varlimsup\limits_{n\to \infty }x_{n} = \begin{cases}
+        \lim_{n \to \infty} \ov{x_{n} } &, x_{n}  \text{ ограничена сверху}\\
+        +\infty 
+    \end{cases} $ -- верхний предел 
+
+    $\varliminf\limits_{n\to \infty }x_{n}  = \ldots $
+\end{definition}
+
+\begin{example}
+    [продолжение примера]
+
+    $\varlimsup x_{n}  = 0 = \varliminf\limits_{n \to \infty} $
+\end{example}
+
+\begin{definition}
+    $\sqsupset \{x_{n}\}_{n=1}^{\infty } $ -- последовательность в топологическом пространстве $\left( X, \Omega \right)\quad l\in X $
+
+    $l$ называется \underline{частичным пределом} последовательности $\{x_{n} \}_{n=1}^{\infty }$, если $\exists $ подпоследовательность $\{x_{n_k}\}_{n=1}^{\infty }:\quad x_{n_k} \to l$ 
+\end{definition}
+
+\begin{theorem}
+    $\sqsupset \{x_{n} \}_{n=1}^{\infty }\subseteq \R$, тогда 
+    \begin{enumerate}
+        \item [I] $\varlimsup\limits_{n\to \infty }x_{n} $ есть наибольший частичный предел последовательности $\{x_{n} \}$ в $\ov \R$ 
+        \item [II] $\exists \lim_{n \to \infty} x_{n} \in \ov \R \iff \varlimsup\limits_{n\to \infty } x_{n}  = \varliminf\limits_{n \to \infty }x_{n} $
+    \end{enumerate}
+
+    В случае существования $\lim_{n \to \infty} x_{n} $ совпадает с $\varlimsup$ и  $\varliminf$
+\end{theorem}
+\begin{proof}
+    $\sqsupset L = \varlimsup x_{n} $
+
+    \begin{note}
+        Если $ L = \varlimsup x_{n} \in \R$
+
+        $L \iff \begin{cases}
+            \forall \varepsilon > 0 \exists N: \forall n>N\quad x_{n} <L+\varepsilon\\
+            \forall \varepsilon>0 \forall N: \exists n>N:\quad x_{n} >L-\varepsilon
+        \end{cases}$
+    \end{note}
+
+    $\sphericalangle L\in \R\quad ?: \exists x_{n_k}:\quad x_{n_k} \to L$
+
+    $\varepsilon = 1\quad N_1 = 1\quad \exists n_1>N_1:\quad x_{n_1}>L-1$
+
+    $\varepsilon = \frac{1}{2}\quad N_2 = n_1+1\quad n_2\geqslant N_2:\quad x_{n_2}>L-\frac{1}{2}$ 
+
+    $\ldots$
+
+    $\varepsilon = \frac{1}{k}\quad N_{k} = n_{k-1}+1\quad \exists n_k\geqslant N_k:\quad x_{n_k} \geqslant L - \frac{1}{k}$ 
+
+    Возникает $x_{n_k}$, что  $\ov{x_{n_k}} x_{n_k} >L-\frac{1}{k}$ Обе части стремятся к $L \implies x_{n_k} \to L$
+
+    Если $\{x_{m_j}\}$ -- сходящаяся  подпоследовательность последовательности $\{x_{n} \} \implies x_{m_j}\leqslant  \ov{x_{m_\leqslant j}}\to L, j\to \infty $
+
+    $\lim_{j \to \infty} x_{m_j}\leqslant L $
+
+    Т.о. $L$ -- наибольший частичный предел
+
+    Если  $\varlimsup x_{n} = -\infty \implies $ любой частичный предел $\leqslant -\infty$ 
+
+    Если $\varlimsup x_{n}  = +\infty \implies \{x_{n} \}$ не ограничена сверху $\implies $ (было установлено) $\exists \{x_{n_k}\}:\quad x_{n_k}\to +\infty $
+
+    II: Если $\exists \lim_{n \to \infty} x_{n}  = L\in \ov \R\implies  \forall $ подпоследовательности $\{x_{n_j}\}\quad x_{n_j}\to L, j\to \infty \implies \varlimsup x_{n}  = \max\{\text{частичных}\} = L$ и $\varliminf = \ldots = L$
+
+    Обратно: $\sqsupset \varlimsup = \varliminf = l$
+
+    \[
+        \forall n\in \N \quad \underline{x_{n} } \left( \to l \right) \leqslant x_{n} \leqslant \ov{x_{n} } \to l
+    .\] 
+    $\implies x_{n} \to l$
+\end{proof}
+
+\begin{theorem}
+    [Теорема Штольца]
+
+    $\sqsupset \{x_{n}\}\quad \{y_{n} \}$ -- две вещественные последовательности 
+    \begin{enumerate}
+        \item $\{y_{n} \}_{n=1}^{\infty }\uparrow$
+        \item $y_{n} \to +\infty , n\to \infty $
+        \item $\exists \lim_{n \to \infty} \frac{x_{n+1} - x_{n} }{y_{n+1}  - y_{n} } = l\in \ov \R$
+    \end{enumerate}
+
+    Тогда $\exists \lim_{n \to \infty} \frac{x_{n} }{y_{n} } = l$
+\end{theorem}
+\begin{proof}
+    $\sqsupset \Delta y_{n}  = y_{n+1} - y_{n} \quad \Delta x_{n}  = x_{n+1} -x_{n} $
+
+    \begin{enumerate}
+        \item $L\in \R$ 
+
+            $\sphericalangle \varepsilon>0\quad \exists N_1: \forall n\geqslant N_1\quad \left|\underbrace{\frac{\Delta x_{n} }{\Delta y_{n} } - l}\limits_{\alpha_n}  \right| <\frac{\varepsilon}{10}$ 
+
+            $\frac{x_{n+1} -x_{n} }{y_{n+1} - y_{n} } -l=\alpha_n $ 
+
+            $x_{n+1} -x_{n} -l\left(y_{n+1} - y_{n}   \right)  = \alpha_n(y_{n+1} - y_{n} )$
+
+            $x_{N_1+1}  -x_{N_1} - l\left( y_{N_1+1} - y_{n_1} \right)  = \alpha_{N_1}\left( y_{N_1+1} - y_{N_1} \right) $ 
+
+            Такие суммы удобно складывать
+
+            $\left| x_{n+1} - x_{N_1} - l\left( y_{n+1} - y_{N_1} \right) \right|  = \left|\sum_{k=N_1}^{n} \alpha_k\left(  y_{k+1} - y_{k} \right) \right| \leqslant \frac{\varepsilon}{10} \sum_{k=N_1}^{n} \left| \Delta y_k \right|  = \frac{\varepsilon}{10} \cdot \left( y_{n+1}  - y_{N_1} \right) $ 
+
+            $\left| \frac{x_{n+1} }{y_{n+1}} - \frac{x_{N_1}}{y_{n+1}} - l + l\cdot \frac{y_{N_1}}{y_{n+1}} \right| <\frac{\varepsilon}{10}\left( 1-\frac{y_{N_1}}{y_{n+1}} \right) \leqslant \frac{\varepsilon}{10}$
+
+            $\left| \frac{x_{n+1} }{y_{n+1}} - l \right| <\frac{\varepsilon}{10} + \left| \frac{x_{N_1}}{y_{n+1}} \right|  + l \cdot \left| \frac{y_{N_1}}{y_{n+1}} \right| $
+
+            $y_{n} \to +\infty \quad \exists N_2:\forall n\geqslant N_2, n\in \N \quad \left| \frac{x_{n_1}}{x_{n+1}} \right| + l\left| \frac{y_{N_1}}{y_{n+1}} \right| <\frac{\varepsilon}{10} \implies \forall n\geqslant N_2\quad \left| \frac{x_{n+1}}{y_{n+1}} - l \right|<2\cdot \frac{\varepsilon}{10} <\varepsilon $ 
+
+           \item Если $L = +\infty \quad x_{n} \uparrow$ с некоторого номера
+
+               $\sphericalangle \frac{y_{n} }{x_{n} }$ 
+
+           \item Если $L = -\infty $ -- упражнение
+    \end{enumerate}
+\end{proof}
+
 
 \section{Предел отображения, предел функции}
 
