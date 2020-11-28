@@ -42,6 +42,7 @@
 \renewcommand\C{\ensuremath{\mathbb{C}}}
 \newcommand{\p}[1]{#1^{\prime}}
 \newcommand{\pp}[1]{#1^{\prime\prime}}
+\newcommand{\tl}[1]{\widetilde{#1}}
 % Easily typeset systems of equations (French package) [like cases, but it aligns everything]
 \usepackage{systeme}
 \usepackage{lipsum}
@@ -142,6 +143,8 @@
   \let\@ifnextchar\new@ifnextchar
   \array{#1}}
 \makeatother
+\usepackage{pgfplots}
+\pgfplotsset{compat = newest}
 \begin{document}
     \maketitle
     \section{Введение}
@@ -1839,8 +1842,740 @@ $F$ -- фокус параболы
 
     $y_My_0 = p\left( x_M + \frac{y_0^2}{2p} \right) \implies y_0 = \ldots$
 \end{proof}
+\section{Лекция}
+\subsection{Параллельный перенос}
+
+\subsection{Поворот}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{rotation}
+    \caption{rotation}
+    \label{fig:rotation}
+\end{figure}
+
+$\left| \vec e_1 \right|  = \left| \vec e_2 \right| = 1$
+
+$\left( \vec e_1, \vec e_2 \right) =0$
+
+\begin{note}
+    Сохраняем длины и углы:
+
+    $\left| \p {\vec e_1} \right| = \left| \p{\vec e_2} \right| =1\quad (\p{\vec e_1}, \p{\vec e_2}) = 0$
+
+    $\p{\vec e_1} = \vec e_1\cos \Theta + \vec e_2\sin \Theta$
+
+    $\p{\vec e_2} = -\vec e_1\sin \Theta + \vec e_2\cos \Theta$
+\end{note}
+
+$\vec r_m = \p x\p{\vec e_1} + \p y\p{\vec e_2} = \p x(\vec e_1\cos \Theta + \vec e_2\sin \Theta) + \p y(-\vec e_1\sin \Theta + \vec e_2\cos \Theta) = \vec e_1\left( \p x\cos \Theta - \p y\sin \Theta \right)  + \vec e_2\left( \p x\sin \Theta + \p y\cos \Theta \right) $
+
+$\vec r_M = x\vec e_1 + y\vec e_2$
+
+$\implies \begin{cases}
+    x = \p x\cos\Theta - \p y\sin \Theta\\
+    y = \p x\sin \Theta + \p y\cos \Theta
+\end{cases}$ -- прямое преобразование
+    
+$\begin{cases}
+    {\vec e_1} = \vec e_1\cos \Theta + \vec e_2\sin \Theta\\
+    \p{\vec e_2} = -\vec e_1\sin \Theta + \vec e_2\cos \Theta\\
+\end{cases}$ -- обратное преобразование
+
+\begin{note}
+    $\begin{bmatrix} x\\y \end{bmatrix} = \begin{bmatrix} \cos \Theta&-\sin \Theta\\sin\Theta & \cos \Theta \end{bmatrix} \begin{bmatrix} \p x\setminus p y \end{bmatrix} \quad X = T_{\Theta}\p X$
+\end{note}
+
+Более общий вид: $T_{\Theta} \to T = \begin{bmatrix} t_1^1 & t_2^1\\t_1^2&t_2^2 \end{bmatrix} $
+$\begin{cases}
+    
+\p{\vec e_1} = t_1^1\vec e_1 + t_1^2\vec e_2\\
+\p{\vec e_2} = t_2^1\vec e_1 + t_2^2\vec e_2
+\end{cases}$
+
+$(\p{\vec e_1}\p{\vec e_2}) = 0 \implies (t_1^1\vec e_1 + t_1^2\vec e_2)(t_2^1\vec e_1 + t_2^2\vec e_2) = t_1^1t_2^1 + t_1^2t_2^2 = 0$ Т.е. в общем виде, матрица, преобразующая оси c сохранением углов, это такая матрица, у которой столбики ортогональны. 
+
+Чтобы сохранялись длины нужно $\begin{cases}
+    (t_1^1)^2 + (t_1^2)^2 = 1\\
+    (t_2^1)^2 + (t_2^2)^2 =1
+\end{cases}$
+
+$T^T_{\Theta}T_{\Theta} = I$ -- условие на матрицу поворота
+
+$T^TT = diag{\lambda_1^+\lambda_2^+}$
+
+$\begin{bmatrix} t_1^1 & t_1^2\\t_2^1&t_2^2 \end{bmatrix} \begin{bmatrix} t_1^1 & t_2^1\\t_1^2 & t_2^2 \end{bmatrix}  = \begin{bmatrix} \lambda_1^+ & 0\\0 & \lambda_2^+ \end{bmatrix} $, где $\lambda_1^+, \lambda_2^+$ -- положительные числа.
+
+\subsection{Общий вид преобразования плоскости}
+\begin{figure}[ht]
+    \centering
+    \incfig{general}
+    \caption{general}
+    \label{fig:general}
+\end{figure}
+
+$(x, y) \to  (\tl x, \tl y)$
+
+$\vec r = \vec a + \vec r_1$
+ 
+$\vec r(x, y)\quad \vec r_1(\tl x, \tl y)$
+
+\begin{align*}
+\vec r_1 &= \tl x\p{\vec e_1} + \tl y\p{\vec e_2}\\& = \tl x(t_1^1\vec e_1 + t_1^2\vec e_2) + \tl y(t_2^2\vec e_1 + t_2^2\vec e_2) \\
+         &= 
+\vec e_1(t_1^1\tl x + t_2^1\tl y) + \vec e_2\left( t_1^2\tl x + t_2^2\tl y \right) 
+.\end{align*}
+
+Подставим $\vec r_1$
+
+\begin{align*}
+    \vec r&= \vec a + \vec e_1(t_1^1\tl x + t_2^1\tl y) + \vec e_2\left( t_1^2\tl x + t_2^2\tl y \right) 
+.\end{align*}
+
+В координатах $\vec a(\alpha, \beta)$
+
+ $\begin{cases}
+     x = \alpha + t_1^1\tl x + t_2^1\tl y\\
+     y = \beta + t_1^2\tl x + t_2^2\tl y\\
+ \end{cases}$
+
+ В матричной форме $X = A + T\tl X\quad $ $A$ - параллельный перенос, $T$ -- поворот, масштаб и инверсия.
+
+ Частные случаи:
+ \begin{enumerate}
+    \item $T = I$ -- параллельный перенос
+    \item $T = T_{\Theta}, A = 0$ -- поворот
+    \item  $T = diag\{\lambda_1^+\lambda_2^+\}, A = 0$ -- изменение масштаба
+    \item $T = diag\{1,-1\}$ -- инверсия $OY$
+\end{enumerate}
+
+\subsection{Уравнение прямой при преобразовании координат}
+
+$ax +by +c = 0 $
+
+В матричном виде: $N^TX + c = 0\quad N = \begin{bmatrix} a\\b\end{bmatrix} \quad N^T = \begin{bmatrix} a&b \end{bmatrix} $
+
+В новой системе: $N^T(A + T\tl X) + c = 0$
+
+ \begin{align*}
+     N^TT\tl X + \underbrace{N^TA + c}\limits_{\tl c}  &= 0\\
+     \tl{N^T}\tl X + \tl c = 0&\begin{cases}
+         \tl c = N^TA+c\\
+         \tl N = T^TN\\
+     \end{cases}\\
+.\end{align*}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{linetr}
+    \caption{linetr}
+    \label{fig:linetr}
+\end{figure}
+
+\subsection{Каноническое уравнение кривой II-го порядка}
+
+\[
+    F(x,y) = ax^2 + 2bxy+cy^2+dx+ey+f = 0
+.\] 
+
+$\sphericalangle P = \begin{bmatrix} a &b\\d&c \end{bmatrix} \quad X = \begin{bmatrix} x\\y \end{bmatrix} \quad Q = \begin{bmatrix} d\\e \end{bmatrix} \quad R = f$
+
+$X^TPX = \begin{bmatrix} x&y \end{bmatrix} \begin{bmatrix} a&b\\b&c \end{bmatrix} \begin{bmatrix} x\\y \end{bmatrix}  = \begin{bmatrix} x&y \end{bmatrix} \begin{bmatrix} ax+by\\bx+cy \end{bmatrix}  = ax^2+bxy+byxcy^2 = ax^2+2bxy+xy^2$
+
+$Q^TX = \begin{bmatrix} d&e \end{bmatrix} \begin{bmatrix} x\\y \end{bmatrix}  = dx+ey$
+
+\[
+    \implies F(x,y) = X^TPX+Q^TX+R
+.\] 
+
+Теперь преобразуем систему координат $(x,y) \to (\tl x, \tl y)$
+
+\begin{note}
+    Много раз будет использовано свойство $(AB)^T =  B^TA^T$
+\end{note}
+
+\begin{align*}
+    F(\tl x, \tl y) & = (A+T\tl X)^TP(A+T\tl X) + Q^T(A + T\tl X)+R\\
+                    &= \underline{A^TPA} + (T\tl X)^TPA + (T\tl X)^TPT\tl X + A^TPT\tl X + \underline{Q^TA} + Q^TT\tl X+\underline{R} \\
+                    &= \tl X^T\underbrace{T^TPT}\limits_{\tl P}\tl X + ((PA)^TT\tl X)^T + A^TPT\tl X+Q^TT\tl X + \underbrace{A^TPA + Q^TA + R}\limits_{\tl R}\\
+                    &= \tl X^T \tl P\tl X + (A^TP^TT\tl X)^T + A^TPT\tl X + QT\tl X + \tl R\\
+.\end{align*}
+\begin{note}
+    $P^T = P$
+
+    $(A^TP^TT\tl X)^T = (A^TPT\tl X)^T = A^TPT\tl X$
+
+    Последнее равенство, потому что это число (матрица $1\times 1$)
+\end{note}
+\begin{align*}
+    &= \tl T^T \tl P\tl X + (2A^T P + Q^T)T\tl X + R \\
+.\end{align*}
+\begin{enumerate}
+    \item $\tl P = T^TPT \overset{?}{=} diag\{\lambda_1, \lambda_2\}$ -- можно всегда
+
+        $\begin{bmatrix} \tl x&\tl y \end{bmatrix} \begin{bmatrix} \lambda_1 & 0\\0&\lambda_2 \end{bmatrix} \begin{bmatrix} \tl x\\ \tl y \end{bmatrix}  = \lambda_1\tl x^2 + \lambda_2\tl y^2\qquad \begin{cases}
+        \lambda_1\lambda_2>0 & \text{ эллиптический }\\
+        \lambda_1\lambda_2<0 & \text{ гиперболический}\\
+        \lambda_1\lambda_2= 0& \text{ параболический}\\
+        \end{cases}$
+
+\begin{note}
+    $\det(AB) = \det A \det B$ (будем доказано позже)
+\end{note}
+
+$\det \tl P = \det T^T\det P\det T = \det (T^TT)\det P = \Delta \det P = \lambda_1\lambda_2$
+
+$\sphericalangle \det P = \frac{\lambda_1\lambda_2}{\Delta}\begin{cases}
+    <0&\text{ эллиптический}\\
+    <0& \text{ гиперболический}\\
+    =0 & \text{ параболический}\\
+\end{cases}$ 
+
+$\det P = 
+\begin{vmatrix}
+    a&b\\b&c
+\end{vmatrix} = ac-b^2$
+\item $\tl Q^T = (2A^TP + Q^T)T = 0$ (хочется, чтобы было нулевой строчкой)
+
+    $2A^TP = -Q^T$
+
+    $A^T = -\frac{1}{2}Q^TP^{-1}\implies A = -\frac{1}{2}P^{-1}Q^T$
+
+    \[
+        \tl X^T\tl P\tl X + \underbrace{\tl Q^T\tl X}\limits_{=0 \text{ хочу}} + \tl R = 0\implies \tl X^T\tl P\tl X + \tl R = 0
+    .\] 
+    \begin{note}
+        $P^{-1}$ не всегда существует. конкретно в случае параболы. Это можно понять, если пропадает коэффициент при  $x^2$ или $y^2$
+
+        $\det P =0$ -- рассмотреть дома
+    \end{note}
+
+     $\lambda_1\tl x^2 + \lambda_2\tl y^2 = -\tl R$
+\end{enumerate}
+
+\subsection{Поверхности второго порядка}
+
+\begin{definition}
+    Алгебраическая поверхность второго порядка -- геометрическое место точек уравнения $F(x,y,z) = 0$, где  $F(x,y,z)$ -- целый алгебраический полином второго порядка. 
+\end{definition}
+
+Способы задания:
+\begin{enumerate}
+    \item Выражение, разрешённо относительно одной из координат $x = f(y,z)$
+    \item Параметрическое: $\begin{cases}
+            x = x(u,v)\\
+            y = y(u,v)\\
+            z = z(u,v)\\
+    \end{cases}$
+\end{enumerate}
+
+Типы поверхностей:
+\begin{enumerate}
+    \item Эллипсоид \[
+    \frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2} = 1
+    .\] 
+
+    Метод сечений. $z = C \implies  \frac{x^2}{a^2} + \frac{y^2}{b^2} = 1 - \frac{C^2}{c^2}$ 
+
+    $|C|<c$ -- эллипс
+
+    $|C|>c$ --  $\O $ (мнимый эллипс)
+    $|C| = c$ -- точка $(0,0,C)$
+
+    \begin{tikzpicture}
+
+  \pgfmathsetmacro{\p}{1.0}
+  \pgfmathsetmacro{\q}{1.5}
+  \begin{axis}[
+    xlabel = {$x$},
+    ylabel = {$y$},
+    zlabel = {$z$},
+    view = {60}{30},
+    domain = 0 : pi,
+    y domain = 0 : 2 * pi,
+    z buffer = sort,
+    unit vector ratio = 1 1,
+    hide axis,
+    colormap/violet,
+    declare function = {
+      xp(\x, \y) = sin(deg(\x)) * cos(deg(\y));
+      yp(\x, \y) = \p * sin(deg(\x)) * sin(deg(\y));
+      zp(\x, \y) = \q * cos(deg(\x));
+    }, ]
+    \addplot3[patch]({xp(x, y)}, {yp(x, y)}, {zp(x, y)});
+    \draw[->] (1, 0, 0) -- (2, 0, 0) node[right]{$x$};
+    \draw[->] (0, \p, 0) -- (0, 2, 0) node[right]{$y$};
+    \draw[->] (0, 0, \q) -- (0, 0, 2) node[above]{$z$};
+  \end{axis}
+\end{tikzpicture}
+    \item гиперболоиды
+
+        $\frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2} = 1$ -- однополостный
+
+%        \begin{tikzpicture}[scale=1.5]
+%    \begin{axis}[
+%    shader=interp,
+%    opacity=0.7,
+%    fill opacity=0.7,
+%    axis lines = none,
+%    ticks=none,
+%    axis equal
+%    ]
+%
+%    \draw[thick,->,black] (0,0,0) -- (4,0,0) node[anchor=north east]{$y$};
+%    \draw[thick,->] (0,0,0) -- (-1,-6,1) node[anchor=north east]{$x$};
+%    \draw[thick,->] (0,0,0) -- (0,0,4.3) node[anchor=east]{$z$};
+%
+%    \addplot3[%
+%        shader=interp,
+%        opacity = 0.6,
+%        fill opacity=0.6,
+%        surf,
+%        colormap = {whiteblack}{color(0cm)  = (mediumgreen);color(1cm) =      (black)},
+%        variable = \u,
+%        variable y = \v,
+%        domain = 0:180,
+%        y domain = 0:360,
+%    ]
+%    ({cos(u)*sin(v)}, {sin(u)*sin(v)}, {.1*cos(v)});
+%
+%    \addplot3[surf,domain=0:360,y domain=-1.5:1.5]
+%         ({cosh(y)*cos(x)},{cosh(y)*sin(x)},{sinh(y)});
+%
+%    \end{axis}
+
+%\end{tikzpicture}
+
+$\frac{x^2}{a^2} - \frac{y^2}{b^2} - \frac{z^2}{c^2} = 1$ -- двуполостный
+
+\item Параболоиды
+
+    $\frac{x^2}{p} + \frac{y^2}{q} = 2z\quad p,q>0$ -- эллиптический
+
+    $\frac{x^2}{p} - \frac{y^2}{q} = 2z$ -- 
 
 
+\item Конусы $\frac{x^2}{a^2} + \frac{y^2}{b^2} - \frac{z^2}{c^2} = 0$
+\item Цилиндры $\frac{x^2}{a^2} + \frac{y^2}{b^2}=1$ -- эллиптический
+\end{enumerate}
+\section{Лекция}
+\subsection{}
+\subsection{Группа}
+\begin{definition}
+    Множество $G = \{g_k\}$ называется группой, если на $G$ определён закон композиции элементов, обладающий следующими свойствами:
+     \begin{enumerate}
+         \item Ассоциативность: $x\circ (y\circ z) = (x\circ y)\circ z)\forall x, y, z\in G$
+         \item Существование нейтрального $\exists e: e\circ g = g\circ e = g\forall g\in G$
+         \item Существование обратного $\forall g\in G\quad \exists g^{-1}:g^{-1}\circ g = g\circ g^{-1} = e$
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    $(\Z , +)$ -- аддитивная группа.
+
+    $(\Q_+, \cdot ) $ -- мультипликативная группа. 
+\end{example}
+\begin{example}
+    $\Z ^n = \{z = (\xi_1, \xi_2, \ldots, \xi_n)^T, \xi_i\in \Z \}$
+
+    $\left( \Z^n, + \right) $ -- группа
+
+    $e = \begin{pmatrix} 0 \\0\\0\\ \vdots\\0 \end{pmatrix}\quad \xi^{-1} = \begin{pmatrix} -\xi_1\\-\xi_2 \\ \vdots \\ \xi_n \end{pmatrix}  $
+\end{example}
+\begin{example}
+    $\R_n^n = \{z:\det z \neq 0\}$
+    
+    $\left( \R^n_n, \cdot  \right) $ -- группа (General Linear Group, $GL(n)$)
+
+    $A, B\in GL(n)\quad AB = BA$
+\end{example}
+
+\begin{definition}
+    Группа называется абелевой, если выполняется ещё одно условие: коммутативность $\forall a, b\in G\quad a\circ b = b\circ a$
+\end{definition}
+\begin{lemma}
+    нейтральный элемент -- единственный
+\end{lemma}
+\begin{proof}
+    Пусть существует два нейтральных элементов $e_1, e_2$. Рассмотрим их композицию:
+
+    $e_1\circ e_2 = e_1$, потому что $e_2$ -- нейтральный элемент и $e_2\circ g = g \forall g\in G$
+
+    $e_1\circ e_2 = e_2$, потому что $e_1$ -- нейтральный элемент и $g\circ e_2 = g \forall g\in G$
+
+    $e_1 = e_1\circ e_2 = e_2 \implies  e_1=e_2$
+\end{proof}
+
+\begin{lemma}
+    Обратный элемент единственный
+\end{lemma}
+\begin{proof}
+    Аналогично: пусть есть два обратных элемента $g^{-1}_1, g_2^{-1}$ к элементу $g$
+
+    $g^{-1}_1 = g^{-1}_1\circ e = g^{-1}_1\circ (g\circ g^{-1}_2) = (g_1^{-1}\circ g)\circ g^{-1}_2 = e\circ g^{-1}_2 = g_2^{-1} \implies g^{-1}_1 = g_2^{-1}$
+\end{proof}
+
+\subsection{Кольцо}
+
+\begin{definition}
+    Множество $R$ называется кольцом, если на  $R$ согласованно заданы два закона элементов  $+$,  $-$, так что:
+     \begin{enumerate}
+         \item $(R, +)$ -- абелева группа
+         \item  $(R, \cdot )$ -- полугруппа
+         \item Согласованность:  $x\cdot (y+z) = x\cdot y + x\cdot z$
+
+             $(x+y)\cdot z = x\cdot z + y\cdot z$
+    \end{enumerate}
+\end{definition}
+\begin{example}
+    $(Z, +, \cdot )$ -- коммутативное кольцо
+\end{example}
+\subsection{Поле (Тело)}
+\begin{definition}
+    Множество $K$ называется полем, если на  $K$ согласованно заданы два закона композиции ( $+$,  $-$), так что:
+     \begin{enumerate}
+         \item $(K, +)$ -- абелева группа
+         \item  $(K\setminus \{0\}, \cdot )$ -- мультипликативная группа 
+
+             Если она абелева, то структура называется \underline{полем}
+
+             Если она не абелева, то структура называется \underline{телом}
+         \item $x\cdot (y+z) = z\cdot y + x\cdot z$
+
+             $(y+z)\cdot x = y\cdot x + z\cdot x$
+     \end{enumerate}
+\end{definition}
+
+\begin{example}
+    $(\Q, +, \cdot )$ -- (лучшее) поле
+
+    $(\R, +, \cdot )$ -- поле (получающееся топологическим замыканием поля $\Q$)
+
+    $(\C, +, \cdot )$ -- поле (алгебраическое замыкание поля $\Q$)
+\end{example}
+
+\begin{definition}
+    Элемент $\Theta$ называется поглощающим элементом относительно закона композиции , если  $\forall x\in S\quad x\circ \Theta = \Theta\cdot x = \Theta$
+\end{definition}
+
+\begin{note}
+    Представим себе структуру $S$ c двумя законами композиции: $\circ, \cdot $, и имеет место следующее: $x\cdot (y\circ z) = (x\cdot y)\circ (x\cdot z)$
+
+    $\sphericalangle x\cdot  y = x\cdot (e\circ y) = (x\cdot e)\circ (x\cdot y) \implies  (x\cdot e)$
+
+    $\forall x\quad x\cdot e = e\implies e$, который был нейтральным для $\circ $ также является поглощающим для $\cdot $ 
+
+    $\cdot  = $ умножение
+
+    $\circ$ -- сложение
+
+     $e = 0$
+\end{note}
+
+\subsection{Сложные алгебраические структуры}
+
+$S, G, R, K$ -- полугруппы, группы, кольца, поля -- структуры нулевого уровня
+
+\subsection{Модуль над кольцом}
+
+Пусть у нас есть кольцо $R$ и коммутати
+
+ \begin{definition}
+     $R$-модулем (или модулем над кольцом  $R$) называется абелева группа $(G, +)$ с заданной бинарной операцией:  $R\times G \to G\quad (r, g) \to  rg\in G\quad r\in R, g\in G$ с законами согласования:
+     \begin{enumerate}
+         \item $(r_1+r_2)g = r_1g+r_2g$ -- здесь два разных плюса: один из группы $G$, другой из кольца  $R$
+         \item  $r(g_1+g_2) = rg_1 + rg_2\quad \forall r\in R\forall g_1, g_2\in R$
+         \item $(r_1\cdot r_2)g = r_1(r_2g)$
+     \end{enumerate}
+\end{definition}
+\begin{example}
+    $\sqsupset (G, +)$ -- абелева группа
+
+    $\sqsupset g\in G\quad \sphericalangle g+g+\ldots+g= ng$ -- используем структуру $Z$-модуля для коэффициентов 
+
+     $\sphericalangle \alpha g_1+\beta g_2+\ldots$ -- какие-то коэффициенты из некоторого кольца
+\end{example}
+
+\begin{note}
+    Хотелось бы решат задачу: получить $g$ ищ  $\alpha g = \widetilde{g}$, но у  $\alpha$ не гарантирован обратный элемент в кольце
+\end{note}
+
+Задачи:
+\begin{itemize}
+    \item Составлять $\alpha_1g_1 + \alpha_2g_2 + \ldots + \alpha_kg_k$
+    \item Решать $\alpha g = \widetilde{g}$
+\end{itemize}
+
+\begin{definition}
+    Линейным пространством $X$ над полем $K$ называется модель над кольцом , имеющим также  алгебраическую структуру поля. 
+
+    $\sqsupset \alpha, \beta, \gamma, \ldots\in K$
+
+    $\sqsupset x, y, z, \ldots\in G$
+
+    \begin{enumerate}
+        \item $(\alpha+\beta)x = \alpha x + \beta x$
+        \item  $(\alpha \beta)x = \alpha(\beta x)$
+        \item $\alpha(x+y) = \alpha x + \alpha y$
+        \item  $1 x = x \forall x$
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    $X^n = \{x = \left( \xi_1, \xi_2, \ldots, \xi_n \right)^T, \xi\in \R\}$ -- линейное пространство над $\R$ -- арифметическое пространство
+
+    $\alpha \begin{pmatrix} \xi_1\\ \xi_2 \\ \vdots \\ \xi_n \end{pmatrix}  + \beta \begin{pmatrix} \phi_1 \\ \phi_2 \\ \vdots \\ \phi_n \end{pmatrix} $ 
+
+    То же самое можно над полем $\C$
+\end{example}
+\begin{example}
+    $\overline{S_n}$ -- многочлены  $deg \leqslant n$ -- Линейное пространство над $\R(\C, \Q)$
+
+    $\alpha p(x) + \beta q(x)$
+\end{example}
+\begin{lemma}
+    $\alpha 0_X = 0_X$
+\end{lemma}
+\begin{proof}
+    $\forall y\in X\quad \alpha 0_X + y = y$
+
+    $\alpha 0_X = \alpha \cdot (0\cdot x) = 0\cdot x = 0_X$
+\end{proof}
+
+\begin{lemma}
+    $0x = 0_X \implies 0\cdot x+y = y$
+\end{lemma}
+\begin{proof}
+    $\sphericalangle 0\cdot x+y = 0x + 0_X + y = 0\cdot x + x + (-x) + y = (0+1)x + (-x) + y = x + (-x) + y = 0_X + y = y \forall y$
+\end{proof}
+\begin{lemma}
+    $-1\cdot x = -x$
+\end{lemma}
+\begin{proof}
+    $-1x = -1x + 0_X = -1x + x + (-x) = (-1+1)x + (-x) = 0x + (-x) = 0_X + (-x) = -x$
+\end{proof}
+
+\subsection{Линейная зависимость}
+
+\begin{note}
+    Условимся называть элементы линейных пространств \underline{векторами} -- элементы группы
+
+    $X(K)$: $X$ -- группа (живут векторы)  $K$ -- поле (живут скаляры / коэффициенты)
+\end{note}
+
+$\sqsupset \{x_i\}_{i=1}^n$ -- набор векторов из $X(\R)$
+
+\begin{definition}
+    Объект вида $\alpha_1x_1 + \alpha_2x_2 + \ldots + \alpha_nx_{n}  = \sum_{i=1}^{n} \alpha_ix_i$ называется линейной комбинацией векторов $x_i$ с коэффициентами $\{\alpha_i\}_{i=1}^n$ из поля  $K$
+\end{definition}
+
+\begin{definition}
+    Набор $\{x_i\}_{i=1}^n$ называется лийнейно зависимым (ЛЗ), если существует нетривиальный (хотя бы один ненулевой) набор  $\{\alpha_i\}_{i=1}^n$, такой что:  $\sum \alpha_ix_i = 0_X$ (дальше будем писать просто  $0$)
+\end{definition}
+
+\begin{definition}
+    Набор $\{x_i\}_{i=1}^n$ Называется линейно независимым, если  $\sum_{i=1}^{n} \alpha_ix_i = 0$ реализуется только если $\{\alpha_i\}$ -- тривиальный набор (все  $\alpha_i$ равны  $0$)
+\end{definition}
+
+\begin{example}
+    $X = \R^n = \{x = \left( \xi_1, \xi_2, \ldots, \xi_n)^T, \xi_i\in \R \right) \}$ 
+
+    $\alpha_1x_1 + \alpha_2x_2 + \ldots + \alpha_nx_n = 0$
+
+    $\alpha_1 \begin{pmatrix}\xi_1^1 \\ \xi_1^2 \\ \vdots \\ \xi_1^n  \end{pmatrix}  + \beta \begin{pmatrix} \xi_2^1 \\ \xi_2^2 \\ \vdots \\ \xi_2^n \end{pmatrix}  + \ldots + \alpha_n \begin{pmatrix} \xi_n^1 \\ \xi_n^2 \\ \vdots \\ \xi_n^n \end{pmatrix}  = \begin{pmatrix} 0\\0\\ \vdots \\ 0 \end{pmatrix} $
+
+    $\begin{cases}
+        \alpha_1\xi_1^1 + \alpha_2\xi_2^1 + \ldots + \alpha_n\xi_n^1 = 0\\
+        \alpha_1\xi_1^2 + \alpha_2\xi_2^2 + \ldots + \alpha_n\xi_n^2 = 0\\
+        $\vdots$\\
+        \alpha_1\xi_1^n + \alpha_2\xi_2^n + \ldots + \alpha_n\xi_n^n = 0\\
+    \end{cases}$
+\end{example}
+\begin{example}
+    $x_1 = \begin{pmatrix} 1\\0\\ \vdots \\0 \end{pmatrix} \quad x_2 = \begin{pmatrix} 0\\1\\ \vdots \\0 \end{pmatrix} \ldots x_n = \begin{pmatrix} 0\\0\\ \vdots \\1 \end{pmatrix} $ -- линейно независимый набор, из системы уравнений получается $\alpha_1 = 0\quad\alpha_2 = 0\ldots \alpha_n = 0$
+\end{example}
+\begin{example}
+    $\overline{S_n}\quad \{1, t, t^2, t^3, \ldots, t^n\}$ -- ЛНЗ?
+
+    $\sphericalangle \alpha_1 1 + \alpha_2t + \alpha_3t^2 + \ldots + \alpha_{n+1}t^n = 0(t)$
+
+    $t=0\quad \alpha_1 = 0$
+
+    $0+\alpha_2 + 2\alpha_3 t + \ldots + n\alpha_{n+1}t^{n-1} = 0(t) \implies \alpha_2 = 0$
+
+    $\alpha_1 = \alpha_2 = \ldots = \alpha_n = 0$
+\end{example}
+\begin{lemma}
+    Если набор содержит $0$, то он ЛЗ
+\end{lemma}
+\begin{proof}
+    Выберем все коэффициенты $0$, кроме коэффициенты перед $0_k$, в нём выберем ненулвой  $\alpha_k$, тогда получится нетривиальный набор, при котором линейная комбинация обращается в  $0$
+\end{proof}
+\begin{lemma}
+    Набор, содержащий ЛЗ поднабор является ЛЗ
+\end{lemma}
+\begin{proof}
+    Выберем нетривиальный набор коэффициентов для поднабора, а для остальных зададим нулевые коэффициенты. Тогда всё, что не было в поднаборе обратится в $0$, в поднабор обратится в 0 нетривиально, значит в итоге весь набор будет нетривиально обращён в  $0$
+\end{proof}
+ \begin{lemma}
+     Любой поднабор ЛНЗ является ЛНЗ
+ \end{lemma}
+ 
+ \begin{theorem}
+     Набор векторов $\{x_i\}_{i=1}^n$ ЛЗ  $\iff $ хотя бы один вектор набора выражается линейной комбинацией остальных
+ \end{theorem}
+ \begin{proof}
+     \begin{itemize}
+         \item []
+         \item [$\implies $] $\alpha_1x_1 + \alpha_2x_2 + \ldots + \alpha_kx_k + \ldots + \alpha_nx_n = 0$
+
+             $x_k = \frac{-1}{\alpha_k}\left( \alpha_1x_1 + \ldots + \alpha_{k-1}x_{k-1} + \alpha_{k+1}x_{k+1} + \ldots + \alpha_nx_n \right) $ 
+         \item [$\impliedby $] $x_k = \sum_{i\neq k} \alpha_ix_i \implies  \sum_{i\neq k} \alpha_ix_i - x_k = 0$
+     \end{itemize}
+ \end{proof}
+ \section{Базисы в линейных пространствах}
+ \begin{definition}
+     Набор, с помощью которого можно выразить любой другой вектор в линейном пространстве называется полным.
+ \end{definition}
+
+ \begin{example}
+     $x = \R^n\quad e_i = \left( [0_1, 0_2, \ldots, 0_{i-1}, 1_i, 0_{i+1}, \ldots, 0_n \right)^T$
+
+     $x = \begin{pmatrix} \xi_1\\ \xi_2 \\ \vdots \\ \xi_n \end{pmatrix} = \xi_1e_1 + \xi_2e_2 + \ldots$
+ \end{example}
+
+ \begin{definition}
+     Базисом в линейном пространстве $X$ называется полный и линейно независимый набор векторов. 
+ \end{definition}
+
+ \begin{example}
+     $\{e_i\}_{i=1}^n$ -- базис в  $\R^n$
+ \end{example}
+
+ \begin{example}
+     $\{1, t, t^2, \ldots, t^n\}$ -- базис в пространстве $P_n$
+ \end{example}
+
+ \begin{definition}
+     Пространство $X$ называется конечномерным, если в нём существует конечный полный набор векторов. 
+ \end{definition}
+
+ \begin{lemma}
+     В любом конечномерном пространстве существует базис.
+ \end{lemma}
+ \begin{proof}
+     Т.к. $X$ -- конечномерный  $\implies $ существует полный набор $\exists \{y_1, y_2, \ldots, y_k\}$ -- ПН
+     \begin{enumerate}
+         \item Если он линейно независимый $\implies $ мы нашли базис
+         \item Если он не линейно независимый, будем совершать процедуру прореживания:
+             \begin{enumerate}
+                 \item $\{y_1\}$ -- ЛНЗ (Если он не нулевой. Но в полном наборе должен быть хотя бы один ненулевой)
+                 \item $\{y_1,y_2\}$. Если ЛЗ, то вычеркнем $y_2$, иначе оставим.
+                 \item $\{y_1\ldots y_3\}$
+                 \item[] $\ldots$
+                 \item $\{y_1,y_2,\ldots y_k\}$ -- ПН + ЛН -- базис
+             \end{enumerate}
+     \end{enumerate}
+ \end{proof}
+\begin{lemma}
+    В любом конечномерном пространстве любой ЛНЗ набор может быть дополнен до базиса.   
+\end{lemma}
+\begin{proof}
+    $X$ -- конечномерное, в нём существует полный набор  $\implies \exists \{e_j\}_{j=1}^n $ базис $X$ 
+
+    $\sqsupset \{x_i\}_{i=1}^m$ -- ЛНЗ
+
+    \begin{enumerate}
+        \item $\{x_1, x_2, \ldots, x_m, e_1\}$: ЛЗ -- вычёркиваем $e_1$, иначе оставляем
+        \item $\{x_1, x_2, \ldots, x_m,  \ldots, e_2\}$ -- задаёмся тем же вопросом и потенциально убираем $e_2$ 
+        \item[] $\ldots$
+        \item $\{x_1, x_2, \ldots., x_m, \ldots, e_n\}$ -- тот же вопрос.
+    \end{enumerate}
+
+    Так мы прошли всё. Он линейно независимый (по построению) + ПН (добавляли вектора базиса, если они и так там не выражались)
+\end{proof}
+
+\begin{lemma}
+    Число векторов ЛНЗ в КМ ространстве не превосходит число векторов ПН. 
+
+    $\sqsupset \{x_1, x_2, \ldots, x_m\}$ -- ЛНЗ набор
+
+    $\sqsupset \{y_1, y_2, \ldots, y_n\}$ -- полный набор
+
+    $\implies m\leqslant n$
+\end{lemma}
+\begin{proof}
+    $\sqsupset n < m \implies $
+    \begin{enumerate}
+        \item $\{y_1, y_2, \ldots, y_n\}$ -- ЛНЗ + ПН -- базис (число базисных меньше, чем линейно независимых??!)
+        \item $\{y_1, y_2, \ldots, y_n\}$ -- ЛЗ, 
+    \end{enumerate}
+
+    $\{x_1:y_1,y_2,\ldots,y_n\}$ (идём слева направо прореживанием)
+
+    $\{x_1,x_2:\ldots y_n\}$ 
+
+    $\ldots$
+
+    $\{x_1, x_2, \ldots, x_n\}$ -- ЛНЗ + ПН -- базис. В базисе $n$ элементов, а линейно независимых $m>n?!!$
+\end{proof}
+
+\begin{lemma}
+    Количество векторов в двух различных базисах ЛП одинаково.
+\end{lemma}
+\begin{proof}
+    $\{e_j\}\quad\{e_k\}$ -- базисы  $X$
+
+    ЛНЗ  $\leqslant $ ПН
+
+    ПН $\geqslant $ ЛНЗ
+\end{proof}
+
+\begin{definition}
+    Размерностью ЛП называется количество векторов его базиса. $\dim X$
+\end{definition}
+
+\begin{example}
+    $\dim \R^n = n$
+\end{example}
+
+\begin{example}
+    $\dim P_n = n+1$
+\end{example}
+\begin{note}
+    Если $\{x_i\}_{i=1}^n$ -- ЛНЗ в  $X \implies k\leqslant \dim X$
+\end{note}
+\begin{note}
+    Набор ${x_i}_{i=1}^n $ образует базис пространства $X \iff  \{x_i\}$ -- ЛНЗ и $k = \dim X $  
+\end{note}
+
+\begin{definition}
+    $\sqsupset \{e_j\}_{j=1}^n$ -- базис ЛП $X$  $\implies \forall x\in X \exists \xi^i\in KL x = \sum_{j=1}^{n} \xi^je_j$
+
+    $\{\xi^j\}_{j=1}^n$ -- координаты вектора  $x$  в базисе  $\{e_j\}_{j=1}^n$
+\end{definition}
+
+\begin{lemma}
+    Координаты любого вектора в заданном базисе определяются единственным образом.
+\end{lemma}
+\begin{proof}
+    $x = \sum_{i=1}^{n} \xi^ie_i$ 
+
+    $x = \sum_{i=1}^{n} \psi^ie_i$
+
+    $\sum_{i=1}^{n} \left( \xi^i-\psi^i \right) e_i = 0 \implies  \xi^i-\psi^i = 0 \forall i \implies \xi^i = \pi^i$
+\end{proof}
+
+\begin{lemma}
+    Координаты линейной комбинации векторов в заданном базисе равны линейным комбинациям соответствующих координат данных векторов.
+
+    $x_i = \sum_{k=1}^{n} \xi_i^ke_k\quad y = \sum_{i=1}^{m} \alpha^ix_i$ 
+
+    $y = \sum_{j=1}^{n} \psi^je_j \implies \psi^j = \sum_{i=1}^{m} \alpha^i\xi_i^j$
+\end{lemma}
+\begin{proof}
+    $y = \sum_{i=1}^{m} \alpha^ix_i = \sum_{i=1}^{m} \alpha^i \sum_{k=1}^{n} \xi^ke_k = \sum_{k=1}^{n} \left( \sum_{i=1}^{m} \alpha^i\xi_i^k \right) e_k = \sum_{k=1}^{n} \psi^ke_k$
+\end{proof}
 
 \end{document}
 

@@ -1544,4 +1544,562 @@ $-$
 
      $\log (m) + \log (n+1)\leqslant n$
 \end{note}
-   \end{document}
+
+\chapter{Комбинаторика}
+
+Раздел математики, изучающий комбинаторные объекты. Объекты, которые наделены какой-то внутренней структурой.
+
+Основные задачи:
+\begin{enumerate}
+    \item подсчёт и перечисление комбинаторных объектов
+    \item эффективная нумерация комбинаторных объектов. (мы можем хотеть эффективно их закодировать)
+\end{enumerate}
+
+\section{Вектора фиксированной длины}
+
+Последовательность из элементов какого-то алфавита $\Sigma$ фиксированной длины $n$
+
+$\Sigma^n\quad \mathscr{B}^n$
+
+Выполним задачу подсчёта. Сколько у нас двоичных векторов?  $2^n$
+
+Для произвольного алфавита  $k^n$
+
+Задача перечисления: лексикографический порядок
+
+\section{Лексикографический порядок}
+
+Пусть есть множество  $A$ 
+
+$X^* = \bigcup\limits_{k=0}^{\infty } X^k$ -- все последовательности 
+
+пусть $X$ линейно упорядочено, т.е. есть  $\leqslant $ и любые два элемента можно сравнить
+
+$A\subseteq X^*$
+
+Перенесём порядок с $X$ на  $A$. Этот перенос называется лексикографическим порядком на $A$
+
+$a = x_1x_2\ldotsx_{l}$
+
+$b = y_1y_2\ldotsy_t$
+
+$x_{i}, y_{i} \in X$
+
+Будем говорить $a\leqslant _{lex} b$, если $\exists i\leqslant \min(l, t)$, что:
+ \begin{enumerate}
+    \item $i\leqslant j \implies  x_{i}  = y_{j} $
+    \item  $\begin{cases}
+        i = l\\
+        i<t, x_{i+1}<y_{i+1}
+    \end{cases}$
+\end{enumerate}
+
+Для $n=3$
+\begin{tabular}{c}
+000 - 0\\001 - 1\\010 - 2\\011 - 3\\100 - 4 \\101 - 5\\110 - 6\\111 - 7\\
+\end{tabular}
+
+$\Sigma = \{a,b,c\}\quad n = 2$
+\begin{tabular}{c}
+    aa\\ab\\ac\\ba\\bb\\bc\\ca\\cb\\cc\\
+\end{tabular}
+
+\begin{example}
+    Двоичные вектора без двух единиц подряд.
+\begin{tabular}{c}
+000 - 0\\001 - 1\\010 - 2\\100 - 4 \\101 - 5
+\end{tabular}
+
+Посчитаем их. 
+
+\begin{tabular}{lll}
+    n & & $f_n$\\
+    0&$\varepsilon$&1\\
+    1&0,1&2\\
+    >1&0.. или 10...&$F_n = 0F_{n-1} + 10F_{n-2}$ -- Фибоначчи\\
+\end{tabular}
+\end{example}
+
+\section{Перестановки}
+(permutations)
+
+$a_i\in\{1, 2, ..., n\}\quad i\neq j\implies a_i\neq a_j$
+
+\begin{tabular}{c}
+    123\\132\\213\\231\\312\\321\\
+\end{tabular}
+
+$\Sigma = \{\triangle, \circ, \star\}$ 
+
+\begin{tabular}{c}
+    \triangle\circ\star\\\triangle\star\circ\\\circ\triangle\star\\\circ\star\triangle\\\star\triangle\circ\\\star\circ\triangle
+\end{tabular}
+
+Подсчёт: на первую позицию можно поставить $n$ элементов, на вторую  $n-1$ и так далее получается $n(n-1)(n-2)\ldots 2 \cdot 1 = n!$
+
+Пусть те же условия, но позиций не $n$, а  $k$
+
+$\begin{cases}
+    n<k&\O \\
+    n=k&\text{перестановки} \\
+    n>k&\ldots
+\end{cases}$ 
+
+$n=4, k=2$
+\begin{tabular}{c}
+    12\\13\\14\\21\\23\\24\\...
+\end{tabular}
+
+Это так называемые размещения (arrangements)
+
+$A_n^k = n(n-1)(n-2)\ldots (n-k+1) = n^{\underline{k}} = (n-k+1)^{\overline{k}} = \frac{n!}{(n-k)!}$
+
+$n! = n^{\underline{n}}$
+\section{Сочетания}
+
+$\{1, 2, \ldots, n\}$
+
+Выбираем из этих элементов $k$ и составляем из них множество  $\{a_1, a_2, \ldots, a_k\}\quad a_i\neq a_j$
+
+$n=3, k=2\quad \{1, 2\}\quad\{1,3\}\quad\{2,3\}$
+
+$12$ И  $21$ это разные размещения, но одно сочетание  $\{1,2\}$
+
+Чтобы подсчитать воспользуемся канонизацией:
+
+из 7 по 4  $\{2,3,5,6\}\quad \{3,6,2,5\} \ldots$ 24 способа записать одно и то же сочетание
+
+Один из этих способов будем использовать как канонический. Путь это будет ествественное возрастающее представление $\{2,3,5,6\}$
+
+n=5, k=3
+\begin{taular}{c}
+    123\\124\\125\\134\\135\\145\\234\\235\\245\\345\\
+\end{taular}
+
+Перечислили. Теперь займёмся подсчётом
+
+$A_{n, k}$ -- множество.  $a\sim b$, если они задают одно и то же сочетания ($sort(a) = sort(b)\quad set(a) = set(b) $)
+
+$C_{n, k} = A_{n, k}|_{\sim }$ 
+
+У каждого класса эквивалентности получается одинаковый размер 
+
+$\left| C_{n, k} \right|  = \frac{\left| A_{n, k} \right| }{k!} = \frac{n!}{k!(n-k)!} = C_n^k = \begin{pmatrix} n\\k \end{pmatrix} =$ биномиальный коэффициент =\\= n choose k
+
+
+$C_{n, k} = C_{n-1, k-1} \cup  C_{n-1, k}\qquad \begin{pmatrix} n\\k \end{pmatrix}  = \begin{pmatrix}n-1\\k-1  \end{pmatrix}  + \begin{pmatrix} n-1\\k \end{pmatrix} $ -- треугольник Паскаля
+
+$1\\1~1\\1~2~1 \\1~4~4~1 \\1~4~6~4~1\\1~5~10~10~5~1$
+
+\section{Код Грея}
+
+\begin{definition}
+    Код Грея на двоичных веторах:
+
+    перечисление $g_1g_2\ldots g_n\quad H(h_i, g_{i+1})=1$
+\end{definition}
+\begin{example}
+    $n=3\quad
+    \begin{tabular}{c}
+        000\\001\\011\\010\\110\\111\\101\\100\\
+    \end{tabular}$
+
+    концы тоже на расстоянии 1. Такой код называется \underline{циклическим}
+\end{example}
+
+\begin{theorem}
+    Для любого $n$ существует циклический код Грея  $\mathscr{B}^n$
+
+    $n=1:\quad 0~1$
+
+     $n\to n+1$
+
+     Запишем два раза $n$ один сверху вниз, другой наоборот. Затем припием к первому 0, а к другому 1
+\end{theorem}
+
+ \begin{example}
+    Целые числа от 1 до n кратные 3 или 5
+
+    $C = C_3\cup C_5$
+
+    $C_3 = \left\lfloor \frac{n}{3} \right\rfloor\quad C_5 = \left\lfloor \frac{n}{5} \right\rfloor$ 
+
+    Некоторые считаются два раза
+\end{example}
+
+\section{Формула включений-исключений}
+
+\[
+\left| A\cup B \right|  = |A| + |B| - |A\cap B|
+.\] 
+
+$C = C_3+C_5-C_{15}$
+
+ \[
+     |A\cup B\cup C| = |A\cup B| + |C| - \left| (A\cup B)\cap C \right|  = |A| + |B| + |C| - |A\cap B| - |(A\cap C)\cup (B\cap C)| = |A| + |B| + |C| - |A\cap B| - |A\cap C| - |B\cap C| + |(A\cap B\cap C)
+.\] 
+
+\begin{theorem}
+    [Формула включений-исключений]
+
+    $A_1, A_2, \ldots, A_n$
+
+    $\left| \bigcup\limits_{i=1}^n A_i  \right|  = \sum_{\O \neq I\subseteq \{1,2,\ldots,n\}} (-1)^{|I|+1}\left| \bigcap\limits_{i\in I} A_i \right| $
+\end{theorem}
+\begin{proof}
+    $\left| \bigcup\limits_{i=1}^n A_i  \right|  = \left| \bigcup\limits_{i=1}^{n-1}A_i  \cup A_n\right|  = \left| \bigcup\limits_{i=1}^{n-1} A_i \right| + |A_n| - \left| \bigcup\limits_{i=1}^{n-1}(A_i\cap A_n)  \right| = \sum_{I\subseteq \{1,2,\ldots ,n-1\}}(-1)^{|I|+1}\left| \bigcap\limits_{i \in  I} A_i \right|  + |A_n| + \sum_{J\subseteq \{1, 2, \ldots, n-1\}} (-1)^{|I|+1}\left| \bigcap\limits_{i\in J} A_i\cap A_n \right|  = (*)$
+\end{proof}
+
+\section{Алгоритмы ..}
+
+Двоичные вектора фиксированной длины $\mathscr{B}^n$
+
+Как нам сгенерировать все эти вектора?
+
+\begin{verbatim}
+    gen:
+        gen all, starting with 0
+        gen all, starting with 1
+\end{verbatim}
+
+Это рекурсия, мы каждый раз делим на два.
+
+Другой взгляд: обход в глубину двоичного дерева.
+
+\begin{verbatim}
+    gen(p) # p - prefix
+        if len(p) == n:
+            print(p)
+            return
+        gen(p+[0])
+        gen(p+[1])
+
+    main:
+        gen([])
+\end{verbatim}
+
+Отметим, что эта программа печатает (перечисляет) вектора в лексигографическом порядке.
+
+Перестановкаи
+
+$n=3 123, 132, 213, 231, 312, 321$
+
+Когда мы выбираем первый элемент, остаётся выбор только из двух, а на следующей итерации нет выбора -- один возможный вариант.
+
+\begin{verbatim}
+    gen(p):
+        if len(p) = n:
+            print(p)
+            return
+        for i = 1 .. n:
+            if i not in p:
+                gen(p+[i])
+\end{verbatim}
+
+Строчки из 0 и 1 длинны $\leqslant n$
+
+$\bigcup\limits_{k=0}^{n} \mathscr{B}^n $ 
+
+\begin{tabular}{c}
+    $\varepsilon$\\
+    0\\00\\000\\001\\01\\010\\011\\
+\end{tabular}
+
+Печатаем теперь не только в листе, а везде
+  
+\begin{verbatim}
+    gen(p) # p - prefix
+        print(p)
+        if len(p) = n:
+            return
+        gen(p+[0])
+        gen(p+[1])
+
+    main:
+        gen([])
+\end{verbatim}
+
+В общем случает. Мы хотим сгенерировать объект
+
+\begin{verbatim}
+    gen(p) # p - префикс комбинаторного обекта
+        if (p - к.о.):
+            print(p)
+        for (c in Sigma) # перебор в возрастающем порядке
+            if (p+[c] -- префикс к.о.)
+                gen(p+[c])
+\end{verbatim}
+
+Сочетания $\Sigma = \{1, 2, \ldots, n\}$. Характеризуются двумя числами: $n, k$
+
+ \begin{verbatim}
+    if len(p) = n:
+        print(p)
+        return
+    for (c = 1 или (p[-1]+1) .. n-k+len(p)+1)
+        if p != [] and c <= p[-1]
+            continue
+        if n-c < k-len(p)-1
+            continue # break
+        gen(p+[c])
+\end{verbatim}
+
+Правильные скобочные последовательности.
+
+Есть последовательность открывающихся и закрывающихся скобочек. И выполнены условия:
+\begin{enumerate}
+    \item На любом префиксе $#( - #)\geqslant 0$
+    \item В конце баланс -- 0
+\end{enumerate}
+
+$\left(  \right) $
+$(\left(  \right) )$ 
+
+$((( )))\quad (( )( ))\quad (( ))\left(  \right) \quad ( )(( ))\quad \left(  \right) \left(  \right) \left(  \right) $ 
+
+$\Sigma = \{(,)\}\quad (<)$
+
+\begin{verbatim}
+gen(p, bal):    
+    if len(p) = 2n:
+        print(p)
+        return
+    if bal+1<= 2n-len(p)-1:
+        gen(p+[(], bal+1)
+    if bal>0:
+        gen(p+[)], bal-1)
+
+main:
+gen([], 0)
+\end{verbatim}
+
+Оптимизация: храним префикс в общем массиве $a$ и будет брать его срезы нужной длины. Кроме того создадим массив used -- маска какие мы элементы взяли. а какие ещё нет
+
+\begin{verbatim}
+gen(p) # p -- длина префикса
+    if len(p) == n:
+        print(a)
+        return
+    for i = 1 .. n:
+        if !used[i]:
+            used[i] = true
+            a[p]=i
+            gen(p+1)
+            used(p[i]) = false
+\end{verbatim}
+
+\begin{problem}
+    Хотим получить $k$-ый (в лексикографическом порядке) объект (нумерация с 0)
+\end{problem}
+
+\begin{verbatim}
+    gen(p)
+        if p == n
+            if k = 0
+                print(a)
+            k--
+            return
+        for i = 1 .. n:
+            if !used[i]
+                if k >= (n-p-1)!:
+                    k-=(n-p-1)!
+                else:
+                    used[i] = true
+                    a[p] = i
+                    gen(p+1)
+                    used[i]=false
+                    return
+\end{verbatim}
+
+\begin{verbatim}
+    gen(p) # p - префикс комбинаторного обекта
+        if (p - к.о.):
+            if (k=0):
+                print(p)
+                return
+            k--
+        for (c in Sigma) # перебор в возрастающем порядке
+            if (p+[c] -- префикс к.о.)
+                t = количество к.о. с префиксом p+[c]
+                if k >= t:
+                    k-=t
+                else:
+                    gen(p+[c])
+                    return
+                gen(p+[c])
+\end{verbatim}
+
+В перестановках мы можем оптимизировать ещё дальше и делать $c = \left\lfloor \frac{k}{(n-p-1)!} \right\rfloor+1\quad k = k\%(n-p-1)!$
+
+\begin{verbatim}
+Из n берём m
+k
+
+gen(p):
+    if p == m:
+        print(a)
+        return
+    for c = 1(a[p-1] ... n-m+p+1:
+        t = Из n-c выбираем m-p-1
+        if k >= t:
+            k-=t
+        else:
+            gen(p+1)
+\end{verbatim}
+
+Теперь будем выполнять обратную задачу: искать номер по объекту.
+
+ \begin{verbatim}
+gen(p):
+    if p -- к.о.:
+        if p == z:
+            res = k
+        else:
+            k++
+    for (c in Sigma):
+        if (p+[c] -- префикс к.о):
+            gen(p+[c])
+\end{verbatim}
+
+Применим ``изоморфный'' алгоритм предыдущему:
+\begin{verbatim}
+    gen(p) # p - префикс комбинаторного обекта
+        if (p - к.о.):
+            if p = z:
+                res = k
+                return
+            k++
+        for (c in Sigma) 
+            if (p+[c] -- префикс к.о.)
+                t = количество к.о. с префиксом p+[c]
+                if (p+[c] -- префикс z):
+                    gen(p+[c])
+                    return
+                else:
+                    k += t
+\end{verbatim}
+
+Следующий к.о.
+
+к.о. лежит в упорядоченном множестве к.о.  Следующий имеет с этим какой-то общий префикс
+
+\begin{enumerate}
+    \item максимальный общий префикс, который можно сохранить, увеличив след. p
+    \item Увеличить следующий элемент минимальным образом, заменив $a$ на  $b$
+    \item Дальше к этому элементу $p+b$ нужно приписать минимальную возрастающую последовательность
+\end{enumerate}
+
+$3576421$
+
+\section{Лекция}
+Перестановки $n(n-1)(n-2)\ldots$
+
+Сочетания $\frac{n(n-1)\ldots(n-k+1)}{k!} = \frac{n!}{k!(n-k)!}$ 
+
+Скобочные последовательности 
+
+$((( )))\quad (( )( ))\quad (( ))( )\quad ( )(( ))\quad ( )( )( )$
+
+\subsection{Рекуррентные соотношения}
+
+Сочетания
+
+$\begin{pmatrix} n\\k \end{pmatrix}  = \begin{pmatrix} n-1\\k-1 \end{pmatrix}  + \begin{pmatrix} n-1\\k \end{pmatrix} $ -- Делим на две группы
+
+Перестановки $P_n = P_{n-1}\cdot n$
+
+Правильная скобочная последовательность: 
+\begin{enumerate}
+    \item У любого префикса неотрицательный баланс. 
+    \item В конце баланс $0$
+\end{enumerate}
+
+Скобочная последовательность из $n$ открывающихся скобок: длина  $2n$
+
+Если мы на месте  $k$, у нас есть какой-то неотрицательный баланс  $b\geqslant 0$
+
+$A_{k,b}$ -- количество префиксов правильных скобочных последовательностей, длины  $k$, баланс в конце $b$
+
+Тогда нужное нам количество  $C_n = A_{2n, 0}$
+
+ \begin{tikzpicture}
+     \draw [help lines, red] (0,0) grid (6,3);
+     \draw (0,0) -- (1,1) -- (2,2) -- (3,1) -- (4,0) -- (5,1) -- (6,0);
+     \draw [<->] (0,4) node [left] {$b$} -- (0,0) -- (7,0) node [below] {$k$};
+\end{tikzpicture}
+
+Так можно изобразить последовательность $(( ))( )$. Такие графики называются путями Дика (Dyck Path)
+
+$A_{k,b} = A_{k-1,b+1} + A_{k-1, b-1}$
+
+$A_{0,0} = 1$
+
+\begin{tikzpicture}
+    \begin{scope}[rotate=-135]
+        \draw [help lines, red] (0,0) grid (5.5,5.5);
+        \foreach \i in {1,...,5} {
+            \draw (\i+1,-1) -- (-1,\i+1);
+        }
+    \end{scope}
+\end{tikzpicture}
+
+Сочетания тоже можно представить сеткой (рисунок выше)
+
+$A_{k,b} = A_{k-1,b+1} + \underbrace{A_{k-1, b+1}}\limits_{b>0}$
+
+$A_{0,0} = 1$
+
+Если убрать внешние скобки, то у оставшейся последовательности понизиться график Дика по балансу. Найдём индекс (первый), в котором баланс стал $-1$  --  $i$. Тогда можно представить последовательность в виде $(\text{псп})\text{псп}$, где псп -- правильная скобочная последовательность. Эти две последовательности никак не связаны друг другом, значит их можно отдельно посчитать и перемножить $C_{i-1}C_{n-i}$
+
+$C_n = \sum_{i=1}^{n} C_{i-1}C_{n-1} = \sum_{i=0}^{n-1} C_iC_{n-i-1}$
+
+$C_n$ -- число Каталана:  $1, 1, 2, 5, 14, 42, \ldots$
+
+Деревья:
+\begin{enumerate}
+    \item Двоичные деревья.
+$\ldots$
+        Числа Каталан
+    \item Разбиения 
+
+        \begin{verbatim}
+            5=1+1+1+1+1
+            5=5
+            5=4+1 (=1+4)
+            5=3+2 
+            5=3+1+1
+            5=2+2+1
+            5=2+1+1+1
+        \end{verbatim}
+        $P_{n,k}$ -- количество разбиения числа  $n$ на слагаемые  $\leqslant k$
+
+        $P_n = P{n,n}$
+
+        $P_{0,k} = 1$
+
+        $P_{n,k} = P_{n-k,k} + P_{n,k-1}$
+
+        Можно лучше: Пентагональная теорема Эйлера
+    \item Разбиения с различными элементами. Числа Белла  $B_n$
+
+        $S_2(n,k) = 
+            \begin{Bmatrix}
+            n\\k
+        \end{Bmatrix}
+        $ -- количество разбиений $n$-элементного множества на $k$ непустых множеств, Числа Стирлинга 2 рода
+
+   $
+   \begin{Bmatrix}
+       n \\ k 
+   \end{Bmatrix} = 
+   \begin{Bmatrix}
+       n-1\\k-1 
+   \end{Bmatrix} + 
+   k \cdot  \begin{Bmatrix}
+       n-1\\k
+   \end{Bmatrix}$ --  один в отдельном множестве + один в множестве с друзьями.
+   \item Разбиение на циклы. Для перестановки можно нарисовать граф циклов. Число Стирлинга 1 рода $S_1(n,k) = \begin{bmatrix} n\\k \end{bmatrix} $
+
+       $\begin{bmatrix} n\\k \end{bmatrix}  = \begin{bmatrix} n-1\\k-1 \end{bmatrix} +(n-1)\begin{bmatrix} n-1\\k \end{bmatrix} $
+\end{enumerate}
+\end{document}
