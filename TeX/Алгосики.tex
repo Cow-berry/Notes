@@ -988,13 +988,13 @@ $B_0$ -- дерево из одной вершины
 $B_1$ -- одна вершина, к которой подвешена друга
 
 $B_2$ --
-
-\begin{figure}[ht]
-    \centering
-    \incfig{binom}
-    \caption{binom}
-    \label{fig:binom}
-\end{figure}
+%
+%\begin{figure}[ht]
+%    \centering
+%    \incfig{binom}
+%    \caption{binom}
+%    \label{fig:binom}
+%\end{figure}
 
 \section{Динамическое программирование}
 
@@ -1229,7 +1229,7 @@ $D[i,j]$ -- минимальное количество действий, что
         s = котик
         t = коржик
     \end{verbatim}
-    \begin{array}{c|c|c|c|c|c|c|}
+    $\begin{array}{c|c|c|c|c|c|c|}
         &0&1&2&3&4&5\\\hline
         0&0&1&2&3&4&5\\ \hline
         1&1&0&1&2&3&4\\\hline
@@ -1238,7 +1238,7 @@ $D[i,j]$ -- минимальное количество действий, что
         4&4&3&2&2&2&3\\\hline
         5&5&4&3&3&2&3\\\hline
         6&6&5&4&4&3&2\\\hline
-    \end{array}
+    \end{array}$
 
     $D[n,m] = 2$
 \end{example}
@@ -1316,6 +1316,121 @@ $D[n]$ --  $\min \sum bad$ для слов  $0\ldots n-1$
 Пусть $D[i,j]$ -- самое короткое представление строки  $s[i..j-1]$
 
 Когда восстанавливаем состояние, то находим не один путь, а дерево.
+\section{Алгосики}
+
+\begin{problem}
+    $n$ предметов, веса  $w_i$, стоимости  $c_i$, рюкзак  $S$
+
+     $\sum w_i\leqslant S\quad \sum c_i \to \max$
+
+     $NP$-полная
+
+      $c_i=w_i\quad \sum w_i\leqslant S\quad \sum w_i\to \max$
+
+      $\sum w_i =S$
+\end{problem}
+\begin{proof}
+    \begin{enumerate}
+        \item $w_i, S$ -- маленькие, целые ( $S \approx 10^6$)
+
+            $d[i,j]$ -- можно ли набрать сумму  $j$ из предметов  $(0\ldots i-1)$
+
+            \begin{enumerate}
+                \item Не берём $i-1\quad d[i-1,j]$
+                \item Берём  $i-1\quad d[i-1,j-w_{i-1}]$
+            \end{enumerate}
+
+            База:
+
+            \begin{verbatim}
+                $d[0,0] = True$
+                for i = 1..n:
+                    for j = 0..S:
+                        d[i,j] = d[i-1,j]
+                        if j-w_{i-1} >= 0:
+                            d[i,j] |= d[i-1,j-w_{i-1}] # |= -- or-равно
+            \end{verbatim}      
+    \end{enumerate}
+
+    Теперь сделаем $d[i,j]$ --  $\max\sum c$, которую можно набрать, если  $\sum w = j$ из предметов  $(0,i-1)$
+            \begin{verbatim}
+                d[0,0] = 0, d[o,j] = infty
+                for i = 1..n:
+                    for j = 0..S:
+                        d[i,j] = d[i-1,j]
+                        if j-w_{i-1} >= 0:
+                            d[i,j] = max(d[i,j], d[i-1,j-w_{i-1}] + c_{i-1}) # |= -- or-равно
+            \end{verbatim}      
+        \item $n$ -- очень маленькое (можем перебрать все  $2^n$ -- небольшое)
+
+            Переберём все  $X\subseteq \{0\ldots n-1\}$
+
+            Подмножество $\leftrightarrow$  числа.
+
+        $n=5\quad x = \{0,2,3\}\quad 01101 = 13$ 
+
+        Подмножества $\{0\ldots n-1\} \leftarrow$ числа $0\ldots 2^n-1$
+
+        $x\cup y = x|y\quad x\cap y = x \& y$
+
+        $x \setminus y\quad x\&\left( ~y \right) $
+
+        $\{i\}\quad 1<<i$
+
+        $i\in X\quad (x\&(1<<i))>0$
+        \begin{verbatim}
+            for x = 0 .. 2^n-1:
+                sw=0, sc=0
+                for i = 0 .. n-1:
+                    if x&(1<<i) > 0:
+                        sw += w(i)
+                        sc += c(i)
+                if sw <= S:
+                    res = max(res,sc)
+            O(2^n * n)
+        \end{verbatim}
+
+    Оптимизации:
+    \begin{itemize}
+        \item Meet in the middle.
+
+            Поделим предметы на левые и правые. Получим $2^{\frac{n}{2}}$ способов с каждой стороны
+
+            $sw[x] + sw[y] \leqslant S\quad sc[x]+sx[y] \to \max$
+
+            \begin{verbatim}
+                for x = 0 .. 2^{n-1}-1
+                    sq[y] <= S*sq[x]
+                    sc[y] -> max (бин поиск)
+            \end{verbatim}  
+        \item Мультирюкзак. Положить все предметы в минимальное количество рюкзак. 
+
+            $d[x]$ -- минимальное число рюкзаков, чтобы положить подмножество  $x$ 
+
+            \begin{verbatim}
+                for x = 0 .. 2^{n-1}:
+                    for y \in x:
+                        if sum w[y] <= S:
+                            d[x] = min(dx, 1 + d[x-y])
+
+                O(4^n)
+            \end{verbatim}
+
+            Каждый предмет:
+            \begin{enumerate}
+                \item В $X$ и в  $Y$
+                \item В  $X$, но не в  $Y$
+                \item Ни там, ни там
+            \end{enumerate}
+
+            Так получается $3^n$ вариантов.
+
+            $d[x] = (A,B)\quad A$ -- число рюкзаков,  $B$ -- заполненность последнего рюкзака.
+
+            $(A_1,B_1)<(A_2,B_2)$, если $A_1<A_2 $ or $A_1=A_2\& B_1<B_2$
+    \end{itemize}
+\end{proof}
+
 
 \end{document}
 

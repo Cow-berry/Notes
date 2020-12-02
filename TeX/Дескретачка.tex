@@ -1579,9 +1579,9 @@ $A\subseteq X^*$
 
 Перенесём порядок с $X$ на  $A$. Этот перенос называется лексикографическим порядком на $A$
 
-$a = x_1x_2\ldotsx_{l}$
+$a = x_1x_2\ldots x_{l}$
 
-$b = y_1y_2\ldotsy_t$
+$b = y_1y_2\ldots y_t$
 
 $x_{i}, y_{i} \in X$
 
@@ -1631,9 +1631,14 @@ $a_i\in\{1, 2, ..., n\}\quad i\neq j\implies a_i\neq a_j$
 
 $\Sigma = \{\triangle, \circ, \star\}$ 
 
-\begin{tabular}{c}
-    \triangle\circ\star\\\triangle\star\circ\\\circ\triangle\star\\\circ\star\triangle\\\star\triangle\circ\\\star\circ\triangle
-\end{tabular}
+$\begin{array}{c}
+    \triangle\circ\star\\
+    \triangle\star\circ\\
+    \circ\triangle\star\\
+    \circ\star\triangle\\
+    \star\triangle\circ\\
+    \star\circ\triangle
+\end{array}$
 
 Подсчёт: на первую позицию можно поставить $n$ элементов, на вторую  $n-1$ и так далее получается $n(n-1)(n-2)\ldots 2 \cdot 1 = n!$
 
@@ -1672,9 +1677,9 @@ $12$ И  $21$ это разные размещения, но одно сочет
 Один из этих способов будем использовать как канонический. Путь это будет ествественное возрастающее представление $\{2,3,5,6\}$
 
 n=5, k=3
-\begin{taular}{c}
+\begin{tabular}{c}
     123\\124\\125\\134\\135\\145\\234\\235\\245\\345\\
-\end{taular}
+\end{tabular}
 
 Перечислили. Теперь займёмся подсчётом
 
@@ -1848,7 +1853,7 @@ $\bigcup\limits_{k=0}^{n} \mathscr{B}^n $
 
 Есть последовательность открывающихся и закрывающихся скобочек. И выполнены условия:
 \begin{enumerate}
-    \item На любом префиксе $#( - #)\geqslant 0$
+    \item На любом префиксе $\#( - \#)\geqslant 0$
     \item В конце баланс -- 0
 \end{enumerate}
 
@@ -2102,4 +2107,232 @@ $\ldots$
 
        $\begin{bmatrix} n\\k \end{bmatrix}  = \begin{bmatrix} n-1\\k-1 \end{bmatrix} +(n-1)\begin{bmatrix} n-1\\k \end{bmatrix} $
 \end{enumerate}
-\end{document}
+
+\section{Группы действий}
+
+Размещение -- список из $k$ элементов из первых  $n$ чисел (в списке различные)
+
+$n^{\underline{k}}$
+
+Сочетание -- облачко из  $k$ разных элементов от  $1$ до  $n$
+
+${n\choose k} = \frac{n!}{k!(n-k)!}$
+
+Введём отношение: равенство с точностью до порядка. $4317\sim 3714$, потому что можно переставить -- поменять порядок.
+
+$A_{n,k}/_{\sim } = C_{n,k}$ 
+
+$\{1,2,\ldots,n\}^k$
+
+$[1,2,3,4]$ --  $4! = k!$ в классе эквивалентности
+
+$[1,1,1,1]$ --  $1!\neq k!$
+
+\begin{definition}
+    Группоид -- Множество $X$ с бинарной операцией  $\cdot :X\times X\to \quad a\cdot b\to ab$
+\end{definition}
+\begin{definition}
+    Полугруппа -- группоид с ассоциативностью. $(a\cdot b)\cdot c = a\cdot (b\cdot c)$
+\end{definition}
+\begin{definition}
+    Моноид -- полугруппа с единицей: $\exists e: \forall a\cdot e=e\cdot a=a$
+
+    $e$ -- нейтральный элемент, нейтральное действие.
+\end{definition}
+
+ \begin{example}
+    $a\to 3a$ Можем ли мы ``отменить'' это действие? Иногда можем
+
+    $3a\to a$ (умножаем на $\frac{1}{3}$ )
+
+    $a\cdot 0=0$ Узнать что было до этого мы не можем. Нет обратного действия.
+\end{example}
+
+\begin{definition}
+    К Моноиду добавляется существование обратного элемента к любому элементу.  $\forall a \exists a^{-1}\quad a\cdot a^{-1} = a^{-1}\cdot a = e$
+\end{definition}
+
+\begin{example}
+    $(\Z , +)$
+
+    $(\R, +)$
+
+    $(\R, \cdot )$ -- НЕ группа
+
+    $(\R\setminus \{0\})$ -- группа
+
+    $(\Z , \cdot )$ -- НЕ группа
+
+    $\left( \{1,-1\}, \cdot  \right) $ -- группа
+\end{example}
+
+\begin{definition}
+    $G$ -- группа. 
+     \begin{enumerate}
+         \item $g(hk) = (h)k$
+         \item  $\exists e\quad eg=ge=g$
+         \item $ \exists g^{-1}:\quad g g^{-1} = g^{-1} g = e$
+    \end{enumerate}
+
+    $X$ -- объекты. 
+
+     $gx=y\in X\quad G\times X\to X$
+      \begin{enumerate}
+          \item $h(gx) = (hg)x$
+          \item $ex=x$
+      \end{enumerate}
+
+      В таком случае говорят $G$ действует на  $X$
+\end{definition}
+
+\begin{example}
+    $X=\R^2\quad G = \R\setminus \{0\}, \cdot \qquad g(x,y)\mapsto (gx,gy)$
+\end{example}
+\begin{example}
+    $X=\R^2\quad G = [0,2\pi ), +_{mod 2\pi}$ -- действие группы поворотов на множество точек
+\end{example}
+\begin{example}
+    $X = \mathscr{B}^n\quad G = S_n$ -- группа перестановок  $n$ элементов.
+
+     $x = 11001$ и применим к нему перестановку  $p = 31245$
+
+     Получим  $y = px = 10101$ (первый идёт на позицию 3, второй на позицию 1, третий на позицию 2, 4 и5  остаются на месте)
+\end{example}
+
+\begin{definition}
+    Группа перестановок: 
+
+    $ab$
+
+    Хотим $(ab)x=a(bx)$
+
+    $x[i]\to b[i] \to a[b[i]$
+
+    $c=ab\quad c[i] = a[b[i]$ -- это перестановка. Все  $b[i]$ различны, а значит и все  $a[b[i]$ различны
+
+    Даёт ли это нам группу
+
+    $a[(b[c[i]])]\quad a(bc)$
+
+    $a[b[\left( c[i] \right) ]]\quad (ab)c$
+
+    Ассоциативность есть.
+
+    $e_i=i\quad (ae)i = a_{e_i} = a_i$
+
+     $ea=ae=a$
+
+     $b=a^{-1}$
+
+     $ba=e\quad b[a[i] = i for i=1\ldots n$
+\end{definition}
+
+\begin{note}
+    Умножение перестановок -- действие $S_n$ на  $S_n$
+\end{note}
+
+\begin{example}
+    $X = T^n$
+
+$G = \{0,\ldots,n-1\},+_{mod~n}\}$
+
+$[1,2,3,4]$ свинутая 3 раза  $[2,3,4,1$
+\end{example}
+
+$X\quad G$ -- группа, которая действует на $X$
+
+ $\sim _G$ -- эквивалентны с точностью до $G$
+
+  $x\sim _Gy\quad \exists g\in G\quad y=gx$
+  \begin{enumerate}
+      \item $x\sim _Gx\quad x=ex$
+      \item $x\sim_Gy\quad y=gx\quad x = g^{-1}y\quad y\sim_Gx$
+      \item $x\sim _Gy\quad y\sim _Gz\quad y=gx\quad z=hy=hgx$
+  \end{enumerate}
+
+$X / G$ -- классы эквивалентности, орбиты
+
+\begin{example}
+    \begin{enumerate}
+        \item $g(x,y) = (gx,gy)$. Коллинеарные вектора -- орбиты
+
+        \item Повороты: Круги -- орбиты
+    \end{enumerate}
+\end{example}
+
+\begin{definition}
+    Неподвижные точки:
+
+    $g\quad I_g = \{x|gx=x\}$ -- элементы, на которые  $g$ действует никак. 
+
+    $g\neq 1\quad I_g=\{0,0\}\quad g=1\quad I_g = \R^2$
+
+    $T^n, S_n\quad I_{\pi } = $ все элементы внутри цикла равны.
+\end{definition}
+
+$n=6$ сдвиг на 3. -- три цикла.
+
+ $n=7$ сдвиг на 3 -- один большой цикл. 
+
+ В общем случае для сдвигов число циклов это  НОД($n,k$)
+
+
+\begin{theorem}
+    [Лемма Бернсайда]
+    $\left| X / G \right|  = \frac{\sum_{g\in G} \left| I_g \right| }{|G|}$
+\end{theorem}
+\begin{proof}
+%\begin{figure}[ht]
+%    \centering
+%    \incfig{xg}
+%    \caption{xg}
+%    \label{fig:xg}
+%\end{figure}
+
+Построим таблицу $G\times X$ и выкинем все столбцы, кроме одного для каждой орбиты. 
+
+$z=g_1x\quad x=g_1^{-1}z$
+
+$z = z\quad z=g_2g_1^{-1}z$
+
+$\ldots$
+
+$z = g_kg_1^{-1}z$
+
+$\{h|hz=z\} = St~z$ -- действия, которые не меняют объект. Именно столько раз будет повторятся объект в столбце. 
+
+$|G|\cdot \left| X / G \right|  = \sum_{x\in X} \left| St~x \right| = \sum_{x\in X}\sum_{h\in G}[gx=x] = \sum_{g\in G}\sum_{x\in X}[gx=x] = \sum_{g\in G}|I_g| $ 
+
+$[hx=x] = \begin{cases}
+    1&,hx=x\\
+    0&, \text{ иначе}
+\end{cases}$ 
+
+\end{proof}
+
+\begin{example}
+    $X$ -- размещения,  $S_k$ -- перестановки
+
+     $X / S_k$ -- сочетания
+
+      $\left| X / S_k \right|  = \frac{|I_k|}{k!} = \frac{|X|}{k!}$
+\end{example}
+
+\begin{example}
+    $n=3\quad \mathscr{B}^3$ 
+
+    \begin{tabular}{c|c}
+        123&8\\
+        132&4\\
+        213&4\\
+        231&2\\
+        312&2\\
+        321&4\
+        
+    \end{tabular}
+
+    $\frac{8+4+4+2+2+4}{6} = 4\quad 000\quad 001\quad 011\quad 111 $
+\end{example}
+
+Для ожерелий $2^{\text{НОД(n,k)}}$
+  \end{document}
