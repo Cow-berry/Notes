@@ -43,6 +43,7 @@
 \newcommand{\p}[1]{#1^{\prime}}
 \newcommand{\pp}[1]{#1^{\prime\prime}}
 \newcommand{\tl}[1]{\widetilde{#1}}
+\newcommand{\ov}[2]{\overset{#1}{#2}}
 % Easily typeset systems of equations (French package) [like cases, but it aligns everything]
 \usepackage{systeme}
 \usepackage{lipsum}
@@ -2576,6 +2577,1151 @@ $\sqsupset \{x_i\}_{i=1}^n$ -- набор векторов из $X(\R)$
 \begin{proof}
     $y = \sum_{i=1}^{m} \alpha^ix_i = \sum_{i=1}^{m} \alpha^i \sum_{k=1}^{n} \xi^ke_k = \sum_{k=1}^{n} \left( \sum_{i=1}^{m} \alpha^i\xi_i^k \right) e_k = \sum_{k=1}^{n} \psi^ke_k$
 \end{proof}
+
+\section{Системы линейных алгебраических уравнений}
+
+\begin{definition}
+    $\begin{cases}
+        
+    \alpha_1^1\xi^1 + \alpha^1_2\xi^2 + \ldots + \alpha^1_n\xi^n = \beta^1\\
+    \alpha_2^1\xi^1 + \alpha^2_2\xi^2 + \ldots + \alpha^2_n\xi^n = \beta^2\\
+    \ldots\\
+    \alpha_2^m\xi^1 + \alpha^m_2\xi^2 + \ldots + \alpha^m_n\xi^n = \beta^m\\
+    \end{cases}$
+
+
+    $\alpha_i^j$ -- коэффициенты.  $\xi^j$ -- неизвестные,  $\beta_i$ -- свободные члены
+\end{definition}
+Способы записи:
+\begin{enumerate}
+    \item Матричный $A = \begin{pmatrix} \alpha_1^1 & \ldots & \alpha_n^1\\ \vdots & & \vdots\\ \alpha_1^m & \ldots & \alpha_n^m \end{pmatrix}\quad X = \begin{pmatrix} \xi^1\\ \xi^2 \\ \vdots \\ \xi^n \end{pmatrix} \quad B = \begin{pmatrix} \beta^1 \\ \beta^2 \\ \vdots \\ \beta^n \end{pmatrix} \implies AX = B $
+    \item Геометрический
+
+        $a_1 = \begin{pmatrix} \alpha_1^1 \\ \alpha_1^2 \\ \vdots \\ \alpha_1^n \end{pmatrix} \quad a_n = \begin{pmatrix} \alpha_n^1 \\ \alpha_n^2 \\ \vdots \\ \alpha_n^m \end{pmatrix} \quad b =\begin{pmatrix} \beta^1 \\ \beta^2 \\ \vdots \\ \beta^n \end{pmatrix} \implies a_1\xi^1 + a_2\xi^2 + \ldots + a_n\xi^n = b $
+
+        Т.е. задача найти коэффициенты линейной комбинации векторов набора $\{a_j\}_{j=1}^n$, которая давала бы вектор  $b$
+\end{enumerate}
+
+\begin{enumerate}
+    \item $\sqsupset b = 0$, т.е. $a_1\xi^1 + a_2\xi^2 + \ldots + a_n\xi^n = 0$
+
+        Очевидное решение $\xi_i=0 \forall i$ -- тривиальное решение. Но есть ли нетривиальные решения?
+
+        \begin{example}
+
+            $\begin{cases}
+            r_1+2r_2+4r_3-3r_4=0\\
+            3r_1+5r_2+6r_3-4r_4 = 0\\
+            4r_1+5r_2-2r_3+3r_4 = 0\\
+            3r_1+8r_2+24r_3-19r_4=0\\
+            \end{cases}$
+
+            Метод Гаусса:
+
+            $\begin{pmatrix} 1&2&4&-3\\3&5&6&-4\\4&5&-2&-3\\3&8&24&-19 \end{pmatrix} \sim \begin{pmatrix} 1&2&4&-3\\0&-1&-6&5\\0&-4&-18&15\\0&2&12&-10 \end{pmatrix} \sim \begin{pmatrix} 1&2&4&-3\\0&1&6&-5\\0&0&0&0\\0&0&0&0 \end{pmatrix} $ 
+
+            $r$ -- количество линейно-независимых столбиков в итоге, или количество ненулевых строк. Первые два столбца назовём базисными неизвестными (можно выбрать любые, но ровно $r$) Оставшиеся столбцы нарвём параметрами . 
+
+            $\begin{cases}
+                r_1+2r_2+4r_3-3r_4=0\\
+                r_2+6r_3-5r_4=0\\
+            \end{cases}$
+
+            $\begin{cases}
+                r_1+2r_2=-4r_3+3r_4\\
+                r_2 = -6r_3+5r_4\\
+            \end{cases}$
+        \end{example}
+        \begin{note}
+            $a_1r_1+a_2r_2+\ldots +a_nr_n = 0$
+
+            Пусть $\p R = \p r_1, \p r_2, \ldots, \p r_n$ -- решение
+
+            И пусть $\pp R = \pp r_1, \pp r_2, \ldots, \pp r_n$ -- другое решение.
+        
+            Тогда $\forall \gamma, \delta\in K\quad \gamma\cdot \p R + \delta\cdot \pp R$ -- линейная комбинация тоже решение.
+
+            Таким образом множество решений это линейное пространство.
+
+            Пусть $r_3=1, r_4=0 \implies  r_1+2r_2=-4;r_2=6 \implies  r_1=8$
+
+            $X_1 = (8,-6,1,0)^T$ -- одно из решений однородной системы.
+
+            $r_3=0, r_4=1 \implies  r_1=-7, r_2=5$
+
+            $X_2=(-7,5,0,1)^T$ -- линейно независим с $X_1$
+
+            $X_1, X_2$ - базис пространства решений.
+
+            $X = c_1X_1 + c_2X_2$ -- общее решение однородной системы. Окончательная форма решения.
+
+            $\{X_1, X_2\}$ -- фундаментальная система решений (ФСР)
+
+            $X = c_1\begin{pmatrix} 8\\-6\\1\\0 \end{pmatrix} +c_2\begin{pmatrix} -7\\5\\1\\0 \end{pmatrix} $
+        \end{note}
+
+        
+\begin{example}
+    $\begin{cases}
+        r_1+r_2-3r_4-r_5=0\\
+        r_1-r_2+2r_3-r_4=0\\
+        4r_1-2r_2+6r_3+3r_4-4r_5=0\\
+        2r_1+4r_2-2r_3+4r_4-7r_5=0\\
+    \end{cases}$ 
+
+    $\begin{pmatrix} 1&1&0&-3&-1\\1&-1&2&-1&0\\4&-2&6&3&-4\\2&4&-2&4&-7 \end{pmatrix} \sim \begin{pmatrix} 1&1&0&-3&-1\\0&-2&2&2&1\\0&-6&6&15&0\\0&2&-2&10&-5 \end{pmatrix} \sim \begin{pmatrix} 1&1&0&-3&-1\\0&-2&2&2&1\\0&0&0&9&-3\\0&0&0&12&-4 \end{pmatrix} \sim \begin{pmatrix} 1&1&0&-3&-1\\0&-2&2&2&1\\0&0&0&3&-1\\0&0&0&0&0 \end{pmatrix}$ 
+
+    Фиксируем первый, второй и четвёртый столбцы как базисные
+
+    $\begin{cases}
+        r_1+r_2-3r_4=r_5\\
+        -2r_2+2r_4=-2r_3-r_5\\
+        3r_4=r_5\\
+    \end{cases}$ 
+
+    Строим ФСР $r_3=0, r_5=3 \implies X_1\left( \frac{7}{2}, \frac{5}{2}. 0, 1, 3 \right)^T $ 
+
+    $r_3=1, r_5=0 \implies  X_2\left(-1,1,1,0,0  \right)^T $
+
+    $X = c_1\begin{pmatrix} \frac{7}{2} \\ \frac{5}{2} \\ 0\\1\\3 \end{pmatrix} +c_2\begin{pmatrix} -1\\1\\1\\0\\0 \end{pmatrix} $
+\end{example}
+    \item $b\neq 0$
+
+        $a_1r_1+a_2r_2+\ldots + a_nr_n = b$
+
+        Рассмотрим $a_1r_1+a_2r_2+\ldots + a_nr_n = 0$
+
+        Если есть два решения первого, то их разность это решение второго.
+\end{enumerate}
+
+\section{Лекция 05.12}
+$\ldots$
+
+\begin{lemma}
+    Пространства различной размерности не могут быть изоморфны.
+\end{lemma}
+\begin{proof}
+    Пусть $X\sim Y$, $\dim X = n > m = \dim Y$
+
+    $\sqsupset \{e_j\}_{j=1}^n$ -- базис $X$
+
+     $e_j \leftrightarrow f_j\in Y$
+
+     $\sphericalangle 0_X = \sum_{j=1}^{n} \alpha^je_j \leftrightarrow \sum_{j=1}^{n} \alpha_if_j = 0_Y$ -- только когда $\alpha^j = 0$
+
+     $\{f_j\}_{j=1}^n$ -- ЛНЗ набор в пространстве  $Y\quad \dim Y = m<n$
+\end{proof}
+
+\begin{lemma}
+    $X\sim Y \iff \dim X = \dim Y$
+\end{lemma}
+\begin{proof}
+    $\sqsupset \{e_j\}_{j=1}^n$ -- базис $X$
+
+    $\sqsupset \{f_j\}_{j=1}^n$ -- базис $Y$ 
+
+    $\varphi(e_j) = f_j\quad e_j \leftrightarrow f_j$
+
+     $\sqsupset x\in X\quad x = \sum_{j=1}^{n} \alpha^je_j \leftrightarrow y = \sum_{j=1}^{n} \alpha^jf_j$
+\end{proof}
+
+$X_n\sim \R^n\sim Y_n$
+
+Пространства размерности $n$ удобно рассматривать как арифметическое пространство  $\R^n$
+
+\begin{note}
+    Любое конечномерное пространство над полем $\R$ или $\C$ можно отождествить с пространством $\R^n$
+\end{note}
+
+\begin{example}
+    $\C^n \sim \R^{2n}$
+
+    $\R^n_m \sim  \R^{nm}\quad \begin{pmatrix} 1&0\\0&0 \end{pmatrix} \begin{pmatrix} 0&1\\0&0 \end{pmatrix} \begin{pmatrix} 0&0\\1&0 \end{pmatrix} \begin{pmatrix} 0&)\\0&1 \end{pmatrix} $
+
+    $P_n \sim \R^{n+1}$
+\end{example}
+
+\subsection{Подпространства}
+
+\begin{definition}
+    Подпространством $L$ Линейного Пространства  $X$ называется подмножество  $X$, замкнутое относительно линейных операций, индуцированных их  $X$ 
+\end{definition}
+
+\begin{example}
+    $X, \{0\}$ -- тривиальные подпространства  $X$ 
+
+    Прямая и плоскость в $E_3$ (они должны содержать  $0$)
+
+     $\R^m \subseteq \R^n, m<n$
+
+     Симметричные матрицы в $\R^n_m$
+\end{example}
+
+\begin{lemma}
+    $\sqsupset L$ -- Линейное подпространство $L \implies \dim L \leqslant \sim X$
+\end{lemma}
+\begin{lemma}
+    $L=X \iff \sim L = \sim X$
+\end{lemma}
+\begin{lemma}
+    $\sqsupset L$ -- линейное подпространство $X$. Тогда любой базис  $L$ может быть дополнен до базиса  $X$, но не наоборот
+\end{lemma}
+\begin{proof}
+    $\sqsupset \{f_1, f_2, \ldots, f_k\}$ -- базис $L\quad \{ e_1, e_2, \ldots, e_n\}$ -- базис $X$ 
+
+    $\{f_1, f_2, \ldots, f_k, e_1, e_2, \ldots, e_n\}$ -- прореживаем слева направо
+\end{proof}
+
+\begin{example}
+    [Контрпример]
+
+    $\sqsupset \{e_1, e_2\}$ -- базис $X\quad\{e_1+e_2\}$ -- базис $L$
+\end{example}
+
+\subsection{Линейная оболочка}
+
+\begin{definition}
+    Линейное оболочкой набора $\{x_i\}_{i=1}^k$ называется множество $\mathscr{L}\{x_1, x_2, \ldots, x_n\}$ всех линейных комбинаций векторов $x_i:$  \[
+        \mathscr{L} = \{x\in X:\quad x = \sum_{i=1}^{n} \alpha^ix_i\}
+    .\] 
+\end{definition}
+
+\begin{lemma}
+    $\mathscr{L}\{x_1, x_2, \ldots, x_n\}$ -- линейное подпространство $X$ 
+\end{lemma}
+\begin{proof}
+    $\sqsupset y_1, y_2\in \mathscr{L} \ov{?}{\implies } y_1+y_2\in \mathscr{L}\quad \lambda y_1\in\mathscr{L}$
+
+    $y_1, y_2\in \mathscr{L} \implies y_1 = \sum_{i=1}^{n} \alpha_1^ix_i\quad y_2 = \sum_{i=1}^{n} \alpha_2^ix_i$ 
+
+    $y_1+y_2 = \sum_{i=1}^{n} (\alpha_1^i + \alpha_2^i)x_i \implies y_1+y_2\in \mathscr{L}$ 
+
+    $\lambda y_1 = \sum_{i=1}^{n} \lambda \alpha_1^ix_i \implies  \lambda y_1\in \mathscr{L}$
+\end{proof}
+
+\begin{lemma}
+    Линейная оболочка $\mathscr{L}\{x_1, x_2, \ldots, x_n\}$ векторов $x_1, x_2, \ldots, x_n$ является наименьшим Линейным подпространством $X$, содержащим эти векторы.
+\end{lemma}
+\begin{proof}
+    $\sqsupset V = \mathscr{L} \setminus \{y\}\quad y\in \mathscr{L} \implies y = \sum_{i=1}^{k} \alpha^ix_i \in \mathscr{L} \impliedby \{x_i\}$ -- полный набор в $\mathscr{L}$
+
+    $y = \sum_{i=1}^{k} \beta^ix_i \in V \implies \{x_i\}$ -- НЕ полный набор в $\mathscr{L}$
+\end{proof}
+
+\begin{definition}
+    Линейная оболочка векторов $\{x_i\}_{i=1}^k$ называется подпространством, натянутым на данные вектора.
+\end{definition}
+
+\begin{definition}
+    Линейным многообразием $M$, параллельным подпространству  $L$ Линейного пространства  $X$ называется множество \[
+        M = \{y\in X:\quad y = x_0+x|\quad x_0\text{ -- фикс } x_0\in X, x\in L\}
+    .\] 
+\end{definition}
+\begin{example}
+    $\{(x_1, y_1+y_0)\}$ -- прямая, не проходящая через $0$  в общем случае. Не линейное пространство, но линейное многообразие.
+\end{example}
+
+\begin{lemma}
+    $M=L \iff x_0\in L$
+\end{lemma}
+
+\begin{definition}
+    $\dim M = \dim L$
+\end{definition}
+
+\begin{example}
+    Примеры Линейных многообразий:
+    \begin{enumerate}
+        \item Прямая $\dim L=1$
+        \item Плоскость  $\dim L = 2$
+        \item  $k$ -мерная плоскость  $\dim L=k$
+        \item гипер-плоскость  $\dim L = \dim X-1$
+    \end{enumerate}
+\end{example}
+
+\subsection{Сумма и пересечение подпространств}
+
+$\sqsupset X$ -- линейное пространство. $L_1, L_2$ - его линейные подпространства
+
+\begin{definition}
+    Пересечением ЛПП $L_1, L_2$ называется множество $\p L$, такое что  \[
+        \p L = \{x\in X:\quad x\in L_1 \& x\in L_2\}
+    .\] 
+\end{definition}
+
+\begin{lemma}
+    $\p L = L_1\cap L_2$ -- ЛПП $X$
+\end{lemma}
+\begin{proof}
+    $\sqsupset x_1, x_2\in \p L \implies x_1, x_2\in L_1\quad x_1, x_2\in L_2$
+
+    $\lambda x_1\in L_1, \lambda x_1\in L_2 \implies \lambda x_1\in L_1\cap L_2$
+\end{proof}
+
+\begin{definition}
+    Множество $\pp L$ называется суммой  ЛПП $L_1, L_2$, если \[
+        \pp L = \{x\in X:\quad x = x_1+x_2|\quad x_1\in L_1, x_2\in L_2\}
+    .\] 
+\end{definition}
+\begin{lemma}
+    $\pp L = L_1 + L_2$ -- ЛПП $X$
+\end{lemma}
+\begin{proof}
+    $x, y\in \pp L\quad x = x_1+x_2\quad y = y_1+y_2\qquad x_1, y_1\in L_1\quad x_2, y_2\in L_2$
+
+    $\sphericalangle x+y = x_1+x_2+y_1+y_2 = (x_1+y_1) + (x_2+y_2) = z_1+z_2$
+
+    $\lambda x = \lambda (x_1+x_2) = \lambda x_1 + \lambda x_2$
+\end{proof}
+
+\begin{theorem}
+    [(первая) Теорема о размерностях]
+
+    $\sqsupset L_1, L_2$ -- ЛПП $X \implies \dim L_1 + \dim L_2 = \dim (L_1+L_2) - \dim (L_1 \cap L_2)$
+\end{theorem}
+\begin{proof}
+    $\sphericalangle L_1\cap L_2\quad e_1, e_2, \ldots, e_m$-- базис пересечения
+
+    $\sphericalangle L_1\quad \{e_1, e_2, \ldots, e_m; f_1, f_2, \ldots, f_k\}$ -- базис $L_1$
+
+    $\sphericalangle L_1\quad \{e_1, e_2, \ldots, e_m;g_1, g_2, \ldots, g_p\}$ -- базис $L_2$
+
+    $\implies \{e_1, e_2, \ldots, e_m;f_1, f_2, \ldots, f_k; g_1, g_2, \ldots, g_p\}$ -- базис $L_1+L_2$ (должно быть)
+
+    \begin{itemize}
+        \item Полнота: $\sqsupset x\in L_1+L_2 \implies x = x_1+x_2\quad x_1\in L_1\quad x_2\in L_2$
+
+            $\implies x_1 = \sum_{i=1}^{m} \alpha_1^ie_i + \sum_{j=1}^{k} \beta_1^jf_j$ 
+
+            $\implies x_2= \sum_{i=1}^{m} \alpha_2^ie_i + \sum_{j=1}^{k} \beta_2^jg_j$ 
+
+            $x = x_1+x_2 = \sum_{i=1}^{m} (\alpha_1^i+\alpha_2^i)e_i + \sum_{j=1}^{k} \beta_1^jf_j + \sum_{s=1}^{p} \beta_2^sg_s$ 
+        \item Линейная независимость
+
+            $\alpha^1e_1 + \ldots + \alpha^me_m + \beta^1f_1 + \ldots + \beta^kf_k + \gamma g^1 + \ldots + \gamma^pg_p = 0$
+
+            $\alpha^1e_1 + \ldots + \alpha^me_m + \beta^1f_1 + \ldots + \beta^kf_k = - \gamma g^1 - \ldots - \gamma^pg_p = z \implies x\in L_1\cap L_2 \implies z = \delta e_1 +\delta_2e_2 + \ldots + \delta_me_m$
+
+            $\sphericalangle z-z = \delta e_1 +\delta_2e_2 + \ldots + \delta_me_m + \gamma^1g_1 + \ldots + \gamma^pg_p = 0 \implies \delta_i = \gamma_j = 0 \implies z = 0\implies \alpha^1e_1 + \ldots + \alpha^me_m + \beta_1f_1 + \ldots + \beta^kf_k = 0 \implies  \alpha^i = \beta^j = 0$
+    \end{itemize}
+\end{proof}
+
+\subsection{Прямая сумма подпространств}
+
+\begin{definition}
+    Сумма линейных подпространства называется прямой, если $\forall x\in L = L_1+L_2\quad x = x_1+x_2$ -- единственное представление.
+\end{definition}
+\begin{note}
+    [Обозначение прямой суммы]
+
+    $L = L_1 \dotplus L_2$
+\end{note}
+
+\begin{lemma}
+    $L = L_1\dotplus L_2 \iff  L_1\cap L_2 = \{0\}$
+\end{lemma}
+\begin{proof}
+    \begin{itemize}
+        \item []
+        \item [$\implies $]$\sqsupset L = L_1\dotplus L_2\quad \exists z\in L_1\cap L_2:z\neq 0$
+
+            $x = x_1+x_2 = x_1+x_2+z-z = (x_1+z) + (x_2-z)\quad x_1\in L_1, x_2\in L_2\quad x_1+z\in L_1, x_2-\in L_2$
+        \item [$\impliedby $] $\sqsupset L_1\cap L_2 = \{0\}$, но $L = L_1 + L_2$ -- не прямая сумма
+
+            $x = x_1+x_2\quad x = y_1+y_2$
+
+            $0 = x-x = x_1-y_1+x_2-y_2 \implies x_1-y_1 = y_2-x_2 = z\quad z\in L_1\cap L_2 \implies  L_1\cap L_2\neq \O $
+    \end{itemize}
+\end{proof}
+
+$\sqsupset X$ -- ЛП,  $L_1, L_2$ -- ЛПП $X$
+
+ \begin{theorem}
+     $X = L_1 \dotplus L_2 \iff \begin{cases}
+         L_1\cap L_2 = \{0\}\\
+         \dim L_2 + \dim L_2 = \dim X
+     \end{cases}$
+ \end{theorem}
+ \begin{proof}
+     \begin{itemize}
+         \item []
+         \item [$\implies $]
+             \begin{enumerate}
+                 \item Доказано
+                 \item $\dim L_1 + \dim L_2 = \dim (L_1+L_2) = \dim X \implies L_1+L_2\sim X$
+             \end{enumerate}
+     \end{itemize}
+ \item $\dim L_1+\dim L_2 = \dim (L_1+L_2)$
+
+     $\dim L_1 + \dim L_2 = \dim X$
+
+     $\implies \dim X = \dim (L_1+L_2)$
+
+     $L_1+L_2\subseteq X \& \dim X = \dim (L_1+L_2) \implies L_1+L_2\sim X\quad L_1+L_2 = X\quad L_1\cap L_2 = \{0\} \implies  X = L_1$
+ \end{proof}
+\begin{definition}
+    $\sqsupset X = L_1 \dotplus L_2 \implies \forall x\in X\quad \ov{!}= x_1+x_2\quad x_1\in L_1, x_2\in L_2$
+
+    В таком случае $x_1, x_2$ называются компонентами $x$ в  $L_1, L_2$ соответстыенно
+
+    $x_1$ -- проекция $x$ на  $L_1$ Параллельно $L_2$
+
+    $x_2$ -- проекция $x$ на  $L_2$ параллельно $L_1$
+
+    $L_1$ -- дополнение $L_2$ до $X$ и наоборот
+\end{definition}
+
+\begin{note}
+    Дополнение к заданному ЛПП до $X$ определяется не единственным образом
+\end{note}
+\begin{example}
+    [Контрпример]
+
+    $\sqsupset X = \R^3\quad L = \mathscr{L}\{e_1, e_2\}\quad L_2 = \mathscr{L}\{e_2+\alpha e_1+\beta e_2\}$
+
+    $X = L_1\dotplus L_2$
+\end{example}
+\begin{definition}
+    Пространство $L$ называется прямой суммой пространств $\{L-i\}_{j=1}^k$, если \[
+        \forall x\in L\quad x \ov{!}= x_1+x_2+\ldots+x_k:\quad x_j\in L_j
+    .\] 
+\end{definition}
+\begin{theorem}
+    $X = \dotplus \sum_{i=1}^{k} L_i \iff \begin{cases}
+        L_i\cap L_{j\neq i} = \{0\}\\
+        \dim X = \sum_{i=1}^{k} \dim L_i
+    \end{cases}$
+\end{theorem}
+
+
+
+\section{... СЛАУ}
+
+\begin{enumerate}
+    \item 
+    \item Геометрическое исследование СЛАУ
+
+        $a_1 = \begin{pmatrix} \alpha_1^1 \\ \alpha_2^1 \\ \vdots \\ \alpha_m^2 \end{pmatrix} \quad a_n = \begin{pmatrix} \alpha_n^1 \\ \alpha_n^2 \\ \vdots \\ \alpha_n^m \end{pmatrix} quad \beta_n = \begin{pmatrix} \beta^1\\ \beta^2 \\ \vdots \\ \beta^m \end{pmatrix} $ (*)
+
+        $\implies \alpha_1\xi^1 + \alpha_2\xi^2 + \ldots + \alpha_n\xi^n = b \iff \sum_{j=1}^{n} a_j\xi^j = b$ 
+
+        $\sphericalangle \mathscr{\alpha} = \text{ЛО}\{a_1, a_2, \ldots, a_n\}$
+
+        $a_j\in \R^m\quad \dim R^m = m$
+
+        Т.к. $\mathscr{\alpha}\quad \text{ЛПП} \R^m \implies \dim \mathscr{\alpha}\leqslant \dim \R^m$
+
+        \begin{definition}
+            Система * называется системой Крамера, если $n=m$ и набор  $\{\alpha_j\}_{j=1}^n$ -- ЛНЗ
+        \end{definition}
+
+        \begin{theorem}
+            Система Крамера совместно и определена
+        \end{theorem}
+        \begin{proof}
+            $m=n \implies \dim \mathscr{\alpha} = r\leqslant n=m$
+
+            $b\in \R^m \simeq \R^n\left( m=n \right) $ 
+
+            $\{a_j\}_{j=1}^n$ -- ЛНЗ в  $\mathscr{\alpha}<\R^n\implies \{a_j\}_{j=1}^n$ -- базис $\R^n\implies b\in\mathscr{\alpha} $ -- совместна и определена
+        \end{proof}
+
+        $\sqsupset m\neq n\quad \dim\mathscr{\alpha} = r \leqslant m$
+
+        Применим процедуру прореживания к набору $\{a_j\}_{j=1}^n \implies \{a_{i_1}, a_{i_2}, \ldots, a_{i_r}\}$ -- ЛНЗ $\implies $ базис $\mathscr{\alpha}$
+
+        \begin{definition}
+            Коэффициенты $\{\xi^{i_k}\}_{k=1}^r$ называются базисными или главными неизвестными системы.
+ 
+            Оставшиеся коэффициенты называются свободными или параметрическими.
+        \end{definition}
+
+        \begin{note}
+            $\xi^{i_1} = \xi^1\quad x^{i_r} = \xi^3$
+
+            $\xi^{i_{r+1}} = \xi^{r+1}\quad \xi^{i_n} = \xi^n$
+        \end{note}
+
+        Перепишем систему *:
+        \[
+            a_1\xi^1 + a_2\xi^2 + \ldots + a_r\xi^r = b - a_{r+1}\xi^{r+1} - \ldots - a_n\xi^n
+        .\] 
+
+        \begin{theorem}
+            [Кронекера-Капелли о совместности системы]
+            Чтобы система * была совместна необходима и достаточно выполнение следующего уловия: $b\in\mathscr{\alpha}$
+
+        \end{theorem}
+        \begin{proof}
+             \begin{itemize}
+                 \item []
+                 \item [$\implies $] Пусть * совместна  $\implies \exists \{\xi^j\}_{j=1}^n$:
+
+                     $\{b, a_1, a_2, \ldots, a_n\}$ -- ЛЗ $\implies b\in\mathscr{\alpha}$
+                 \item [$\impliedby $] $\sqsupset b\in \mathscr{\alpha} \implies b-a_{r+1}\xi^{r+1} - \ldots - a_n\xi^r\in\mathscr{\alpha}$
+            \end{itemize}
+        \end{proof}
+
+        \begin{note}
+            Если $r = n \implies $ * определена
+
+            $a_1\xi^1 + \ldots + a_n\xi^n = b+0$
+
+            Если $r<n \implies $ * неопределена
+
+            $a_1\xi^1 + \ldots + a_r\xi^r = b-a_{r+1}\xi^{r+1} - \ldots - a_n\xi^n = \p b$
+
+            $a_1\xi^1 + \ldots + a_r\xi^r = \p b$ -- определена,но! разложение для $\p b$ даёт неопределённость 
+        \end{note}
+
+        \begin{corollary}
+            \begin{enumerate}
+                \item Однородная система: 
+                    \begin{itemize}
+                       \item всегда определена
+                        \item имеет неоднородные решения, когда $r<n$
+                        \item является неопределённой, когда  $m<n$
+
+                            $\dim\mathscr{\alpha}  = m<n \implies \{a_j\}_{j=1}^n$ -- ЛЗ по любому
+                    \end{itemize}
+            \end{enumerate}
+        \end{corollary}
+
+        \begin{theorem}
+            [Альтернатива Фредгольма] $\sqsupset m=n$
+
+            $\sum\limits_{j=1}^na_j\xi^j = b\quad(*)$
+
+             \[
+                 \sum\limits_{j=1}^{n} a_j\xi^j = 0\quad (* *)
+            .\] 
+            \begin{enumerate}
+                \item Или $* *$ имеет только тривиальное решение (а тогда  $*$ совместна и опредена)
+                \item (Или  $* *$ имеет нетривиальные решение)  система $*$ совместна не при любом  $b$
+            \end{enumerate}
+        \end{theorem}
+        \begin{proof}
+           $* *$ имеет нетривиальные  
+        \end{proof}
+
+    \item Фундаментальная систем решений
+
+        $\sqsupset N$ -- множество решений системы $ * *$
+
+         \begin{theorem}
+             Множество $M$ решений однородной системы СЛАУ является линейным пространством.
+
+         \end{theorem}
+         \begin{proof}
+             
+             $\sqsupset x_1 = \left( \xi_1^1\quad \xi_1^2, \ldots, \xi_1^n \right) $ 
+
+             $\sqsupset x_2 =\left( \xi_2^1\quad \xi_2^2, \ldots, \xi_2^n \right)\quad x_1, x_2, \in M $
+
+             $x_1+x_2\in M?$
+
+             $\sum_{i=1}^{n} \left( \xi_1^i + \xi_2^i \right) a_i = \sum_{i=1}^{n} \xi a_1^ja_j + \sum_{i=1}^{n} \xi_2^ja_j = =0+0 = 0 \implies x_1+x_2\in M$
+
+             $\sum_{i=1}^{n} (\lambda \xi^h)a_j = \lambda \sum_{i=1}^{n} \xi^ja_j = \lambda\cdot 0 = 0 \implies \lambda x\in M$
+         \end{proof}
+
+         \begin{theorem}
+             $\dim M = n - r$
+         \end{theorem}
+         \begin{proof}
+             $\dim M = n-r \iff   \simeq \R^{n-r}$
+
+             $a_1\xi^1 + a_2\xi^2 + \ldots a_r\xi^r = -a_{r+1}\xi^{r+1} - \ldots - a_n\xi^n =: \eta$
+
+             \begin{note}
+                 $\eta$ имеет единственное разложение по набору  $\{a_i\}_{i=1}^r$
+             \end{note}
+
+             $\R^{n-r} \ni \left( \xi^{r+1}\xi^{r+2} \ldots \xi^n \right)^T \longleftrightarrow \left( \xi^1\xi^2\ldots\xi^r;\xi^{r+1}\ldots\xi^n \right) ^T$ -- биекция
+
+             $\sqsupset y_1 = \sum_{k=1r+1}^{n} \eta_1^ka_k \longleftrightarrow x_1 = \sum_{k=1}^{n} \xi_1^ka_k$ 
+
+             $\sqsupset y_2 = \sum_{k=1r+1}^{n} \eta_2^ka_k \longleftrightarrow x_2 = \sum_{k=1}^{n} \xi_2^ka_k$ 
+
+             $y_1+y_1 = \sum_{k=r+1}^{n} \left( \eta_1^k+\eta_2^k \right) a_k = \sum_{k=r+1}^{n} \eta_1^ka_k + \sum_{k=r+1}^{n} \eta_2^ka_k \longleftrightarrow \sum_{k=1}^{n} \xi_1^ka_k + \sum_{k=1}^{n} \xi_2^ka_k = x_1+x_2$ 
+
+             $\lambda y = \sum_{k=r+1}^{n} \lambda \eta^ka_k = \lambda \sum_{k=r+1}^{n} \eta^ka_k \longleftrightarrow \lambda \sum_{k=1}^{n} \xi^ka_k$
+         \end{proof}
+
+         Доказали, что $M$ -- ЛП размерности  $n-r$
+
+         $M\simeq \R^{n-r} \leftarrow $ базис $\begin{cases}
+             \left( 1, 0, \ldots, 0 \right) ^T\\
+             (0,1,\ldots,1)^T\
+             \ldots\\
+             (0,0,\ldots,1)^T\\
+         \end{cases}$ 
+
+         $(100\ldots_0)\in \R^{n-r}\quad \left( \xi_1^1 \xi_1^2\ldots\xi_1^r;100\ldots 0 \right) $
+
+         $(0100\ldots_0)\in \R^{n-r} \longleftrightarrow \left( \xi_2^1\xi_2^2\ldots \xi_2^r;010\ldots 0 \right) $
+
+         $\ldots$
+
+         $(000\ldots_1) \leftrightarrow \left( \xi_{n-r}^1 \xi_{n-r}^2 \ldots \xi_{n-r}^r;00\ldots 1 \right) $ 
+
+         Справа стоит базис $M$. Нормальная ФСР  ($* *$)
+
+         $\sqsupset \left( \xi_j^1\xi_j^2\ldots\xi_j^r,00\ldots 1..0 \right) = x_j $ 
+
+         \begin{definition}
+             Общим решением системы $* *$ называется решение вида  \[
+                 x = c_1x_1+c_2x_2+\ldots+c_{n-r}x_{n-r} = \sum_{i=1}^{n-r} c_ix_i
+             .\]  
+         \end{definition}
+         
+     \item Структура решения неоднородной СЛАУ
+
+     $\sqsupset (*)$ -- совместна $\implies b\in \mathscr{\alpha}\quad \dim \mathscr{\alpha} = r$
+
+     $\sqsupset \tl M $ -- множество решений $*$
+
+      $M$ -- множество решений  $* *$ -- ЛПП
+
+       \begin{theorem}
+          Пусть $\p z$ -- фиксированное решение  $*$.  $\p z\in \tl M$, тогда  \[
+          z = \p z+x\in \tl M\quad \forall x\in M
+          .\] 
+      \end{theorem}
+      \begin{proof}
+          $\p z = \{\zeta^1\zeta^2 \ldots \zeta^n\}\quad x = \{\xi^1\xi^2 \ldots \xi^n\}$
+
+          $\sphericalangle \sum_{i=1}^{n} \left( \zeta^i+\xi^i \right) a_i = \sum_{i=1}^{n} \zeta^ia_i + \sum_{i=1}^{n} \xi^ia_i = b+0 = b$ 
+
+          $\sphericalangle x = \p z-z\quad z = \left( \tl{\zeta^1} \ldots \tl{\zeta^n} \right)^T$
+
+          $\sum_{i=1}^{n} (\tl{\zeta^i} - \xi^i)a_i = \sum_{i=1}^{n} \tl{\zeta^i}a_i - \sum_{i=1}^{n} \xi^ia_i = b-b = 0 = \sum_{i=1}^{n} \xi^ia_i \implies x\in M$
+      \end{proof}
+
+      \begin{note}
+          Общее решение неоднородной СЛАУ
+
+          $z = \p z-x \implies z = \p z - \sum_{i=1}^{n} x_ix_i\qquad \{x_i\}_{i=1}^n$ -- ФСР  
+      \end{note}
+      \begin{note}
+          $\tl M$ имеет структуру линейного многообразия
+
+          $\forall z\in \tl M\quad z = \p z+x\quad x\in M\quad \p z\not\in M$
+      \end{note}
+\end{enumerate}
+
+\section{Как практика, но на лекции, потому что космос против практики на практике.}
+
+\begin{problem}
+    $\begin{cases}
+    5x_1+4x_2+x_3+3x_4=-5\\
+    2x_1+x_2+x_3+4x_4=2\\
+    3x_1+2x_2+x_3+x_4=-3\\
+    x_1+3x_2-2x_3+2x_4=-4\\
+    \end{cases}$
+
+    Получить общее решение системы
+\end{problem}
+\begin{proof}
+    $\begin{pmatrix} 5&4&1&3&-5\\2&1&1&4&2\\3&2&1&1&-3\\1&3&-1&2&-4 \end{pmatrix} \sim \begin{pmatrix} 1&3&-2&2&-4\\5&4&1&3&-5\\2&1&1&4&2\\3&2&1&1&-3 \end{pmatrix} \sim \begin{pmatrix} 1&3&-2&2&-4\\0&-11&11&-7&15\\0&-5&5&0&10\\0&-7&7&-5&9 \end{pmatrix} \sim \begin{pmatrix} 1&3&-2&2&-4\\0&1&-1&0&-2\\0&-11&11&-7&15\\0&-7&7&-5&9 \end{pmatrix} \sim \begin{pmatrix} 1&3&-2&2&-4\\0&1&-2&0&-2\\0&0&0&0&-7\\0&0&0&-5&-5 \end{pmatrix} \sim \begin{pmatrix} 1&3&-2&2&-4\\0&1&-1&0&-2\\0&0&0&1&1\\0&0&0&0&0 \end{pmatrix} $
+
+    \begin{enumerate}
+        \item Решение однородной задачи:
+           $\begin{cases}
+               x_1+3x_2+2x_4=2x_2\\
+               x_2=x_2\\
+               x_4=0
+           \end{cases}$
+
+           $x_3$ -- параметр. Можем взять любой неноль.
+
+           $\sqsupset x_3=1$
+
+           $\implies x_4=0, x_2=1, x_1 = -1\qquad x_1 = \begin{pmatrix} -1\\1\\1\\0 \end{pmatrix} $
+
+           Общее решение ОЗ: $x = c_1x_1$
+       \item Решение неоднородной задачи
+
+           $
+           \begin{cases}
+               x_1+4x_2+2x_4=-4+2x_3\\
+               x_2=-2+x_3\\
+               x_4=1\\
+           \end{cases}$
+
+           В неоднородной задаче можно взять параметры вообще любыми (даже 0)
+
+           Частное решение:  $x_3=0\quad x_4=1\quad x_2=-2\quad x_1 = 0$
+
+           $\p z = \begin{pmatrix} 0\\-2\\0\\1 \end{pmatrix} $
+
+           Общее решение: $z = \p z + c_1x_1 = \begin{pmatrix} 0\\-2\\0\\1 \end{pmatrix}  + x_1\begin{pmatrix} -1\\1\\1\\0 \end{pmatrix}$ {\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+    \end{enumerate}
+\end{proof}
+
+\begin{example}
+    $\begin{pmatrix} \lambda&1&1&1&1\\1&\lambda&1&1&1\\1&1&\lambda&1&1\\1&1&1&\lambda&1 \end{pmatrix}$ 
+
+    Найти общее решение в зависимости от параметра $\lambda$
+
+    $\begin{pmatrix} 1&1&1&\lambda&1\\1&1&\lambda&1&1\\1&\lambda&1&1&1\setminus lambda&1&1&1&1 \end{pmatrix} \sim \begin{pmatrix} 1&1&1&\lambda&1\\0&0&\lambda-1&1-\lambda&0\\0&\lambda-1&0&1-\lambda&0\\ \lambda-1&0&0&1-\lambda&0 \end{pmatrix} \sim \left( \lambda-1\neq 0 \right) \begin{pmatrix} 1&1&1&\lambda&1\\0&0&1&-1&0\\0&1&0&-1&0\\1&0&0&-1&0 \end{pmatrix} \sim \begin{pmatrix} 1&1&1&\lambda&1\\0&1&0&-1&0\\0&0&1&-1&0\\0&-1&-1&-1-\lambda&-1 \end{pmatrix} \sim \begin{pmatrix} 1&1&1&\lambda\\ 0&1&0&-1&0\\0&0&1&-1&0\\0&0&-1&-2-\lambda&-1\end{pmatrix} \sim \begin{pmatrix} 1&1&1&\lambda&1\\0&1&0&-1&0\\0&0&1&-1&0\\0&0&0&-3-\lambda&-1 \end{pmatrix} $
+
+    $\lambda=-3\implies $ система несовместна
+
+    $\lambda\neq -3 \& \lambda\neq -1\implies $ единственное решение $x_4=\frac{1}{\lambda+3}\quad x_3 = \frac{1}{\lambda+3}\quad x_2=\frac{1}{\lambda+3}\quad x_1 = 1-\frac{\lambda}{\lambda+3} - \frac{2}{\lambda+3} = \frac{1}{\lambda+3}$ 
+
+    $\lambda=1\quad  \begin{pmatrix} 1&1&1&1&1 \end{pmatrix} $ 
+
+    $x_1 = 1-x_2-x_3-x_4$
+
+    Однородная задача: $x_1 = -x_2-x_3-x_4$
+
+    $x_2 = 1\quad \times x_3=x_4 = 0\quad \left( -1,1,0,0 \right)^T  = y_1$
+
+    $x_2=x_3=0\quad x_2=1\quad \left( -1010 \right) ^T = y_2$
+
+    $x_2=x_3=0\quad x_4=1\quad \left( -1001 \right) ^T = y_3$
+
+    $y_1, y_2, y_3$ -- ФСР
+
+    Неоднородная задача: $x_2=x_3=x_4=0\quad x_1=1$
+
+    Общее решение: $z = \begin{pmatrix} 1\\0\\0\\0 \end{pmatrix}  + \sum_{i=1}^{3} x_iy_i$ 
+
+    II вариант. Когда система будет крамеровского типа? Когда определитель будет отличен от 0
+
+    $
+    \begin{vmatrix}
+        \lambda&1&1&1&1\\1&\lambda&1&1&1\\1&1&\lambda&1&1\\ 1&1&1&\lambda&1\\
+    \end{vmatrix} = 
+    \begin{vmatrix}
+        0&1-\lambda&1-\lambda&1-\lambda^2\\0&\lambda-1&0&1-\lambda\\0&0&\lambda-1&1-\lambda\\1&1&1&\lambda
+    \end{vmatrix} = 
+    \begin{vmatrix}
+        1-\lambda&1-\lambda&1-\lambda^2\setminus \lambda-1&0&1-\lambda\\0&\lambda-1&1-\lambda
+    \end{vmatrix} = -(1-\lambda)^3 
+    \begin{vmatrix}
+        1&1&1+\lambda\\-1&0&1\\0&-1&1
+    \end{vmatrix} = -\left( 1-\lambda \right) ^3
+    \begin{vmatrix}
+        1&1&1+\lambda\\0&1&2+\lambda\\ 0&-1&1
+    \end{vmatrix} = (1-\lambda)^3
+    \begin{vmatrix}
+        1&2+\lambda\\-1&1
+    \end{vmatrix} = (\lambda-1)^3(\lambda+3) = 0$
+
+    $\lambda = -3 \implies $
+
+    $\lambda = 1 \implies $
+
+    $\lambda$ Остальные
+\end{example}
+
+
+\section{Линейные подпространства}
+
+$\R^n, P^n, \R^n_m$
+
+Вспомним:
+\begin{definition}
+    $L\subseteq X\quad L$ -- замкнуто относительно операций индуцированных на $X$
+\end{definition}
+
+\begin{example}
+    $\R^n$ 
+
+    $x\in \R^n\quad x = \left( \xi, \xi, \ldots, \xi \right) $ --линейное пространство
+\end{example}
+
+\begin{example}
+    $\sum \xi_i = 0$ -- линейное пространство
+
+     $\sum \xi_i = 1$ -- НЕ линейное пространство
+\end{example}
+
+\begin{example}
+    $X = \R_n^n$
+
+    $x$ -- матрица с нулевой первой строкой. Можество таких  $x$ -- линейное подпространство
+
+    Если заменить на единичную строку, то уже не будет
+\end{example}
+
+\begin{example}
+    Верхние треугольные матрицы -- линейное подпространство.
+\end{example}
+
+Вспомним также, что в инейном пространстве есть базис.
+
+$\R^n:\quad \begin{bmatrix} 1\\0\\ \vdots \\0 \end{bmatrix} \begin{bmatrix} 0 \\ 1 \\ \vdots \\ 0 \end{bmatrix} \begin{bmatrix} 0\\0\\ \vdots \\ 1 \end{bmatrix} $
+
+\begin{example}
+    \begin{align*}
+        x_1&= \left( -1, 4, 0, 1 \right)^T  \\
+        x_2&= \left( 0,0,0,1 \right)^T  \\
+        x_3&= \left( -1,1,1,- \right)^T  \\
+        x_4&= \left( 0,3,-1,1 \right)^T  \\
+    .\end{align*}
+
+    Найдём линейные зависимости (если они есть)
+    Запишем вектора по строчкам:
+
+    $\begin{bmatrix}[c c c c|c c c c ] -1&4&0&1&1&0&0&0\\0&0&0&1&0&1&0&0\\-1&1&1&-1&0&0&1&0\\0&3&-1&1&0&0&0&1 \end{bmatrix}\sim \begin{bmatrix}[c c c c|c c c c] -1&4&0&1&1&0&0&0\\0&-3&1&-2&-1&0&1&0\\0&3&-1&1&0&0&0&1\\0&0&0&1&0&1&0&0  \end{bmatrix} \sim\\\sim  \begin{bmatrix} [c c c c|c c c c] -1&4&0&1&1&0&0&0\\0&-3&1&-2&-1&0&1&0\\0&0&0&-1&-1&0&1&1\\0&0&0&1&0&1&0&0 \end{bmatrix} \sim \begin{bmatrix} [c c c c|c c c c] -1&4&0&1&1&0&0&0\\0&-3&1&-2&-1&0&1&0\\0&0&0&-1&-1&0&1&1\\0&0&0&0&-1&1&1&1 \end{bmatrix}  $
+
+    $0 = -x_1+x_2+x_3+x_4$
+\end{example}
+
+\begin{example}
+    $\begin{cases}
+        3\xi^{1} + 3\xi^2  -4\xi^3 - 3\xi^4 = 0\\
+        6\xi^1 + \xi^3 + \xi^4 = 0\\
+        5\xi^1 + 4\xi^2 + 2\xi^3 + \xi^4 = 0\\
+        2\xi^1 + 3\xi^2 + 3\xi^3 + 2\xi^4 = 0\\
+    \end{cases}$
+
+    Множество решений -- ЛП. Найдём базис и размерность этого пространства.
+
+    ФСР $\to $ Базис $L$
+
+    А что если мы хотим наоборот по ФСР восстановить систему. Или по-другому: имея базис ЛП составить систему, которая этот базис порождает.
+
+
+    \begin{align*}
+        x_1&= \left(2,0,1,3,-1 \right)^T  \\
+        x_2&= \left( 1,1,0,-1,1 \right)^T  \\
+        x_3&= \left( 0,-2,1,5,-3 \right)^T  \\
+        x_4&= \left( 1,-3,2,9,-5\right)^T  \\
+    .\end{align*} $\implies  L = \mathscr{L}(x1, ..., x_n)$
+
+    $y\in L\quad \left( \eta^1, \eta^2, \eta^3, \eta^4, \eta^5 \right) \implies  \alpha_1x_1 + \alpha_2x_2 + \alpha_3x_3 + \alpha_4x_4 = y$ -- совместна
+
+    $\begin{bmatrix} [c c c c|c ] 2&1&0&1&\eta^1\\ 0&1&-2&-3&\eta^2 \\ 1&0&1&2&\eta^3\\ 3&-1&5&9&\eta^4\\ -1&1&-3&-5&\eta^5 \end{bmatrix} $
+
+
+\end{example}
+
+
+\section{Лекция}
+TODO: дописать
+
+\begin{lemma}
+    $f,g$ -- линейные форма  $\implies f+g$ -- линейная форма
+\end{lemma}
+\begin{proof}
+    $\sqsupset x_1, x_2\in X$
+
+    \begin{align*}
+        h\left( x_1+x_2 \right) &= (f+g)(x_1+x_2) \\
+                                &= f(x_1+x_2) + g(x_1+x_2) \\
+                                &= f(x_1) + f(x_2) + g(x_1) + g(x_2)\\ 
+                                &= (f+g)(x_1) + (f+g)(x_2)  \\
+                                &= h(x_1) + h(x_2) \\
+    .\end{align*}
+
+     \begin{align*}
+         h\left( \lambda x \right) &= (f+g)(\lambda x) \\
+                                    &= \lambda f(x) + \lambda g(x)\\
+                                    &= \lambda(f+g)(x) \\
+                                    &= \lambda h(x) \\
+    .\end{align*}
+\end{proof}
+
+\begin{theorem}
+    Линейные формы образуют линейное ространства
+\end{theorem}
+
+\begin{definition}
+    Линейное пространство линейных форм над $X$ называется пространством, сопряжённым к $X$
+\end{definition}
+\begin{note}
+    Обозначение: $X^*$
+\end{note}
+
+$\sqsupset \{e_j\}$ -- базис $X$
+
+ $\forall x\in X\quad x \longleftrightarrow \xi\quad x = \sum_{j=1}^{n} \xi^je_j$ 
+
+ $\sqsupset f\in X^*$
+
+ $\sphericalangle f(x) = f\left( \sum_{j=1}^{n} \xi^je_j \right)  = \sum_{j=1}^{n} \xi^j \underbrace{f\left( e_j \right)}\limits_{\phi_j}  = \sum_{j=1}^{n} \xi^j\phi_j$ 
+\begin{definition}
+    Коэффициентами линейной формы в базисе $\{e_j\}$ ЛП  $X$ называется набор  $\{\phi_j\}:\quad \phi_j = f\left( e_j \right) $
+\end{definition}
+
+\begin{lemma}
+    Задание линейной формы над $X$ эквивалентно заданию её коэффициентов на базисных векторах $X$
+\end{lemma}
+\begin{proof}
+    Доказательство чуть выше
+\end{proof}
+\begin{note}
+    $f \longleftrightarrow \left( \phi_1, \phi_2, \ldots, \phi_n \right) $
+
+    $x \longleftrightarrow \left( \xi^1, \xi^2, \ldots, \xi^n \right) $
+
+    $f(x) = \xi^1\phi_1 + \xi^2\phi_2 + \ldots + \xi^n\phi_n$
+
+    Если $f(x) = 0 \implies  \xi^1\phi_1 + \xi^2\phi_2 + \ldots + \xi^n\phi_n = 0$
+\end{note}
+
+\begin{theorem}
+    [О базисе  $X^*$]
+    Набор линейных форм $\{f^k\}_{k=1}^n:X\to K$, действующих на  $X$ с базисом  $\{e_j\}$ следующим образом:  \[
+        f^k(x) = \xi^k\qquad x = \sum_{j=1}^{n} \xi^je_j
+    .\] 
+    образует базис линейного пространства $X^*$
+\end{theorem}
+\begin{note}
+    $\dim X = \dim X^* = n \implies X\simeq X^*$
+\end{note}
+\begin{proof}
+    [теоремы]
+    $\{f^k\}_{k=1}^n$ -- полный набор.
+
+    $\sqsupset g\in X^*\quad x\in X\quad \sphericalangle g(x) = \sum_{k=1}^{n} \xi^kg\left( e_k \right) = \sum_{k=1}^{n} \xi^k\phi_k = \sum_{k=1}^{n} \phi_kf^k\left( x \right) = \sum_{k=1}^{n} \left( \phi_kf^k \right) (x) = \left( \sum_{k=1}^{n} \phi_kf^k \right) (x)$
+
+    $\implies g = \sum_{k=1}^{n} \phi_kf^k$ -- полный набор!
+
+    $\{f^k\}_{k=1}^n$ -- ЛНЗ
+
+    $\sphericalangle \sum_{k=1}^{n} \alpha_kf^k = \mathcal O$ (ноль-форма) $\alpha_k = 0\forall k$?
+
+    $\mathcal O(e_1) = \sum_{k=1}^{n} \alpha_kf^k\left( e_1 \right)  = \alpha_1f^1\left( e_1 \right)  = \alpha_1 = 0$ 
+
+    $\mathcal O\left( e_2 \right)  = \sum_{k=1}^{n} \alpha_kf^k\left( e_2 \right) \implies \alpha_2 = 0$ 
+
+    $\ldots$
+
+    $\alpha_1 = \alpha_2 = \ldots = \alpha_n = 0$
+\end{proof}
+
+
+\begin{note}
+    $\{f^k\}_{k=1}^n:X\to K\quad f^k(x) = \xi^k$ \[
+        f^k\left( e_j \right)  = \begin{cases}
+            1&k=j\\
+            0&k\neq j\\
+        \end{cases} = \delta_j^k
+    .\] 
+
+    Такие базисы называются сопряжёнными. Для такой формы есть спец символ, называемый формой Корнекера
+\end{note}
+
+\begin{note}
+    $x = \xi^1e_1 + \xi^2e_2 + \ldots + \xi^ne_n = \sum_{j=1}^{n} \xi^je_j$ 
+
+    $x = f^1(x)e_1 + f^2(x)e_2 + \ldots + f^n(x)e_n = \sum_{j=1}^{n} f^j(x)e_j$
+\end{note}
+
+\begin{note}
+    $f = \sum_{k=1}^{n} \eta_kf^k \ov{\{f^k\}_{k=1}^n}{\leftarrow}  f\in X^* \ov{\{e_j\}_{j=1}^n}\phi_j = f\left( e_j \right) $
+
+    $(\eta_1, \eta_2, \ldots, \eta_n)\qquad \left( \phi_1, \phi_2, \ldots, \phi_n \right) $ 
+
+    Если $f^k$ и  $e_j$ сопряжены, то эти наборы коэффициентов совпадают ($f^k(e_j) = \delta_j^k$)
+\end{note}
+
+\begin{note}
+    $X\quad X^*\quad (X^*)^* = X^{* *}$?
+
+    $(f,x)\quad (f,*)\quad \begin{cases}
+        (f,x_1+x_2) = (f,x_1) + (f,x_2)\\
+        (f,\lambda x) = \lambda (f,x)
+    \end{cases}\qquad X\to K$ 
+
+    $(*,x)\quad \begin{cases}
+        (f_1+f_2,x) = (f_1,x) + (f_2,x)\\
+        (\lambda f,x) = \lambda (f,x)
+    \end{cases}\qquad X^*\to K$
+
+    $X\simeq X^*\simeq X^{* *} \implies X\simeq X^{* *}$
+
+    $(*,x) = \left( \tl x, * \right) $
+
+    $X \simeq X^{* *}$ -- ``естественно изоморфны''.  $(x\rightarrow \tl x) \iff  (\tl x, f) = (f,x)$ 
+
+    $x_1+x_2 \longleftrightarrow \tl x_1 + \tl x_2$
+
+    $\lambda x_1 \longleftrightarrow \lambda \tl x_1$
+\end{note}
+
+\section{Низапная Практика}
+
+    \begin{align*}
+        x_1&= \left(2,0,1,3,-1 \right)^T  \\
+        x_2&= \left( 1,1,0,-1,1 \right)^T  \\
+        x_3&= \left( 0,-2,1,5,-3 \right)^T  \\
+        x_4&= \left( 1,-3,2,9,-5\right)^T  \\
+    .\end{align*} $\implies  L = \mathscr{L}(x1, ..., x_n)$
+
+    $y\in L\quad \left( \eta^1, \eta^2, \eta^3, \eta^4, \eta^5 \right) \implies  \alpha_1x_1 + \alpha_2x_2 + \alpha_3x_3 + \alpha_4x_4 = y$ -- совместна
+
+    $\begin{bmatrix} [c c c c|c ] 2&1&0&1&\eta^1\\ 0&1&-2&-3&\eta^2 \\ 1&0&1&2&\eta^3\\ 3&-1&5&9&\eta^4\\ -1&1&-3&-5&\eta^5 \end{bmatrix} \sim \begin{bmatrix} [c c c c|c] 1&0&1&2&\eta^3\\0&1&-2&-3&\eta^1-2\eta^3 \\ 0&1&-2&-3&\eta^4\\0&-1&2&3&\eta^4-3\eta^3\\ 0&1&-2&-3&\eta^4+\eta^3 \end{bmatrix} \sim \begin{bmatrix} [c c c c|c] 1&0&1&2&\eta^3\\ 0&1&-2&-3&\eta^1-2\eta^3\\0&0&0&0&\eta^2-\eta^1+2\eta^3\\ 0&0&0&0&\eta^1-2\eta^3+\eta^4-3\eta^3\\0&0&0&0&\eta^5+\eta^3-\eta^1+2\eta^3 \end{bmatrix}  $
+
+    Для совместности напротив нулей должны быть нули $\implies  \begin{cases}
+        -\eta^1+\eta^2+2\eta^3 = 0\\
+        \eta^!-5\eta^3+\eta^4 = 0\\
+        -\eta^1+3\eta^3+\eta^5\\
+    \end{cases}$ 
+
+    Эта система уравнений даёт нам нужную линейную оболочку четырёх векторов $x_1, x_2, x_3, x_4$
+
+    \begin{example}
+        $A_1 = \begin{bmatrix} 0&0&1\\0&1&0\\1&0&1 \end{bmatrix} \quad A_2 = \begin{bmatrix} 1&2&2\\2&1&-2\\2&-2&1 \end{bmatrix} \quad A_3 = \begin{bmatrix} 1&2&3\\2&3&4\\3&4&5 \end{bmatrix} \quad A_4 = \begin{bmatrix} -2&3&1\\3&6&2\\1&2&2 \end{bmatrix} \quad A_5 = \begin{bmatrix} 2&2&-1\\2&-1&2\\-1&2&2 \end{bmatrix} \quad A_6 = \begin{bmatrix} 0&1&1\\1&-1&-1\\1&-1&-2 \end{bmatrix} $
+
+        Эти матрицы лежат в линейном пространстве симметричных матриц размерности $3\times 3$. Найдём базис их линейной оболочки:  $\mathcal{L}\{A_1, A_2, A_3, A_4, A_5, A_6\}$
+
+        $\sphericalangle $ базис пространства симметричных матриц:
+
+        $E_1 = \begin{bmatrix} 1&0&0\\0&0&0\\0&0&0 \end{bmatrix} \quad E_2 = \begin{bmatrix} 0&1&0\\1&0&0\\0&0&0 \end{bmatrix} \quad E_3 = \begin{bmatrix} 0&0&1\\0&0&0\\1&0&0 \end{bmatrix} \quad E_4 = \begin{bmatrix} 0&0&0\\0&1&0\\0&0&) \end{bmatrix} \quad E_5 = \begin{bmatrix} 0&0&0\\0&0&1\\1&0&0 \end{bmatrix} \quad E_5 = \begin{bmatrix} 0&0&0\\0&0&1\\0&1&0 \end{bmatrix} \quad E_6 = \begin{bmatrix} 0&0&0\\0&0&0\\0&0&1 \end{bmatrix} $
+
+        $A_1 = 0E_1+0E_2+1E_3+1E_4+0E_5+1E_6 \implies A_1 \longleftrightarrow \left( 0,0,1,1,0,1 \right) $ 
+
+        Так можно переформулировать на язык векторов. А дальше тот же алгоритм.
+    \end{example}
+
+    \begin{example}
+        $X = P_3^{(e)}\quad \begin{cases}
+            P_1 = (1+t^2)^2\\
+            P_2 = (1-t^2)^2\\
+            P_3 = 1\\
+        \end{cases}$ 
+
+        Выберем базис $\{1, t^2, t^4\}$
+
+        $P_1 \longleftrightarrow (1,2,1)^T$
+
+        $P_2 \longleftrightarrow \left( 1, -2, 1 \right)^T $
+
+        $P_3 \longleftrightarrow \left( 1, 0, 0 \right) ^T$ 
+
+        $
+        \begin{vmatrix}
+            1&1&1\\2&-2&0\\1&1&0
+        \end{vmatrix} = -4\neq 0 \implies $ образуют базис.
+    \end{example}
+
+    \begin{example}
+        $L_1:\quad \begin{cases}
+            x_1 = \left( 1, 2, -1, -2 \right) ^T\\
+            x_2 = \left( 3, 1, 1, 1 \right) ^T\\
+            x_3 = \left( -1,0,1,-1 \right) ^T\\
+        \end{cases}\quad L_2:\quad \begin{cases}
+        y_1 = \left( 2, 5, -6, -6 \right) ^T\\
+        y_2 = \left( -1,2,-7,-3 \right)^T \\
+        \end{cases}$ 
+
+        $L_1+L_2 $ --? (базис суммы)
+
+        $L_1\cap L_2$ -- ? (базис пересечения)
+
+        Сумма: $ \begin{bmatrix} [c c c|c c] 1&-3&-1&2&-1\\2&1&0&5&2\\-1&1&1&-6&-7\\-2&1&-1&-5&-3 \end{bmatrix} \sim  \begin{bmatrix} 1&2&-1&2&-1\\0&-5&2&1&4\\0&4&0&-4&-8\\0&7&-3&-1&-5\\ \end{bmatrix} \sim \begin{bmatrix} 1&3&-1&2&-1\\0&1&0&-1&-2\\0&0&2&-4&-6\\0&0&-3&6&9 \end{bmatrix} \implies y_1\in L_1, y_2\in L_1$
+
+        $L_1+L_2 = L_1 \implies L_2\subseteq L_1$
+
+        Базис суммы совпадает с базисом $L_1$
+
+        Базис пересечения -- базис $L_2$
+    \end{example}
+
+    \begin{example}
+        $L_1, L_2 \subseteq P_3$
+
+        $L_1: \begin{cases}
+            p_1 = 1+2t+t^3\\
+            p_2 = 1+t+t^2\\
+            p_3 = t-t^2+t^3\\
+        \end{cases}\quad L_2: \begin{cases}
+            q_1 = 1+t^3\\
+            q_2 = 1+3t+t^2\\
+            q_3 = 3t-t^2+t^3\\
+        \end{cases}$ 
+
+        $L_1+L_2$ -- ? $L_1\cap L_2$ -- ?
+
+        Выберем базис  $P_3$ --  $\{1, t, t^2, t^3\}$
+
+        $p_1 \longleftrightarrow x_1(1, 2, 0, 1)^T$
+
+        $p_2 \longleftrightarrow x_2(1, 1, 1, 0)^T$
+        
+        $p_3 \longleftrightarrow x_3(0, 1, -1, 1)^T$
+        
+        $q_1 \longleftrightarrow y_1(1, 0, 0, 1)^T$
+        
+        $q_2 \longleftrightarrow y_2(1, 2, 0, 1)^T$
+        
+        $q_3 \longleftrightarrow y_3(0,3,-1,1)^T$
+
+
+        Найдём базис суммы
+
+        $\begin{bmatrix} [c c c| c c c] 
+        1&1&0&1&1&0\\
+        2&1&1&0&3&3\\
+        0&1&-1&0&0&-1\\
+        1&0&1&1&1&1  
+        \end{bmatrix} 
+        \sim 
+        \begin{bmatrix} [c c c|c c c] 
+        1&1&0&1&1&0\\
+        0&-1&1&-2&1&3\\
+        0&1&-1&0&0&-1\\
+        0&-1&1&0&0&1 
+        \end{bmatrix} 
+        \sim 
+        \begin{bmatrix} 
+        1&1&0&1&1&0\\
+        0&-1&1&-2&1&3\\
+        0&0&0&-2&1&2\\
+        0&0&0&2&-1&-2 
+        \end{bmatrix} 
+        \sim 
+        \begin{bmatrix} 
+        1&1&0&1&1&0\\0&-1&1&-2&1&3\\0&0&0&-2&1&2\\0&0&0&0&0&0 \end{bmatrix} $
+
+        Базис суммы: 1, 2 и 4 столбцы:
+
+        $\begin{cases}
+            \left( 1, 2, 0, 1 \right) ^T\leftrightarrow b_1 = 1+2t+t^3\\
+            \left( 1, 1, 1, 0 \right) ^T\leftrightarrow b_2 = 1+t+t^2\\
+            \left( 1,0,0,1 \right) ^T \leftrightarrow b_3 = 1+t^3
+        \end{cases}$ 
+
+        (Можем взять те же столбцы из начальной матрицы, т.к. Гаусс сохраняет линейные соотношения.
+
+        СЛАУ для $L_1$:
+
+        $\begin{bmatrix} [c c c|c] 1&1&0&\xi^1\\2&1&1&\xi^2\\0&1&-1&\xi^3\\1&0&1&\xi^4  \end{bmatrix} \sim \begin{bmatrix} [c c c| c]1&1&0&\xi^1\\0&-1&1&\xi^2-2\xi^1\\0&1&-1&\xi^3\\0&-1&1&\xi^4-\xi^1 \end{bmatrix} \sim \begin{bmatrix} [c c c| c] 1&1&0&\xi^1\\0&-1&1&\xi^2-2\xi^1\\0&0&0&-2\xi^1+\xi^2+\xi^3\\0&0&0&\xi^1-\xi^2+\xi^4 \end{bmatrix} $
+
+        $\begin{cases}
+            -2\xi^1+\xi^2+\xi^3=0\\
+            \xi^1-\xi^2+\xi^4= 0\\
+        \end{cases}$ 
+
+        $\begin{bmatrix} [c c c|c] 1&1&0&\xi^1\\0&3&3&\xi^2\\0&0&-1&\xi^3\\1&1&1&\xi^4 \end{bmatrix} \sim \begin{bmatrix} [c c c|c] 1&1&0&\xi^1\\0&3&3&\xi^2\\0&0&-1&\xi^3\\0&0&1&\xi^4-\xi^1 \end{bmatrix} \sim \begin{bmatrix} [c c c|c] 1&1&0&\xi^1\\0&3&3&\xi^2\\0&0&-1&\xi^3\\0&0&0&-\xi^1+\xi^3+\xi^4 \end{bmatrix}$
+
+        $\begin{cases}
+            -\xi^1+\xi^3+\xi^4 = 0
+        \end{cases}$ 
+
+        Базис для $ L_1\cap L_2$ -- ФСР
+
+        $\begin{cases}
+            -2\xi^1+\xi^2+\xi^3 = 0\\
+            \xi^1-\xi^2+\xi^4= 0\\
+            -\xi^1+\xi^3+\xi^4 = 0\\
+        \end{cases}$
+    \end{example}
+
+
+
+
+
+
+
+
+
 
 \end{document}
 

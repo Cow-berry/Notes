@@ -49,6 +49,7 @@
 \usepackage{lipsum}
 % limits are put below (optional for int)
 \let\svlim\lim\def\lim{\svlim\limits}
+\let\svlim\sum\def\sum{\svlim\limits}
 %\let\svlim\int\def\int{\svlim\limits}
 % Command for short corrections
 % Usage: 1+1=\correct{3}{2}
@@ -137,6 +138,7 @@
     \import{./figures/}{#1.pdf_tex}
 }
 \usepackage{tikz}
+\usetikzlibrary{quotes, angles}
 \begin{document}
     \maketitle
     
@@ -2335,4 +2337,269 @@ $[hx=x] = \begin{cases}
 \end{example}
 
 Для ожерелий $2^{\text{НОД(n,k)}}$
+
+$G$ -- группа,  $G\subseteq S_n$ -- группа всех перестановок $n$ элементов / симметрическая группа
+
+ $X = A^n\quad |A| = k$
+
+ $g\in G\quad g\cdot x\qquad x = [x_1, x_2, \ldots, x_n], x\in A$
+
+ $x_1 \to x_{g\left( i \right) }$ 
+
+ \begin{theorem}
+     [Теорема Пойя]
+ $\left| X / G \right| = \frac{\sum_g \left| I_g \right| }{|G|} = \frac{\sum_g k^{c(g)}}{|G|} =*$
+ \end{theorem}
+
+ $*= \frac{\sum_{i=1}^{n} s_ik^i}{|G|}\quad s_i$ -- число перестановок с $i$ циклами в  $G$
+
+ Если $G = S_n\quad s_i = \begin{bmatrix} n\\i \end{bmatrix} $
+
+ $\left| X / G \right|  = \frac{\sum_i \begin{bmatrix} n\\i \end{bmatrix}k^i }{n!}$
+
+ \begin{example}
+     $G=$ сдвиги  $k^{c(g)}\quad g = $ сдвиги на  $i\quad c(g) = gcd(n,i)$
+
+     $\frac{\sum_i k^{gcd(n,i)}}{n}$
+ \end{example}
+
+
+
+\section{Конструируемые комбинаторные объекты}
+
+$A$ -- множество комбинаторных объектов. Пусть комбинаторные объекты  $a$ имеют веса  $w(a)$
+
+$a_n = |\left\{ a\in A| w(a) = n \right\} |$
+
+$f(A_1, A_2, \ldots, a_n) \mapsto B$
+
+$b_n$ зависит только от  $a_{i,j}$ 
+
+\begin{example}
+    [Дизъюнктное объединение]
+
+    $A, B$ -- два множества комбинаторных объектов, без общих объектов.  $A\cap B=\O $
+
+    $f(A,B) = A\cup B = C$ -- функция конструирования $a_n, b_n\quad |C| = c_n = a_n+b_n$ 
+
+    $\sqcup\quad A = \{1, 2, 3, \ldots\}\qquad B = \{1, 2, 3, \ldots\}\quad A\cup B = A = B$ 
+
+    $A \sqcup B$ -- объединение с учётом возможного повторения элементов. Вообще, получается мультимножество. 
+
+    Рассмотрим множество пометок  $M = \{a,b\}$
+
+    $A\sqcup B = A\times \{a\} \cup B\times \{b\}$
+\end{example}
+
+\begin{example}
+    [Декартово произведение, конструкция пары]
+    $A,B\quad A\times B = C\quad z\in C\quad z = (x,y)\quad x\in A, y\in B$
+
+    $z = (x,y)\quad w(z) = n = w(x)+w(y) \implies w(y) = n-w(x)$
+
+    $c_n = \sum_{i=0}^{n} a_i\cdot b_{n-i}$ 
+
+    В предыдущем примере $w(a) = w(b) = 0$ -- ``краска шарика не добавляет ему веса''
+\end{example}
+
+\begin{example}
+    [Последовательность]
+
+    $A\quad a_0 = 0$
+
+    $C = Seq A = \bigcup\limits_{i=0}^{\infty }A^i = A^0 \cup \bigcup\limits_{i=1}^{\infty }A\times A^{i-1} = A^0 \cup A\times \bigcup\limits_{i=1}^{\infty } A^i = A^0\cup A\times C  $ 
+
+    $C = A^0\cup A\times C\quad A^0 = E = \{[]\}\quad w([]) = 0\quad A\times C = B$
+
+    $c_0 = e_0 + b_0 = 1$
+
+    $n<0\quad c_n = e_n + b_n=0+\sum_{i=0}^{n} a_ic_{n-i} = \sum_{i=1}^{n} a_ic_{n-i}$
+\end{example}
+
+\begin{example}
+    $a_k$ вагонов веса  $k$
+
+    Сколько способов составить поезд суммарного веса  $n$
+
+     $n = 0\quad c_0 = 1$
+
+     $n>0\quad c_n = \sum_{i=1}^{n} a_ic_{n-i}$
+\end{example}
+
+\begin{example}
+    $U = \{{\tikz \fill[red] (0,0) circle [radius =.12];}\}\quad u_0 = 0\quad u_1=1\quad u_2=u_3=\ldots=0$
+
+    $V = U\times U = \{\left( {\tikz \fill[red] (0,0) circle [radius =.12];}, {\tikz \fill[red] (0,0) circle [radius =.12];} \right) \}\quad v_0=0, v_1=0, v_2=1, v_3=v_4=\ldots=0$
+
+    $Z = Seq~U = \{[], [{\tikz \fill[red] (0,0) circle [radius =.12];}], [{\tikz \fill[red] (0,0) circle [radius =.12];}, {\tikz \fill[red] (0,0) circle [radius =.12];}], [{\tikz \fill[red] (0,0) circle [radius =.12];}, {\tikz \fill[red] (0,0) circle [radius =.12];}, {\tikz \fill[red] (0,0) circle [radius =.12];}], \ldots\}$
+
+    $z_0=1, z_1=1, z_2=1, \ldots$
+
+    $z_0=1\quad z_n = \sum_{i=1}^{n} u_iz_{n-i} = 1\cdot z_{n-1} = z_{n-1}$. По индукции $z_n=1$
+
+     $Z^+ = Sqe^+~U\qquad Seq~Z^+2$
+        
+     $\{[], \left[ \left[ {\tikz \fill[red] (0,0) circle [radius =.12];} \right]  \right] , \left[ \left[ {\tikz \fill[red] (0,0) circle [radius =.12];} \right] , [{\tikz \fill[red] (0,0) circle [radius =.12];}] \right] , \left[ \left[ {\tikz \fill[red] (0,0) circle [radius =.12];}, {\tikz \fill[red] (0,0) circle [radius =.12];} \right]  \right] , \ldots\}$
+
+     $\{[], [1], [1,1], [2], [1,1,1], [1,2], [2,1], [3], \}$
+\end{example}
+
+\begin{example}
+    Set MSet
+
+    $A\quad Set~A$ -- множества  $X\subseteq A\quad 2^A$
+
+    $B = Set~A\quad b_n$
+
+    Кононизация  $X = \{x_1, x_2, \ldots, x_l\}$
+
+    $b_{n,k}$ -- количество множеств веса $n$, содержащие объекты  $A$ веса  $\leqslant k$
+
+    $b_n = b_{n,n}$
+
+    $b_{n,k} = \sum_{t=0}^{\left\lfloor \frac{n}{k} \right\rfloor} \begin{pmatrix} a_k\\t \end{pmatrix} b_{n-kt,k-1} $ 
+
+    $Set~Z^+ = \left\{ \{\}, \{1\}, \{2\}, \{1,2\}, \{3\}, \{1,3\}, \{4\}, \ldots \right\} $ -- множество разбиений чисел на различные слагаемые
+
+    $MSet~Z^+ = \{\{\}, \{1\}, \underbrace{\{1,1\},\{2\}}\limits_{2},\underbrace{\{1,1,1\},\{1,2\},\{3\}}\limits_{3},\{1,1,1,1\}, \ldots\}$ -- множество разбиений чисел на слагаемые               
+
+    $b_{n,k} = \sum_{t=0}^{\left\lfloor n\\k \right\rfloor} \begin{pmatrix} a_k+t-1\\t \end{pmatrix} b_{n-kt,k-1}$
+\end{example}
+
+\begin{example}
+    [Сочетания с повторениями]
+    $\{\tikz \fill[green] (0,0) circle [radius=.12];, \tikz \fill[blue] (0,0) circle [radius=.12];\}$ 
+
+    TODO дописать
+\end{example}
+
+
+
+ Напоминание операций конструирования:
+ \begin{enumerate}
+     \item Дизъюнктное объединение $c_n = a_n+b_n$
+     \item Прямое произведение $c_n = \sum_{k=0}^{n} a_kb_{n-k}$ 
+     \item Seq, * $c_n = \sum_{k=1}^{n} a_kc_{n-k}$ 
+ \item Set, MSet $c_n = c_{n,n}\quad c_{n,k} = \sum_{t=0}^{\left\lfloor \frac{n}{k} \right\rfloor} {a_k\choose t} C_{n-kt, k-1}\qquad {a_{k+t-1}\choose t} C_{n-kt, k-1}$
+ \end{enumerate}
+
+ \section{Деревья с $n$ вершинами}
+
+ \begin{enumerate}
+     \item Помеченные/Непомеченные (непомеченное: 1-2 $\quad$ помеченные 1-2, 2-1 (разные корни))
+     \item С порядком на детях: Есть понятие первого, второго, .. сына
+       
+         Без порядка, двоичный, троичный
+ \end{enumerate}
+
+Дерево $T = U \times Seq T$ -- с порядком на детях.
+
+$F = Seq T$ (Forest)
+
+$t_n = \sum_{k=0}^{n} u_kf_{n-k} = f_{n-1}$
+
+$u_1=1\quad u_0=u_2=u_3=\ldots = 0$
+
+$f_n = \sum_{k=1}^{n} t_kf_{n-k}$ 
+
+$t-n = f_{n-1}\quad f_{n-k} = t_{n-k+1}$
+
+$f_n = \sum_{k=1}^{n} t_kt_{n-k+1}$ 
+
+$t_n = \sum_{k=1}^{n-1} t_kt_{n-k}$ 
+
+
+
+Нет порядка: $T = U \times MSet T\quad F = MSet T$
+
+$t_n = f_{n-1}$ всё ещё
+
+$f_{n,k} = \sum_{k=0}^{\left\lfloor \frac{n}{k} \right\rfloor} {{t_k+s-1} \choose s}f_{n-ks,k-1}$
+
+
+$B = \{\tikz \draw (0,0) circle [radius=.12];, \tikz \fill[black] (0,0) circle [radius=.12];\}$ -- бусинки: чёрные и белые 
+
+$C = Cyc B\quad C_4 = 6$
+
+$A\quad Cyc A$ -- множество циклов из множества  $A$
+
+$C_n = \sum_{l=1}^{n} \frac{\sum_{k=0}^{l-1} I_{k,l}}{n}$ 
+
+Количество циклов в перестановке $gcd(l,k)$
+
+Длина цикла $\frac{l}{gcd(l,k)}$
+
+
+$A\quad A^k = A\times A^{k-1}$
+
+$S_{n,k}$ -- число последовательностей длины  $k$ веса  $n$
+
+$S_{n,k} = \sum_{i=1}^{n} a_is_{n-i, k-1}$ 
+
+$S_{\frac{n\cdot gcd(l,k)}{l}, g}$ 
+
+Итого: $C_n = \sum\limits_{\substack{l=1\\g = gcd(l,k)\\ ng  \mathrel{\vbox{\baselineskip.65ex\lineskiplimit0pt\hbox{.}\hbox{.}\hbox{.}}} l}}^{n} \sum_{k=0}^{l-1} \frac{1}{l}\cdot S_{\frac{ng}{l}, g} $
+\section{Помеченные объекты}
+
+Объекты-атомы. Атомы с пометками составляют новые объекты. У атом всегда разные пометки.
+
+Пусть есть два помеченных к.о., состояющие из атомов. Составим из них новый к.о.
+
+Новое ``переразмечивание'' называется согласованным с изначальными двумя, если порядок атомов внутри частей по возрастанию остаётся таким же.
+
+Разберём операторы конструирования на помеченных объектов:
+\begin{enumerate}
+    \item $A\times B = C\quad $ $\left[ \tikz \draw (0,0) circle [radius=.12];\in A, \tikz \draw (0,0) circle [radius=.12];\in B\right]$
+
+        $c_n = \sum_{k=0}^{n} {n\choose k} a_kb_{n-k}$ 
+    \item $Seq~U = S\quad s_n = \sum_{k=1}^{n} {n\choose k}u_ks_{n-k} = {n \choose 1}us_{n-1} = n\cdot s_{n-1}$ 
+
+        $Seq U$ -- перестановки
+    \item Set = MSet (не может быть двух одинаковых. 
+
+        Последовательности длины $k\quad A^k$
+
+        $s_{n,k}$ -- количество последовательностей длины  $k$ веса  $n$
+
+        $ s_{n,k} = \sum_{i=1}^{n} {n\choose i}a_is_{n-i, k-1}\qquad s_{n,1 = a_n} $ 
+
+         $C = Set~A$
+
+         $c_n = \sum_{k=1}^{n} \frac{s_{n, k}}{k!}$
+\end{enumerate}
+
+$Set~U\quad U^k\quad s_{n,k = \begin{cases}
+        0&k\neq n\\
+        n!&k=n
+\end{cases}}$ 
+
+$s_{n,k} = n\cdot s_{n-1,k-1}$
+
+$C_n = \frac{n!}{n!} = 1$
+
+
+Циклы для помеченных объектов: $Cyc A = C\quad c_n = \sum_{k=1}^{n} \frac{s_{n,k}}{k}$ 
+
+Размещения по $k$:  $A_n^{(k)} = U^k\times Set~U$ 
+
+$A_n^k = k!{n\choose k}\times 1 = {n\choose k}k! = \frac{n!}{(n-k)!}$ 
+
+    $C_n^{(k)} = Set^{=k}U\times Set~U\qquad Set^{=k}\quad C_{n,k} = \frac{s_{n,k}}{k!}$ -- множества равно $k$
+
+
+Разбиения на множества:
+
+$Set^{=k}~Set^{+}U$ -- разбиения на  $k$ множеств $
+\begin{Bmatrix}
+    n \\ k
+\end{Bmatrix} $
+
+Разбиение на циклы:
+
+$Set^{=k}~Cyc^{+}U$ -- разбиение на  $k$ циклов  $\begin{pmatrix} n\\k \end{pmatrix} $
+
+$Set~Set^{+}U$ -- число Белла  $B_n$
+
+$Set~Cyc^{+}U$ -- перестановки  $n!$
+
   \end{document}
