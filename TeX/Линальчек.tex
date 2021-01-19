@@ -3714,6 +3714,246 @@ $\sqsupset \{e_j\}$ -- базис $X$
         \end{cases}$
     \end{example}
 
+    \section{Практика-закрепление}
+
+    \subsection{Линейные формы}
+
+    $f:X\to K\quad \forall x, y\in X\quad f\left( x+y \right)  = f(x) + f(y)\qquad f\left(\lambda x  \right)  = \lambda f(x)$
+
+    \begin{example}
+        $P_n\quad f$ -- отображение  $\forall p\in P_n\quad f(p) = p\left( t_0 \right) \quad t_0$ -- фиксировано
+
+        \begin{enumerate}
+            \item $f$ -- Линейная форма
+            \item Найти коэффициенты в базисе  $\{1, t, t^2, \ldots, t^n\}$
+        \end{enumerate}
+    \end{example}
+    \begin{proof}
+        $\sqsupset p, q\in P^n\quad p(t) = \sum_{k=0}^{n} \alpha_kt^k\qquad q(t) = \sum_{m=0}^{n} \beta_mt^m$
+
+        $f\left( p + q \right)  = f\left( \sum + \sum \right)  = f\left( \sum  \right)  = \sum_{k=0}^{n} \left( \alpha_k+\beta_k \right) t_0^k = \sum  + \sum = f(p) + f(q)$ 
+
+        $f\left( \lambda p \right)  = f\left( \lambda\sum  \right)  = \lambda f\left( \sum \right) =\lambda f(p)$
+
+        $f$ -- ЛФ
+
+        $\sphericalangle \{1, t, t^2, \ldots, t^n\}$
+
+         $\begin{cases}
+             f(1) = 1\\
+             f(t) = t_0\\
+             f(t^2) = t_0^2\\
+             \ldots
+         \end{cases}$ 
+
+         $f\leftrightarrow(1, t_0, t_0^2, \ldots, t_0^n)$
+             
+    \end{proof}
+
+    $f, g$ -- ЛФ  $\implies  (f+g)(x) = f(x)+g(x)\quad (\lambda f)(x) = \lambda\cdot  f(x) \implies X^*$ -- пр-во сопряжённое $X \left( \dim X^* = \dim X \right) $
+
+    \begin{example}
+        $\{f^k\}_{k=1}^n$ -- набор Линеных Форм в  $P_n^*$ (над $P_n$) 
+
+        $f^k(p) = \frac{d^{k-1}p}{dt^{k-1}}(0)$
+
+        Покажем, что $\{f^k\}_{k=1}^n$ -- ЛНЗ набор в  $P_n^*$
+    \end{example}
+    \begin{proof}
+        $P_n^k = \R^{n+1}$
+
+        $\sqsupset \{1, t, t^2, \ldots, t^n\}$
+
+        $f^1 \longleftrightarrow \left( 1, 0, 0, \ldots, 0 \right) ^T$
+
+        $f^2 \longleftrightarrow \left( 0, 1, 0, \ldots, 0 \right) ^T$
+
+        $f^3 \longleftrightarrow \left( 0, 0, 2, \ldots, 0 \right)^T $ 
+
+        $f^n \longleftrightarrow \left( 0, 0, 0, \ldots, n! \right) ^T $
+
+        Этот набор ЛНЗ
+
+        $f^k\left( e_j \right)  = \delta_j^k$ -- сопряжённый базис
+
+    \end{proof}
+        $\sqsupset x\in X\quad \{e_j\}_{j=1}^n$ -- базис $X$
+
+        $\implies x = \sum_{j=1}^{n} \xi^je_j$ 
+
+        $\sphericalangle f(x) = f\left( \sum_{j=1}^{n} \xi^je_j \right) = \sum_{j=1}^{n} \xi^jf\left( e_j \right)  = \sum_{j=1}^{n} \xi^j\varphi_j$
+
+
+        \begin{example}
+            \begin{align*}
+                y^1(x) = 2\xi^1 - \xi^2 + 3\xi^3 + 4\xi^4 - \xi^5\\
+                y^2(x) = 5\xi^1 - 5\xi^2 + 12\xi^3 + 11\xi^4 - 5\xi^5\\
+                y^3(x) = \xi^1 - 3\xi^2+6\xi^3+3\xi^4-3\xi^5
+            .\end{align*}
+
+            $y^1, y^2, y^3\in X^*$
+
+            \begin{enumerate}
+                \item ЛЗ -?
+                \item Найти зависимости
+            \end{enumerate}
+
+            $X^*\simeq \R^5 \implies y_1\quad (2,-1,3,4,-1)\ldots$
+
+            $\begin{bmatrix} [c c c c c|c c c] 2&-1&3&4&-1&1&0&0\\5&-5&12&11&-5&0&1&0\\1&-2&6&3&-3&0&0&1 \end{bmatrix} $
+        \end{example}
+
+        \begin{example}
+            $P_2\quad {\p f}^1(p) = p(1)\quad f^2(p) = p(2)\quad f^3(p) = p(3)$ Покажем, что эти три формы образуют базис.
+        \end{example}
+        \begin{proof}
+            Выберем базис $\{1, t, t^2\}$
+
+            $f^1 \to (1,1,1)\quad f^2 \to (1,2,4)\quad f^3 \to (1,3,9)$
+
+            $
+            \begin{vmatrix}
+                1&1&1\\1&2&3\\1&3&9\\
+            \end{vmatrix}\neq 0 \implies f^1, f^2, f^3$ -- ЛНЗ $\implies $ базис 
+
+            $\sphericalangle \delta \in P_2^*\quad\delta(p) = p(0)\quad \delta \leftrightarrow (1, 0, 0)$
+
+            $\alpha_1f_{61} + \alpha_2f^2 + \alpha_3f^3 = \delta$
+
+            $\begin{bmatrix}[c c c|c] 1&1&1&1\\1&2&3&0\\1&4&9&0 \end{bmatrix} \sim \begin{bmatrix} 1&1&1&1\\0&1&2&-1\\0&2&8&-1 \end{bmatrix} \sim \begin{bmatrix} 1&1&1&1\\0&1&2&-1\\0&0&2&2 \end{bmatrix} $
+
+            $\implies \alpha_1 = 3\quad \alpha_2 = -3\quad \alpha_3 = 1$
+
+            $\delta = 3f^1-3f^1+f^3$ Применим к  $p\in P_2$
+
+            $p(0) = 3p(1) - 3p(2) + p(3)\quad \forall p\in P_2$
+
+            $f_{1}, f^2, f^3$ -- базис $P_2^*$
+
+            Построим базис  $P_2$, сопряжённый базису $f^1, f^2, f^3$
+
+            Если  $p_1, p_2, p_3$ -- искомый базис $\implies f^k(p_m) = \delta_m^k$
+
+            $p_1(t):\quad f^1(p_1) = 1\quad f^2(p_1) = 0, f^3(p_3) = 1$
+
+            $p_1 = \alpha_1+\beta_1t + \gamma t^2$
+
+            $f^2(p_1) = p_1(2) = 0 \implies 2$ -- корень полином. 3 -- тоже корень полинома.
+
+            $p_1(t) = a(t-2)(t-3)\quad p_1(1) = 1 \implies a = \frac{1}{2}$ 
+
+            $p_1(t) = \frac{1}{2}(t-2)(t-3)$
+
+            $p_2(t):\quad  f^1(p_2) = 0\quad f^2(p_2) = 1\quad f^3(p_2) = 0 \implies p_2(t) = -1\cdot (t-1)(t-3)$
+
+            $p_3(t): f^1(p_3) = 0\quad f^2(p_3) = 0\quad f^3(p_3) = 1\quad p_3(t) = -\frac{1}{2}\left( t-1 \right) \left( t-1 \right) $
+        \end{proof}
+
+        \begin{example}
+            $P_3\qquad f(p) = \int\limits_{-1}^1(1+t^2)p(t)dt$
+
+            Найти коэффициенты разложения $f$ в базисе  $P_3^*$, сопряжённом к базису $\{1, t, t^2, t^3\}$
+
+            $\forall x\in X\quad x = f^1(x)e_1 + f^2(x)e_2 + \ldots + f^n(k)e_n$
+
+            Эта штука работает в обе стороны
+
+            $\forall g\in X^*\quad g(e_1)f^1 + g(e_2)f^2 + \ldots + g(e_n)f^n$
+
+            $f(1) = \frac{8}{3}$ 
+
+            $f(t) = 0$
+
+            $f(t^2) = \frac{16}{15}$ 
+
+            $f(t^3) = 0$
+        \end{example}
+\section{Преобразование базиса}
+
+$\sqsupset X$ -- Линейное пространство
+
+$\{e_j\}_{j=1}^n$ -- базис  $X\qquad \forall x\in X\quad x = \sum_{j=1}^{n} \xi^je_j$ 
+
+$\sqsupset \{\tl e_k\}_{k=1}^n$ -- тоже базис $X$
+
+ $\sphericalangle \tl e_k = \sum_{j=1}^{n} \tau^j_ke_j\quad j, k = 1\ldots n$
+
+ $\sqsupset T = \|\tau_k^j\|$ -- матрица перехода от базиса $\{e_j\}$ к базису  $\{\tl e_k\}$
+
+ Для удобства введём ещё две матрицы:  $E = \left[ e_1, e_2, \ldots, e_n \right] \quad \tl E = \left[ \tl e_1, \tl e_2, \ldots, \tl e_n \right] $
+
+\begin{note}    
+ $\tl E = ET$
+
+ $\tl e_k = \sum_{j=1}^{n} \tau^j_ke_j\quad j, k = 1\ldots n$
+\end{note}
+
+$\sphericalangle x = \sum_{j=1}^{n} \xi^je_j$ Какие координаты будет иметь $x$ в базисе  $\{\tl e_k\}$
+
+$\{e_j\}\ov{T}{\rightarrow} \{\tl e_k\}$
+
+$x\leftrightarrow \xi^j \ov{?}{\rightarrow} \tl \xi^k$
+
+ $x = \sum_{k=1}^{n} \tl \xi^k\tl e_k = \sum_{k=1}^{n} \tl \xi^k \sum_{j=1}^{n} \tau_k^je_j = \sum_{j=1}^{n} \left[ \tl \xi^k\tau_k^j \right] e_j = \sum_{j=1}^{n} \xi^je_j \implies $ 
+
+ $\implies \xi^j = \sum_{k=1}^{n} \tl\xi^k\tau_k^j\qquad \xi = T\tl \xi$ 
+
+ $\sqsupset \{f^i\}$ -- базис $X^*$ (старый)
+
+ $\{\tl f^l\}$ -- тоже базис  $X^*$ (новый)
+
+ $\{e_j\} \ov{T}{\rightarrow}\{\tl e_k\}$
+
+    $\{f^i\} \ov{?}{\rightarrow} \{\tl f^l\}$
+
+    Нижняя строчка сопряжена с верхней.
+    \begin{align}
+    \sqsupset \tl f^l = \sum_{i=1}^{n} \alpha_i^lf^i\quad \delta_k^l \\&= \left( \tl f^l, \tl e_k \right)  \\&= \left( \sum_{i=1}^{n} \alpha_i^lf^i, \sum_{j=1}^{n} \tau_k^je_j \right) \\&= \sum_{i=1}^{n} \sum_{j=1}^{n} \alpha_i^l\tau_k^j\left( f^i, e_j \right)\\  &=  \\
+    \sum_{i=1}^{n} \alpha_i^l\tau_k^j \\&= \delta_k^j\\
+\end{align}
+
+$AI = I\implies A = T^{-1}$
+
+\begin{note}
+    Матрицу, обратную к матрице перехода $T$ обозначают  $S = \|\sigma_i^p\|$
+\end{note}
+
+$\tl f^l = \sum_{i=1}^{n} \sigma_i^lf^i$ 
+
+$\{e_j\} \ov T {\rightarrow} \{\tl e_k\}\\ \{\tl f^i\} \ov {T^{-1}}{\rightarrow} \{\tl f^l\}$
+
+Введём две матрицы:  $F = \begin{bmatrix} f^1\\f^2\\ \vdots \\ f^n \end{bmatrix} \quad \tl F = \begin{bmatrix} \tl f^1 \\ \tl f^2 \\ \vdots\\ \tl f^n \end{bmatrix} \quad \tl F = SF\quad F = T\tl F\quad S = T^{-1}$
+
+$\sphericalangle g\in X^*\quad g = \sum_{i=1}^{n} \eta_if^i$ 
+
+\begin{align}
+    \sphericalangle g = \sum_{l=1}^{n} \tl \eta_l\tl f^l \\&= \sum_{l=1}^{n} \tl \eta_e \sum_{i=1}^{n} \sigma_i^lf^u \\&= \sum_{i=1}^{n} \left[ \sum_{l=1}^{n} \tl \eta_l\sigma_i^l \right] f^i = \sum_{i=1}^{n} \eta_if^i
+\end{align}
+
+$\eta_i = \sum_{l=1}^{n} \tl \eta_l\sigma_i^l\quad  \eta = \tl \eta S\qquad \tl \eta = \eta T\qquad \eta$ -- строка
+
+Ковариантные величины -- те, которые преобразуются как базис $e$. Индекс снизу как в $e_j, \eta_j$
+
+Контравариантные -- те, которые преобразуются обратной матрицей. Индекс сверху $\xi^j\quad f^j$
+
+$g = \sum\limits_{i=1}^n\eta_if^i\qquad x = \sum_{j=1}^{n} \xi^je_j$
+
+$\sphericalangle g\in X^*\quad g\left( e_j \right)  = \chi_j $ -- коэффициенты ЛФ в базисе $e_j$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
