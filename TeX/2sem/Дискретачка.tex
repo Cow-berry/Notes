@@ -1,0 +1,311 @@
+\documentclass{book}
+%nerd stuff here
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+% Languages support
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+% Some fancy symbols
+\usepackage{textcomp}
+\usepackage{stmaryrd}
+% Math packages
+\usepackage{amsmath, amssymb, amsthm, amsfonts, mathrsfs, dsfont, mathtools}
+\usepackage{cancel}
+% Bold math
+\usepackage{bm}
+% Resizing
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+% Optional font for not math-based subjects
+%\usepackage{cmbright}
+
+\author{Коченюк Анатолий}
+\title{Конспект по дискретной математике\\ II семестр}
+
+\usepackage{url}
+% Fancier tables and lists
+\usepackage{booktabs}
+\usepackage{enumitem}
+% Don't indent paragraphs, leave some space between them
+\usepackage{parskip}
+% Hide page number when page is empty
+\usepackage{emptypage}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{xcolor}
+% Some shortcuts
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\renewcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand{\p}[1]{#1^{\prime}}
+\newcommand{\pp}[1]{#1^{\prime\prime}}
+% Easily typeset systems of equations (French package) [like cases, but it aligns everything]
+\usepackage{systeme}
+\usepackage{lipsum}
+% limits are put below (optional for int)
+\let\svlim\lim\def\lim{\svlim\limits}
+\let\svsum\sum\def\sum{\svsum\limits}
+%\let\svlim\int\def\int{\svlim\limits}
+% Command for short corrections
+% Usage: 1+1=\correct{3}{2}
+\definecolor{correct}{HTML}{009900}
+\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
+\newcommand\green[1]{{\color{correct}{#1}}}
+% Hide parts
+\newcommand\hide[1]{}
+% si unitx
+\usepackage{siunitx}
+\sisetup{locale = FR}
+% Environments
+% For box around Definition, Theorem, \ldots
+\usepackage{mdframed}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\newmdtheoremenv[nobreak=true]{definition}{Определение}
+\newmdtheoremenv[nobreak=true]{theorem}{Теорема}
+\newmdtheoremenv[nobreak=true]{lemma}{Лемма}
+\newmdtheoremenv[nobreak=true]{problem}{Задача}
+\newmdtheoremenv[nobreak=true]{property}{Свойство}
+\newmdtheoremenv[nobreak=true]{statement}{Утверждение}
+\newmdtheoremenv[nobreak=true]{corollary}{Следствие}
+\newtheorem*{note}{Замечание}
+\newtheorem*{example}{Пример}
+\renewcommand\qedsymbol{$\blacksquare$}
+% Fix some spacing
+% http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=\parskip \thm@postskip=0pt
+}
+\usepackage{xifthen}
+\def\testdateparts#1{\dateparts#1\relax}
+\def\dateparts#1 #2 #3 #4 #5\relax{
+    \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
+}
+
+\def\@lecture{}%
+\newcommand{\lecture}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@lecture{Lecture #1}%
+    }{%
+        \def\@lecture{Lecture #1: #3}%
+    }%
+    \subsection*{\@lecture}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+% Todonotes and inline notes in fancy boxes
+\usepackage{todonotes}
+\usepackage{tcolorbox}
+
+% Make boxes breakable
+\tcbuselibrary{breakable}
+\newenvironment{correction}{\begin{tcolorbox}[
+    arc=0mm,
+    colback=white,
+    colframe=green!60!black,
+    title=Correction,
+    fonttitle=\sffamily,
+    breakable
+]}{\end{tcolorbox}}
+% These are the fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% LE: left even
+% RO: right odd
+% CE, CO: center even, center odd
+% My name for when I print my lecture notes to use for an open book exam.
+% \fancyhead[LE,RO]{Gilles Castel}
+
+\fancyhead[RO,LE]{\@lecture} % Right odd,  Left even
+\fancyhead[RE,LO]{}          % Right even, Left odd
+
+\fancyfoot[RO,LE]{\thepage}  % Right odd,something additional 1  Left even
+\fancyfoot[RE,LO]{}          % Right even, Left odd
+\fancyfoot[C]{\leftmark}     % Center
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+\usepackage{tikz}
+\begin{document}
+    \maketitle
+    \chapter{Дискретная теория вероятностей}
+    \section{Введение}
+
+    \begin{definition}
+        [Вероятностное пространство]
+        $ $\\
+        $\Omega$ -- элементарные исходы, неделимые дальше.
+
+         $p$ -- дискретная плотность вероятности.
+
+         $p: \Omega \to [0,1]\quad \sum\limits_{q\in \Omega} p(\omega) = 1$
+    \end{definition}
+
+    \begin{note}
+        В случае дискретного вероятностного пространства $\left| \Omega \right| $ -- не более, чем счётное.
+    \end{note}
+
+    \begin{example}
+        [Честная монета]
+        $\Omega = \{0,1\}\quad p(0) = p(1) = \frac{1}{2}$
+    \end{example}
+
+    \begin{example}
+        [Нечестная монета]
+        $\Omega = \{0,1\}\quad p(1) = p, p(0) = q$ -- различные числа. $p+q = 1$
+
+        Ещё одно название -- \underline{распределение Бернулли}
+    \end{example}
+
+    \begin{example}
+        [Честная игральная кость]
+        $\Omega = \{1, 2, 3, 4, 5, 6\}\quad p(\omega) = \frac{1}{6}$
+    \end{example}
+
+    \begin{definition}
+        Событие, случайное событие -- $A\subseteq \Omega$
+    \end{definition}
+
+    \begin{note}
+        Неправильное определение -- то, что может произойти, а может не произойти.
+
+            $\O \subseteq \Omega\quad \Omega\subseteq \Omega$ -- примеры, когда никогда не происходит и всегда происходит
+    \end{note}
+    \begin{note}
+        Для недискретного случая неверно, что \underline{любое} подмножество $\Omega$ это событие
+    \end{note}
+
+    \begin{definition}
+        Вероятность события $P(A) = \sum\limits_{\omega\in A} p(\omega)$
+
+        $p$ берёт элементарные исходы.  $P, \mathbb{P}$ -- вероятность события
+    \end{definition}
+
+    \begin{example}
+        
+        Событие $E = \{2, 4, 6\}\quad P(E) = p(2) + p(4) + p(6) = \frac{3}{6} = \frac{1}{2}$
+
+        $O = \{1, 3, 5\}$
+    \end{example}
+
+    \begin{note}
+        Не существует вероятностного пространства с бесконечным числом равновероятных исходов
+
+
+        $p(\omega) = 0\quad \sum = 0$
+
+        $p(\omega) = a >0\quad \sum = a\cdot (+\infty ) = +\infty $
+    \end{note}
+
+    \begin{example}
+        Событие $B(IG) = \{4, 5, 6\} \quad P(B) = \frac{1}{2}$
+    \end{example}
+
+    \begin{definition}
+        [Независимое событие] События $A, B$ независимы, если  $P(A\cap B) = P(A) \cdot  P(B)$
+    \end{definition}
+
+    \begin{example}
+        $E\cap O = \O \quad B\cap E = \{4,6\}$
+
+        $P(E\cap O) = \O \quad P(O)\cdot P(B) = \frac{1}{4}\neq 0$ 
+
+        $P(B)\cdot P(E) = \frac{1}{4} \neq \frac{1}{3} = P(B\cap E)$
+    \end{example}
+
+    \begin{tikzpicture}
+        \draw (0,0) circle [radius = 2];
+        \draw[fill = green, opacity = 0.5] (-0.5,0) circle [radius = 0.8];
+        \draw[fill = red, opacity = 0.5] (0.5,0) circle [radius = 0.8];
+    \end{tikzpicture}
+
+    $P(A\cap B) = P(A)\cdot P(B)$
+
+    $\frac{P(A\cap B)}{P(B)} = \frac{P(A)}{P(\Omega)}$
+
+    \begin{definition}
+        [Условна вероятность] 
+        $P(A|B) = \frac{P(A\cap B)}{P(B)}$
+    \end{definition}
+    \begin{note}
+        Альтернативное определение независимости, не поддерживающее 0: $P(A\cap B) = A$
+    \end{note}
+
+    $V = \{5,6\}$
+
+    $P(V\cap E) = \frac{1}{6}$ 
+
+    $P(V) = \frac{1}{3}\quad P(E) = \frac{1}{2}\quad P(V) \cdot  P(E) = \frac{1}{3}\cdot \frac{1}{2} = \frac{1}{6} = P(V\cap E)$
+
+    \begin{definition}
+        [Произведение вероятностных пространств]
+        $ $\\
+        $\Omega_1, p_1\qquad \Omega_2, p_2$
+
+        $\Omega = \Omega_1 \times \Omega_2$
+
+        $p\left( \left<\omega_1, \omega_2 \right> \right)  = p_1\left( \omega_1 \right) \cdot p_2(\omega_2)$
+    \end{definition}
+    \begin{theorem}
+        $\forall A_1\subseteq \Omega_1$ и $\forall  A_2\subseteq \Omega_2$
+
+        $A_1\times \Omega_2$ и $\Omega_1\times A_2$ -- независимы
+    \end{theorem}
+    \begin{proof}
+        $P\left( A_1\times \Omega_2 \cap \Omega_1\cap A_2 \right)  = P\left( A_1\times A_2 \right) = \sum\limits_{\substack{a\in A_1\\b\in A_2}} p\left( \left<a, b \right> \right)  = \\ = \sum\limits_{a\in A_1} \sum\limits_{b\in A_2} p_1(a)\cdot p_2(b) = \sum\limits_{a\in A_1}p_1(a)\left( \sum\limits_{b\in A_2} p_2(b) \right) = P_1(A_1)\cdot P_2(A_2)$
+    \end{proof}
+
+    \begin{definition}
+        $A_1, A_2, \ldots, A_n$
+
+        \begin{enumerate}
+            \item Попарно независимые $\quad A_i$ и $A_j$ независимы
+            \item Независимы в совокупности $\forall I\subseteq \{1, 2, \ldots, n\}\quad P\left( \bigcap\limits_{i\in I}A_i \right)  = \prod\limits_{i\in I} P(A_i)$
+
+                $P(A_1\cap A_2\cap A_3) = P(A_1)\cdot P(A_2)\cdot P(A_3)$
+        \end{enumerate}
+    \end{definition}
+
+    \begin{example}
+        Кидаем две монеты $\Omega = \{00, 01, 10, 11\}$
+
+        $A_1 = \{10,11\}\quad A_2 = \{01,11\}\quad A_3 = \{01,10\}$ -- независимы попарно, но не в совокупности
+    \end{example}
+
+    \begin{definition}
+        [Формула полной вероятности]
+
+        $\Omega = A_1\cup A_2\cup \ldots \cup A_n\quad i\neq j\implies A_i\cap A_j = \O $
+
+        Совокупность таких А-шек называется полной системой событий.
+
+        Дано: вероятности $P(A_i)\quad P(B|A_i)$
+        Найти: $P(B)$
+
+        \[P(B) = \sum_{i=1}^nP(B\cap A_i) = \sum_{i=1}^n P(B|A_i)\cdot P(A_i)\] -- формула полной вероятности
+
+        Найти: $P\left( A_j|B \right) $
+
+        $A_1$ -- болен, $A_2$ -- здоров, $B$ -- положительный результат теста
+
+        $P(A_2|B)$
+
+        \[P(A_j|B) = \frac{P(A_j\cap B)}{P(B)} = \frac{P(B|A_j)\cdot P(A_j)}{\sum_{i=1}^nP\left( B|A_i \right)\cdot P(A_i) }\] -- формула Байеса
+    \end{definition}
+\begin{figure}[ht]
+    \centering
+    \incfig{b}
+    \caption{B}
+    \label{fig:b}
+\end{figure}
+\end{document}

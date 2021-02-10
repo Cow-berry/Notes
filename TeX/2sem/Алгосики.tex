@@ -1,0 +1,238 @@
+\documentclass{book}
+%nerd stuff here
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+% Languages support
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+% Some fancy symbols
+\usepackage{textcomp}
+\usepackage{stmaryrd}
+% Math packages
+\usepackage{amsmath, amssymb, amsthm, amsfonts, mathrsfs, dsfont, mathtools}
+\usepackage{cancel}
+% Bold math
+\usepackage{bm}
+% Resizing
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+% Optional font for not math-based subjects
+%\usepackage{cmbright}
+
+\author{Коченюк Анатолий}
+\title{Конспект~по~алгоритмам~и~структурам~данных\\ II семестр}
+
+\usepackage{url}
+% Fancier tables and lists
+\usepackage{booktabs}
+\usepackage{enumitem}
+% Don't indent paragraphs, leave some space between them
+\usepackage{parskip}
+% Hide page number when page is empty
+\usepackage{emptypage}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{xcolor}
+% Some shortcuts
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\renewcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand{\p}[1]{#1^{\prime}}
+\newcommand{\pp}[1]{#1^{\prime\prime}}
+% Easily typeset systems of equations (French package) [like cases, but it aligns everything]
+\usepackage{systeme}
+\usepackage{lipsum}
+% limits are put below (optional for int)
+\let\svlim\lim\def\lim{\svlim\limits}
+%\let\svlim\int\def\int{\svlim\limits}
+% Command for short corrections
+% Usage: 1+1=\correct{3}{2}
+\definecolor{correct}{HTML}{009900}
+\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
+\newcommand\green[1]{{\color{correct}{#1}}}
+% Hide parts
+\newcommand\hide[1]{}
+% si unitx
+\usepackage{siunitx}
+\sisetup{locale = FR}
+% Environments
+% For box around Definition, Theorem, \ldots
+\usepackage{mdframed}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\newmdtheoremenv[nobreak=true]{definition}{Определение}
+\newmdtheoremenv[nobreak=true]{theorem}{Теорема}
+\newmdtheoremenv[nobreak=true]{lemma}{Лемма}
+\newmdtheoremenv[nobreak=true]{problem}{Задача}
+\newmdtheoremenv[nobreak=true]{property}{Свойство}
+\newmdtheoremenv[nobreak=true]{statement}{Утверждение}
+\newmdtheoremenv[nobreak=true]{corollary}{Следствие}
+\newtheorem*{note}{Замечание}
+\newtheorem*{example}{Пример}
+\renewcommand\qedsymbol{$\blacksquare$}
+% Fix some spacing
+% http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=\parskip \thm@postskip=0pt
+}
+\usepackage{xifthen}
+\def\testdateparts#1{\dateparts#1\relax}
+\def\dateparts#1 #2 #3 #4 #5\relax{
+    \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
+}
+
+\def\@lecture{}%
+\newcommand{\lecture}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@lecture{Lecture #1}%
+    }{%
+        \def\@lecture{Lecture #1: #3}%
+    }%
+    \subsection*{\@lecture}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+% Todonotes and inline notes in fancy boxes
+\usepackage{todonotes}
+\usepackage{tcolorbox}
+
+% Make boxes breakable
+\tcbuselibrary{breakable}
+\newenvironment{correction}{\begin{tcolorbox}[
+    arc=0mm,
+    colback=white,
+    colframe=green!60!black,
+    title=Correction,
+    fonttitle=\sffamily,
+    breakable
+]}{\end{tcolorbox}}
+% These are the fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% LE: left even
+% RO: right odd
+% CE, CO: center even, center odd
+% My name for when I print my lecture notes to use for an open book exam.
+% \fancyhead[LE,RO]{Gilles Castel}
+
+\fancyhead[RO,LE]{\@lecture} % Right odd,  Left even
+\fancyhead[RE,LO]{}          % Right even, Left odd
+
+\fancyfoot[RO,LE]{\thepage}  % Right odd,something additional 1  Left even
+\fancyfoot[RE,LO]{}          % Right even, Left odd
+\fancyfoot[C]{\leftmark}     % Center
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+\usepackage{tikz}
+\begin{document}
+    \maketitle
+    \chapter{Новые структуры данных}
+    \section{Дерево отрезков}
+
+    Segment Tree, Range Tree, Interval Tree -- можно наткнутся на другие структуры
+
+    Есть массив $a$ на  $n$ элементов
+     \begin{enumerate}
+         \item set(i,v) $\quad a[i] = v$
+         \item sum(l,r)  $\quad \sum_{i=l}^{r-1} a[i]$
+    \end{enumerate}
+
+    $\left[ 3,5,2,1,6,4,8,3 \right] $
+
+    Построим дерево, где в каждом узле сумма двух под ним. Каждое число это сумма чисел на каком--то отрезке.
+
+    Заменим 4 на 7. set(5, 7). Нужно пересчитать все узлы, которые выше него. Их логарифм.
+
+    Теперь к сумме. Сумму от  $l $ до  $r$ мы будем раскладывать на суммы, которые мы уже знаем.
+     \begin{enumerate}
+        \item Как найти эти суммы: обойдём наше дерево рекурсивно, не заходя в плохие поддереве. Идём вниз: если в поддереве нет нужных элементов, выходим, если полностью содержится в нужном, берём эту сумму, иначе идём дальше вниз.
+        \item Мы обошли не так много (порядка логарифма) узлов. Посмотрим на узлы, в которых не сработало отсечение. Тогда наш отрезок содержит одну из границ отрезка. Отрезков, которые содержат границу (правую или левую) не более $2\log n$. 
+
+            Запуск рекурсии: узлов, в которых не сработало отсечение -- $2\log n$, всего узлов $\approx 4\log n$.
+    \end{enumerate}
+
+    Будем хранить полное двоичное дерево. У узла $i$ дети  $2i+1$ и  $2i+2$
+
+    \begin{verbatim}
+        set(i, v, x, lx, rx):
+            if rx - lx = 1:
+                tree[x] = v
+            else:
+                m = (lx+rx)/2
+                if i < m:
+                    set(i,v,2x+1,lx,m)
+                else:
+                    set(i,v,2x+2,m, rx)
+                tree[x] = tree[2x+1] + tree[2x+2]
+
+        sum(l, r, x, lx, rx):
+            if l >= rx || lx >= r:
+                return 0
+            if lx >= l && rx <= r:
+                return tree[x]
+            m = (lx+rx)/2
+            s1 = sum(l, r, 2x+1, lx, m)
+            s2 = sum(l, r, 2x+2, m, rx)
+            return s1 + s2
+    \end{verbatim}
+
+    Пусть мы теперь хотим посчитать минимум. Делаем то же самое, только в каждом узле храним не сумму на отрезке, а минимум. Только в случае пустого дерева вместо 0 в сумме надо вернуть $+\infty $ (нейтральный элемент по операции)
+
+    Если нужно сделать операцию $a \bigotimes b$. Если у неё есть ассоциативность  $(a\otimes b)\otimes c = a\otimes (b\otimes c)$, то её можно встроить в дерево отрезков. 
+
+$max, +, \cdot , \&, |, \text{НОД}, \text{НОК}$ 
+
+\subsection{Снизу вверх}
+
+Занумеруем также, но будем идти снизу вверх и без рекурсии.
+
+\begin{verbatim}
+    set(i, v): // n = 2^k
+        x = i + n - 1
+        delta = v - tree[x]
+        while x >= 0:
+            tree[x]+=delta
+            x = (x+1)/2-1
+
+    sum(l, r):
+        l = n-1+r
+        r = n-2+r
+        res = 0
+        while r >= l:
+            if l % 2 = 0:
+                res += tree[l]
+            l = l / 2
+            if r % 2 = 1:
+                res += tree[r]
+            r = r/2-1
+        return res
+\end{verbatim}
+
+Если нужно посчитать другую функцию, поменяется нейтральный элемент. Если не коммутативная функцию, можно сначала считать левую, потом правую, а потом их сложить.
+
+Такая реализация чуть лучше работает как $o(\log (l-r))$. Каждый раз разница между $ l$ и $r$ уменьшается в 2 раза.  
+
+\section{Персистентное дерево отрезков}
+
+$\begin{array}{c}
+     15\\ 8 ~ ~ ~7\\ 3~5~6~1
+ \end{array}
+$
+
+set(2,8) Сделаем новый узел рядом с 6. Рядом с узлом 7 на верхнем слое приделаем ещё один узел 9. А к корню приделаем узел 17. Так у нас появилось две параллельные версия дерева отрезков.
+ 
+
+
+
+\end{document}
