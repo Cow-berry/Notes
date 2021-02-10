@@ -234,7 +234,7 @@
     $\frac{P(A\cap B)}{P(B)} = \frac{P(A)}{P(\Omega)}$
 
     \begin{definition}
-        [Условна вероятность] 
+        [Условная вероятность] 
         $P(A|B) = \frac{P(A\cap B)}{P(B)}$
     \end{definition}
     \begin{note}
@@ -262,7 +262,7 @@
         $A_1\times \Omega_2$ и $\Omega_1\times A_2$ -- независимы
     \end{theorem}
     \begin{proof}
-        $P\left( A_1\times \Omega_2 \cap \Omega_1\cap A_2 \right)  = P\left( A_1\times A_2 \right) = \sum\limits_{\substack{a\in A_1\\b\in A_2}} p\left( \left<a, b \right> \right)  = \\ = \sum\limits_{a\in A_1} \sum\limits_{b\in A_2} p_1(a)\cdot p_2(b) = \sum\limits_{a\in A_1}p_1(a)\left( \sum\limits_{b\in A_2} p_2(b) \right) = P_1(A_1)\cdot P_2(A_2)$
+        $P\left( A_1\times \Omega_2 \cap \Omega_1\times A_2 \right)  = P\left( A_1\times A_2 \right) = \sum\limits_{\substack{a\in A_1\\b\in A_2}} p\left( \left<a, b \right> \right)  = \\ = \sum\limits_{a\in A_1} \sum\limits_{b\in A_2} p_1(a)\cdot p_2(b) = \sum\limits_{a\in A_1}p_1(a)\left( \sum\limits_{b\in A_2} p_2(b) \right) = P_1(A_1)\cdot P_2(A_2)$
     \end{proof}
 
     \begin{definition}
@@ -270,7 +270,7 @@
 
         \begin{enumerate}
             \item Попарно независимые $\quad A_i$ и $A_j$ независимы
-            \item Независимы в совокупности $\forall I\subseteq \{1, 2, \ldots, n\}\quad P\left( \bigcap\limits_{i\in I}A_i \right)  = \prod\limits_{i\in I} P(A_i)$
+            \item Независимы в совокупности $\forall I\subseteq \{1, 2, \ldots, n\}~ P\left( \bigcap\limits_{i\in I}A_i \right)  = \prod\limits_{i\in I} P(A_i)$
 
                 $P(A_1\cap A_2\cap A_3) = P(A_1)\cdot P(A_2)\cdot P(A_3)$
         \end{enumerate}
@@ -284,7 +284,7 @@
 
     \begin{definition}
         [Формула полной вероятности]
-
+        $ $\\
         $\Omega = A_1\cup A_2\cup \ldots \cup A_n\quad i\neq j\implies A_i\cap A_j = \O $
 
         Совокупность таких А-шек называется полной системой событий.
