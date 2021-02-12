@@ -159,7 +159,7 @@
 
          $\sqsupset x_1, x_2, x_3, \ldots, x_p \in X\quad y^1, y^2, \ldots, y^q\in X^*$
 
-         $u\left( x_1, x_2, \ldots,\p x_i^1+\alpha \pp x_i, \ldots, x_p, y^1, y^2, \ldots, y^q \right) =\\= \left(x_1, x_2, \ldots, \p x_i, \ldots, x_p, y^1, y^2, \ldots  \right) + \alpha u\left( x_1, x_2, \ldots, \pp x_i, \ldots, x_o, y^1, y^2, \ldots, y^q \right)  $
+         $u\left( x_1, x_2, \ldots,\p x_i+\alpha \pp x_i, \ldots, x_p, y^1, y^2, \ldots, y^q \right) =\\= \left(x_1, x_2, \ldots, \p x_i, \ldots, x_p, y^1, y^2, \ldots  \right) + \alpha u\left( x_1, x_2, \ldots, \pp x_i, \ldots, x_p, y^1, y^2, \ldots, y^q \right)  $
     \end{definition}
 
     \begin{note}
@@ -186,7 +186,7 @@
                 \begin{lemma}
                     $w$ -- ПЛФ  $(p,q)$
 
-                    $w\left( \ldots \p x_i+\alpha \pp x_i \ldots \right)  = w\left( \ldots \p x_i \right) +\alpha w\left( \ldots \pp x_i \ldots \right) $
+                    $w\left( \ldots ,\p x_i+\alpha \pp x_i, \ldots \right)  = w\left( \ldots ,\p x_i ,\ldots\right) +\alpha w\left( \ldots \pp x_i \ldots \right) $
                 \end{lemma}
             \item Произведением полилинейной формы на число $\lambda$ называется отображение  $\lambda u$, такое что:  \[
                     (\lambda u)\left( x_1, \ldots, x_p, y^1, \ldots, y^1 \right)  = \lambda \cdot u\left( x_1, \ldots, x_p, y^1, \ldots, y^1 \right) 
@@ -208,15 +208,13 @@
 
     $\sqsupset \{e_j\}$ -- базис $X\quad \sqsupset \{f^k\}$ -- базис $X^*$
 
-    $x_1 = \sum_{j=1}^{n} \xi_1^{j_1} e_{j_1} = \xi_1^{j_1}e_{j_1}$. Дальше значок суммы писаться не будет (иначе помрём) (соглашение о немом суммировании).
+    $x_1 = \sum_{j_1=1}^{n} \xi_1^{j_1} e_{j_1} = \xi_1^{j_1}e_{j_1}$. Дальше значок суммы писаться не будет (иначе помрём) (соглашение о немом суммировании).
 
-    $x_2 = \xi_2^{j_1}e_{j_2}\quad \ldots \quad x_p = \xi^{j_p}e_{j_p}$
+    $x_2 = \xi_2^{j_2}e_{j_2}\quad \ldots \quad x_p = \xi^{j_p}e_{j_p}$
 
     $y^1 = \eta_{k_1}^1f^{k_1}\quad y_2 = \eta_{k_2}^2f^{k_2}\quad \ldots \quad y^1 = \eta_{k_q}^qf^{k_q}$ 
-
-    \begin{align*}
-        
-    w\left( x_1, x_2, \ldots, x_o, y^1, y^2, \ldots, y^q \right) = w\left( \xi_1^{j_1}e_{j_1}, \xi_2^{j_2}e_{j_2}, \ldots, \xi_p^{j_p}e_{j_p}, \eta_{k_1}^1f^{k_1}, \eta^2_{k_2}f^{k_2}, \ldots, \eta_{k_q}^qf^{k_q} \right) \\
+    \begin{align*}        
+    w\left( x_1, x_2, \ldots, x_p, y^1, y^2, \ldots, y^q \right) = w\left( \xi_1^{j_1}e_{j_1}, \xi_2^{j_2}e_{j_2}, \ldots, \xi_p^{j_p}e_{j_p}, \eta_{k_1}^1f^{k_1}, \eta^2_{k_2}f^{k_2}, \ldots, \eta_{k_q}^qf^{k_q} \right) \\
     = \xi_1^{k_1}\xi_2^{j_2}\ldots\xi_p^{j_p}\eta_{k_1}^1\eta_{k_2}^2\ldots\eta_{k_q}^q \underbrace{w\left( e_{j_1}, e_{j_2}, \ldots, e_{j_p}, f^{k_1}, f^{k_2}, \ldots, f^{k_q} \right) }\limits_{\omega_{j_1j_2 \ldots j_p}^{k_1 k_2 \ldots k_q} \text{ -- тензор ПЛФ}}
     \\ = \xi_1^{k_1}\xi_2^{j_2}\ldots\xi_p^{j_p}\eta_{k_1}^1\eta_{k_2}^2\ldots\eta_{k_q}^q \omega_{j_1 j_2 \ldots j_p} ^{k_1 k_2 ... k_q}
     .\end{align*}
@@ -243,12 +241,12 @@
      \begin{note}
          $_{t_1 t_2 \ldots t_q}^{s_1 s_2 \ldots s_p}w$ -- индексация базиса $\Omega_p^q$
 
-     $\sideset{_{t_1 t_2 \ldots t_q}^{s_1 s_2 \ldots s_p}}{_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q}}w$
+     $_{t_1 t_2 \ldots t_q}^{s_1 s_2 \ldots s_p}w_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q}$
 
      $_{t_1 t_2 \ldots t_q}^{s_1 s_2 \ldots s_p}w\left( x_1, x_2, \ldots, x_p, y^1, y^2, \ldots, y^q \right) = \xi_1^{s_1}\xi_2^{s_2}\ldots\xi_p^{s_p}\eta_{t_1}^1\eta^2_{t_2}\ldots\eta_{t_q}^q$
     \end{note}
     \begin{note}
-        $\sphericalangle \sideset{_{t_1 t_2 \ldots t_q}^{s_1 s_2 \ldots s_p}}{_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q}}w = _{t_1 t_2 \ldots t_q}^{s_1 s_2 \ldots s_p}w\left( e_{i_1}, e_{i_2}, \ldots, e_{i_p}, f^{j_1}, f^{j_2}, \ldots, f^{j_q} \right) \\
+        $\sphericalangle _{t_1 t_2 \ldots t_q}^{s_1 s_2 \ldots s_p}w_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q} = _{t_1 t_2 \ldots t_q}^{s_1 s_2 \ldots s_p}w\left( e_{i_1}, e_{i_2}, \ldots, e_{i_p}, f^{j_1}, f^{j_2}, \ldots, f^{j_q} \right) \\
         =\delta_{i_1}^{s_1}\delta_{i_2}^{s_2}\ldots\delta_{i_p}^{s_p}\delta_{t_1}^{j_1}\delta_{t_2}^{j_2}\ldots\delta_{t_q}^{j_q}$
     \end{note}
 
@@ -267,11 +265,10 @@
         \begin{itemize}
             \item []
             \item [ПН] $\sphericalangle u\in \Omega_q^p$
-                \[
-                    u\left( x_1, x_2, \ldots, x_p, y^1, y^2, \ldots, y^q \right)  = \xi_1^{i_1}\xi_2^{i_2}\ldots\xi_p^{i_p}\eta_{j_1}^1\eta_{j_2}^2\ldots\eta_{j_q}^qu_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q}=
-
-                    = _{j_1 j_2 \ldots j_q}^{i_1 i_2 \ldots i_p}w\left( x_1, x_2, \ldots, x_p, y^1, y^2, \ldots, y^q  \right) u_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q}\quad \forall x_1, x_2, \ldots, x_p, y^1, y^2, \ldots, y^q
-                .\] 
+                \begin{align*}
+                    &u\left( x_1, x_2, \ldots, x_p, y^1, y^2, \ldots, y^q \right)  = \xi_1^{i_1}\xi_2^{i_2}\ldots\xi_p^{i_p}\eta_{j_1}^1\eta_{j_2}^2\ldots\eta_{j_q}^qu_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q}=\\
+                    &= _{j_1 j_2 \ldots j_q}^{i_1 i_2 \ldots i_p}w\left( x_1, x_2, \ldots, x_p, y^1, y^2, \ldots, y^q  \right) u_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q}\quad \forall x_1, x_2, \ldots, x_p, y^1, y^2, \ldots, y^q
+                .\end{align*}
 
                 $\implies u = _{j_1 j_2 \ldots j_q}^{i_1 i_2 \ldots i_p}w\cdot u_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q}$
 
@@ -396,8 +393,8 @@
 
              \begin{example}
                  Построить тензор $\varepsilon_k^{ij} = \begin{cases}
-                     -1 & (i,j,k) \tex{-- чётная}\\
-                     1 & (i,j,k) \tex{-- чётная}\\
+                     -1 & (i,j,k) \text{-- чётная}\\
+                     1 & (i,j,k) \text{-- чётная}\\
                  0 & (i,j,k)\text{ -- не перестановка}
                  \end{cases}$
              \end{example}
@@ -420,7 +417,7 @@
                 1 & i=k\neq j=l\\
             -1 & i = l \neq  j = k\\
         0 & \text{иначе}\end{cases}
-            \end{cases}$
+            $
         \end{example}
 
         \subsection{Операции с тензорами}
