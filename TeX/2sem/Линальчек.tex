@@ -1,0 +1,267 @@
+\documentclass{book}
+%nerd stuff here
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+% Languages support
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+% Some fancy symbols
+\usepackage{textcomp}
+\usepackage{stmaryrd}
+% Math packages
+\usepackage{amsmath, amssymb, amsthm, amsfonts, mathrsfs, dsfont, mathtools}
+\usepackage{cancel}
+% Bold math
+\usepackage{bm}
+% Resizing
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+% Optional font for not math-based subjects
+%\usepackage{cmbright}
+
+\author{Коченюк Анатолий}
+\title{Конспект по линейной алгебре\\ II семестр}
+
+\usepackage{url}
+% Fancier tables and lists
+\usepackage{booktabs}
+\usepackage{enumitem}
+% Don't indent paragraphs, leave some space between them
+\usepackage{parskip}
+% Hide page number when page is empty
+\usepackage{emptypage}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{xcolor}
+% Some shortcuts
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\renewcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand{\p}[1]{#1^{\prime}}
+\newcommand{\pp}[1]{#1^{\prime\prime}}
+\newcommand{\tl}[1]{\widetilde{#1}}
+% Easily typeset systems of equations (French package) [like cases, but it aligns everything]
+\usepackage{systeme}
+\usepackage{lipsum}
+% limits are put below (optional for int)
+\let\svlim\lim\def\lim{\svlim\limits}
+\let\svsum\sum\def\sum{\svsum\limits}
+%\let\svlim\int\def\int{\svlim\limits}
+% Command for short corrections
+% Usage: 1+1=\correct{3}{2}
+\definecolor{correct}{HTML}{009900}
+\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
+\newcommand\green[1]{{\color{correct}{#1}}}
+% Hide parts
+\newcommand\hide[1]{}
+% si unitx
+\usepackage{siunitx}
+\sisetup{locale = FR}
+% Environments
+% For box around Definition, Theorem, \ldots
+\usepackage{mdframed}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\newmdtheoremenv[nobreak=true]{definition}{Определение}
+\newmdtheoremenv[nobreak=true]{theorem}{Теорема}
+\newmdtheoremenv[nobreak=true]{lemma}{Лемма}
+\newmdtheoremenv[nobreak=true]{problem}{Задача}
+\newmdtheoremenv[nobreak=true]{property}{Свойство}
+\newmdtheoremenv[nobreak=true]{statement}{Утверждение}
+\newmdtheoremenv[nobreak=true]{corollary}{Следствие}
+\newtheorem*{note}{Замечание}
+\newtheorem*{example}{Пример}
+\renewcommand\qedsymbol{$\blacksquare$}
+% Fix some spacing
+% http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=\parskip \thm@postskip=0pt
+}
+\usepackage{xifthen}
+\def\testdateparts#1{\dateparts#1\relax}
+\def\dateparts#1 #2 #3 #4 #5\relax{
+    \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
+}
+
+\def\@lecture{}%
+\newcommand{\lecture}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@lecture{Lecture #1}%
+    }{%
+        \def\@lecture{Lecture #1: #3}%
+    }%
+    \subsection*{\@lecture}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+% Todonotes and inline notes in fancy boxes
+\usepackage{todonotes}
+\usepackage{tcolorbox}
+
+% Make boxes breakable
+\tcbuselibrary{breakable}
+\newenvironment{correction}{\begin{tcolorbox}[
+    arc=0mm,
+    colback=white,
+    colframe=green!60!black,
+    title=Correction,
+    fonttitle=\sffamily,
+    breakable
+]}{\end{tcolorbox}}
+% These are the fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% LE: left even
+% RO: right odd
+% CE, CO: center even, center odd
+% My name for when I print my lecture notes to use for an open book exam.
+% \fancyhead[LE,RO]{Gilles Castel}
+
+\fancyhead[RO,LE]{\@lecture} % Right odd,  Left even
+\fancyhead[RE,LO]{}          % Right even, Left odd
+
+\fancyfoot[RO,LE]{\thepage}  % Right odd,something additional 1  Left even
+\fancyfoot[RE,LO]{}          % Right even, Left odd
+\fancyfoot[C]{\leftmark}     % Center
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+\usepackage{tikz}
+\begin{document}
+    \maketitle
+    \chapter{Дополнительные главы линейной алгебры}
+    \section{Полилинейная формы}
+
+    \begin{note}
+        [вспомним]
+        Линейное отображение $\varphi(x+\alpha y) = \varphi(x) + \alpha\cdot \varphi(y)$
+    \end{note}
+
+    \begin{definition}
+        $\sphericalangle X$ -- ЛП, $\dim X = n$
+
+         $X^*$ -- сопряжённое к  $X$ пространство.
+
+         \underline{Полилинейной формой} (ПЛФ) называется отображение:
+          \[
+         U:X\times X\times \ldots \times X\times X^*\times X^*\times \ldots \times X^* \to K
+         ,\] обладающее свойством линейности по каждому аргументу.
+
+         $\sqsupset x_1, x_2, x_3, \ldots, x_p \in X\quad y^1, y^2, \ldots, y^q\in X^*$
+
+         $u\left( x_1, x_2, \ldots,\p x_i^1+\alpha \pp x_i, \ldots, x_p, y^1, y^2, \ldots, y^q \right) =\\= \left(x_1, x_2, \ldots, \p x_i, \ldots, x_p, y^1, y^2, \ldots  \right) + \alpha u\left( x_1, x_2, \ldots, \pp x_i, \ldots, x_o, y^1, y^2, \ldots, y^q \right)  $
+    \end{definition}
+
+    \begin{note}
+        Пара чисел $(p,q)$ называется валентностью полилинейной формы
+    \end{note}
+
+    \begin{example}
+        $\R^n\quad f:\R\to K$ -- ПЛФ $(1,0)$
+
+        $\hat x: \R^{n*} \to  K$ -- ПЛФ(0,1)
+
+        Скалярное произведение $u(x_1, x_2) = \left( \vec x_1, \vec x_2 \right) $ -- ПЛФ(2,0)
+
+        Смешанное произведение $w(x_1, x_2, x_3) = (\vec x_1, \vec x_2, \vec x_3)$ -- ПЛФ(3,0)
+    \end{example}
+
+    $\sqsupset u, w$ -- две полилинейные формы валентности $(p,q)$
+     \begin{definition}
+        \begin{enumerate}
+            \item []
+            \item $u=w \iff $ \[u(x_1, \ldots, x_p, y^1, \ldots, y^q) = w(x_1, \ldots, x_p, y^1, \ldots, y^q) \quad\forall x_1\ldots x_p y^1 \ldots y^1\] 
+            \item Нуль форма $\Theta\quad \Theta\left( x_1, \ldots, x_p, y^1, \ldots, y^q \right)  = 0$
+            \item Суммой ПЛФ валентностей $(p,q)\quad u+v$ называется такое отображение  $\omega$, что  $\omega(x_1, \ldots, x_p, y^1, \ldots, y^1) = u\left( x_1, \ldots, x_p, y^1, \ldots, y^1 \right) + v\left( x_1, \ldots, x_p, y^1, \ldots, y^1 \right)  $
+                \begin{lemma}
+                    $w$ -- ПЛФ  $(p,q)$
+
+                    $w\left( \ldots \p x_i+\alpha \pp x_i \ldots \right)  = w\left( \ldots \p x_i \right) +\alpha w\left( \ldots \pp x_i \ldots \right) $
+                \end{lemma}
+            \item Произведением полилинейной формы на число $\lambda$ называется отображение  $\lambda u$, такое что:  \[
+                    (\lambda u)\left( x_1, \ldots, x_p, y^1, \ldots, y^1 \right)  = \lambda \cdot u\left( x_1, \ldots, x_p, y^1, \ldots, y^1 \right) 
+            .\] 
+                    \begin{lemma}
+                        $\lambda u$ -- ПЛФ  $(p,q)$
+                    \end{lemma}
+
+
+        \end{enumerate}
+    \end{definition}
+
+    $\sqsupset \Omega_p^q$ -- множество ПЛФ $(p,q)$
+
+     \begin{statement}
+        $\Omega_p^q$ -- ЛП
+    \end{statement}
+
+
+    $\sqsupset \{e_j\}$ -- базис $X\quad \sqsupset \{f^k\}$ -- базис $X^*$
+
+    $x_1 = \sum_{j=1}^{n} \xi_1^{j_1} e_{j_1} = \xi_1^{j_1}e_{j_1}$. Дальше значок суммы писаться не будет (иначе помрём) (соглашение о немом суммировании).
+
+    $x_2 = \xi_2^{j_1}e_{j_2}\quad \ldots \quad x_p = \xi^{j_p}e_{j_p}$
+
+    $y^1 = \eta_{k_1}^1f^{k_1}\quad y_2 = \eta_{k_2}^2f^{k_2}\quad \ldots \quad y^1 = \eta_{k_q}^qf^{k_q}$ 
+
+    \begin{align*}
+        
+    w\left( x_1, x_2, \ldots, x_o, y^1, y^2, \ldots, y^q \right) = w\left( \xi_1^{j_1}e_{j_1}, \xi_2^{j_2}e_{j_2}, \ldots, \xi_p^{j_p}e_{j_p}, \eta_{k_1}^1f^{k_1}, \eta^2_{k_2}f^{k_2}, \ldots, \eta_{k_q}^qf^{k_q} \right) \\
+    = \xi_1^{k_1}\xi_2^{j_2}\ldots\xi_p^{j_p}\eta_{k_1}^1\eta_{k_2}^2\ldots\eta_{k_q}^q \underbrace{w\left( e_{j_1}, e_{j_2}, \ldots, e_{j_p}, f^{k_1}, f^{k_2}, \ldots, f^{k_q} \right) }\limits_{\omega_{j_1j_2 \ldots j_p}^{k_1 k_2 \ldots k_q} \text{ -- тензор ПЛФ}}
+    \\ = \xi_1^{k_1}\xi_2^{j_2}\ldots\xi_p^{j_p}\eta_{k_1}^1\eta_{k_2}^2\ldots\eta_{k_q}^q \omega_{j_1 j_2 \ldots j_p} ^{k_1 k_2 ... k_q}
+    .\end{align*}
+
+    \begin{lemma}
+        Задание полилинейной формы эквивалентно заданию её тензора в известном базисе
+        \[
+            w \longleftrightarrow \omega_{i_1 i_2 \ldots i_p} ^{j_1 j_2 \ldots j_q} = \omega^{\vec j}_{\vec i}
+        .\] 
+    \end{lemma}
+    \begin{proof}
+        (выше)
+    \end{proof}
+
+    \begin{lemma}
+        $v \longleftrightarrow \upsilon_{\vec i}^{\vec j}\quad w \longleftrightarrow \omega_{\vec i}^{\vec j}$
+
+        $\implies \begin{cases}
+            w+v \longleftrightarrow \upsilon_{\vec i}^{\vec j} + \omega_{\vec i}^{\vec j}\\
+            \alpha v \longleftrightarrow \alpha \upsilon_{\vec i}^{\vec j}
+        \end{cases}$
+    \end{lemma}
+
+     \begin{note}
+         $_{t_1 t_2 \ldots t_q}^{s_1 s_2 \ldots s_p}w$ -- индексация базиса $\Omega_p^q$
+
+     $\sideset{_{t_1 t_2 \ldots t_q}^{s_1 s_2 \ldots s_p}}{_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q}}w$
+
+     $_{t_1 t_2 \ldots t_q}^{s_1 s_2 \ldots s_p}w\left( x_1, x_2, \ldots, x_p, y^1, y^2, \ldots, y^q \right) = \xi_1^{s_1}\xi_2^{s_2}\ldots\xi_p^{s_p}\eta_{t_1}^1\eta^2_{t_2}\ldots\eta_{t_q}^q$
+    \end{note}
+    \begin{note}
+        $\sphericalangle \sideset{_{t_1 t_2 \ldots t_q}^{s_1 s_2 \ldots s_p}}{_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q}}w = _{t_1 t_2 \ldots t_q}^{s_1 s_2 \ldots s_p}w\left( e_{i_1}, e_{i_2}, \ldots, e_{i_p}, f^{j_1}, f^{j_2}, \ldots, f^{j_q} \right) \\
+        =\delta_{i_1}^{s_1}\delta_{i_2}^{s_2}\ldots\delta_{i_p}^{s_p}\delta_{t_1}^{j_1}\delta_{t_2}^{j_2}\ldots\delta_{t_q}^{j_q}$
+    \end{note}
+
+    \begin{example}
+        $\R_2^2$ 
+        
+        $a_1 = \begin{bmatrix} 1&0\\0&0 \end{bmatrix} \quad a_2 = \begin{bmatrix} 0&1\\0&0 \end{bmatrix} \quad a_3 = \begin{bmatrix} 0&0\\1&0 \end{bmatrix} \quad a_4 = \begin{bmatrix} 0&0\\0&1 \end{bmatrix} $
+
+        $a_1 = ^{11}a_1\quad a_2 = ^{12}a_2\quad a_3 = ^{21}a_3\quad a_4 = ^{22}a_4$
+    \end{example}
+
+    \begin{theorem}
+        Набор $\left\{ _{t_1 t_2 \ldots t_q}^{s_1 s_2 \ldots s_p} W \right\} _{s_1 s_2 \ldots s_p}^{t_1t_2 \ldots t_p} $ -- образует базис в $\Omega_p^q$
+    \end{theorem}
+
+\end{document}
