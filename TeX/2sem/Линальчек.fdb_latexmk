@@ -1,7 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1613118523 "Линальчек.tex" "Линальчек.pdf" "Линальчек" 1613118523
+["pdflatex"] 1613130544 "Линальчек.tex" "Линальчек.pdf" "Линальчек" 1613130544
   "/etc/texmf/web2c/texmf.cnf" 1594940150 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/cowberry/.texlive2019/texmf-var/fonts/tfm/lh/lh-t2a/labx1000.tfm" 1596029474 3300 6abb8e321227ead2a8e929e5abc72bd3 ""
+  "/home/cowberry/.texlive2019/texmf-var/fonts/tfm/lh/lh-t2a/labx1200.tfm" 1596029488 3308 eee81981029f67083258db36df06e523 ""
   "/home/cowberry/.texlive2019/texmf-var/fonts/tfm/lh/lh-t2a/labx1440.tfm" 1596029479 3304 6a543c07045572737981351171e0505e ""
   "/home/cowberry/.texlive2019/texmf-var/fonts/tfm/lh/lh-t2a/labx2074.tfm" 1596029469 3316 0992aa03d0c75498a0b6fb905d9eaab6 ""
   "/home/cowberry/.texlive2019/texmf-var/fonts/tfm/lh/lh-t2a/labx2488.tfm" 1596029470 3304 10c1a71cb294f8a8339c46823bcc15f2 ""
@@ -249,6 +250,7 @@
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
   "/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t2a.enc" 1565080000 3141 82d5616418ed8d5de703b3951bedecb4 ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb" 1565080000 145408 43d44302ca7d82d487f511f83e309505 ""
+  "/usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb" 1594940163 140176 d4962f948b4cc0adf4d3dde77a128c95 ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb" 1594940163 135942 859a90cad7494a1e79c94baf546d7de5 ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sfbx2074.pfb" 1594940163 140194 627cc7f36c05b80e25d178974ccb3442 ""
   "/usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb" 1594940163 135938 299ac3a69892db3b7674a8b2543b0a77 ""
@@ -260,9 +262,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1581979058 38841 ce3692aa899bb693b90b87eaa5d4d84e ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1594940192 4770781 1ed1abab22da9c3e2cc82e4db562318b ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1594940224 8256356 55586164a8007a87338ed6fc61461260 ""
-  "Линальчек.aux" 1613118517 1167 4ffcd469ff75e8daf19d183a9e14320e "pdflatex"
-  "Линальчек.tex" 1613118522 11031 fd04ceec401b754156ee50c36ef7eb2b ""
+  "Линальчек.aux" 1613130532 2259 f967c9c7c206e323b46072e5a5a81147 "pdflatex"
+  "Линальчек.tex" 1613130542 22093 602da8a60927f6615efabc31ea7a73bd ""
   (generated)
-  "Линальчек.pdf"
   "Линальчек.log"
+  "Линальчек.pdf"
   "Линальчек.aux"

@@ -393,6 +393,7 @@ INPUT /home/cowberry/.texlive2019/texmf-var/fonts/tfm/lh/lh-t2a/labx1000.tfm
 INPUT /home/cowberry/.texlive2019/texmf-var/fonts/tfm/lh/lh-t2a/larm0700.tfm
 INPUT /home/cowberry/.texlive2019/texmf-var/fonts/tfm/lh/lh-t2a/larm0500.tfm
 INPUT /home/cowberry/.texlive2019/texmf-var/fonts/tfm/lh/lh-t2a/lati1000.tfm
+INPUT /home/cowberry/.texlive2019/texmf-var/fonts/tfm/lh/lh-t2a/labx1200.tfm
 INPUT Линальчек.aux
 INPUT /usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t2a.enc
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
@@ -407,6 +408,7 @@ INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb
+INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfbx2074.pfb
 INPUT /usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb

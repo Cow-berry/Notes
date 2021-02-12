@@ -261,7 +261,233 @@
     \end{example}
 
     \begin{theorem}
-        Набор $\left\{ _{t_1 t_2 \ldots t_q}^{s_1 s_2 \ldots s_p} W \right\} _{s_1 s_2 \ldots s_p}^{t_1t_2 \ldots t_p} $ -- образует базис в $\Omega_p^q$
+        Набор $\left\{ _{t_1 t_2 \ldots t_q}^{s_1 s_2 \ldots s_p} W \right\} _{s_1 s_2 \ldots s_p}^{t_1t_2 \ldots t_p} $ -- образует базис в $\Omega_q^p$
     \end{theorem}
+    \begin{proof}
+        \begin{itemize}
+            \item []
+            \item [ПН] $\sphericalangle u\in \Omega_q^p$
+                \[
+                    u\left( x_1, x_2, \ldots, x_p, y^1, y^2, \ldots, y^q \right)  = \xi_1^{i_1}\xi_2^{i_2}\ldots\xi_p^{i_p}\eta_{j_1}^1\eta_{j_2}^2\ldots\eta_{j_q}^qu_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q}=
+
+                    = _{j_1 j_2 \ldots j_q}^{i_1 i_2 \ldots i_p}w\left( x_1, x_2, \ldots, x_p, y^1, y^2, \ldots, y^q  \right) u_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q}\quad \forall x_1, x_2, \ldots, x_p, y^1, y^2, \ldots, y^q
+                .\] 
+
+                $\implies u = _{j_1 j_2 \ldots j_q}^{i_1 i_2 \ldots i_p}w\cdot u_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q}$
+
+            \item [ЛНЗ] $_{j_1 j_2 \ldots j_q}^{i_1 i_2 \ldots i_p}W\alpha_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q} = \Theta$ Посчитаем на наборе $e_{s_1}, e_{s_2}, \ldots, e_{s_p}, f^{t_1}, f^{t_2}, \ldots, f^{t_q}$
+
+                $\delta_{s_1}^{i_1}\delta_{s_2}^{i_2}\ldots\delta_{j_1}^{t_1}\delta_{j_2}^{t_2}\ldots\delta_{j_q}^{t_q}\alpha_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q} = 0$
+
+                $\alpha_{s_1 s_2 \ldots s_p}^{t_1 t_2 \ldots t^q} = 0\quad \forall s_1 \ldots s_p t_1 \ldots t_q \implies $ ЛНЗ (альфа 0 на всех, значит она все нули)
+        \end{itemize}
+    \end{proof}
+
+    \begin{note}
+        Размерность пространства полилинейных форм $\dim \Omega_q^p = n^{p+q}$
+    \end{note}
+
+    \section{Симметричные и антисимметричные ПЛФ}
+
+    $\sphericalangle \Omega_0^p\qquad u\left( x_1, x_2, \ldots, x_p \right) $ 
+
+    $\sphericalangle \sigma$ -- перестановка чисел от 1 до $p$.  $\sigma\left( 1, 2, \ldots, p \right)  = \left( \sigma(1), \sigma(2), \ldots, \sigma(p) \right) $
+
+    \begin{definition}
+    Полилиненйая форма $u$ называется \underline{симметричной}, если \[
+            u\left( x_{\sigma(1)}, x_{\sigma(2)}, \ldots, x_{\sigma(p)} \right) = u(x_1, x_2, \ldots, x_p 
+        .\]  
+    \end{definition}
+
+    \begin{lemma}
+        Симметричные полилинейные формы валентности $(p,0)$ образуют подпространство $\Sigma^p$ линейного пространства $\Omega_0^p$
+    \end{lemma}
+    \begin{proof}
+        $ \sqsupset u, v\in \Sigma^p$
+
+        $\sphericalangle (u+v)\left( x_{\sigma(1)}, x_{\sigma(2)}, \ldots, x_{\sigma(p)} \right) = u\left( x_{\sigma(1)}, x_{\sigma(2)}, \ldots, x_{\sigma(p)} \right)  + v\left( x_{\sigma(1)}, x_{\sigma(2)}, \ldots, x_{\sigma(p)} \right) =\\=u\left( x_1, x_2, \ldots, x_p \right) + v\left( x_1, x_2, \ldots, x_p \right)  = (u+v)\left( x_1, x_2, \ldots, x_p \right)  $
+
+        Так же с умножением на число.
+    \end{proof}
+
+    \begin{definition}
+        Полилинейная форма $u$ валентности $(p,0)$ называется \underline{антисимметричной}, если:
+        \[
+            u\left( x_{\sigma(1)}, x_{\sigma(2)}, \ldots, x_{\sigma(p)} \right) = (-1)^{[\sigma]}u(x_1, x_2, \ldots, x_p) 
+        .\]
+    \end{definition}
+    \begin{lemma}
+        Антисимметричные полилинейные формы валентности $(p,0)$ образуют подпространство $\Lambda^p$ линейного пространства  $\Omega_0^p$
+    \end{lemma}
+
+
+    \begin{lemma}
+        Полилинейная форма $u\in \Lambda^p \iff u = 0$ при любых двух совпадающих аргументах.
+    \end{lemma}
+    \begin{proof}
+        \begin{itemize}
+            \item []
+            \item [$\implies $]
+        $\sqsupset u\in \Lambda^p$ и $x_i = x_j\quad i\neq j$
+
+        $a = \sphericalangle u\left( \ldots x_i \ldots x_j \ldots \right) = - u\left( \ldots x_j \ldots x_i \ldots \right) = -a \implies  a = 0$
+    \item [$\impliedby $] Известно, что если $x_i = x_{j\neq i}$, то $u\left( \ldots x_i \ldots x_j \ldots \right)  = 0\quad \forall i, j$
+
+        Докажем, что $u$ принадлежит  $\Lambda^p$
+
+         $x_i = x_j = \p x_i + \pp x_i$
+
+         $u\left( \ldots x_i \ldots x_j \ldots \right)  = u\left( \ldots \p x_i + \pp x_i \ldots \p x_i + \pp x_i\ldots \right) = u\left( \ldots \p x_i \ldots \p x_i \right) + u\left( \p x_i \ldots \pp x_i \right)  + u\left( \ldots \pp x_i \ldots \p x_i \ldots \right)  + u\left( \ldots \pp x_i \ldots \pp x_i \ldots \right)  $
+
+         Правая часть равна 0. В левой части первое и последнее слагаемые тоже нули, а значит получам 
+
+         \[
+             u\left( \ldots \p x_i \ldots \pp x_i \right)  = -u\left( \ldots \pp x_i, \ldots \p x_i \right) 
+         .\] 
+
+         
+        \end{itemize}
+        
+    \end{proof}
+
+    \begin{lemma}
+        Полилинейная форма $u\in \Lambda^p \iff u\left( x_1, x_2, \ldots, x_p \right) =0$ лишь только $\{x_i\}_{i=1}^p$ -- ЛЗ
+    \end{lemma}
+    \begin{proof}
+        \begin{itemize}
+            \item []
+            \item [$\implies$] $\sqsupset \{x_i\}_{i=1}^p$ -- ДЗ $\implies x_k = \sum_{j\neq k}\beta^jx_j = \beta^1x_1 + \beta^2x_2 + \ldots + \beta^p x_p$
+
+                $\sphericalangle u\left( x_1, \ldots, x_k, \ldots, x_p \right) = u\left( x_1, \ldots, \beta^1x_1+\beta^2x_2+\ldots+\beta^px_p, \ldots, x_p \right) = 0 $ 
+
+                При раскрытии будут выносится коэффициенты и получится образ от совпадающих аргументов (хотя бы двух), который 0 по пред. лемме, а значит всё выражение, как сумма нулей, будет нулём.
+            \item [$\impliedby $] $u\left( x_1, x_2, \ldots, x_p \right) = 0 $, когда $\{x_i\}_{i=1}^n$ -- ЛЗ  $\implies u\in \Lambda^p$
+
+                $u\left( x_1, x_2, \ldots, x_p \right) = u\left( x_1 + \sum \alpha^ix_i, \ldots, x_p+\sum \alpha^ix_i \right)  = u(x_1, x_2, \ldots, x_p) + u\left( x_1, \ldots, \sum \alpha^ix_i \right) + u\left( \sum \alpha^ix_i, \ldots, x_p \right) = u\left(x_1, x_2, \ldots, x_p  \right)  + \sum_{j=2}^{p} \alpha^iu\left( x_1, \ldots, x_i \right) + \sum_{i=1}^{p-1} \alpha^iu(x_i, \ldots, x_p) $
+        \end{itemize}
+    \end{proof}
+
+        \section{Практика 02.12}
+
+        \subsection{Тензоры}
+
+        $\omega_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q}$
+
+        \begin{definition}
+            [Соглашение об упорядочивании индексов]
+
+            Слева направо сверху вниз: $(p,q)\quad r = p+q$ -- ранг тензора, сколько значков.
+
+             $r = 0$ -- число  $\omega$, инвариант
+            
+             $r = 1$:  $a_i$ -- строчка $\begin{bmatrix} a_1&a_2&\ldots&a_n \end{bmatrix} $ $ b^j$ -- столбик  $\begin{bmatrix} b^2\\b^2\\ \vdots\\ b^n \end{bmatrix} $ 
+
+             $r = 2$: $a_{ij}$  $b_{j}^i$ $c^{ij}$ -- первый индекс всегда строка, второй всегда столбец
+
+             $a_{ij} \longleftrightarrow A = \begin{bmatrix} a_{11} & a_{12} & a_{13}\\ a_{21} & a_{22} & a_{23}\\ a_{31} & a_{32} & a_{33} \end{bmatrix} $ 
+
+             $b^i_j \longleftrightarrow B = \begin{bmatrix} b_1^1 & b_2^1&b_3^1\\b_1^2 & b_2^2 & b_3^2\\ b_1^3 & b_2^3 & b_3^3 \end{bmatrix} $ 
+
+             $r = 3:$  $a_{i j k}$  $b^i_{jk}$  $c^{ij}_k$ $d^{ijk}$
+
+             1й -- строка, 2й -- столбец, 3й -- слой
+
+             $a_{ijk} \longleftrightarrow A = \left[\begin{array}{c c | c c} a_{111} & a_{121} & a_{112} & a_{122}\\ a_{211} & a_{221} & a_{212} & a_{222}\end{array}\right] $ 
+
+             \begin{example}
+                 Построить тензор $\varepsilon_k^{ij} = \begin{cases}
+                     -1 & (i,j,k) \tex{-- чётная}\\
+                     1 & (i,j,k) \tex{-- чётная}\\
+                 0 & (i,j,k)\text{ -- не перестановка}
+                 \end{cases}$
+             \end{example}
+
+             $r = 4:$ строка, столбец, слой, сечение
+
+             $a_{ijkl}$  $b^i_{jkl}$ $c^{ij}_{kl}$  $d^{ijk}_l$  $e^{ijkl}$ -- последний тензор типа 4,0 (число вверху, число внизу)
+
+             $c^{ij}_{kl} \longleftrightarrow C = 
+             \left[\begin{array}{c c | c c}
+                 c_{11}^{11} & c_{11}^{12} & c_{12}^{11} & c_{12}^{12}\\
+                 c_{11}^{21} & c_{11}^{22} & c_{12}^{21} & c_{12}^{22}\\ \hline
+                 c_{21}^{11} & c_{21}^{12} & c_{22}^{11} & c_{22}^{12}\\
+                 c_{21}^{21} & c_{21}^{22} & c_{22}^{21} & c_{22}^{22}\\
+         \end{array}\right]$
+
+        \end{definition}
+        \begin{example}
+            $c_{kl}^{ij} = \begin{cases}
+                1 & i=k\neq j=l\\
+            -1 & i = l \neq  j = k\\
+        0 & \text{иначе}\end{cases}
+            \end{cases}$
+        \end{example}
+
+        \subsection{Операции с тензорами}
+
+        \begin{enumerate}
+            \item Линейные операции:
+                
+                $\omega_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q}\qquad v_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q}$
+
+                $u = v+\omega\quad u_{i_1 i_2 \ldots i_p}^{j_1 j_2 \ldots j_q} = (v+\omega)_{\vec i}^{\vec j} = v_{\vec i}^{\vec j} + \omega_{\vec i}^{\vec j}$ -- матричное сложение.
+
+                $(\lambda v)_{\vec i}^{\vec j} = \lambda \cdot  v_{\vec i}^{\vec j}$
+            \item Произведение:
+
+                $u_{\vec i}^{\vec j}\quad v_{\vec s}^{\vec t}$
+
+                $\omega = u \cdot v\quad \omega_{\vec l}^{\vec k} = u_{\vec i}^{\vec j}\cdot  v_{\vec s}^{\vec t} = \omega_{i_1 i_2 \ldots i_{p_1}s_1s_2 \ldots s_{p_2}}^{j_1 j_2 \ldots j_{q_1}t_1 t_2 \ldots t_{q_2}}$
+
+                $\vec l = \vec j\vec t = j_1 \ldots j_{q_1}t_1 \ldots t_{q_2}$
+
+                $\vec l = \vec i \vec s = i_1 \ldots i_{p_1}, s_1 \ldots. s_{p_2}$
+        \end{enumerate}
+
+         \begin{example}
+             $a^i_j \longleftrightarrow A = \begin{bmatrix} 1 & 2\\ 3 & 4 \end{bmatrix} $
+
+             $b_k \longleftrightarrow \begin{bmatrix} 1\\-1 \end{bmatrix} $
+
+             $a^i_jb_k = \omega^i_{jk}$. То же самое можно записать как  $a\otimes b = \omega$
+
+             $\omega \longleftrightarrow \left[
+                 \begin{array}{c c | c c}
+                     1 & 2 & -1 & -2\\ 3 & 4 & -3 & -4
+                \end{array}
+             \right]$
+
+             $v = b\otimes a\quad v^i_{kj} = b_k\cdot a^i_j\longleftrightarrow V = \left[
+                 \begin{array}{c c | c c}
+                    1 & -1 & 2 & -2\\ 3 & -3 & 4 & -4
+                \end{array}
+             \right]$
+        \end{example}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \end{document}
