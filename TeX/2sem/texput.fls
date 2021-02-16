@@ -1,0 +1,6 @@
+PWD /home/cowberry/Documents/university/Конспекты/TeX/2sem
+INPUT /etc/texmf/web2c/texmf.cnf
+INPUT /usr/share/texmf/web2c/texmf.cnf
+INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
+INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
+OUTPUT texput.log

@@ -308,4 +308,271 @@
     \caption{B}
     \label{fig:b}
 \end{figure}
+
+\section{Случайные величины}
+
+\begin{note}
+    Неправильное (наивное) определение -- величина, принемающая слуйное значение.
+
+    Она может быть константой. Что такое величина?
+\end{note}
+
+\begin{definition}
+    [Случайная величина]
+
+    $\xi: \Omega \to \R$ -- $\R$ -значная функция
+
+    $\Omega, p$ -- вероятностное пространство. 
+\end{definition}
+
+\begin{example}
+    Если взять случайные текст длинной 1Кб. Вариантов текста очень много и бессмысленно их рассматривать отдельно, интересует какое-то свойство, величина.
+
+    Графы, $2^{n \choose 2}$ штук. Но нас интересует какая-то (численная) характеристика элементарного исхода.
+\end{example}
+
+\begin{example}
+    $D(ice) = \{\1, 2, 3, 4, 5, 6 \}$
+
+    $\Omega = D^2\quad p\left( \left<i, j \right> \right) =\frac{1}{36}$ 
+
+    $\xi: \Omega \to  \R\qquad \xi(\left<i, j \right>) = i+j$
+\end{example}
+
+\begin{example}
+    [Случайные графы]
+
+    $G(4, \frac{1}{2})$ -- случайный граф, 4 вершины, каждое ребро существует с вероятностью $\frac{1}{2}$ 
+
+    $\Omega = \mathsds{B}^6\quad p(G) = \frac{1}{64}$
+
+    $\xi(G)$ = количество компонент связности
+\end{example}
+
+\begin{example}
+    $\Omega = \{1, 2, 3, 4, 5,6\}$
+$\xi(w) = w$
+\end{example}
+\begin{example}
+    $\Omega = \{1, 2, 3, 4, 5, 6\}\quad E = \{2, 4, 6\}$
+
+    $\chi_E(\omega) = \begin{cases}
+        1,& \omega\in E\\
+        0,&\omega \not\in E\\
+    \end{cases}$ -- индикаторная случайная величина
+\end{example}
+
+\begin{definition}
+    $\Omega, p\quad \xi$
+
+    $\left[ 7xi = i \right]  = \{\omega |  \xi(\omega) = i\}\subseteq \Omega$
+
+    $P\left( \left[ \xi = i \right]  \right)  = P\left( \xi = i \right)  = f_{\xi}(i)\quad f:\R\to \R$
+
+    $f_{\xi}(i) = P\left( \xi = i \right) $ -- дискретная плотность вероятности случайной величины $\xi$
+
+    $F_{\xi}(i):\R\to \R = P\left( \xi\leqslant i \right) $ -- функция распределения
+
+
+\end{definition}
+
+\begin{note}
+
+    Непрерывная vs Дискретная вероятность
+    
+\begin{figure}[ht]
+    \centering
+    \incfig{непрерывная-вероятность}
+    \caption{непрерывная вероятность}
+    \label{fig:непрерывная-вероятность}
+\end{figure}
+\end{note}
+
+\begin{example}
+\begin{figure}[ht]
+    \centering
+    \incfig{два-кубика}
+    \caption{Два-кубика}
+    \label{fig:два-кубика}
+\end{figure}
+\end{example}
+
+
+\begin{note}
+    $\delta(x) = \begin{cases}
+        0, &x\neq 0\\
+        +\infty ,&x=0\\
+    \end{cases}$ 
+
+    $\int\limits_{-\infty }^{+\infty }\delta(x)dx = 1$
+
+    $f_{\xi}(i) = P\left( \xi = i \right) \qquad f_{\xi} = \int\limits_{-\infty }^{+\infty }f_{xi}(x) = F_{\xi}(i)$
+
+    $f_{\xi}(x) = \sum_i P\left( \xi = i \right) f\left( x-i \right) $
+\end{note}
+
+\begin{example}
+    $\Omega = \mathbb{B}^{1000}\quad p(\omega) = \frac{1}{2^{1000}}$ 
+
+    $\xi(w)$ =  число 1 в  $\omega$
+
+    $\left| \text{множество значений } \xi \right|  = 1001\qquad p\left( \xi = i \right) = \frac{{1000\choose i}}{2^{1000}}$
+
+\end{example}
+
+\begin{note}
+    Случайные числа обозначаются строчными греческими или заглавными латинскими из конца алфавита (X, Z)
+\end{note}
+
+\begin{note}
+    [Что можно делать со случайными величинами]
+
+    $\xi, \eta$ -- функции
+
+    $\xi^2\quad 2\xi\quad \xi+\eta\quad \xi\cdot \eta\quad \xi^{\eta}\quad \sin \xi\quad e^{\eta}\quad \frac{1+\xi}{\eta}$ (всё то же, что мы можем делать с функциями.
+\end{note}
+
+\begin{example}
+    $\Omega = D^2\quad \xi_1\left( \left<i, j \right> \right)  = i\qquad \xi_2\left( \left<i, j \right> \right) = j $ -- одинаково распределённые случайные величины
+\end{example}
+
+\begin{example}
+    $\Omega = F\quad id(\omega) = \omega$
+
+    $1, 2, \ldots, 6$ -- каждый с вероятностью $\frac{1}{6}$. Другое вероятностное пространство относительно предыдущего примера, но всё равно одинаковое распределение.
+
+    $\xi = (i+j) = \xi_1 + \xi_2\qquad \xi = (i+j)\%6 +1$ -- у второй то же распределение, что у верхних, но она уже совсем другая.
+\end{example}
+
+\begin{definition}
+    Математическое ожидание \[
+        E_{\xi} = \sum_{\omega}p\left( \omega \right) \xi(\omega)
+    .\] 
+
+\end{definition}
+\begin{statement}
+    $E_{\xi} = \sum_i ip(\xi = i)$ 
+\end{statement}
+\begin{proof}
+     \begin{align*}
+         E_{\xi} &= \sum_{\omega}p\left( \omega \right) \xi\left( \omega \right)  \\
+                 &= \sum_i\sum_{w:\xi(\omega) = i}p\left( \omega \right) \cdot  \xi\left(\omega  \right)\\
+                 &= \sum_i\sum_{\omega:\xi\left( \omega \right) =i}p\left( \omega \right) \cdot i \\
+                 &= \sum_i\sum_{w:\xi\left( \omega \right) =i} p\left( \omega \right) \\
+                 &= \sum_i iP\left( \xi = i \right)  \\
+    .\end{align*}
+\end{proof}
+
+\begin{example}
+    $\Omega = D\quad \xi = id$
+
+    $E_{\xi} = \frac{1}{6}\cdot 1 + \frac{1}{6}\cdot 2 + \frac{1}{6}\cdot 3 + \frac{1}{6}\cdot 4 + \frac{1}{6}\cdot 5 + \frac{1}{6}\cdot 6 = \frac{21}{6} = \frac{7}{2} = 3,5$
+\end{example}
+
+\begin{example}
+    $\Omega = D^2\quad \xi \left( \left<i, j \right> \right) = i+j$
+
+    $E_{\xi} = \frac{1}{36}\cdot \left( 2\cdot 1+3\cdot 2+4\cdot 3+5\cdot 4+6\cdot 5+7\cdot 6+8\cdot 5+9\cdot 4+10\cdot 3+11\cdot 2+12\cdot 1 \right) $ -- здесь среднее значение оказалось наиболее частым, но так оно не всегда (пример с 3,5)
+\end{example}
+
+
+\begin{theorem}
+    $E_{\lambda\xi} = \lambda E_{\xi}$
+
+    $E\left( \xi + \eta \right)  = E_{\xi} + E_{\eta}$
+\end{theorem}
+\begin{proof}
+    $E_{\lambda\xi} = \sum_{\omega}p\left( \omega \right) \lambda\xi\left( \omega \right)  = \lambda E_{\xi}$
+
+    $E\left( \xi + \eta \right)  = \sum_{\omega  }p\left( \omega \right) \left( \xi\left( \omega \right)  + \eta\left( \omega \right)  \right) = E_{\xi} + E_{\eta}$
+\end{proof}
+
+\begin{statement}
+    Если $\xi$ и  $\eta$ одинаково распределены, то  $E_{\xi} = E_{\eta}$
+\end{statement}
+
+\begin{example}
+    Бросим кубик один раз, $\xi_1$ -- что выпало сверху, $\xi_2$ -- что выпало снизу
+
+    $E\left( \xi_1 + \xi_2 \right)  = 7$. -- не играет роли как числа друг относительно друга расположены.
+\end{example}
+
+\begin{center}
+    {\HUGE \textbf{ \color{red} МАТОЖИДАНИЕ ЛИНЕЙНО ВСЕГДА}}
+    
+\end{center}
+
+\begin{example}
+    $\Omega = S_n\quad p(\omega) = \frac{1}{n!}$ 
+
+    $\xi\left( \pi  \right)  = \left| \{i | \pi [i] = i\} \right| \quad 0\ldots n$, кроме $n-1$
+
+    $E_{\xi} = \sum_{j=1}^{n} \xi_i = 1$
+
+    $\xi_i\left( \pi  \right)  = \begin{cases}
+        1, & \pi [i] = i\\
+        0, & \text{ иначе}
+    \end{cases}$ 
+
+    $E_{\xi_i} = \frac{1}{n}$ 
+
+    $\xi = \sum_{j=1}^{n} \xi_i$
+
+\end{example}
+\section{Независимые случайные величины}
+
+\begin{definition}
+    [удобное]
+    Случайные величины  $\xi$ и  $\eta$ независимы, если события  $[\xi = \alpha]$ и $\left[ \eta = \beta \right] $ -- независимы $\forall \alpha, \beta$
+\end{definition}
+
+\begin{definition}
+    [нормальное]
+
+    $[\xi\leqslant \alpha]$ и $\left[ \eta\leqslant \beta \right] $ -- независимы для $\forall \alpha, ]beta$
+\end{definition}
+
+\begin{example}
+    $\Omega = \Omega_1 \times  \Omega_2$
+
+    $\xi_1\left( \left<\omega_1, \omega_2 \right> \right)  = f\left( \omega_1 \right) $
+
+    $\xi_2\left( \left<\omega_1, \omega_2 \right> \right) = g\left( \omega_2 \right) $
+
+    $A$ и  $B$ независимы, $\chi_A, \chi_B$ -- независимы
+\end{example}
+
+\begin{theorem}
+    $\xi, \eta$ -- независимы  $\implies E\left( \xi\cdot \eta \right)  = E_{\xi} \cdot  E_{\eta}$
+\end{theorem}
+\begin{proof}
+    $E \xi\cdot \eta = \sum_{\alpha} \alpha\cdot P\left( \xi\cdot \eta = \alpha \right)  = \sum_{i, j}\alpha P\left( \left[ \xi = i \right] \cap  \left[ \eta = j \right]  \right)  = \sum_i\sum_j i j P\left( \xi = i \right) P\left( \eta = j \right)  = E_{\xi}E_{\eta}$
+
+    $i\cdot j = \alpha\quad i\n R_{\xi}\quad j\in R_{\eta}$
+\end{proof}
+
+\begin{example}
+    $\Omega = \{0,1\}\quad p = \frac{1}{2}\quad \xi(i) = 2i\quad E_{\xi} = 1$ 
+
+    $\Omega = S_n\quad p = \frac{1}{n!}\quad \xi = $ число неподвижных точек $\quad E_{\xi} = 1$
+
+    Матожидание одно, но ведут себя совершенно по разному.
+\end{example}
+
+\begin{definition}
+    [Дисперсия]
+
+    $D_{\xi} = Var\left( \xi \right) $ 
+
+    $D_{xi} = E\left( \xi-E_{\xi} \right) ^2  =E\left( \xi^2 - 2\xi E_{\xi} + \left( E_{\xi} \right) ^2 \right)  = E_{xi}^2 - 2E_{\xi}E_{\xi} + \left( E_{\xi} \right) ^2 = E_{\xi^2} - \left( E_{\xi} \right) ^2$
+\end{definition}
+
+\begin{theorem}
+    $D_{c\xi} = c^2D_{\xi}$
+
+    Если $\xi$ и  $\eta$ независимы, то $D_{\xi + \eta} = D_{\xi} + D_{\eta}$
+\end{theorem}
+\begin{proof}
+    Упражнение
+\end{proof}
 \end{document}
