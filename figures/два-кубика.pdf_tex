@@ -55,7 +55,7 @@
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{два-кубика.pdf}}%
     \put(0.08174757,0.48952183){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.0307516\unitlength}\raggedright 1\end{minipage}}}%
-    \put(0.74169892,0.05321607){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.06984608\unitlength}\raggedright 12\end{minipage}}}%
+    \put(0.72091942,0.05695073){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.04975229\unitlength}\raggedright 12\end{minipage}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{два-кубика.pdf}}%
   \end{picture}%
 \endgroup%

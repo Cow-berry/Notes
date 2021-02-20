@@ -332,7 +332,7 @@
 \end{example}
 
 \begin{example}
-    $D(ice) = \{\1, 2, 3, 4, 5, 6 \}$
+    $D(ice) = \{1, 2, 3, 4, 5, 6 \}$
 
     $\Omega = D^2\quad p\left( \left<i, j \right> \right) =\frac{1}{36}$ 
 
@@ -344,7 +344,7 @@
 
     $G(4, \frac{1}{2})$ -- случайный граф, 4 вершины, каждое ребро существует с вероятностью $\frac{1}{2}$ 
 
-    $\Omega = \mathsds{B}^6\quad p(G) = \frac{1}{64}$
+    $\Omega = \mathds{B}^6\quad p(G) = \frac{1}{64}$
 
     $\xi(G)$ = количество компонент связности
 \end{example}
@@ -365,7 +365,7 @@ $\xi(w) = w$
 \begin{definition}
     $\Omega, p\quad \xi$
 
-    $\left[ 7xi = i \right]  = \{\omega |  \xi(\omega) = i\}\subseteq \Omega$
+    $\left[ \xi = i \right]  = \{\omega |  \xi(\omega) = i\}\subseteq \Omega$
 
     $P\left( \left[ \xi = i \right]  \right)  = P\left( \xi = i \right)  = f_{\xi}(i)\quad f:\R\to \R$
 
@@ -383,7 +383,7 @@ $\xi(w) = w$
 \begin{figure}[ht]
     \centering
     \incfig{непрерывная-вероятность}
-    \caption{непрерывная вероятность}
+    \caption{непрерывная и дискретная вероятность}
     \label{fig:непрерывная-вероятность}
 \end{figure}
 \end{note}
@@ -392,7 +392,7 @@ $\xi(w) = w$
 \begin{figure}[ht]
     \centering
     \incfig{два-кубика}
-    \caption{Два-кубика}
+    \caption{Два-кубика (функция распределения)}
     \label{fig:два-кубика}
 \end{figure}
 \end{example}
@@ -458,7 +458,7 @@ $\xi(w) = w$
          E_{\xi} &= \sum_{\omega}p\left( \omega \right) \xi\left( \omega \right)  \\
                  &= \sum_i\sum_{w:\xi(\omega) = i}p\left( \omega \right) \cdot  \xi\left(\omega  \right)\\
                  &= \sum_i\sum_{\omega:\xi\left( \omega \right) =i}p\left( \omega \right) \cdot i \\
-                 &= \sum_i\sum_{w:\xi\left( \omega \right) =i} p\left( \omega \right) \\
+                 &= \sum_i i\negthickspace\negthickspace\sum_{w:\xi\left( \omega \right) =i} p\left( \omega \right) \\
                  &= \sum_i iP\left( \xi = i \right)  \\
     .\end{align*}
 \end{proof}
@@ -498,7 +498,7 @@ $\xi(w) = w$
 \end{example}
 
 \begin{center}
-    {\HUGE \textbf{ \color{red} МАТОЖИДАНИЕ ЛИНЕЙНО ВСЕГДА}}
+    {\Huge \textbf{ \color{red} МАТОЖИДАНИЕ ЛИНЕЙНО ВСЕГДА}}
     
 \end{center}
 
@@ -548,7 +548,7 @@ $\xi(w) = w$
 \begin{proof}
     $E \xi\cdot \eta = \sum_{\alpha} \alpha\cdot P\left( \xi\cdot \eta = \alpha \right)  = \sum_{i, j}\alpha P\left( \left[ \xi = i \right] \cap  \left[ \eta = j \right]  \right)  = \sum_i\sum_j i j P\left( \xi = i \right) P\left( \eta = j \right)  = E_{\xi}E_{\eta}$
 
-    $i\cdot j = \alpha\quad i\n R_{\xi}\quad j\in R_{\eta}$
+    $i\cdot j = \alpha\quad i\in R_{\xi}\quad j\in R_{\eta}$
 \end{proof}
 
 \begin{example}

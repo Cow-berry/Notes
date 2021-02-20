@@ -463,14 +463,362 @@
 
 
 
+\begin{lemma}
+    $\sqsupset \{x_{i} \}_{i=1}^p$ -- ДЗ
+\end{lemma}
+\begin{proof}
+    $u(x_1, x_2, \ldots, x_p) = 0$
+
+    $u\left( \alpha x_1, x_2, \ldots, x_p \right) = 0 $ 
+
+    $u\left( \sum_{i=1}^{p-1} \alpha^ix_i, x_2, \ldots, x_p \right)  = 0$ -- равные $x_p$ и первый аргумент
+\end{proof}
+
+$\Omega_0^p$ -- хотим делать из произвольной формы симметричную
+
+ $\sqsupset u\in \Omega_0^p$
+
+ \begin{definition}
+     $u^{(s)}\left( x_1, x_2, \ldots, x_p \right) = \frac{1}{p!}\sum_{\sigma} u\left( x_{\sigma(1)}, x_{\sigma(2)}, \ldots, x_{\sigma_{p}} \right) $ -- симметричная форма, образованная из $u$
+
+     $u^{(s)}$ называю \underline{симметризацией}  $u$ и пишут  \[
+         u^{(s)} = Sym~u
+     .\] 
+ \end{definition}
+
+ \begin{note}
+     $u^{(s)}\in \Sigma^p$
+ \end{note}
+ \begin{proof}
+     $\sqsupset \tl {\sigma}$ -- другая перестановка
+
+     $u^{(s)} \left( x_{\tl{\sigma}(1)}, \ldots, x_{\tl{\sigma}(pa)} \right)  = \frac{1}{p!}\sum_{\sigma} \left( x_{\sigma\circ \tl{\sigma}(1)}, \ldots, x_{\sigma \circ \tl{\sigma}(p)} \right) = u^{(s)}\left( x_1, x_2, \ldots, x_p \right)  $
+ \end{proof}
+
+ \begin{note}
+     Деление на $p!$ нужно, чтобы выполнялось  \[
+     Sym~u = u
+     .\] , если $u$ уже симметричная форма
+ \end{note}
+
+ \begin{note}
+     $Sym~(\alpha u+\beta v) = \alpha Sym~u + \beta Sym~v$
+ \end{note}
+
+ \begin{definition}
+     \[
+     u^{(a)} = \frac{1}{p!}\sum_{\sigma}(-1)^{[\sigma]} u\left( x_{\sigma(1)}, x_{\sigma(2)}, \ldots, x_{\sigma(p)} \right) 
+     .\] 
+
+     Эта операция называется \underline{антисимметризацией} или \underline{альтернированием}
+
+     \[
+         u^{(a)} = Asym~u
+     .\] 
+ \end{definition}
+ \begin{note}
+     $u^{(a)} \in \Lambda^p$
+ \end{note}
+ \begin{note}
+     \[
+         \left( \alpha u + \beta v  \right)^{(a)}  = \alpha u^{(a)} + \beta v^{(a)}
+     .\] 
+ \end{note}
+
+ \begin{note}
+     $Sym~Sym  = Sym$
+
+      $Asym~Asym = Asym$
+
+       $Sym~Asym = 0 \quad Asym~Sym = 0$
+ \end{note}
+
+ \begin{problem}
+        $Omega_0^p$
+
+     Найдём базис $\Lambda ^p$
+ \end{problem}
+ \begin{proof}
+     $\sphericalangle \left\{ ^{s_1, s_2, \ldots, s_p} W \right\} _{\vec s}$ -- базис
+
+     $\sphericalangle ^{s_1, s_2, \ldots, s_p}F = p!\cdot Asym \left( ^{s_1, s_2, \ldots, s_p}W \right) $
+
+     \begin{lemma}
+         Некоторые формы будут повторятся.
+
+         $^{s_1 \ldots s_i \ldots s_j \ldots s_p}F = - ^{s_1 \ldots s_j \ldots s_i \ldots s_p} F$
+     \end{lemma}
+
+     \begin{proof}
+        \begin{align*}
+            ^{s1 ... s_i .. s_j \ldots s_p}F\left( x_1 \ldots x_i \ldots x_j \ldots x_p \right)  &= ^{s_1 \ldots s_j \ldots s_i \ldots s_p}F\left( x_1, \ldots, x_j, \ldots., x_i, \ldots x_p \right)\\
+            &  = - ^{s_1 \ldots s_j \ldots s_p}\\
+            &= - ^{s_1 \ldots s_j \ldots s_i \ldots s_p}F\left( x_1 \ldots x_i \ldots x_j \ldots x_p \right) 
+        \end{align*}     
+     \end{proof}
+
+     \begin{note}
+         Ненулевых $C_n^p$ штук
+     \end{note}
+     
+     Упорядочивание $\left\{ ^{s_1 s_2 \ldots d_p} F\right\}_{1 \leqslant s_1 < s_2 < \ldots < s_p \leqslant n} $  -- ненулевой набор. Докажем, что он базис
 
 
+ \end{proof}
+
+ \begin{theorem}
+     Набор $\left\{ ^{s_1 s_2 \ldots s_p}F \right\} _{1\leqslant s_1 < s_2 \ldots < s_p\leqslant  n}$ образует базис в $\Lambda^p$
+ \end{theorem}
+ \begin{proof}
+     \begin{itemize}
+         \item []
+         \item [Полнота]
+             $\sqsupset u\in \Lambda^p$
+
+             \begin{align*}
+                 u\left( x_1, x_2, \ldots, x_p \right) &= \xi_1^{i_1}\xi_2^{i_2}\ldots\xi_p^{i_p}u_{i_1 i_2 \ldots i_p} \\
+                                                       &= ^{i_1 i_2 \ldots i_p}W\left( x_1, x_2, \ldots, x_p \right) u\left( i_1 i_2 \ldots i_p \right)  \\
+                 \text{То же самое:}\quad u &= ^{i_1 i_2 \ldots i_p}W\cdot u_{i_1 i_2 \ldots i_p} \\
+             .\end{align*}
+
+             \begin{align*}
+                 Asym ~ u &= Asym \left( ^{i_1 i_2 \ldots i_p}W\cdot u_{i_1 i_2 \ldots i_p} \right)  \\
+                 u &= Asym\left( ^{i_1 i_2 \ldots i_p} W \right)\cdot u_{i_1 i_2 \ldots i_p}  \\
+                   &= \frac{1}{p!} ~ ^{i_1 i_2 \ldots i_p}F\cdot u_{i_1 i_2 \ldots i_p} \\
+                   &= \frac{1}{p!}\sum_{1\leqslant  i_1 < i_2 < \ldots < i_p \leqslant  n}\sum_{\sigma}~ ^{\sigma(i_1)\sigma(i_2) \ldots \sigma(i_n)}F \cdot u_{\sigma(i_1)\sigma(i_2) \ldots. \sigma(i_p)} \\
+                   &= \frac{1}{p!}\sum_{1\leqslant i_1 < \ldots < i_p \leqslant n} \sum_{\sigma} (-1)^{[\sigma]} {}^{i_1 i_2 \ldots i_p} F \cdot  (-1)^{[\sigma]}u_{i_1 i_2 \ldots i_p} \\
+                   &= \frac{1}{p!} \sum_{1 \leqslant  i_1 < \ldots < n} p! ^{i_1 i_2 \ldots i_p}F u_{i_1 i_2 \ldots i_p}\\
+             .\end{align*}
+
+             \begin{lemma}
+                 $u\in \Lambda ^p \implies  \forall \sigma u_{\sigma(i_1)\sigma(i_2) \ldots \sigma(i_p) = (-1)^{[\sigma]}}u_{i_1 i_2 \ldots i_p}$
+
+                 Тензоры это значение $u$ на  $e_{i_1} \ldots e_{i_p}$. А тогда оно выполняется просто по определению антисимметричной формы
+             \end{lemma}
+         \item[Линейная независимость]
+             $\sphericalangle \alpha_{i_1 i_2 \ldots i_p}\quad ^{i_1 i_2 \ldots i_p}F\alpha_{i_1 i_2 \ldots i_p} = \mathds{0}$. Подействуем на $e_{s_1} e_{s_2} \ldots e_{s_p}$
+
+             $^{i_1 i_2 \ldots i_p}F\left( e_{s_1}, e_{s_2}, \ldots, s_{s_p}  \right) \alpha_{i_1 i_2  \ldots i_p} = 0$
+
+             $p!\left[Asym^{i_1 i_2 \ldots i_p}\right]\left( e_{s_1} e_{s_2} \ldots s_{s_p} \right) \alpha_{i_1 i_2 \ldots i_p} = 0  $ 
+
+             $p!\cdot \frac{1}{p!}\sum_{\sigma} (-1)^{[\sigma]}{}^{i_1 i_2 \ldots i_p}W\left( e_{\sigma(s_1)}, e_{\sigma(s_2)}, \ldots, e_{\sigma(s_p)} \right) \alpha_{i_1 i_2 \ldots i_p}  = 0$ 
+
+                 $\sum_{\sigma} (-1)^{[\sigma]}\delta_{\sigma(s_1)}^{i_1}\delta_{\sigma(s_2)}^{i_2} \ldots \delta_{\sigma(s_p)}^{i_p} \alpha_{i_1 i_2 \ldots i_p = 0}$ 
+
+                 $\sum_{\sigma}(-1)^{[\sigma]}\alpha_{\sigma(s_1)\sigma(s_2) \ldots \sigma(s_2)} = 0$
+
+                 $p!\alpha_{s_1 s_2 \ldots s_p} = 0 \forall  s_1 s_2 \ldots s_p \implies  \alpha = 0$, если $\alpha$ антисимметричный тензор
+
+     \end{itemize}
+ \end{proof}
+
+ \begin{note}
+     $\dim \Lambda^p = C_n^p$
+
+      \begin{enumerate}
+         \item $p = 0 \implies  C_n^0 = 1 \implies  K$
+         \item $p = 1 \implies  C_n^1 = n \implies  X^*$
+         \item $p = 2 \implies  C_n^2 = \frac{n(n-1)}{2}$ 
+             \\ \hrule
+          $C_n^p = C_n^{n-p}$ 
+      \item[n] $p = n-1 \implies  C_n^{n-1} = C_n^1 = n$
+      \item[n+1] $C_n^n = 1$ 
+
+          $\sphericalangle \Lambda^n$ 
+
+          $\left\{^{i_1 i_2 \ldots i_n}F\right\}_{1\leqslant i_1 < i_2 < \ldots < i _n \leqslant  n} = \left\{ ^{123 \ldots n}F \right\} $ 
+
+          $\sqsupset u\in \Lambda^n \implies  \exists \alpha \quad u = \alpha^{1 2 3 \ldots n}F$
+
+          $\sphericalangle ^{1 2 3\ldots n}F\left( x_1, x_2, \ldots, x_n \right)  = p!\cdot \left[Asym^{1 2 3\ldots n}W\right](x_1, x_2, \ldots, x_n) = \sum_{\sigma} (-1)^{[\sigma]_{1 2 3 \ldots n}}W\left( x_{\sigma(1)} x_{\sigma(2)} \ldots x_{\sigma(n)} \right)  = (-1)^{[\sigma]} \xi_{\sigma(1)}^{1} \xi_{\sigma(2)}^{2} \ldots \xi_{\sigma(n)}^{n} \overset{\triangle}= \det\{x_i\}$ 
+
+          \begin{lemma}
+              $\forall u\in \Lambda^n\quad u = \alpha\left( ^{123 \ldots n}F \right) $
+          \end{lemma}
+          \begin{proof}
+              \begin{align*}
+                  u\left( x_1, x_2, \ldots, x_n \right) &=  \xi_1^{i_1}\xi_2^{i_2} \ldots \xi_n^{i_n} u_{i_1 i_2 \ldots i_n}\\
+                  &= ^{i_1, i_2, \ldots, i_n}W\left( x_1, x_2, \ldots, x_n \right) u_{i_1 i_2\ldots, i_n}\\
+                  & = ^{1 2 3 \ldots n}F(x_1, x_2, \ldots, x_n)\underbrace{u_{1 2 \ldots n}}\limits_{\alpha}
+              \end{align*}                        
+          \end{proof}
+  \end{enumerate}
+
+  \section{Произведение полилинейных форм}
+
+$\sqsupset \Omega_p^q$
+
+\begin{definition}
+    $u\in \Omega_{q_1}^{p_1}, v\in \Omega_{q_2}^{p_2}$
+
+    $\sphericalangle \omega \left( x_1, x_2, \ldots, x_{p_1}, x_{p_1+1}, \ldots, x_{p_1+p_2}, y^1, \ldots, y^{q_1}, y^{q_1+1}, \ldots, y^{q_1+q_2} \right) =\\ = u\left( x_1, x_2, \ldots, x_{p_1}, y^1, y^2, \ldots, y^{q_1} \right)  \cdot v\left( x_{p_1+1}, x_{p_1+2}, \ldots, x_{p_1+p_2}, y^{q_1+1}, \ldots, y^{q_1+q_2} \right) $ 
+
+    Такая форма называется консолидированной формой $u$ и  $v$
+
+    $u^{i_1 i_2 \ldots i_{p_1}}_{j_1 j_2 \ldots j_{q_1}} \cdot v_{t_1 t_2 \ldots t_{q_2}}^{s_1 s_2 \ldots s_{p_2}} = \omega^{i_1 \ldots i_p, s_1, \ldots, s_{p_2}}_{j_1 \ldots j_{q_1} t_1, \ldots, t_{q_2}}$
+\end{definition}
+
+\begin{note}
+    $\omega$ -- ПЛФ  $(p_1+p_2, q^1+ q^2)$
+
+    $\omega = u\cdot v \subseteq \Omega_{q_1+q_2}^{p_1+p_1}$
+
+    $\sphericalangle \Omega = \dotplus \sum_{i, j} \Omega_{q_j}^{p_i}$ -- линейное пространство
+
+    $\left( \Omega, +, \cdot \lambda, \cdot  \right) $ Новое умножение называется внешним
+\end{note}
+
+\begin{property}
+    \begin{enumerate}
+        \item $u\cdot (v\cdot w) = (u*v)\cdot w$
+        \item $u\cdot v \neq  v \cdot  u$
+        \item $u\cdot (v+w) = u\cdot v+u\cdot w$
+        \item $\mathds{0}\quad u\cdot \mathds{0} = \mathds{0}$ -- получившийся нооль из бОльшего пространства
+        \item $u(\alpha v) = (\alpha u)\cdot v$
+    \end{enumerate}
+\end{property}
+
+\begin{definition}
+    $\Omega$ -- внешняя алгебра полилинейных форм
+\end{definition}
+ \end{note}
+
+ \section{Практика №2}
+ \subsection{Свёртки}
+\begin{example}
+    $\omega^{j}_i \sim \begin{pmatrix} 1 & 2 & 3 \\ 8 & 7 & 5\\ 1 & -1 & 9 \end{pmatrix} $
+
+    $w_i^i = \sum_i = \omega_1^1 +\omega_2^2 + \omega_3^3$
+\end{example}
+
+\begin{example}
+    $w^{ij}_k \sim  \left( 
+        \begin{array}{c c| c c}
+            1 & 2 & 8 & 9\\ 5 & -1 & 10 & 3
+        \end{array}
+    \right) $
+
+    $w_i^{ij} = \alpha^j\qquad \alpha^0 = 1 + 10 = 11\quad \alpha^1 = 2+(-3) = -1$
+
+    $\omega^{ij}_i = \begin{pmatrix} 11\\-1 \end{pmatrix} $
+\end{example}
+
+\begin{example}
+    $\omega^{ij}_{kl} \sim \left( 
+        \begin{array}{c c| c c}
+            3 & -1 & 4 & 7\\ -8 & 1 & -3 & 11\\ \hline -3 & 4 & 13 & 17\\ 6 & 5 & 19 & 23\\
+        \end{array}
+    \right) $
+
+    $\omega_{ki}^{ij} = \alpha_k^j \sim \begin{pmatrix} 0 & 10\\ 16 & 27 \end{pmatrix} $
+
+    $\omega^{ij}_{ji} = \sum_j\sum_i\omega^{ij}_{ji} = \sum_k \alpha_k^k = \alpha_0^0 + \alpha_1^1 = 27$
+\end{example}
+
+\begin{note}
+    Сложную свёртку можно считать как последовательность единичных
+\end{note}
+
+\subsection{Транспонирование}
+
+$\omega^i_{jk} = \left( 
+    \begin{array}{c c c| c c c| c c c}
+        1 & 2 & 3 & 7 & 8 & 9 & 4 & 5 & 6\\
+        -3 & -2 & -1 & 9 & 8 & 7 & -7 & 11 & -13\\
+        2 & 19 & 17 & 14 & 12 & 9 & 21 & 17 & -1\\
+    \end{array}
+\right) $
+
+$\psi_{jk}^i = \omega_{kl}^i$
+
+$\psi_{jk}^{i} \sim \left( 
+    \begin{array}{c c c | c c c| c c c}
+        1 & 7 & 4 & 2 & 8 & 5 & 3 & 9 & 6\\
+        -3 & 9 & -7 & -2 & 8 & 11 & -1 & 7 & -13\\
+        2 & 14 & 21 & 19 & 12 & 17 & 17 & 9 & -1\\
+\end{array}
+\right) $ 
+
+$\omega^{ij}_{kl} \sim \left( 
+    \begin{array}{c c | c c }
+        14 & 1 & 1 & 3\\
+        -8 & 2 & -7 & -1\\
+        18 & 16 & 9 & 11\\
+        -14 & -3 & 17 & 19\\
+\end{array}
+\right) $ 
 
 
+$\omega^{ij}_{kl} \sim \left( 
+    \begin{array}{c c | c c}
+        14 & & 18 & \\
+           &&& \\
+        1 & 3 & 9 &\\
+          &&17&\\
+\end{array}
+\right) $
 
 
+\subsection{Свёртка и тензорное произведение}
+
+$a^{ij} \sim \begin{pmatrix} 8 & 9 & 1\\7 & -5 & 4\\ 1 & 1 & 1\end{pmatrix} $ 
+
+$b^k_l \sim \begin{pmatrix} 7 & -1 ^ -3\\ 8 & 4 & 5\\ 11 & -9 & 1 \end{pmatrix} $ 
+
+$a \otimes b = \omega^{ijk}_l \implies  \omega^{ijk}_j = \beta^{ik}$
+
+$\beta^{ik} = a^{ij}b^k_l = \begin{pmatrix} 44 & & \\ & 56 & \\ & & &\\ \end{pmatrix} $
+
+$\beta^{00} = a^{00}b^0_0 + a^{01}b^0_1 + a^{02}b^0_2 = $
 
 
+$a^{ij}_k \sim \left( 
+    \begin{array}{c c | c c}
+     2 & 1 & -1 & -7\\
+     2 & 2 & 8 & 11\\
+\end{array}
+\right) $ 
+
+$b_{m, n} \sim \begin{pmatrix} 3 & -3\\ 8 & -1 \end{pmatrix} $ 
+
+$a\otimes b = \omega^{ij}_{kmn} \implies  \omega^{ij}_{kji} = \beta_k \sim \begin{pmatrix} 9\\-94 \end{pmatrix} $
+
+$\omega\in \Omega_0^2\quad \omega(x, y)\in \R\quad x, y\in X$
+
+$\omega \sim  a_{ij}\quad x\sim \xi^k\quad y \sim \eta^l$
+
+$\omega(x, y) = a_{ij}\xi^i\eta^j = (a\otimes x \otimes y)^{ij}_{ij} $
+
+\subsection{Симметризация и асимметризация тензоров}
+
+$\omega_{ij} \sim \begin{pmatrix} 1 & 3 & 7\\-1 & 8 & 4\\ 3 & 2 & -1 \end{pmatrix} $
+
+$sym(\omega_{i_1 , \ldots, i_p}) = a_{j_1 \ldots j_p} = \sum_{\sigma}\omega_{i_{\sigma(1)}, \ldots, i_{\sigma(p)}}$
+
+$a_{ij} = w_{(ij)} \sim \begin{pmatrix} 1 & 1 & 5\\ 1& 8 & 3\\5 &3 & -1\\ \end{pmatrix} $ 
+
+$a_{ij} = \frac{1}{2!}(\omega_{ij} + \omega_{ji})$
+
+$\omega_{ijk} \sim \left( 
+    \begin{array}{c c c | c c c| c c c}
+        1 & 2 & 3 & -7 & 8 & 1 & 9 & 3 & 13\\
+        3 & -4 & 5 & 11 & -7 & 13 & 1 & 4 & 2\\
+        8 & 9 & 7 & 5 & 6 & 11 & -7 & 8 & -1\\
+\end{array}
+\right) $
+
+
+$a_{ijk} = \frac{1}{6}\left( \ldots \right) $ 
+
+$a_{ijk} \sim \left( 
+    \begin{array} {c c c| c c c| c c c}
+        1 & -\frac{2}{3} & \frac{20}{3} & -\frac{2}{3} & 5 & 4 & \frac{20}{3} &4 & \frac{13}{3}\\
+        -\frac{2}{3} & 5 & 4 & 5 & -7 & \frac{23}{3} & 4& \frac{23}{3} & 7 \\
+        \frac{20}{3} &4 & \frac{13}{3} &4 &\frac{23}{3} &7& \frac{13}{3} &7 & -1\\
+    
+\end{array}
+\right) $
 
 
 
