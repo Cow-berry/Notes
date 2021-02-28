@@ -43,6 +43,9 @@
 \newcommand{\p}[1]{#1^{\prime}}
 \newcommand{\pp}[1]{#1^{\prime\prime}}
 \newcommand{\tl}[1]{\widetilde{#1}}
+\let\latexwedge\wedge
+\def\wedge{\,\raisebox{0.5ex}{\ensuremath{\scriptscriptstyle\latexwedge}\,}}
+\DeclareMathAlphabet{\mymathbb}{U}{BOONDOX-ds}{m}{n}
 % Easily typeset systems of equations (French package) [like cases, but it aligns everything]
 \usepackage{systeme}
 \usepackage{lipsum}
@@ -137,6 +140,7 @@
     \import{./figures/}{#1.pdf_tex}
 }
 \usepackage{tikz}
+
 \begin{document}
     \maketitle
     \chapter{Дополнительные главы линейной алгебры}
@@ -596,7 +600,7 @@ $\Omega_0^p$ -- хотим делать из произвольной формы
                  Тензоры это значение $u$ на  $e_{i_1} \ldots e_{i_p}$. А тогда оно выполняется просто по определению антисимметричной формы
              \end{lemma}
          \item[Линейная независимость]
-             $\sphericalangle \alpha_{i_1 i_2 \ldots i_p}\quad ^{i_1 i_2 \ldots i_p}F\alpha_{i_1 i_2 \ldots i_p} = \mathds{0}$. Подействуем на $e_{s_1} e_{s_2} \ldots e_{s_p}$
+             $\sphericalangle \alpha_{i_1 i_2 \ldots i_p}\quad ^{i_1 i_2 \ldots i_p}F\alpha_{i_1 i_2 \ldots i_p} = \mathbb{•}{0}$. Подействуем на $e_{s_1} e_{s_2} \ldots e_{s_p}$
 
              $^{i_1 i_2 \ldots i_p}F\left( e_{s_1}, e_{s_2}, \ldots, s_{s_p}  \right) \alpha_{i_1 i_2  \ldots i_p} = 0$
 
@@ -631,7 +635,14 @@ $\Omega_0^p$ -- хотим делать из произвольной формы
 
           $\sqsupset u\in \Lambda^n \implies  \exists \alpha \quad u = \alpha^{1 2 3 \ldots n}F$
 
-          $\sphericalangle ^{1 2 3\ldots n}F\left( x_1, x_2, \ldots, x_n \right)  = p!\cdot \left[Asym^{1 2 3\ldots n}W\right](x_1, x_2, \ldots, x_n) = \sum_{\sigma} (-1)^{[\sigma]_{1 2 3 \ldots n}}W\left( x_{\sigma(1)} x_{\sigma(2)} \ldots x_{\sigma(n)} \right)  = (-1)^{[\sigma]} \xi_{\sigma(1)}^{1} \xi_{\sigma(2)}^{2} \ldots \xi_{\sigma(n)}^{n} \overset{\triangle}= \det\{x_i\}$ 
+        \begin{align*}
+        &\sphericalangle ^{1 2 3\ldots n}F\left( x_1, x_2, \ldots, x_n \right)  =\\
+        &=p!\cdot \left[Asym^{1 2 3\ldots n}W\right](x_1, x_2, \ldots, x_n) =\\
+        &=\sum_{\sigma} (-1)^{[\sigma]_{1 2 3 \ldots n}}W\left( x_{\sigma(1)} x_{\sigma(2)} \ldots x_{\sigma(n)} \right)  =\\
+        &=(-1)^{[\sigma]} \xi_{\sigma(1)}^{1} \xi_{\sigma(2)}^{2} \ldots \xi_{\sigma(n)}^{n} \overset{\triangle}=\\
+        &=\det\{x_i\}\\
+        \end{align*}
+
 
           \begin{lemma}
               $\forall u\in \Lambda^n\quad u = \alpha\left( ^{123 \ldots n}F \right) $
@@ -674,7 +685,7 @@ $\sqsupset \Omega_p^q$
         \item $u\cdot (v\cdot w) = (u*v)\cdot w$
         \item $u\cdot v \neq  v \cdot  u$
         \item $u\cdot (v+w) = u\cdot v+u\cdot w$
-        \item $\mathds{0}\quad u\cdot \mathds{0} = \mathds{0}$ -- получившийся нооль из бОльшего пространства
+        \item $\mymathbb{0}\quad u\cdot \mymathbb{0} = \mymathbb{0}$ -- получившийся нооль из бОльшего пространства
         \item $u(\alpha v) = (\alpha u)\cdot v$
     \end{enumerate}
 \end{property}
@@ -820,18 +831,200 @@ $a_{ijk} \sim \left(
 \end{array}
 \right) $
 
+\section{Свойства произведения полилинейных форм}
+
+\begin{enumerate}
+    \item $u\cdot v\cdot w = u\cdot \left( v\cdot w \right)  = \left( u\cdot v \right) \cdot w$
+    \item $u\cdot v\neq v\cdot u$
+        \begin{example}
+            [Конртпример] $\sqsupset u = f^1\quad v = f^2\quad u, v\in \Omega^1_0$
+
+            $\left( u\cdot v \right) \left( x_1, x_2 \right) =\left( f^1f^2 \right) \left( x_1, x_2 \right) = f^1(x_1)\cdot f^2(x_2) \neq f^2(x_1)\cdot f^1(x_2) = \left( f^2f^1 \right) (x_1, x_2) = \left( v\cdot u \right) \left( x_1, x_2 \right) $
+        \end{example}
+    \item $\forall p, q\exists \mathds{0}\in\Omega_q^p \forall u\in \Omega^{p_1}_{q_1}\quad u\cdot \mymathbb{0} = \mymathbb{0}\cdot u = \mymathbb{0}\in\Omega_{q_1+q}^{p_1+p}$
+    \item $u\cdot \left( v+w \right)  = u\cdot v+u\cdot w$
+    \item $u\left( \alpha v \right)  = \left( \alpha u \right) v = \alpha\left( uv \right) $
+    \item $\exists \left\{ f^k \right\} _{k=1}^n$ -- базис $X^*$
+
+        $\sqsupset \left\{ ^{s_1 s_2 \ldots s_p}W \right\} $ -- базис $\Omega_0^p$
+
+        $^{s_1s_2\ldots s_p}W = f^{s_1}f^{s_2}\cdot \ldots\cdot f^{s_p}$
+        \begin{proof}
+            $\sqsupset x_1, x_2, \ldots, x_p\in X$
+
+            \begin{align*}
+                &^{s_1s_2 \ldots s_p}W\left( x_1, x_2, \ldots, x_p \right)  = \xi_1^{s_1}\xi_2^{s_2}\ldots\xi_p^{s_p}\\
+                &= f^{s_1}(x_1)\cdot f^{s_2}(x_2)\ldots\cdot f^{s_p}(x_p) \\
+                &= f^{s_1}f^{s_2}\ldots f^{s_p}\left( x_1, x_2, \ldots, x_p \right)  \\
+           .\end{align*}
+        \end{proof}
+    \begin{note}
+        $\left\{ ^{s_1 s_2 \ldots s_p}_{t_1 t_2 \ldots t_q}W \right\} $ -- базис $\Omega^p_q$
+
+        $^{s_1 s_2 \ldots s_p}_{t_1 t_2 \ldots t_q}W = f^{s_1}f^{s_2}\ldots f^{s_p}\hat e_{t_1}\hat e_{t_2} \ldots \hat e_{t_q}$
+
+        $\hat e_y(y^k) = y^k(e_t)$
+    \end{note}
+\item $Sym\left( u\cdot v \right)  = Sym\left( Sym~u \cdot  v \right)  = Sym\left( u\cdot Sym~v \right) $ 
+$Asym\left( u\cdot v \right)  = Asym\left( Sym~u \cdot  v \right)  = Asym\left( u\cdot Asym~v \right) $ 
+\begin{statement}
+    $Asym\left( u\cdot v \right)  = Asym\left( Asym~u\cdot v \right) $
+\end{statement}
+\begin{proof}
+    \begin{align*}
+        Asym\left( Asym~u\cdot v \right) \\
+        &= Asym\left\{ \frac{1}{p!}\sum_{\sigma} (-1)^{\left[ \sigma \right] }u\left( x_{\sigma(1)}x_{\sigma(2)}\ldots x_{\sigma(p)} \right)  \cdot v\left( x_{p+1}\ldots x_{p+q} \right)\right\}   \\
+        &= \frac{1}{p!}\sum_{\sigma}(-1)^{\left[ \sigma \right] }Asym\left[ \underbrace{u\left( x_{\sigma(1)}\ldots x_{\sigma(p)} \right) \cdot v\left( x_{p+1}\ldots x_{p+q} \right)}\limits_{w\left( x_{\sigma(1)\ldots x_{\sigma(p) x_{p+1} .. x_{p+q}}} \right) }  \right]  \\
+        &= \frac{1}{p!} \sum_{\sigma}\cancel{(-1)^{\left[ \sigma \right] }} \cancel{(-1)^{\left[ \sigma \right] }}Asym~w\left( x_1, x_2, \ldots, x_, x_{p+1} \right) \\
+        &= \frac{1}{p!}p!Asym~w\left( x_1, x_2, \ldots, x_{p}, x_{p+1}, \ldots, x_{p+1} \right)  \\
+        &= Asym~\left( u\cdot v \right) \left( x_1 \ldots x_{p+q} \right)  \\
+    .\end{align*}
+\end{proof}
+
+\end{enumerate}
 
 
+\section{Внешнее произведение ассиметричных полилинейных форм}
+
+$\sqsupset u\in \Lambda^{p_1}\quad v\in \Lambda^{p_2}$
+
+$\sphericalangle u\cdot \not\in \Lambda^{p_1+p_2} $
+
+$\sphericalangle u\wedge v = \frac{(p_1+p_2)!}{p_1!p_2!}Asym\left( u\cdot v \right) $
+
+\begin{align*}    
+    Asym\left( u\wedge v \right)  &= Asym~\left( \frac{\left( p_1+p_2 \right) !}{p_1!p_2!}~Asym\left( u\cdot v \right)  \right) \\
+                                  &= \frac{\left( p_1+p_2 \right) !}{p_1!p_2!}\cdot \frac{1}{\left( p_1+p_2 \right) !}~ \sum_{\sigma}\left( -1)^{\left[ \sigma \right] } \right) u\left( x_{\sigma(1)} \ldots x_{\sigma(p_1)} \right) v\left( x_{\sigma(p_1+1} \ldots x_{\sigma\left( p_1+p_2 \right) } \right)  \\
+                                  &= \sum_{\p \sigma} \left( -1 \right) ^{\left[ \sigma \right] } u\left( x_{\p \sigma(1)} \ldots x_{\p \sigma_{p_1}} \right) \cdot v\left( x_{\sigma\left( p_1+1 \right) }\ldots x_{\p\sigma\left( p_1+p_2 \right) } \right)  \\
+.\end{align*}
+
+$\p\sigma(j)>p_1\quad j\leqslant p_1$
+
+$\p\sigma(j)\quad j>p_1$
 
 
+Свойства операции $u\wedge v$:
+ \begin{enumerate}
+     \item  $u\wedge\left( v+w \right)  = u\wedge v + u\wedge w$
+     \item $(\alpha u)\wedge v = u\wedge (\alpha v) = \alpha \left( u\wedge v \right) $
+     \item $u\wedge v \wedge w = u\wedge (v\wedge w) = (u\wedge v)\wedge w$
+      \begin{note}
+          \begin{align*}
+              (u\wedge v)\wedge w &= \frac{(p_1+p_2)!}{p_1!p_2!}Asym~(u\cdot v) \wedge w\\
+                                  &= \frac{\cancel{(p_1+p_2)!}}{p_1!p_2!}\frac{\left( p_1+p_2 +p_3\right) !}{\cancel{(p_1+p_2)!}p_3!}Asym~\left( Asym\left( u\cdot v)w \right)  \right)  \\
+                                  &= \frac{\left( p_1+p_2+p_3 \right) !}{p_1!p_2!p_3!}Asym\left( u\cdot v\cdot w \right) \\
+                                  &= u\wedge v\wedge w \\
+         .\end{align*}
+     \end{note}
+ \item $u\wedge v \overset ? = v\wedge u$
 
+      \begin{note}
+          $u\wedge v = (-1)^{p_1p_2}v\wedge u$
+     \end{note}
+     \begin{proof}
+            \begin{align*}                
+                &\sphericalangle \left[u\wedge v\right]\left( x_1, x_2, .., x_{p_1}, x_{p_1+1}, \ldots, x_{p_1+p_2} \right)=\\
+                 &=\frac{(p_1+p_2)!}{p_1!p_2!}\frac{1}{(p_1+p_2)!}\sum_{\sigma}(-1)^{\left[ \sigma \right] }u\left( x_{\sigma(1)} \ldots x_{\sigma(p_1)} \right) v\left( x_{\sigma(p_1+1)} \ldots x_{\sigma(p_1+p_2)}  \right)  =\\
+                                                                                                                          &= \frac{(p_1+p_2)!}{p_1!p_2!}\frac{(-1)^{p_1p_2}}{(p_1+p_2)!}\sum_{\sigma}(-1)^{\left[ \sigma \right] } v\left( x_{\sigma(p_1)} \ldots x_{\sigma(p_1+p_2)} \right) \cdot  u\left( x_{\sigma(1)}, \ldots, x_{\sigma(p_1)} \right)    =\\
+                                                                                                                          &= (-1)^{p_1p_2}\left( v\wedge u \right) \left( x_1, \ldots, x_{p_1+p_2} \right)  \\
+            .\end{align*}
+     \end{proof}    
+     \begin{note}
+         $\sqsupset f, g\in \Lambda^1\quad f\wedge g = -g\wedge f$
+     \end{note}
+ \item $\exists \mymathbb{0}\in\Lambda^p \quad u\wedge u\in \Lambda^p = u\wedge \mymathbb{0} = \mymathbb{0}\in\Lambda^{p+q}$
+ \item $u\in\Lambda^p\quad v\in \Lambda^q$
 
+     $\sqsupset p+q>n = \dim X \implies u\wedge v = \mymathbb{0}$
+ \item $\left\{ f^k \right\} _{k=1}^n$ -- базис $X^*$
 
+     $\sqsupset \left\{ ^{s_1s_2\ldots s_p}F \right\} $ -- базис $\Lambda^p$
 
+     $\implies ^{s_1s_2\ldots s_p} = f^{s_1}\wedge f^{s_2}\wedge \ldots \wedge f^{s_p}$
+     \begin{proof}
+        \begin{align*}            
+         ^{s_1 s_2  \ldots s_p}F &=   p!Asym\left( ^{s_1s_2 \ldots s_p}W \right) \\ 
+         &=   p!Asym\left( f^{s_1}f^{s_2} .. f^{s_p} \right)\\
+         &=   p!Asym\left(Asym( f^{s_1}f^{s_2}) .. f^{s_p} \right)\\
+         &=   p!Asym \frac{1}{2!}\left( f^{s_1}\wedge f^{s_2}\cdot  .. \cdot f^{s_p} \right)\\
+         &=   p!Asym \frac{1}{2!}\left( Asym(f^{s_1}\wedge f^{s_2}\cdot f^{s_3})\cdot   .. \cdot f^{s_p} \right)\\
+         &=   p!Asym \frac{1}{3!}\left( f^{s_1}\wedge f^{s_2}\cdot f^{s_3}\cdot   .. \cdot f^{s_p} \right)\\
+         &= \ldots \\
+         &= f^{s_1}\wedge f^{s_2} \ldots f^{s_p} \\
+        .\end{align*}
 
+     \end{proof}
+ \item $\sphericalangle \Lambda^n\quad \dim \Lambda^n = 1$
 
+     $^{123\ldots n}F$ -- единственный базисный элемент
+     
+     $\implies ^{123 \ldots n} = f^1\wedge f^2 \wedge \ldots \wedge f^n$
 
+     $\sphericalangle ^{12 \ldots n}F(x_1, x_2, \ldots, x_n = n! Asym\left[ ^{12 \ldots n}W \right] \left( x_1, x_2, \ldots, x_n \right) = n!\frac{1}{n!}\sum_{\sigma}(-1)^{\left[ \sigma \right] } {}^{12 \ldots n}W\left( x_{\sigma(1) \ldots x_{\sigma(2)} \ldots x_{\sigma(n)}} \right) = \sum_{\sigma}(-1)^{\left[ \sigma \right] } \xi^1_{\sigma(1)}\xi^2_{\sigma(2)} \ldots \xi^n_{\sigma(n)}\triangleq \det\{x_1, x_2, \ldots, x_n\} = \sum_{\sigma} (-1)^{\left[ \sigma \right] } f^1\left( x_{\sigma(1)} \right) f^2\left( x_{\sigma(2)} \right) f^n\left( x_{\sigma(n)} \right)  = \left( f^1\wedge f^2 \wedge \ldots \wedge f^n \right) \left( x_1, x_2, ... x_n \right)  $
+\end{enumerate}
 
+\section{Основы теории определителей}
+
+$\sqsupset X$ -- ЛП $\dim X = n$
+
+$\left\{ e_j \right\} _{j=1}^n$ --базис X
+
+$\left\{ x_i \right\} _{i=1}^n$ -- набор векторов из X
+
+\begin{definition}
+    \begin{align*}
+        \det\{x_1, x_2, \ldots, x_n\} &= ^{12\ldots n}F\left( x_1, x_2, \ldots, x_n \right)  \\
+                                      &= \left( f^1\wedge f^2\wedge \ldots \wedge f^n \right) \left( x_1, x_2, \ldots, x_n \right)  \\
+                                      &= \left< x_k = \sum_{j=1}^{n} \xi_k^je_j\right> \\
+                                      &= \sum_{\sigma}(-1)^{\left[ \sigma \right] }\xi^1_{\sigma(1)}\xi^2_{\sigma(2)} \ldots \xi^k_{\sigma(k)} \\
+    .\end{align*}
+\end{definition}
+
+\begin{definition}
+    $k$-мерным параллелепипедом в $X$, построенном на векторах $\{x_i\}_{i=1}^k$ называется следующее множество:
+    \[
+        T = \{\sum_{i=1}^{k} \alpha^ix_i, \quad \alpha^i\in [0,1]\}
+    .\] 
+\end{definition}
+
+\begin{definition}
+    Формой объёма в ЛП $X$ называется отображение  $\omega^(n)$ удовлетворяющееся следующим свойствам:
+    \begin{enumerate}
+        \item $\omega^{(n)}(T_n)$ -- число  $ = \omega^{(n)}\left( x_1, x_2, \ldots, x_n \right) $ 
+        \item $\omega^{(n)}$ -- полилинейное отображение
+        \item  $\omega^{(n)}$ -- ассиметричное отображение
+    \end{enumerate}
+    
+\end{definition}
+
+\begin{lemma}
+    $\omega^{(n)}\in\Lambda^n \iff \omega^{(n)} = \alpha\cdot {}^{12\ldots n}F$
+\end{lemma}
+
+\section{Практика}
+
+\begin{problem}
+    $a_{ijk} \longrightarrow \left[ 
+        \begin{array}{c c c | c c c | c c c}
+            1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9\\
+            9& 8&7&6&5&4&3&2&1\\
+            1&2&3&2&3&1&3&2&1\\
+    \end{array}
+    \right] $
+\end{problem}
+\begin{proof}
+    $\sphericalangle a_{i\left( jk \right) }$
+
+    $i = 1 \quad a_{1jk}\rightarrow \begin{pmatrix} 1&4&7\\2&5&8\\3&6&9 \end{pmatrix} \overset{S}{\longrightarrow} \begin{pmatrix} 1 & 3 & 5\\3 & 5 & 7 \\ 5 & 7 & 9 \end{pmatrix} $ 
+
+    $\left[ 
+        \begin{array}{c c c| c c c| c c c}
+            1 & 3 & 5 & 3& 5 & 7 & 5 & 7 & 9\\
+            9&7&5&7&5&3&5&3&1\\
+            1&2&3&2&3&\frac{3}{2}&3 & \frac{3}{2}&1
+        \end{array}
+    \right] $
+\end{proof}
 
 
 
