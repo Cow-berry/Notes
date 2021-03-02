@@ -575,4 +575,152 @@ $\xi(w) = w$
 \begin{proof}
     Упражнение
 \end{proof}
+
+
+\begin{proof}
+    [Вспомним]
+
+    $\xi, \eta : \Omega \to  \R$
+
+    $F_{\xi}(a) = P\left( \xi \leqslant  a \right) $
+
+    $f_{\xi}(a) = P\left( \xi = a \right) $
+
+    $F_{\xi}(a) = \sum_{b\leqslant a} f_{\xi}(b)$
+
+    $E_{\xi} = \sum_{\omega\in \Omega}p(\omega)\xi(\omega)  = \sum_a a\cdot P\left( \xi = a \right) $
+
+    $E(\xi+\eta) = E_{\xi} + E_{\eta}$
+\end{proof}
+
+$E\left( \xi - E\xi \right)  = E_{\xi} - EE_{\xi} = 0$ матожидане отклонения от матожидания равно нулю..
+
+Хочется смотреть насколько величина отклоняется от своего матожиданя. Для этого используется понятие дисперсии:
+
+$D_{\xi} = E\left( \xi-E\xi \right)^2 = E\xi^2 - \left( E\xi \right) ^2 $
+
+$D\left( \xi+\eta \right)  = E\xi^2 + E\eta^2 + 2E\xi\eta - \left( E\xi \right) ^2 - \left( E\eta \right) ^2 - 2E\xi E\eta = D_{\xi} + D_{\eta} + 2\left( E_{\xi\eta} - E_{\xi}E_{\eta} \right) $. 
+
+В случае независимых случайных величин дисперсия линейна. Иначе она отличается на ковариацию:
+
+\begin{definition}
+    [Ковариация]
+
+     \[
+     Cov\left( \xi, \eta \right)  = E_{\xi\eta} - E_{\xi}E_{\eta}
+    .\]
+    
+    $D_{\xi} = Cov\left( \xi, \xi \right) $ 
+\end{definition}
+
+\begin{definition}
+    [Корреляция]
+
+    \[
+        Corr\left( \xi, \eta \right)  = \frac{Cov\left( \xi, \eta \right) }{\sqrt{D_{\xi}D_{\eta}} } 
+    .\] 
+\end{definition}
+
+\begin{theorem}
+    Корреляция двух случайных величин лежит между -1 и 1.
+
+    \[
+        -1\leqslant Corr(\xi, \eta) \leqslant 1
+    .\] 
+\end{theorem}
+\begin{proof}
+    $\alpha = \xi-\lambda \eta$
+
+    $D_{\alpha} = E_{\xi^2} - 2\lambda E_{\xi\eta} +\lambda^2 E\left(\eta^2  \right) - (E(\xi))^2 + 2\lambda E_{\xi}E_{\eta} - \lambda^2\left( E_{\eta^2} \right)\geqslant 0  $
+
+    $D_{\xi} + 2\lambda Cov\left( \eta, \eta \right)  + \lambda^2D_{\eta}$
+
+    $4Cov\left( \xi, \eta \right) ^2 - 4D_{\xi}D_{\eta}\leqslant 0$
+\end{proof}
+
+\section{Хвостовые неравенства}
+
+$\xi\quad E\xi = 10\quad \xi \geqslant  0$
+
+$P\left( \xi\geqslant 100 \right) <\frac{1}{10}$ 
+
+\begin{theorem}
+    [Неравенство Маркова]
+
+    $\xi \not\equiv 0\quad \xi\geqslant 0\quad P\left( \xi\geqslant a\cdot E_{\xi} \right) \leqslant \frac{1}{a}$
+\end{theorem}
+\begin{proof}
+    $E_{\xi} = \sum_{v}v\cdot P\left( \xi = v \right) = \sum_{v< a\cdot E_{\xi}}v\cdot P\left( \xi = v \right) + \sum_{v \geqslant  a\cdot E_{\xi}}v\cdot P\left( \xi=v \right) \geqslant 0+a\cdot E_{\xi}\sum_{v\geqslant a\cdot E_{\xi}}P\left( \xi = v \right) = a\cdot E_{\xi}\cdot P\left( \xi\geqslant a\cdot E_{\xi} \right)  $
+\end{proof}
+
+
+\begin{example}
+    $a = \frac{c}{E_{\xi}}\quad P\left( \xi\geqslant c \right) \leqslant \frac{E_{\xi}}{c}$
+\end{example}
+
+
+
+$D_{\xi} = E\left( \xi-E\xi \right) ^2$
+
+$\eta = \left( \xi-E_{\xi} \right) ^2$
+
+$P(\left( \xi - E_{xi} \right)^2 \geqslant a^2\cdot D_{\xi}) \leqslant \frac{1}{a^2}$
+
+$\sigma = \sqrt{D_{\xi}} $ -- среднеквадратичное отклонение
+\begin{theorem}
+    [Неравенство Чебышева]
+$P\left( |\xi-E_{\xi}|\geqslant a\sigma \right) \leqslant \frac{1}{a^2}$
+\end{theorem}
+
+$P\left( |\xi-E_{\xi}|\geqslant c \right) \leqslant \frac{D_{\xi}}{c^2}$
+
+\begin{figure}[ht]
+    \centering
+    \incfig{drawing}
+    \caption{drawing}
+    \label{fig:drawing}
+\end{figure}
+
+\begin{problem}[10 монет, найти количество ``1'']
+    \[E\xi = 5 \quad D\xi = 2{,}5\]
+    \[P(\xi \leqslant 0) \leqslant P(|\xi - E\xi| \geqslant 5) \leqslant \cfrac{2{,}5}{25} = \cfrac{1}{10}\]
+\end{problem}
+
+\begin{note}
+    С одной стороны, у неравенства есть плюс: \quad оно \textbf{всегда} работает; всегда (!)
+    
+    С другой --- иногда оценки получаются, очень грубыми. В нашем примере ответ $\leqslant \dfrac{1}{10}$, а в жизни --- $\dfrac{1}{1024}$.
+\end{note}
+
+
+\begin{example}
+    Нечестная монета $p\neq \frac{1}{2}$. Хотим выяснить чем чаще выпадает.
+
+    Бросили: $c$ единиц,  $n-c$ нулей. Предположим, что  $c<\frac{n}{2}\quad p>\frac{1}{2}\quad pn>\frac{n}{2}$ 
+
+    $P\left( \xi = c \right) \leqslant P\left( \xi\leqslant c \right) \leqslant P\left( |\xi-pn|\leqslant pn-c \right) \leqslant P\left(| \xi-pn|\leqslant \frac{n}{2}-c \right) \leqslant \frac{n}{4\cdot \left( \frac{n}{2}-c \right) ^2}$
+\end{example}
+
+\begin{theorem}
+    [Граница Чернова (без доказательства)]
+
+    $\xi_i\quad P\left( \xi_i = 1 \right) \quad P\left( \xi_i = 0 \right) =1$
+
+    $\xi = \sum_{i=1}^{n} \xi_i\qquad E_{\xi} = np = \mu$
+
+    $P\left( |\xi - \mu| \geqslant \delta \mu \right) < e^{-\mu \frac{\delta^2}{3}} $
+\end{theorem}
+
+\begin{example}
+    Случайная величина  $\xi$. Хотим узнать матожидание. Проведём эксперимент  $n$ раз:  $\xi_1, \xi_2, \ldots, \xi_n$
+
+   \[
+       P\left( \left| \frac{\sum \xi_i}{n} - E_{\xi} \right| > c  \right) \leqslant \frac{D_{\xi}}{n\varepsilon^2} 
+   .\] 
+
+\end{example}
+
+$\xi:\Omega \to \Z^+$
+
+$E_{\xi} =\sum_{i=0}^{n} i\cdot P\left( \xi=i \right)  = \sum_{i=0}^{n} \left( P\left( \xi\geqslant i \right) -P\left( \xi\geqslant i+1 \right)  \right)  = \sum_{i=1}^{n} P\left( \xi\geqslant i \right) $
 \end{document}
