@@ -33,6 +33,7 @@
 \usepackage{subcaption}
 \usepackage{multicol}
 \usepackage{xcolor}
+\usepackage{listings}
 % Some shortcuts
 \newcommand\N{\ensuremath{\mathbb{N}}}
 \newcommand\R{\ensuremath{\mathbb{R}}}
@@ -487,4 +488,155 @@ precalc $O(n^2\lg^2)$
  При переходе смотрим на ближайшие запихнутые элементы. X между ними, проверем две позиции.
 
  А теперь у нас много элементов.
-\end{document}
+
+ \section{Дерево поиска}
+
+set, map. Что умеет и то, и то? Хэш-таблица
+ 
+add, remove, contains, put(k,v), get(k)
+
+Хотим иметь линейный порядок.  $(x<y)$
+
+Выполняется свойство: Все элементы в левом поддереве элементы меньше узла. Справа -- больше.
+
+\begin{figure}[ht]
+    \centering
+    \incfig{tree}
+    \caption{$contains(7)\quad add(4)$}
+    \label{fig:tree}
+\end{figure}
+
+
+
+$h$ -- высота дерева. за  $O(h)$ можем получать и проверять на наличие
+
+\begin{figure}[ht]
+    \centering
+    \incfig{removing}
+    \caption{removing (дерево поиска)}
+    \label{fig:removing}
+\end{figure}
+
+Поищем что-нибудь. Например lower bound -- $\min y \geqslant x\quad y\in Tree$
+
+Стартуем в корне. Если элемент меньше $x$, идём вправо. Иначе запоминаем и идём влево поискать что-нибудь получше. 
+
+Если дерево -- бамбук, то его высота  $n$. Оптимальное дерево -- бинарное, чтобы  $\log n$ было (меньше не сделать)
+
+\section{АВЛ-дерево}
+
+\begin{figure}[ht]
+    \centering
+    \incfig{rotation}
+    \caption{rotation}
+    \label{fig:rotation}
+\end{figure}
+
+$H_1, H_2$ -- высоты поддеревьев (правого и левого) $|H_1-H_2| \leqslant 1$
+
+$H\leqslant c\cdot \lg n$
+
+$n\geqslant 2^{\frac{H}{c}} = \underbrace{\left( 2^{\frac{1}{c}} \right)}_{\alpha}{}^H $
+
+$n\geqslant \alpha^H$
+
+$F(H) = \min$ число вершин в дереве высоты  $H$
+
+$F(H) = 1 + F(H-1) + F(H-2) >2F(H-2)$
+
+$F(H) \geqslant \frac{\sqrt{2}^H}{2} $ 
+
+\begin{statement}
+    Если добавить один элемент в дерево, высота любого дерева изменится максимум на 1
+
+\end{statement}
+    Было $(H, H+1)$ стало  $(H, H+2)$. Сломалось АВЛ-дерево
+
+Сделаем операцию балансировки.
+
+\begin{definition}
+    [RR-поворот]
+
+    Новый элемент добавился в правое поддерево правого поддерева. Крутим ребро $xy$
+
+
+LL -- аналогично.
+\end{definition}
+\begin{figure}[ht]
+    \centering
+    \incfig{rr}
+    \caption{RR}
+    \label{fig:rr}
+\end{figure}
+
+\begin{definition}
+    [RL]
+
+
+LR также
+\end{definition}
+\begin{figure}[ht]
+    \scriptsize
+    \centering
+    \incfig{rl}
+    \caption{RL}
+    \label{fig:rl}
+\end{figure}
+\lstset{language=Java}
+    
+ \begin{lstlisting}
+     class Node{
+        Node left, right;
+        int key;
+     }
+
+     rotate(x, y, p) 
+        if (y == x.right):
+            x.right = y.left
+            y.left = x
+        else:
+            x.left = y.right
+            y.right = x
+        x.recalc()
+        y.recalc()
+
+    recalc():
+        H = max(left.H, right.H)+1
+
+    Node add(Node x, Node nw)
+        if (x == null)
+            return nw
+        if nw.key > x.key
+            x.right = add(x.right, nw)
+            x.recalc()
+            y = x.right
+            n = x.left.H
+            if y.right == h+1:
+                rotate(x,y)
+                return y
+            else if y.leftH = h+1:
+                z = y.left
+                rotate(y,z)
+                rotate(x,z)
+                return z
+        else:
+            x.left = add(x.left, nw)
+            x.recalc()
+            y = x.left
+            h = x.right.H
+            if y.left.H = h+1
+                rotate(x,y)
+                return y
+            else if y.right.H == h+1
+                z = y.right
+                rotate(y,z)
+                rotate(x,z)
+                return z
+
+ \end{lstlisting}
+\begin{statement}
+    А это всё тоже персистентным можно делать
+
+    Можно всякие функции считать на отрезке ключей.
+\end{statement}
+ \end{document}

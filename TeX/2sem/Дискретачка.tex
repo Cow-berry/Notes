@@ -42,6 +42,7 @@
 \renewcommand\C{\ensuremath{\mathbb{C}}}
 \newcommand{\p}[1]{#1^{\prime}}
 \newcommand{\pp}[1]{#1^{\prime\prime}}
+\newcommand{\tl}[1]{\widetilde{#1}}
 % Easily typeset systems of equations (French package) [like cases, but it aligns everything]
 \usepackage{systeme}
 \usepackage{lipsum}
@@ -723,4 +724,179 @@ $P\left( |\xi-E_{\xi}|\geqslant c \right) \leqslant \frac{D_{\xi}}{c^2}$
 $\xi:\Omega \to \Z^+$
 
 $E_{\xi} =\sum_{i=0}^{n} i\cdot P\left( \xi=i \right)  = \sum_{i=0}^{n} \left( P\left( \xi\geqslant i \right) -P\left( \xi\geqslant i+1 \right)  \right)  = \sum_{i=1}^{n} P\left( \xi\geqslant i \right) $
+
+\section{Теория информации}
+
+\begin{definition}
+    [Что такое информации]
+$ $\\
+    Информация $=-$ неопределённость
+\end{definition}
+
+непределённость Н1. Что-то узнали, стала неопределённость Н2. полученная информация  $I = $Н1-Н2  $=-\Delta$ Н
+
+Хочется убрать наблюдателя, нас, из определения, чтобы не было кого-то, кто узнаёт и меняет неопределённость. Надо ввести объективную модель:
+
+    \begin{definition}
+        [Случайный источник]
+        $\Omega$ -- вероятностное простраство. Есть исходы  $p_1, p_2, \ldots, p_n$
+
+        Чёрный ящик с красной кнопкой и дисплеем. Основан на вероятностном пространстве
+
+        $\xi_1, \xi_2, \ldots, \xi_m \ldots$
+
+        $P(\xi_i = a) = p_a\quad a = 1 \ldots n$
+    \end{definition}
+
+     Случайный источник $p_1, p_1, \ldots, p_n$. Хотим померять сколько информации содержится в одном результате эксперимента.
+
+     $H\left( p_1, p_2, \ldots, p_n \right) : RS(random sources) \to  \R^+$
+
+     Частный случай $p_i = \frac{1}{n}$ 
+
+     $h(n) = H\left( \frac{1}{n}, \frac{1}{n}, \ldots, \frac{1}{n} \right) $ 
+
+     \begin{enumerate}
+         \item $h(n+1)>h(n)$
+         \item 
+
+             \begin{example}
+                 $\Omega = \left\{ (1,1), (1, 2), \ldots, (1, m_1) (2, 1), \ldots, (2, m_2), \ldots, (k, 1), \ldots, (k, m_k) \right\} $
+
+                 $n = m_1+m_2+\ldots m_n$
+
+                 $p(i,j) = 1_{ij}\quad p_i = \sum_{j=1}^{m_k} q_{ij}$ 
+
+                 Первый ряд $(1,*)$ --  $p_1$. Второй $p_2$ ... Последний $p_k$
+
+                 Если случайный источник показывает только первое число это эквивалентно  $H(p_1, p_2, \ldots, p_n)$
+
+
+                 Теперь представим, что мы сначала узнаём первую компоненту, а потом открываем вторую
+
+                 $\sum_{i=1}^k p_i  H\left( \frac{q_{i 1}}{p_i}, \ldots, \frac{q_{i m_i}}{p_i}  \right) $ 
+
+                 Если провести эксперимент сразу, получим $q_{11}, \ldots, q_{i m_i}$ 
+
+                 $q_{ij} = p_i q_{ij}$
+                    
+             \end{example}
+
+             \[
+                 H\left( p_1r_{11}, p_{1}r_{12}, \ldots, p_1r_{1k_1}, p_2r_{21}, \ldots, p_kr_{km_k} \right) = H\left( p_1, p_2, \ldots, p_k \right)   + \sum_{i=1}^{k} p_iH\left( r_{i1}, \ldots, r_{i m_i}  \right) 
+             .\] 
+             
+             \item Для фиксированного $n$ Н непрерывная как функция $\R^n \to \R$
+     \end{enumerate}
+
+     \begin{theorem}
+         $H\left( p_1, p_2, .., p_n \right) = -\sum_{i=1}^{n} p_i \log p_i$
+     \end{theorem}
+     \begin{lemma}
+         $h\left( nm \right)  = H_(n) + h(m)$ Следует из второго свойства
+     \end{lemma}
+     \begin{proof}
+         $k=n\quad m_i = m\quad p_i = \frac{1}{n}\quad q_{ij} = \frac{1}{nm}\quad r_{ij} = \frac{1}{m}$ 
+
+         $h(nm) = H\left( q_{11}, q_{12}, \ldots, q_{nm} \right)  =  H\left( \frac{1}{n}, \ldots, \frac{1}{n} \right) + \sum_{i=1}^{n} \frac{1}{n} H\left( \frac{1}{m}, \ldots, \frac{1}{m} \right) =h(n) + h(m)$
+     \end{proof}
+
+     \begin{definition}
+         $h(2) = \alpha$ (может с точностью до мультипликативной константы задать)
+     \end{definition}
+
+     \begin{lemma}
+         $h(2^k) = k\alpha$
+     \end{lemma}
+
+     \begin{lemma}
+         $h(n) = \alpha \log_2 n$
+     \end{lemma}
+     \begin{proof}
+         $2^{i}\leqslant n^ r < 2^{i+1}\quad r\in \N $
+
+         $h(i)\leqslant h\left( n^r \right)  < \alpha(i+1)$
+
+         $\alpha\cdot i \leqslant  r\cdot h(n) < \alpha(i+1)$
+
+         $\alpha\cdot \frac{i}{r}\leqslant h(n) , \alpha \frac{i+1}{r}$ 
+
+         $i\leqslant r\log_2 n < i+1$
+
+         $\alpha \frac{i}{r} \leqslant \alpha \log_2 n < \alpha \frac{i+1}{r}$ 
+
+         $\forall r\quad \left| h(n) - \alpha \log_2 n \right| \leqslant  \frac{\alpha}{r}$ 
+
+         $\implies  h(n) = \alpha \log_2 n$
+     \end{proof}
+
+     \begin{proof}
+         [Доказательство теоремы]
+         Рациональный $p_i = \frac{a_i}{b}\quad m_i = a_i\quad r_{ij} = \frac{1}{a_i}\quad q_{ij} = \frac{1}{b}\quad q_{ij} = p_ir_{ij}$ 
+
+
+ $H\left( \underbrace{\frac{1}{b}, \ldots, \frac{1}{b}}\limits_{b} \right) = H\left( p_1, \ldots, p_k \right) +\sum_{i=1}^{k} p_iH\left( \underbrace{ \frac{1}{a_i}, \ldots, \frac{1}{a_i}}\limits_{a_i} \right)  $ 
+
+ $\left(\sum_{i=1}^{k}  p_i \right) h(b) = H\left( p_1, \ldots, p_k \right)  + \sum_{i=1}^{k} p_ih(a_i)$    
+
+ $H\left( p_1, \ldots, p_k \right)  = \sum_{i=1}^{k} p_i\left( \alpha \log_2 b - \alpha \log_2 a_i \right) $
+
+ Функция непрерывна и она верна для рациональных, следовательно она верна для всех
+     \end{proof}
+     \begin{note}
+         $h(2) = \alpha$ -- бит
+     \end{note}
+
+     А теперь мы хотим перевести определение информации на неслучайный источник
+     \begin{proof}
+         [Ответ 1]
+         Это тогда будет не совсем корректно с математической точки зрения. Когда смотришь на конкретные детерминированные данные.
+     \end{proof}
+     \begin{proof}
+         [Ответ 2]
+         Изучение среднего не совсем антинаучное занятие. Внешне оно ведёт себя как случайные величины.
+     \end{proof}
+
+
+\begin{example}
+    Есть строка $s$, в которой мы хотим померить информацию.
+
+     $s\in \Sigma^*\quad n = \left| \Sigma \right| $
+
+     $|s| = l\quad f_i$ -- количество символов  $c_i$ в строке  $s$
+
+      $p_i = \frac{f_i}{L}$ 
+
+      Допустим, что символы выдаёт случайный источник, который выдал символы $s_1, s_2, \ldots , s_L$. Статистически эта строка похожа на $s$.  *натягивание на глобус* Допустим, что количество информации в строке $s$ равно количеству в строке  $\tl s$
+
+      $I(\tl s) = J\cdot H\left( p_1, p_2, \ldots, p_n \right)  = -L \sum_{i=1}^{n} p_i \log_2p_i$
+\end{example}
+
+Вспомним арифметическое кодирование
+
+$q=A(s)$ -- длина арифместического кодирования
+
+$A(s)\leqslant -\log_2 (b_L-a_L) = -\log_2 \left( p_{s_1}\cdot \ldots\cdot p_{s_L} \right)  = -\log_2 \left( \prod_{i=1}^np_i^{f_i} \right) =-\sum_{i=1}^{n} \underbrace{\frac{L}{p_i}}\limits_{p_i}\log_2 p_i =\\= I\left( \tl s \right)  = L\cdot H\left( p_1, p_2, \ldots, p_n \right)   $
+
+\begin{theorem}
+    Длина кода, после арифметического кодирования не превышает энтропию Шеннона
+\end{theorem}
+\begin{note}
+    Арифметическое кодирование асимптотически оптимально среди тех, которые не учитывают взаимное расположение символов.
+\end{note}
+
+\begin{example}
+    [Нижняя оценка для сортировки]
+
+    Пусть $a_1, \ldots, a_n$ -- перестановка и мы хотим её отсортировать
+
+    \begin{statement}
+        От одного сравнения мы получаем не больше 1 бита информации
+    \end{statement}
+
+    Рассмотрим все перествки. В каждой содержится 
+
+    $\log_2 n! = \sum_{i=1}^{n} \log_2 i\geqslant \sum_{i=\frac{n}{2}}^{n} \log_2 \frac{n}{2} = \Omega\left( n\log n \right)  $
+\end{example}
+
 \end{document}

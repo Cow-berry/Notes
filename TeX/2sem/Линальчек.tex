@@ -43,6 +43,8 @@
 \newcommand{\p}[1]{#1^{\prime}}
 \newcommand{\pp}[1]{#1^{\prime\prime}}
 \newcommand{\tl}[1]{\widetilde{#1}}
+\newcommand{\ov}[1]{\overline{#1}}
+\DeclareMathOperator{\rg}{rg}
 \let\latexwedge\wedge
 \def\wedge{\,\raisebox{0.5ex}{\ensuremath{\scriptscriptstyle\latexwedge}\,}}
 \DeclareMathAlphabet{\mymathbb}{U}{BOONDOX-ds}{m}{n}
@@ -967,7 +969,7 @@ $\p\sigma(j)\quad j>p_1$
 
 $\sqsupset X$ -- ЛП $\dim X = n$
 
-$\left\{ e_j \right\} _{j=1}^n$ --базис X
+$\left\{ e_j \right\} _{j=1}^n$ --базис X \quad $\left\{ f^k \right\} _{k=1}^n$ -- базис $X^*$
 
 $\left\{ x_i \right\} _{i=1}^n$ -- набор векторов из X
 
@@ -988,7 +990,7 @@ $\left\{ x_i \right\} _{i=1}^n$ -- набор векторов из X
 \end{definition}
 
 \begin{definition}
-    Формой объёма в ЛП $X$ называется отображение  $\omega^(n)$ удовлетворяющееся следующим свойствам:
+    Формой объёма в ЛП $X$ называется отображение  $\omega^i{(n)}$ удовлетворяющееся следующим свойствам:
     \begin{enumerate}
         \item $\omega^{(n)}(T_n)$ -- число  $ = \omega^{(n)}\left( x_1, x_2, \ldots, x_n \right) $ 
         \item $\omega^{(n)}$ -- полилинейное отображение
@@ -1026,6 +1028,394 @@ $\left\{ x_i \right\} _{i=1}^n$ -- набор векторов из X
     \right] $
 \end{proof}
 
+\section{Определитель, продолжение}
+
+\begin{example}
+    $^{i_1i_2\ldots i_p} = f^{i_1}\wedge f^{i_2}\wedge \ldots \wedge f^{i_p}$
+\end{example}
+
+Свойства:
+\begin{enumerate}
+    \item[] $\left\{ e_j \right\} _{j=1}^k$ -- базис $X \implies x_i = \sum_{j=1}^{n} \xi_i^je_j$
+
+        $\sphericalangle M = \left\{ x_1, x_2, \ldots, x_n \right\}  = \begin{bmatrix} \xi_1^1 & \xi_2^1 & \ldots & \xi_n^1 \\ \xi_1^2 & \xi_2^2 & \ldots &\xi_n^2\\ \vdots & \vdots &\ddots & \vdots\\ \xi_1^n & \xi_2^n & \ldots & \xi_n^n  \end{bmatrix} $ 
+
+        $\sqsupset \det \left\{ x_1,x_2, \ldots, x_n \right\}  = \det M$
+    \item $\det M^T = \det M$
+
+        \begin{proof}
+            $\det M = \sum_{\sigma}(-1)^{\left[ \sigma \right] }\xi_1^{\sigma(1)}\xi_2^{\sigma(2)} \ldots \xi_n^{\sigma(n)}$
+
+            $\sphericalangle \det M^T = \sum_{\sigma}(-1)^{\left[ \sigma \right] }\xi^1_{\sigma(1)}\xi^2_{\sigma(2)} \ldots \xi^n_{\sigma(n)} = \sum_{\sigma^{-1}}(-1)^{\left[ \sigma^{-1} \right]} \xi_1^{\sigma^{-1}(1)}\ldots \xi_n^{\sigma^{-1}(n)} = \det M$
+        \end{proof}
+
+        \begin{lemma}
+            $\sigma \in S_n \implies \left[ \sigma \right]  = \left[ \sigma^{-1} \right] $
+        \end{lemma}
+        \begin{proof}
+            $\sigma \circ \sigma^{-1} = e$ -- чётная перестановка. 
+
+            Чётность при композиции складывается, значит у $\sigma$ и  $\sigma^{-1}$ равная чётность (если разная, то  $e$ -- нечётная ?!!)
+        \end{proof}
+    \item $\det \left\{ x_1, \ldots, x_i, \ldots, x_j, \ldots, x_n \right\} = -\det \left\{ x_1, \ldots, x_j, \ldots, x_i, \ldots, x_n \right\} $
+        \begin{proof}
+            Основное свойство антисимметричной формы
+        \end{proof}
+    \item $\det \left\{ x_1+\sum_{i=2}^{n} \alpha^ix_i, x_2, \ldots, x_n \right\} = \det \left\{ x_1, x_2, \ldots, x_n \right\} $
+    \item $\left\{ x_i \right\} _{i=1}^n$ -- ЛЗ $\implies \det \left\{ x_1, x_2, \ldots, x_n \right\} = 0$
+    \item $\det \left\{ \alpha x_1, x_2, \ldots, x_n \right\} = \alpha \det \left\{x_1, x_2, \ldots, x_n  \right\} $ 
+
+    \item 
+        \begin{proof}            
+            $M = \left\{ x_1, x_2, \ldots, x_n \right\}  = \begin{bmatrix} \xi_1^1 & \xi_2^1 & \ldots & \xi_m^1 & \ldots & \xi_n^1 \\ \xi_1^2 & \xi_2^2 & \ldots &\xi_m^2 & \ldots & \xi_n^2\\ \vdots & \vdots &\ddots & \vdots & \ddots & \vdots\\ \xi_1^n & \xi_2^n & \ldots & \xi_m^n & \ldots & \xi_n^n \end{bmatrix} $ 
+
+        \begin{align*}
+            \sphericalangle \det \left\{ x_1, x_2, \ldots, x_n \right\} & = f^1\wedge f^2 \wedge \ldots \wedge f^n\left( x_1, x_2, \ldots, x_n \right)\\
+                                                                        &= f^1\wedge f^2 \wedge \ldots \wedge f^n\left( x_1, x_2, \ldots, \sum_{j=1}^{n} \xi^j_me_j, \ldots, x_n \right)  \\
+                                                                        &= \sum_{j=1}^{n} \xi^j_m f^1 \wedge \ldots \wedge f^n\left( x_1, x_2, \ldots, e_j, \ldots, x_n \right)  \\
+                                                                        &= \sum_{j=1}^{n} (-1)^{\left| m-j \right| }\xi^j_m f^1 \wedge f^2 \wedge \ldots \wedge \underbrace{f^j(e_j)}\limits_{1}\wedge \ldots \wedge f^n\left( x_1, x_2, \ldots, x_{m-1}, x_{m+1}, \ldots, x_n \right)  \\
+                                                                        &= \sum_{j=1}^{n} (-1)^{\left| m-j \right| }\xi^j_m \underbrace{\underbrace{f^1 \wedge \ldots \wedge f^n}\limits_{\scriptsize\cancel{f^j}}\left( x_1, x_2, \ldots, x_{m-1}, x_{m+1}, \ldots, x_n \right)}\limits_{M_j^m\text{ -- дополнительный минор элемента }\xi^j_n}  \\
+                                                                        &= \sum_{j=1}^{n} (-1)^{\left| m-j \right| }\xi_n^jM_j^m = \sum_{j=1}^{n} (-1)^{j-m}\xi_m^jM_j^m \\
+            =\ldots &=\sum_{j_1}\sum_{j_2}\ldots \sum_{j_k}(-1)^{j_1-m}(-1)^{j_2-m}\ldots (-1)^{j_k-m+k}\underbrace{\xi_{m_1}^{j_1}\xi_{m_2}^{j_2}\ldots \xi_{m_k}^{j_k}}\limits_{L}M_{j_1, j_2, \ldots, j_k}^{m_1, m_2, \ldots, m_k} \\
+                    &= (-1)^{j_1-m_1+j_2-m_2+\ldots +j_k-m_k} L^{j_1, j_2, \ldots, j_k}_{m_1, m_2, \ldots, m_k}M_{j_1, j_2, \ldots, j_k}^{m_1, m_2, \ldots, m_k}\\
+        .\end{align*}
+
+        \begin{theorem}
+            [Лапласа]
+            $\det \left\{ x_1, x_2, \ldots, x_n \right\} = (-1)^{j_1+\ldots+j_n-m_1-\ldots-m_n}L_{m_1, \ldots, m_n}^{j_1, j_2, \ldots, j_n}M_{j_1, j_2, \ldots, j_n}^{m_1, m_2, \ldots, m_n}$
+        \end{theorem}
+
+        \begin{example}
+            $\det
+            \begin{vmatrix}
+                1&2&3\\0&1&2\\1&2&1
+            \end{vmatrix} = \det 
+            \begin{vmatrix}
+                1&2\\0&1
+            \end{vmatrix}\cdot 1 + \det 
+            \begin{vmatrix}
+                1&2\\1&2
+            \end{vmatrix}\cdot 2\cdot (-1)^7 + \det
+            \begin{vmatrix}
+                0&1\\1&2\\
+            \end{vmatrix} = 1-3 = 2$
+        \end{example}
+
+        \begin{example}
+             
+            $ \det
+            \begin{vmatrix}
+            1&2&5&6\\3&4&7&8\\0&0&1&2\\ 0&0&3&4 
+            \end{vmatrix} = \det
+            \begin{vmatrix}
+                1&2\\3&4
+            \end{vmatrix}\cdot \det
+            \begin{vmatrix}
+                1&2\\3&4
+            \end{vmatrix} = 4$
+        \end{example}
+
+        \end{proof}
+\end{enumerate}
+
+\begin{example}
+    $
+    \begin{vmatrix}
+        A_{11} & A_{12} & \ldots & A_{1n}\\
+        0 & A_{22} & \ldots & A_{2n}\\
+        0&0&\ldots & A_{nn}
+    \end{vmatrix} = \prod_{j=1}^n \det A_{jj}$
+\end{example}
+
+\section{Ранг матрицы}
+
+    $\sqsupset \left\{ x_i \right\} _{i=1}^k$ -- набор векторов в $X\quad \left( \dim X = n \geqslant k \right) $ 
+
+    \begin{lemma}
+        $\left\{ x_i \right\} _{i=1}^k$ -- ЛЗ $\iff \forall \omega\in  \Lambda^k\quad \omega\left( x_1, x_2, \ldots, x_n \right) = 0$
+    \end{lemma}
+    \begin{proof}
+        \begin{itemize}
+            \item []
+            \item [$\implies $] $\sqsupset \left\{ x_i \right\} _{i=1}^n$ -- ЛЗ
+
+                $\sphericalangle \omega\left( x_1, x_2, \ldots, x_k \right) = \omega\left( \underbrace{x_1+\sum_{i=2}^{k}}\limits_{\simeq x_k\quad = \beta x_k} \alpha^x_i, x_2, \ldots, x_k \right) = \beta\omega\left( x_1, x_2, \ldots, x_k \right) = 0 $
+            \item [$\impliedby $] $\left\{ x_1, x_2, \ldots, x_k \right\} \quad \forall \omega\in\Lambda ^k\omega\left( x_1, x_2, .., x_k \right) =0 \overset ? {\implies } $ ЛЗ
+
+                Допустим оратное. Тогда мы можем достроить этот набор до базиса $X\quad \left\{ x_1, x_2, \ldots, x_k, e_{k+1}, \ldots, e_n \right\} $. К нему есть сопряжённый базис $\left\{ f^1, f^2, \ldots, f^n \right\} $ 
+
+                \begin{align}
+                    \sphericalangle f^1\wedge f^2 \wedge \ldots \wedge \left( x_1, x2, \ldots, x_n \right) &= \sum_{\sigma} (-1)^{\left[ \sigma \right] } f^{\sigma(1)}f^{\sigma(2)}\ldots f^{\sigma(k)}\left( x_1, x_2, \ldots, x_k \right) \\
+                                                                                                           &= \sum_{\sigma}(-1)^{\left[ \sigma \right] }f^{\sigma(1)}(x_1)f^{\sigma(2)}\ldots f^{\sigma(k)}\neq 0 \\
+                \end{align}
+        \end{itemize}
+    \end{proof}
+
+    \begin{note}
+        $\forall \omega\in\Lambda^p\quad \omega = ^{i_1i_2\ldots i_k}F\omega_{i_1i_2\ldots i_k}$
+
+        $\impliedby \left( \left\{ x_i \right\} _{i=1}^n \text{ -- ЛЗ } \iff ^{i_1i_2\ldots i_k}F\left( x_1, x_2, \ldots, x_k \right) =0 \forall i_1 \ldots i_k \right) $
+    \end{note}
+
+    $\sphericalangle B =  \begin{bmatrix} \xi_1^1 & \xi_2^1 & \ldots & \xi_n^1 \\ \xi_1^2 & \xi_2^2 & \ldots &\xi_n^2\\ \vdots & \vdots &\ddots & \vdots\\ \xi_1^n & \xi_2^n & \ldots & \xi_n^n  \end{bmatrix} \quad \det B = 0 \implies  x_1,x_2, \ldots, x_n$ -- ЛЗ. Но нам хочется узнать, а сколько там независимых
+
+    $\Lambda^n\quad \Lambda^{n-1}\quad ^{i_1 i_2 \ldots i_{n-1}}F\left( x_1, x_2, \ldots, x_{n-1} \right) $. Если найдётся такой минор, который не равен 0, то у нас есть $n-1$ ЛНЗ векторов. Если все равны 0, то значит их меньше. Мы уменьшаем число и смотрим дальше, а там тоже выбор из двух.
+
+    \begin{definition}
+        Ранг матрицы -- максимальный размер её отличного от нуля минора.
+    \end{definition}
+
+    \begin{definition}
+        Базисные строки -- набор ЛНЗ строк в количестве ранга матрицы.
+    \end{definition}
+
+    \begin{theorem}
+        Число ЛНЗ строк матрицы равно $rg~A$ (ранг  $A$)
+    \end{theorem}
 
 
-\end{document}
+\section{Практика. Вычисление определителей}
+
+\begin{enumerate}
+    \item Приведение к треугольному виду.
+    \item Метод выделения линейных множителей
+
+        \begin{definition}
+            [Определитель Вандермомда (определитель Того-кого-нельзя-называть)]
+            $\prod_{i>j}(x_i-x_j$
+
+             $
+             \begin{vmatrix}
+                 1 & x_1 &x_2^2 & x_1^3 & \ldots & x_1^{n-1}\\
+                 1 & x_2 &x_2^2 & x_2^3 & \ldots & x_2^{n-1}\\
+                 \ldots&\ldots&\ldots&\ldots& \ddots & \ldots\\
+                 1 & x_n & x_n^2 & x_n^3 & \ldots & x_n^{n-1}\\
+             \end{vmatrix}$
+        \end{definition}
+\end{enumerate}
+
+\section{Тензорная алгебра}
+
+\begin{theorem}
+    TODO
+\end{theorem}
+\begin{proof}
+    TODO
+\end{proof}
+
+$\sphericalangle W \in \Omega_q^p$
+
+$W\quad \underbrace{x_1x_2\ldots x_p}_{\in X}\underbrace{y^1y^2 \ldots y^q}_{\in X^*} \mapsto K$
+
+$\sqsupset \left\{ e_j \right\} _{j=1}^n$ -- базис $K\quad \left\{ f^i \right\} _{i=1}^n$ 
+
+$f^k(e_j) = \delta_j^k$
+
+$x_1 = \sum_{i=1}^{n} \xi_1^{i_1}e_{i_1} \quad \ldots\quad x_p = \sum_{i=1}^{n} \xi_p^{i_p} e_{i_p} $
+
+$y^1 = \sum_{j=1}^{n} \eta_{j_1}^1f^{i_1}\quad \ldots\quad y^q = \sum_{j=1}^{n} \eta^q_{j_q}f^{j_q}$
+
+\begin{align*}    
+    W\left( x_1x_2\ldots x_p y^1 y^2 \ldots y^q \right) &= W\left( \xi_1^{i_1} \ldots \right)  \\
+                                                        &= \xi_1^{i_1} \ldots \eta_{j_q}^qW\left( e_{i_1}e_{i_2} \ldots f^{j_1}f^{j_2} \ldots \right)  \\
+                                                        &\ov{\triangle}= \xi_1^{i_1}\xi_2^{i_2} \ldots \eta^1_{j_1}\eta^2_{j_2} \ldots \omega_{i_1i_2\ldots i_p}^{j^1j^2 \ldots j^q}  \\
+.\end{align*}
+
+
+$\sqsupset \left\{ \tl e_l \right\} _{l=1}^n$ -- базис X (новый)
+
+$\tl e_l = \sum_{j=1}^{n} \tau_l^je_j\qquad \left( \tau = \|\tau_l^j\| \right) $
+
+$\sqsupset \left\{ \tl f^m \right\} _{m=1}^n$ -- базис $X^*$ (сопряжённый к новому)
+
+$\tl f^m = \sum_{j=1}^{n} \sigma_j^mf^j \qquad \left( \sigma_j^m\tau_l^j = \delta_l^m \right) $
+
+$\sqsupset \omega_{i_1i_2\ldots i_p}^{j_1j_2 \ldots j_q} = W\left( e_{i_1} \ldots e_{i_p}f^{j_1}\ldots f^{j_q} \right) $
+
+\begin{align*}    
+    \sphericalangle \tl{\omega}^{t_1t_2 \ldots t_q}_{s_1 s_2 \ldots s_p} &= W\left( \tl e_{s_1}\tl e_{s_2}\ldots. \tl e_{s_p}\tl f^{t_1}\ldots \tl f^{t_q} \right)\\
+                                                                         &= W\left( \sum_{i_1=1}^{n} \tau_{s_1}^{i_1}e_{i_1} \ldots \sum_{i_p=1}^{n} \tau_{s_p}^{i_p}e_{i_p}, \sum_{j_1=1}^{n} \sigma_{j_1}^{t_1} \ldots \sum_{j_q = 1}^{n} \sigma_{j_q}^{t_q}f^{j_q} \right)  \\
+                                                                         &= \tau_{s_1}^{i_1}\tau_{s_2}^{i_2} \ldots \tau_{s_p}^{i_p}\sigma_{j_1}^{t_1} \ldots \sigma_{j_q}^{t_q} \omega_{i_1i_2 \ldots i_p}^{j^1j^2 \ldots j^q} \\
+.\end{align*}
+
+\begin{note}
+    Вообще аргументы могут идти по-разному и тогда могут писать $\omega^{i_1i_2}{}_{j_1j_2j_3}{}^{i_3i_4i_5}$
+\end{note}
+
+\begin{definition}
+    Тензором типа $(p,q)$  называется алгебраический объект вида  $\omega_{i_1i_2\ldots i_p}^{j_1j_2 \ldots j_q}$, где:
+    \begin{enumerate}
+        \item [] $i_1i_2 \ldots i_p$ -- ковариантные индексы
+        \item [] $j^1 j^2 \ldots j^q$ -- контравариантные индексы
+    \end{enumerate}
+    и преобразующийся при замене базиса $(T)$ по закону
+    \[
+    \tl{\omega}^{t_1t_2 \ldots t_q}_{s_1 s_2 \ldots s_p} = \tau_{s_1}^{i_1}\tau_{s_2}^{i_2} \ldots \tau_{s_p}^{i_p}\sigma_{j_1}^{t_1} \ldots \sigma_{j_q}^{t_q} \omega_{i_1i_2 \ldots i_p}^{j^1j^2 \ldots j^q}
+    .\] 
+\end{definition}
+
+\begin{note}
+    Они, естественно, образуют линейное пространство (можно рассмотреть сложение, домножение на число и доказать свойство)
+\end{note}
+
+Операции:
+\begin{enumerate}
+    \item Сложение \quad $\omega_{\vec i}^{\vec j}\quad v_{\vec i}^{\vec j}\quad \in (p,q)$
+
+         \[
+         u_{i_1i_2 .. i_p}^{j^1 j^2 \ldots j^q} = \omega_{i_1i_2 \ldots i_p}^{j_1j_2 \ldots j_q} + v_{i_1i_2 \ldots i_p}^{j^1 j^2 \ldots j^q} \]
+
+             $\tl u_{\vec i}^{\vec j} = \tl{\omega + v}_{\vec i}^{\vec j} = \tl \omega_{\vec i}^{\vec j} + v_{\vec i }^{\vec j}$
+         \item Умножение на число $u_{\vec i}^{\vec j} = \alpha \omega_{\vec i}^{\vec j}$
+
+             $\tl u_{\vec i}^{\vec j} = \tl {\left( \alpha \omega \right) }_{\vec i}^{\vec j} = \alpha \tl {\omega}_{\vec i}^{\vec j}$
+         \item Тензорное произведение. $\sqsupset \omega_{\vec i}^{\vec j} \left( p_1, q_1 \right) \quad v_{\vec i}^{\vec j}\quad (p_2, q_2)$
+
+             $u = \omega \otimes v \left( p_1+p_2, q_1+q_2 \right) $
+
+    \begin{align*}
+    &\tl \omega_{s_1s_2 \ldots s_{p_1}}^{t_1t_2 \ldots t_{q_1}}\tl v_{s_{p_1+1} \ldots s_{p_1+p_2}}^{t_{p_1+1} ... t_{p_1+p_2}} =\\
+    &= \tau_{s_1}^{i_1} ..  \tau_{s_{p_1+p_2}}^{i_{p_1+p_2}} \sigma_{j_1}^{t_1} \ldots \sigma_{j_{q_1+q_2}}^{t_{q_1+q_2}} \underbrace{\omega_{i_1i_2 \ldots i_{p_1}}^{j_1j_2 \ldots j_{q_1}}v_{i_{p_1+1}\ldots i_{p_1+p_2}}^{j_{q_1} \ldots j_{q_1+q_2}}}_{u_{i_1 i_2 \ldots i_{p_1+p_2}}^{j_1j_2 \ldots j_{q_1+q_2}}}
+    .\end{align*}
+\item Транспонирование. Замена двух индексов тянется до замены двух индексов в преобразовании (просто везде один меняется на другой). А тогда преобразование то же самое. Note: менять можно индексы одного типа
+    \begin{note}
+        Если менять индексы разного типа, то нарушится ко(нтра)вариантность и это не будет тензором
+    \end{note}
+\item Свёртка. $\omega_{i_1 i_2 \ldots k \ldots i_p}^{j_1 j_2 \ldots k \ldots j_q}$
+
+    $\omega_{s_1s_2 \ldots m \ldots s_p}^{t_1t_2 \ldots m \ldots t_q} = \sigma_{j_1}^{t_1} \ldots \sigma_k^m \ldots \sigma_{j_q}^{t_q}\tau_{s_1}^{i_1} ... \tau_m^k \ldots \tau_m^k \ldots \tau_{s_p}^{i_p}\omega_{i_1i_2 \ldots k \ldots i_p}^{j_1j_2 \ldots k \ldots j_q}$
+
+    $\sigma_k^m\tau_m^k = 1$ -- т.е. эти индексы просто не участвуют в преобразовании.
+
+\end{enumerate}
+
+\section{Практика. Вычисление определеителей}
+
+\begin{enumerate}
+    \item Метод рекуррентных отношений
+
+        $D_n = p D_{n-1}$
+
+        $D_n = p_nD_{n-1}$
+
+        $D_n = p-qD_{n-1}$
+
+        $D_n = p_n - q_nD_{n-1}$
+
+        $D_n = pD_{n-1} + qD_{n-2}$
+    \item Представление определителя в виде суммы
+\end{enumerate}
+
+\section{Ранг матрицы это инвариант}
+
+$\sqsupset A, B $
+
+$AB = C\quad c_{ij} = \sum_{k=1}^{n}a_{ik}b_{kj}$
+
+$
+\begin{array}{c@{\,}c}
+    &\begin{bmatrix} b_{11} & b_{12} & \ldots\\ b_{21} & b_{22} & \ldots\\ \vdots & \vdots & \ldots \end{bmatrix} \\[8mm]
+    \begin{bmatrix} a_{11} & a_{12} & \ldots\\ a_{21} & a_{22} & \ldots\\ \vdots & \vdots & \ldots \end{bmatrix}    & \begin{bmatrix} c_{11} & c_{12} & \ldots\\ c_{21} & c_{22} & \ldots\\ \vdots & \vdots & \ldots \end{bmatrix} \\[8mm]
+    \begin{bmatrix} 0 & 1 &  & \\ 1 & 0 & &\\ & & 1 &\\ &&&1 \end{bmatrix} & \begin{bmatrix} b_{21} & b_{22}& &\\ b_{11} & b_{12} & &\\ &&&\\&&& \end{bmatrix} 
+\end{array}$
+
+
+Если поменять две строчки местами, то они поменяются и у результата.
+
+Если умножить строку на число, в итоге та же строка тоже умножится
+
+Если добавим к одной строке другую, то же произойдёт и с результатом.
+
+Матрицы преобразований:
+\begin{enumerate}
+    \item $\begin{bmatrix} 0 & 1 &  & \\ 1 & 0 & &\\ & & 1 &\\ &&&1 \end{bmatrix} $\\
+    \item $\begin{bmatrix} 1 & & & \\ &\lambda & && \\ &&1&&\\ &&&\ddots &\\ &&&&1 \end{bmatrix} $
+    \item $\begin{bmatrix} 1 & 1&&\\&1&&\\&&1&\\&&&1 \end{bmatrix} $
+\end{enumerate}
+
+\begin{note}
+    Произведение матриц некоммутативно. 
+
+    $AB\neq BA\qquad (A+B)^2 \neq A^2+2AB+B^2\quad (A+B)(A-B)\neq A^2-B^2$
+\end{note}
+
+\begin{example}
+    $A\quad \rg A = a\quad \rg B = b$
+
+     \[
+         \rg AB = \min(m, n)
+    .\] 
+
+    Про ранг суммы нельзя ничего сказать
+\end{example}
+
+\begin{example}
+    $A_{m\times r}\quad B_{r\times n}$
+
+    $\rg (AB) = r \implies \rg A = r\quad \rg B = r$
+\end{example}
+
+\begin{problem}
+    Сформулировать в терминах рангов необходимое и достаточное условие того, чтобы три точки на плоскости не лежали на одной прямой
+
+    $P(x_1, y_1)\quad Q(x_2, y_2)\quad R\left( x_3, y_3 \right) $
+
+    $Ax+By+C = 0$ -- уравнение прямой
+
+    $\begin{cases}
+        Ax_1+By_1+C = 0\\
+        Ax_2+By_2+C = 0\\
+        Ax_3+By_3+C = 0\\
+    \end{cases}$ 
+
+    Мы требуем нетривиальное решение. Это некрамеровская система, значит
+
+    $\rg \begin{bmatrix} x_1&y_1&1\\x_2&y_2&1\\x_3&y_3&1\\ \end{bmatrix} <3$
+\end{problem}
+
+\begin{problem}
+    То же самое, только для четырёх точек в пространстве и плоскость через них.
+
+    $\begin{bmatrix} x_1&y_1&z_1&1\\ x_2&y_2&z_2&1\\x_3&y_3&z_3&1\\ x_4&y_4&z_4&1\\  \end{bmatrix} $
+
+    4 -- не лежт
+
+    3 -- на одной плоскости
+
+    2 -- на одной прямой
+\end{problem}
+
+\begin{problem}
+$\left[\begin{array}{cc|c} A_1&B_1&C_1\\A_2&B_2&C_2\\A_3&B_3&C_3 \end{array}\right] $ 
+
+
+    2, 3 -- две прямые параллельны или они пересекаются в трёх разных точках
+
+    2, 2 -- пересекаются в одной точке
+
+    1, 2 -- три параллельных прямые, две из которых совпадают
+
+    1, 1 -- все совпадают
+\end{problem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    \end{document}
