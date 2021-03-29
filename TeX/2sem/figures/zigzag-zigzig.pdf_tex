@@ -99,7 +99,7 @@
     \put(0.66011867,0.20998148){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$D$\\\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=17]{zigzag-zigzig.pdf}}%
     \put(0,1.2375){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}z\end{tabular}}}}%
-    \put(0.28204123,0.32146556){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}zig-zag\\\end{tabular}}}}%
-    \put(0.49720465,0.12321612){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}zig-zig\end{tabular}}}}%
+    \put(0.49967686,0.12558149){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}zig-zag\\\end{tabular}}}}%
+    \put(0.28193382,0.32823887){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}zig-zig\end{tabular}}}}%
   \end{picture}%
 \endgroup%
