@@ -1,6 +1,6 @@
 %% Creator: Inkscape inkscape 0.92.5, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'tree.pdf' (pdf, eps, ps)
+%% Accompanies image file 'splayop.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -53,13 +53,10 @@
   \begin{picture}(1,0.5)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(0.44137182,0.4275308){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$5$\end{tabular}}}}%
-    \put(0.26830928,0.28735008){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$3$\end{tabular}}}}%
-    \put(0.60233167,0.28388888){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$10$\end{tabular}}}}%
-    \put(0.49675188,0.11428744){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$7$\end{tabular}}}}%
-    \put(0.73905112,0.11601817){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$16$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{tree.pdf}}%
-    \put(0.37906936,0.14370804){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$4$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{tree.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{splayop.pdf}}%
+    \put(0.25055898,0.13747484){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.2782757\unitlength}\raggedright X\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{splayop.pdf}}%
+    \put(0.7494596,0.4512279){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.2782757\unitlength}\raggedright X\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{splayop.pdf}}%
   \end{picture}%
 \endgroup%

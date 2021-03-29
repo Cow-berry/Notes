@@ -1,0 +1,73 @@
+%% Creator: Inkscape inkscape 0.92.5, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'exmerge.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{680.31496063bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.5)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{exmerge.pdf}}%
+    \put(0.02882536,0.27716704){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.2051036\unitlength}\raggedright G\end{minipage}}}%
+    \put(0.0798241,0.18736493){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.15188753\unitlength}\raggedright F\end{minipage}}}%
+    \put(0.53338533,0.28904329){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.2051036\unitlength}\raggedright G\end{minipage}}}%
+    \put(0.58400796,0.1992196){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.15188753\unitlength}\raggedright F\end{minipage}}}%
+    \put(0.11862747,0.38914249){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.17516954\unitlength}\raggedright W\end{minipage}}}%
+    \put(0.62343245,0.40321524){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.17516954\unitlength}\raggedright W\end{minipage}}}%
+    \put(1.08108228,-0.12429339){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.850619\unitlength}\raggedright \end{minipage}}}%
+    \put(0.4301632,0.40466383){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24058097\unitlength}\raggedright Q\end{minipage}}}%
+    \put(0.93388265,0.41685346){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24058097\unitlength}\raggedright Q\end{minipage}}}%
+    \put(0.21951628,0.28714502){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.17295224\unitlength}\raggedright P\end{minipage}}}%
+    \put(0.86003341,0.30676019){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.17295224\unitlength}\raggedright P\end{minipage}}}%
+    \put(0.35477378,0.29490571){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.22062496\unitlength}\raggedright O\end{minipage}}}%
+    \put(0.71658433,0.27906617){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.22062496\unitlength}\raggedright O\end{minipage}}}%
+    \put(0.44235855,0.19512558){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.21729896\unitlength}\raggedright C\end{minipage}}}%
+    \put(0.94577702,0.20700216){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.21729896\unitlength}\raggedright C\end{minipage}}}%
+  \end{picture}%
+\endgroup%

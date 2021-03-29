@@ -77,6 +77,7 @@
 \newmdtheoremenv[nobreak=true]{property}{Свойство}
 \newmdtheoremenv[nobreak=true]{statement}{Утверждение}
 \newmdtheoremenv[nobreak=true]{corollary}{Следствие}
+\newmdtheoremenv[nobreak=true]{question}{Вопрос}
 \newtheorem*{note}{Замечание}
 \newtheorem*{example}{Пример}
 \renewcommand\qedsymbol{$\blacksquare$}
@@ -1399,15 +1400,298 @@ $\left[\begin{array}{cc|c} A_1&B_1&C_1\\A_2&B_2&C_2\\A_3&B_3&C_3 \end{array}\rig
 \end{problem}
 
 
+\section{Линейные операторы}
+
+ \begin{definition}
+    $\sqsupset X, Y$ -- ЛП, $\dim X = n\quad \dim Y = m$
+
+     $\sphericalangle \phi: X\to Y$
+
+     \begin{align*}
+         \varphi: X &\longrightarrow Y \\
+         x &\longmapsto y = \varphi(x) = \varphi x\\
+         \varphi(x+y) = \varphi(x) + \varphi(y)\\
+         \varphi\left(\lambda x  \right) = \lambda \varphi(x) 
+     .\end{align*}    
+\end{definition}
+
+\begin{note}
+    $\varphi: X\longrightarrow X$
+
+    действует на (биекция) -- автоморфизм
+
+    действует в (сюръекция) -- эндоморфизм
+\end{note}
+
+\begin{example}
+    \begin{enumerate}
+        \item $\mathscr{I}: X\to X\quad \mathscr{I}x = x$ -- тождественный оператор
+        \item $\mathbb{O}:X\to X\quad \mathbb{O}x = 0$ -- нулевой оператор
+        \item  $\mathscr{P}:X\to X\quad X = L_1 \dotplus L_2 \implies x = x_1+x_2$
+            $\begin{cases}
+                \mathscr{P}_{L_1}^{\parallel L_2}x = x_1\\
+                \mathscr{P}_{L_2}^{\parallel L_1} = x_2
+            \end{cases}$ -- проектор
+        \item $\varphi: \p C[a,b] \to  \p C[a,b]\quad \left( \varphi f \right) (t) = \int_a^bf(s)K(s,t)ds$
+        \item $\mathscr{D}: C^{\infty }(a,b) \to  C^{\infty}(a,b)\quad \left( \mathscr{D}f \right) (t) = \frac{df}{dt}$
+    \end{enumerate}
+\end{example}
+
+$\sqsupset \mathscr{L}(X,Y)$ -- множество операторов действующих из $X$ в  $Y$
+
+$\sqsupset \varphi, \psi \in \mathscr{L}(X, Y)$
+
+\begin{definition}
+    Суммой операторов $\varphi, \psi$ называется отображение  \[
+    \chi = \varphi + \psi
+    .\] 
+    и определяемое как $\chi(x) = \varphi(x) + \psi(x)$
+\end{definition}
+\begin{lemma}
+    $\chi \in \mathscr{L}(X, Y)$
+
+     \begin{align*}
+         \chi(x+y) = (\varphi + \psi)(x+y) = \varphi(x+y) + \psi(x+y) = (\varphi + \psi)(x) + (\varphi + \psi)(y) = \chi x + \chi y
+    .\end{align*}
+\end{lemma}
+
+\begin{definition}
+    Умножением оператора на число $\lambda \in K$ называется отображение
+     \[
+    \omega = \lambda \varphi
+    .\] 
+    $\omega(x) = \left( \lambda \varphi \right) (x) = \lambda\cdot  \varphi(x)$
+\end{definition}
+\begin{lemma}
+    $\omega\in\mathscr{L}(X, Y)$
+\end{lemma}
+
+\begin{theorem}
+    $\mathscr{L}(X, Y)$ -- Линейное Пространство
+\end{theorem}
+
+\begin{question}
+    $\dim(X, Y) = ?$
+    
+\end{question}
+
+$\sqsupset \left\{ e_j \right\} _{j=1}^n$ -- базис $X\quad \left\{ h_k \right\} _{k=1}^m$ -- базис $Y$
+
+$\sqsupset x\in X \implies x = \sum_{j=1}^{n} \xi^je_j$ 
+
+\begin{align*}
+    \varphi x &= \varphi\left( \sum_{j=1}^{n} \xi^je_j \right)  
+               =\sum_{j=1}^{n} \xi^j\underbrace{\varphi(e_j)}_{\in Y} \\
+              &\overset * = \sum_{j=1}^{n} \xi^j \sum_{k=1}^{m} a_j^kh_k 
+              = \sum_{k=1}^{m}\underbrace{ \left( \sum_{j=1}^{n} \xi^ja_j^k \right)}_{\eta^k} h_k
+              = \sum_{k=1}^{n} \eta^kh_kx
+.\end{align*}
 
 
+$*\quad\varphi(e_j) = \sum_{k=1}^{m} a_j^kh_k$
+
+\begin{definition}
+    Набор $A_{\varphi} = \|a_j^k\|$ образует матрицу, которая называется матрицей линейного оператора $\varphi$ в паре базисов  $\left\{ e_j \right\} $ и $\left\{ h_k \right\} $
+\end{definition}
+
+\begin{lemma}
+    Задание линейного оператора в пространстве эквивалентно заданию его матрицы при фиксированной паре базисов.
+\end{lemma}
+
+\begin{note}
+    $\varphi x = y$
+
+    $A_{\varphi}\xi = \eta$
+
+    Тождественный оператор имеет единичную матрицу.
+
+    Нулевой матрицу из нулей
+
+    $X = L_1 \dotplus L_2\quad L_1 \left\{ e_j \right\} _{j=1}^k\quad L_2 \left\{ e_j \right\} _{j=k+1}^n$ 
+
+    $\begin{bmatrix} E&O\\O&O \end{bmatrix} $ -- матрица проектора (единичный квадрат, всё остальное ноль)
+\end{note}
+
+$\sphericalangle \left\{ _k^jE \right\}$  -- набор в $\mathscr{L}(X, Y$
+
+$\sqsupset x\in X\quad x = \sum_{j=1}^{n} \xi^je_j\quad _k^jEx = \xi^jh_k$ (единичка в матрице на месте $(j,k)$)
+
+\begin{theorem}
+    Набор $\left\{ _k^jE \right\} $ образует базис $\mathscr{L}(X, Y)$
+\end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item []
+        \item Полнота. $\sqsupset \varphi\in \mathscr{L}(X, Y)$
+
+        \begin{align*}            
+            \varphi(x) &= \sum_{j=1}^{n} \xi^j\varphi(e_j) = \sum_{j=1}^{n} \xi^j \sum_{k=1}^{m} a_j^k \\
+            &= \sum_{j=1}^{n} \sum_{k=1}^{m} \xi^ja_j^kh_k = \sum_{j=1}^{n} \sum_{k=1}^{m} {}_k^jE(x)a_j^k\ \ \forall x\in X
+        .\end{align*}
 
 
+            $ \implies  \varphi = \sum_{j=1}^{n} \sum_{k=1}^{m} {}_k^jEa_j^k$
+        \item Линейная независимость. 
+            $\sqsupset \sum_{j=1}^{n} \sum_{k=1}^{m}{}_k^jE\alpha_j^k = \mathscr{O}\quad \mid e_1$ 
 
+            $\sum_{j=1}^{n} \sum_{k=1}^{m}{}_k^jE\left( e_1 \right) \alpha_j^k = \sum_{k=1}^{m} 1\cdot \underbrace{h_k}_{\text{ЛНЗ}}\cdot \alpha_1^k = 0 \implies \alpha_1^k = 0$ 
 
+            $\alpha_j^k = 0 \forall k, j$
+    \end{itemize}
+\end{proof}
 
+\begin{note}
+    $\dim \mathscr{L}(X, Y) = m\cdot n$
 
+    $\sphericalangle K_n^m$ -- пространство $m \cdot  n$
+\end{note}
 
+\begin{lemma}
+    $\mathscr{L}(X, Y) \simeq K_n^m$
+\end{lemma}
+
+$\sqsupset \left\{ e_j \right\} _{j=1}^n\quad  \left\{ \tl e_k \right\} _{k=1}^n$ -- базис $X$ 
+
+$\sqsupset \varphi:X\to X\quad A_{\varphi}\quad \tl A_{\varphi}$
+
+Как преобразуется матрица оператора при переходе между базисами
+\begin{align*} 
+    \varphi \tl e_s i&= \varphi\left( \sum_{j=1}^{n} \tau^j_se_j \right) =\sum_{j=1}^{n} \tau^j_s \varphi\left( e_j \right) &= \sum_{j=1}^{n} \sum_{k=1}^{n} \tau^j_s a^k_je_k\\
+                     &= \sum_{j=1}^{n} \tl a_s^j\tl e_j = \sum_{j=1}^{n} \tl a^j_s \sum_{k=1}^{n} \tau_j^k e_k &= \sum_{j=1}^{n} \sum_{k=1}^{n} \tl a_s^j\tau_j^ke_k
+.\end{align*}
+
+$\implies \sum_{j=1}^{n} \tau^j_sa^k_j = \sum_{j=1}^{n} \tl a^j_s\tau^k_j$ 
+
+$A_{\varphi}T = T\tl A_{\varphi}$
+
+ \begin{lemma}
+     $\tl A_{\varphi} = S A_{\varphi}T\quad S = T^{-1}$ -- преобразование SAT
+\end{lemma}
+
+$\sqsupset T\quad \det T\neq 0$
+
+$\sqsupset A\in \R_n^n$
+
+$A \longrightarrow T^{-1}AT$ -- преобразование подобия
+
+$A~B \iff B = T^{-1}AT$ -- отношение эквивалентности. Разбивается на непересекающиеся классы
+
+$\sqsupset X, Y, Z$
+
+$\sphericalangle \varphi\in\mathscr{L}(X, Y)$
+
+$\sphericalangle \psi\in\mathscr{L}(Y, Z)$
+
+$X \overset {\varphi}{\longrightarrow} Y \overset{\psi}{\longrightarrow} Z$
+
+ \begin{definition}
+     Композицией линейных операторов $\phi$ и  $\psi$ называется отображение  \[
+     \chi = \psi \circ \varphi,
+     \] 
+      которое действует как \[
+         \chi(x) = \left( \varphi\circ \psi \right) (x) = \pi\left( \varphi(x) \right) 
+     .\] 
+\end{definition}
+\begin{lemma}
+    $\psi\circ \varphi = \chi\in\mathscr{L}(X, Z)$
+\end{lemma}
+\begin{proof}
+    $\sqsupset x, y\in X$
+
+    $\chi(x+y) = \left(\psi\circ \varphi  \right)(x+y) = \psi\left( \varphi(x+y) \right) = \psi\left( \varphi x + \varphi y \right)  = \psi(\varphi (x)) + \psi(\varphi( y)) = \chi (x) + \chi (y)  $
+
+    $\chi\left( \lambda x \right)  = \lambda \chi(x)$
+\end{proof}
+
+$\sqsupset \left\{ e_j \right\} _{j=1}^n$ -- базис $X$,  $\left\{ h_k \right\} _{k=1}^m$ -- базис $Y$,  $\left\{ g_l \right\} _{l=1}^s$ -- базис $Z$
+
+В паре базисов  $\varphi \longleftrightarrow A_{\varphi}$
+
+В паре базисов  $\psi \longleftrightarrow B_{\psi}$
+
+Хочется получить матрицу  $\chi \longleftrightarrow C_{\chi}$
+
+$\chi\left( e_j \right) = \sum_{l=1}^{s} C^l_kg_l$ 
+
+С другой стороны 
+\begin{align*}  
+ &= \left( \psi\circ \varphi \right) (e_j) = \psi\left( \varphi(e_j) \right) \\
+ &= \psi\left( \sum_{k=1}^{m} a_j^kh_k \right)  \\
+ &= \sum_{k=1}^{m} a_j^k\psi(h_k) \\
+ &= \sum_{k=1}^{m} a^k_j \sum_{l=1}^{s} b_k^lg_l \\
+ &= \sum_{l=1}^{s} \left( \sum_{k=1}^{m} a^k_jb^l_k \right) g_l \\
+.\end{align*}
+
+$\implies c^l_j = \sum_{k=1}^{m} a^k_jb^l_k \iff C_{\chi} = B_{\psi}\cdot A_{\varphi}$
+
+$\sphericalangle \mathbb{K}^n_n\quad$ ``+'' ``$\lambda$'' ``$\cdot $''
+
+\begin{definition}
+    Алгеброй $\mathscr{A}$ называется линейное пространство, наделённое операцией умножение, так что выполняются следующие требования (аксиомы):
+     \begin{enumerate}
+         \item $a_1\left( a_2a_3 \right)  = (a_1a_2)a_3 \forall a_1, a_2, a_3$
+         \item $a\left( b+c \right)  = ab+ac$
+         
+             $(a+b)c = ac+bc$
+         \item  $\lambda\left( ab \right)  = \left( \lambda a \right) b = a\left( \lambda b \right) $
+    \end{enumerate}
+\end{definition}
+
+$\sqsupset \mathscr{A}$ -- некоторая алгебра $\sqsupset x, y\in \mathscr{A}$
+
+$\sqsupset \left\{ e_j \right\}$ -- базис $\mathscr{A} \implies \begin{cases}
+    x = \sum_{j=1}^{n} \xi^je_j\\
+    y = \sum_{k=1}^{n} \eta^ke_k
+\end{cases}$ 
+
+$x\cdot y = \left( \sum_{j=1}^{n} \xi^je_j \right) \cdot \left( \sum_{k=1}^{n} \eta^ke_k \right)  = \sum_{k,j = 1}^{n} \xi^j\eta^k\underbrace{\left( e_j\cdot e_k  \right)}_{\sum_{l=1}^{n} m^l_{jk}e_l } $
+
+$\left\{ m^l_{jk} \right\}$ -- структурные константы алгебры $\mathscr{A}$
+
+\begin{example}
+    $\C$
+
+    \begin{tabular}{|c|c|c|}       
+    \hline &1&i\\ \hline
+    1 & 1 & i\\ \hline
+i&i&-1\\ \hline
+    \end{tabular}
+
+    Такую же для кватернионов можно сделать. 
+\end{example}
+
+\begin{problem}
+    Выразить свойство ассоциативности в рамках структурных констанст
+
+    Сделать то же самое с коммутативностью
+\end{problem}
+
+\begin{note}
+    Алгебра это полугруппа (есть ассоциативности)
+\end{note}
+
+$\sphericalangle \mathscr{A}$ -- алгебра $\sqsupset e_L\in \mathscr{A}:\quad \forall x\in \mathscr{A}\quad e_L x = x$ -- левая единица
+
+$e_R\in\mathscr{A}:\quad \forall x\in \mathscr{A}\quad xe_R = x$ -- правая единица
+
+\begin{note}
+    Если есть и левая и правая, то они совпадают
+
+    Если нет, то может быть несколько одного типа.
+\end{note}
+
+$\sqsupset x\in \mathscr{A}\quad \sqsupset y\in \mathscr{A}: yx = e$, $y$ -- левый обратный
+
+$z\in\mathscr{A}\quad xz = e$ -- правый обратный
+
+ \begin{note}
+     Если у $x$ есть правый \underline{или} левый, то он называется обратимым
+
+     Если есть и тот и другой, то они совпадают $y = z = x^{-1}$
+      \begin{proof}
+         $z = yxz = y$
+     \end{proof}
+\end{note}
 
 
 

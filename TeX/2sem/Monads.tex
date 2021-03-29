@@ -1,0 +1,266 @@
+\documentclass{book}
+%nerd stuff here
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+% Languages support
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+% Some fancy symbols
+\usepackage{textcomp}
+\usepackage{stmaryrd}
+% Math packages
+\usepackage{amsmath, amssymb, amsthm, amsfonts, mathrsfs, dsfont, mathtools}
+\usepackage{cancel}
+% Bold math
+\usepackage{bm}
+% Resizing
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+% Optional font for not math-based subjects
+%\usepackage{cmbright}
+
+\author{Коченюк Анатолий}
+\title{От типов до свободных монад}
+
+\usepackage{url}
+% Fancier tables and lists
+\usepackage{booktabs}
+\usepackage{enumitem}
+% Don't indent paragraphs, leave some space between them
+\usepackage{parskip}
+% Hide page number when page is empty
+\usepackage{emptypage}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{xcolor}
+% Some shortcuts
+\DeclareMathOperator{\Obj}{Obj}
+\DeclareMathOperator{\Morph}{Morph}
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\renewcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand{\p}[1]{#1^{\prime}}
+\newcommand{\pp}[1]{#1^{\prime\prime}}
+% Easily typeset systems of equations (French package) [like cases, but it aligns everything]
+\usepackage{systeme}
+\usepackage{lipsum}
+% limits are put below (optional for int)
+\let\svlim\lim\def\lim{\svlim\limits}
+\let\svsum\sum\def\sum{\svsum\limits}
+%\let\svlim\int\def\int{\svlim\limits}
+% Command for short corrections
+% Usage: 1+1=\correct{3}{2}
+\definecolor{correct}{HTML}{009900}
+\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
+\newcommand\green[1]{{\color{correct}{#1}}}
+% Hide parts
+\newcommand\hide[1]{}
+% si unitx
+\usepackage{siunitx}
+\sisetup{locale = FR}
+% Environments
+% For box around Definition, Theorem, \ldots
+\usepackage{mdframed}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\newmdtheoremenv[nobreak=true]{definition}{Определение}
+\newmdtheoremenv[nobreak=true]{theorem}{Теорема}
+\newmdtheoremenv[nobreak=true]{lemma}{Лемма}
+\newmdtheoremenv[nobreak=true]{problem}{Задача}
+\newmdtheoremenv[nobreak=true]{property}{Свойство}
+\newmdtheoremenv[nobreak=true]{statement}{Утверждение}
+\newmdtheoremenv[nobreak=true]{corollary}{Следствие}
+\newtheorem*{note}{Замечание}
+\newtheorem*{example}{Пример}
+\renewcommand\qedsymbol{$\blacksquare$}
+% Fix some spacing
+% http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=\parskip \thm@postskip=0pt
+}
+\usepackage{xifthen}
+\def\testdateparts#1{\dateparts#1\relax}
+\def\dateparts#1 #2 #3 #4 #5\relax{
+    \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
+}
+
+\def\@lecture{}%
+\newcommand{\lecture}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@lecture{Lecture #1}%
+    }{%
+        \def\@lecture{Lecture #1: #3}%
+    }%
+    \subsection*{\@lecture}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+% Todonotes and inline notes in fancy boxes
+\usepackage{todonotes}
+\usepackage{tcolorbox}
+
+% Make boxes breakable
+\tcbuselibrary{breakable}
+\newenvironment{correction}{\begin{tcolorbox}[
+    arc=0mm,
+    colback=white,
+    colframe=green!60!black,
+    title=Correction,
+    fonttitle=\sffamily,
+    breakable
+]}{\end{tcolorbox}}
+% These are the fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% LE: left even
+% RO: right odd
+% CE, CO: center even, center odd
+% My name for when I print my lecture notes to use for an open book exam.
+% \fancyhead[LE,RO]{Gilles Castel}
+
+\fancyhead[RO,LE]{\@lecture} % Right odd,  Left even
+\fancyhead[RE,LO]{}          % Right even, Left odd
+
+\fancyfoot[RO,LE]{\thepage}  % Right odd,something additional 1  Left even
+\fancyfoot[RE,LO]{}          % Right even, Left odd
+\fancyfoot[C]{\leftmark}     % Center
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+\usepackage{tikz}
+\usepackage{listings}
+\begin{document}
+    \maketitle
+    \section{Функции}
+
+    $f(x) = y$
+
+    $f(x) = y_1, \ldots, y_n$ -- многозначная функция
+
+    У нас функция: соответствие одному $y$-ку
+
+    Зачем нужны? Много чего ими описывается. А теперь мы хотим поменять способ описания самих функций. (страшное слово -- функторизация)
+
+    $f(x) = y \quad x\in X_f\quad y\in Y_f$
+
+    \begin{lstlisting}
+        function int mod2(int a) {
+            return a & 1;
+        }   
+    \end{lstlisting}
+
+    $X_f \to Y_f$ -- наша функция стала стрелочкой и это то, чем занимает теория категорий -- стрелочки)
+    
+    Тип $ \leftrightarrow$ Множество
+
+    Что можем делать с множествами:  $\cap\quad \cup\quad add\quad \in?\quad \subseteq \quad \setminus \quad remove$ -- с последней есть некоторые проблемы в разных теориях, но сейчас не об этом.
+
+    Что можем делать с типами:
+    \begin{itemize}
+        \item объединять да
+        \item пересекать неочевидно непонятно
+        \item добавлять элемент -- объединять с синглтоном
+        \item принадлежность есть
+        \item включённость есть
+        \item с вычитанием проблемы
+    \end{itemize}
+
+    Воспомиания о топологии: Топология -- множество открытых множеств. Если $X, Y$ -- открытые, то  $X\subseteq  X\cup Y\quad Y\subseteq X\cup Y$. Этого про топологию нам должно хватить
+
+    \section{Типы}
+
+    \begin{lstlisting}
+        class A<T,U> {
+            T a;
+            U b;
+        }
+    \end{lstlisting}
+
+    Если значений $T$ -- 5, а  $U$ -- 7, то всего разных  $A$ Бывает 35. Вжух, мы ввели умножение
+
+    Если ввести union(U, T), то это будет сложение
+
+     $f: U_7 \to T_5$ -- $5^7$ -- возведение в степень
+
+     $x+y = (1 + (x-1)) + y = \ldots = \left( 1+1+\ldots+1 \right) +y$
+
+     $x\cdot y = (1+(x-1))\cdot y = y + (x-1)\cdot y = \ldots = y + \ldots + y$
+
+     $x^y\quad 0^y = 0\quad x^{1+(y-1)} = x\cdot x^{y-1}$
+
+    Рассмотрим наш класс выше. $\frac{\partial TU}{\partial U} = T$ 
+
+    \section{Схема существования}
+
+    Хотим, чтобы функция работали и на типах и на множествах. И отдельно, чтобы в качестве функция были наши стрелочки (которые будут называeтся категориями)
+
+    Хотим от стрелок ассоциативности $f\circ (g\circ h) = (f\circ g)\circ h$
+
+    $f\left( X_f \right)  = Y_f$
+
+    \begin{lstlisting}
+        func T id(T t) {
+            return t
+        }
+
+        id: T -> T
+        id: A -> A
+    \end{lstlisting}
+
+    Разные ли эти два id? Реализация одна, вообще разные
+
+    \begin{lstlisting}
+        A a = new A();
+        A b = new A();
+        id(a) != id(b)
+    \end{lstlisting}
+
+    Хотим, ли мы, чтобы они были равны. Этим вопросом в частности задаётся теория категорий
+
+
+    Obj Объекты: Будем обозначать их буковками A, B, C, $\ldots$, а остальное выводить сами.
+
+    Morph Морфизмы: $\to \quad A\to B, \ldots, f, g, \ldots$
+
+    Закон композиции: $x, y\in Morph\quad x_{AB}, y_{BC}\quad (y\circ x)\in Morph$
+
+    Если у нас есть две категории, и между ними есть соответствие, то мы называем его функтором
+
+    $\C_1\quad \C_2\quad \gamma\mathscr{F}:$
+    \begin{enumerate}
+        \item $\forall a\in \Obj \C_1\ \exists f(a) = a\in \Obj \C_2$
+        \item $\forall m\in \Morph \C_1\ \exists  f(m) = \p m$
+        \item $f\left( m\left( a \right)  \right)  = \p m\left( \p a \right) , \p m = f(m), \p a = f(a)$
+        \item $\forall m_1, m_2\in \Morph \C_1\quad f\left( m_1 \right) \circ f\left(m_2 \right) = \p m_1\circ \p m_2$
+    \end{enumerate}
+    Объект -- первого порядка, Морфизмы -- второго, Морфизмы морфизмов -- третьего, ...
+
+    Категория какого порядка?
+    \begin{itemize}
+        \item  Первого, как объект
+        \item 2.5, 1.5, ..
+        \item Категория не объект, а что-то ещё (более страшная терминология, юхху)
+    \end{itemize}
+
+    Если есть стрелки в обе стороны, то $(f_{BA}\circ f_{AB} )(A) = id_A(A) = A$
+
+    $A[k]\quad arr\quad f(A) = B\quad Aarr \to Barr$
+
+    $B[k]\quad map(f, arr)$
+
+    \begin{definition}
+        Полная категория -- в которой стоят все стрелки, которые могут стоять
+    \end{definition}
+
+    Ввести петли так просто, что давайте их требовать
+\end{document}

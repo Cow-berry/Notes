@@ -34,6 +34,35 @@
 \usepackage{multicol}
 \usepackage{xcolor}
 \usepackage{listings}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{myStyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=myStyle}
+
+\lstset{language=Python}
+\usepackage{float}
 % Some shortcuts
 \newcommand\N{\ensuremath{\mathbb{N}}}
 \newcommand\R{\ensuremath{\mathbb{R}}}
@@ -72,9 +101,12 @@
 \newmdtheoremenv[nobreak=true]{property}{Свойство}
 \newmdtheoremenv[nobreak=true]{statement}{Утверждение}
 \newmdtheoremenv[nobreak=true]{corollary}{Следствие}
+\newmdtheoremenv[nobreak=true]{remember}{Воспоминание}
 \newtheorem*{note}{Замечание}
 \newtheorem*{example}{Пример}
 \renewcommand\qedsymbol{$\blacksquare$}
+\newcommand{\ov}[2]{\overset{#1}{#2}}
+\newcommand{\tl}[1]{\widetilde{#1}}
 % Fix some spacing
 % http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
 \makeatletter
@@ -499,7 +531,7 @@ add, remove, contains, put(k,v), get(k)
 
 Выполняется свойство: Все элементы в левом поддереве элементы меньше узла. Справа -- больше.
 
-\begin{figure}[ht]
+\begin{figure}[!ht]
     \centering
     \incfig{tree}
     \caption{$contains(7)\quad add(4)$}
@@ -510,7 +542,7 @@ add, remove, contains, put(k,v), get(k)
 
 $h$ -- высота дерева. за  $O(h)$ можем получать и проверять на наличие
 
-\begin{figure}[ht]
+\begin{figure}[!ht]
     \centering
     \incfig{removing}
     \caption{removing (дерево поиска)}
@@ -525,7 +557,7 @@ $h$ -- высота дерева. за  $O(h)$ можем получать и п
 
 \section{АВЛ-дерево}
 
-\begin{figure}[ht]
+\begin{figure}[!ht]
     \centering
     \incfig{rotation}
     \caption{rotation}
@@ -562,7 +594,7 @@ $F(H) \geqslant \frac{\sqrt{2}^H}{2} $
 
 LL -- аналогично.
 \end{definition}
-\begin{figure}[ht]
+\begin{figure}[!ht]
     \centering
     \incfig{rr}
     \caption{RR}
@@ -575,7 +607,7 @@ LL -- аналогично.
 
 LR также
 \end{definition}
-\begin{figure}[ht]
+\begin{figure}[!ht]
     \scriptsize
     \centering
     \incfig{rl}
@@ -639,4 +671,326 @@ LR также
 
     Можно всякие функции считать на отрезке ключей.
 \end{statement}
- \end{document}
+
+\section{Декартово Дерево}
+
+\begin{enumerate}
+    \item split(x). Из дерева делает два дерева, одно в котором все элементы $<x$, второе --  $\geqslant x$
+    \item merge(T1, T2). Берёт два дерево, которые соответственно $<x$ и  $\geqslant x$ и склеивает их. 
+\end{enumerate}
+
+За $\log n$ научимся делать обе эти операции.
+
+Итак, в каждом узле нашего дерева будет находится два ключа: $x, y$ и выполняется свойство: 
+В правом поддереве:  $\left( <x; <y \right) $, в левом -- $\left( >x; < y \right) $
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{dektree}
+    \caption{dektree}
+    \label{fig:dektree}
+\end{figure}
+
+Если посмотреть на дерево $x$, получится нормальное дерево поиска. Если посмотреть на ключи  $y$, мы получим кучу.
+
+В английском это всё называется Treap = Tree + Heap
+
+$y = rand\left(  \right) \quad E(n) = O\left( \log n \right) $
+
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{treapbuilding}
+    \caption{treapbuilding}
+    \label{fig:treapbuilding}
+\end{figure}
+
+Как строить по набору точек на плоскости:
+\begin{enumerate}
+    \item Находим точку с наибольшим $y$, она, очевидно, корень. 
+    \item Дальше всё, что правее неё, лежит в правом поддереве, всё, что левее -- в левом. Соответственно мы рекурскивно находим корни в этих поддеревьях и соединяем их с корнем на предыдущем шаге.
+\end{enumerate}
+
+Эта процедура очень похожа на quick sort, по той же причине эта штука делается за логарифм.
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{split}
+    \caption{split}
+    \label{fig:split}
+\end{figure}
+
+Split(node, x):
+\begin{enumerate}
+    \item смотрим с какой стороны стоит корень. Так мы можем сразу сделать вывод об одном из поддеревьев
+    \item Запускаемся рекурсивно от второго поддерева
+    \item Возвращаем пару деревьев (два корня)
+\end{enumerate}
+
+\begin{lstlisting}
+    split(node, x):
+        if node = null:
+            return {null, null}
+        if node.x < x:
+            p = split(node.right, x)
+            node.right = p.first
+            return {node, p.second}
+        else:
+            p = split(node.left, x)
+            node.left = p.second
+            return {p.first, node}
+\end{lstlisting}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{merge}
+    \caption{merge}
+    \label{fig:merge}
+\end{figure}
+
+Merge(T1, T2):\quad Все узлы первого меньше всех узлов второго
+\begin{enumerate}
+    \item Определяем кто из двух корней будет итоговым корнем. 
+    \item Делаем merge от второго дерева и ближайшего к нему поддерева главного.
+    \item Возвращаем корень выбранный на первом шаге
+\end{enumerate}
+
+\begin{lstlisting}
+    if A = null:
+        return B
+    if B = null:
+        return A
+    if A.y > B.y:
+        A.right = merge(A.right, B)
+        return A
+    else:
+        B.left = merge(A, B.left)
+        return B
+\end{lstlisting}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{add}
+    \caption{add}
+    \label{fig:add}
+\end{figure}
+
+Add(A, x):
+\begin{enumerate}
+    \item Сплиттим на до $x$ и после $x$, получается три дерева: эти и с одним элементом -- $x$
+    \item Два раза мёрждим, чтобы получить итоговое дерево
+    \item Возвращаем результат последнего мёрджа
+\end{enumerate}
+
+\begin{lstlisting}
+    add(A, node):
+        if node.y > A.y:
+            p = split(A, node.x)
+            node.left = p.first
+            node.right = p.second
+        if node.x < A.x:
+            A.left = add(A.left, node)
+        else:
+            A.right = add(A.right, node)
+        return A
+
+    remove(A, x):
+        if A.x = x:
+            return merge(A.left, A.right)
+        if x < A.x:
+            A.left = remove(A.left, x)
+        else:
+            A.right = remove(A.right, x)
+        return A
+\end{lstlisting}
+
+На этом всём можно делать действия на отрезке как обычно, в том числе с propogate
+
+Чтобы сделать персистентным, нужно найти все места, где мы присваиваем и не присваивать.
+Пример:
+\begin{lstlisting}
+    Ap.right = merge
+    Ap.left = A.left
+    return Ap
+\end{lstlisting}
+
+такая копия, у которой одна половинка такая же, а другая изменённая
+
+\begin{remember}
+    Были списки [G F W O] + [P C Q] = [G F W O P C Q]
+
+    Хотим два списка объектов обеъединять в один список. А также хотим делать сплит по позиции.
+
+    split(3) -> [G F W], [O P C Q]
+\end{remember}
+
+План: хранить последовательности в дереве поиска 
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{exmerge}
+    \caption{Пример merge'a}
+    \label{fig:exmerge}
+\end{figure}
+
+$merge\left( W, Q \right)  \to merge\left( W, P \right) \to merge\left( O, P \right) \to merge\left( O, null \right) $
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{exsplit}
+    \caption{Пример split'а}
+    \label{fig:exsplit}
+\end{figure}
+
+$split\left( Q, 5 \right)  \to split\left( W, 5 \right)  \to  split\left( P, 2 \right) \to split\left( C, 0 \right) $
+
+
+\section{Splay дерево}
+
+Нет никаких вариантов, просто дерево. Любое дерево это валидное Splay дерево. Балансируем с помощью магии, о которой дальше
+
+Есть операция $splay(x)$, которое последовательностью поворотов ставит $x$ в корень
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{splayop}
+    \caption{операция Splay}
+    \label{fig:splayop}
+\end{figure}
+
+Что делать со всеми остальными операциями? Ко всем операция, которые лезут вглубь дерева мы будем в конце приписывать Splay
+
+Хотим доказать, что $\tl T(splay) = O\left( \lg n \right) $, из этого будет следовать, что и $\tl T(find) = \lg n$
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{zigop}
+    \caption{Операция zig}
+    \label{fig:zigop}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{zigzag-zigzig}
+    \caption{zigzag-zigzig}
+    \label{fig:zigzag-zigzig}
+\end{figure}
+
+Вот и весь алгоритм. Давайте ещё раз:
+\begin{enumerate}
+    \item Есть путь до $x$ и мы хотим сделать операцию  $splay$
+    \item Смотрим на два уровня вверх от  $x$ и применяем  zig-zig или zig-zag соответственно
+    \item Если остаётся только один родитель, делаем zig
+\end{enumerate}
+
+$T(find) = 2 T(splay)$
+
+$\tl T(splay) = O\left( \log n \right)$
+
+$\sum T(splay) \leqslant k \log n \implies \sum T(find) \leqslant 2k\log n \implies \tl T(find) = O(\log n)$
+
+Слейтор, Тарьян. Доказывать амортищированные оценки будем с помощью метода потенциалов.
+
+$\Phi$ -- потенциал  $\geqslant 0\qquad \tl T = T+\underbrace{\Delta\Phi}_{\geqslant 0} \geqslant \sum T$
+
+Потенциал здесь -- мера того насколько дерево плохое. Хотим такой потенциал, чтобы  $\tl T = O\left( \log  n \right) $
+
+$w(x)$ -- вес узла  $x$.  $w(x) = 1$ пока что все веса единицы
+
+$s(x)$ -- суммарный вес поддерева  $x$
+
+$r(x) = \log _2 s(x)$
+
+$\Phi = \sum r(x)$
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{dokvo-splay}
+    \caption{proof-splay}
+    \label{fig:proof-splay}
+\end{figure}
+
+$\Phi \approx 8.6\qquad \Phi = \approx 15.3$
+
+$\tl T(splay(x)) \leqslant 1+3\left( r'(x) - r(x) \right) $
+ 
+Доказать это -- весь план
+
+\begin{itemize}
+    \item [zig] $\tl T \leqslant  1 + 3\left( \p r(x) - r(x) \right) $
+    \item [zig-zag, zig-zig]  $\tl T \leqslant 3\left( \p r(x) - r(x) \right) $
+\end{itemize}
+
+Если сложить последовательность применений этих команд получится $3(r_2-r_1) + 3\left( r_3-r_2 \right)  + \ldots + 3\left( r_{n-1} - r_{n-2} \right) +1 + 3\left( r_n - r_{n-1} \right)  = 1 + 3\left( r_n-r_1 \right) $
+
+\begin{note}
+    Единицы в сумме может не оказаться hence знак $\leqslant $
+\end{note}
+
+\begin{proof}
+    \begin{itemize}
+        \item []
+        \item [zig] $\tl T = \overbrace{T}^{=1} + \Delta \Phi = 1 + \cancel{\p r(x)} + \overbrace{\p r(root)}^{\leqslant \p r(x)} - r(x) - \cancel{r(root)} \leqslant 1 + \left( \p r(x) - r(x) \right) \leqslant\\\leqslant 1+ 3\left( \p r(x) - r(x) \right)  $
+        \item [zig-zag] 
+\begin{figure}[!ht]
+    \centering
+    \incfig{zigzag-zigzig}
+    \caption{zigzag-zigzig}
+\end{figure}
+\begin{align*}
+    \tl T &= 2 + \p r(x) + \p r(p) + \p r(g) - r(x) \overbrace{-r(p)}^{\leqslant -r(x)} - \overbrace{r(g)}^{=\p r(x)}\\
+          &\leqslant  2+\p r(p) + \p r(g) - \cancel{2r(x)} \ov{?}{\leqslant} 2\left( \p r(x) - \cancel{r(x)} \right)  \\
+    \p r(p) + \p r(g) - 2\p r(x) \leqslant -2\\
+    \log _2\left( \frac{\p s(p)\cdot \p s(g)}{\p s(x)\p s(x)} \right) &\leqslant -2 \\
+    \underbrace{\frac{\p s(p)}{\p s(x)}}_A\cdot \underbrace{\frac{\p s(g)}{\p s(x)}}_B&\leqslant \frac{1}{4}\\    
+.\end{align*}
+$A+B\leqslant 1$ (размер $p$ и $g$ вместе меньше чем размер вершины над ними --  $x$)
+
+$A\cdot B -- \max \iff A=B(=\frac{1}{2})\qquad A\cdot B = \frac{1}{4}$ 
+
+$A =: \frac{\alpha}{\gamma}\quad B =:\frac{\beta}{\gamma}$ (обозначим соответствующие части итогового дерева как $\alpha, \beta$ и  $\gamma$)
+
+ $A + B = \frac{\alpha + \beta}{\gamma}\quad \alpha + \beta < \gamma$
+ 
+
+    \item [zigzig]
+
+    \begin{align*}
+        \tl T & = 2 + \cancel{\p r(x)} + \overbrace{\p r(p)}^{\leqslant \p r(x)} + \p r(g) - r(x) \overbrace{- r(p)}^{\geqslant -r(x)} - \cancel{r(g)}\\
+              &\leqslant 2 + \p r(x) - 2r(x) + \p r(g) \leqslant 3\left( \p r(x) - r(x) \right)   \\
+              r(x) + \p r(g) - 2\p r(x) \leqslant -2
+    .\end{align*}
+
+    Доказывается той же логикой
+    \end{itemize}
+
+    $\tl T(splay) \leqslant  1 + 3\left( \underbrace{\p r(x)}_{\leqslant \log n} - \underbrace{r(x)}_{\leqslant 0} \right) \leqslant 1 + \log n = O\left( \log  n \right)  $
+\end{proof}
+
+Итого не хуже логарифма, но может быть веселее, если случай не худший.
+
+Обычно при оценке времени работы алгоритма, мы смотрим на худший случай. А теперь мы хотим посмотреть на время работы во всех случаях.
+
+Как понять худший ли наш случай или нет, когда мы делаем $find(x_1)\ find(x_2)\ \ldots \ find(x_{k} )$?
+
+Пусть делаем $find(x) \ldots find(x)\quad k$ раз
+
+АВЛ-дерево потратит $k\log n$, а Splay-дерево -- $k + \log n$. Этот случай явно не худший и Splay-дерево это ``просекло''
+
+Теперь смотрим на последовательность $find(x_1), \ldots, find(x_k)\quad T_{opt}$ -- минимальное время для обработки (сделаем специально дерево, которое хорошо крутится, подюирае коэффициенты, чтобы получилось минимальное время обработки)
+
+Интересно отношение $\frac{T}{T_{opt}}$, т.е. на каком тесте оптимальное дерево действует быстро, а наше долго.
+
+\begin{note}
+    Есть гипотеза, что Splay-дерево динамически оптимально и отношение $\frac{T}{T_{opt}} \leqslant const???$ 
+
+    Никто не знает правда это или нет. Есть несколько важных неравенств про разные случаи. На разное смотрели, везде получалось такое, какое надо.
+
+    Если вдруг окажется, что это правда, то можно будет делать такие штуки:
+    Есть задача и в ней нужно дерево поиска. Мы можем доказывать, что существует какое-то дерево, которое быстро работает. Тогда мы сможем пихнуть Splay-дерево и оно тоже будет быстро работать, потому что магия.
+
+    Такие случаи в целом бывают. Есть реализации, про которые известно, что они лучше, чем любые другие реализации. Верно ли это про Splay-дерево -- неизвестно.
+\end{note}
+
+
+\end{document}

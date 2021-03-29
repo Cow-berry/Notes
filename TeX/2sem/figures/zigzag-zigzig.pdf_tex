@@ -1,0 +1,105 @@
+%% Creator: Inkscape 1.0.2 (1.0.2+r75+1), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'zigzag-zigzig.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{680.31496063bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.5)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{zigzag-zigzig.pdf}}%
+    \put(0.38624022,0.23742146){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$g$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{zigzag-zigzig.pdf}}%
+    \put(0.32475134,0.1615962){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$p$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{zigzag-zigzig.pdf}}%
+    \put(0.39557646,0.10918659){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{zigzag-zigzig.pdf}}%
+    \put(0.27015556,0.06218511){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$A$\\\end{tabular}}}}%
+    \put(0.33840599,0.01482415){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B$\\\end{tabular}}}}%
+    \put(0.43499801,0.01484745){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$C$\\\end{tabular}}}}%
+    \put(0.44850173,0.15924524){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$D$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{zigzag-zigzig.pdf}}%
+    \put(0.81117482,0.21503739){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{zigzag-zigzig.pdf}}%
+    \put(0.7181834,0.13921213){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$p$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{zigzag-zigzig.pdf}}%
+    \put(0.9116744,0.13680096){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$g$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{zigzag-zigzig.pdf}}%
+    \put(0.66358762,0.03980104){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$A$\\\end{tabular}}}}%
+    \put(0.85450396,0.04023345){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B$\\\end{tabular}}}}%
+    \put(0.95109592,0.04025687){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$C$\\\end{tabular}}}}%
+    \put(0.76230115,0.04076107){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$D$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{zigzag-zigzig.pdf}}%
+    \put(0.21003237,0.46835997){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$g$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{zigzag-zigzig.pdf}}%
+    \put(0.14854348,0.39253477){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$p$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{zigzag-zigzig.pdf}}%
+    \put(0.0921705,0.30771569){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{zigzag-zigzig.pdf}}%
+    \put(0.19378267,0.313675){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$C$\\\end{tabular}}}}%
+    \put(0.03500001,0.21335325){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$A$\\\end{tabular}}}}%
+    \put(0.13159203,0.21337655){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B$\\\end{tabular}}}}%
+    \put(0.27229393,0.39018382){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$D$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{zigzag-zigzig.pdf}}%
+    \put(0.60965368,0.30603034){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$g$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=14]{zigzag-zigzig.pdf}}%
+    \put(0.55463853,0.38710736){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$p$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=15]{zigzag-zigzig.pdf}}%
+    \put(0.49524694,0.46051222){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=16]{zigzag-zigzig.pdf}}%
+    \put(0.42150751,0.38413362){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$A$\\\end{tabular}}}}%
+    \put(0.50114729,0.30851725){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B$\\\end{tabular}}}}%
+    \put(0.56029497,0.20783227){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$C$\\\end{tabular}}}}%
+    \put(0.66011867,0.20998148){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$D$\\\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=17]{zigzag-zigzig.pdf}}%
+    \put(0,1.2375){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}z\end{tabular}}}}%
+    \put(0.28204123,0.32146556){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}zig-zag\\\end{tabular}}}}%
+    \put(0.49720465,0.12321612){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}zig-zig\end{tabular}}}}%
+  \end{picture}%
+\endgroup%

@@ -1,0 +1,74 @@
+%% Creator: Inkscape inkscape 0.92.5, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'exsplit.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{680.31496063bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.5)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{exsplit.pdf}}%
+    \put(0.02228933,0.25689187){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.2051036\unitlength}\raggedright G\end{minipage}}}%
+    \put(0.07291196,0.16706818){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.15188753\unitlength}\raggedright F\end{minipage}}}%
+    \put(0.11233645,0.37106386){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.17516954\unitlength}\raggedright W\end{minipage}}}%
+    \put(0.42278665,0.38470208){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24058097\unitlength}\raggedright Q\end{minipage}}}%
+    \put(0.34893741,0.27460877){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.17295224\unitlength}\raggedright P\end{minipage}}}%
+    \put(0.20548833,0.24691475){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.22062496\unitlength}\raggedright O\end{minipage}}}%
+    \put(0.43468102,0.17485075){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.21729896\unitlength}\raggedright C\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{exsplit.pdf}}%
+    \put(0.5400373,0.26686987){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.2051036\unitlength}\raggedright G\end{minipage}}}%
+    \put(0.59065993,0.17704618){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.15188753\unitlength}\raggedright F\end{minipage}}}%
+    \put(0.63008442,0.38104191){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.17516954\unitlength}\raggedright W\end{minipage}}}%
+    \put(0.94053461,0.39468008){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.24058097\unitlength}\raggedright Q\end{minipage}}}%
+    \put(0.86668537,0.28458677){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.17295224\unitlength}\raggedright P\end{minipage}}}%
+    \put(0.72323633,0.25689275){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.22062496\unitlength}\raggedright O\end{minipage}}}%
+    \put(0.95242898,0.18482875){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.21729896\unitlength}\raggedright C\end{minipage}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{exsplit.pdf}}%
+  \end{picture}%
+\endgroup%

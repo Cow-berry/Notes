@@ -899,4 +899,101 @@ $A(s)\leqslant -\log_2 (b_L-a_L) = -\log_2 \left( p_{s_1}\cdot \ldots\cdot p_{s_
     $\log_2 n! = \sum_{i=1}^{n} \log_2 i\geqslant \sum_{i=\frac{n}{2}}^{n} \log_2 \frac{n}{2} = \Omega\left( n\log n \right)  $
 \end{example}
 
+\section{Цепи Маркова}
+
+$b = \left( b_1, b_2, \ldots, b_n \right) $ -- $b_i$ вероятность находиться в состоянии  $i$
+
+$C\quad c = \left( c_1, c_2, \ldots, c_n \right) $ -- случайная величина после одного перехода
+
+Матрица перехода  $p_{ij}$ -- вероятность перейти из  $i$ в  $j$
+
+$P = \begin{bmatrix} 0&0&\frac{1}{2} &0\\0&1&0&0\\\frac{1}{2} & 0 & 0 &\frac{1}{2}\\0&0&0&1 \end{bmatrix} $
+
+$c_i = P(C=i) = \sum_{j=1}^{n} P\left( x=i | B = j \right) P(B=j) = \sum_{j=1}^{n} p_{ji}\cdot b_j$
+
+$b^0 = \left( 1,0,0,0 \right) $ -- нулевой шаг
+
+$b^1 = (0,\frac{1}{2}, \frac{1}{2}, 0)$
+
+Рассмотрим судьбу м.ц. после поглощения. Жизнь происходит внутр одной сильно связанной компоненты -- эргадического класса. 
+
+\begin{enumerate}
+    \item $d > 1$ длинна любого цикла кратна $d$. Циклический класс
+    \item НОД(длин всех циклов) $= 1$. 
+\end{enumerate}
+
+\begin{theorem}
+    [Эргадическая для регулярных цепей]
+    М.ц. такова, что $p_{ij} >0 \forall i, j$
+
+    Тогда $\exists\ b\quad \forall\ b^0\quad b^0P^n \to b$
+
+    ($b$ удолветворяет равенству  $b = bP$
+\end{theorem}
+\begin{proof}
+    $(b^0A)_i = \sum_{j=1}^{n} b^0_j\cdot A_{ji} = \left( \sum_{j=1}^{n} b_j^0 \right) \tl a_i = \tl a_i$ 
+
+    $\sqsupset \forall j\quad a_{ji} = \tl a_i$
+
+    $P^n \to A$, которая  удовлетворяет условию выше.
+
+    $m_i^t = \min_j (P^t)_{ji}\quad M_i^t = \min_j (P^t)_{ji}$
+
+    $M^t_i - m_i^t \to  0$
+
+    $\delta = \min_{i,j}\quad \delta >0$
+    
+\begin{align*}
+    P_{ji}^{t+1} &= \sum_{k=1}^{n} P^t_{jk}P_{ki}\\
+                 &\leqslant \overbrace{\sum_{\substack{k = 1\\k\neq posMin}}^{n} P_{jk}}^{1}M_i^t + P_{j\ posMin}(m_i^t - M_i^t)\\
+                 &\leqslant  M_i^t + \delta\left( m_i^t - M_i^t \right)  
+.\end{align*}
+
+Аналогично с максимумом, оцениваем всё снизу минимумов, кроме максимума 
+
+
+
+\[
+    M_i^{t+1} \leqslant  M_i^t + \delta\left( m_i^t - M_i^t \right) 
+.\] 
+
+\[
+    -m_i^{t+1} \leqslant  -m_i^t + \delta\left( m_i^t - M_i^t \right) 
+.\] 
+
+\[
+    M_i^{t+1} - m_i^{t+1} \leqslant  \left( M_i^t - m_i^t \right) \left( 1-2\delta \right) \leqslant \left( 1-2\delta \right) ^{t+1} \to 0
+.\] 
+
+Теперь у $b = bP$
+
+$(I-P)b = 0$
+
+$Rg\left( I - P \right) = n-1$
+
+$\sum b_i = 1$ 
+
+$P^{2^c}$
+
+$bP^n 0> b\quad bP^{n+1} \to bP$
+
+$b = bP$
+\end{proof}
+
+Вернёмся к вопросу что происходит после поглощения.
+
+$\sphericalangle $ эргадический класс $A\quad \tl p = \sum_{a\in A}\left( b^oNR \right)_a $
+
+$\tl b^0 = \left( b^0NR \right) _{A - \frac{1}{\tl p}}$ 
+
+$\exists $ предельное $b:\quad \tl b^0 A^n \to b$
+
+Конечное распределение $b\tl p$
+
+
+Скрытые Марковские модели. Мы решали до этого прямую задачу -- брали м.ц. с извстными матрицами перехода и смотрели на их характеристики.
+
+Есть обратная: Есть состояние и мы хотим узнать матрицу перехода.
+
+Ещё задача: Есть немарковский процесс и мы хотим аппроксимировать его марковским.
 \end{document}
