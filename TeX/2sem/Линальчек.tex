@@ -3,6 +3,7 @@
 \pdfminorversion=7
 \pdfsuppresswarningpagegroup=1
 % Languages support
+\usepackage{mmap}
 \usepackage[utf8]{inputenc}
 \usepackage[T2A]{fontenc}
 \usepackage[english,russian]{babel}
@@ -45,6 +46,8 @@
 \newcommand{\tl}[1]{\widetilde{#1}}
 \newcommand{\ov}[1]{\overline{#1}}
 \DeclareMathOperator{\rg}{rg}
+\DeclareMathOperator{\Image}{Im}
+\DeclareMathOperator{\Ker}{Ker}
 \let\latexwedge\wedge
 \def\wedge{\,\raisebox{0.5ex}{\ensuremath{\scriptscriptstyle\latexwedge}\,}}
 \DeclareMathAlphabet{\mymathbb}{U}{BOONDOX-ds}{m}{n}
@@ -1693,13 +1696,449 @@ $z\in\mathscr{A}\quad xz = e$ -- правый обратный
      \end{proof}
 \end{note}
 
+\begin{example}
+    $\mathcal{L}(X,X)$ -- алгебра операторов ($\circ$)
+
+    $K_n^n$ -- алгебра матриц
+\end{example}
+
+\begin{definition}
+    $\sqsupset x\in \mathcal{A}$
+
+    $y:\quad yx = e \implies y$ -- левый обратный
+
+    $z: xz = e \implies z$ -- правый обратный
+\end{definition}
+
+\begin{statement}
+    Если существует и тот, и другой, то они совпадают и обозначаются $x^{-1}$
+\end{statement}
+
+\section{Обратная матрица}
+
+$\sqsupset A \in K_n^n$
+
+\begin{definition}
+    Матрица $B\in K_n^n$ Называется левой обратной к  $A$, если
+     \[
+    BA=E
+    .\]
+
+    Матрица $X\in K_n^n$ называется правой обратной к $A$, если  
+    \[
+    AC=E
+    .\] 
+
+    ($E$ -- единичная матрица)
+\end{definition}
+
+\begin{lemma}
+    Обратная матрица существует тогда и только тогда, когда её определитель не равен нулю
+
+    $\det A\neq 0 \iff \exists A^{-1}:\quad A A^{-1} = A^{-1}A = E$
+\end{lemma}
+\begin{proof}
+    \begin{itemize}
+        \item []
+        \item [$\implies $] $\det A \neq  0 \ov ? {\implies } \exists B, C:\quad BA = AC = E $
+
+        $\sqsupset A = \|a^i_j\|\quad c = \|c^i_j\|\quad E = \|\delta^i_j\|$
+
+        \begin{align*}
+            &\begin{bmatrix} C \end{bmatrix} &\\
+            \begin{bmatrix} A \end{bmatrix} & &=\begin{bmatrix} E \end{bmatrix} 
+        .\end{align*}
+
+        $\sum_{j=1}^{n} a^i_jc^j_k = \delta^i_k$ 
+
+        Зафиксируем $k = k_0$-ый столбец. $\implies \delta^i_{k_0} = \beta^i\quad c^j_{k_0} = \xi^j$
+
+        $\implies \sum_{j=1}^{n} a^i_j\xi^j = \beta^i$ -- система линейных уравнений. Матрица уравнения -- ровно матрица $A$
+
+        Нам нужно единственное решение, чтобы она была Крамеровской  $\implies \det A \neq 0$
+
+        \begin{note}
+            Существования правой ИЛИ левой обратной достаточно, чтобы определитель был не равен нулю.
+        \end{note}
+
+        $\implies \exists C:\quad AC = E$
+
+        $ ?\exists B: BA = E$
+
+        $E^T = E\quad (BA)^T = A^TB^T\qquad A^TB^T = E$
+
+        Аналогично нам нужно  $\det A^T \neq 0$, но $\det A^T = \det A$, а значит мы свели к тому же условию
+
+        $\exists B, C \implies  \exists B=C = A^{-1}$
+    \item [$\impliedby $] Можно сказать, что уже сделали. Там также сводим к крамеровской системе, а там определитель не ноль.
+    \end{itemize}
+\end{proof}
+
+\begin{note}
+    Можно вычислять обратную матрицу честно выписывая все уравнения на все члены, но такое матричное произвдение у нас определено не случайно, у него уже есть структура и ей следует пользоваться
+\end{note}
+
+Методы вычисления обратной матрицы:
+\begin{enumerate}
+    \item Метод Гаусса
+
+        $\begin{bmatrix} A\mid E \end{bmatrix} \sim \begin{bmatrix} E\mid A^{-1} \end{bmatrix} $
+
+         Мини-описание: делаем прогон, чтобы получить треугольную, потом получаем диагональную, затем домножаем столбцы или строки, чтобы получить $E$
+         
+         $T_n \ldots T_2T_1A = E \implies  T_n\ldots T_2T_1 E = A^{-1}$ (не доказательство, просто демонстрация)
+     \item Союзная матрица.
+
+         $A^{-1} = \frac{1}{\det A}\tl A^T$ 
+
+         $\tl A^i_j$ -- вычёркиваем в  $A$ соответствующие столбцы и строки, считаем определитель оставшегося (название получившегося: алгебраическое дополнение)
+         \begin{proof}
+             $A = \|\alpha^i_j\| A^{-1} = \|\gamma^i_j\|$
+
+             $A A^{-1} = E \quad \sum_{j=1}^{n} \alpha^i_j\gamma^j_k = \delta^i_k$ 
+
+             $k = k_0$ -- зафиксировали
+
+             $\delta^i_{k_0} = \beta^i\quad \gamma^j_{k_0} = \xi^j\quad \alpha^i_j = a_j$ (вектор по $i$)
+
+              $\sum_{j=1}^{n} a_j\xi^j = b$ 
+
+              $\xi^j = \frac{\Delta_j}{\det A} = \frac{\det \left( A| a_j \to b \right) }{\det A}o$ 
+
+              $b$ -- столбец с нулями и одной единицей на месте  $k_0$. Можем разложить по столбцу определитель 
+
+              $ = \frac{A^{k_0}_j}{\det A} \forall k_0$ 
+
+              $\xi^j = \gamma^j_{k_0} = \frac{A_j^k}{\det A}$ 
+
+              $\implies A^{-1} = \frac{\tl A^T}{\det A}$
+         \end{proof}
+\end{enumerate}
+
+\section{Операторная алгебра}
+
+$\mathcal{L}(X, X) \simeq K^n_n$
+
+ $\sqsupset \varphi : X\to X$
+
+\begin{definition}
+    Ядром оператора $\varphi$ называется множество
+     \[
+         \Ker \varphi = \{x\in X: \varphi x = 0\}
+    .\] 
+\end{definition}
+
+\begin{lemma}
+    $\Ker \varphi$ -- ЛПП  $X$
+\end{lemma}
+
+\begin{definition}
+    Образом оператора $\varphi$ называется множество
+     \[
+         \Image \varphi = \varphi(X)
+    .\] 
+\end{definition}
+\begin{lemma}
+    $\Image \varphi $ -- ЛПП $X$
+\end{lemma}
+
+\begin{theorem}
+    [О ядре и образе]
+    $\sqsupset \varphi: X\to X$
+    \[
+    \dim Ker\varphi + \dim \Im \varphi = \dim X
+    .\] 
+\end{theorem}
+\begin{proof}
+    Утверждаем, что $X$ делится на две непересекающиеся части: ядро и образ
+
+    $\dim \Ker \varphi = K\quad \left( \dim X = n \right) $  
+
+    $\sqsupset \Ker\varphi = \mathcal{L}\left\{ e_1, e_2, \ldots, e_k \right\} $ 
+
+    $X = \mathcal{L}\left\{ \underbrace{e_1, e_2, \ldots, e_k}_{\Ker \varphi}, e_{k+1}, \ldots, e_n \right\} $
+
+    $\sqsupset x\in X\quad x = \sum_{i=1}^{k} \xi^ie_i + \sum_{j=k+1}^{n} \xi^je_j$ 
+
+    $\sphericalangle  \varphi x = \varphi\left( \sum_{j=k+1}^{n} \xi^je_j \right)  = \sum_{j=k+1}^{n} \xi^j\varphi\left( e_j \right)\quad \forall x\in X$ 
+
+    Так образов $e_{k+1} \ldots e_n$ хватает, чтобы разложить образ. Пока что есть только полнота: любой образ раскладывается. Надо доказать следующее: 
+
+    $\left\{ \varphi\left( e_j \right)  \right\} _{j = k+1}^n$  -- ЛНЗ
+
+    $\sphericalangle \sum_{j=k+1}^{n} \alpha^i\varphi(e_j) = 0 \implies  \varphi\left( \underbrace{\sum_{j=k+1}^{n} \alpha^je_j}_{z} \right) = 0 \implies z\in \Ker\varphi \implies z = \beta^1e_1 + \ldots \beta^ke_k $. Но тогда есть два разложения по первым $k$ и одновременно по $k+1 \ldots n$, но тогда они были бы линейно зависимы, а они выбраны не такими (они базис $ \implies $ есть ЛНЗ в них)
+
+    $\implies \alpha^j = 0\quad \forall j$
 
 
+\end{proof}
+
+    \begin{note}
+        $\Ker \varphi\cap \Image \varphi = \left( 0 \right) $
+
+        $\dim \Ker\varphi = k\quad \dim \Image \varphi = n-k $
+
+         $\dim \Ker \varphi + \dim \Image \varphi = n = \dim X$
+
+         $\implies X = \Ker\varphi \dotplus \Image \varphi$
+    \end{note}
+
+$\sqsupset \varphi: X\to X$
+
+\begin{definition}
+    Оператор $\varphi^{-1}$ называется обратным к  $\varphi$, если:
+    \[
+        \varphi^{-1}\circ\varphi = I
+    .\] 
+    $\forall x\in X\quad \left( \varphi^{-1}\circ \varphi \right) (x) = \varphi^{-1}\left( \varphi(x) \right) $
+\end{definition}
+
+\begin{theorem}
+    [Инвариантное условие существования $\varphi^{-1}$] 
+    $\exists \varphi^{-1} \iff \begin{cases}
+        \Ker\varphi = \{0\}\\
+        \Image \varphi = X
+    \end{cases}$
+\end{theorem}
+\begin{note}
+    $\varphi(x) = y \implies x = \varphi^{-1}(y)$ 
+    
+    $x \longleftrightarrow \xi^j\quad y\longleftrightarrow \eta^k\quad \varphi \longleftrightarrow \|a^i_m\|$
+
+     $\eta^k = \sum_{i=1}^{n} a_i^k\xi^i$ -- в такой записи нужно искать решение системы уравнений
+
+     $\eta = A\xi$ 
+
+     Нужно, чтобы система была совместна и определена (крамеровская). ш
+
+     $\sphericalangle \sum_{i=1}^{n} a^k_i = 0$ : Если существует единственно решение такого, то существует обратный оператор (по теорема Фредгольма)
+\end{note}
+
+\begin{statement}
+    $\exists \varphi^{-1} \iff \Ker\varphi = \{0\}$
+\end{statement}
+\begin{proof}
+    [Доказательство теоремы]
+
+    $\exists \varphi^{-1} \implies \forall y\quad \varphi x = y$ имеет решение $\left[ x = \varphi^{-1}y \right] $
+
+    $\sqsupset \Ker\varphi = \{0\} \implies \dim \Image \varphi = n \implies \Image \varphi \simeq X \implies \varphi$ -- сюръекция
+
+     $\begin{cases}
+         \varphi(x_1) = y_1\\
+         \varphi(x_2) = y_2\\
+     \end{cases}$ 
+
+     $\varphi\left( x_1-x_2 \right) =y_1-y_2\neq 0 \implies  x_1-x_2\not\in \Ker\varphi \implies x_1\neq x_2 \implies $ инъекция
+
+     $\implies $ биекция
+\end{proof}
+
+\section{Внешняя степень оператора}
+
+$\Lambda^n\quad \dim X = n\quad \dim X = n$
+
+$\dim \Lambda^n = C^n_n = 1 \implies \left\{ ^{12\ldots n}F \right\} $ 
+
+$^{12 \ldots n}F = f^1\wedge f^2\wedge \ldots \wedge f^n$
+
+$\det \left\{ x_1x_2 \ldots x_n \right\}  = ^{12\ldots n}\left( x_1, x_2, \ldots, x_n \right)  = \sum_{\sigma}(-1)^{\left[ \sigma \right] }\xi^1_{\sigma(1)} \ldots \xi^n_{\sigma(n)} = \det A\quad A = \left[ x_1x_2 \ldots x_{n}  \right] $
+
+$\Lambda_n\quad {}_{12 \ldots n}\hat F = \hat e_1 \wedge \hat e_2\wedge \ldots \wedge \hat e_n = \left<X^{* * } = X \right> = e_1\wedge e_2\wedge \ldots \wedge e_n$ (под негалочками будем понимать то, что с галочками. формально сняли их)
+
+\begin{align*}    
+    \sphericalangle x_1\wedge x_2 \wedge \ldots \wedge x_n &= \xi^{i_1}_1e_{i_1}\wedge\xi^{i_2}_2e_{i_2}\wedge \ldots \wedge \xi^{i_n}_ne_{i_n} \\
+                                                           &= \sum{\sigma}(-1)^{\left[ \sigma \right] }\xi_1^{\sigma(1)}\xi_2^{\sigma(2)} \ldots \wedge \xi_n^{\sigma(n)} e_1\wedge e_2\wedge \ldots \wedge e_n\\
+                                                           &= \det A^T e_1\wedge e_2\wedge \ldots \wedge e_n\\
+                                                           &=\det \left[ x_1 x_2 \ldots x_n \right] 
+.\end{align*}
+
+\begin{lemma}
+    $\det \left[ x_1 x_2 \ldots x_n \right]  = \det \left\{ x_1 x_2 \ldots x_n \right\} $
+\end{lemma}
 
 
+\begin{definition}
+    [Внешняя степень оператора $p$]
+$\sqsupset \varphi:X\to X$
+
+$\Lambda_p\quad \left\{ _{i_1i_2 \ldots i_p}F = e_{i_1}\ldots e_{i_p} \right\}_{1\leqslant i_1< \ldots< i_p\leqslant n} $
+
+$\sphericalangle \varphi^{\Lambda_p}:\Lambda_p \to \Lambda_p$
+
+$\sqsupset x_1\wedge x_2\wedge \ldots \wedge x_n \in \Lambda_p$
+
+$\varphi^{|lambda^p}\left( x_1\wedge x_2\wedge \ldots \wedge x_n \right)  = \varphi x_1 \wedge \varphi x_2 \wedge \ldots\wedge \varphi x_n$
+\end{definition}
+
+$\sqsupset p = n \implies  \implies \varphi^{\Lambda_n}:\Lambda_n \to \Lambda_n$
+
+\begin{lemma}
+    $\sqsupset z\in \Lambda_n \implies \varphi^{\Lambda_n}z = \alpha z$
+\end{lemma}
+\begin{proof}
+    $\sqsupset z = e_1\wedge e_2\wedge \ldots \wedge e_n$
+
+    \begin{align*}
+        \varphi^{\Lambda_n}z &= \varphi e_1\wedge \varphi e_2 \wedge \ldots \wedge \varphi e_n\\
+                             &= a_1^{j_1}e_{j_1}\wedge a_2^{j_2}e_{j_2}\wedge \ldots \wedge a_n^{j_n}e_{j_n} \\
+                             &=\underbrace{ \sum_{\sigma}(-1)^{\left[ \sigma \right] }a_1^{\sigma(1)}a_2^{\sigma(2)}\ldots a_n^{\sigma(`n)}}_{\alpha} \overbrace{e_1\wedge e_2\wedge \ldots \wedge e_n}^z = \alpha z
+    .\end{align*}
+
+\end{proof}
+
+\begin{definition}
+    $\alpha \ov{\triangle} = \det \varphi$ -- определитель Линейного Оператора 
+\end{definition}
+
+\begin{note}
+    
+       $\varphi^{\Lambda^n}\left( x_1\wedge x_2 \wedge \ldots \wedge x_n \right)  = \det\varphi \cdot x_1\wedge x_2\wedge \ldots \wedge x_n$
+   \begin{align*} 
+       \varphi^{\Lambda^n}\left( x_1\wedge x_2 \wedge \ldots \wedge x_n \right) &= \varphi x_1\wedge \varphi x_2\wedge \ldots \wedge \varphi x_n \\
+                                                                                &= \sum_{\sigma}(-1)^{\left[ \sigma \right] } \xi_1^{\sigma(1)}\ldots\xi_n^{\sigma(n)}\varphi\left( e_1\wedge e_2\wedge \ldots \wedge e_n \right) \\
+                                                                                &= \det \varphi \cdot  \left( x_1\wedge x_2\wedge \ldots \wedge x_n \right)  \\
+                                                                                &= \sum_{\sigma}\left( -1 \right) ^{\left[ \sigma \right] }\xi_1^{\sigma(1)}\ldots\xi_n^{\sigma(n)}\cdot \det \varphi \cdot  \left( e_1\wedge e_2\wedge \ldots \wedge e_n \right)  \\
+   .\end{align*}
+
+\end{note}
+
+$\sqsupset \varphi, x\in End(X)$
+
+\begin{theorem}
+    $\det\left( \varphi\circ \chi \right)  = \det\varphi \cdot \det \chi$
+\end{theorem}
+\begin{proof}
+     \begin{align*}
+         \left( \varphi\chi \right) ^{\Lambda_n}\left( x_1\wedge x_2\wedge \ldots \wedge x_n \right) = \varphi\left( \chi x_1 \right) \wedge \varphi\left( \chi x_2 \right) \wedge \ldots\wedge \varphi\left( \chi x_n \right) \\
+         &= \det \varphi \cdot \left( \chi x_1\wedge \chi x_2 \wedge \ldots \wedge \chi x_n \right)  \\
+         &= \det \varphi\cdot \det \chi\left( x_1\wedge x_2 \wedge \ldots \wedge x_n \right)  \\
+    .\end{align*}
+
+    С другой стороны $\left( \varphi \chi \right) ^{\Lambda_n}\left( x_1\wedge x_2\wedge \ldots \wedge x_n \right)  = \det\left( \varphi\chi \right) \left( x_1\wedge x_2\wedge \ldots \wedge x_n \right) $
+\end{proof}
+
+\section{Практика: ядро и образ }
+
+$\varphi: X\to Y$
+
+ \begin{enumerate}
+     \item $\Ker\varphi = \{x\in X\mid \varphi(x) = 0\}$ -- ЛПП $X$
+     \item  $\Image \varphi = \varphi(X) = \{y\in Y\mid \exists x\in X\quad \varphi(x) = y\}$ -- ЛПП $Y$
+\end{enumerate}
+
+$\sqsupset Y = X\quad \varphi$ -- эндоморфизм
+
+$\sqsupset \{e_j\}_{j=1}^n$ -- базис $X\quad \varphi \longleftrightarrow A_{\varphi} = \|a^i_j\|\quad \varphi\left( e_j \right)  = \sum_{i=1}^{n} a^i_je_j$ 
+
+$x\longleftrightarrow \xi^i \implies \varphi(x) \longleftrightarrow A_{\varphi}\xi$
+
+\begin{problem}
+    Как найти ядро линейного оператора?
+\end{problem}
+\begin{proof}
+    $\sphericalangle x:\quad \varphi(x) = 0$
+
+    но, у нас есть базис, поэтому эквивалентно можно искать $\xi:\quad A_{\varphi}\xi = 0 \implies $ ФСР -- базис $\Ker\varphi$ 
+\end{proof}
+
+\begin{example}
+    $\varphi: \R^3\to \R^3$
+
+    $\varphi\left[ \xi^1\xi^2\xi^3 \right] ^T = \left[ \xi^2,\xi^1+\xi^3,\xi^3 \right] $
+
+    $A_3 = \begin{bmatrix} 0&1&0\\1&0&0\\0&1&1 \end{bmatrix}  \implies  \Ker \varphi = \{0\}$
+\end{example}
+
+\begin{example}
+    $D(p) = 2\cdot \frac{d^2p}{dt^2} - \frac{dp}{dt}$ 
+
+    $A_{\varphi} = \begin{bmatrix} 0&-1&4&0\\0&0&-12&12\\0&0&0&-3\\0&0&0&0 \end{bmatrix} $
+
+    $A_{\varphi}\xi = 0 \implies \begin{cases}
+        -\xi^2 + 4\xi^3 = 0\\
+        -12\xi^3 + 12\xi^4\\
+        -3\xi^4
+    \end{cases} \implies \xi^1 - \forall \quad \xi^1 = 1$. Все остальные нули
+
+    В $\Ker\varphi$ лежит  $\begin{bmatrix} 1\\0\\0\\0 \end{bmatrix} $, а значит там только константы, что соответствует нашему оператору
+\end{example}
+
+\begin{example}
+    $\varphi A = A^T$
+
+    $\begin{bmatrix} 1&0&0&0\\0&0&1&0\\0&1&0&0&\\0&0&0&1 \end{bmatrix} $ 
+
+    $\det \neq 0 \implies \Ker\varphi = \{0\}$
+\end{example}
+
+\begin{example}
+    $\varphi:E_3\to E_3\quad \varphi(\vec x) = \vec x - \frac{\left( \vec x, \vec n \right) }{(\vec n, \vec n}\vec n $
+
+    $\varphi(\vec x) = 0 \implies \vec x = \frac{\left( \vec x\vec n \right) }{\left( \vec n\vec n \right) }\vec n \implies \vec x\parallel \vec n$ 
+
+    $A_{\varphi} = \begin{bmatrix} \frac{2}{3}&-\frac{1}{3}&-\frac{1}{3}\\-\frac{1}{3} &\frac{2}{3}&-\frac{1}{3}\\-\frac{1}{3}&-\frac{1}{3}&\frac{2}{3} \end{bmatrix} $ 
+
+    $\begin{bmatrix} -\frac{1}{3}&-\frac{1}{3}&\frac{2}{3}\\-\frac{1}{3}&\frac{2}{3}&-\frac{1}{3}\\\frac{2}{3} &-\frac{1}{3}&-\frac{1}{3} \end{bmatrix}
+     \sim 
+     \begin{bmatrix} -\frac{1}{3}&-\frac{1}{3}&\frac{2}{3}\\0&1&-1\\0&-1&1 \end{bmatrix} 
+     \sim  
+     \begin{bmatrix} -\frac{1}{3}&-\frac{1}{3}&\frac{2}{3}\\0&1&-1\\0&0&0 \end{bmatrix}  $ 
+
+    $\begin{cases}
+        \xi^3 = 1\\
+        \xi^2 = 1\\
+        \xi^1 = 1
+    \end{cases}$ 
+
+    $\vec n = \left( 1, 1, 1 \right) $
+\end{example}
+
+\begin{problem}
+    Найти ядро и образ ЛОп
+
+    $A = \begin{bmatrix} 1&1&1&2&-1\\2&1&-2&-1&1\\3&-1&0&-1&1\\1&-2&2&0&0\\2&-2&-1&-3&2 \end{bmatrix} $
+
+    $\ldots\ldots\ldots\ldots$
+
+    $x_1, x_2 = \ldots$ -- пространство размерности 2, ядро
+\end{problem}
+\begin{proof}
+    $\varphi(X) = \Image \varphi\quad \varphi(x) = y\quad \sqsupset y = \begin{bmatrix} \eta^1\\ \eta^2 \\ \eta^3 \\ \eta^4 \\ \eta^5 \end{bmatrix} $
+
+     Если дописать сбоку столбец эт и преобразовывать его вместе с матрицей, то в конце когда слева у нас де строки нулей, справа есть две нулевые комбинации эт. Строим ФСР по этой системе и находим базис Образа оттуда
+
+     НО есть способ лучше. Что такое $A$? это матрица образов базисных векторов. Значит они все лежат в образе. Более того, всё сводится к базису, а значит образ это линейная оболочка векторов из матрицы. Обычно просят найти таки базис образа, а не просто описание , но мы просто приводим её к диагональному виду и выделяем ненулевые строки.
+\end{proof}
+
+\begin{problem}
+    Найти полный прообраз $a$. Это то же самое что найти один прообраз и добавить все линейные комбинации ядра. (потому что по сути мы решаем неоднородную систему линейных уравнений, а она даёт решения в виде многообразия через частное решение и линейную комбинацию
+\end{problem}
+
+\begin{problem}
+    $\varphi:\R^5 \to \R^3$
+
+    $A_{\varphi} = \begin{bmatrix} 3&1&-2&4\\2&-3&6&-5\\8&-1&2&3 \end{bmatrix} $ 
+
+    $M\subseteq Y\quad \begin{cases}
+        \xi_{61} + \xi^2 = 0\\
+        \xi^1 - \xi^3 = 0\\
+    \end{cases}$ 
+
+    $\sqsupset y\in Y\quad y\in M \iff By = 0\quad B = \begin{bmatrix} 1&1&0\\1&0&-1\\0&0&0 \end{bmatrix} $
+
+     $x\longleftrightarrow \xi$
+
+     $A_{\varphi}x = y\in M$
+
+     $BA_{\varphi}x = By = 0$
+
+    Таким образом:
+    \begin{itemize}
+        \item Прообраз элемента это многооразие
+        \item Прообраз линейного пространство это линейное пространство
+    \end{itemize}
+\end{problem}
 
 
-
-
-
-    \end{document}
+\end{document}
