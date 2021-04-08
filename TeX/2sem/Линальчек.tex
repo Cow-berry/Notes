@@ -302,7 +302,7 @@
 
     \begin{definition}
     Полилиненйая форма $u$ называется \underline{симметричной}, если \[
-            u\left( x_{\sigma(1)}, x_{\sigma(2)}, \ldots, x_{\sigma(p)} \right) = u(x_1, x_2, \ldots, x_p 
+            u\left( x_{\sigma(1)}, x_{\sigma(2)}, \ldots, x_{\sigma(p)} \right) = u\left( x_1, x_2, \ldots, x_p \right)
         .\]  
     \end{definition}
 
@@ -363,7 +363,7 @@
     \begin{proof}
         \begin{itemize}
             \item []
-            \item [$\implies$] $\sqsupset \{x_i\}_{i=1}^p$ -- ДЗ $\implies x_k = \sum_{j\neq k}\beta^jx_j = \beta^1x_1 + \beta^2x_2 + \ldots + \beta^p x_p$
+            \item [$\implies$] $\sqsupset \{x_i\}_{i=1}^p$ -- ЛЗ $\implies x_k = \sum_{j\neq k}\beta^jx_j = \beta^1x_1 + \beta^2x_2 + \ldots + \beta^p x_p$
 
                 $\sphericalangle u\left( x_1, \ldots, x_k, \ldots, x_p \right) = u\left( x_1, \ldots, \beta^1x_1+\beta^2x_2+\ldots+\beta^px_p, \ldots, x_p \right) = 0 $ 
 
@@ -474,7 +474,7 @@
 
 
 \begin{lemma}
-    $\sqsupset \{x_{i} \}_{i=1}^p$ -- ДЗ
+    $\sqsupset \{x_{i} \}_{i=1}^p$ -- ЛЗ
 \end{lemma}
 \begin{proof}
     $u(x_1, x_2, \ldots, x_p) = 0$
@@ -544,7 +544,7 @@ $\Omega_0^p$ -- хотим делать из произвольной формы
  \end{note}
 
  \begin{problem}
-        $Omega_0^p$
+        $\Omega_0^p$
 
      Найдём базис $\Lambda ^p$
  \end{problem}
@@ -847,7 +847,7 @@ $a_{ijk} \sim \left(
 
             $\left( u\cdot v \right) \left( x_1, x_2 \right) =\left( f^1f^2 \right) \left( x_1, x_2 \right) = f^1(x_1)\cdot f^2(x_2) \neq f^2(x_1)\cdot f^1(x_2) = \left( f^2f^1 \right) (x_1, x_2) = \left( v\cdot u \right) \left( x_1, x_2 \right) $
         \end{example}
-    \item $\forall p, q\exists \mathds{0}\in\Omega_q^p \forall u\in \Omega^{p_1}_{q_1}\quad u\cdot \mymathbb{0} = \mymathbb{0}\cdot u = \mymathbb{0}\in\Omega_{q_1+q}^{p_1+p}$
+    \item $\forall p, q\exists \mymathbb{0}\in\Omega_q^p \forall u\in \Omega^{p_1}_{q_1}\quad u\cdot \mymathbb{0} = \mymathbb{0}\cdot u = \mymathbb{0}\in\Omega_{q_1+q}^{p_1+p}$
     \item $u\cdot \left( v+w \right)  = u\cdot v+u\cdot w$
     \item $u\left( \alpha v \right)  = \left( \alpha u \right) v = \alpha\left( uv \right) $
     \item $\exists \left\{ f^k \right\} _{k=1}^n$ -- базис $X^*$
@@ -872,6 +872,7 @@ $a_{ijk} \sim \left(
         $\hat e_y(y^k) = y^k(e_t)$
     \end{note}
 \item $Sym\left( u\cdot v \right)  = Sym\left( Sym~u \cdot  v \right)  = Sym\left( u\cdot Sym~v \right) $ 
+
 $Asym\left( u\cdot v \right)  = Asym\left( Sym~u \cdot  v \right)  = Asym\left( u\cdot Asym~v \right) $ 
 \begin{statement}
     $Asym\left( u\cdot v \right)  = Asym\left( Asym~u\cdot v \right) $
