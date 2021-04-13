@@ -3,7 +3,6 @@
 \pdfminorversion=7
 \pdfsuppresswarningpagegroup=1
 % Languages support
-\usepackage{mmap}
 \usepackage[utf8]{inputenc}
 \usepackage[T2A]{fontenc}
 \usepackage[english,russian]{babel}
@@ -2139,6 +2138,216 @@ $x\longleftrightarrow \xi^i \implies \varphi(x) \longleftrightarrow A_{\varphi}\
         \item Прообраз линейного пространство это линейное пространство
     \end{itemize}
 \end{problem}
+
+\section{Алгебра скалярных полиномов}
+
+$P_n$ -- пространство, множество полиномов. 
+
+ \begin{definition}
+     [Полином]
+     Формальная запись \[
+         a_0 + a_1t + a_2t^2 + \ldots + a_nt^n,\quad a\in K\quad t^k = \underbrace{t\cdot t\cdot \ldots\cdot t}_k
+     .\] 
+\end{definition}
+
+$P_n = P_n[K]$ -- линейное пространство.
+
+Стандартный базис  $\left\{ 1, t, t^2, \ldots, t^n \right\} \qquad \lim P_n[K] = n+1$
+
+Не ввести мультипликативную структуры, замкнутую в полиномах степени $n$
+
+$\sphericalangle P_{\infty }[K] = \left\{ \sum_{i=0}^{n} a_it^i\quad \forall n\in \N  \right\} $
+
+\begin{enumerate}
+    \item $P_{\infty }[K]$ -- линейное пространство
+    \item $P_{\infty }[K]$ -- мультипликативный моноид
+
+        $\sqsupset p, q\in P_{\infty }[K]\quad \sphericalangle (p\cdot q)(t) = p(t)\cdot q(t) = q(t)\cdot p(t) = \left( q\cdot p \right) (t)$
+
+        $\implies p\cdot q = q\cdot p\quad \forall p, q\implies $ коммутативность
+
+        $\sphericalangle 1\in P_{\infty }[K]\quad 1\cdot p = p \implies $ нейтральный элемент моноида
+\end{enumerate}
+
+\begin{note}
+    $\dim P_{\infty }[K] = \infty $
+\end{note}
+
+\begin{statement}
+    $P_{\infty }[K]$ -- алгебра (скалярных полиномов)
+\end{statement}
+
+$\sqsupset J\subseteq P_{\infty }[K]$
+
+\begin{definition}
+    $J$ называется \underline{идеалом} алгебры  $P_{\infty }[K]$, если \[
+        P_{\infty }[K] \cdot  J\subseteq J \text{(левый идеал)}
+    .\]     
+    У нас коммутативность, значит идеалы все двусторонние и называются просто идеалами.
+
+    Любой идеал это линейное пространство
+\end{definition}
+
+\begin{note}
+    $1\in P_{\infty }[K]$, значит $\forall a\in J\quad a\in 1\cdot J\subseteq P_{\infty }[K]\cdot J\quad a\in P_{\infty }[K]\cdot J \implies J\subseteq P_{\infty }[K]J$
+
+    \[
+        P_{\infty }[K]\cdot J = J
+    .\] 
+\end{note}
+
+\begin{example}
+    $\sqsupset q\in P_{\infty }[K] \implies q\cdot P_{\infty }[K]$ -- идеал $J_q$
+
+    \begin{enumerate}
+        \item $P_{\infty }[K] \cdot  q \cdot  P_{\infty }[K] = q \cdot  P_{\infty }[K]  = J_q$
+        \item $q\in J_q\quad p\in P_{\infty }[K]$  \[
+        p \cdot  q = \p q\in J_q
+        .\]
+        $\sqsupset p\in P_{\infty }[K]\quad r\in J_q \implies  r = \tl p \cdot  q$
+
+        $\sphericalangle p \cdot  r = p \cdot  \tl p \cdot  q = \hat p \cdot  q\in q\cdot P_{\infty }[k]$
+         
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    $\left\{ 0 \right\} ,\quad P_{\infty }[K]$ 
+
+    \begin{note}
+        Если В идеале есть единица, то он тривиален и совпадает с $P_{\infty }[K]$
+    \end{note}
+\end{example}
+
+\begin{example}
+    $J_{\alpha} = \left\{ p\in P_{\infty }[K]:\quad p(\alpha) = 0 \right\}$ -- идеал. (главный идеал)
+
+    $J_q = \left\{ p\in P_{\infty }[K]:  \text{имеют тот же набор корней, что и } q \right\} $
+\end{example}
+
+\begin{definition}
+    Если $J_q = q\cdot P_{\infty }[K]$, то $q$ -- порождающий полином идеала  $J$
+\end{definition}
+
+\begin{definition}
+    Суммой идеалов $J_1$ и $J_2$ называется множество \[
+    J_s = \left\{ p\in P_{\infty }[K] :p=p_1+p_2,\quad p_1\in J_1,\quad p_2\in J_2 \right\} 
+    .\] 
+\end{definition}
+\begin{lemma}
+    $J_s$ -- идеал
+\end{lemma}
+\begin{proof}
+    $\sqsupset \tl p\in P_{\infty }[K],\quad p\in J_s\quad \p p_1\in J_1,\quad \p p_2\in J_2$
+
+    $\sphericalangle \tl p \cdot  p = \tl p\left( p_1+p_2 \right)  = \overbrace{\tl pp_1}^{\p p_1\in J_1} + \overbrace{\tl pp_2}^{\p p_2\in J_2}\in J_1 + J_2 = J$
+\end{proof}
+
+\begin{definition}
+    Произведением идеалов $J_1$ и $J_2$ называется множество \[
+        J_m = \left\{ \sum_i p_iq_i\mid \left\{ p_i \right\} \in J_1,\quad \left\{ q_i \right\} \in J_2 \right\} 
+    .\] 
+\end{definition}
+\begin{lemma}
+    $J_m$ -- идеал
+\end{lemma}
+\begin{note}
+    Идеал это:
+    \begin{enumerate}
+        \item Аддитивный моноид
+        \item Мультипликативный моноид
+        \item Дистрибцтивность ещё есть
+    \end{enumerate}
+\end{note}
+
+\begin{definition}
+    Пересечением идеалов $J_1$ и $J_2$ называется \[
+    J_r = \left\{ p\in P_{\infty }[K]:\quad p\in J_1\cap J_2 \right\} 
+    .\] 
+
+    Здесь $J_1\cap J_2$  в теоретико-множественном смысле. Вообще так называется именно пересечение идеалов
+\end{definition}
+
+\begin{problem}
+    [Домашнее задание]
+    \[
+    J_1\cdot J_2\subseteq J_1\cap J_2
+    .\] 
+\end{problem}
+
+$\sphericalangle J\quad \sqsupset p\in J: \deg P = \min$
+
+\begin{definition}
+    Полином, обладающий данным свойством называется минимальным полиномом идеала $J$
+\end{definition}
+
+\begin{note}
+    $P = P_{\min}$
+\end{note}
+
+\begin{lemma}
+    Минимальный полином существует
+\end{lemma}
+\begin{proof}
+    $p$ --  $\min J$
+
+    Если $ \dim p = 1$, то  $J = P_{\infty }[K]$, а в  $P_{\infty }[K]$ есть 1
+
+    Если $\dim p > 1$
+
+     $P_{\infty }[K]  \cdot  J = J$ 
+
+     $1 \cdot  p = p$, 
+
+     Так мы нашли минимальный полином в обоих частях равенства из определения, значит всё хорошо $=)$
+\end{proof}
+
+\begin{lemma}
+    $\forall p\in J \implies p \vdots p_{\min}$
+\end{lemma}
+\begin{proof}
+    $\sqsupset p\in J$, но $p\not\vdots p_{\min}$
+
+    $\implies p = q\cdot p_{\min} + r\quad \deg r < \deg p_{\min}$
+
+    $r = p - q\cdot p_{\min}$, оба слагаемых из идеала $ \implies  r\in J\quad \deg r < \deg p_{\min} \implies r$ -- минимальный полином идеала $\implies  r = 0$
+\end{proof}
+
+\begin{lemma}
+    $\sqsupset q$ -- порождающий полином идеала $J_q \implies J_q = q \cdot  P_{\infty }[K]$
+
+    $\sqsupset p_{\min}$ -- минимальный полином идеала $J_q$ 
+
+    $\implies q = \alpha  p_{\min}\quad \alpha \in K$
+\end{lemma}
+\begin{proof}
+    В силу предыдущей леммы $q \vdots p_{\min}$
+
+    $p_{\min} \in J_q \implies \exists \tl p\in P_{\infty }[K]:\quad p_{\min} = q \cdot  \tl p \implies  p_{\min}\vdots q$
+\end{proof}
+
+\begin{note}
+    $J_p\quad p_J$ -- минимальный порождающий полином идеала  $J_p$
+\end{note}
+
+\section{Практика. Алгебра Скалярных полиномов}
+
+Операции:
+\begin{enumerate}
+    \item Умножение полиномов
+    \item Деление. Деление в столбик.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}

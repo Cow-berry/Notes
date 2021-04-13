@@ -43,6 +43,8 @@
 \newcommand{\p}[1]{#1^{\prime}}
 \newcommand{\pp}[1]{#1^{\prime\prime}}
 \newcommand{\tl}[1]{\widetilde{#1}}
+\DeclareMathOperator{\Reg}{Reg}
+\DeclareMathOperator{\Aut}{Aut}
 % Easily typeset systems of equations (French package) [like cases, but it aligns everything]
 \usepackage{systeme}
 \usepackage{lipsum}
@@ -996,4 +998,476 @@ $\exists $ предельное $b:\quad \tl b^0 A^n \to b$
 Есть обратная: Есть состояние и мы хотим узнать матрицу перехода.
 
 Ещё задача: Есть немарковский процесс и мы хотим аппроксимировать его марковским.
+
+
+\section{Формальные языки}
+
+
+Алфавит -- $\Sigma$, конечное непустое множество
+
+слово, цепочка, строка  $\Sigma^* = \bigcup\limits_{k=0}^{\infty }\Sigma^k$
+
+Формальный язык $L\subseteq \Sigma^*$
+
+<TODO>
+
+\begin{definition}
+    Описание языка -- слово конечной длины
+
+    Всего ``описаний'' счётное множество 
+\end{definition}
+
+\begin{itemize}
+    \item Распознавание -- по слову возвращаем булевский флаг -- есть слово в нашем языке или нет
+    \item Порождение -- описывает как породить возможно бесконечное количество слов
+\end{itemize}
+
+\begin{definition}
+    Перечиление слов.  $\left\{ 01,011,10,1010 \right\} $. Но так можно описать только конечные языки (содержащие конечное количество слов
+\end{definition}
+
+\begin{example}
+    Правильные скобочные последовательности
+    $\varepsilon$ -- псп
+
+    $A,B$ -- псп  $\implies AB$ -- псп
+
+    $A$ -- псп  $\implies (A)$ -- псп
+
+    Это порождение. Можно описать распознованием: баланс в любой момент неотрицательный, баланс в конце $=0$
+\end{example}
+
+Между этими способми есть логический переход:
+\begin{itemize}
+    \item Распозновать $\to $ Порождать. порождаем всё, что можем распознать
+    \item Обратно: распознаём всё, что в какой-то момент порождаем
+\end{itemize}
+
+\begin{example}
+    С++ без ограничений по памяти. Пограмма $P$
+
+    $L = \left\{\omega \mid p(\omega)=1  \right\} $
+
+\end{example}
+
+\subsection{Регулярные = Автоматные языки}
+
+\begin{definition}
+    Конкатенация: $\alpha\in\Sigma^k, \beta\in \Sigma^l\quad \alpha\beta\in \Sigma^{k+l}$
+
+     $\gamma = \alpha\beta\quad \gamma_i =\begin{cases}
+         i\leqslant k&\implies \alpha_i\\
+         i>k&\implies \beta_{i-k}
+     \end{cases}$ 
+
+     $\alpha(\beta\gamma) = \left( \alpha\beta \right) \gamma\qquad \alpha\varepsilon = \varepsilon\alpha = \alpha$
+\end{definition}
+
+\begin{example}
+    $AB = \left\{ x \mid x = yz, y\in A, z\in B \right\} $ 
+
+    $A = \left\{ 0,01 \right\} \quad B = \left\{ 0,10 \right\} $
+
+    $AB = \left\{ 00,010,0110 \right\} $
+\end{example}
+
+Базовые операции:
+\begin{enumerate}
+    \item Объединение $A\cup B$
+    \item Конкатенация $AB$
+    \item[] Возведение в степень  $A^k = \underbrace{AA\ldots A}_k\quad A^0 = \left\{ \varepsilon \right\} $ 
+    \item Замыкание Клини $A^* = \bigcup\limits_{k=0}^{\infty }A^k$
+\end{enumerate}
+
+\begin{definition}
+    $Reg_0 = \left\{ \O, \left\{ \varepsilon \right\} , \left\{c\right\} \forall c\ \in \ C \right\} $
+
+    $Reg_{i+1} = Reg_i \cup \left\{ A\cup B, AB, A^* \mid A, B\in Reg_i \right\} $ 
+
+    $Reg_1 = \left\{ \O , \varepsilon, a, b, \ldots, \left\{a,b\right\}, \left\{a,\varepsilon\right\}, \ldots., {ab}, {aa}, \ldots., \left\{\varepsilon, a, aa, aaa, \ldots \right\} , \ldots, \left\{ \varepsilon b, bb, bbb, \ldots \right\}\right\} $
+
+    $Reg = \bigcup\limits_{k=0}^{\infty }Reg_k$
+\end{definition}
+
+\begin{lemma}
+    $A, B\in Reg$:
+     \begin{enumerate}
+        \item $A\cup B\in Reg$
+        \item $AB\in Reg$
+        \item  $A^*\in Reg$
+    \end{enumerate}
+
+    $A\in Reg_i, B\in Reg_j$
+
+    Они все принадлежат $Reg_{\max\{i,j\}+1}$
+\end{lemma}
+
+\begin{definition}
+    Назовём семейство языков $X\in Good\quad X\subseteq 2^{\Sigma^*}$
+
+    $X = set\left<lang \right>$ 
+
+    Good: set<set<lang> >
+    \begin{enumerate}
+        \item $Reg_0\in X$
+        \item $X$ замкнуто относительно  $A\cup B, AB, A^*$, a.и. \[
+        A, B\in X\implies AB, A\cup B, A^*\in X\qquad A,B:lang
+        .\] 
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+    $Reg = \bigcap\limits_{u\in Good}U $
+\end{theorem}
+\begin{proof}
+    to be written
+\end{proof}
+
+\begin{definition}
+    [Описание]
+    \begin{itemize}
+        \item $\O \quad \varepsilon\quad c$
+        \item $A\ \alpha\quad B\  \beta$:
+             \begin{itemize}
+                \item $AB\quad \alpha\beta$ -- средний приоритет
+                \item $A \cup B\quad \alpha |\beta$ -- минимальный приоритет
+                \item $A^*\quad \alpha^*$ -- максимальный приоритет
+            \end{itemize}
+    \end{itemize}
+
+    $\Sigma = \left\{ 0,1 \right\} $ 
+
+    $\left( 0\mid 11 \right)^* $ -- язык в кортором единицы идут парами
+
+    Такие описания называют академическими регулярными выражениями
+
+    $\alpha^+ = \alpha\alpha^*$
+
+    $\alpha^k = \underbrace{\alpha\alpha \ldots \alpha}_{k}$
+\end{definition}
+
+\begin{example}
+    $0^*|\left( 0^*10^*10^* \right)^*$ -- язык, содержащий чётное число единиц
+\end{example}
+
+\begin{example}
+    Проверка чётное ли число единиц
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{check-one}
+    \caption{check-one}
+    \label{fig:check-one}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{check-div3}
+    \caption{check-div3}
+    \label{fig:check-div3}
+\end{figure}
+\end{example}
+
+\begin{definition}
+    Детерминированный Конечный Автомат ДКА DFA
+
+    \[
+    A = \left<\Sigma, Q, S\in \Sigma, T\subseteq Q, \delta:Q\times \Sigma \to Q \right>
+    .\] 
+
+    \begin{itemize}
+        \item $\Sigma$ -- алфавит
+        \item Q -- конечное множество состояний
+        \item  $S$ -- начальное состояние
+        \item  $T$ -- допускающие состояния
+        \item  $\delta$ -- функция переходов
+    \end{itemize}
+
+    $Snap = Q\times \Sigma^*$
+
+    Пееход:
+     \begin{tikzpicture}
+        
+    \end{tikzpicture}
+    \begin{enumerate}
+        \item $\alpha = c\beta\quad c\in \Sigma$
+        \item  $r = \delta(q,c)$
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    $\left<e,0101 \right> \vdash \left<e,101 \right> \vdash \left<o,01 \right> \vdash \left<o,1 \right> \vdash \left<e,\varepsilon \right>$
+\end{example}
+
+$\mathscr{L}(A) = \left\{ \omega \mid \left<s, \omega \right> \vdash^* \left<t, \varepsilon \right>, t\in T \right\} $
+
+\begin{theorem}
+    [Клини] $Reg = Aut$
+
+    $Aut = \left\{ X\mid \exists \text{ ДКА } A:\quad X = L(A) \right\} $
+\end{theorem}
+
+\section{Недетерминированный конечный автомат}
+
+$x$ -- допускаюется Недетерминированным Конечным Автоматом $\iff \exists $ последовательность переходов по символам $x$, заканчиващееся в допускающем состоянии
+
+$L$ -- формальный язык.  $L\times \Sigma^*$
+
+Артур: $x \mapsto x\in L?$
+
+Мерлин: Убедить Арутра, что $x\in L$
+
+\begin{note}
+   Артуру в случае неопределённости выгодно слушать Мерлина.
+
+   Если $x\not\in L$, то Мерлин не сможет испортить своими советами, потому что в автомате просто нет такой последовательности, на которую можно направить, чтобы попасть в допускающее
+
+   Если $x\in L$, то, внезпано, интересы Артура и Мерлина совпадают
+\end{note}
+
+\begin{note}
+    [интерпретация через миры]
+
+    На каждом шаге, где недетерминирован следующий шаг, создаётся два мира, на каждый из шагов. Если хотя бы в одном дошли до допускающего, то слово принадлежит.
+\end{note}
+
+\begin{definition}
+    [НКА]
+
+    $\left( \Sigma, Q, S\subseteq Q, T\subseteq Q, \delta:Q\times E \to 2^{Q} \right) $ 
+
+    Стартовых состояний может быть несколько, хотя почти никогда не нужно
+
+
+    Состояние -- $\left<q, x \right>\quad q\in Q,\quad x\in X^*$
+
+    $\left<q,x \right>\vdash \left<r,y \right>$
+
+    \begin{enumerate}
+        \item $x = cy,\quad c\in \Sigma$
+        \item  $r\in\delta\left( q,c \right) $
+    \end{enumerate}
+
+    $x$ -- допускается  $A$, если  $\left<s,x \right>\vdash^* \left<t,\varepsilon \right>,\quad t\in T$
+\end{definition}
+
+\begin{example}
+\begin{figure}[!ht]
+    \centering
+    \incfig{auto}
+    \caption{auto}
+    \label{fig:auto}
+\end{figure}
+\end{example}
+
+\begin{verbatim}
+    class DFA {
+        // 0 .. n-1 -- Q; 0 .. c-1 -- Sigma
+        s : int
+        t :  vector<bool>(n)
+        delta: vector<vector<int>> (n,c)
+
+        bool accept(x) {
+            cur = s
+            for (i = 0 .. len(x) - 1)
+                cur = delta[cur][x[i]
+            return t[cur]
+        }
+    }   
+\end{verbatim}
+
+$O(len(x))$
+\section{Динамическое программирование}
+
+\begin{verbatim}
+    class NFA {
+        // 0 ... n-1 -- Q; 0 .. c-1 -- Sigma
+        s : int
+        t : vector<bool>(n)
+        delta : vector<vector<set<int>>>(int)
+
+        can[i][q] -- можно ли прочитав i символов x'a оказаться в состоянии q
+
+        bool accept(x):
+            can[0][s] = true
+            for (i = 0 .. len(x) - 1)
+                for (q = 0 .. n-1)
+                    if (can[i][q])
+                       for (r : delta[q][x[i])
+                        can[i+1][r] = true
+            for (q = 0 .. n-1)
+                if (can[len(x)][q] &&  t[q])
+                    return true
+    }   
+\end{verbatim}
+
+$O\left( len(x) \cdot  (n^2 + m) \right) $
+
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{nfa-step}
+    \caption{nfa-step}
+    \label{fig:nfa-step}
+\end{figure}
+
+\begin{statement}
+    Для $L\ \exists $ НКА $A_n \iff $ для $L\ \exists $ ДКА $A_D$
+\end{statement}
+\begin{proof}
+    $\forall $ ДКА является частным случаем НКА
+
+    \begin{itemize}
+        \item [$\impliedby $] очевидно
+        \item [$\implies $] Алгоритм Томпсона
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{tomps}
+    \caption{tomps}
+    \label{fig:tomps}
+\end{figure}
+
+\begin{verbatim}
+    next(a : vector<bool>, c) vector<bool> 
+        res = vector<bool>(n)
+        for (q = 0 .. n-1)
+            if a[q]
+                for r : delta[q][c]
+                    res[r] = true
+        return res
+
+    bool accept(x)
+        can[0][s] = true
+        for (i = 0 .. len(x) - 1)
+            can[i+1] = next(can[i], x[i])
+\end{verbatim}
+
+$(\Sigma, Q_D = 2^{Q_N}, \{s\}, T_D = \{A\mid A\cap T_n \neq \O \} , \delta_D(A,c) = \{r \mid \exists q\in A,\ r\in \delta_N(q,c)\}$
+    \end{itemize}
+\end{proof}
+
+\begin{note}
+    Казалось бы, вот Детерминированный автоматы такие хорошие, зачем нужны другие? Но он имеет экспоненциальное количество состояний (верхняя оценка) по сравнению с Недерминированным
+
+    Но в реальности можно улучшать, убирая состояния, которые недостижимы (например $\{B,C\}$ может не встречаться одновременно никогда) (в недерминированном)
+
+    Иначе можно начать со стартовых состояний и делать очередь всех состояний, в которых мы можем быть. Именно такую конструкцию обычно и называют \underline{Алгоритмом Томпсона}.
+
+    Конструкция описанная выше называется \underline{Конструкцией подмонжеств}.
+\end{note}
+
+\section{$\varepsilon$-НКА}
+
+Разрешим на переходе писать не символ, а $\varepsilon$. Переходя по нему строка на входе не меняется
+
+\begin{example}
+\begin{figure}[!ht]
+    \centering
+    \incfig{epsauto}
+    \caption{epsauto}
+    \label{fig:epsauto}
+\end{figure}
+
+$\left( \left( 0|1 \right) ^*00|\left( 0|1 \right) ^*11 \right) \left( 0|1 \right) ^*$
+
+ $0^*1^*2^*$
+\end{example}
+
+\begin{statement}
+    $\forall \varepsilon$-НКА $\exists $ эквивалентный НКА без $\varepsilon$ переходов
+\end{statement}
+\begin{proof}
+    \begin{enumerate}
+        \item Рассмотрим граф $\varepsilon$-переходов. Этому графу мы сделаем транзитивное замыкание. И добавим новые рёбра как $\varepsilon$-переходы в наш граф
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{epsgraph}
+    \caption{epsgraph}
+    \label{fig:epsgraph}
+\end{figure}
+
+Язык не поменялся. Вместо прохождения по новому переходу, можно делать $n$ эпсилон-переходов в старом графе
+        \item Для каждой конструкции: Из $p$ есть  $\varepsilon$-переход в $q$ терминальный, сделаем  $p$ тоже терминальным
+
+             \begin{statement}
+                Если $x$ Допускалось раньше, $\iff $ допускается и сейчас. Последний переход не $\varepsilon$
+            \end{statement}
+        \item Рассмотрим тройки вершин, что Из  $p$ есть  $\varepsilon$ переход в $q$ откуда переход по  $c$ в  $r$. Тогда добавим ребро из  $p$ в  $r$ по  $c$
+
+            \begin{statement}
+                Если слово можно допустить, то его можно допустить вообще не делая $\varepsilon$-переход
+            \end{statement}
+        \item удалим все $\varepsilon$-переходы 
+    \end{enumerate}
+\end{proof}
+\begin{figure}[!ht]
+    \centering
+    \incfig{proof-pic}
+    \caption{proof-pic}
+    \label{fig:proof-pic}
+\end{figure}
+
+\begin{statement}
+    Для любого Языка следующие три утверждения эквивалентны:
+    \begin{enumerate}
+        \item Можно построить ДКА
+        \item Можно построить НКА 
+        \item Можно построить $\varepsilon$-НКА
+    \end{enumerate}
+
+    $2 \implies 1$ -- Томпсон
+
+    $3 \implies 1$ -- $\varepsilon$-замыкание
+\end{statement}
+
+
+
+\begin{theorem}
+    [Клини]
+    $\Reg = \Aut$
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}
+        \item []
+        \item [$\Reg \subseteq  \Aut$] Докажем по индекции, что $\forall i\quad \Reg_i\subseteq Aut$
+
+            Будем строить $\varepsilon$-НКА с одним терминальным состоянием
+
+            База: $\O $. Стратовое и терминальное состояние и никаких переходов
+
+            $\varepsilon$ -- одна $\varepsilon$-стрелка
+
+            $c$ -- одна  $c$-стрелка
+
+            Переход:  $\Reg_i \subseteq Aut \implies \Reg_{i+1}\subseteq Aut$
+
+            \begin{itemize}
+                \item $L = A\cup B$ 
+                \item $L = AB$
+                \item  $L = A^*$
+            \end{itemize}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{move-klini}
+    \caption{move-klini}
+    \label{fig:move-klini}
+\end{figure}
+    \end{enumerate}
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}
