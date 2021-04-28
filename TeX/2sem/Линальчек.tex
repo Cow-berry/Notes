@@ -2338,15 +2338,347 @@ $\sphericalangle J\quad \sqsupset p\in J: \deg P = \min$
     \item Деление. Деление в столбик.
 \end{enumerate}
 
+\begin{note}
+    Алгебру скалярных полиномов $P_{\infty }[K]$ будем обозначать как $\mathscr{A}$
+\end{note}
+
+\begin{lemma}
+    $J_1, J_2$ -- идеалы $\mathscr{A}$
+
+     $p_1 \leftrightarrow J_1\quad p_2 \leftrightarrow J_2$
+
+     $\sqsupset J_1 \subseteq J_2 \implies p_1 \vdots p_2$
+\end{lemma}
+\begin{proof}
+    $\forall p \in J_1\quad p\vdots p_1$
+
+    $J_1 \subseteq  J_2 \implies  p\in J_2 \implies  p \vdots p_2$
+
+    $p_1\in J_1 \implies  p_1 \in J_2 \implies  p_1 \vdots p_2$
+\end{proof}
+
+\begin{lemma}
+    $p_1 = \min J_1\quad p_2 = \min J_2$
+
+    $\sqsupset J_r = J_1 \cap J_2 \quad  p_r = \min J_r \implies  p_r = \text{НОК}\left( p_1,p_2 \right) $
+\end{lemma}
+\begin{proof}
+    $p_r\in J_1 \cap J_2 \implies  \begin{cases}
+        p_r \in J_1 \implies p_r \vdots p_1\\
+        p_r \in J_2 \implies  p_r \vdots p_2\\
+    \end{cases} \implies p_r \sim  \text{ОК}\left( p_1, p_2 \right)$
+
+    $\sqsupset \tl p_r \sim  \text{НОК}\left( p_1, p_2 \right) \implies \tl p_r \vdots p_1 \implies p_r\in J_1$ 
+
+    $\tl p_r \vdots p_2 \implies p_r\in J_2$
+
+    $\implies p_r\in J_1\cap J_2$
+
+    Кроме того $p_r\vdots \tl p_r \implies \tl p_r = \min J_r$
+\end{proof}
+
+\begin{lemma}
+    $p_1 = \min J_1\quad p_2 = \min J_2$
+
+    $\sphericalangle J_s = J_1 + J_2 \leftrightarrow p_s = \text{НОД}\left( p_1,p_2 \right)  $
+\end{lemma}
+\begin{proof}
+    $p_1\in J_s \implies  p_1\vdots p_s$
+
+    $p_2\in J_s \implies  p_2 \vdots p_s$
+
+    $p_3 \sim \text{ОД}\left( p_1,p_2 \right) $
+
+    $\sqsupset \tl p_s = \text{НОД}\left( p_1,p_2 \right) $ 
+
+    $\begin{cases}
+        p_1 \vdots p_s\\
+        p_2 \vdots p_s\\
+        p_s = \alpha p_1 + \beta p_2 \vdots p_s \implies \underbrace{\tl p_s}_{\min}\in J_s
+    \end{cases}$
+\end{proof}
+
+\begin{theorem}
+    $\sqsupset p_1,p_2\quad \text{НОД}\left( p_1,p_2 \right)  = 1 \implies \exists q_1,q_2\in A:$ 
+    \[
+    p_1q_1+p_2q_2=1
+    .\] 
+\end{theorem}
+\begin{proof}
+    $J_1, J_2$ порождены полиномами $p_1,p_2$ 
+
+    $J_1+J_2 = P_{\infty }[K]\longleftrightarrow p_s = 1$
+
+    $1$ лежит в сумме идеалов, значит раскладывается через  $p_1$ и $p_2$
+
+    $\implies  p_1q_1+p_2q_2=1$
+\end{proof}
+
+\begin{note}
+    $\sqsupset p_1p_2 \ldots p_k\in A\quad \text{НОД}\left( p_1 \ldots p_n \right) = 1 \implies \exists q_1q_2 \ldots q_k:$
+    \[
+    \sum_{i=1}^{k} p_iq_i = 1
+    .\] 
+\end{note}
+\begin{proof}
+    $p_i \leftrightarrow J_i$
+
+    $J_1 + \underbrace{J_2 + \ldots + J_k}_{\p J} = 1$ (свели задачу предыдущей. $\p J = J_2 + \pp J$ ...)
+\end{proof}
+
+\begin{note}
+    $\sqsupset p_1p_2\ldots p_k$ -- попарно взаимопростые ($\text{НОД}\left( p_i, p_{j\neq i} \right) =1$)
+
+    $\sphericalangle p = p_1\cdot p_2\cdot \ldots \cdot p_k$
+
+    $\p p_i = \frac{p}{p_i}$ -- не взаимнопростые (дофига общих множителей), но подходит под условие прошлого замечания с общим нодом
+
+    $\implies \exists q_i\in A:\quad  \sum_{i=1}^{k} \p p_iq_i = 1$
+\end{note}
+
+\section{Алгебра операторных полиномов}
+
+\subsection{Введение}
+
+$\sqsupset G, \p G$ -- группы
+
+$\sigma: g\to \p G\quad \begin{cases}
+    \sigma\left(xy  \right) =\sigma(x)\sigma(y)\\
+    \sigma(e) = \p e
+\end{cases}$ 
+
+$\Ker \sigma = \left\{ x\in G \mid \sigma(x) = \p e \right\} $
+
+\begin{note}
+    $\Ker \sigma$ -- подгруппа  $G$
+\end{note}
+
+$\sqsupset R, \p R$ -- два кольца. Есть сложение и умножение
+
+$\sigma: R\to \p R$
+
+$\forall x, y\in R \begin{cases}
+\sigma(x+y) = \sigma(x) + \sigma(y)\\
+sigma(0) = 0\\
+\sigma(xy) = sigma(x)sigma(y)
+\sigma(1) = 1\\
+\end{cases}$
+
+?$\Ker \sigma = \left\{ x\in R\mid \sigma(x) = 1 \right\} $ 
+
+$\sqsupset x,y \in \Ker \sigma\quad \sigma(x+y)\neq 1$
+
+На самом деле:
+\[
+    \Ker \sigma = \left\{ x\in R\mid \sigma(x) = 0  \right\} 
+.\] 
+
+$\sqsupset x,y\in \Ker \sigma\quad x+y\in, 0\in $ -- по сложению всё хорошо (и группы по сложению мы и исходим)
+
+$xy\in \Ker\sigma\quad 1\not\in \Ker\sigma \implies $ Ядро $\sigma$ это не подкольцо
+
+$\sigma\left( xy \right)  = \sigma(x)\sigma(y) \implies \Ker\sigma$ -- идеал (что угодно домножить на элемент из него всё ещё в нём)
+
+$A = P_{\infty }[K]$ -- кольцо
+
+$\sqsupset \varphi:X \to X\quad X$ -- ЛП
+
+$\sphericalangle S_{\varphi}\quad P_{\infty }[K] \to P_{\varphi}$
+ \[
+ \sum_{i=1}^{n} \alpha_it^i \longmapsto \sum_{i=1}^{n} \alpha_i\varphi^i
+ .\] 
+
+ \begin{definition}
+     $P_{\varphi}$ -- множество операторных полиномов
+ \end{definition}
+
+ \begin{lemma}
+     $S_{\varphi}$ -- гомоморфизм колец
+ \end{lemma}
+ \begin{proof}
+     $S_{\varphi}\left( p+q \right)  = q_1+q_2\quad S_{\varphi}p_i = q_i$
+
+     $S_{\varphi}(0) =\mathds{O}\\quad S_{\varphi}(1) = \mathds{J}$ 
+
+     $S_{\varphi}\left( p_1p_2 \right) =q_1q_2$
+ \end{proof}
+\begin{note}
+    $S_{\varphi}\left( P_{\infty }[K] \right) =$ кольцо
+\end{note}
+
+\begin{note}
+    $S_{\varphi} \left( \lambda p \right)  = \lambda q \implies  S_{\varphi}$ -- гомоморфизм
+\end{note}
+
+\begin{theorem}
+    $\sqsupset p_1,p_2\in P_{\infty }[K]: \text{НОД}\left( p_1,p_2 \right)  = 1$ 
+
+    $\implies \exists q_1q_2\in P_{\infty }[K]\quad p_1(\varphi)q_1(\varphi) + p_2\left( \varphi \right) q_2\left( \varphi \right) = \mathds{J}$
+\end{theorem}
+\begin{proof}
+    Из леммы для скалярных полиномов следует:
+
+    $\exists q_1, q_2\quad p_1(t)q_1(t) + p_2(t)q_2(t) = 1$. Применим к обоим частям гомоморфизм и получается то, что нужно.
+\end{proof}
+
+\begin{theorem}
+    $\sqsupset p(t) = p_1(t)\cdot p_2(t) \quad \text{НОД}\left( p_1,p_2\right) = 1 $ 
+
+    Тогда $\Ker p\left( \varphi \right)  = \Ker p_1\left( \varphi \right)  \dotplus \Ker p_2\left( \varphi \right) $
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}
+        \item []
+        \item $\Ker p_1\left( \varphi \right)  + \Ker p_2\left( \varphi \right) \subseteq \Ker p\left( \varphi \right) $
+
+            $\sqsupset x_1\in Ker p_1\left( \varphi \right) \quad x_2\in \Ker p_2\left( \varphi \right) \implies x_1+x_2\in \Ker p_1\left( \varphi \right)  + \Ker p_2\left( \varphi \right) $ 
+
+            $\sphericalangle p\left( \varphi \right) x = p\left( \varphi \right) \left( x_1+x_2 \right)  = p_1\left( \varphi \right) +p_2\left( \varphi \right) x + p_1\left( \varphi \right)p_2\left( \varphi \right) x_2 = 0+0 = 0$
+        \item $\Ker p\left( \varphi \right) \subseteq \Ker p_1\left( \varphi \right)  + \Ker p_2\left( \varphi \right) $
+
+            $\sqsupset x\in \Ker p\left( \varphi \right) \quad p_1(\varphi)q_1(\varphi)+p_2(\varphi)q_2(\varphi) = \mathds{J}$
+
+            $\underbrace{p_1(\varphi)q_1(\varphi)x}_{x_2}+\underbrace{p_2(\varphi)q_2(\varphi)x}_{x_1} = x\quad \forall x\in X$
+
+            $p_2\left( \varphi \right) x_2 = p_2\left( \varphi \right) p_1\left( \varphi \right)q_1\left( \varphi \right)  x = 0 \implies p_1\left( \varphi \right) q_1(\varphi)x\in \Ker p_2\left( \varphi \right) $
 
 
+            $p_1\left( \varphi \right) x_1 = p_1\left( \varphi \right) p_2\left( \varphi \right)q_2\left( \varphi \right)  x = 0 \implies p_1\left( \varphi \right) q_1(\varphi)x\in \Ker p_2\left( \varphi \right) $
+
+        \item $\sqsupset z = \Ker p_1\left( \varphi \right) \cap \Ker p_2\left( \varphi \right) $
+
+            $\implies p_1\left( \varphi \right) z = 0\quad p_2\left( \varphi \right) z = 0$
+
+            $\implies z = p_1\left( \varphi \right) q_1\left( \varphi \right) z + p_2\left( \varphi \right) q_2\left( \varphi \right)z = 0+0 = 0 \implies  $ пространства дизъюнктны и речь идёт о прямой сумме
+    \end{enumerate}
+\end{proof}
+
+$S_{\varphi}$ -- гомоморфизм колец. Давайте найдём его ядро.
+
+$\Ker S_{\varphi} = \left\{ p\in P_{\infty }[K] \mid p\left( \varphi \right)  = \mathds{O}\right\} $
+
+\begin{definition}
+    Полином $p\in P_{\infty }[K]$, такой что \[
+        p\left( \varphi \right)  = \mathds{O}
+    .\] называется аннулирующим полиномом оператора $\varphi$
+\end{definition}
+
+\begin{lemma}
+    Аннулирующий полином существует
+\end{lemma}
+\begin{proof}
+    $\dim P_{\infty }[K] = \infty $ 
+
+    $\dim \mathscr{L}\left( X, X \right)  = \left( \dim X \right) ^2$
+
+    $\varphi^0\ \varphi^1\ \varphi^2 \ \varphi^3 \ \ldots \varphi^{n^2}$ -- ЛЗ набор (векторов больше черм размерность)
+
+    $\implies \exists \left\{ \alpha_i \right\} _{i=0}^{n^2}\quad \sum_{i=1}^{n^2} \alpha_i\varphi^i =0$
+
+    $p = \sum_{i=1}^{n^2} \alpha_it^i$
+\end{proof}
+
+\begin{lemma}
+    $\Ker S_{\varphi}$ -- идеал в $P_{\infty }[K]$ 
+\end{lemma}
+
+\begin{definition}
+    Минимальным аннулирующим полиномом оператора $\varphi$ называется минимальный полином идеала  $\Ker S_{\varphi}$
+\end{definition}
+
+\begin{note}
+    Обозначать его мы будем как $p_{\varphi}\qquad p_{\varphi}\left( \varphi \right) =\mathds{O}$
+\end{note}
+
+\begin{lemma}
+    $\sqsupset p_{\varphi}(t) = p_1(t)p_2(t)\quad \text{НОД}\left( p_1,p_2 \right)  = 1$ 
+
+    Тогда $\underbrace{\Ker p_{\varphi}(\varphi)}_X = \Ker p_1\left( \varphi \right)  \dotplus \Ker p_2\left( \varphi \right) $ 
+
+    $X = \Ker p_1\left( \varphi \right) \dotplus \Ker p_2\left( \varphi \right) $
+    
+\end{lemma}
+
+\begin{note}
+    $\sqsupset \Ker p_i\left( \varphi \right)  = L_i$ (назовём так)
+
+    $x_1 = p_2\left( \varphi \right) q_2\left( \varphi \right) x\in L_1$
+    
+    $x_2 = p_1\left( \varphi \right) q_1\left( \varphi \right) x\in L_2$
+
+    $X = L_1\dotplus L_2$
+\end{note}
+
+\begin{lemma}
+    $\mathscr{P}_{L_1}^{\parallel L_2} = p_2(\varphi)q_2\left( \varphi \right) \quad \mathscr{P}_{L_2}^{\parallel L_1} = p_1\left( \varphi \right) q_1\left( \varphi \right) $ -- проекторы!
+\end{lemma}
+\begin{proof}
+    $\mathscr{P}_{L_1}^{\parallel L_2} \mathscr{P}_{L_1}^{\parallel L_2} = \mathscr{P}_{L_1}^{\parallel L_2}$
+
+    $\mathscr{P}_{L_1}^{\parallel L_2}\mathscr{P}_{L_1}^{\parallel L_2}x = p_2\left( \varphi \right) q_2\left( \varphi \right) p_2\left( \varphi \right) q_2\left( \varphi \right) x = p_2\left( \varphi \right) q_2\left( \varphi \right) \left( \mathds{J} - p_1\left( \varphi \right) q_1\left( \varphi \right)  \right)  = p_2\left( \varphi \right) q_2\left( \varphi \right) $ 
+
+    $\mathcal{P}_{L_1}^{\parallel L_2}\mathcal{P}_{L_2}^{\parallel L_1} = \underline{p_1\left( \varphi \right)} q_1\left( \varphi \right) \underline{p_2\left( \varphi \right)} q_2\left( \varphi \right)  = \mathds{O}$
+\end{proof}
 
 
+$\varphi \to P_{\varphi}(t) = p_1(t)p_2(t) \to X = L_1 \dotplus L_2$
 
+\begin{theorem}
+    $\sqsupset \varphi:X\to X$
 
+    $\sqsupset p_{\varphi}$ -- минимальный аннулирующий полином оператора $\varphi$
 
+    $p_{\varphi} = p_1 p_2 \ldots p_k\quad \text{НОД}\left( p_i, p_{j\neq i} \right)=1 $ 
 
+    $\implies X = \bigoplus \sum_{i=1}^{k} L_i\quad L_i = \Ker \p p_i\left( \varphi \right) \quad \p p_i = \frac{p\left( \varphi \right) }{p_i}$ 
 
+    $\mathscr{P}:X \to L_i\quad \mathscr{P}_i = \p p_i\left( \varphi \right) q_i\left( \varphi \right) $
+
+   где $\sum_{i=1}^{k} \p p_iq_i = 1$
+\end{theorem}
+
+\begin{note}
+    Применим $S_{\varphi}$ к последней сумме.
+
+     \[
+         \sum_{i=1}^{k} \p p_i\left( \varphi \right) q_i\left( \varphi \right)  = \sum_{i=1}^{k} \mathscr{p}_i = \mathds{J}
+    .\] -- разложение единицы для оператора $\varphi$ 
+\end{note}
+
+\begin{theorem}
+    [Вторая теорема о ядре и образе]
+
+    $\sqsupset \varphi:X\to X\quad p_{\varphi} = p_1p_2\quad \text{НОД}\left( p_1p_2 \right) $ 
+
+    $\implies \Im p_2\left( \varphi \right)  = \Ker p_1\left( \varphi \right) $
+\end{theorem}
+\begin{proof}
+    $\Im p_2\left( \varphi \right) \subseteq \Ker p_1\left( \varphi \right)$
+
+    $let x \in X \implies y =  p_2\left( \varphi \right) x\subseteq \Im p_2\left( \varphi \right) $
+
+    $\sphericalangle p_1\left( \varphi \right) y = p_1\left( \varphi \right) p_2\left( \varphi \right) x = p_{\varphi}\left( \varphi \right) x = 0$
+
+    $\dim \Im p_2\left( \varphi \right)  = \dim \Ker p_1\left( \varphi \right) $ 
+
+    $\dim \Ker p_1\left( \varphi \right)  + \dim \Im \Ker p_1\left( \varphi \right)  = n$ 
+
+    $\dim \Ker p_1\left( \varphi \right) + \dim \Ker p_2\left( \varphi \right)  = n$
+
+    $\dim \Im p_1\left( \varphi \right)  = \dim \Ker p_2\left( \varphi \right) $
+\end{proof}
+
+\begin{note}
+    $\sum_{i=1}^{k} \mathscr{p}_ix = \mathds{J}x \forall x$ 
+
+    $\sum_{i=1}^{k} \varphi\mathscr{P}_ix = \varphi x$ 
+
+    $\sum_{i=1}^{k} \varphi \mathscr{P}_i = \varphi$ 
+
+    $X \ov{\mathcal{P}_i}{\longrightarrow}L_i \ov{\varphi}{\longrightarrow}?$
+
+     $\sum_{i=1}^{k} \varphi_i = \varphi$
+\end{note}
 
 
 

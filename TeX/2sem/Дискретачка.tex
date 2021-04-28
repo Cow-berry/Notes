@@ -57,6 +57,37 @@
 \definecolor{correct}{HTML}{009900}
 \newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
 \newcommand\green[1]{{\color{correct}{#1}}}
+
+\usepackage{listings}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{myStyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    extendedchars=\true
+}
+
+\lstset{style=myStyle}
+
+\lstset{language=Python}
 % Hide parts
 \newcommand\hide[1]{}
 % si unitx
@@ -1458,16 +1489,407 @@ $\left( \left( 0|1 \right) ^*00|\left( 0|1 \right) ^*11 \right) \left( 0|1 \righ
     \end{enumerate}
 \end{proof}
 
+\begin{theorem}
+    [Лемма о разрастании/накачке]
+
+    $L$ -- регулярный
+
+    $\exists n > 0 \forall \omega : \omega \in L\quad \left| \omega \right| \geqslant n\quad \exists x, y, z:\quad \omega = xyz$
+
+    $y\neq \varepsilon\quad \left| xy \right| \leqslant n\quad \forall l\geqslant 0\ xy^kz\in L$
+
+\end{theorem}
+
+<TODOTODOTODO>
+
+\begin{note}
+    Формула, в которой чередуются блоки ``существует'' и ``для любого'' называется $\sigma-\pi$-формулой
+
+    Формула сверху это $\sigma-4$
+
+    На это можно смотреть на игру между двумя игроками. Существует ход одного, что для любого хода другого существует ход первого... Если утверждение верное, то выиграл ``существует'', иначе выиграл ``для любого''
+\end{note}
+
+\begin{example}
+    Правильные скобочный последовательности
+
+    $n\quad \omega = (^n)^n\quad x = (^a\quad y = (^b. b>0. z = (^{n-a-b})^n$
+
+    $k = 2\quad (^{n+b})^n\not\in L$
+\end{example}
+
+\begin{proof}
+    $L$ -- регулярный язык.  $A$ -- ДКА для  $L$ 
+
+    $\sqsupset n$ -- число состояний автомата $A$
+
+     $\sphericalangle w\in L\quad \left| w \right| \geqslant n$. Раз оно из $L$, значит автомат его допускает
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{dopusk}
+    \caption{dopusk}
+    \label{fig:dopusk}
+\end{figure}
+
+$i\neq j\quad  u_i = u_j\quad w[1 \ldots i] = x\quad w[i+1 \ldots j] = y\quad w[j+1 \ldots |w|] = z$
+\end{proof}
+
+\begin{example}
+    $0^a 1^a, a\geqslant 0$
+
+    $n\quad o^n 1^n$
+
+    $x = 0^a\quad y = 0^b\quad z = 0^{n-b-a}1^n$
+
+     $k = 0$
+
+     $xy^kz = 0^{n-c}1^n\not\in L$
+\end{example}
+
+\begin{note}
+    Просто ДКА для одного языка может быть несколько
+
+    Но у любого языка существует единственный ДКА с минимальным количеством состояний
+\end{note}
+
+\section{Алгоритм Минимизации}
+
+ДКА $A$.  $u$ и  $v$ различим строкой  $S$, если $\left( x\in T \land y\not\in T \right) \lor \left( x\not\in T\land y\in T \right) $
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{razlich}
+    \caption{razlich}
+    \label{fig:razlich}
+\end{figure}
+
+$a\sim b$, если они не различили никакой строгой
 
 
+\begin{lemma}
+    $\sim $ -- отношение эквивалентности
+\end{lemma}
+\begin{proof}
+    Рефлексивность и Симметричность очевидны
+
+%\begin{figure}[!ht]
+%    \centering
+%    \incfig{ekvitrans}
+%    \caption{ekvitrans}
+%    \label{fig:ekvitrans}
+%\end{figure}
+\end{proof}
 
 
+\begin{lemma}
+    $u\sim v \implies \delta(u,c) \sim \delta(v,c)$ для $\forall c\in \Sigma$        
+\end{lemma}
+\begin{proof}
+    $\delta(u,c)$ и  $\delta(v,c)$ различимы  $S \implies u$ и $v$ различимы  $cs$
+\end{proof}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{minex}
+    \caption{minex}
+    \label{fig:minex}
+\end{figure}
+
+Алгоритм:
+
+$D_k = \left\{ (u,v) \mid u \text{ и } v \text{ различимы } s, |s|\leqslant k \right\} $ 
+
+$D_0 = \{(u,v) \mid u\in T \oplus v\in T\}$
+
+$D_k = \left\{ (u,v)| (u,v)\in D_{k-1} \text{ или } \exists x\in \Sigma: \left( \delta(u,c), \delta(v,c) \right) \in D_{k-1} \right\} $ 
+
+$D_k = D_{k-1} \implies D_{k+1} = D_k \implies  \forall $ пара различима в $D_k$
+
+Обход в ширину:
+
+очередь $Q$, поместим  $D_0$ в  $Q$ и $D_0$ в  $D$
+
+ \begin{lstlisting}
+    while not Q.empty()
+        (u, v) = Q.pop()
+        for c \in Sigma
+            for a \in In[u][c]
+                for b \in In[v][c]
+                    if (a,b) !\in D
+                        Q.push(a,b)
+                        D.add(a,b)
+\end{lstlisting}        
+
+while -- $n^2\quad \left| \Sigma \right|  = \sigma$
+
+форы суммарно -- $n^2$
+
+Суммарно  $O(n^2\cdot \sigma)$
+
+\begin{theorem}
+    $A$ -- ДКА для  $L$, не содержащий эквивалентных состояний, и любое состояние достижимо из $S$, тогда:
+     \begin{enumerate}
+        \item $A$ -- минимальный
+        \item  $\p A$ -- ДКА для  $L$,  $|\p Q| = |\Q|$, тогда  $A\simeq \p A$
+    \end{enumerate}
+\end{theorem}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{union}
+    \caption{union}
+    \label{fig:union}
+\end{figure}
+
+Стартовые состояния эквивалентны. состояния, в которые можно дойти из них -- тоже эквивалентны. 
+
+Есть алгоритм быстрой минимазации (фамилии, которую я не услышал), буит на след. неделе.
+
+План
+\begin{enumerate}
+    \item Другой алгоритм построения регулярного выражения по автомату (решаем системы линейных уравнений в регулярных выражениях)
+    \item Быстрый алгоритм минимизации (за $n\log n$)
+    \item Алгоритмический анализ свойств регулярных языков
+\end{enumerate}
+
+\section{Построение ругулярки с помощью линала}
+
+$\alpha, \beta$ -- регулярки
+
+$L = \alpha L + \beta\qquad +$ здесь означает объединение или ``или''
+
+ \begin{example}
+     $\alpha = a L + b$
+
+     решени --  $a^*b$
+
+      $\forall  k\geqslant 0 a^kb\in L$
+
+      $x\in L\quad x = b \begin{cases}
+          \implies x\in a*b\\
+          x\in aL
+      \end{cases}$
+\end{example}
+
+\begin{lemma}
+    $\alpha^*b$ -- решение
+\end{lemma}
+
+\begin{theorem}
+    Если $\varepsilon \not\in \alpha \implies  \alpha^*\beta$ -- единственное решение
+
+    Иначе $L = \alpha^*b \cup N$ -- решение для $\forall N\subseteq \Sigma^*$
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}
+        \item $\varepsilon \not\in \alpha$
+
+            $|x| = 0 \implies x\in L \implies x\in \alpha L + \beta \implies  x\in \beta \implies  x\in \alpha^*\beta$
+
+            $|y| <|x| \implies  y\in \alpha^*\beta$
+
+            $x\in L \implies x\in \alpha L + \beta$
+
+             \begin{enumerate}
+                 \item $x\in \beta \implies x\in \alpha^*\beta$
+                 \item $x\in \alpha L \implies  x = yz, y\in \alpha, z\in L$
+             \end{enumerate}
+             $|y|\geqslant 1 \implies |z| <|z| \implies z\in \alpha^*\beta \implies x\in \alpha^*\beta$
+         \item $\varepsilon\in \alpha$
+
+             $\beta \subseteq L \implies \alpha\beta\subseteq L \implies  \ldots \implies \alpha^*\beta \subseteq L$
+
+             $\forall N\quad \alpha N \supset N$
+    \end{enumerate}
+\end{proof}
+
+\begin{problem}
+    $X_1, X_2, \ldots, X_n$ -- неизвестные языки, которые связаны системой
+
+    $\begin{cases}
+        X_1 = \alpha_{11}X_1 + \alpha_{12}X_2 + \ldots + \alpha_{1n} X_n +\beta_1\\
+        X_2 = \alpha_{21}X_1 + \alpha_{22}X_2 + \ldots + \alpha_{2n} X_n +\beta_2\\
+        \vdots\\
+        X_n = \alpha_{n1}X_1 + \alpha_{n2}X_2 + \ldots + \alpha_{nn} X_n +\beta_n\\
+    \end{cases}$
+\end{problem}
+\begin{proof}
+    [Решение]
+
+    Потребуем  $\varepsilon\not\in \alpha_{ij}$ 
+
+    Будем решать чем-то похожим на метод Гаусса. 
+
+    Предположим, что $X_1$ неизвестное, а остальное нам известно, тогда первое уравнение выглядит как
+
+    $X_1 = \alpha_{11}^*\left( \alpha_{12}X_2 + \alpha_{13}X_3 + \ldots + \alpha_{1n}X_n + \beta \right) $ 
+
+    $X_2 = \alpha_{21}\alpha_{11}^*\left( \alpha_{12}X_2 + \ldots + \alpha_{1n}X_n + \beta \right)  + \alpha_{22}X_2 + \ldots + \beta_2$
+
+    $X_2 = \left( \alpha_{21}\alpha_{11}^*\alpha_{12} + \alpha_{22} \right) ^*\left(\left( \alpha_{21}\alpha_{11}^*\alpha_{13}+\alpha_{23} \right)X_3+ \ldots + \left( \alpha_{21}\alpha_{11}^*\beta_1+\beta_2 \right)  \right)$
+
+    Так продолжаем до $X_n$. Кажется, что непохоже, но вообще похоже на прошлый алгоритм.
+\end{proof}
+
+\begin{note}
+    Как это можно применить для автомата?
+
+    Рассмотрим автомат для чисел кратных трём
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{kratno3}
+    \caption{kratno3}
+    \label{fig:kratno3}
+\end{figure}
+
+    $\begin{cases}
+        X = 0X + 1Y + \varepsilon\\
+        Y = 0Z+1X\\
+        Z = 1Z+0Y\\
+    \end{cases}$ 
+
+    $Z = 1^*0Y$
+
+     $Y = 01^*0Y+1X$
+
+     $Y = \left( p_1^*0 \right) ^*1X$
+
+     $X = \left( 0 + 1\left( 01^*0 \right) ^*1 \right) X+\varepsilon$
+
+     $X = \left( 0 + 1\left( 01^*0 \right) ^*1  \right) ^*$
+\end{note}
+
+\section{Алгоритмы анализа регулярных языков}
+
+\begin{theorem}
+    Пусть $A,B$ -- регулярные языки. Тогда такими также являются: (по определению  $A\cup B, AB, A^*$)
+    \begin{itemize}
+        \item $A\cap B$\\
+        \item $\overline{A}$\\
+        \item $\varphi:\Sigma \to \Pi*\quad \varphi^*:\Sigma^* \to \Pi^*$ -- гомоморфизмы
+
+            $\varphi^*\left( c_1c_2\ldots c_n \right) =\varphi\left( c_1 \right) \varphi\left( c_2 \right) \ldots \varphi\left( c_n \right) $
+
+            $\varphi L\Sigma^* \to \Pi^*\quad \varphi = \varphi^*$ (обозначим так)
+
+            $\varphi(A)\quad \varphi^{-1}(A) = \left\{ x|\varphi(x)\in A \right\} $ -- тоже ругялярн ые
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+\begin{figure}[!ht]
+    \centering
+    \incfig{presech}
+    \caption{presech}
+    \label{fig:presech}
+\end{figure}
+
+Рассмотрим произведение автоматов.
+
+Множество состояний -- декартово произведение $Q_{A\times b} = Q_A\times Q_b$
+
+$\delta\left( \left<y_a, u_b \right>, c \right)  = \left<\delta\left( u_a, c \right) , \delta_B\left( u_B, c \right)  \right>$
+
+$S = \left<S_a, S_b \right>$
+
+$T = \left\{ \left<t_A, t_B \right> \mid t_A\in T_A, t_B\in T_b \right\} $ -- допускает, если оба автомата допускают.
+
+Подобным образом можно сдать объединение, ксор, ... (см следствие)
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{homomor}
+    \caption{homomor}
+    \label{fig:homomor}
+\end{figure}
+
+$A$ -- регулряный.  $\sphericalangle \varphi^{-1}(A)$
+
+$\varphi:\Sigma \to \Pi^*$
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{obr-homomor}
+    \caption{obr-homomor}
+    \label{fig:obr-homomor}
+\end{figure}
+\end{proof}
+
+\begin{corollary}
+    \label{xor-and-whatnot}
+    $A_1, A_2, \ldots, A_n$ -- регулярные языки
+
+    $f:\mathbb{B}^n \to \mathbb{B}$
+
+    $A = \left\{ x \mid f\left( x\in A_1, x\in A_2, \ldots, x\in A_n \right)  \right\} $ 
+
+    То $A$ -- регулрный. Доказательство не меняется, просто терминальными объяляем те, которые подходят под функцию
+\end{corollary}
+
+\begin{example}
+    $0^{2n}1^{2n}$ -- нерегулярный
+
+     $\varphi: \begin{cases}
+         0 \to 00\\
+         1 \to 11
+     \end{cases}$ 
+
+     $A = \varphi\left( 0^N1^n \right) $ 
+
+     $0^n1^n = \varphi^{-1}(A)$
+\end{example}
+
+\section{Алгоритм Хопкрофта}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{classes}
+    \caption{classes}
+    \label{fig:classes}
+\end{figure}
+
+Хотим разбить на классы по различимости, чтоб бегать по ним за линию. Также нам потребуется список входящих рёбер по символу.
+
+Пары состояний, в которых либо по символу все идёт из одного в другой, либо все ведут не в А.
+
+Если есть и те, и те, разобъём их на ведущие в и не в.
+
+Рассмотри Dequeu, которая будет хранить классы, которые могут ещё повлиять на разделение других.
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{nablud}
+    \caption{nablud}
+    \label{fig:nablud}
+\end{figure}
 
 
+$\forall B: \exists u\in B\quad \delta(u,c)\in A \implies \forall u\in B\quad \delta(u,c)\in A$
 
+Если $A$ -- хороший, то он не будет влиять на разбиение других. Если нет, разбиваем все, что идут в него и делаем его хорошим.
 
+В очереди будем хранить пары $\left<A,c \right>$ -- состояние, символ, чтобы не разбивать сразу по всем символом (потому что это неудобно)
 
+Если мы разбиваем $B$, то нужно положить  $\left<B_1, c \right>\quad \left<B_2,c \right>$
 
+Хотим удалять, но удалять из очереди непоятно как. Но мы храним номер и одной половине оставляем старый, а другой даём новый. Так, если в очереди уже было состояние, то нужно добавить только по новому номеру
 
+Каждая вершина просматривается $n$ раз (столько может уменьшаться), рёбер  $n\cdot c$
 
+Алгоритм делает всё за $n^2S + n^2$
+
+Оптимизация 1:
+
+ $\sphericalangle \left<B, d \right>$ -- хорошая. Оно разобъётся $\left<B_1,d \right>\quad \left<B_2,d \right>$ -- эти уже могли стать плохими. Но разбивать по обеим парам не нужно, т.к. разбивание по одной также сделает другую хорошей. Поэтому при разделении будем класть только ту, которая меньше
+
+ Если $\left<B,d \right>$ -- плохой, то надо положить обе (добавим новую)
+
+ Теперь оно работает за $n\log n S + n^2$
+
+ Оптимизация 2:
+
+ При разделении объявим новым классом тот, который указывает в $C$. Так у нас ... <пересмотреть лекцию и понять почему оно работае хорошо>
+
+ Дальше нам нужно уметь удалять из нашей структуры, можно либо связный список, либо hash-set
 \end{document}
