@@ -1892,4 +1892,274 @@ $\forall B: \exists u\in B\quad \delta(u,c)\in A \implies \forall u\in B\quad \d
  При разделении объявим новым классом тот, который указывает в $C$. Так у нас ... <пересмотреть лекцию и понять почему оно работае хорошо>
 
  Дальше нам нужно уметь удалять из нашей структуры, можно либо связный список, либо hash-set
+
+
+ \section{КС (контекстно-свободные) грамматики. Лекция 11 мая}
+ TODO на пол пары
+
+\begin{example}
+    \begin{gather*}
+        A \to \varepsilon\\
+        A \to (A)\\
+        A \to A A\\
+    \end{gather*}
+\end{example}
+
+\begin{definition}
+    Грамматика называется право-линейной, если каждая правая часть задержит не более одного нетерминала и этот нетерминал находится на последнем месте (Все правила имеют вид $A \to \alpha B\quad \alpha\in\Sigma^*\quad A \to \alpha$)
+\end{definition}
+
+\begin{theorem}
+   Язык $A$  регулярный $\iff A$ задаётся проволинейной грамматикой.
+\end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item[]
+        \item [$\implies $]
+    $\sphericalangle $ ДКА для языка $A$. $\left<\Sigma, Q, S, T, \delta \right>$
+
+    $N = Q\quad S = S\quad \delta$ -- правила:
+
+    Если из  $X$ переходим в  $Y$ по символу  $c$, то добавляем  $X \to cY$
+
+    Для терминального состояния $T$ добавляем правило  $T \to \varepsilon$
+
+    По построению видно, что всё правильно =)
+
+    $\left<s, xy \right> \vdash^k\left<U, y \right>$ 
+
+    $S \to ^k xU$
+        \item[$\impliedby $]
+            Строим НКА с $\varepsilon$-переходами
+
+            $\left<\Sigma, N, S, P \right>$ -- грамматика
+
+            $Q = N \cup \left\{ T \right\} \quad S = S\quad \delta:$
+
+            $A \to \alpha B$
+            \begin{enumerate}
+                \item $\alpha = \varepsilon\quad A \to B$ по $\varepsilon$
+                \item $\alpha = c\quad$ переход по  $c$
+                \item  $\alpha = c_1c_2 \ldots c_k\quad $ промежуточные вспомогательные состояни по одному символу
+            \end{enumerate}
+
+            $A \to \alpha$ -- сделать терминальное состояние.
+    \end{itemize}
+\end{proof}
+
+\begin{corollary}
+    $Reg \subseteq CF\quad Reg \neq CF$
+\end{corollary}
+
+\begin{note}
+    Почему контестно-свободные. Потому что нет контекста. Можно дальше ещё обощить
+
+    Иерархия Хосмкого. У нас есть некоторое неравноправие, слева всегда стоит только один символ. Давайте разрешим там тоже несколько символов.
+
+    Формальная грамматика нулевого класс -- как грамматика, только слева стоит произвольная строка Г$ = \left<\Sigma, N, S, P \subseteq N^+\times \left( N\cup \Sigma \right) ^* \right>$
+
+$0^n 1^n 2^n$ -- не задать даже $CF$ грамматикой, но можно формальной грамматикой нулевого класса
+
+ \begin{gather*}
+     S \to ZT\\
+     T \to ABCT\\
+     T \to \varepsilon\\
+     BA \to AB\\
+     CB \to BC\\
+     CA \to AC\\
+     ZA \to 0Z\\
+     Z\to Y\\
+     YB\to 1Y\\
+     Y\to X\\
+     XC\to 3X\\
+     X \to \varepsilon\\ 
+ \end{gather*}
+
+Грамматики нулевого класса задают все языки, порождаемые Машины Тьюринга
+
+CG (Chomsky)
+
+$CG_1$ -- контекстно зависимые грамматики. Правила обладают контекством $\xi A\eta \to \xi\alpha\eta\quad \xi, \eta\in \left( \Sigma \cup N \right) ^*$ КЗГ
+
+$CG_2 = CFG$
+
+$CG_3 = $ праволинейные грамматики
+
+\begin{definition}
+    Неукарачивающая грамматкиа. $\alpha \to \beta\quad \left| \alpha \right| \leqslant \left| \beta \right| $
+
+    Грамматику выше можно сделать такой. Некоторые нет.
+\end{definition}
+
+\end{note}
+
+
+\section{Выводиться ли слово в заданной КС}
+
+\begin{definition}
+    $\Gamma$ в НФХ (нормальная форма Хомского)
+
+     $A \longrightarrow BC -- A \longrightarrow  c $
+
+     (а также $S \to \varepsilon$, тогда $S$ не встречается в правых частях)
+\end{definition}
+
+\begin{enumerate}
+    \item В правых частях только $N$, кроме правил  $A\to c$
+
+        $c  N_c\quad N_c\to c\quad A\to \alpha c \beta\quad A \to \alpha Nc\beta$
+
+        \begin{itemize}
+            \item $A\to \varepsilon$ -- эпсилон правила
+            \item $A\to B$ -- цепные правила
+            \item $A\to BC$ -- хорошие правила, мы таки любим, остальные враги
+            \item $A\to N_1N_2\ldots N_k, k\geqslant 3$ -- длинные правила
+        \end{itemize}
+
+        \begin{example}
+            $S\to (S)S\quad S\to \varepsilon$
+
+            $S\to ASBS\quad A\to (\quad B\to )\quad S\to \varepsilon$
+        \end{example}
+
+        Легче всего избавиться от длинных правил.
+
+        $A\to N_1N_2\ldots N_k$
+
+        $A\to N_1Y_1\quad Y_1\to N_2Y_2 \quad \ldots\quad Y_{k-2}\to N_{k-1}N_k$
+
+        \begin{example}
+            $S\to AX\quad X\to SY\quad Y\to BS\quad A\to C\quad B\to )\quad S\to \varepsilon$
+        \end{example}
+
+        Удаление $\varepsilon$-переходов:
+        \begin{enumerate}
+            \item Найидём $\varepsilon$-переходы. $A \implies ^* \varepsilon$
+
+                $A\to \varepsilon\quad B\to A A\quad C\to AB$ --- все они $\varepsilon$-порождающие
+                \begin{lstlisting}
+                    while changes:
+                        for A -> alpha:
+                            Если все нетерминальные в alpha -- epsilon-порождающие
+                                то пометить A как epsilon-порождающий
+                \end{lstlisting}
+
+                $B\implies ^k \varepsilon\quad k\quad k\to \min$ алгоритм не пометил $B$ как  $\varepsilon$-порождающую
+
+                $B\implies C\implies \ldots\implies \varepsilon$
+
+                $B\implies CD \implies \ldots \implies \varepsilon$ 
+
+                $C$ и  $D$ --  были порождены на $k-1$ шаге, значит и  $B$ тоже должен был быть помечен 
+            \item $A \implies ^* \varepsilon$
+
+                $B\implies AC$. Добавим правило $B \implies C$
+
+                $B \implies CA$. Добавим $B\implies C$
+
+                 Если  $S$ ---  $\varepsilon$-порождающий, заведём новое стартовое состояние и правило $\p S \to S\quad \p S \to \varepsilon$
+
+                 \begin{example}
+                     $S \to AX\quad X \to Sy \quad X \to Y\quad Y \to BS \to Y \to B\quad A \to (\quad B \to )\quad \p S \to \varepsilon\quad \p S \to S$
+                 \end{example}
+
+
+        \end{enumerate}
+\end{enumerate}
+
+Граф цепных правил
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{chain-graph}
+    \caption{chain-graph}
+    \label{fig:chain-graph}
+\end{figure}
+
+Транзитивное замыкание $A \to B\quad B \to \alpha\quad A\to \alpha$
+
+\begin{example}
+    $S \to AX\quad X \to SY\quad X \to BS\quad X\to (\quad Y \to BS\quad Y \to )\quad A \to (\quad B \to )\quad \p S \to \varepsilon\quad \p S \to AX$
+
+    $\left(  \right) \left(  \right) $
+
+\end{example}
+
+\section{Алгоритм Кока-Янгера-Касами (КЯК) $\quad $ Cock, Yanger, Kasami\quad CYK}
+
+Принимает на вход грамматику в НФХ и слово $x\quad len(x) = n\quad x[0\ldots n-1]$
+
+$d_a[l][r]$ -- можно ли из нетерминала  $a$ породить фрагмент нашего слова  $x[l \ldots r-1]$
+
+$d_A[l][r] = \bigvee\limits_{A\to BC} \bigvee\limits_{k = l+1}^{r-1} \left( d_B[l][r] \land d_C[l][r] \right)\quad r-l>1 $
+
+$d_A[l][l+1] = \begin{cases}
+    1&, A \to x[l]\in \text{Г}\\
+    0&, \text{иначе}
+\end{cases}$ 
+
+$ans = d_s[0][n]$
+
+ \begin{lstlisting}
+    for len = 2 ... n:
+        for l = 0 ... n-len:
+            r = l + len:
+                ...
+\end{lstlisting}
+
+Итоговая сложность $\left| \text{Г} \right| n^3$
+\begin{figure}[!ht]
+    \centering
+    \incfig{cyk-algo}
+    \caption{cyk-algo}
+    \label{fig:cyk-algo}
+\end{figure}
+
+\begin{example}
+    $(0|1)^*00(0|1)^*$ -- слова с двумя нулями подряд
+
+    Можно написать автомат. Он распознаёт строку
+
+    Грмамматика  $S \to (S)S\quad S\to \varepsilon$
+
+    С одной стороны мы говорим как порождать слова. С другой стороны с помощью алгоритма выше можно проверять выводиться ли слово в КС-грамматике.
+\end{example}
+
+\begin{example}
+    Грамматика для палиндромов
+
+    $S\to aSa\quad S\to bSb\quad S\to \varepsilon$. Проверить что слово палиндром можно также например стэком, дойдя до середины
+\end{example}
+
+\section{Автомат с магазином памяти. МП-автомат, Стековая машина, Автомат со стэком, Push-Down-Automaton (PDA)}
+    Придётся делать НКА, потому что мы не можем чётко знать что нужно хранить (пример слова азканчиваюиеся на 001, он не знает когда нужно выходить на конец, а просто рассматривает вохможность всегда когда она есть)
+
+    В стэке изначально находится маркер дна. Его не надо вынимать или копировать.
+
+    В рамках перехода. включается два параметра: символ на которым мы сейчас $c$ (указатель на ленте) и верхний символ в стэке $A$.
+
+    При переходе мы можем изменить стэк: $c, A/\alpha$ -- по символу $c$ мы переходим, убираем  $A$ и кладём в стэк  $\alpha$
+
+    \begin{example}
+        Будем хранить баланс в унарной системе
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{brack-stack}
+    \caption{brack-stack}
+    \label{fig:brack-stack}
+\end{figure}
+    \end{example}
+
+    Входной Алфаыит $\Sigma$
+
+    Стэковый алфавит  $\Pi$
+
+    Состояния $Q$
+
+    Стартовое состояние $S \in Q$
+
+    Допускающее состояние  $T \in Q$
+
+    $\delta:Q\times \left( \Sigma \cup \varepsilon \right) \times \Pi \to \mathscr{P_{<+\infty }}( Q\times \Pi^*)$ -- Powerset $_{<+\infty }$ -- семейство конечных пожмножеств.
 \end{document}

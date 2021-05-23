@@ -1434,4 +1434,280 @@ $D = \left( d[v] - l \right) $
         Смотрим на одно дерево конкретного типа, считаем на нём все возможные запросы (табличка mem[type,v,l]) -- $O(\sqrt{n}\log ^2n) = O(n) $
 \end{enumerate}
 
+\section{TODO}
+\section{Euler TODO}
+\section{Цетроидная декомпозиция}
+
+Назовём близкими вершины, для которых $dist(u,v)\leqslant D$
+
+Найти число таких пар можно бинпоиском, префиксными суммами, двумя указателями ... но это на бамбуке
+
+Выберем вершины, поделим пути на те, которые содержат и которых не содержат вершину
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{deli}
+    \caption{deli}
+    \label{fig:deli}
+\end{figure}
+
+Когда у нас несколько деревьев, одно выбираем, а все другие запихиваем в большое дерево поиска и ищем там
+
+$d[v] = dist(v, c)$
+
+\begin{lstlisting}
+    BST
+    for t in trees:
+        for v in t:
+            find(bst, D - d(u))
+        for v in t:
+        insert(bst, v)
+\end{lstlisting}
+
+Для хорошести рекурсии нужно, чтобы самый большой кусок при раздлении был поменьше
+
+\begin{lemma}
+    В каждом дереве есть вершина, такая что при разделении по ней куски получаются $\leqslant n$
+\end{lemma}
+\begin{proof}
+    Подвесим за любую вершину. Посчитаем все веса поддеревьев.
+
+    Если какое-то дерево слишком большое, то пойдём в ребёнка большего половины.
+
+    При переходе мы знаем что всё вне ребёнка $\leqslant  \frac{n}{2}$, значит нужно проверить , что у детей детей $\leqslant \frac{n}{2}$, если нет, то идём дальше. За один обход находим нужную вершины, называемыю \underline{центроидом}
+\end{proof}
+
+Алгоритм:
+\begin{enumerate}
+    \item Делим по центроиду
+    \item В кусках рекурсивно высчитываем пути
+    \item В путях меньше деревьями считаем процедурой выше.
+\end{enumerate}
+
+\begin{problem}
+    Есть сеть дорог. 
+
+    [картинка] меня можно пнуть её сделать
+
+    Картинка делеает за $n\log n$
+\end{problem}
+\begin{proof}
+    Найдём первую оющую компоненту двух вершин
+
+    Предпосчитаем расстояния от всех центродов к их детям
+
+    \begin{lstlisting}
+        for c in centroids[v]:
+            i = binsearch(component[c], d - dist(c, v))
+            res = min(res, prefmin[c][i])
+    \end{lstlisting}
+\end{proof}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{kartinka}
+    \caption{kartinka}
+    \label{fig:kartinka}
+\end{figure}
+
+Если считать что-то менее хорошее, чем минимум, например сумму, то можно посчитать два раза если зайти в то же поддерево из которого мы вышли.
+
+Задача: нам нужно посчитать сумму по всех компонентам, кроме нашей
+
+Человеческий код:
+\begin{lstlisting}
+    build(v):
+        # строит декомпозицию
+        c = find_centroid(v)
+        mark[c] = True # Чтобы по ней больше не ходить
+        prepare(c) # посчитать расстояни, посортировать, ... all the fun stuff
+        for u in g[c]: # рёбра-соседи
+            if (not mark[u]):
+            build(u)
+
+    prepare(v):
+        dfs(v, -1)
+    
+    dfs(v, p, d):
+        for u in g[u]:
+            if !mark[u] and u != p:
+                dfs(u,v,d+1)
+        centroids[v].add({c, d})
+
+    for v = 1 ... n:
+        for (c, d) in centroids[v]:
+            comp[c].add({d, r})
+            comp2[c].add({dp, v}) # в comp2 вершину сортируются по расстоянию до предудущго центроида
+            dp = d # dp -- расстояние до предыдущего центроида
+
+    for c = 1 ... n:
+        sort(comp(c))
+        sort(comp2(c))
+
+
+    calc(v, D):
+        for (c, d) in centroid[v]:
+        i = binsearch(comp[c], D - d)
+        res += prefsum[c][i]
+        i = binsearch(comp2[c], D - dp)
+        res -= prefsum2[c][i]
+        dp = d
+
+    calc(v, D):
+    k = centroids[v].size
+    for i = 0 .. k-1:
+        c = centroids[v][i]
+        x = binsearch(comp[c], D - d)
+        res += prefsum[c][x]
+        if i < k-1:
+            cp = centroids[v][i+1]
+            x = binsearch(comp2[cp], D - d)
+            res  = prefsum2[c'][x]
+\end{lstlisting}
+
+Итоговая асимптотика: $O\left( n\log ^2 n \right) $ на предпосчёт. $O\left( \log ^2 \right)$ на запрос
+
+
+\section{Алгоритмы во внешней памяти}
+
+RAM-модуль: доступ за $O(1)$
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{sistema}
+    \caption{sistema}
+    \label{fig:sistema}
+\end{figure}
+
+
+$M, B$ -- параметры системы. Время работы = число чтений/записей блоков размера  $B$
+
+Эта модель может применяться к много чему, например к облачному хранилищу с долгим временем запроса и большими блоками запроса соответственно.
+
+Тупое решение: пусть у нас есть массив и нам нужно посчитать на нём сумму. Разделим его на блоки размера $B$.  $T(Scan(N)) = \left\lceil \frac{N}{B} \right\rceil \approx \frac{N}{B} + 1 $ 
+
+Отсортируем массив: хотим работать с блоками, MergeSort
+
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{morzh}
+    \caption{morzh}
+    \label{fig:morzh}
+\end{figure}
+
+$\frac{N}{B} \log \frac{N}{B}$ 
+
+так мы используем только 3 Мб памяти. Давайте сливать сразу много блоково
+
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{big-morzh}
+    \caption{big-morzh}
+    \label{fig:big-morzh}
+\end{figure}
+
+$k \approx \frac{M}{B} \quad M \geqslant kB$ 
+
+$Sort(N) = \frac{N}{B} \log _{\frac{M}{B}} \frac{N}{B}$ 
+
+
+\begin{statement}
+    Это время оптимально.
+\end{statement}
+\begin{proof}
+    N! всех перестановок. Выбираем одну, нужно $\log \left( N! \right) $ сравнений (примерно $N\log N$)
+
+    Когда мы мёрджим блоки размера  $M$ и $B$. 
+
+    $\log  C_m^B \approx \log \frac{M(M-1)(M-2)\ldots (M-B+1)}{B (B-1)(B-2) \ldots 1} \approx B \log \frac{M}{B}$
+\end{proof}
+
+
+
+Стэк во внешней памяти: 
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{stack}
+    \caption{stack}
+    \label{fig:stack}
+\end{figure}
+
+$O(1)$ -- нехорошо
+
+$O(\frac{1}{B})$ -- правильная оценка. 1 запрос на $B$ операций
+
+Дерево поиска:
+
+
+B-дерево. В каждом узле хранится  $B$ ключей и  $B+1$ ребёнка. Время работы $O\left( \log _b^N \right) $ 
+
+C деревом посика нельзя запросы меньше 1, потому что дерево поиска может выдать любой свой элемент, а держать их все в оперативной памяти оно не может, значит всегда есть запрос, который заставит его что-то подгрузить.
+
+Хотим обратную перестановку. Если бы не было внешней памяти, то
+\begin{lstlisting}
+    for i = 1 .. n:
+        r[p(i)] = i
+\end{lstlisting}
+
+
+С памятью запишем все такие пары $(i, p[i])$ и отсортируем их по второму элементу
+
+$35214\quad (1,3), (2,5)(3,2)(4,1)(5,4) \implies (4,1)(3,2)(1,3)(5,4)(2,5)$ -- выбираем первые элементы пар и это будет обратная перестановка.
+
+Есть два массива. Хотим посчитать третий, чтобы $c[i] = b[a[i]\quad a[i]\in [1 .. N]$
+
+Сделаем массив пар  $(i, a[i])$ И  $(i, b[i])$ 
+
+Отсортируем первый по $a[i]$, а второй по  $i$. Тогда переход между ними будет приятный (можно идти указателями по сортированным массивам)
+
+
+ \begin{problem}
+     Есть массив $next$, в котором написан какой элемент следующий после данного.  $[5, 7, -, 3, 2, 4]\quad 1 \to 5\to 3\to 6\to 2\to 7\to 4$
+
+\end{problem}   
+\begin{proof}
+     Безыдейно:
+     \begin{lstlisting}
+         x = 1
+         for i = 1 .. n:
+            print x
+            x = next(x)
+     \end{lstlisting}
+
+     Переделаем задачу: Есть элементики
+     
+     
+\begin{figure}[!ht]
+    \centering
+    \incfig{elementiki}
+    \caption{elementiki}
+    \label{fig:elementiki}
+\end{figure}
+
+Если делать все двоичные подъёмы, то будет $O\left( \log N \cdot  \frac{N}{B}\log _{\frac{M}{B}}\frac{N}{B} \right) $ 
+
+Можно делать не все подъёмы.
+
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{ne-vse-podъёmы}
+    \caption{ne-vse-podъёmы}
+    \label{fig:ne-vse-podъёmы}
+\end{figure}
+
+
+Поставим в элементы рандомные битики. В местах, где с 1 переходим на 0 будем делать переход через 2 (удалять тот, на котором 1)
+
+\begin{lstlisting}
+    if renoved[Next[i]:
+        Next[i] = Next[Next[i]
+        W[i] = N[i] + W[Next[i]]
+\end{lstlisting}
+
+\end{proof}
+
 \end{document} 
