@@ -2679,6 +2679,411 @@ $\varphi \to P_{\varphi}(t) = p_1(t)p_2(t) \to X = L_1 \dotplus L_2$
 
      $\sum_{i=1}^{k} \varphi_i = \varphi$
 \end{note}
+\section{BIIG TODO, something Жордана something}
+
+\section{Евклидово пространство}
+
+$\sqsupset M$ -- произвольное множество (вообще любое)
+
+\begin{definition}
+    Метрикой $\rho$ на $M$ называется отображение  $M\times M \to R$, удовлетворяющее следующим свойствам (аксиомам метрики) $\forall x, y, z$:
+    \begin{enumerate}
+        \item $\rho(x, y) \geqslant 0\quad \rho(x, y) =0 \iff  x = y$
+        \item $\rho(x, y) = \rho(y, x)$
+        \item  $\rho(x, z) \leqslant \rho(x, y) + \rho(y, z)$
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    Множество непрерывных функций на $[a,b]$
+
+    $\rho(f, g) = \max\limits_{t\in [a,b]} |f(t) - g(t)|$
+\end{example}
+
+\begin{example}
+    Шахматная доска
+
+
+максимальное количество ходов коней, ферзей, ладей, чтобы добравться из одной клетки в другую..
+\end{example}
+
+\begin{note}
+    $(M, \rho)$ -- метрическое пространство
+\end{note}
+\subsection{Норма}
+\begin{definition}
+    $\sqsupset L$ -- линейное пространство
+
+    Нормой называется отображение $L \to \R$, такое что:
+    \begin{enumerate}
+        \item $\|x\| \geqslant 0\quad \|x\| = 0 \iff  x = 0$ (ноль есть, потому что ЛП)
+        \item $\|\alpha x\| = |\alpha|\|x\|\quad \alpha \in K$
+        \item $\|x + y\| \leqslant \|x\| + \|y\|$
+    \end{enumerate}
+\end{definition}
+\begin{note}
+    Пара $(L, \|\|)$ -- нормированное простраснство
+\end{note}
+\begin{note}
+    Нормированное пространство можно метризовать
+
+    $\rho(x, y) = \|x-y\|$
+
+     $x = a - b$
+
+     $\rho(x, z) = \|x-z\|\leqslant \|x-y\| + \|y-z\| = \rho(x,y) + \rho(y,z)$
+
+     $x - y = a, y - z = b$
+
+      $\|a + b\| \leqslant a + b$
+\end{note}
+
+\begin{note}
+    $\rho(x,y) = \begin{cases}
+        0, x = y\\
+        1, x \neq y\\
+    \end{cases}$ 
+
+    Отличное расстояние, метризует любое пространство)
+\end{note}
+
+\begin{example}
+    $L = \R\implies \|x\| = |x|$
+
+    $L = \R^n \implies x = \left( \xi^1 \ldots \xi^n \right) ^T\quad \max_i|\xi^i|$ -- норм норма
+
+    $\|x\| = \sum_{i}^{} \xi^i$ -- 1-норма
+
+    $\|x\| = \sqrt[p]{   \sum_{i=1}^{n} \xi^p}$ -- p-норма (доказывать -- убиться)
+
+    Аналогично можно сделать с функциями заменив сумму на интеграл.
+\end{example}
+
+\begin{example}
+    $L = \mathscr{P}_n$ -- $\sum_{i=1}^{m} |p(t_i)|$
+
+    ненулевой многочлен может дать 0, плохо. Но можно взять $m>n$ и оно переборет даже  $n$ корней
+\end{example}
+
+\section{Скалярное произведение}
+
+\begin{definition}
+    $\sqsupset L$ -- ЛП \underline{над $\R$}
+    
+    Скалярным произведением над $L$ называется отображение $L\times L \to \R$, удовлетворяющее следующим требованиям (аксиомы скалярного произведения):
+     \begin{enumerate}
+            \item $\left<x, y \right> = \left<y, x \right>$
+            \item $\left<x + \alpha y, z \right> = \left<x,z \right> + \alpha\left<y,z \right>$
+            \item $\left<x, x \right> \geqslant 0\quad \left<x,x \right> = 0 \iff  x  = 0$
+     \end{enumerate}
+\end{definition}
+
+\begin{note}
+    Пара $\left( L, \left< \right> \right) = E $ -- (вещественное) Евклидово пространство 
+\end{note}
+
+\begin{example}
+    $E = \R^n\quad x = \left[ \xi^1 \ldots \xi^n \right] ^T \quad y = \left[ \eta^1 \ldots \eta^n \right] ^T$
+
+    $\left<x, y \right> = \sum_{i=1}^{n} \xi^i\eta^i$
+\end{example}
+
+\begin{example}
+    $E = C[a,b]$
+
+    $\left<f, g \right> = \int\limits_a^bf(t)g(t)dt$
+\end{example}
+
+\begin{example}
+    $E = \mathscr{P}$
+
+    $\left<p, a \right> = \sum_{i=1}^{m} p(t_i)q(t_i),\quad m>n$
+\end{example}
+
+\begin{lemma}
+    Любое евклидово пространство можно нормизовать
+
+    $\|x\| = \sqrt{\left<x, x \right>} $
+
+    Первые два свойтсва очевидны
+
+    $\|x+y\|^2 = \|x\|^2 + 2\left<x, y \right> + \|y\|^2$
+
+    $\left( \|x\| + \|y\| \right) ^2 = \|x\|^2 + 2\|x\| \|y\| + \|y\|^2$
+
+    $\left<x, y \right> \leqslant  \|x\| \|y\|$ (неравенство Швартца (Коши-Буняковского-Швартца))
+\end{lemma}
+
+\begin{lemma}
+    [неравенство Швартца]
+
+    $\left<x, y \right>\leqslant \|x\|\|y\| \implies \underset{\cos \Theta}{\frac{|\left<x, y \right>|}{\|x\|\|y\|}} \leqslant 1$
+\end{lemma}
+\begin{proof}
+    $\|\alpha x + y\|^2 = \left<\alpha x + y, \alpha x + y \right> = |\alpha|^2\|x\|^2 + 2\alpha \left<x, y \right> + \|y\|^2 > 0$ (строго, потому что берём ненулевые)
+
+    Всегда пололжительный, нет корней, отрицательный дискриминант $\frac{D}{4} = \left<x, y \right>^2 - \|x\|\|y\| <0 \implies \left<x, y \right> < \|x\|\|y\|$
+\end{proof}
+
+\begin{note}
+    Неравенство Швартца превращается в равенство, когда $x, y$  линейно зависимы
+
+     $|\left<x, y \right>| = \|x\|\|y\| \iff x, y$ -- ЛЗ
+\end{note}
+\begin{proof}
+    \begin{itemize}
+        \item []
+        \item [$\impliedby $] $\sqsupset y = |\beta x\quad \left<x, y \right>| = |\left<x, \beta x \right>| = |\beta\left<x, x \right>| = |\beta| \|x\|^2 = |\beta| \|x\|\|x\| = \|x\| \|\beta x\| = \|x\| \|y\| $
+        \item [$\implies $] $\sphericalangle \|\alpha x + y\|^2  = \alpha^2 \|x\|^2 + 2\alpha \left<x, y \right> + \|y\|^2 = 0\quad D = 0\quad \alpha x + y = 0 \implies $ ДЗ
+
+    \end{itemize}
+\end{proof}
+
+\begin{note}
+    [равенство параллелограмма]
+
+    Если норма удовлетворяет следующему свойству:
+    
+    $\forall x, y\quad \|x + y\|^2 + \|x-y\|^2 = 2\left( \|x\|^2 + \|y\|^2  \right) $
+
+    Сумма квадратов сторон параллелограмма равна сумма квадратов её диагоналей
+\end{note}
+
+\subsection{Псевдо-евклидовы пространства}
+
+Аксиомы:
+\begin{enumerate}
+    \item $\left<x, y \right> = \left<y, x \right>$
+    \item $\left<\alpha x + y, z \right> = \alpha \left<x, z \right> + \left<y, z \right>$
+    \item $\left<x, y \right> = 0\forall y \implies x = 0$
+\end{enumerate}
+
+\begin{example}
+    [пространство Минковского]
+
+    $x = \left[ \xi^1 \xi^2 \xi^3 \right]^T \quad y = \left[ \eta^1 \eta^2\eta^3 \right] ^T$
+
+    $\left<x, y \right> = \xi^1\eta^1 + \xi^2\eta^2 - \xi^3\eta^3 \implies \left<x, x \right> = |\xi^1|^2 + |\xi^2|^2 - |\xi^3|^2\quad x = \left( \frac{1}{\sqrt{2} } \frac{1}{\sqrt{2} } 1 \right) \quad \|x\| = 0$
+\end{example}
+
+\subsection{Комплексное евклидово пространство}
+Аксиомы скалярного произведения:
+\begin{enumerate}
+    \item $\left<x, y \right> = \ov{\left<y, x \right>}$
+    \item $\left<\alpha x + y, z \right> = \ov {\alpha}\left<x, z \right> + \left<y, z \right>$
+
+        $\left<x, \alpha y \right> = \alpha \left<x, y \right>$
+
+        1.5-линейность (вместо билинейности в вещественных числах)
+    \item $\left<x, x \right> \geqslant 0\quad \left<x, x \right> = 0 \iff x = 0$
+    
+        $\left<x, x \right> = \ov{\left<x, x \right>} \implies \left<x, x \right>\in \R_{\geqslant 0}$
+\end{enumerate}
+
+\begin{note}
+    $|\left<x, y \right>| \leqslant \|x\|\|y\| $
+\end{note}
+\begin{proof}
+    $\|\lambda x + y\|^2 = \lambda^2\|x\|^2 + \lambda \left<x, y \right> + \ov{\lambda }\left<y, x \right> + \|y\|^2 = \lambda^2\|x\|^2 + 2\Re \lambda \left<x, y \right> + \|y\|^2$
+\end{proof}
+
+\begin{lemma}
+    [Швартц жив! (всё равно работает)]
+\end{lemma}
+\begin{proof}
+    $\left<x, y \right> = |\left<x, y \right>|e^{i\varphi}$
+
+    $\sphericalangle z = e^{i\varphi}x$
+
+    $\left<z, y \right> =  \left<e^{i\varphi}x, y \right> = e^{-\varphi}\left<x, y \right> = e^{-i\varphi}e^{i\varphi}r = r \in \R$
+
+    $|\left<x, y \right>| = |\left<z, y \right>| \leqslant \|z\|\|y\| = \|e^{i\varphi}x\|\|y\| = |e^{i\varphi}| \|x\|\|y\| = \|x\|\|y\|$
+\end{proof}
+
+\subsection{Метрический тензор}
+
+$\sqsupset \left\{ e_j \right\} _{j=1}^n$ базис $E$
+
+ $x = \sum_{j=1}^{n} \xi^je_j\quad y = \sum_{k=1}^{n} \eta^ke_k$ 
+
+ $\left<x, y \right> = $
+
+ \begin{align*}
+     \left<x, y \right> &= \left<\sum_{j=1}^{n} \xi^je_j, \sum_{k=1}^{n} \eta^k e_k \right>\\& = \sum_{j,k=1}^{n} \ov{\xi}^j\eta^k \overset{g_{ik}}{\left<e_j, e_k \right>}\\& = \sum_{j,k=1}^{n} \ov{\xi}^j\eta^kg_{jk}
+ .\end{align*}
+
+ \begin{note}
+     $g_{ik} \longleftrightarrow G = \begin{bmatrix} \left<e_1, e_1 \right> & \left<e_2, e_1 \right> & \ldots\\ \left<e_1, e_2 \right>& \ldots& \ldots\\\ldots & \ldots & \ldots \end{bmatrix} $ -- матриа Грама
+ \end{note}
+
+ Свойства $g_{jk}$:
+  \begin{enumerate}
+      \item $g_{jk} = \left<e_j, e_k \right> = \ov{e_k, e_j} = \ov{g_{jk}}$ 
+
+          $\ov G^{-1} = G$ -- эрмитовость
+
+          $G^{\dag} := \ov G^{-1}$
+
+          $\left<x, y \right> = \dag {\xi} G \eta$
+      \item $g_{ii} > 0$
+ \end{enumerate}
+
+ \section{Ортогональность}
+
+ $\sqsupset E$ -- Евклидово пространство
+
+ $\sqsupset x, y\in E$
+
+ \begin{definition}
+     Элементы $x, y$ называются ортогональными, если  $\left<x, y \right> = 0$
+ \end{definition}
+
+ \begin{lemma}
+     $\sqsupset \left\{ x_i \right\} _{i=1}^n$ -- набор попарно ортогональных векторов (ненулевых)
+
+     $\impliedby \left\{ x_i \right\} _{i=1}^n$ -- ЛНЗ
+ \end{lemma}
+ \begin{proof}
+     $\sum_{i=1}^{n} \alpha_i x_i = 0 \implies \\\sum_{i=1}^{n} \alpha_ix_i\|^2 = 0 = \left<\sum_{i=1}^{n} \alpha^ix_i, \sum_{j=1}^{n} \alpha^jx_j \right> = \sum_{i, j = 1}^{n} \alpha^i\alpha^j \left<x_i, x_j \right> = \sum_{i=1}^{n} |\alpha^i|^2\|x_i\| = 0 \implies \alpha^i = 0 \forall i \implies $ ЛНЗ
+ \end{proof}
+
+ \begin{theorem}
+     [ортогонализация Грама-Шинка]
+
+     $\sqsupset \left\{ x_i \right\} _{i=1}^k$ -- ЛНЗ и $L = \mathscr L\left\{ x_1, \ldots, x_k \right\} $ -- подпространство $E$
+
+     Можно построить ортогональный базис  $L$
+ \end{theorem}
+ \begin{proof}
+     Будем строить ортогональный базис $L\quad \left\{ e_i \right\} _{i=1}^k$
+
+     $e_1 = x_1$
+
+     $e_2 = x_2 - \alpha e_1\quad \left( e_1, e_2 \right) = 0 \quad 0 = \left( x_2, e_1 \right)  - \alpha \left( e_1, e_1 \right) $ -- знаем $\alpha$
+
+      $e_3 = x_3 - \beta e_2 - \gamma e_1$ Домножением на $e_1, e_2$ получаем коэффициенты
+
+        $e_3 = x_3 - \frac{\left<x_3, r_2 \right>}{\left<e_2, e_2 \right>}e_2 - \frac{\left<x_3, e_1 \right>}{\left<e_1, e_1 \right>}e_1$ 
+
+        ...
+
+        $e_m = x_m - \sum_{j=1}^{m-1} \frac{\left<x_m, e_j \right>}{\left<e_j, e_j \right>}e_j$
+        
+        ...
+
+        $e_k$
+ \end{proof}
+
+\begin{note}
+    Почему он не прервётся?
+
+    $\sqsupset m:\quad e_{m+1} = 0 \implies 0 = x_{n+1} - \sum_{j=1}^{m} x_je_j = x_{m+1} - \sum_{j=1}^{m} \beta_jx_j = 0$, но x-ы ЛНЗ
+\end{note}
+\begin{note}
+    На любом этапе $\|x_m\| \leqslant \|e_m\|$
+
+    $e_m = x_m + \ldots\quad $
+
+    $\|e_m\|^2 = \left<x_m, e_m \right> \leqslant \|x_m\|\|e_m\|\quad \|e_m\| \leqslant \|x\|$ (Если есть линейная комбинация, зануляющая $x_m$, то занулиться и  $e_m$)
+\end{note}
+
+\begin{definition}
+    Базис $\left\{ e_j \right\} _{j=1}^n$ пространства $E$ называется ортогональным, если  $\left<e_i, e_{j\neq i} \right> = 0$
+\end{definition}
+
+\begin{note}
+    Ортогональный базис всегда существует
+\end{note}
+
+\begin{definition}
+    Базис называется ортонормированным, если $\left<e_i, e_j \right> = \delta_{i,j}$ ОРТН
+\end{definition}
+
+\begin{note}
+    В ортогональном базис матрица Грама имеет вид $G = diag\left\{ \lambda_1 ,\lambda_2, \ldots, \lambda_n \right\} $ 
+
+    ОРТН $G = I$
+\end{note}
+
+\begin{theorem}[Пифагора]
+    Пусть $\left\{ x_i \right\} _{i=1}^n$ -- такой, что $\left<x_i, x_{j\neq i} \right> = 0$ 
+
+    Тогда $\left\| \sum_{i=1}^{m} x_i \right\| = \sum_{i=1}^{m} \|x_i\|^2$ 
+\end{theorem}
+
+\subsection{Ортогональное дополнение}
+
+$L$ -- ЛПП  $E$
+
+ \begin{definition}
+    Говорят, что $x$ ортогонален  $L \iff \left<x, y \right> = 0 \forall y\in L$
+\end{definition}
+
+\begin{definition}
+    $\left\{ x_i \right\} _{i=1}^m$ ортогонален $L$, если  $x_i$ отогонален  $L \forall i$
+\end{definition}
+
+\begin{lemma}
+   Множество векторов, ортогональных $L$ образует подпространство  $E$
+\end{lemma}
+\begin{proof}
+    $\sqsupset x, y \perp L$
+
+    $x + y\perp L$
+
+     $\left<x+y, z \right> = \left<x, z \right> + \left<y, z \right> = 0 + 0 = 0 \forall  z\in L$
+\end{proof}
+
+\begin{note}
+    $\p L$ -- ортогональное дополнение пространства  $L$ до   $E$
+\end{note}
+
+\begin{lemma}
+    $E = L \dotplus \p L$
+\end{lemma}
+\begin{proof}
+    $E = L + \p L$
+
+    Выберем базис  $L\quad \left\{ e_1, e_2, \ldots, e_k \right\} \cup {e_{k+1}, \ldots, e_n} $ -- добили базис до базиса всего пространства. дальше ортонормируем базис. Тогда все вектора, что не лежат в $L$ ортогональны  $\p L$, а тогда полуичшееся -- базис $E$ -- состоит из базисов  $L$ И  $\p L$
+
+     $E = L\dotplus \p L \iff  L \cap \p L = \O $
+
+     $x \overset ! = y + z\quad x = \p y + \p z$
+
+     $y - \p y = z - \p z$
+
+      $\sphericalangle \|y - \p y\|^2 = \left<y - \p y, y - \p y \right> = \left<y - \p y, z - \p z \right> = 0 \implies y = \p y \implies z = \p z$
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

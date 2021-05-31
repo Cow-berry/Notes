@@ -2162,4 +2162,218 @@ $ans = d_s[0][n]$
     Допускающее состояние  $T \in Q$
 
     $\delta:Q\times \left( \Sigma \cup \varepsilon \right) \times \Pi \to \mathscr{P_{<+\infty }}( Q\times \Pi^*)$ -- Powerset $_{<+\infty }$ -- семейство конечных пожмножеств.
+
+
+    \begin{theorem}
+        $L$ -- контекстно-свободный  $\iff L$ распознаётся МП-автоматом
+    \end{theorem}
+
+    \section{МП-автоматом с допуском по пустому стэку}
+
+    \begin{definition}
+        Нету терминальных состояний, но теперь можем снимать маркер дна.
+
+        Допуск, если полностью опустошили стэк.
+    \end{definition}
+
+    \begin{definition}
+        [операция переходит за один шаг]
+
+        $\left<q, x, \gamma \right> \vdash \left< r, y, p\right>$
+
+        состояние-вход(слово)-стэк
+    \end{definition}
+
+    \begin{definition}
+        [МП-автомат-язык]
+        $L(A) = \left\{ x | \left<s, x, z_0 \right> \vdash^*\left<t, \varepsilon, \varepsilon \right> \right\} $
+    \end{definition}
+
+    \begin{lemma}
+        Допуск по допускающему состоянию, допуск по пустому стэку
+    \end{lemma}
+    \begin{proof}
+\begin{figure}[!ht]
+    \centering
+    \incfig{ekvimp}
+    \caption{ekvimp}
+    \label{fig:ekvimp}
+\end{figure}
+    \end{proof}
+
+
+    \begin{proof}
+        [КС $ \implies $ МП-автомат]
+
+        строим МП-автомат с допуском по пустому стэку (ДПС)
+
+        $\Sigma, \Pi = \Sigma \cup  N,  Q = \left\{ st \right\} , S = st, z_0 = S, \delta$
+
+        $A \to \alpha \implies \varepsilon, A / \alpha$
+
+        $A \to c \implies c, c / \varepsilon$
+
+        $S \implies \xi = xA\zeta \implies x\alpha \zeta$
+
+
+        $\left<st, xy, S \right> \vdash^* \left<st, y, \alpha \right>$
+    \end{proof}
+
+    \begin{definition}
+        [LL(k) грамматики]
+
+        Если можно подсмотрев на $k$ символов точно определить какое правило применить (детерминированность)
+    \end{definition}
+
+    \begin{proof}
+        [МП-автомат $\implies$  КСГ]
+
+        Автомат $\Sigma, \Pi, Q, s\in Q, z_0\in \Pi, \delta$
+
+        КСГ $\Sigma, Q\times P\times Q [pAq], $
+
+        состояние $P$ символ  $A$ перейдём в  $r$ с состояни
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{klast-snimat}
+    \caption{klast-snimat}
+    \label{fig:klast-snimat}
+\end{figure}
+
+$L[pAq]) = \left\{ x | \left<p, x, A \right>\vdash^* \left<q, \varepsilon, \varepsilon \right> \right\} $
+
+$S \to  [sz_0q_1]\quad S \to  [sz_0q_2]\quad \ldots \quad S \to [sz_0q_k]$
+
+$p\to r\quad c, A / \alpha$
+
+$c\in \Sigma \cup \left\{ \varepsilon \right\} $
+
+\begin{enumerate}
+    \item $\alpha  = \varepsilon$ должно быть $q = r$
+
+        $[pAr] \to c$
+    \item $|\alpha| = 1\quad \alpha  = B$
+
+        $[pAq] \to c[rBq]$
+    \item $|\alpha| \geqslant 2\quad \alpha = B_1B_2\ldots B_k, k \geqslant 2$
+
+        $\forall u_1, u_2 \ldots, u_{k-1} \in Q\quad \left( |Q|^{k-1} \right) $ 
+
+        $[pAq] \to c[rB_1u_1][u_1B_2u_2] \ldots [u_{k-1}B_kq]$
+\end{enumerate}
+    \end{proof}
+
+
+    МП-автомат $A \mapsto \text{Г} \overset{\text{НФХ}}{\mapsto} \text{Г}^{\prime} \to \p A$ 
+
+    $\p A$ кладёт в стэк не более двух символов и эквивалентен  $A$!
+
+     \begin{example}
+        $\Sigma, x_1, x_2, \ldots, x_n$ -- множество слов
+
+        $\p \Sigma  = \Sigma \cup \left\{ 1, \ldots, n \right\} $ 
+
+        $L : S\to \varepsilon, S \to x_iS i$
+
+        $3 1 2 1 x_1x_2x_1x_3$
+
+        $L$ -- КС
+    \end{example}
+
+    \begin{theorem}
+        [Лемма о разрастании (накачке boost) для КС ]
+
+        $L$ - КС-язык
+
+         $\exists n  \forall w\in L, |w| \geqslant n\quad \exists u, v, x, y, z: w = uvxyz\quad |vxy| \leqslant n \quad vy\neq \varepsilon\quad  \forall  k\geqslant 0 uv^kxy^kz\in L$
+    \end{theorem}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{prostaya-kartinka}
+    \caption{prostaya-kartinka}
+    \label{fig:prostaya-kartinka}
+\end{figure}
+
+
+\begin{proof}
+    $\sqsupset \text{Г}$ -- КСГ в НФХ для $L$
+
+    Г содержит  $m$ нетерминалов
+
+    выберем  $n = 2^m$
+
+     \begin{lemma}
+        $\sqsupset w\in L\quad |w| \geqslant n$
+
+        Тогда в дереве разбора $w$ существует такой нетерминал  $A$, что у него в собственном поддереве тоже есть нетерминал  $A$
+    \end{lemma}
+    \begin{proof}
+        Допустим нет, тогда , значит суммарное количество листьев не более $2^{m-1}$?! ($n = 2^m$) 
+    \end{proof}
+
+    Выберем пару $A ---- A$, у которой верхний нетерминал самый глубокий. В её поддереве таких пар нет (мы взяли самую глубокую), поэтому высота дереве в рёбрах не превышает  $m$
+
+    Крона этого поддерева  $|t| \leqslant  2^h = 2^m = n$ 
+
+    То, что справа и слева от поддерева $A$ по листья назовём  $u$ и  $z$
+
+    Внутри по поддереву нижнего  $A$ Разделим на  $vxy$
+
+     $|vxy| \leqslant n$, как и требовалось
+
+     Т.к. у верхнего $A$ есть два сына, нижнее А лежит в либо правом, либо левом поддереве. Значит либо  $v$ либо  $y$ содержат хотя бы один символ (от другого сына верхнего  $A$)
+\end{proof}
+
+\begin{theorem}
+    Язык $0^n 1^n 2^n$ -- НЕ КС
+\end{theorem}
+\begin{proof}
+    $\sphericalangle n\quad w = 0^n 1^n 2^n$
+
+    $|vxy| \leqslant n$, соотвественно не может содержать одновременно 0 и 2
+
+    $k = 2\quad uv^2xy^2z$
+
+    длина увеличилось, либо количество 0 $n$, либо количество  $2$  $n$, значит их не треть, слово не из языка.
+\end{proof}
+
+
+\begin{example}
+    $L = 0^n 1^n 2^m$
+
+    $S \to AB\quad A \to 0A_1\quad A \to \varepsilon\quad B \to 2 B\quad B \to  \varepsilon$
+
+    $L = 0^n 1^m 2^m$ -- тоже КС
+
+     $L_1 \cap L_2 = 0^n 1^n 2^n$ -- Не КС
+\end{example}
+
+\begin{note}
+    Автомат с двумя стэками распознаёт вообще любые языки
+\end{note}
+
+\begin{theorem}
+    $L\in CF\quad L_2\in Reg \implies L_1\cap L_2\in CF$ (можно рассмотреть произведение обычного автомата и автомата со стэком)
+\end{theorem}
+
+\begin{theorem}
+    Язык тандемных повторов на неодносимвольным алфавитом не является КС.
+
+    $\sphericalangle n\quad 0^n 1^n 0^n 1^n$
+
+    Если $vxy$ целиком какой-то блок, берём  $k=1$ и доказано
+
+    Если два блока: 
+    Если не посередине, то берём $k=2$ и две не равные части получаются
+
+    Если посередине  $0^a 1^b 0^n 1^n\quad$
+\end{theorem}
+
+\begin{note}
+    Существуют КС языки, такие, что дополнение не КС
+\end{note}
+
+
 \end{document}
