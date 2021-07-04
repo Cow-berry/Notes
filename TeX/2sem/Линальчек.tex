@@ -47,6 +47,7 @@
 \DeclareMathOperator{\rg}{rg}
 \DeclareMathOperator{\Image}{Im}
 \DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Tr}{Tr}
 \let\latexwedge\wedge
 \def\wedge{\,\raisebox{0.5ex}{\ensuremath{\scriptscriptstyle\latexwedge}\,}}
 \DeclareMathAlphabet{\mymathbb}{U}{BOONDOX-ds}{m}{n}
@@ -3058,21 +3059,337 @@ $L$ -- ЛПП  $E$
 
 
 
+\section{Ортогональное дополнение}
+
+$\sqsupset E$ -- евклидово
+
+$L \subseteq E$ -- ЛПП $R \implies  L^{\perp} \triangleq M = \left\{ x\in E : x\in L \right\} $
+
+\begin{lemma}
+    $E = L \dotplus L^{\perp }$
+\end{lemma}
+\begin{note}
+    $\left\{ e_1, e_2, \ldots, e_n \right\} $ -- ортогональный базис $E$
+
+     $E = \dotplus \sum_{i=1}^{k} L_i$
+\end{note}
+\subsection{Ортогональны проектор}
+
+$E = L \dotplus L^{\perp} = L\dotplus M  \iff \forall x\in E \exists x \overset ! = \underbrace{y\in L} y + \underbrace{\in M} \varepsilon   $
+
+$\sphericalangle \mathcal P_L^{\perp}: \varepsilon \to  L$
+
+$\mathcal P_L^{\perp} x = y\in L\quad \mathcal P_L^{\perp} = 0 $
+
+$\sphericalangle \mathcal P_M^{L}: E \to  M$ 
+
+$\mathcal P_M^{\perp} x = z\quad \mathcal P_y^{\perp} = 0$
+
+ \begin{lemma}
+     $\sqsupset \left\{ e_i \right\} _{i=1}^k$ -- ортонормированный базис $\implies \mathcal P_L^{\perp} x = \sum_{i=1}^{k} (e_i x)e_I$
+\end{lemma}
+\begin{proof}
+    $L \to L^{\perp}$
+
+    $x = y + z = \underbrace{\mathcal P_L^{\perp} x}{\alpha^1e_1 + \alpha_2 e_2 + \ldots + \alpha^ke_k} = z$
+
+    $(e_1 x) = \alpha_1\quad \ldots\quad (e_k x) = \alpha_k\qquad (e_i e_{j\neq i}) = 0\quad (e_i z) = 0$
+
+    $\implies \mathcal P_L^{\perp} x = \sum_{i=1}^{k} \left( e_i x)e_i \right) $
+\end{proof}
+
+\begin{definition}
+    $y = \mathcal P_L^{\perp} x$ -- ортогональная проекция  $x$ на  $L$
+
+    $z = x- y = x - \mathcal P_L^{\perp} x$ -- ортогональная составляющая  $x$ в $L$
+\end{definition}
+
+\begin{note}
+    Нахождение $y$ и $z$ для заданного $x$ называется ``задачей о перпендикуляре''
+
+    Решение:
+    \begin{enumerate}
+        \item Заводят Ортогональный базис в $L$
+        \item Находим  $\mathcal P_L^{\perp } \implies  V = \mathcal P_L^{\perp}\quad z = x - \mathcal P_L^{\perp}$
+    \end{enumerate}
+\end{note}
+
+\begin{lemma}
+    $\|\mathcal P_L^{\perp} x\| \leqslant \|x\|$ 
+\end{lemma}
+\begin{proof}
+    $x = y + z \implies \|x\|^2 = \|y\|^2  + \|z\|^2$
+
+    $\|x\|^2 = \left< x, x \right> = \left<y + z, y + z \right> = \|y\|^2 + \|z\|^2$
+
+    $\|x\|^2 = \|\mathcal P_L^{\perp} x\| + \|z\|^2 \implies \|x\|^2 \geqslant  \|\mathcal P_L^{\perp}\|$
+\end{proof}
+
+\begin{lemma}
+    $\|\mathcal P_L^{\perp}\|^2 = \sum_{i=1}^{k} \|x^i\|^2\quad x = \sum_{i=1}^{n} \alpha^ie_i$
+\end{lemma}
+\begin{proof}
+    $\|\mathcal P_L^{\perp} x\|^2 = \left<P_L^{\perp} x, P_L^{\perp} x \right> = \left< \sum_{i=1}^{n} \left( e_i x \right) e_i, \sum_{i=1}^{n} \left( e_i x \right) e_i \right>  = \sum_{i, j = 1}^{k} \left( x e_i \right) (e_j x) \underbrace{\delta_{i j}}{(e_i e_j)} = \sum_{i=1}^{k} |(e_i x)|^2 = \sum_{i=1}^{n} |\alpha^i|^2$
+\end{proof}
+
+\begin{definition}
+    $\alpha^i$ -- коэффициенты Фурье вектора  $x$ в  $\left\{ e_i \right\} _{i=1}^n$
+    \[
+    \alpha^i = \left<e_i x \right>
+    .\] 
+\end{definition}
+
+\begin{theorem}
+    [Неравенство Беселя]
+    \[
+    \|x\| = \sum_{i=1}^{k} |\alpha_i|^2
+    .\] 
+\end{theorem}
+
+\begin{theorem}
+    [Равенство Парсеваля]
+
+    $\sqsupset E$ -- евклидово пространство $ \sqsupset \left\{ e_i \right\} _{i=1}^k$  -- ортонгрмированная ЛЗ система векторов
+
+    $\|x\|^2 = \sum_{i=1}^{k} |\alpha_i|^2\quad \alpha^i = \left<e_i x \right>$
+\end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item []
+        \item [$\impliedby $] $\sqsupset \left\{ e_i \right\} _{i=1}^n$ -- полная в $E$
+
+             $x = \sum_{i=1}^{k} \alpha^ie_i \implies \|x\|^2 = \left<x, x \right> = \sum_{i, j = 1}^{k} \alpha^i\alpha^j \left<e_i e_j \right> = \sum_{k=1}^{k} |\alpha^i|^2$ 
+         \item [$\implies $] $\|x\|^2 = \sum_{i=1}^{k} |\alpha^i|^2\quad \alpha^i = \left<e_i x \right>$ 
+
+             Допустим противное. $\sqsupset \left\{ e_i \right\} _{i=1}^n $ -- не полный $\sqsupset x = \sum_{i=1}^{k} \alpha^ie_i$ 
+
+             $\sphericalangle L = \mathcal L\left( e_i \right) _{i=1}^k\quad x\in L$
+
+             $\sqsupset z \in E\quad z = x+ y$
+
+             $\|z\|^2 = \|x\| + \|y\|$
+
+             $z = \sum_{i=1}^{k} \gamma^ie_i + \sum_{i=k+1}^{n} \gamma^ie_i$ 
+
+             $\|z\|^2 = \|\sum_{i=1}^{k} \gamma^i e_i\|^2 + \|\sum_{i=k+1}^{n} \gamma^ie_i\|^2 \implies  \|y\|^2 = 0 \implies y = 0$
+    \end{itemize}
+\end{proof}
+
+\subsection{Изоморфизм $E$ и  $E^*$}
+
+$\sqsupset x, y\in E$
+
+$\sqsupset f \in E^*\qquad \sphericalangle \left<y x \right> = \tl y(x)$
+
+$g: (x, y) \to g(x, y) = \left<x, y \right>$
+
+$g:E \times E \to  \R (\C)$
+
+$g_x: E \to \R(\C) $
+
+\begin{lemma}
+    $\tl y(x) = \left< y x \right> \in E^*$ -- линейная форма
+\end{lemma}
+\begin{proof}
+    $\tl y(x_1 + x_2) = \left< y, x_1 + x_2 \right> = \left<y x_1 \right> + \left<y x_2 \right> = \tl y(x_1) + \tl y(x_2)$
+
+    $\tl y(\lambda x) = \left<y, \lambda x \right> = \lambda \left<y x \right> = \lambda \tl y(x)$
+\end{proof}
+
+\begin{note}
+    $g: E \to E^*$
+
+    это ещё не изоморфизм, нужна биективность
+
+    $g^{-1}$ -- ? $\sqsupset f\in E^* \implies \tl f \in E:\quad f(x) = \left<\tl f, x \right> \quad \forall x$
+
+    $\sqsupset \left\{ e_i \right\} _{i=1}^n $ -- базис $E$ (произвольный)  $\quad x = \sum_{i=1}^{n} \xi^ie_i\quad y = \sum_{j=1}^{n} \eta^je_j$
+
+    $\sqsupset f\in E^* \to \left( \varphi_1 \varphi_2 \ldots \varphi_n \right) $ -- коэффициенты формы в базисе $\left\{ e_i \right\} $
+
+    $f(x) = \sum_{i=1}^{n} \varphi_i\xi^i = \varphi^T\xi$
+
+    $\left< y x  \right> = \sum_{i, j = 1}^{n} \xi^i\eta^jg_{ij} = \eta^T G \xi$ 
+
+    $\implies \xi = G\eta \implies \left(\exists  G^{-1} \right)  \exists g^{-1}$
+\end{note}
+
+\begin{note}
+    $g$ -- биекция и гомоморфизм  $\impliedby $ изоморфизм
+\end{note}
+
+$\sqsupset \left\{ e_i \right\} _{i=1}^n$ -- базис $E\quad \left\{ f^k \right\} _{i=1}^n$ -- сопряжённый базис $E^*$
+
+$g^{-1} : E ^* \to  E\quad g^{-1}(f^k) = e^k\in E$
+
+\begin{note}
+    $\left\{ e^k \right\} $ -- тоже базис $E$. Такой называется биортогональным (дуальным) к $e_j$
+\end{note}
+
+Давайте посчитаем коэффициенты одного базиса в другом
+
+$\sphericalangle e_i = \sum_{j=1}^{n} \alpha_{ij}e^j$ Умножим скалярно на $e_k$ справа
+
+$\left<e_i e_k \right> = \sum_{j=1}^{n} \alpha_{ij}\underbrace{f^j(e_k) = \delta_k^j}{\left<e^je_k \right>} = \alpha_{ik}$ 
+
+$\left<e_i e_k \right> = g_{ik}$
+
+$\implies \alpha_{ik} = g_{ik} \implies$ 
+
+$e_i = \sum_{j=1}^{n} g_{ij}e^j$ 
+
+И
+
+$\left<e^j e_i \right> = \delta_i^j$
+
+\begin{note}
+    $\sphericalangle x = \sum_{i=1}^{n} \xi^ie_i = \sum_{i=1}^{n} \xi^i \sum_{j=1}^{n} g_{ij}e^j = \sum_{j=1}^{n} \left[ \sum_{i=1}^{n} \xi^ig_{ij} \right] e^j = \sum_{j=1}^{n} \xi_je^j\quad \tl x_j = g_{ij}\xi^j$ 
+
+    $\xi^j$ -- контрвариантная координата вектора  $x$
+
+     $\xi_j$ -- ковариантная координата вектора  $x$
+\end{note}
+
+\begin{note}
+    $g \to g_{ij}$
+
+    $g^{-1} \to g^{ij}$
+
+    $\tl \eta^j = g^{ji} \eta_i$
+\end{note}
+
+\begin{definition}
+    Процедура вычисления координат вектора $x$ в базисе  $\left\{ e^j \right\} $ называется процедурой опускания индекса. В обратная сторону -- поднятием индекса.
+\end{definition}
+
+\section{Самосопряжённый унитарный операторы}
+
+$\sqsupset E$  евклидово, $\varphi : E \to  E$ -- линейный оператор
+
+\subsection{Сопряжённый оператор}
+
+$\sqsupset x, y\in E $
+
+\begin{definition}
+    Оператором $\varphi^*$ сорпряжённым оператору  $\varphi$ называется отображение
+     \[
+    \left<\varphi^* y, x \right> = \left<y, \varphi x \right>
+    .\] 
+\end{definition}
+
+\begin{note}
+    $\varphi^*(y + z) = ? = \varphi^* y + \varphi^* z$
+
+    $\left<\varphi^*(y+z), x \right> = \left<y+z, \varphi x \right> = \left<\varphi^* y, x \right> + \left< \varphi^* z \right> = \left<\varphi^* y + \varphi^* z, x \right>$
+\end{note}
+\begin{example}
+    $\R^n\quad \varphi \longleftrightarrow A $ 
+
+    $\left<y, Ax \right> = \eta^+G(A \xi) = \eta^+ GA\xi = \eta^+GA\xi = \eta^+GAG^{-1}G\xi = \eta^+ \left( G^{-1+}A^+G^+ \right) ^+G\xi = (G^{-1}A^+G\eta)^+G\xi$
+
+    $\varphi^* \longleftrightarrow G^{-1}A^+G$
+\end{example}
+
+\begin{example}
+    $E_3\quad \varphi(x) = [a x]\quad a\neq 0$
+
+    $\left<y, \varphi x \right> = \left( y, [a x] \right)  = \left( y a x \right)  = \left<[y a], x \right> \implies \varphi^*(y) = [y a] = -[a y]$
+
+    $\varphi^*  = -\varphi$
+\end{example}
+
+\begin{example}
+    $\varphi(A) = A^T$
+
+     $\varphi^* = ?$
+
+     $\left<A, \varphi B \right> = \Tr A^TB^T = \Tr \left( BA \right) ^T = \Tr BA = \Tr AB = \Tr (A^T)^TB$
+
+     $\varphi^* A = A^T$
+
+      $\varphi^* = \varphi$
+\end{example}
+
+\begin{definition}
+    Оператор $\varphi$, обладающий свойством  \[\varphi^* = \varphi\] называется самосопряжённым
+
+    $\left< y x \right> = \tl y(x)$
+\end{definition}
+
+    $\tl y(\varphi x) = \left< y, \varphi x \right> = \left<\varphi^* y, x \right> = [\varphi^* \tl y](x)$
+
+\begin{note}
+    $G^{-1}A^+G = A \implies  A^+G = GA$, если оператор самосопряжённый
+\end{note}
+
+\begin{lemma}
+    Все собственные значения самосопряжённого оператора вещественные
+\end{lemma}
+\begin{proof}
+    $\sqsupset \varphi x  = \lambda x$
+
+    $\left<x, \varphi x \right> = \lambda \left<x, x \right>$ 
+
+    $\left<\varphi x, x \right> = \ov \lambda \left<x, x \right>$
+
+    $\left<\varphi^* x, x \right> = \lambda \left<x, x \right>$
+
+    $\left<\varphi x, x \right> = \ov \lambda \left<x, x \right>$
+
+    $\lambda = \ov \lambda$
 
 
+\end{proof}
+
+\begin{lemma}
+    $\sqsupset \varphi x = \lambda x\quad \sqsupset \varphi y = \mu y\quad \lambda \neq  \mu \implies  \left<x, y \right> = 0$
+\end{lemma}
+\begin{proof}
+    $\left< y, \varphi x \right> = \lambda \left<y x \right>$
+
+    $\left<x, \varphi y \right> = \mu \left< x y \right> = \left<\varphi^* x, y \right>$ 
+
+    $\left<y, \varphi x \right> = \lambda \left<y, x \right>$
+
+    $\left<y, \varphi^* x \right> = \mu \left<y x \right>$
+
+    $(\lambda - \mu)\left<y, x \right> = 0 \implies \left<y x \right> = 0$
+\end{proof}
+
+\begin{definition}
+    Пространство $L\subseteq  E$ Называется приводимым, если $L$ -- inv  $\varphi$ и  $L^{\perp}$ -- inv  $\varphi$
+\end{definition}
+\begin{proof}
+    Инвариантное подпространство $x\in L\quad \varphi x\in L$
+
+     $L$ -- inv  $\varphi\quad \forall x\in L\quad \varphi x\in L$
+
+     $\forall y\in L^+\quad \varphi y\in L^{\perp}$
+
+     $\sphericalangle 0 = \left<y.  \varphi x \right> = \left<\varphi^* y, x \right> = \left<\varphi y, x \right> = 0 \implies  \varphi y\in L^{\perp}$
+\end{proof}
 
 
+\begin{theorem}
+    Всякий самосопряжённый оператор это оператор скалярного типа
 
+    $\left\{ x_i \right\} _{i=1}^n$ -- Собственные вектора $\varphi$ -- базис в  $E$
+\end{theorem}
+\begin{proof}
+    Допустим противное. $\left\{ x_i \right\} _{i=1}^n$ -- не базис $\implies  L = \mathcal L\left\{ x_i \right\} $ -- inv подпространство $\varphi$
 
+    $E = L + L^{\perp}$, оба инвариантные.  $\p \varphi = \varphi |_L\quad \pp \varphi = \varphi |_{L^{\perp }}$ 
 
+    $\exists $ хотя бы одно собственное значение $\pp \varphi$, существует хотя бы один собственный вектор, мы попадаем в $L$.$ \implies L^{\perp } = {0}$
+\end{proof}
 
-
-
-
-
-
-
-
+\begin{theorem}
+    [Спектральная теорема]
+    \[
+        \varphi = \sum_{i=1}^{k} \mathcal P_i^{\perp }\lambda_i\quad \mathcal P^{\perp } * =\left<x_i * \right> x_i
+        \sigma_y\in \R
+    .\] 
+\end{theorem}
 
 
 

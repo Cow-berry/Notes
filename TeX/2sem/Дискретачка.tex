@@ -2375,5 +2375,172 @@ $c\in \Sigma \cup \left\{ \varepsilon \right\} $
     Существуют КС языки, такие, что дополнение не КС
 \end{note}
 
+\begin{definition}
+    ДМП -- детерминированный автомат с магазинной памятью.
 
+    Для любой тройки $\left<q, \alpha, \xi \right> \quad \exists \leqslant 1 \left<r, \beta, \eta \right>\quad \left<q, \alpha, \xi \right>\vdash \left<r, \beta, \eta \right>$
+
+
+    \begin{enumerate}
+        \item 
+    $\forall q, c, A\quad \left| \delta\left( q, c, A \right)  \right| \leqslant 1$
+\item $\left| \delta(q, \varepsilon, A) \right|  = 1 \implies \forall c\quad \delta(q,c,a) = \O $
+    \end{enumerate}
+\end{definition}
+
+\begin{lemma}
+    Если $L$ Распознаётся ДМП-автоматом с допуском по пустому стэку, то ни одно слово языка  $L$ не является префиксом никакого другого слова (беспрефиксный)
+\end{lemma}
+\begin{proof}
+    Препдположим, что $x$ префикс  $y\quad x, y\in L$
+
+     $x$ опустошит стэк
+
+     Когда внутри  $y$ Дочитается  $x$, стэк опустошится и вычисление закончится, значит  $y$ допущен не будет.
+\end{proof}
+
+\begin{statement}
+    Существуют КС языки не распознаваемые ДМП-автоматами
+\end{statement}
+\begin{proof}
+    $0^n 1^n \cup 1^n 2^{2n}$
+
+    Небезпрефиксный, по лемме сверху не распознаёт, если допуск по пустому стэку
+
+    Пусть есть $A$, распознающее этот язык по допускающему состоянию
+
+    $\sphericalangle $ изоморфный язык $0^n 2^n \cup 0^n 2^{2n}$
+
+    Пусть $A_1$ распознаёт первый, а $A_2$ второй
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{nedmp}
+    \caption{nedmp}
+    \label{fig:nedmp}
+\end{figure}
+
+
+Если сделать такое преобразование, то мы будем распознавать язык $0^n 1^n \cup  0^n 1^n 2^n$ -- не КС язык распознаётся ДМП автоматом?!!
+\end{proof}
+
+\begin{note}
+    $0^n1^m0^m1^n \cup 0^n1^n0^m1^m$ -- существенно неоднозначный
+
+    $0^n 1^m 2^m \cup  0^n 1^n 2^m$
+\end{note}
+
+\begin{lemma}
+    [Лемма Огдена]
+    $L$ -- КС-яызк, $\Gamma$ -- КС-грамматика  $L$  $\implies \exists n\quad \forall w\in L\quad |w| \geqslant n\quad \forall 1 \leqslant i_1<i_2<\ldots<i_n\leqslant |w|$ будем называть позиции в слове $i_k$ помеченными
+
+    $\exists w = uvxyz\quad uvx$ содержит выделенные позиции ИЛИ $x,y, z$ содержат выделенные позиции.
+
+    $\forall k\geqslant 0$ выполнено $S \implies ^* uxz \implies ^*uvxyz \implies ^* \ldots \implies ^*  uv^kxy^kz$
+
+\end{lemma}
+\begin{proof}
+    $w\in L$. Не можем взять НФХ. Пусть  $l$ -- макс длина правой части  $\Gamma\quad l\geqslant 2\quad m = |N|$ (нетерминалов)
+
+    $n = l^{2m+3}$
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{ogden}
+    \caption{ogden}
+    \label{fig:ogden}
+\end{figure}
+
+Идём в того ребёнка, где максимальное количество пометок. Шагов, где количество шагов, где количество уменьшалось $\geqslant 2m+3$ -- ветвящиеся вершины
+
+На каждой такой вершине напишем слева или справа есть ещё помеченные вершины
+
+$\exists  \geqslant  m+2$ ветвящихся влево (НУО). Рассмотрим нижние $m+1$. Какие-то две из них содержат один и тот же нетерминал, допустим $A$
+\end{proof}
+
+\begin{statement}
+    $\exists $ неоднозначные КС-языки (может быть более одного дерева разбора на одно слово)
+\end{statement}
+\begin{proof}
+    $0^a 1^b 2^b \cup  0^1 a^b 2^b$
+
+    $\sphericalangle n$ из лемма Огдена
+
+    $w = 0^n 1^n 2^{n + n!} \in L$, пометим все нули.
+
+    $u = 0^a\quad v = 0^b \quad x = 0^{n-a-b}\quad y = 1^b\quad z = 1^{n-b-c}0^{n + n!}$
+
+     $k = \frac{n!}{b} + 1$ 
+
+     Рассмотрим дерево разбора у строки $uv^kxy^kz = 0^{n + n!}1^{n + n!}2^{n + n!}$
+
+     $w_2 = o^{n! + n}1^n 2^n$, пометим все двойки и применим то же рассуждение. Получим ещё одно дерево для такого же слова, где ветвление с правого конца. Если они разные, то мы доказали
+
+     Пусть $T_1 = T_2$ (деревья). В поддереве $A$ у  $T_1$ только 0 и 1. $B$ у  $T_2$ только 1 и 2. Одно не является родителем другого. Прокачки можем делать независимо, сделаем ещё один качок
+
+     $0^{n + n! + b}1^{n + n! + b + b!} 2^{n + n! + \p b}$ -- слово не из нашего языка, при этом у него есть дерево разбора?!!
+\end{proof}
+
+\begin{theorem}
+    $\forall $ КС-грамматики $\Gamma$ существует эквивалентная КС-грамматика  $\p {\Gamma}\quad \forall A \to \alpha \in \p {\Gamma}:\quad \alpha = c\p \alpha,\quad  c\in \Sigma$
+
+    $L(\p \Gamma) = L(\Gamma) \setminus \varepsilon$
+\end{theorem}
+\begin{proof}
+    Будем считать, что грамматика в НФХ. Не содержит $\varepsilon$ И цепных правил
+
+    \begin{lemma}
+        Пусть нетерминалы занумерованы  $N^n = \left\{ A_1, A_2, \ldots, A_m \right\} $
+
+        $A_i \to \alpha$ -- правило $\pp \Gamma\quad \alpha = c\p \alpha \lor \alpha = A_j\p \alpha\quad j > i$
+    \end{lemma}
+    \begin{proof}
+        $A_1 \to A_1\alpha$ -- не нравится
+
+        $A_1 \to  A_i\alpha\quad i\neq 1$
+
+        $A_1 \to  c\alpha$ -- нравятся
+
+        $A_1 \to A_1\alpha\quad A_1 \to \beta$
+
+        Применим ``удаление непосредственной левой рекурсии''
+
+        Добавим следующие правила  $A_1 \to \beta \quad \p A_1 \to \beta A_1^1\quad A_1^1 \to \alpha \p A_1\quad A_1^1 \to \alpha$ 
+
+        теперь на первых позициях $A_1$  не стоит.
+
+        $\p A_1$ поместим в начало списка нетерминалов
+
+        Теперь $\sphericalangle A_2$
+
+        $A_2 \to A_i\alpha\quad i > 2\quad A_2 \to c\alpha$ -- хорошие
+
+        $A_2 \to A_2\alpha$ -- уже можем делать
+
+        $A_2 \to A_1\alpha$ -- подставим все правые части (как с цепными правилами поступали)
+
+        \begin{lstlisting}
+            for i = 1 ... m:
+                for j = 1 ... i -1:
+                    Ai -> Aj alpha, A_j -> gamma, Ai -> gamma alpha
+                Ai -> Ai alpha, Ai -> beta beta[1] \not\uin {A1, ..., Ai}
+                удалить непосредственную левую рекурсию
+        \end{lstlisting}
+    \end{proof}
+
+
+    Перенумеруем нетерминалы. $A_m \to x\alpha$
+
+    $A _{m-1} \to A_m \alpha\quad \mapsto\quad A_{m-1} \to c\alpha_1 \alpha_2 $ Так подставляем и избавляемся от подобных правил
+
+    \begin{lstlisting}
+        for i = m .. 1:
+            for j = i + 1 .. m:
+                Aj -> gamma, Ai -> Ai alpha \mapsto Ai ->gamma alpha
+    \end{lstlisting}
+\end{proof}
+
+\begin{note}
+    Поулчившаяся форма называется ослабленной нормальной формой Грейбаха
+\end{note}
 \end{document}
