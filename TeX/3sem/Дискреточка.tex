@@ -1,0 +1,483 @@
+\documentclass{book}
+%nerd stuff here
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+% Languages support
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+% Some fancy symbols
+\usepackage{textcomp}
+\usepackage{stmaryrd}
+% Math packages
+\usepackage{amsmath, amssymb, amsthm, amsfonts, mathrsfs, dsfont, mathtools}
+\usepackage{cancel}
+% Bold math
+\usepackage{bm}
+% Resizing
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+% Optional font for not math-based subjects
+%\usepackage{cmbright}
+
+\author{Коченюк Анатолий}
+\title{Дискретная математика, 3 семестр}
+
+\usepackage{url}
+% Fancier tables and lists
+\usepackage{booktabs}
+\usepackage{enumitem}
+% Don't indent paragraphs, leave some space between them
+\usepackage{parskip}
+% Hide page number when page is empty
+\usepackage{emptypage}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{xcolor}
+% Some shortcuts
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\renewcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand{\p}[1]{#1^{\prime}}
+\newcommand{\pp}[1]{#1^{\prime\prime}}
+% Easily typeset systems of equations (French package) [like cases, but it aligns everything]
+\usepackage{systeme}
+\usepackage{lipsum}
+% limits are put below (optional for int)
+\let\svlim\lim\def\lim{\svlim\limits}
+\let\svsum\sum\def\sum{\svsum\limits}
+%\let\svlim\int\def\int{\svlim\limits}
+% Command for short corrections
+% Usage: 1+1=\correct{3}{2}
+\definecolor{correct}{HTML}{009900}
+\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
+\newcommand\green[1]{{\color{correct}{#1}}}
+% Hide parts
+\newcommand\hide[1]{}
+% si unitx
+\usepackage{siunitx}
+\sisetup{locale = FR}
+% Environments
+% For box around Definition, Theorem, \ldots
+\usepackage{mdframed}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\newmdtheoremenv[nobreak=true]{definition}{Определение}
+\newmdtheoremenv[nobreak=true]{theorem}{Теорема}
+\newmdtheoremenv[nobreak=true]{lemma}{Лемма}
+\newmdtheoremenv[nobreak=true]{problem}{Задача}
+\newmdtheoremenv[nobreak=true]{property}{Свойство}
+\newmdtheoremenv[nobreak=true]{statement}{Утверждение}
+\newmdtheoremenv[nobreak=true]{corollary}{Следствие}
+\newtheorem*{note}{Замечание}
+\newtheorem*{example}{Пример}
+\renewcommand\qedsymbol{$\blacksquare$}
+% Fix some spacing
+% http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=\parskip \thm@postskip=0pt
+}
+\usepackage{xifthen}
+\def\testdateparts#1{\dateparts#1\relax}
+\def\dateparts#1 #2 #3 #4 #5\relax{
+    \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
+}
+
+\def\@lecture{}%
+\newcommand{\lecture}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@lecture{Lecture #1}%
+    }{%
+        \def\@lecture{Lecture #1: #3}%
+    }%
+    \subsection*{\@lecture}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+% Todonotes and inline notes in fancy boxes
+\usepackage{todonotes}
+\usepackage{tcolorbox}
+
+% Make boxes breakable
+\tcbuselibrary{breakable}
+\newenvironment{correction}{\begin{tcolorbox}[
+    arc=0mm,
+    colback=white,
+    colframe=green!60!black,
+    title=Correction,
+    fonttitle=\sffamily,
+    breakable
+]}{\end{tcolorbox}}
+% These are the fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% LE: left even
+% RO: right odd
+% CE, CO: center even, center odd
+% My name for when I print my lecture notes to use for an open book exam.
+% \fancyhead[LE,RO]{Gilles Castel}
+
+\fancyhead[RO,LE]{\@lecture} % Right odd,  Left even
+\fancyhead[RE,LO]{}          % Right even, Left odd
+
+\fancyfoot[RO,LE]{\thepage}  % Right odd,something additional 1  Left even
+\fancyfoot[RE,LO]{}          % Right even, Left odd
+\fancyfoot[C]{\leftmark}     % Center
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+\usepackage{tikz}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Beg}{Beg}
+\DeclareMathOperator{\len}{len}
+\DeclareMathOperator{\Ker}{Ker}
+\begin{document}
+    \maketitle
+    \chapter{Графы, неалгоритмические свойства}
+    \section{Что такое граф}
+
+    $V, E\subseteq V\times V$ -- конечные множества
+
+    Такая конструкция называется (обыкновенным) ориентированным графом
+
+    \begin{note}
+        В таком графе нет параллельных рёбер. 
+
+    Ориентированный, потому что у ребра есть начало и конец.    \end{note}
+
+    \begin{definition}
+        $V, E, beg:E\to V, end:E\to V$
+
+        Граф с кратными рёбрами (ориентированный мультиграф)
+    \end{definition}
+
+    \begin{note}
+        Если дополнительно затребовать, что для любых \[uv, ab\quad u\neq a \vee v\neq b\]
+    \end{note}
+
+    \begin{note}
+        $uv\sim vu\quad V, E\subseteq \left( V\times V \right) /_{\sim}$
+
+        неориентированный граф с петлями
+
+        $uv\sim vu\quad V, E\subseteq \left( V\times V \right) /_{\sim} \setminus \left\{ (u,u)|u\in V \right\} $
+
+        неориентированный граф без петель (обыкновенный)
+    \end{note}
+
+    \begin{note}
+        Альтернативно $V, E, ends:E \to \left( V\times V \right) /_{\sim} \left[ \setminus \left\{ (u,u)|u\in     V \right\}\right]$
+
+        Граф с кратными рёбрами [без петель] (мультиграф)
+    \end{note}
+
+    \begin{note}
+        Неориетированный граф -- ориаентированный, где есть рёбра (дуги) в обе стороны
+    \end{note}
+
+    \section{Ориентированный граф}
+    У ребра есть начло и конец. Говорят, что ребро выходит из вершины и входит в вершины.
+
+    Когда из вершины выходит $n$ рёбер, это число обозначается  $d^-u$ и называется исходящей степенью вершины
+
+    Когда в вершину выходит $n$ рёбер, это число обозначается  $d^+u$ и называется входящей степенью вершины
+
+    \begin{lemma}
+        $\sum_u deg^+u = \sum_u deg^-u = |E|$
+    \end{lemma}
+    \begin{definition}
+    Пусть $P = u_0 e_1 u_1 e_1 u_2 \ldots e_k u_k$
+     
+    $e_i = u_{i-1}u_i$
+
+     $u_0 = \Beg P\quad u_k = \End P$
+
+     $k = \len P = |P|$
+
+      $a\leadsto b\quad \exists $ путь $P: \Beg P = a, \End P = b$
+    \end{definition}
+
+    \begin{lemma}
+        $\leadsto = \to^*$
+    \end{lemma}
+
+    \begin{corollary}
+        $\leadsto$ -- транзитивно, рефлексивно
+    \end{corollary}
+
+    \begin{definition}
+        $a\leftrightsquigarrow b \iff a\leadsto b ,  b \leadsto a$
+
+        Тогда это отношение эквивалентности, а граф, где вершины могут быть связаны только так, называется сильно связанным.
+    \end{definition}
+
+    \begin{definition}
+        Если выполняется $a\leadsto b \implies \text{ не }b\leadsto a$
+
+        такой граф называется ациклическим
+    \end{definition}
+
+    \begin{definition}
+        Циклическим путём называется путь, у которого начало и конец совпадают и длина больше нуля.
+
+        Циклом (в ориентированным графе) называется класс эквивалентности циклическим путей, в котором пути равны с точностью до циклического сдвига.
+
+        Путь (цикл) называется простым, если все вершины на нём различны
+
+        путь (цикл) называется рёберно-простым, если в нём все рёбра различны.
+    \end{definition}
+
+    \begin{statement}
+        $a\leadsto b$ антисимметричный  $\iff $ в $G$ нет циклов длины 2 и более.
+    \end{statement}
+
+    \begin{lemma}
+        $G$ -- ациклический граф  $\implies \exists $ вершина исходящей степени ноль.
+    \end{lemma}
+    \begin{corollary}
+        В ациклическом графе можно построить topsort
+
+        $n:V\to \N \quad uv\in E \implies  n(u) < u(v)$
+    \end{corollary}
+    \begin{proof}
+        Одна вершина очень хорошо сортируется
+
+        По лемме есть вершина исходящей степени ноль. Удалим её временно из графа. Меньший граф сортируется по индукционном предположению. Добавляем первую вершину, она ничего не ломает, так как в неё не входят рёбра.
+    \end{proof}
+
+    \section{Неориентированный граф}
+    \begin{definition}
+        Путём называется последовательность $u_0e_1u_1\ldots e_ku_k$
+
+        $e_i = u_{i-1}u_i$
+    \end{definition}
+
+    \begin{definition}
+        Циклический путь -- путь, где начало = концу и длина ненулевая.. Тогда путь $aebea$ по одному ребру в две стороны был бы циклическим путём.. а мы не хотим называть такое циклом.
+
+        Назовём циклическим путём корректным, если  $\forall i\quad e_i = e_{i+1} \implies  e_i$ петля. $e_k = e_1 \implies  e_k$ петля
+
+        Назовём циклом класс эквивалентности корректных циклических путей относительно равенства с точностью до циклического сдвига отражения.
+    \end{definition}
+
+    \begin{note}
+        $\leadsto$ -- отношение эквивалентности, потому что есть симметричности в силу неориентированности.
+
+        Классы эквивалентности -- компоненты связности.
+
+        Если граф состоит из одной компоненты связности, то он называется связным
+    \end{note}
+
+    \begin{note}
+        Ориентированному графу $G$ можно сделать симметризацию  $\overset{\leftrightarrow} G$
+
+        Обратно можно сделать ориентацию неориентированному графу, заменив каждое ребро на стрелку в одну стороны (соответственно  $2^{|E|}$ ориентаций)
+    \end{note}
+
+    \begin{definition}
+        Отношение ``связаны ребром'' называется отношением смежности
+
+        Если из вершины исходит ребро, то отношение между ребром и вершиной называется отношением инцидентности.
+
+        $\deg u$ -- количество рёбер, инцидентных данной вершине
+    \end{definition}
+
+    \begin{lemma}
+        [о рукопожатиях] $\sum \deg u = 2|E|$
+    \end{lemma}
+
+    \begin{definition}
+        Лес -- ациклические неориентированный граф
+
+        Дерево -- лес, связный 
+    \end{definition}
+
+    \begin{definition}
+        $u, v$ рёберно-двусвязны, если  $\exists $ два рёберно-непересекающихся пути $u\leadsto v$
+
+        Классы эквивалентности -- листы
+
+        Если удалить вершину, связывающую разные листы, то эти листы перестанут быть связанными. Такие вершины называются хвостами 
+    \end{definition}
+
+    \begin{theorem}
+        Рёберно-двусвязность -- отношение эувивалентности
+    \end{theorem}
+    \begin{proof}
+        Транзитивность: 
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{trans}
+    \caption{trans}
+    \label{fig:trans}
+\end{figure}
+    \end{proof}
+
+    \begin{note}
+        Если вводить аналогичную вершинную двусвязность с патчем, что концы могут совпадать, то облом:
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{oblom}
+    \caption{oblom}
+    \label{fig:oblom}
+\end{figure}
+
+$a, b\quad b, c$ вершинно двусвязны, но  $a, c$ явно нет
+    \end{note}
+
+    \begin{definition}
+        Ребра вершинно двусвязны, если междц ними есть два пути, которые вершинно непересекаются (концы тоже должны не совпадать)
+
+        Классы эквивалентности -- блоки
+
+        Если удалить ребро, связывающее два разных блока, то его концы перестанут быть связанными. Такие рёбра называется мостами.
+    \end{definition}
+
+    \section{Деревья}
+
+    \begin{definition}
+        Неориентированный граф называется лесом, если в нём нет циклов.
+
+        Неориентированный граф называется деревом, если он является лесом и связным.
+    \end{definition}
+    \begin{theorem}
+        \begin{enumerate}
+            \item граф связен
+            \item граф ацикличен
+            \item количество рёбер на 1 меньше количества вершин $|E| = |V|-1$.
+        \end{enumerate}
+
+        Из любых двух из этих свойств следует третье.
+    \end{theorem}
+    \begin{lemma}
+        Пусть есть дерево (связный граф без циклов), содержащее хотя бы $2$ вершины. Тогда существует вершина степени 1.
+    \end{lemma}
+    \begin{proof}
+        Рассмотрим самый длинный простой путь. Его концы имеют степень 1. Пусть нет, пусть есть вершина, которая не лежит на диаметре и является соседом конца, но тогда диаметр не самый длинный путь. Иначе сосед конца лежит внутри диаметра, что значит появление цикла, а у нас дерево.
+    \end{proof}
+    \begin{proof}
+        [Доказательство теоремы]
+
+       \begin{itemize}
+           \item [$1, 2\implies 3$] $|V| = 1 \implies |E| = 0$. Петлей нет. Даже если разрешить, петля это цикл, что запрещено по ацикличности
+
+               Если есть хотя бы две вершины, то есть вершина степени 1. Возьмём её, удалим из графа и получим дерево из индукционного предполоожения. Получаем $n$ вершин и $n-1$ ребро
+           \item[$1,3\implies 2$] Предположим, что цикл есть. Удалим любое ребро этого цикла. Получим граф, в котором $n$ вершин и $n-2$ ребра. Граф всё ещё связен (можно пройти по циклу вместо удалённого ребра). Рассмотрим все связные подграфы (есть как миниму он сам) и выберем минимальный по числу рёбер.  $n$ вершин и  $n-k$  рёбер. Он ациклический (потому что иначе можно удалить ребро без потери связности), тогда по первому пункту  $n-k = n-1$??
+
+               Можно прямее: возьмём минимальный по числу рёбер связный подграф, он ациклический, значит $n-k = n-1$, значит он совпадает с нашим.
+           \item [$2, 3\implies 1$] Каждая компонента связна и ациклична, значит в каждой из них $n_i$ вершин и  $n_i-1$ рёбер. Просуммируем и получим  $n$ вершин и  $n-k$ рёбер. Но по 3 рёбер у нас  $n-1\implies n-k = n-1 \implies k=1$ -- есть ровно одна компонента связности
+       \end{itemize}
+    \end{proof}
+
+    \begin{theorem}
+        В дереве между любыми двумя вершинами существует один простой путь
+    \end{theorem}
+    \begin{proof}
+        Допустим есть два простых путя между двумя вершинами. Найдём общий префикс и место, где пути ветвятся. Найдём общий суффикс и место, где пути ветвятся. Между этими двумя путями согласно нашему определению есть корректный цикл. В дереве нашли цикл?!
+    \end{proof}
+
+    \begin{statement}
+        Все рёбра дерева являются мостами.
+
+        Верно также и обратное.
+    \end{statement}
+
+    \begin{definition}
+        $T$ -- подграф  $G$ -- называется остовным дерево, если  $T$ остовный граф
+    \end{definition}
+
+    \begin{definition}
+        Подграф:
+        \begin{itemize}
+            \item Откидываем любое количество вершин и рёбер
+            \item Остовный подграф, не удаляем вершины, они сохраняют отношение связности
+        \end{itemize}
+    \end{definition}
+
+    \begin{statement}
+        Любой связный граф содержит остовное дерево.
+    \end{statement}
+    \begin{proof}
+        минимальный по количеству рёбер связный подграф.
+    \end{proof}
+
+    \begin{definition}
+        Матрица смежности. $A[i][j] = \begin{cases}
+            1, \text{есть ребро из} i \text{ в } j\\
+            0, \text{иначе}
+        \end{cases}$
+    \end{definition}
+
+    \begin{theorem}
+        $A^k[i][j]$ -- число путей из  $i$ в  $j$ длины  $k$
+    \end{theorem}
+    \begin{proof}
+        $A^0 = I\quad A^1 = A$
+
+        $A^k = A^{k-1}A \quad A^K[i][j] = \sum_t A^{k-1}[i][t] \cdot  A[t][j]$
+
+        Рассмотрим путь из $i$ в  $j$ длины  $k$, разобьём его на две части длины  $k-1$ и  $1$. Тогда количество путей считается именно так, как произведение количества первых на количество вторых.
+    \end{proof}
+
+    Возьмём матрицу смежности и на диагонали напишем минус степени вершин
+
+    $\begin{pmatrix} 3&-1&-1&-1\\-1&2&-1&-0\\-1&-1&3&-1\\-1&-0&-1&2 \end{pmatrix} $ -- матрица Кирхгофа.
+
+    Вычеркнем одну строку и одну столбец. Посчитаем определитель и получим количество остовных деревьев.
+
+    \begin{theorem}
+        Количество остовных деревьев неориентированного графа равно алгебраическому дополнению любого элемента матрицы Кирхгофа
+    \end{theorem}
+    \begin{proof}
+        Рассмотрим любую ориентацию нашего графа $G$. Рассмотрим матрицу инцидентности $\vec G$ --  $I_{\vec G}$ -- в каждом столбце есть -1, 1 и остальные все нули.
+
+         \begin{lemma}
+             $K_G = I_{\vec G}I^T_{\vec G}$
+        \end{lemma}
+        \begin{proof}
+            на диагоналях скалярное произведение равных строк, где стоят 1 или -1 на местах рёбер. В сумме это степень вершины.
+
+            Если не диагональный: будет 0, если не соединены ребром и -1, если соиденены ($1 \cdot  -1$) (здесь пригождается ориентация)
+        \end{proof}
+        \begin{lemma}
+            $\sphericalangle $ минор $(n-1)\times (n-1)$ матрицы $I_{\vec G}$. Задаётся множеством рёбер и вершиной, которую выкидыванием. Утверждается, что этот минор равен нулю, если множество рёбер содержит цикл и $\pm 1$ иначе.
+        \end{lemma}
+        \begin{proof}
+            рассмотрим цикл  -- какие-то рёбра. Просуммируем соответствующие столбцы и получим нулевой столбец (если цикл ориентированный. В противном случае, просуммируем с нужными коэффициентами). А тогда мы получим линейно-зависимые столбцы в миноре, следовательно он будет равен нулю.
+
+            Иначе, пусть $v_1$ -- висячая вершина (лист)  $A, v_1\neq u$. Поставим в миноре строку $v_1$ в начало, как и столбец с её единственным ребром $[0][0] = \pm 1$, всё остальное в строке 0. Удалим её из дерева., по усиленной лемме о висячих вершинах, есть два листа, хотя бы один из которых не  $u$. Проделаем с ней --  $v_2$ -- те же действия. Так сделам со всеми и получим треугольную матрицу, у которой на диагонали стоят $\pm 1$, значит сам минор равен  $\pm 1$
+        \end{proof}
+        \begin{lemma}
+            $\widehat{K_{G_{ii}}} = (I_{\vec G} \setminus  \left\{ i\text{ стр.} \right\})\cdot \left( I^T_{\vec G}\setminus \left\{ i \text{ столбца} \right\}  \right)  $
+        \end{lemma}
+        \begin{lemma}
+            [Формула  Коши-Бине]
+
+        \[A_{r\times r}\quad A = B\cdot C\quad B_{r\times s}\quad C_{s\times r}\quad s \geqslant r\]
+
+        \[\det A = \sum_{1\leqslant i_1<\ldots< i_r\leqslant s}\det B^{i_1i_2\ldots i_r}\det C_{i_1i_2\ldots i_r}\]
+        \end{lemma}
+        \begin{theorem}
+            [lite]
+
+            Число основных деревьев $G = $ алгебраическому дополнению матрицы Кирхгофа.
+        \end{theorem}
+    \end{proof}
+
+    \section{Циклическое пространство}
+
+    Рассмотрим матрицу инцидентности $A:\mathbb B^m \to \mathbb B^n$
+
+    $\Ker A = \left\{ C|C\subset E, C \text{ -- дизъюнктное объединение циклов} \right\} $
+\end{document}

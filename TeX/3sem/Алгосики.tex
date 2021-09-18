@@ -1,0 +1,378 @@
+\documentclass{book}
+%nerd stuff here
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+% Languages support
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+% Some fancy symbols
+\usepackage{textcomp}
+\usepackage{stmaryrd}
+% Math packages
+\usepackage{amsmath, amssymb, amsthm, amsfonts, mathrsfs, dsfont, mathtools}
+\usepackage{cancel}
+% Bold math
+\usepackage{bm}
+% Resizing
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+% Optional font for not math-based subjects
+%\usepackage{cmbright}
+
+\author{Коченюк Анатолий}
+\title{Алгоритмы и Структуры Данных}
+
+\usepackage{url}
+% Fancier tables and lists
+\usepackage{booktabs}
+\usepackage{enumitem}
+% Don't indent paragraphs, leave some space between them
+\usepackage{parskip}
+% Hide page number when page is empty
+\usepackage{emptypage}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{xcolor}
+% Some shortcuts
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\renewcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand{\p}[1]{#1^{\prime}}
+\newcommand{\pp}[1]{#1^{\prime\prime}}
+% Easily typeset systems of equations (French package) [like cases, but it aligns everything]
+\usepackage{systeme}
+\usepackage{lipsum}
+% limits are put below (optional for int)
+\let\svlim\lim\def\lim{\svlim\limits}
+\let\svsum\sum\def\sum{\svsum\limits}
+%\let\svlim\int\def\int{\svlim\limits}
+% Command for short corrections
+% Usage: 1+1=\correct{3}{2}
+\definecolor{correct}{HTML}{009900}
+\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
+\newcommand\green[1]{{\color{correct}{#1}}}
+% Hide parts
+\newcommand\hide[1]{}
+% si unitx
+\usepackage{siunitx}
+\sisetup{locale = FR}
+% Environments
+% For box around Definition, Theorem, \ldots
+\usepackage{mdframed}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\newmdtheoremenv[nobreak=true]{definition}{Определение}
+\newmdtheoremenv[nobreak=true]{theorem}{Теорема}
+\newmdtheoremenv[nobreak=true]{lemma}{Лемма}
+\newmdtheoremenv[nobreak=true]{problem}{Задача}
+\newmdtheoremenv[nobreak=true]{property}{Свойство}
+\newmdtheoremenv[nobreak=true]{statement}{Утверждение}
+\newmdtheoremenv[nobreak=true]{corollary}{Следствие}
+\newtheorem*{note}{Замечание}
+\newtheorem*{example}{Пример}
+\renewcommand\qedsymbol{$\blacksquare$}
+% Fix some spacing
+% http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=\parskip \thm@postskip=0pt
+}
+\usepackage{xifthen}
+\def\testdateparts#1{\dateparts#1\relax}
+\def\dateparts#1 #2 #3 #4 #5\relax{
+    \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
+}
+
+\def\@lecture{}%
+\newcommand{\lecture}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@lecture{Lecture #1}%
+    }{%
+        \def\@lecture{Lecture #1: #3}%
+    }%
+    \subsection*{\@lecture}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+% Todonotes and inline notes in fancy boxes
+\usepackage{todonotes}
+\usepackage{tcolorbox}
+
+% Make boxes breakable
+\tcbuselibrary{breakable}
+\newenvironment{correction}{\begin{tcolorbox}[
+    arc=0mm,
+    colback=white,
+    colframe=green!60!black,
+    title=Correction,
+    fonttitle=\sffamily,
+    breakable
+]}{\end{tcolorbox}}
+% These are the fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% LE: left even
+% RO: right odd
+% CE, CO: center even, center odd
+% My name for when I print my lecture notes to use for an open book exam.
+% \fancyhead[LE,RO]{Gilles Castel}
+
+\fancyhead[RO,LE]{\@lecture} % Right odd,  Left even
+\fancyhead[RE,LO]{}          % Right even, Left odd
+
+\fancyfoot[RO,LE]{\thepage}  % Right odd,something additional 1  Left even
+\fancyfoot[RE,LO]{}          % Right even, Left odd
+\fancyfoot[C]{\leftmark}     % Center
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+\usepackage{tikz}
+\usepackage{listings}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{myStyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    extendedchars=\true
+}
+
+\lstset{style=myStyle}
+
+\lstset{language=Python}
+\begin{document}
+    \maketitle
+    
+    \chapter{Алгоритмы на графах и строках и фане.}
+    \section{Графы и обход в ширину}
+    кружочки и стрелочки 
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{fex}
+    \caption{fex}
+    \label{fig:fex}
+\end{figure}
+
+$n$ вершин,  $m$ рёбер,  $T(n, m)$
+
+Связность -- из любой вершины можно дойти до любой другой
+
+$m\geqslant n-1\quad m\leqslant \frac{n(n-1)}{2}$ если связный и нет приколов с кратными рёбрами и петлами
+
+\begin{definition}
+    Матрица смежности -- матрица $m(a,b) = \begin{cases}
+        1, \text{a и b связаны ребром}\\
+        0, \text{иначе}
+    \end{cases}$
+\end{definition}
+
+\begin{example}
+    \begin{enumerate}
+        \item 2, 3\\
+           \item 4\\
+           \item 5\\
+           \item 2, 3\\
+           \item 4\\
+    \end{enumerate}
+
+    более компактный и полезный способ хранить что с чем связано
+\end{example}
+
+\begin{definition}
+    Компонента связаности -- класс эквивалентности по отношению эквивалентности быть связанным.
+\end{definition}
+
+\begin{definition}
+    [Поиск в глубину]
+
+    Дали нам граф. Берём вершину и помечаем все вершины, которые из неё достижимы. Всё, что мы пометили это кмпонента связности. Дальше берём непомеченную и аналогично выделяем вторую компоненту и так пока вершины не закончатся
+\end{definition}
+
+\begin{lstlisting}
+    dfs(v):
+        mark[v] = True
+        for vu \in out(v):
+            if !mark[u]:
+                dfs(u)
+\end{lstlisting}    
+\begin{lemma}
+    Мы пометили все достижимые и только их
+\end{lemma}
+\begin{proof}
+    Ходим только по рёбрам, значит все помеченные вершины достижимы из $s$
+
+    Есть вершина  $s$ и достижимая $v$. Предположим, что мы не дошли. Значит на пути до  $v$ была первая вершина, до которой мы не дошли. Но дошли до соседеней с ней, значит запустился оттуда и ведел непомеченную. Он её пометит в цикле, противоречие.
+\end{proof}
+
+\section{Что можно делать поиском в глубину в ориентированном графе}
+
+\begin{definition}
+    Топологическая сортировка -- сортировка вершин, чтобы все рёбра шли слева направо
+\end{definition}
+
+\begin{problem}
+    Построить топологическую сортировку у ациклического графа.
+\end{problem}
+\begin{problem}
+    В ациклическом графе есть вершина, в которую ничего не входит. Вставим самой левой в сортировке и уберём из графа.
+
+    Возьмём любую вершину, в которую ничего не входит. Добавляем в сортировку, убираем из графа.
+\end{problem}
+
+\begin{lstlisting}
+   z = []
+   for v = 0 .. n-1:
+        if deg[v] = 0
+            z.insert(v)
+    while !z.empty():
+        x = z.remove()
+        for y in out(x):
+            deg[y]--
+            if deg[y] == 0:
+                z.insert(y)
+
+\end{lstlisting}
+
+Время алгоритма $O(m)$
+
+\begin{proof}
+    \begin{lstlisting}
+        mark[v] = True
+        for m in out(v):
+            if !mark[u]:
+                dfs(u)
+        topsort.add(v)
+    \end{lstlisting}
+\end{proof}
+
+\begin{statement}
+    Все рёбра идут слева направо. 
+\end{statement}
+
+\begin{problem}
+    Как понять есть ли циклы
+\end{problem}
+\begin{proof}
+    Запустить topsort. Если получилась фигня, значит есть цикл.
+\end{proof}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{dfstree}
+    \caption{dfstree}
+    \label{fig:dfstree}
+\end{figure}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{xor}
+    \caption{xor}
+    \label{fig:xor}
+\end{figure}
+
+
+Выберем для всех рёбер, до которых мы не дошли в dfs по циклу из него и рёбер из dfs. Из получившихся циклов можно собрать (ксорами множеств) любой цикл)
+
+\section{Связность в ориентированных графах}
+
+\begin{note}
+    Сильная связность является отношением эквивалентности. Можно выбирать классы эквивалентности -- компоненты связности. После этого можно построить конденсацию -- граф на компонентах связности, где обозначается односторонняя связь между компонентами.
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{dvureb}
+    \caption{dvureb}
+    \label{fig:dvureb}
+\end{figure}
+\end{note}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{neprimer}
+    \caption{neprimer}
+    \label{fig:neprimer}
+\end{figure}
+
+Aлгоритм:
+\begin{enumerate}
+    \item запускаем dfs, записываем вершины в порядке выхода. 
+    \item Если идти по входящим рёбрам из первой вершины в списке, то мы пометим все вершины в компоненте связности 1. Затем перейдя к следующей не помеченной вершине, мы пометим вторую компоненту и т.д.
+\end{enumerate}
+\begin{lstlisting}
+    dfs(v):
+        ...
+        p.push_back(v)
+        -> 1 6 2 3 7 4 5 -- dvureb
+        -> 1 6 7 2 3 4 5 -- neprimer
+\end{lstlisting}
+
+\begin{lstlisting}
+    for i = 0 .. n-1
+        dfs1(i)
+    reverse(p)
+    for i  = 0 .. n-1:
+        if !mark[p[i]]:
+            dfs2(p[i])
+\end{lstlisting}
+\begin{proof}
+    Возьмём компоненту связаности. Возьмём первую вершину оттуда, в которую зашёл dfs. Он оттуда не уйдёт, пока всё в ней не пометит. 
+
+    На компонентах сильной связности есть ``топсорт'' по первым вершинам в компонентах, которые рассматривает dfs. Это гарантирует нам, что мы будем запускать dfs по обратным рёбрам в компонентах, все входящие компоменты в которую мы уже пометили. Значит dfs2 останется только идти внутри компоненты, что нам и требовалось.
+\end{proof}
+
+
+\begin{problem}
+    [2-SAT]    
+$(x\vee y)\land(!y\lor !x)\land(z\lor !x) = 1 $
+
+$x\lor y = !x \to y$
+
+Если есть стрелки в обе стороны между  $x $ и  $\neg x$, то это противоречие.
+
+$A \implies B \iff  \neg B \implies \neg A $ -- кососимметричность импликации
+
+Если есть пусть между $u$ и  $v$, то есть обратный между  $\neg v$ в  $\neg u$.
+
+Алгоритм:
+в конденсации строим топсорт (он ациклический). В каждой паре компонент, ту, которая правее, делаем True.
+\end{problem}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{vershinki}
+    \caption{vershinki}
+    \label{fig:vershinki}
+\end{figure}
+
+\begin{proof}
+    Берём левую вершину. Все следствия из неё выполняются. Из неё рёбра только выходят. В ней значение False, значит все седствия выполняются. Рассмотрим симметричную к ней, она возможно где-то в середине. В неё только входят рёбра, у неё всё хорошо. Убираем их их по индукции всё хорошо.
+\end{proof}
+
+\end{document}

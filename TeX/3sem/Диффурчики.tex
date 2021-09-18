@@ -1,0 +1,539 @@
+\documentclass{book}
+%nerd stuff here
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+% Languages support
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+% Some fancy symbols
+\usepackage{textcomp}
+\usepackage{stmaryrd}
+% Math packages
+\usepackage{amsmath, amssymb, amsthm, amsfonts, mathrsfs, dsfont, mathtools}
+\usepackage{cancel}
+% Bold math
+\usepackage{bm}
+% Resizing
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+% Optional font for not math-based subjects
+%\usepackage{cmbright}
+
+\author{Коченюк Анатолий}
+\title{Дифференциальные уравнения}
+
+\usepackage{url}
+% Fancier tables and lists
+\usepackage{booktabs}
+\usepackage{enumitem}
+% Don't indent paragraphs, leave some space between them
+\usepackage{parskip}
+% Hide page number when page is empty
+\usepackage{emptypage}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{xcolor}
+% Some shortcuts
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\renewcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand{\p}[1]{#1^{\prime}}
+\newcommand{\pp}[1]{#1^{\prime\prime}}
+% Easily typeset systems of equations (French package) [like cases, but it aligns everything]
+\usepackage{systeme}
+\usepackage{lipsum}
+% limits are put below (optional for int)
+\let\svlim\lim\def\lim{\svlim\limits}
+\let\svsum\sum\def\sum{\svsum\limits}
+%\let\svlim\int\def\int{\svlim\limits}
+% Command for short corrections
+% Usage: 1+1=\correct{3}{2}
+\definecolor{correct}{HTML}{009900}
+\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
+\newcommand\green[1]{{\color{correct}{#1}}}
+% Hide parts
+\newcommand\hide[1]{}
+% si unitx
+\usepackage{siunitx}
+\sisetup{locale = FR}
+% Environments
+% For box around Definition, Theorem, \ldots
+\usepackage{mdframed}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\newmdtheoremenv[nobreak=true]{definition}{Определение}
+\newmdtheoremenv[nobreak=true]{theorem}{Теорема}
+\newmdtheoremenv[nobreak=true]{lemma}{Лемма}
+\newmdtheoremenv[nobreak=true]{problem}{Задача}
+\newmdtheoremenv[nobreak=true]{property}{Свойство}
+\newmdtheoremenv[nobreak=true]{statement}{Утверждение}
+\newmdtheoremenv[nobreak=true]{corollary}{Следствие}
+\newtheorem*{note}{Замечание}
+\newtheorem*{example}{Пример}
+\renewcommand\qedsymbol{$\blacksquare$}
+% Fix some spacing
+% http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=\parskip \thm@postskip=0pt
+}
+\usepackage{xifthen}
+\def\testdateparts#1{\dateparts#1\relax}
+\def\dateparts#1 #2 #3 #4 #5\relax{
+    \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
+}
+
+\def\@lecture{}%
+\newcommand{\lecture}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@lecture{Lecture #1}%
+    }{%
+        \def\@lecture{Lecture #1: #3}%
+    }%
+    \subsection*{\@lecture}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+% Todonotes and inline notes in fancy boxes
+\usepackage{todonotes}
+\usepackage{tcolorbox}
+
+% Make boxes breakable
+\tcbuselibrary{breakable}
+\newenvironment{correction}{\begin{tcolorbox}[
+    arc=0mm,
+    colback=white,
+    colframe=green!60!black,
+    title=Correction,
+    fonttitle=\sffamily,
+    breakable
+]}{\end{tcolorbox}}
+% These are the fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% LE: left even
+% RO: right odd
+% CE, CO: center even, center odd
+% My name for when I print my lecture notes to use for an open book exam.
+% \fancyhead[LE,RO]{Gilles Castel}
+
+\fancyhead[RO,LE]{\@lecture} % Right odd,  Left even
+\fancyhead[RE,LO]{}          % Right even, Left odd
+
+\fancyfoot[RO,LE]{\thepage}  % Right odd,something additional 1  Left even
+\fancyfoot[RE,LO]{}          % Right even, Left odd
+\fancyfoot[C]{\leftmark}     % Center
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+\usepackage{tikz}
+\DeclareMathOperator{\Dom}{Dom}
+\begin{document}
+    \maketitle
+    %
+    %
+    %
+    % Сашин блок
+    
+    Связь по: mvbabushkin@itmo.ru --- просьба писать именно на почту
+30 --- экзамен 
+70 --- практика (будет уточняться)
+
+Литературу пришлю
+
+\section{Введение}
+\subsection{Уравнения первого порядка}
+Допустим, $y$ --- неизвестная величина. Заметим, что это не просто число, а некоторая зависимость (например, температура, зависящая от времени), то есть это некоторая искомая функция. Ну, и часто непосредственно, нам не написать чему она равна; явно эту функцию просто так не напишешь, но можно написать некую взаимосвязь между этой функцией и переменной, возможно еще и производной и т.п.
+
+\begin{definition}
+	Такая взаимосвязь называется \textbf{дифференциальным уравнением}.
+\end{definition}
+
+\begin{example}
+Допустим, у нас есть кролики, заведем таблицу и будем считать кроликов каждый день.
+
+Предположем, мы смотрели на эксперемент и обнаружили такую зависимость:
+Прирост примерно пропорционален текущему клличеству и времени замерки.
+
+\[y_{k + 1} - y_k \approx \alpha  y_k (t_{k + 1} - t_k)\]
+
+Так же заметим, что если узмельчатьь шаг времени, то зависимость будет все более и более точная.
+
+\[\dfrac{y_{k + 1} - y_k}{t_{k + 1} - t_k} = \alpha y_k\]
+
+Тогда слева производная.
+\[y’(t) = \alpha y(t) - g \cdot y\]
+Как же получать такие формулы? Все-таки мы не привели ни одного аргумента, что эта формула верна…
+Пусть этим занимаются физики, мы лишь будем решать используя эти формулы.
+
+Попробуем поугадывать решения:
+
+\[\varphi(t) = \alpha t \implies (\alpha t)’ = \alpha (\alpha t) \implies \alpha = \alpha ^ 2 t \implies t = \dfrac{1}{\alpha}\]
+
+\[\varphi(t) = e^{\alpha t} \implies (e^{\alpha t})’ = \alpha e^{\alpha t} \implies \alpha e^{\alpha t} \equiv \alpha e^{\alpha t} \text{на} ~ \R \implies \varphi(t) = C e^{\alpha t} ~-~ \text{все решения}\]
+\end{example}
+
+\begin{problem}
+Пусть дано $m(0) = 25$г, $m(30) = 42$г, $m(t_2) = 2m(0), ~ t_2 - ?$
+
+То есть нам нужно найти точку на плоскости (здесь был рисунок), но она может быть где угодно, так что предположем, что у нас есть еще какие-то данные:
+\[m’(t) = \alpha m(t) ~\&~ m(t) = C e^{\alpha t}\]
+\end{problem}
+
+\begin{proof}
+[Решение]
+\[25 = m(0) = C \quad 42 = m(30) = 25 e^{\alpha \cdot 30} \implies \alpha = \dfrac{1}{30} \ln \dfrac{42}{25} \implies 50 = m(t_2) = 25 e^{\dfrac{1}{30} \ln \dfrac{42}{25}} \implies t_2 \approx 40\]
+\end{proof}
+
+\subsection{Второй закон Ньютона}
+\[F = ma \implies a = \dfrac{F(t, x, v)}{m} \implies \pp x  =\dfrac{F(t, x, \p x)}{m}\]
+Так что дифференциальные уравнение встречаются очень часто --- мотивируйтесь их решать.
+
+\section{Уравнения первого порядка и его решения}
+\begin{definition}
+Дифференциальное уравнение первого порядка --- это уравнение вида:
+\[F(x, y, y’) = 0\]
+\end{definition}
+
+\begin{definition}
+Функция $\varphi$, если:
+\begin{enumerate}
+\item $\varphi \in C^1(a, b)$
+\item $F(x, \varphi(x), \varphi’(x)) \equiv 0, ~ x \in \in (a, b)$
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+$y’ = -\dfrac{1}{x^2}$
+
+$y = \dfrac{1}{x} + C, ~ x \in \R \setminus \{0\}$
+
+\[y = \begin{cases}
+\dfrac{1}{x} + A, x < 0 \\
+\dfrac{1}{x} + B, x > 0
+\end{cases}\]
+
+Сейчас одна точка разрыва, а если их больше, то было бы больше независимых констант…
+Поэтому, решениями являются функции на отрезке.
+\end{example}
+
+\begin{definition}
+Интегральная кривая --- это график его решения.
+\end{definition}
+
+<!-- Опять рисунок -->
+
+\begin{definition}
+Общее множество решений для дифференциального уравнения --- это множество всех его решений.
+\end{definition}
+
+\begin{definition}
+$F(x, y, c) = 0$
+
+Общий интеграл --- это такой интеграл при некотором значении константы в решении которого, соотношение неявно задает все решения.
+\end{definition}
+
+\subsection{Уравнение в нормальной форме}
+\begin{definition}\label{1.2}
+Уравнение в неявной форме:
+\[y’ = f(x, y)\]
+\end{definition}
+
+Для такого мы определим \textbf{область задания} --- это аналог ОДЗ.
+\begin{definition}
+Область задания --- это множество $\Dom f$ (domain) --- множество, где уравнение имеет смысл.
+\end{definition}
+
+\begin{example}
+$y’ = -\dfrac{1}{x^2}, ~ f(x, y) = -\dfrac{1}{x^2}, ~ \Dom f = \R \setminus \{0\} \times \R$
+\end{example}
+
+\begin{problem}
+$\sphericalangle y’ = x + y$. Пусть $\varphi$ --- решение. У нас есть такая связь: $\varphi’(x) = x + \varphi(x)$, в частности, в точке $(2, 3)$.
+
+$\sphericalangle (2, 3) \quad \varphi’(2) = 2 + 3 = 5 = f(2, 3)$
+
+То есть, если там проходит наша функция, то она проходит там под углом $\arctg 5$.
+
+$\sphericalangle (4, 3) \quad \varphi’(4) = 4 + 3 = 7 = f(4, 3)$
+
+Никто не мешает нам взять какую-то сетку, и в каждой точке этой сетки мы поймем, как примерно ведут себя интегральные кривые. То есть, можно не решая уравнения, можно построить такое поле и увидеть, как ведут себя интегральные кривые.
+
+\begin{definition}
+То есть, задать уравнение --- это значит увидеть, как ведет себя поле направлений.
+\end{definition}
+\end{problem}
+
+Из этого геометрического смысла, мы можем сделать еще один вывод.
+
+Возьмем какую-то точку (потом научимся их находить), посчитаем в ней угол, пойдем по этому направлению, новая точка --- новое направление, и т. д.
+Чем мельче шаг, тем ближе ломаная к интегральной кривой.
+\[x_{k + 1} = x_k + h\]
+\[y_{k + 1} = y_k + f(x_k, y_k) h\]
+\[\dfrac{\delta y_k}{\delta x_k} = f(x_k, y_k)\]
+
+Так определяется \textbf{ломаная Эйлера}.
+
+\subsection{Уравнение в дифференциалах}
+
+Давайте запишем производную, как отношение дифференциалов, и перепишем  уравнение \ref{1.2}.
+\[dy = f(x, y) dx\]
+\[f(x, y) dx - dy = 0\]
+
+\begin{definition}\label{1.3}
+Уравнение в дифференциалах: $P(x, y) dx + Q(x, y) dy = 0$
+\end{definition}
+
+\begin{definition}
+Функция $\varphi$ --- это решение \ref{1.3}, если:
+\begin{itemize}
+\item $\varphi \in C^1 (a, b)$
+\item $P(x, \varphi(x)) + Q(x, \varphi(x)) \varphi’(x) \equiv 0, ~ x \in (a, b)$
+\end{itemize}
+\end{definition}
+
+\begin{definition}
+Область определения \ref{1.3} --- это множество $\Dom P \cap \Dom Q$
+\end{definition}
+
+\begin{example}
+Пусть $xdx + ydy = 0 \qquad \Dom P \cap \Dom Q = \R^2$
+
+$y = \sqrt{R^2 - x^2}, ~ x \in (-R, R) \quad xdx + \sqrt{R^2 - x^2} \cdot\left(- \dfrac{2x}{2 \sqrt{R^2 - x^2}}\right) dx = 0$
+%<!-- Рисунок -->
+\end{example}
+
+В чем еще одна идея такого вида уравнения? В том, что $x$ и  $y$ здесь равноправны, то есть $x = k y$ --- это тоже \textit{конечное} решения.
+
+\begin{definition}
+Пара или вектор-функция $r(t) = (\varphi(t), \psi(t))$ --- это параметрическое решение уравнения \ref{1.3}, если:
+\begin{itemize}
+\item $\varphi, \psi \in C^1 (\alpha, \beta), r’(t) \neq 0, ~ \forall t \in (\alpha, \beta)$ --- второе условие, чтобы не было изломов у функции (как у модуля)
+\item $P(\varphi(t), \psi(t)) \varphi’(t) + Q(\varphi(t), \psi(t)) \psi’(x) \equiv 0$
+\end{itemize}
+\end{definition}
+
+\begin{example}
+$xdx + ydy = 0 \implies (R \cos t, R \sin t), ~ t \in \R$ --- параметрическое решение.
+\end{example}
+
+$P(\varphi, \psi) \varphi’ + Q(\varphi, \psi) \psi’(x) \equiv 0 \implies (P, Q) \cdot (\varphi’, \psi’) = 0$
+
+$F = (P, Q) \quad r = (\varphi, \psi) \quad F \perp r’$
+
+<!-- Рисунок -->
+
+И здесь у нас никакие направления не исключаются, в отличии от поля, где исключались вертикальные направления.
+    
+    % конец Сашиного блока
+    %
+    %
+    %
+    
+
+    \section{Задача Коши и уравнения с разделяющимися переменными}
+
+    \subsection{Задача Коши (ЗК)}
+
+    \begin{definition}
+        Задачей Коши или начальной задачей называется задача отыскания решения уравнения в нормальной форме $\p y = f(x,y)$, которая удовлетворяет начальному условию  $y(x_0) = y_0$
+
+        \[\p y = f(x,y)\quad y(x_0) = y_0\]
+
+        $(x_0, y_0)$ -- начальные данные
+    \end{definition}
+
+    Вопросы: есть ли решение и может ли их быть несколько?
+
+    \begin{theorem}
+        [Теорема о существовании для уравнений 1-го порядка]
+
+        $G$ -- область (открытое связное множество),  $f\in C(G)$,  $(x_0, y_0)\in G \implies \exists $ решение задачи Коши в некоторой окрестности точки $x_0$
+    \end{theorem}
+
+    \begin{example}
+        $\p y = f(x, y)\quad f(x, y) = \begin{cases}
+            1&, y>0\\
+            0, & y\leqslant 0\\
+        \end{cases}$ 
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{legko}
+    \caption{legko}
+    \label{fig:legko}
+\end{figure}
+    \end{example}
+
+    \begin{theorem}
+        [Теорема единственности для уравнения 1-го порядка]
+
+        $G$ -- область,  $f, \p g_y \in C(G), (x_0,y_0)\in G, \varphi_1, \varphi_2$ -- решения ЗК на $(\alpha, \beta) \implies \varphi_1 \equiv \varphi_2$ на $\left( \alpha, \beta \right) $
+    \end{theorem}
+
+    \begin{example}
+        $\p y = 3\sqrt[3]{y^2} $ 
+
+        $f(x, y) = 3\sqrt[3]{y^2} $ -- непрерывна везде, $G = \R^2$
+
+        По теореме о существовании через любую точку проходит хотя бы одна интегральная кривая.
+
+        $\p f_y = 3\cdot \frac{2}{3}\cdot \frac{1}{\sqrt[3]{y} } = \frac{2}{\sqrt[3]{y} }$ 
+
+        На прямой $y = 0$ нарушаются условия теоремы об единственности, значит в этих точках могут (но не факт, что будут) проходить несколько интегральных кривых.
+
+         \begin{gather*}
+             dy = 2\sqrt[3]{y^2}dx\\
+             y = (x-c)^3
+        \end{gather*}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{uzhas}
+    \caption{uzhas}
+    \label{fig:uzhas}
+\end{figure}
+
+Ответ: $y = (x-C)^3\quad C\in \R, x\in \R$
+
+$y = 0, x\in \R$ -- особое решение. Имеются составные решения
+    \end{example}
+
+    \begin{definition}
+        Решение $\varphi$ на  $(a, b)$ уравнения $\p y = f(x, y)$ называется \underline{особым}, если \[\forall x_0\in (a,b)\ \forall \varepsilon>0 \exists \varphi_1 \text{ -- решение задачи}, \p y = f(x,y)\quad y(x_0) = \varphi(x_0)\] 
+
+        на $(\alpha,\beta)$, где  $\beta - \alpha < \varepsilon, x_0\in \left( \alpha, \beta \right) $, но $\varphi_1 \not\equiv \varphi$ на $\left( \alpha, \beta \right) $
+    \end{definition}
+
+    \subsection{Уравнения с разделяющимися переменными}
+
+    \begin{definition}
+        [Уравнения с разделёнными переменными]
+        \[P(x)dx + Q(y)dy = 0\]
+    \end{definition}
+
+    \begin{theorem}
+        [Общее решение уравнения с разделёнными переменными]
+        $P\in C(a, b)\quad Q\in C(c, d)\quad (\alpha, \beta)\subset (a, b)$
+
+        Тогда функция $y = \varphi(x)$ -- решение на $(\alpha,\beta) \iff :$
+        \begin{enumerate}
+            \item $\varphi\in C^1(\alpha, \beta)$
+            \item  $\exists C\in \R$, т.ч. $\varphi$ неявно задаётся уравнением  $\int P(x)dx + \int Q(y)dy = C$
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+         \begin{itemize}
+             \item []
+             \item [$\implies $] Дано, что $\varphi$ -- решение  $\implies $ автоматически выполняется первый пункт.
+
+                 $\sqsupset x_0\in (\alpha, \beta)$ -- прозвольно. $y_0 := \varphi(x_0)$, тогда пункт 2 запишется как:
+                 \[\int_{x_0}^xP(x)dx + C_1 + \int_{y_0}^y Q(t)dt + C_2 = C\]
+                 \[\int_{x_0}^xP(x)dx + \int_{y_0}^{\varphi} Q(t)dt = A\quad \forall x\in (\alpha, \beta)\]
+                  
+                 Пусть $t  = \varphi(\tau) \implies $ л.ч.
+
+                 \[\int_{x_0}^x P(t)dt + \int_{x_0}^xQ\left( \varphi(\tau \right) \p \varphi(\tau)dt = \int_{x_0}^x\left( P(\tau) + Q\left( \varphi(\tau \right) \p \varphi(\tau) \right) dt \equiv 0 \text{ на } \left( \alpha, \beta \right) \]
+             \item [$\impliedby $] Дано: $\varphi\in C^1(\alpha, \beta)$ и  $\int P(x)dx + \left[\int Q(y)dy \right]_{y = \varphi(x)}\equiv C$ на  $(\alpha, \beta)$
+
+                 продиффиренцируем наше тождество (законно, потому что  $\varphi$ непрерывно дифференцируемо)
+
+                 $P(x) + Q\left( \varphi(x) \right) \cdot \p \varphi(x)\equiv 0$ на $(\alpha, \beta)$
+            
+        \end{itemize}
+    \end{proof}
+
+    \begin{example}
+        $xdx + ydy = 0$
+
+         \begin{gather*}
+            \int xdx + \int ydy = C\\
+            x^2 + y^2 = 2C\\
+            x^2 + y^2 = A
+        \end{gather*}
+
+        $A>0\quad 
+        \begin{matrix}
+            y = \pm \sqrt{A-x^2}&x\in (-\sqrt{A}, \sqrt{A})\\
+            x = \pm \sqrt{A - y^2}&, y\in \left( -\sqrt{A}, \sqrt{A} \right)  
+        \end{matrix}
+        $               
+    \end{example}
+
+    \begin{definition}
+        Уравнение с разделяющимися переменными:
+        \[p_1(x)q_1(y)dx + p_2(x)y_2(y)dy = 0\]
+
+        $p_2(x_0) = 0 \implies x \equiv x_0$ -- решение
+
+        $q_1(t_0) = 0 \implies  y\equiv y_0$ -- решение
+
+        Далее отдельно рассматриваем на каждой из областей (4 здесь):
+
+        \[\frac{p_1(x)}{p_2(x)}dx + \frac{q_2(y)}{q_1(y)}dy = 0\]
+    \end{definition}
+
+    \begin{example}
+        \[2ydx - xdy = 0\]
+
+        $x = 0, y = 0$ -- решения. Нужно отдельно смотреть все четверти
+
+         \begin{gather*}
+            \frac{2dx}{x} = \frac{dy}{y}\\
+            2\ln |x| = \ln |y| + C\\
+            y = Ax^2, A>0, x>0
+        \end{gather*}
+
+        В остальных четвертях аналогично. Они все стыкуются в нуле и общее решение -- всевозможные стыковки.
+\begin{figure}[!ht]
+    \centering
+    \incfig{gohan1}
+    \caption{gohan1}
+    \label{fig:gohan1}
+\end{figure}
+    \end{example}
+
+    \begin{example}
+        \[ydx - xdy = 0\]
+
+        \begin{gather*}
+            \int \frac{dx}{x} = \int \frac{dy}{y}  + C\\
+            \ln |x| = \ln |y| + C\\
+            y = Ax
+        \end{gather*}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{gohan2}
+    \caption{gohan2}
+    \label{fig:gohan2}
+\end{figure}
+    \end{example}
+
+    \begin{definition}
+        Два уравнения называют \underline{эквивалентными}, если они имеют одинаковую область задания и одинаковый набор интегральных кривых.
+    \end{definition}
+    \begin{note}
+    \[p_1(x)q_1(y)dx + p_2(x)q_2(y)dy = 0\]
+    не экивалентно \[\frac{p_1(x)}{p_2(x)}dx +\frac{q_1(y)}{q_2(y)}dy = 0\]
+    \end{note}
+
+    \begin{theorem}
+        [Теорема о существовании и единственности для уравнений с разделёнными переменными]
+
+        $P\in C(a, b)\quad Q\in C(c, d)$
+
+        $(x_0, y_0)$ -- не особая точка уравнения (т.е.  $P(x_0)\neq 0, Q(y_0)\neq 0) \implies $ уравнение \[\int_{x_0}^xP(t)dt + \int_{y_0}^yQ(t)dt = 0\]
+
+        определяет единственное решение в некоторой окрестности точки $x_0$
+    \end{theorem}
+\end{document}

@@ -1,0 +1,323 @@
+\documentclass{book}
+%nerd stuff here
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+% Languages support
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+% Some fancy symbols
+\usepackage{textcomp}
+\usepackage{stmaryrd}
+% Math packages
+\usepackage{amsmath, amssymb, amsthm, amsfonts, mathrsfs, dsfont, mathtools}
+\usepackage{cancel}
+% Bold math
+\usepackage{bm}
+% Resizing
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+% Optional font for not math-based subjects
+%\usepackage{cmbright}
+
+\author{Коченюк Анатолий}
+\title{Оси}
+
+\usepackage{url}
+% Fancier tables and lists
+\usepackage{booktabs}
+\usepackage{enumitem}
+% Don't indent paragraphs, leave some space between them
+\usepackage{parskip}
+% Hide page number when page is empty
+\usepackage{emptypage}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{xcolor}
+% Some shortcuts
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\renewcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand{\p}[1]{#1^{\prime}}
+\newcommand{\pp}[1]{#1^{\prime\prime}}
+% Easily typeset systems of equations (French package) [like cases, but it aligns everything]
+\usepackage{systeme}
+\usepackage{lipsum}
+% limits are put below (optional for int)
+\let\svlim\lim\def\lim{\svlim\limits}
+\let\svsum\sum\def\sum{\svsum\limits}
+%\let\svlim\int\def\int{\svlim\limits}
+% Command for short corrections
+% Usage: 1+1=\correct{3}{2}
+\definecolor{correct}{HTML}{009900}
+\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
+\newcommand\green[1]{{\color{correct}{#1}}}
+% Hide parts
+\newcommand\hide[1]{}
+% si unitx
+\usepackage{siunitx}
+\sisetup{locale = FR}
+% Environments
+% For box around Definition, Theorem, \ldots
+\usepackage{mdframed}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\newmdtheoremenv[nobreak=true]{definition}{Определение}
+\newmdtheoremenv[nobreak=true]{theorem}{Теорема}
+\newmdtheoremenv[nobreak=true]{lemma}{Лемма}
+\newmdtheoremenv[nobreak=true]{problem}{Задача}
+\newmdtheoremenv[nobreak=true]{property}{Свойство}
+\newmdtheoremenv[nobreak=true]{statement}{Утверждение}
+\newmdtheoremenv[nobreak=true]{corollary}{Следствие}
+\newtheorem*{note}{Замечание}
+\newtheorem*{example}{Пример}
+\renewcommand\qedsymbol{$\blacksquare$}
+% Fix some spacing
+% http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=\parskip \thm@postskip=0pt
+}
+\usepackage{xifthen}
+\def\testdateparts#1{\dateparts#1\relax}
+\def\dateparts#1 #2 #3 #4 #5\relax{
+    \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
+}
+
+\def\@lecture{}%
+\newcommand{\lecture}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@lecture{Lecture #1}%
+    }{%
+        \def\@lecture{Lecture #1: #3}%
+    }%
+    \subsection*{\@lecture}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+% Todonotes and inline notes in fancy boxes
+\usepackage{todonotes}
+\usepackage{tcolorbox}
+
+% Make boxes breakable
+\tcbuselibrary{breakable}
+\newenvironment{correction}{\begin{tcolorbox}[
+    arc=0mm,
+    colback=white,
+    colframe=green!60!black,
+    title=Correction,
+    fonttitle=\sffamily,
+    breakable
+]}{\end{tcolorbox}}
+% These are the fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% LE: left even
+% RO: right odd
+% CE, CO: center even, center odd
+% My name for when I print my lecture notes to use for an open book exam.
+% \fancyhead[LE,RO]{Gilles Castel}
+
+\fancyhead[RO,LE]{\@lecture} % Right odd,  Left even
+\fancyhead[RE,LO]{}          % Right even, Left odd
+
+\fancyfoot[RO,LE]{\thepage}  % Right odd,something additional 1  Left even
+\fancyfoot[RE,LO]{}          % Right even, Left odd
+\fancyfoot[C]{\leftmark}     % Center
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+\usepackage{tikz}
+\begin{document}
+    \maketitle
+
+    \section{Введение}
+
+    В современном мире не представить вычислительный узел без операционной системы.
+
+    \begin{example}
+        Супермаркет с одной кассой и тремя покупателями:
+        \begin{itemize}
+            \item с водой, человек очень хочет пить
+            \item корзинка на ужин
+            \item тележка на неделю
+        \end{itemize}
+
+        Если пропустим вперёд парнишку, его вклад будет крайне маленький. Но он выйдет из магазина и проходящий может зайти увидев очередь из двух человек.
+
+        Если же выстроить наоборот, то новые покупатели не заходят заходить в ваш супермаркет.
+
+        Хочется иметь монополию на власть в смысле порядка очереди
+
+        Многие процессы связаны с социальными процессами.
+    \end{example}
+
+    \begin{definition}
+        Операционная система -- базовое системное программное обеспечение, управляющее работой вычислительного узла и реализующее универсальный интерфейс между аппаратным обеспечением, программным обеспечение и пользователем.
+
+        базовое -- первое, что появляется и последнее, что умирает
+
+        системное -- само пользу конечному пользователю не приносит, но без него не работает прикладное
+
+        управляет -- достигает некоторых целевых показателей
+    \end{definition}
+    \chapter{Этапы эволюции ПО}
+    \section{Программы-диспетчеры}
+    Конец сороковых, компьютеры работают строго по архитектуре Фон-Неймана. Есть устройство ввода и вывода.
+
+    4 принципа:
+    \begin{itemize}
+        \item однородность памяти -- код и данные в единой памяти
+            \item адресность -- оперативная память это линейно-адресуемое пространство и мы можем обратиться в любой момент к любой её ячейке.
+            \item программное управление -- программа представляет собой набор инструкций в память. Процессор по ходу своей работы поочерёдно берёт и на такте выполняет следующую инструкцию
+            \item кодирования -- всё, и данные, и инструкции, кодируются с помощью двоичного кода.
+    \end{itemize}
+
+    \begin{problem}
+        [Повторное использование кода. Автоматизация загрузки и  линковки]
+
+        В те времена комп часто использовался для физических вычислений. Операторы заметили, что заново вводят одни и те же инструкции по многу раз. А почему бы не попробовать вынести куда-то.
+
+        Идея: вынести ``подпрограмму'' в конкретный адрес. МЫ переходим в него из своего кода.. но как вернутся, а ещё передать что-то хочется.
+
+        Появляются диспетчеры, которые управляют таким выводом
+    \end{problem}
+    \begin{problem}
+        [Оптимизация взаимодействия с устройствами ввода-вывода]
+
+        В классической архитектуре все устройства работают с памятью через процессор. Задача подкачки довольно простая, для неё не нужно всей мощности процессора. 
+
+        Задача: осветлить картинку. Задача, которую можно делать незавсимо для всех пикселей
+
+        Идея: контроллер -- связан с памятью, RAM и частично с процессором.
+
+        Предсказать время подкачки нельзя, потому что совершенно разные носители с разными гарантиями. Код не может знать подкачались ли уже данные или нет. А хочется уметь на это реагировать, т.е. ждать пока завершится процесс подкачки.
+
+        Обработчик прерываний -- меняет значение флага, опрашиваемый в бесконечном цикле, пока контроллер не даст флаг, что всё сделано. Функционал диспетчера разрастется, теперь умеет обрабатывать прерывания.
+
+        SPOOL -- simultaneous operation online
+    \end{problem}
+
+    \begin{definition}
+        Перывание -- сигнал, поступающий от внешнего устройства к центральному процессору, приостанавливающей исполнение текущего потока команд и передающий управление обработчикe прерываний.
+    \end{definition}
+
+    \begin{problem}
+        [Однопрограммная пакетная <..>]
+        
+        Одно приложение -- много программ. Кроме того может ещё набор констант.
+
+        Появляется термин пакет -- как совокупность программ.
+
+        Пока исполняем одну, можем загружать другую или даже другие и тут возникает вопрос: вот мы завершли один процесс, а какой исполнять следующим. Возвращаемся к задаче про супермаркет. Если взять идею пропускать маленького и реализовать её вот так втупую, то мы рискуем попасть в программное голодание, когда постоянно подгружается что-то маленькое и проходит вперёд.
+
+    \end{problem}
+
+    \section{Мультипрограммные операционные системы}
+
+    Что привело к их появлению: программы становятся более сложными и разнообразными. Неэффективно используем ресурсы, потому что исполняем программы от начала до конца.
+
+    Идея: несколько программ можно исполнять параллельно. Простая идея привела к огромным сложностям.
+
+    Программы обычно исполняются ``псевдо-параллельно''
+
+    \begin{problem}
+        [Обеспечение разделения времени процессора]
+
+        Сделал аппаратное решение, будет генерироваться прерывание каждый тайминг, которое будет запускать планирование того, что выполнять следующим.
+
+        Когда мы останавливаем процессор, в регистрах что-то есть и это что-то нужно. Идея: откатываться назад, но непонятно насколько, может я давно что-то туда положил. Забыть тоже нельзя, код дальше расчитывает на эти регистры. Регистровый контекст приходится где-то сохранять (чтобы его потом найти), подгружать такой  же контекст от другого процесса и запускать его.
+    \end{problem}
+\begin{figure}[!ht]
+    \centering
+    \incfig{pseudo-parallel}
+    \caption{pseudo-parallel}
+    \label{fig:pseudo-parallel}
+\end{figure}
+    \begin{problem}
+        [Обеспечение разделения памяти]
+
+        Когда мы пишем код, переменные заменяются на адреса. Программный ноль совпадал с реальным и всё было хорошо. Но у нас много программ и память может быть где угодно. Идея: виртуальная память -- при сиполнении подменять виртуальные адреса, считающие, что они в реальном нуле, на физические.
+    \end{problem}
+
+    \begin{problem}
+        [Обеспечение защиты данных программы от деятельности других программ]
+
+        Люди пишут код с ошибками -- закон вселенной. Если программы многих людей, а мы своей ошибкой зашли в код чужой программы, то будет нехорошо.
+
+        Идея: защита памяти. аппаратное решение -- при обращении к памяти понимать свой-чужой.
+
+        Но теперь не может работать наш диспетчер, он же должен быть изолированным. А ему нужно что-то взять, куда-то записать..
+
+        Идея: кому-то нужно разрешить. Привилегированный режим. Грубо говоря отключаем защиту памяти. Этот привилегированный режим приводит к пониманию современной системы:
+
+        System call -- обращение пользовательской программы к ядру ОС с требованием предоставить ресурс или выполнить привилегированную операцию.
+
+        Теперь OS -- универсальный интерфейс. У неё монопольная власть, на уровне неё мы пытаемся эффективно использовать ресурсы
+    \end{problem}
+
+    \begin{problem}
+        [Планирование выполнения программ и использования рускрсов]
+
+        У каждого контроллера своя очередь, у каждого жёсткого диска своя очередь, у сетевого узла, у процессора, ... А они ещё и связаны друг с другом
+
+        Хочется максимально эффективно всё заменеджить, что суммарно всё максимально быстро исполнилось.
+
+        Очередь и ре<..>
+
+        \begin{example}
+            Хотим напечатать что-то на принтере. Передаём данные, прервались, перключились на другую программу, а она тоже хочет печатать.. Неразделяемый ресурс.
+
+            Идея: ставим блок, чтобы только первый мог давать данные.
+
+            Но может быть дедлок.. 1 захватит ресурс 1, 2 захватит ресурс 2, в какой-то момент они хотят получить другой ресурс, не отжав первый -- тупик.. Дейкстра занимался этим лет 15.
+        \end{example}
+    \end{problem}
+
+    \begin{problem}
+        [Универсальный доступ к информации на внешних устройствах] 
+
+        Линейная адресация $\to $ файл, каталог
+    \end{problem}
+    \begin{problem}
+        [Обеспечение коммуникации между программами]
+
+        Комфортная работа множества программ, а что если они будут передавать друг-другу данные.
+
+        ctrl+C ctrl+V -- использование буффера, требует ручного управления.
+
+        Сигналы, передача из stdout одного в stdin в другого, ..
+
+        Появляется понятие виртуальной машины -- приложение живёт отдельно и не знает, что есть другие приложения. С этим понятием появляется и термин операционной системы. Теперь делегирование всех операций лежит именно на ОС.
+    \end{problem}
+
+    С первой ОС сложно, не понятно кого считать уже ОС.
+
+    1963 -- компьютер B5000 с ОС MCP -- Master Control Programm
+
+    \section{Сетевые операционные системы}
+
+    Компьютеры тогда -- только большие и очень дорогие компьютеры.
+
+    Затраты на доставку программного кода до машины начинают превалировать
+
+    АМ -- амплитудная модуляция, FM -- частотная модуляция. Способы обозначть 0 или 1 в синусоиде.
+
+    Модем -- модулятор-демодулятор. Теперь проблемы с безопасностью. Раньше был один конкретный подконтрольный оператор, с которого можно было в случае чего спросить. А теперь надо защищаться от людей. Появляются понятии учётной записи, аутентификации.
+
+    Появляются компании, специализирующиеся на предоставлении компьютерного времени. У такой компании могло быть уже несколько компьютеров.
+
+    Могла быть большая нагрузка в Чикаго и простаивать компьютер в Бостоне. Тогда строили линию АТМ между Чикаго и Бостоном, чтобы перенаправлять звонки.
+    
+    \section{Универсальный операционные системы}
+
+
+\end{document}

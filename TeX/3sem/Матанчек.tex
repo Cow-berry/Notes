@@ -1,0 +1,816 @@
+\documentclass{book}
+%nerd stuff here
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+% Languages support
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+% Some fancy symbols
+\usepackage{textcomp}
+\usepackage{stmaryrd}
+% Math packages
+\usepackage{amsmath, amssymb, amsthm, amsfonts, mathrsfs, dsfont, mathtools}
+\usepackage{cancel}
+% Bold math
+\usepackage{bm}
+% Resizing
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+% Optional font for not math-based subjects
+%\usepackage{cmbright}
+
+\author{Коченюк Анатолий}
+\title{Математический анализ, 3 семестр}
+
+\usepackage{url}
+% Fancier tables and lists
+\usepackage{booktabs}
+\usepackage{enumitem}
+% Don't indent paragraphs, leave some space between them
+\usepackage{parskip}
+% Hide page number when page is empty
+\usepackage{emptypage}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{xcolor}
+% Some shortcuts
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\renewcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand{\p}[1]{#1^{\prime}}
+\newcommand{\pp}[1]{#1^{\prime\prime}}
+\newcommand{\tl}[1]{\widetilde{#1}}
+\newcommand{\ov}[1]{\overline{#1}}
+% Easily typeset systems of equations (French package) [like cases, but it aligns everything]
+\usepackage{systeme}
+\usepackage{lipsum}
+% limits are put below (optional for int)
+\let\svlim\lim\def\lim{\svlim\limits}
+\let\svsum\sum\def\sum{\svsum\limits}
+%\let\svlim\int\def\int{\svlim\limits}
+% Command for short corrections
+% Usage: 1+1=\correct{3}{2}
+\definecolor{correct}{HTML}{009900}
+\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
+\newcommand\green[1]{{\color{correct}{#1}}}
+% Hide parts
+\newcommand\hide[1]{}
+% si unitx
+\usepackage{siunitx}
+\sisetup{locale = FR}
+% Environments
+% For box around Definition, Theorem, \ldots
+\usepackage{mdframed}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\newmdtheoremenv[nobreak=true]{definition}{Определение}
+\newmdtheoremenv[nobreak=true]{theorem}{Теорема}
+\newmdtheoremenv[nobreak=true]{lemma}{Лемма}
+\newmdtheoremenv[nobreak=true]{problem}{Задача}
+\newmdtheoremenv[nobreak=true]{property}{Свойство}
+\newmdtheoremenv[nobreak=true]{statement}{Утверждение}
+\newmdtheoremenv[nobreak=true]{corollary}{Следствие}
+\newtheorem*{note}{Замечание}
+\newtheorem*{example}{Пример}
+\renewcommand\qedsymbol{$\blacksquare$}
+% Fix some spacing
+% http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=\parskip \thm@postskip=0pt
+}
+\usepackage{xifthen}
+\def\testdateparts#1{\dateparts#1\relax}
+\def\dateparts#1 #2 #3 #4 #5\relax{
+    \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
+}
+
+\def\@lecture{}%
+\newcommand{\lecture}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@lecture{Lecture #1}%
+    }{%
+        \def\@lecture{Lecture #1: #3}%
+    }%
+    \subsection*{\@lecture}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+% Todonotes and inline notes in fancy boxes
+\usepackage{todonotes}
+\usepackage{tcolorbox}
+
+% Make boxes breakable
+\tcbuselibrary{breakable}
+\newenvironment{correction}{\begin{tcolorbox}[
+    arc=0mm,
+    colback=white,
+    colframe=green!60!black,
+    title=Correction,
+    fonttitle=\sffamily,
+    breakable
+]}{\end{tcolorbox}}
+% These are the fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% LE: left even
+% RO: right odd
+% CE, CO: center even, center odd
+% My name for when I print my lecture notes to use for an open book exam.
+% \fancyhead[LE,RO]{Gilles Castel}
+
+\fancyhead[RO,LE]{\@lecture} % Right odd,  Left even
+\fancyhead[RE,LO]{}          % Right even, Left odd
+
+\fancyfoot[RO,LE]{\thepage}  % Right odd,something additional 1  Left even
+\fancyfoot[RE,LO]{}          % Right even, Left odd
+\fancyfoot[C]{\leftmark}     % Center
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat = newest}
+
+\DeclareMathOperator{\Int}{Int}
+
+\begin{document}
+    \maketitle
+    \chapter{Анализ нескольких переменных. Функциональные ряды. Теория меры, Криволинейные интегралы.}
+    литература -- Виноградов, Виноградов-Громов
+    \section{Вспоминаем}
+
+    $O\subseteq \R^n$ -- открытое, $f:O \to R, f \in C^{N+1}(O), N\in \N $
+
+    $[a,x]$ -- замкнутый отрезок  $\subset O, a\neq x \implies \exists x\in (a,x):$
+
+    $f(x) = \underbrace{\sum_{k=0}^{N} \frac{d^k_af(x-a)}{k!}}_{\text{Тейлоровский многочлен порядка N}} +\, \frac{d^k_c f(x-a)}{(N+1)!}$
+
+    $T_{N, a, f}$
+
+     \begin{definition}
+        $\alpha\in \Z _+^n$ -- пространство мультииндексов
+
+        $\alpha = \left( \alpha_1, \alpha_2 \ldots \alpha_n \right) $ 
+
+        $\left| \alpha \right| = \alpha_1 + \ldots + \alpha_n$
+
+        $\alpha! = \alpha_1 \cdot  \ldots \cdot  \alpha_n$
+
+        $f^{(\alpha)}_{(a)} = \frac{\partial^{|\alpha|}f}{\partial^{\alpha_n}x_n \ldots \partial^{\alpha_1}x_1}$
+    \end{definition}
+
+    $h = \left( h_1, \ldots, h_n \right) \quad d_a^k f(h) = \sum_{\substack{\alpha \in \left( Z_+ \right) ^n\\ |\alpha|=k}} \frac{f^{(\alpha)}(a)}{\alpha!}h^{\alpha}$
+
+    \section{Полиномиальная форма Ньютона}
+
+    $N\in \N \quad x = \left( x_1, \ldots, x_n \right) \in \R^n$ 
+
+    $\left( x_1 + \ldots + x_{n}  \right) ^N = \sum_{\substack{\alpha\in \left( \Z _+ \right) ^n\\ |\alpha| = N}} \frac{N!}{\alpha!}x^{\alpha}$
+    \begin{proof}
+        $p(x) = \left( x_1 + x_2 + \ldots + x_{n}  \right) ^N$
+
+        $\p p_{x_1} = N\left( x_1 + \ldots + x_{n}  \right) ^{N-1} = \p p_{x_2} = \ldots = \p p_{x_{n} }$
+
+        $p^{\alpha} = N(N-1) \ldots \left( N - |\alpha|+1 \right)\left( x_1+\ldots+x_{n}  \right) ^{N - |\alpha|} $
+
+        $|\alpha|\leqslant N+1 \implies p^{(\alpha)} \equiv 0$
+
+        $|\alpha|<N \implies p^{(\alpha)}(0) = 0$
+
+        Неноль получается, только если $|\alpha| = N\quad p^{(\alpha)}(0) = N!$
+
+        Если подставить, то получим:
+
+        $\sum \frac{N!}{\alpha!}x^{\alpha}\quad h = x-a = x-0$
+    \end{proof}
+    \section{Оценка однородных многочленов}
+    \begin{definition}
+        $\sum_{\substack{\alpha\in \left( Z_+ \right) ^n \\ |\alpha|=N}}^{n} b_{\alpha}x^{\alpha}$ -- однородный многочлен степени $N$
+
+        В более широком смысле $b_{\alpha}\in \R^m$
+    \end{definition}
+
+
+    $\forall t\in \R\quad p\left( tx \right)  = t^Np(x)$, т.е. однородный многочлен является однородной функцией.
+
+    \begin{statement}
+        $\sqsupset p(x) = \sum_{\substack{\alpha\in \left( Z_+ \right) ^n \\ |\alpha|=N}} \frac{N!}{\alpha!}C_{\alpha}x^{\alpha}\quad C_{\alpha}\in \R^m, \sqsupset M: \|C_{\alpha}\|\leqslant M$
+
+        Тогда $\|p(x)\|\leqslant M\left( \sqrt{n} \|x\| \right) ^N$
+    \end{statement}
+    \begin{proof}
+        $\|p(x)\|\leqslant \sum_{\substack{\alpha\in \left( Z_+ \right) ^n \\ |\alpha|=N}}\frac{N!}{\alpha!} |x^{\alpha}|\underbrace{\|C_{\alpha}\|}_{\leqslant M}\leqslant M \sum_{\substack{\alpha\in \left( Z_+ \right) ^n \\ |\alpha|=N}}\frac{N!}{\alpha!}\underbrace{|x^{\alpha}|}_{|x_1|^{\alpha_1} \ldots |x_{n} |^{\alpha_n}} = M \cdot  \left( |x_1| + \ldots + |x_{n} | \right) ^{N}\leqslant M\left( \sqrt{n} \|x\| \right) ^N$
+
+            $\sum_{k=1}^{n} |x_k|\cdot 1 \leqslant \sqrt{\sum_{k=1}^{n} x_k^2} \cdot \sqrt{\sum_{k=1}^{n} 1} = \|x\| \sqrt{n}  $ -- неравенство Коши, что сумма скаларяных произведений меньше произведения норм
+    \end{proof}
+
+    Формула Тейлора-Лагранжа на отображения буквально не переносится
+    $f\in C^1(O)\quad f(x) - f(a) = d_c f(x-a)$
+
+    для отображений нарушается
+
+    $f(t) = \begin{pmatrix} \cos t\\ \sin t \end{pmatrix} a = 0, $ ``х''$ = 2\pi \quad f(x) - f(a) = 0$
+
+    $\p f(t) = \begin{pmatrix} -\sin t\\ \cos t \end{pmatrix} $
+
+
+    \begin{theorem}
+        Открытое $O\subseteq  \R^n, n, m \in \N \quad N \in \Z_+, f\in C^{N+1}\left( O \to  \R^m \right)$
+
+        $ [a,x]\in O, a\neq x$
+
+        Тогда $f(x) - T_{N, a, f}(x)$ -- остаточный член, который оценивается так:
+
+        $\|f(x) - T_{N, a, f}(x)\| \leqslant \frac{1}{(N+1)!}\sup_{x\in (a,x)}\| d_c^{N+1}f(x-a)\|$
+
+        $\sum_{\substack{\alpha\in \left( \Z _+ \right) ^n \\ |\alpha|\leqslant N}} \frac{f^{(\alpha)}(a)}{\alpha!}(x-a)^{\alpha}$
+    \end{theorem}
+    
+    \section{Отступление}
+
+    $f, g: O \to  \R^m$, дифференцируемые в $O$
+
+     $d \left<f, g \right> = \left<df, g \right> + \left<f, dg \right>$
+
+     $d \left<f, g \right>(h) = \left<df(h), g \right> + \left<f, dg(h) \right>$
+
+
+     $d^2\left<f, g \right> = \left<d^2f, g \right> + 2\left<df, dg \right> + \left<f, d^2 g \right>$
+
+     $d^N\left<f, g \right> = \sum_{k=0}^{N} C_N^k\left< d^kfd^{N-k}g\right>$ (проверка как в одномерном случае)
+
+     Тогда, если $v\in \R^m, v = const$
+
+     $d^N\left<f, v \right> = \left<d^Nf, v \right>$
+    
+     \begin{proof}
+         [Доказательство теоремы 1]
+         Если $v\in \R^m, v$ -- фиксирована
+
+         $g(x) = \left<f(x), v \right>:O \to \R, g\in C^{N+1}\left( O\to \R \right) $
+
+         $g(x)-T_{N,a,g}(x) = \frac{1}{(N+1)!}d_c^{N+1}g(x-a)$ по уже установленной теореме Тейлора-Лагранжа для функций
+\def \mulinl {\substack{\alpha\in \left( \Z _+ \right) ^n \\ |\alpha|\leqslant N}}
+\def \muline {\substack{\alpha\in \left( \Z _+ \right) ^n \\ |\alpha|\neq  N}}
+
+$T_{N, a, g}(x) = \sum_{k=0}^{N} \frac{\left<d^kf, v \right>(x-a)}{k!}$
+
+$\left<f(x) - \sum_{k=0}^{N} \frac{d^kf(x-a)}{k!}, v \right> = \frac{1}{(N+1)!}\underbrace{\left<d_c^{N+1}f(x-a), v \right>}_{\leqslant \|d_c^{N+1} f \ldots\|\|v\|}$ 
+
+$\left| \text{левая часть} \right| \leqslant\underbrace{ \frac{1}{(N+1)!}\sup_{c\in [a,x]} \|d_c^{N+1}f(x-a)\|}_{\text{не зависит от выбора $v$}} \cdot  \|v\|$
+
+Если мы возьмём $v$ остаточным членом, то мы получим оценку остаточного члена, не зависящую от  $v$
+
+$v = f(x) - \sum_{k=0}^{N} \frac{d^kf(x-a)}{k!}$ 
+
+$\|v\|^{\cancel{2}} \leqslant \frac{1}{(N+1)!}\sup \ldots \cancel{\|v\|}$  (сократили на $\|v\|$ )
+
+$\|f - T_{N, a, f}\| \leqslant  \frac{1}{(N+1)!}\sup \ldots.$
+     \end{proof}
+
+     \section{Частный случай: формула конечных приращений}
+
+     $O\subseteq \R^n, f\in C^1\left(O\to \R^m  \right) , [a,x]\subseteq O \quad a\neq x$, тогда 
+
+     \[\|f(x) - f(a)\|\leqslant \sup_{c\in [a,x]} \|d_c f\| \|x-a\|\]
+
+
+     \begin{corollary}
+         Пусть $f\in C^1\left( O \to \R^m \right) $, где $O$ -- открытое множество.
+         Пусть  $K$ -- выпуклый компакт,  $K\subseteq O$.
+         Тогда \[\forall a, b\in K\quad \|f(b)-f(a)\| \leqslant \sup\limits_{c\in K}\|d_cf\| \|b-a\| \]
+     \end{corollary}
+
+    \section{Об оценке нормы дифференциала}
+
+    $p(x) = \sum_{\substack{\alpha\in \left( \Z _+ \right) ^n \\ |\alpha|\neq  N}} \frac{N!}{\alpha!}C_{\alpha} x^{\alpha}\quad \forall \alpha \,\|C_{\alpha}\|\leqslant M$
+
+    $\|p(x)\|\leqslant M\left( \sqrt{n} \|x\| \right) ^N$
+
+    $d_c^Nf = \sum \frac{N!}{\alpha!}\underbrace{\frac{f^{(\alpha)}}{N!}}_{=C_{\alpha}} x^{\alpha}$ 
+
+    $M = \max\limits_{\substack{\alpha\in \left( Z_+ \right) ^n\\c\in[a,x]\\|\alpha|=N}}\|\frac{f^{\alpha}(x)}{N!}\| \implies  \|d_c^Nf(x-a)\|\leqslant  M\left( \sqrt{n} \|x-a\| \right) ^N$
+
+
+         Пусть $O$ $\subseteq \R^n$ открыто, $ f\in C^1\left( O \to  \R^m \right) $
+
+        $K$ -- компактно в  $O \implies  f$ липшецево на $K$, т.е.  
+        \[\exists C\in \R: \|f\left( \p x \right)  - f\left(\pp x  \right)  \|\leqslant C\|\p x - \pp x\|\ \forall \p x , \pp x \in K\]
+        Следует из формулы конечных приращений и оценки дифференциала и теоремы Вейерштрасса: $\frac{\partial f}{\partial x_1}, \ldots, \frac{\partial f}{\partial x_{n} }\in C(K)$
+
+        $\implies \exists x_1: \quad \|\frac{\partial f}{\partial x_i}(x)\|\leqslant C_1 \forall x\in K$
+        
+        $M = C_1,  \implies \forall \p x, \pp x\in K\quad \|d_c f\left( \p x - \pp x) \right) \|\leqslant  M\left( \sqrt{n}\|\p x - \pp x\|  \right) \quad C = M\sqrt{n}  $ 
+
+        \section{Экстремум функции нескольких переменных}
+
+        \begin{definition}
+            $\sqsupset O\subseteq \R^n\quad f:O\to \R$
+
+            $a\in O\quad a$ называется точкой (локального) максимума, если  $\exists $ окрестность $V_a: \forall x\in V_a \cap O\quad f(x) \leqslant f(a)$
+
+            Экстремум -- максимум или минимум
+        \end{definition}
+
+        \begin{statement}
+            [Необходимое условие экстремума (безусловного)]
+            Пусть $E \subseteq \R^n\quad f$, такое что $E\to \R$.
+            $a\in \Int E$ -- точка локального экстремума для  $f$, $f$ дифференцируема в точке  $a$.
+        Тогда  \[d_af = \mathbb{O} \left( \iff  \nabla f = \mathbb O \iff  \frac{\partial f}{\partial x_1}(a) = 0, \ldots, \frac{\partial f}{\partial x_{n} }(a) = 0\right) \].
+        \end{statement}
+        \begin{proof}
+            Пусть $a$~--- точка максимума. 
+            Фиксируем $h\in \R^n\quad g(t) = f(a + th), t\in \R.$ 
+            Для $g$ точка 0 это точка максимума.
+            Существует окрестность нуля $\p V(0): \forall t\in \p V(0)\quad g(t) \geqslant  g(0) = f(a)$, $g$ дифференцируема в 0 как композиция, 0 -- внутренний для  $D(g) \implies \p g(0) = 0$.
+
+            $g(t) = f\left( \varphi(t) \right)$.
+
+            $\p g(t)  =\p f\left( \varphi(t) \right) \cdot \p \varphi(t)$.
+
+            $0 = \left<\nabla f, h  \right> = \left( \p f_{x_1}, \ldots, \p f_{x_{n} } \right) \begin{pmatrix} h_1\\\ldots\\ h_n \end{pmatrix}$.
+        \end{proof}
+            
+        \section{Квадратичные формы}
+        Если $Q(x)$ допускает представление в виде  $ Q(x) \equiv \sum_{i, j=1}^{n} c_{ij}x_i x_j, \quad c_{i, j}\in \R$. 
+        Тогда $Q(x)$ называется квадратичной формой в  $\R^n$.
+
+        \begin{note}
+            Любая квадратичная форма есть однородная функция степени 2.
+        \end{note}
+        \begin{note}
+            Не умаляя общности, матрицу коэффициентов $c_{ij}$ можно считать симметричной.
+            Если это не так, можно перейти в такой форме  $\p c_{ij} = \p c_{ji} = \frac{c_{ij} + c_{ji}}{2}$.
+        \end{note}
+
+        \begin{definition}
+            Квадратичная форма $Q(x)$ в  $\R^n$ называется положительно-определённой (положительной) (Q > 0), если 
+            \[\forall x\in \R^n \setminus \left\{ 0 \right\} \quad Q(x) >0.\]
+        неотрицательно определённой, если неравенство нестрогое. 
+
+        $Q \geqslant 0\quad \ldots Q<0, Q\leqslant 0$
+
+
+        неопределённая, если $Q \gtrless 0\quad \exists x^1 и x^2 \in \R^n: Q\left( x^1 \right) >0, Q\left( x^2 \right) <0$
+        \end{definition}
+        \begin{example}
+            \begin{enumerate}
+                \item $n=2$ $Q(x) = 2x_1^2 - 3x_2^2 \gtrless 0$
+                    
+                    $Q(x) = 2x_1^2 + 3x_2^2 >0$
+
+                    $Q(x)  =Ax_1^2 + 2Bx_1^2x_2^2 + Cx_2^2$, если $B^2-AC$, то форма знакопеременная
+
+                    Если $A\geqslant 0\quad B^2-AC\leqslant 0$, то $Q \geqslant 0$
+
+                    $A\leqslant 0 \ldots$
+            \end{enumerate}
+        \end{example}
+
+        \begin{lemma}
+            $\sqsupset Q(x)$ -- положительная квадратичная форма в $\R^n$
+
+            Тогда $\exists \gamma >0: \forall x\in \R^n\qquad Q(x) \geqslant \gamma \|x\|^2$
+        \end{lemma}
+        \begin{proof}
+            $\gamma  = \min_{\|x\| = 1}Q(x) = Q(x_0) >0\quad \|x_0\|=1$
+
+            $\forall x\in \R^n \setminus \left\{ 0 \right\} Q(x) = Q\left( \|x\| \frac{x}{\|x\|}\right) = \|x\|^2 \cdot  Q\left( \frac{x}{\|x\|} \right)  \geqslant  \gamma \|x\|^2$
+        \end{proof}
+
+        \begin{statement}
+            [Достаточое условие экстремума]
+
+            $\sqsupset f: E\to \R, \quad \underline{a\in \Int E}, d_a f = 0\quad \exists  d^2_a f$ 
+
+            Тогда, если $d^2_af>0$ (положительная квадратичная форма как функция дифференциалов  $dx_1, \ldots, dx_{n} )$, то $a$ это точка минимума (строгого)
+
+            Если  $d^2_af <0 \ldots.$
+
+            Если $d^2_af \gtrless$, то $a$ \underline{не} точка экстремума
+
+            Это не все случаи, есть нестрогие, в которых ДУЭ не применимо
+        \end{statement}
+
+        \begin{example}
+            $f(x, y) = x^4 - y^4$
+
+            $g(x, y) = x^4 + y^4$
+
+            для $f$ точка $(0, 0)$ не точка экстремума, а для $g$ -- да 
+
+            $\nabla f = \left( 4x^3, -4y^3 \right)  = 0 \iff  \left( x,y \right)  = \left( 0, 0 \right) $
+        \end{example}
+
+        \begin{proof}
+            ДУЭ. Пеано в точке $a$:
+
+            $f(x) = f(a) + d_af(x-a) + \frac{1}{2} d^2_af(x-a) + o\left( \|x-a\|^2 \right) $ 
+
+            $f(x) - f(a) = \frac{1}{2} d^2_af(x-a) + \underbrace{\varepsilon(x)}_{\to 0, x\to a}\|x-a\| $
+
+            Если $Q>0$, то по лемме $\exists \gamma >0: Q(x-a) \geqslant  \gamma \|x-a\|^2$
+
+            Т.к. $\varepsilon(x) \to 0, x\to a$, то $\exists V(a): \left| \varepsilon(x) \right| <\frac{\gamma}{8} \forall x\in V(a) \implies  \forall x\in V(a)\quad f(x) - f(a) \geqslant \frac{1}{2} \gamma \|x-a\|^2 - \frac{\gamma}{8} \|x-a\|^2 = \|x-a\|^2\left( \frac{3}{8}\gamma \right) >0\quad x\neq a \implies a$ -- точка строгого минимума
+
+            $Q<0$, рассмотреть  $-f$
+
+            $Q\gtrless 0 \implies  \exists h_+, h_- \in \R^n: Q\left( h_+ \right) >0\quad Q\left( h_- \right) <0$, не умаляя общности $\|h_+\| = \|h_-\| = 1$ 
+
+            $\delta = \min \left\{ \left| Q\left( h_+ \right)  \right| , \left| Q\left( h_- \right)  \right|  \right\} $ 
+
+            Т.к. $\varepsilon(x)\to 0, x\to a$, то $\exists $ окрестность $V_r(a): \left| \varepsilon(x) \right| <\frac{\delta}{4}$ 
+
+            $|t|<r\quad f\left( a + th_+ \right)  - f(a) = \frac{1}{2} t^2 Q\left( x_+ \right) + \varepsilon(x)t^2 \geqslant  \frac{1}{2} t^2\cdot \delta - \cdot \frac{\delta}{4}t^2= t^2 \frac{\delta}{4}>0$ 
+
+            $\left| Q(h_-) \right| \geqslant \delta$
+
+            $Q(h_-) = - |Q(h_-)| \leqslant -\delta$
+
+            $f\left( a + th_- \right) - f(a) \leqslant - \frac{\delta}{2}tse + \frac{\delta}{4}t^2 \leqslant -\frac{\delta}{2}t^2<0 $
+
+            Таким образом в любой окрестности точки $a\quad f(x) - f(a)$ знакопеременная
+
+        \end{proof}
+
+        \section{Практика. Теорема о существовании}
+
+        \begin{theorem}
+            [Теорема о неявной функции]
+            $F(x, y, z) = 0$
+
+            $(x_0, y_0, z_0):\quad F\left( x_0, y_0, z_0 \right) = 0\quad \p F_z(x_0, y_0, z_0) \neq 0$ и все функции непрерывны в $(x_0, y_0, z_0)$
+
+            $\implies \exists z = z(x, y)\quad z_0 = z(x_0, y_0)\quad F(x, y, z(x, y)) = 0$ в окрестности $(x_0, y_0)$
+        \end{theorem}
+
+        \begin{example}
+            $x^2 + y^2 - 1 = 0$
+
+            $F(x, y)\quad \left( \frac{\sqrt{2} }{2}, \frac{\sqrt{2} }{2} \right) \quad y = \sqrt{1-x^2} $
+
+            $\p F_y = 2y\quad \p F_y(x_0, y_0) = \sqrt{2}\neq 0 $ 
+
+            $y = y(x)\quad y_0 = y(y_0)\quad x^2+y^2(x)-1=0$
+
+        \end{example}
+\begin{figure}[!ht]
+    \centering
+    \incfig{exex}
+    \caption{exex}
+    \label{fig:exex}
+\end{figure}
+
+        $F(x, y, z)$ И все условия выполняются. как найти  $\frac{\partial}{\partial x}z(x, y)$
+        
+        $F(x, y, z(x, y)) = 0$
+
+        $\frac{\partial}{\partial x}F(x, y, z(x, y)) = 0$
+
+        $\begin{cases}
+            \p F_x + \p F_z\cdot \frac{\partial z(x, y)}{\partial x} = 0\\
+            \p F_y + \p F_z\cdot \frac{\partial z(x, y)}{\partial y} = 0\\
+        \end{cases}$ 
+
+        Отсюда выражается
+
+        \begin{definition}
+            Многозначная функция $f$ -- соответствие  $x \mapsto f(x)$ -- множество
+        \end{definition}
+        \begin{example}
+            $x\mapsto \pm \sqrt{1-x^2} = \left\{ \sqrt{1-x^2} , -\sqrt{1-x^2}  \right\}  $ 
+
+            $x^{\frac{1}{2}} = y\qquad x = y^2$ -- задаёт неявную функцию $y(x)$
+        \end{example}
+
+        \begin{figure}[!ht]
+                \centering
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        xmin= -1, xmax= 10,
+                        ymin= -5, ymax = 5,
+                        axis lines = middle,
+                    ]
+                    \addplot[domain=-1:10, samples=100]{sqrt(x)};
+                    \addplot[domain=-1:10, samples=100]{-sqrt(x)};
+                    \end{axis}
+                \end{tikzpicture}
+                \caption{$x=y^2$}
+                \label{$x=y^2$}
+            \end{figure}
+
+        Пусть $y(x)$ -- многозначная функция. Тогда выбор единственного  $y\in y(x)$ для  $\forall x$ задаёт явную функцию (однозначная функция)
+
+        Каждый такой выбор задаёт однозначную функцию называемую ветвью. Ветви могут быть непрерывными, например в $x=y^2$ бесконечность ветвей. Чтобы уточнить, нужно проговаривать непрерывная ветвь. дифференцируемая ветвь и т.д.
+
+        \begin{example}
+            $x^2+y^2 = x^4 + y^4$
+
+            Задаёт многозначную функцию. Определить для каких $x$ она будет 1-, 2-, 3-, 4-значной
+        \end{example}
+
+
+        \section{Лекция 2}
+    
+        $d^2_af \longleftrightarrow \begin{pmatrix} 
+            \pp f_{x_1x_1}(a) & \pp f_{x_1x_2}(a) & \pp f_{x_1x_3}(a) & \ldots \\
+            \pp f_{x_2x_1}(a) & \pp f_{x_2x_2}(a) & \pp f_{x_2x_3}(a) & \ldots \\
+            \pp f_{x_2x_1}(a) & \pp f_{x_2x_2}(a) & \pp f_{x_2x_3}(a) & \ldots \\
+            \ldots & \ldots & \ldots & \ldots \\
+        \end{pmatrix} $ 
+
+        \begin{theorem}
+            [Критерий Сильвестра]
+            \begin{itemize}
+                \item Если все главные миноры положительны, то соответствующая квадратичная форма положительна ($a$ -- точка минимума).
+                \item Если  $\Delta_1 <0\quad \Delta_2>0\quad \Delta_3 <0 \ldots$, то квадратичная форма отрицательна ($a$ -- точка максимума) 
+                \item $\Delta_k\neq 0$, и не реализуется ни первый случай, ни второй, то квадратичная форма неопределённая (т.е. экстремума нет)
+            \end{itemize}
+        \end{theorem}
+
+        \begin{note}
+            $Q(h) = d^2_a f(h)$.
+            $Q(h) = \left<A\cdot h, h \right>\quad A = \left( \pp f_{x_ix_j} \right)_{ij} $
+        \end{note}
+
+        \begin{problem}
+           $z = x^2-xy+y^2-2x+y$ -- исследовать на экстремум 
+        \end{problem}
+        \begin{proof}
+            Необходимое условие экстремума $\p z_x = 0\quad \p z_y = 0$.
+
+             $\p z_x = 2x - y - 2\quad \p z_y = -x + 2y +  1$
+
+             $(x, y) = (1, 0)$, других нет, потому что определитель хороший.
+
+             Достаточное условие экстремума:
+             $\pp z_{x x} = 2, \quad \pp z_{xy} = -1,\quad \pp z_{yy}=2$.
+             $\left[ d^2_{\left( 1, 0 \right) }f \right] \longleftrightarrow \begin{pmatrix} 2&-1\\-1&2 \end{pmatrix}$. 
+
+             $\Delta_1 = 2>0\quad \Delta_2 = 2*2 - (-1)^2 = 3>0$, таким образом $(1, 0)$~--- строгий минимум.
+        \end{proof}
+
+        \begin{note}
+            $d^2_{(1,0)}f = 2dx^2 + 2(-1)dxdy + 2dy^2 = dx^2 + dy^2 + (dx-dy)^2 >0$, если $\begin{pmatrix} dx\\dy \end{pmatrix} \neq \begin{pmatrix} 0\\0 \end{pmatrix}$.
+
+            $d^2f>0$
+        \end{note}
+
+        \begin{problem}
+            [без привлечения $d^2f$]
+            $z = x^2y^3(6-x-y)$ -- исследовать на экстремум. 
+
+            $\begin{cases}
+                0 = \p z_x = y^3(6x^2-x^3-yx^2\p )_x = y^3(12x-3x^2-2yx) = xy^3(12-3x-2y)\\
+                0 = \p z_y = x^2(6y^3-xy^3-y^4 \p )_y = x^2(18y^2-3xy^2-4y^3)= x^2y^2(18-3x-4y)\\
+            \end{cases}$ 
+
+           Либо $x=0$, либо  $y=0$, либо  $\begin{cases}
+               3x + 2y = 12\\ 3x+4y=18
+           \end{cases}$ -- $(2, 3)$.
+
+$\left\{ (0, t) \right\} _{\left\{ t<0 \right\} \cup \left\{ t>6 \right\} }$ -- максимум (нестрогий)
+
+$\left\{ (0, t) \right\} _{\left\{ t\in (0,6) \right\} }$ -- максимум (нестрогий)
+
+$(0,6)$ -- не экстремум
+
+$\sphericalangle K = \left\{ (x, y)|x\geqslant 0\quad y\geqslant 0\quad x+y\leqslant 6 \right\} $ -- компакт
+
+По теореме Больцано-Вейерштрасса существует $\left( x_{\pm}, y_{\pm} \right)\in K $ 
+
+$f\left( x_+, y_+ \right)  = \max\limits_K f$
+
+$f\left(x_-, y_-  \right) = \min\limits_Kf $ 
+
+из распределения знаков следует, что точки границы -- точки минимума.
+Тогда $(x_+, y_+)\in \Int K,$ значит $(x_+, y_+)$ удовлетворяет необходимому условии экстремума. 
+Такая точка у нас одна~---  $(x_+, y_+) = (2, 3)$.
+        \end{problem}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{znaki}
+    \caption{znaki}
+    \label{fig:znaki}
+\end{figure}
+        \section{Экстремумы и замена переменных}
+        Определение точки экстремума непосредственно переносится на случай метрических пространств
+
+        \begin{lemma}
+            Пусть $\left( X, \rho_X) \right) , \left( Y, \rho_y \right) $ -- метрические пространства и $f:X \to \R$.
+            Пусть $g(b) = a\quad g$ непрерывна в точке  $b$.  $a $ -- точка максимума (минимума) для  $f$.
+            Тогда  $b$ -- точка максимума (минимума) для  $f \circ g$.
+
+        \end{lemma}
+\begin{figure}[!ht]
+    \centering
+    \incfig{kartinkalemmi}
+    \caption{kartinkalemmi}
+    \label{fig:kartinkalemmi}
+\end{figure}
+        \begin{proof}
+            По условию $a$ -- точка локального максимума, т.е.  существует окрестность $U(a)\subseteq X:\quad f(x)\leqslant f(a)\ \forall x\in U(a)$.
+            По определению непрерывности существует окрестность $V(b)\subseteq Y:$
+            \[g(y)\in U(a)\forall y\in V(b)\implies f(g(y))\leqslant f(a) = f(g(b)).\]
+        \end{proof}
+
+        \begin{corollary}
+            Если в условии леммы $g$ -- гомеоморфизм  $X$ на  $Y$, то  $a$ -- точка максимума (минимума) для $f\circ g$.
+        \end{corollary}
+        \begin{corollary}
+            Если $g$ -- локальный гомеоморфизм (существует окрестность $V(b)$, такая что в точке $b$ сужение  $g|_{V(b)}$ -- гомеоморфизм на образ ( $g(V(b))$)), то сохраняется вывод предыдущего следствия. 
+        \end{corollary}
+
+        \begin{problem}
+            $z = xy\sqrt{1 - \frac{x^2}{a^2} - \frac{y^2}{b^2}}\quad (a, b>0) $~--- исследовать на экстремум.
+        \end{problem}
+        \begin{proof}
+
+            $z(x, y) = -z(-x, y) = -z(x, -y)$
+
+            $z$ -- нечётная по  $x$ и по  $y$. 
+            Значит достаточно рассматривать функцию только в первой четверти.
+            
+            $\begin{cases}
+            x = a\rho \cos \alpha\\
+            y = b\rho \sin \alpha\\
+            \end{cases}$
+
+            $(\rho, \varphi) \to (x, y)$
+
+            $(0,1) \times (0, \frac{\pi}{2}) \to \Int K$ -- гомеоморфизм $\left( \varphi = \arctg \frac{y}{x}\quad r = \sqrt{x^2+y^2}  \right) $ 
+            
+            $z(\rho, \varphi) = ab\rho^2\cos \varphi \sin \varphi \sqrt{1-\rho^2} \overset{\rho^2=t} = \frac {ab} 2 \sin 2\varphi t\cdot \sqrt{1-t} $
+
+            Необходимое условие экстремума: $\begin{cases}
+                \frac{2}{ab} \p z_{\varphi} = 0 = 2\cos 2\varphi\cdot t\sqrt{1-t}\\
+                \frac{2}{ab}\p z_{t} = 0 = \sin 2\varphi\left( \sqrt{1-t} -\frac{1}{2} \frac{t}{\sqrt{1-t} } \right) = \frac{\sin 2\varphi \left( 2(1-t)-t) \right) }{2\sqrt{1-t} } 
+            \end{cases}$ 
+
+            $\begin{cases}
+                 \cos 2\varphi \cdot  t\sqrt{1-t} = 0\\
+                 \sin 2\varphi \cdot  \frac{(2-3t)}{\sqrt{1-t} } = 0
+            \end{cases} \iff  \begin{cases}
+            \cos 2\varphi = 0\quad \varphi \in (0, \frac{\pi}{2})\\
+                3t = 4
+            \end{cases} \iff  \begin{cases}
+                \varphi = \frac{\pi}{4}\\
+                t = \frac{2}{3}
+            \end{cases} \iff  \begin{cases}
+                x = a\cdot \frac{4}{9}\cdot \frac{1}{\sqrt{2} } = \frac{2\sqrt{2}b }{9}\\
+                y = b \cdot  \frac{4}{9}\cdot \frac{1}{\sqrt{2} } = \frac{2\sqrt{2} b}{9}
+            \end{cases}$
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{primer}
+    \caption{primer}
+    \label{fig:primer}
+\end{figure}
+        \end{proof}
+
+        \begin{problem}
+            $f: \underbrace{O}_{\subseteq \R^n} \to  \R$
+
+            $E = \left\{\varphi_1(x)=0, \ldots, \varphi_n(x) = 0  \right\} $
+
+            Исследование $f_{E}$ на экстремум называется задачей об условном экстремуме
+        \end{problem}
+
+        \begin{example}
+            $f(x, y) = x+y\quad E = \left\{ x+2y = 1 \right\} $
+        \end{example}
+        \begin{proof}
+            $x = 1-2y$
+
+             $f = 1-2y+y = 1-y$
+
+             $\tl f(x, y) = x^2+y^2\quad E = \left\{ x+y=1 \right\} $
+        \end{proof}
+        \begin{example}
+            $f = Ax^2 + 2Bxy + Cy^2\quad E = \left\{ x^2+y^2=1 \right\} $
+
+            $\begin{cases}
+                x = \cos \varphi\\
+                y = \sin \varphi\\
+            \end{cases}$ 
+
+
+        \end{example}
+
+        \section{Дифференцирование обратного отображения}
+
+        $x\in \R, y\in \R\quad$\[ f(x) = y\]
+
+        $x\in \R^n\quad y\in \R^n\quad f(x) = y\quad A \cdot  x = y, \ A = [f]$  -- линейна
+
+        $f(x) = y$ имеет единственное решение  $\forall y\in \R^n \iff \det A \neq  0$
+        
+        \begin{theorem}
+            [об обратной функции для случая одной переменной]
+
+            $f: (A, B) \to  \R, f\in C^1((A, B)), a\in (A, B), \p f(a)\neq 0$, тогда существует окрестность $V(a):$
+            \begin{enumerate}
+                \item $\forall x\in V(a)\quad \p f(x)\neq 0$ -- локальная новорожденность производной
+                \item $f|_{(A, B)}$ -- инъекция. -- локальная обратимость
+                \item  $f(V(a))$ - откр. -- локальная открытость отображения
+                \item $\left( f|_{V(a)} \right)^{-1} $ дифференцируема в точке $f(a)$ и  $\left( \left( f|_{V(a)} \right)^{-1}  \right)^{\prime} = \frac{1}{\p f(a)} $ -- дифференцируемость локально обратного
+            \end{enumerate}
+        \end{theorem}
+
+        \begin{definition}
+            $f:\left( X, \Omega_X \right) \to \left( Y, \Omega_Y \right)  $
+
+            Если для любого $O\in \Omega_X\quad f(O)\in \Omega_Y$, то  $f$ называется открытым отображением
+        \end{definition}
+        \begin{example}
+            $f(x) = x^2$ не открытое на $(-1, 1) \to [0,1)$, но открыто на $(-1, 0) \cup (0, 1)$, потому что нет точек, где $\p f(x) = 0$
+        \end{example}
+        \begin{proof}
+            [доказательство теоремы]
+            По следствию теоремы Дарбу, если $\p f(a) >0 (<0)$, то существует окрестность  $V(a):\forall x\in V(a)\quad \p f(x) >0 (<0)$
+
+            $\sqsupset \p f(x)>0$ всюду на  $V(a)$, то $f$ строго возрастает, значит  $f|_{V(a)}$ -- инъекция
+
+            $V(a) = \left( a-\delta, a + \delta \right) \implies f\left( a-\delta, a+\delta \right) = \left( f(a-\delta), f(a+\delta) \right) $ 
+
+            $4 \impliedby $ теоремы о дифференцируемости обратимой функции
+        \end{proof}
+
+        \begin{theorem}
+            [об обратном отображении]
+            Пусть $\underbrace{O}_{\text{открытое}} \subseteq \R^n\quad f:O\to \R^n$ и $\forall x\in O\quad d_xf$ -- обратим (якобиан не обращается в ноль в  $O$)
+
+            Тогда  $f$ -- открытое отображение
+
+
+        \end{theorem}
+        \begin{proof}
+            См. доказательства утверждения 3 в теореме о дифференцировании обратного отображения в книжке Виноградов-Громов.
+        \end{proof}
+        \begin{theorem}
+            [теорема об обратном отображении]
+
+            $n\in \N, $ $O$ -- открытое,  $O\subseteq \R^n$
+
+            $f\in C^1(O \to  \R^n)$ $a\in O$. Пусть  $d_af$ обратим ($\iff  \mathcal{J}_af\neq 0$) , тогда существует окрестность $V(a):$
+            \begin{enumerate}
+                \item $\forall x\in V(a)\quad d_xf$ обратим -- локальная новорожденность производной
+                \item $f|_{(A, B)}$ -- инъекция. -- локальная обратимость
+                \item  $f(V(a))$ - откр. -- локальная открытость отображения
+                \item $\left( f|_{V(a)} \right)^{-1} $ дифференцируема в точке $f(a)$ и  $d_{f(a)} \left( f|_{V(a)} \right)^{-1}  = (d_{a}f)^{-1} $ -- дифференцируемость локально обратного
+            \end{enumerate}
+        \end{theorem}
+
+        \begin{lemma}
+            Пусть $n\in \N $, $O\subseteq \R^n$ открыто, $f:O\to \R^n, f\in C^1(O), a\in O$ и $d_af$ обратим. Тогда  $\forall \sigma >0 $ существует окрестность $V(a):$
+             \begin{enumerate}
+                 \item $\forall x\in V(a)$ \[\|d_xf - d_af\| < \sigma\]
+                 \item $\forall p, q\in V(a)$ \[\|f(p) - f(a) - d_af(p-q)\|\leqslant C_1\|p-q\|\]
+                 \item $\forall p, q\in V(a)$ \[C_3 \|p-q\| \leqslant  \|f(p) - f(q)\| \leqslant C_2 \|p-q\|\], такое свойство называется билипшецевость.
+
+                     Здесь конкретно $C_2 = \|d_af\| + \sigma\qquad C_3 = \frac{1}{\|\left( d_af \right) ^{-1}\|} - \sigma$
+            \end{enumerate}
+        \end{lemma}
+        \begin{proof}
+            $f\in C^1(a) \implies$ существует окрестность $V(a):$ 1 верно
+
+            $\sphericalangle F(x) = f(x) - d_af(x): O \to \R^n$
+
+            $d_xF(h) = d_xf(h) - d_af(h), \quad F\in C^1(O)$
+
+            $\|f(p) - f(q) - d_ad(p-q)\| = \|F(p) - F(q)\|\leqslant\underbrace{ \sup\limits_{c\in V(a)} \|d_cF\|}_{\leqslant \sigma}$ по теореме о конечных приращениях, т.к. $V(a)$ выпуклое
+
+            $\|d_cF\| = \|\underbrace{d_Cf - d_af}_{<\sigma}\|$
+
+            $\forall p, q\in V(a)$
+
+            $\|f(p) - f(q)\| \leqslant  \sup\limits_{c\in V(a)} \|d_cf\| \|p-q\|$ 
+
+            $\|d_c f\| = \|d_af + \left( d_cf - d_af \right) \| \leqslant  \|d_af\| + \underbrace{\|d_cf - d_af\|}_{<\sigma \text{в силу 1}} \leqslant  C_2$ 
+
+            $\|f(p) - f(q)\| = \|d_af(p-1) - \left( f(p) - f(q)   - d_af(p-q) \right)\| \geqslant  \underbrace{\|d_af(p-q)\|}_{\geqslant  \frac{1}{\|\left( d_af \right) ^{-1}\|} \|p-q\|} - \underbrace{\|f(p) - f(q) - d_af(p-q)\|}_{\leqslant C_1\|p-q\|} \geqslant  C_3 \|p-q\|$
+        \end{proof}
+
+        \begin{proof}
+            [доказательство (часть) теоремы об обратном отобржаении]
+
+            Существует $\left( d_xf \right) ^{-1} \iff  \mathcal{J} f\neq 0$, но $\mathcal{J} f\in C\left( O\to \R \right) \underset{\text{по неперывности}} {\implies}  $ существует окрестность $V(a): \forall x\in V(a)\quad \mathcal{J}_xf !+0 \implies 1$ 
+
+            $C_0 = \frac{1}{\|\left( d_af \right) ^{-1}\|}, \quad \sigma = \frac{C_0}{4}$, применим лемму к такому $\sigma$
+
+            Не умаляя общности  $V(a) \subseteq V_0(a)$. Т.к. $\sigma < C_0\quad \forall p, q\in V(a)$ в силу  неравенства 3 из леммы $f(p)\neq f(q)$ ($f|_{V(a)}$ -- инъекция.  $\implies  f|_{V(a)}$ -- биекция на  $f(V(a))$, т.е.  $g = f|_{V(a)}$ обратимо и  $4 \impliedby $ правило дифференцирования обратного отображения
+        \end{proof}
+
+\end{document}

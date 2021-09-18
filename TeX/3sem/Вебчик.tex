@@ -1,0 +1,249 @@
+\documentclass{book}
+%nerd stuff here
+\pdfminorversion=7
+\pdfsuppresswarningpagegroup=1
+% Languages support
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage[english,russian]{babel}
+% Some fancy symbols
+\usepackage{textcomp}
+\usepackage{stmaryrd}
+% Math packages
+\usepackage{amsmath, amssymb, amsthm, amsfonts, mathrsfs, dsfont, mathtools}
+\usepackage{cancel}
+% Bold math
+\usepackage{bm}
+% Resizing
+%\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+% Optional font for not math-based subjects
+%\usepackage{cmbright}
+
+\author{Коченюк Анатолий}
+\title{Вею-программирование}
+
+\usepackage{url}
+% Fancier tables and lists
+\usepackage{booktabs}
+\usepackage{enumitem}
+% Don't indent paragraphs, leave some space between them
+\usepackage{parskip}
+% Hide page number when page is empty
+\usepackage{emptypage}
+\usepackage{subcaption}
+\usepackage{multicol}
+\usepackage{xcolor}
+% Some shortcuts
+\newcommand\N{\ensuremath{\mathbb{N}}}
+\newcommand\R{\ensuremath{\mathbb{R}}}
+\newcommand\Z{\ensuremath{\mathbb{Z}}}
+\renewcommand\O{\ensuremath{\emptyset}}
+\newcommand\Q{\ensuremath{\mathbb{Q}}}
+\renewcommand\C{\ensuremath{\mathbb{C}}}
+\newcommand{\p}[1]{#1^{\prime}}
+\newcommand{\pp}[1]{#1^{\prime\prime}}
+% Easily typeset systems of equations (French package) [like cases, but it aligns everything]
+\usepackage{systeme}
+\usepackage{lipsum}
+% limits are put below (optional for int)
+\let\svlim\lim\def\lim{\svlim\limits}
+\let\svsum\sum\def\sum{\svsum\limits}
+%\let\svlim\int\def\int{\svlim\limits}
+% Command for short corrections
+% Usage: 1+1=\correct{3}{2}
+\definecolor{correct}{HTML}{009900}
+\newcommand\correct[2]{\ensuremath{\:}{\color{red}{#1}}\ensuremath{\to }{\color{correct}{#2}}\ensuremath{\:}}
+\newcommand\green[1]{{\color{correct}{#1}}}
+% Hide parts
+\newcommand\hide[1]{}
+% si unitx
+\usepackage{siunitx}
+\sisetup{locale = FR}
+% Environments
+% For box around Definition, Theorem, \ldots
+\usepackage{mdframed}
+\mdfsetup{skipabove=1em,skipbelow=0em}
+\theoremstyle{definition}
+\newmdtheoremenv[nobreak=true]{definition}{Определение}
+\newmdtheoremenv[nobreak=true]{theorem}{Теорема}
+\newmdtheoremenv[nobreak=true]{lemma}{Лемма}
+\newmdtheoremenv[nobreak=true]{problem}{Задача}
+\newmdtheoremenv[nobreak=true]{property}{Свойство}
+\newmdtheoremenv[nobreak=true]{statement}{Утверждение}
+\newmdtheoremenv[nobreak=true]{corollary}{Следствие}
+\newtheorem*{note}{Замечание}
+\newtheorem*{example}{Пример}
+\renewcommand\qedsymbol{$\blacksquare$}
+% Fix some spacing
+% http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=\parskip \thm@postskip=0pt
+}
+\usepackage{xifthen}
+\def\testdateparts#1{\dateparts#1\relax}
+\def\dateparts#1 #2 #3 #4 #5\relax{
+    \marginpar{\small\textsf{\mbox{#1 #2 #3 #5}}}
+}
+
+\def\@lecture{}%
+\newcommand{\lecture}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@lecture{Lecture #1}%
+    }{%
+        \def\@lecture{Lecture #1: #3}%
+    }%
+    \subsection*{\@lecture}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+% Todonotes and inline notes in fancy boxes
+\usepackage{todonotes}
+\usepackage{tcolorbox}
+
+% Make boxes breakable
+\tcbuselibrary{breakable}
+\newenvironment{correction}{\begin{tcolorbox}[
+    arc=0mm,
+    colback=white,
+    colframe=green!60!black,
+    title=Correction,
+    fonttitle=\sffamily,
+    breakable
+]}{\end{tcolorbox}}
+% These are the fancy headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% LE: left even
+% RO: right odd
+% CE, CO: center even, center odd
+% My name for when I print my lecture notes to use for an open book exam.
+% \fancyhead[LE,RO]{Gilles Castel}
+
+\fancyhead[RO,LE]{\@lecture} % Right odd,  Left even
+\fancyhead[RE,LO]{}          % Right even, Left odd
+
+\fancyfoot[RO,LE]{\thepage}  % Right odd,something additional 1  Left even
+\fancyfoot[RE,LO]{}          % Right even, Left odd
+\fancyfoot[C]{\leftmark}     % Center
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+\usepackage{tikz}
+\begin{document}
+    \maketitle
+    Http -- протокол по которому общается браузер и веб-сервер. 
+
+    IP внутри TCP внутри HTTP внутри <> для HTTPS, такая матрёшка.
+
+    Отец -- Тим Бернерс-Ли.
+
+    HTTP2 бинарный, но эта бинарность от нас скрыта и мы будем думать, что он текстовый.
+
+    Пользовательский агент -- браузер обычно, но может консолька или ещё что
+
+    Агент посылает запрос -- сервер отвечает этими данными. Агент инициирует общение, сервер отвечает.
+
+    TCP -- важная штука, на которой в частности базируется HTTP, там трёхфазное рукопожатие происходит, это долго.
+
+    В HTTP1.1 придумали не разрывать соединение (keep alive) для повторных вопрос-ответов
+
+    <картинка со слоями>
+
+    HTTP:
+    \begin{itemize}
+        \item протокол предметного кровня
+            |item клиент-серверный, запрос-ответ
+        \item текстовый (не совсем в HTML2, чтобы оптимизировать мировой трафик)
+        \item stateless -- протокол без состояния. Когда сервер обрабатывает запрос, ему не важен контекст кто откуда это прислал. Каждый запрос обрабатывается независимо от других запросов.
+    \end{itemize}
+
+    В разработке HTTP3, которое там ещё оптимизированное будет.
+
+    Поверх HTTP строятся протоколы ещё более высокого уровня (документики типа HTML, CSS, ..)
+
+    <картинка с url>
+
+    \begin{definition}
+        URI Universal Resource Identiier -- последовательность символов, индентифицирующая абстрактный или физический ресурс
+    \end{definition}
+
+    \begin{definition}
+        Uniform Resource Locator (URL, урлы) -- стандарт записи ссылок на объекты в Интернете. Ещё есть URN  -- идентифицирует имя, например urn:isbn:5170224575
+    \end{definition}
+
+    Особенности:
+    \begin{itemize}
+        \item Процентное кодирование для не ASCII символов: например \%20 -- пробел. Браузеры зачастую скрывают это и показывают, например, русские буквы в url на страничке википедии
+        \item схема и хост -- регистронезависимые, а всё остальное нормализуется как регистрозависимое.
+        \item Используются часто относительные пути, говоряющие, что нужно сбросить путь и начать с корня.
+    \end{itemize}
+
+    глагол (GET, POST, ..) / HTTP  / 1.1 (жизнь не стоит на месте, если делаешь свой протокол, разумно хранить версию в заголовке)
+
+    HOST -- обязательная часть заголовка www.example.com
+
+    Общий вид:
+    \begin{enumerate}
+        \item METHOS URL HTTP/Version
+        \item Аргументы Name: Value
+        \item Пустая строка
+        \item Данные
+    \end{enumerate}
+
+    Посылемые данные сжимаются, например gzip'ом, но не всегда. Обычно на сервере есть константа начиная с которой данные сжимать осмысленно.
+
+    Cookie -- псевдосостояние, потом отдельно поговорим.
+
+    <табличка методов>
+
+    Некоторые заголовки:
+    \begin{itemize}
+        \item Общие: Cashe-Control, Connection, Sate
+        \item Запрос: Accept, Accept-Encoding, Accept-Languages, Connection, Cookie, Host, Refere, User-Agent, if-None-Match
+        \item Ответ: Connection, Connection-Encoding, Connection-Type, Transfer-Encoding, Set-Cookie, Location
+    \end{itemize}
+
+    Типы кодов:
+    \begin{enumerate}
+        \item [1xx] информационные
+        \item [2xx] успех (200 OK, 206 Partial Content)
+        \item [3xx] перенаправление (301 Moved Permanently, 302 Moved Temporarily, 304 Not Modified, 303 See Other, 307 Temporarily Redirect, 308 Permanent Redirect)
+        \item [4xx] ошибка клиента (403 Forbidden, 404 Not Found, 405 Mthod Not Allowed)
+        \item [5xx] ошибка сервера (500 Internal Server Error, 501 Not Implemented, 502 Bad Gateway, 503 Service Unavailable, 504 Gateway Timeout)
+    \end{enumerate}
+
+    Печеньки -- hashmap'чик, который хранится на стороне клиента, который параметризован именем хоста. При запросе на любую странице этого же сайта (с этим именем хоста), то сайт также посылает и эту печеньку.
+
+    Параметры:
+    \begin{itemize}
+        \item  name, value
+        \item expires, max-age
+        \item path, domain
+        \item secure, httponly, samesite
+    \end{itemize}
+
+    <cashe-control картинка>
+
+    Отличия HTTP2:
+    \begin{itemize}
+        \item бинарный. Прошлый был местами бинарный, но не в заголовках, а здесь всё бинарное
+    \end{itemize}
+
+    \section{Введение в HTML/CSS}
+
+
+    Будем делить элементы на блоковые (занимают всё, что дают) и инлайновые (встраиваются в строку)
+
+    \begin{definition}
+        DOM -- Document object model
+
+        CSS -- Cascading Style Sheet
+    \end{definition}
+\end{document}
