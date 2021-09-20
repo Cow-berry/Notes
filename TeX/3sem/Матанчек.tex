@@ -812,5 +812,328 @@ $f\left(x_-, y_-  \right) = \min\limits_Kf $
 
             Не умаляя общности  $V(a) \subseteq V_0(a)$. Т.к. $\sigma < C_0\quad \forall p, q\in V(a)$ в силу  неравенства 3 из леммы $f(p)\neq f(q)$ ($f|_{V(a)}$ -- инъекция.  $\implies  f|_{V(a)}$ -- биекция на  $f(V(a))$, т.е.  $g = f|_{V(a)}$ обратимо и  $4 \impliedby $ правило дифференцирования обратного отображения
         \end{proof}
+        \section{Практика}
+        \begin{theorem}
+            $f(x_1, x_2, \ldots, x_{n} )$  дифференцируема в точке P
+
+
+
+
+            $f$ достигает экстремума в точке  $P \implies  \frac{\partial f}{\partial x_i}(P) = 0$
+        \end{theorem}
+        
+            $d^2 f = \left( \frac{\partial}{\partial x_1}dx_1 + \ldots + \frac{\partial}{\partial x_n}dx_{n}  \right)^2 f $
+
+            $H(f)= \begin{pmatrix} 
+                \frac{\partial^2}{\partial x_1^2} & \frac{\partial^2}{\partial x_1\partial x_2} & \ldots\\ \ddots & \ddots & \ddots\\
+            \end{pmatrix} $
+        \begin{theorem}
+            Если $H(f)$ положительно определена в точке $P$, то $P$ -- точка минимума. Если она отрицательно определена, то это точка максимума.
+        \end{theorem}
+
+        $d^2f = \frac{\partial^2f}{\partial x_1^2}(dx_1)^2 + \frac{\partial^2 d}{\partial x_1\partial x_2} + \ldots = \lambda_1(dy_1)^2 + \ldots + \lambda_n(dy_{n} )^2$
+
+        $f(dx_1 \ldots dx_{n} ) = f(0) + \underbrace{=0}{\p f(0)dx} + d^2f + o\left(  \right) $ 
+
+        $f(dx_1 \ldots dx_{n} ) - f(0) = d^2f + o\left(  \right) $
+
+        $x^TAx>0 \forall x\neq 0 \overbrace{def}{\iff }$
+
+        $(x_1 \ldots x_{n} )\begin{pmatrix} a_{11} & a_{12} & \ldots a_{1n}\\ a_{21} & a_{22} & \ldots & \ldots\\&&&\\&&& \end{pmatrix} \begin{pmatrix} x_1\\x_2\\ \vdots\\ x_{n}  \end{pmatrix} = \left( x_1 \ldots x_{n}  \right) \begin{pmatrix} \sum a_{1i}x_i\\ \sum a_{2i}x_i\\ \vdots \end{pmatrix} = \sum a_{ji}x_jx_i  $ -- квадратичная форма
+
+        Пусть $Q$ -- квадратичная форма.  $Q = \sum a_{ji}x_jx_i$, где  $a_{ij} = a_{ji} \forall i, j\quad Q = x^TAx$, где $A^T=A$
+
+        Такая матрица $A$ называется  матрицей квадратичной формы $Q$
+
+        $x = Cy\quad Q = \left( Cy \right) ^TACy = y^T\underbrace{B}{\left( C^TAC \right)} y = \lambda_1y_1^2 + \ldots + \lambda_ny_{n} ^2\quad B = \begin{pmatrix} \lambda_1 & 0 & \ldots & 0\\ 0 & \lambda_2 & 0 & 0\\&&&\\&&& \end{pmatrix} $
+
+        \begin{statement}
+            Симметричная матрица подобна диагональной матрице.
+        \end{statement}
+        \begin{proof}
+            $A = A^T$
+
+             \begin{example}
+                 $\begin{pmatrix} \cos \varphi & \sin \varphi\\-\sin \varphi&\cos \varphi \end{pmatrix}  = \begin{pmatrix} 0&1&-1&0 \end{pmatrix} $
+            \end{example}
+
+            \begin{enumerate}
+                \item Докажем, что существует собственный вектор.
+
+                    Пусть $Q = x^TAx = \sum_{ij}a_{ij}x_ix_j$
+
+                    Рассмотрим  $Q$ на сфере  $x_1^2+ \ldots +x_{n} ^2 - 1 =0$
+
+                    $Q$ диффрецнируема на сфере $\implies $ достигает максимума в точке $(v_1, \ldots, v_n)$ 
+
+                     $Q$, максимум с ограничением  $F = 0$, то  $\sphericalangle \mathcal L:=Q - \lambda F$
+
+                     У $\mathcal L$ частные производные равны 0 в максимуме
+
+                     $\frac{\partial}{\partial x_1}Q = \frac{\partial}{\partial x_i}\left( \sum_j a_{ij}x_ix_j + \sum_{k\neq i} a_{kj}x_kx_j \right) = \sum_j a{ij}x_j + \sum_j a_{ji}x_j = 1\sum a_{ij}x_j $ 
+
+                     $\frac{\partial F}{\partial x_i} = 2x_i\quad \frac{\partial}{\partial x_i}\mathcal L = 2\sum_ja_{ij}x_j - \lambda 2xi = 0 \forall i$ для $x_j=v_j$
+
+                      $Av = \lambda v \implies v$ -- вещественный собственный вектор
+
+                      Так мы для симметричной матрицы нашли вещественный собственный вектор
+                  \item Достроим наш вектор $v$ до базиса  $(v, e_2, e_3, \ldots, e_n)$
+
+                      Запишем $A$ в этом базисе:  $\begin{pmatrix} \lambda& 0& \ldots & 0\\0&&&\\ \vdots&&&\\0\end{pmatrix} $. Дальше делаем по индукции
+
+                      Следовательно существует базис из собственных векторов, где на диагонали стоят собственные числа
+            \end{enumerate}
+            Итого, любую квадратичную форму $Q$ можно заменой переменных свести к каноническому виду  $Q = \sum_i \lambda_iy_i^2$
+        \end{proof}
+
+        \section{Лекция}
+
+        Макаров, Подкорытов: Гладкие отображения и функции
+
+        \begin{theorem}
+            [Об открытом отображении]
+
+            $\sqsupset O\subseteq \R^n$ -- открыток, $f\in C^1(O\to \R^n), \quad \forall a\in O\ d_af$ обратим. Тогда $f(O)$ -- открыто.
+        \end{theorem}
+        \begin{example}
+            $x = \left( x_1, \ldots, x_n \right) \quad f(x) = x_1$ -- необратимое, схлопывает шар и там нет открытости
+        \end{example}
+        \begin{proof}
+            $\sqsupset \sigma:$ в лемме: $C_3>0, \sigma = \frac{1}{2} \frac{1}{\|\left( d_af \right) ^{-1}\|}$ 
+
+            $\delta$ -- это половины от  ``$\delta$ из леммы''
+
+            \[\|f(p)-f(q)\| \geqslant C_3\|p-q\|\quad \forall p, q\in B_{\delta}[a]\]
+
+            $r = \frac{1}{2} C_3\cdot \delta\quad ?:B_r(b)\subset f(O) \iff \forall y\in B_r(b) \exists x\in O: f(x) = y$ 
+
+            $\sphericalangle \varphi(x) = \|f(x) - y\|\in C*(O\to \R$
+
+            $\varphi(a) = \|f(a) - y\| = \|b-y\|\leqslant r$
+
+
+            Если $\|x-a\| = \delta$, то $\varphi(x) = \|f(x) - b\| = \|f(x) - f(a) + f(a) - y\|\geqslant \underbrace{\|f(x) - f(a)\|}_{\geqslant C_3\|x-a\| = 2r} - \underbrace{\|f(a) - y\|}_{<r} > 2r-r = r$
+
+            По теореме Вейерштрасса $\varphi(x)$ достигает на  $B_{\delta}[a]$ своего минимума
+
+            Из оценки  $\varphi(x)$ следует, что  $\min\limits{B_{\delta}[a]}\varphi$ Достигается внутри шара
+
+            $\psi(x) = \varphi^2(x) = \|f(x) - y\|^2$. У функции $\psi(x)$ экстремумы в тех же точках, что и у  $\varphi(x)$
+
+            Необходимое условие экстремума $\exists x_*\in B_{\delta}(a):\quad f_{x_*}\psi = \mathbb O$
+
+            $\varphi(x) = \left<f(x) - y, f(x) - y \right>$
+
+            $d\psi_{x_*} = 2\left<\underbrace{d(f\left( x \right) -y)}_{d_{x_*}f}, f(x) - y \right>$
+
+            Т.к. $df$ обратим в  $B_{\delta}(a) \implies f(x_*)-y=0 \implies f(x_*) = y_0$
+
+        \end{proof}
+
+        \begin{theorem}
+           [теорема об обратном отображении]
+
+           $\sqsupset $ открытое $O\subseteq \R^n\quad f\in C^1(O\to \R^n), a\in O, d_af$ обратим
+
+           Тогда существует окретстность $V(a):$
+            \begin{enumerate}
+                \item [I] $\forall x\in V(a)\quad d_xf$ обратим
+                \item [II] $f_{V(a)}$ -- инъекуий (т.е. обратимо как отображение из  $V(a)$ в  $f(V(a))$
+                \item [III]  $f(V(a))$ -- открыто
+                \item [IV]  $\left( f_{V(a)} \right)^{-1}\in C^1\left( f(V(a))\to \R^n \right)  $ 
+
+                    $ \left( f|_{V(a)} \right)^{\prime}(f(a)) = (\p f)(a) $ (или $d\left( f_{V(a)} \right) ^{-1} = \left( d_af \right) ^{-1}$ 
+           \end{enumerate}
+        \end{theorem}
+
+        $\|B-A\|<\varepsilon\quad \|B^{-1} - A^{-1}\|<\varepsilon C(A)$
+
+        $\|(d_af)^{-1} - (d_xf)^{-1}\| <\varepsilon C\cdot \left( d_af \right) \implies \left( d_xf \right) ^{-1}$ непрерывно зависит от $x$
+
+        второе объяснение: элементы матрицы $\left( d_xf \right) ^{-1}$ -- результат арифметических действий над частными производными отображения $f; f\in C^1(O) \implies $ элементы $[\left( d_xf \right) ^{-1}]\in C(0)$
+
+        По аналогичным рассуждения, если в условии теоремы $f\in C^r\left( O \to \R \right) $, то локально обратное также из $C^r$
+
+
+
+        \begin{definition}
+            $\sqsupset r\in Z_+\quad O\subseteq \R^n, O$ -- открытое, $f\in C^r\left( O\to \R^n \right) $
+
+            $f$ Называется диффеоморфизмом класса  $C^r$, если:
+             \begin{enumerate}
+                 \item $f$ -- биекция на  $f(O)$
+                 \item $f(O)$ -- открытое
+                 \item  обратное отображение  $f^{-1}\in C^r\left( f(O) \to O \right) $
+            \end{enumerate}
+        \end{definition}
+
+        \begin{definition}
+            $r, O$ --||--,  $a\in O\quad f$ называется локальным диффеоморфизмом в точке $ a$, если существует такая окрестность $V(a)$, что  $f_{V(a)}$ -- гомеоморфзим
+        \end{definition}
+
+        \begin{example}
+            $y = e^x$ -- диффеоморфизм (глобальный)
+
+             $y = x^2$ -- локальный диффеорморфизм отдельно либо на положительных, либо на отрицательных числах
+
+             $y = \sin x$ -- локальный диффеоморфизм в точках не вида  $\frac{\pi}{2} + \pi k$
+        \end{example}
+
+        \begin{theorem}
+            [Об обратном отображении ``на языке диффеоморфизмов'']
+
+            Открытое $O\subseteq \R^n, f\in C^r\left( O\to \R^n \right) $
+            \begin{enumerate}
+                \item Если $a\in O\quad d_af$ обратим, тогда  $f$ локальный диффеоморфизм в точке  $a$ класса  $C^r$\
+               \item Если $f$ -- инъекция и  $d_axf$ Обратим всюду в  $O$, то  $f$ -- глобальный диффеоморфизм
+            \end{enumerate}
+        \end{theorem}
+
+        \begin{example}
+            $f(x,y) = \begin{pmatrix} e^y\cos x\\ e^y\sin  x \end{pmatrix} $ 
+
+            $\p f = \begin{pmatrix} -\sin x e^y & e^y\cos x\\
+            \cos x e^y & e^y\sin x\end{pmatrix} $
+
+            $\det \p f = e^{2y}(-1)\neq 0$
+
+            $f(0,y) = f(2\pi k)$
+
+            В каждой точке невырожденный дифференциал, но глобальный инъективности нет
+        \end{example}
+
+        \begin{example}
+            [Важные примеры локальных диффеоморфизмов]
+
+            \begin{enumerate}
+                \item Полярные координаты $\phi(r, \varphi) = \left( r\cos \varphi, r\sin \varphi \right) $ 
+
+                    $\phi: [0,+\infty )\times \R \to \R^2$
+
+                    $\p \phi = \begin{pmatrix} \cos \varphi&-r\sin \varphi\\ \sin \varphi & r\cos \varphi \end{pmatrix} $ 
+
+                    $\det \phi = \cos \varphi\cdot r\cos\varphi - \sin \varphi\left( -r\sin\varphi  \right) = r>0$ в $O$, значит  $\phi$ -- локальный ддиффеоморфзм в  $O$ класса  $C^{\infty }$
+
+                    но не глобальный! $\phi(r, \varphi+2\pi k)\equiv \phi(r, \varphi)$
+
+                    $O_1= \left( 0, +\infty  \right) \times \left( -\frac{\pi}{2}, \frac{\pi}{2}  \right) \quad \phi$ -- инъекция d в $O_1 \implies \phi$  глобальный диффеоморфизм в $O_1$
+
+                    $r = \sqrt{x^2+y^2} \quad \varphi = \arctg \frac{y}{x}$
+                \item Цилиндрические координаты.
+
+                    $x = r\cos \varphi\quad y = r\sin\varphi\quad z = t$
+
+                    $\p \phi  = \begin{pmatrix} \p x_r & \p x_{\varphi} & \p x_t\\&\nabla y&\\&\nabla z \end{pmatrix}  = \begin{pmatrix} \cos \varphi&-r\sin \varphi&0\\ \sin \varphi & r\cos \varphi &0\\0&0&1 \end{pmatrix}  = r$
+
+                    Таким образом $\phi$ -- локальный диффеорморфизм в области $\left( 0, +\infty  \right) \times \R\times \R$
+
+                    глобальный диффеоморфизм в областях $(0, +\infty ) \times \left( -\pi , \pi  \right) \times x\R$ И $\left( 0, +\infty  \right) \times \left( 0, 2\pi  \right) \times \R$
+
+                    $x^2+y^2=R\quad r=|R|$
+
+                     $x^2+y^2=z^2C \leftrightarrow r^2 = Ct^2\quad \pm r = \tl C = t$
+                \item Сферические координаты
+
+                    меряем широту и долготу. $\begin{cases}
+                        x=r\cos \varphi\cos \psi\\
+                        y=r\sin \varphi \cos \psi\\
+                        z=r\sin \psi\\
+                    \end{cases}$ 
+
+                    $(r, \varphi, \psi) \to \left( x,y, z \right) \quad C^{\infty }:\R^3 \to  \R_3$
+
+                    $\left| \psi \right| = \begin{pmatrix} \cos \varphi\cos \psi&-r\sin \varphi\cos \psi&-r\cos \varphi\sin \psi\\ \sin \varphi\cos \psi & r\cos \varphi\cos \psi & -r\sin \varphi\sin \psi\\ \sin \psi & 0 & r\cos \psi \end{pmatrix}  = r^2\cos \psi\left( \sin ^2\psi \begin{pmatrix} -\sin \varphi & -\cos \varphi\\cos\varphi&-\sin \varphi \end{pmatrix}  + \cos ^2\psi \begin{pmatrix} \cos \varphi & -\sin \varphi\\ \sin \varphi&\cos \varphi \end{pmatrix}  \right)  = r^2\cos \psi $
+
+                    $\phi$ локальный диффеоморфизм в  $\left( 0, +\infty  \right) \times \R\times \left( -\frac{\pi}{2}, \frac{\pi}{2}   \right) $ 
+
+                    глобальный в $\left( 0, +\infty \right) \times \left( -\pi , \pi  \right) \times \left( -\frac{\pi}{2}, \frac{\pi}{2}   \right)  $ 
+
+                    $x^2+y^2+z^2=R^2 \leftrightarrow r=R$
+
+                    \begin{problem}
+                        Записать уравнение сферы $(x-a)^2 + (y-b)^2 + (z-c)^2 = R$ в сферических координатах
+
+                        $x^2+y^2 = Cz^2$ тоже.
+                    \end{problem}
+                    \begin{problem}
+                        В области $x>0, y>0$  $u = \frac{y}{x}\quad v = xy$
+
+                        $\psi:(x, y) \to (u, v)$
+
+                        Вопросы:
+                        \begin{enumerate}
+                            \item $\psi(O) = ?$
+                            \item явялется ли  $\psi$ диффеоморфизмом или локальным диффеоморфизмом 
+                            \item Выписать явно функции для обратного к $\psi$ или локально обратного
+                        \end{enumerate}
+                    \end{problem}
+            \end{enumerate}
+        \end{example}
+
+        \section{Теорема о неявном отображении}
+
+        Если у нас есть явное выражение $x = g(y)$, то можно явно исследовать функцию от одной переменной $f_E = f\left( h(y), y \right) $
+
+         \begin{definition}
+             Говорят, что уравнение $f(x,y) = 0$ неявно задаёт функцию  $y = g(x)$ или  $x = h(y)$, если условия  $F(x,y) = 0$ и  $\begin{cases}
+                 x\in D(g)\\
+                 y = g(x)\\
+             \end{cases}$ равносильны.
+         \end{definition}
+
+         \begin{definition}
+             $F:E\to \R\quad D\subseteq E$
+
+             $F$ задаёт  $y = g(x)$ или  $x = h(y)$ в $D$, если \[\begin{cases}
+                 F(x,y) = 0\\(x,y)\in D
+             \end{cases} \iff \begin{cases}
+             x\in D(g)\\
+             y = g(x)\\
+             \end{cases}\]
+         \end{definition}
+
+         $\begin{cases}
+             F_1\left( x_1, \ldots, x_{k} ,y_1, \ldots, y_m  \right)  = 0\\
+             \vdots\\
+             F_m\left( x_1, \ldots, x_k, y_1, \ldots, y_m \right)  = 0
+         \end{cases} \iff  F(x,y) = 0\quad \begin{cases}
+         x = \left( x_1, \ldots, x_k \right) \\
+         y = (y_1, \ldots, y_m)\\
+         F - \left( F_1, \ldots, F_m \right) 
+         
+         \end{cases}$
+
+         ``$y = g(x)$''  $\quad \begin{cases}
+             y_1 = g_1\left( x_1, \ldots, x_k \right) \\
+             \vdots\\
+             y_m = g_m\left( x_1, \ldots, x_k \right) 
+         \end{cases}$
+
+        \begin{theorem}
+            [Теорема о неявном отображении]
+            $\sqsupset O$ -- открытое в $\R^{k+m}, F\in C^1\left( O \to  \R^k \right) $
+
+            $(a, b)\in O\quad \left( a = \left( a_1, \ldots, a_k \right) , b = \left( b_1, \ldots, b_k \right)  \right) $ и 
+            \begin{enumerate}
+                \item $F(a,b) = 0$ 
+                \item $\det \p F_y\left( a,b \right) \neq 0$ \[\p F_y = \begin{pmatrix} \frac{\partial F_1}{\partial y_1} &\ldots& \frac{\partial F_1}{\partial y_m}\\ \ldots&\ldots&\ldots\\ \frac{\partial F_m}{\partial y_1}& \ldots& \frac{\partial F_m}{\partial } \end{pmatrix} \]
+
+                    Тогда:
+                    \begin{enumerate}
+                        \item [I] Существует открытое множество $U\times V$ в $\R^{k+m}$, где $U$ -- окрестность  $a$, а $V$ -- окрестность $b$: в  $U\times V$ уравнение $F(x,y) = 0$ неявно задаёт единственную функцию  $y = g\left( x \right) $
+                        \item [II] $g$ дифференцируема в точке  $a$
+                        \item [III]  $\p g(x) = -\left( \p F_{y}(a,b) \right) ^{-1} \cdot  \p F_x(a,b)$
+                    \end{enumerate}
+            \end{enumerate}
+        \end{theorem}
+
+
+
+
+
+
+
+
+
 
 \end{document}
