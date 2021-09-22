@@ -375,4 +375,144 @@ $A \implies B \iff  \neg B \implies \neg A $ -- кососимметричнос
     Берём левую вершину. Все следствия из неё выполняются. Из неё рёбра только выходят. В ней значение False, значит все седствия выполняются. Рассмотрим симметричную к ней, она возможно где-то в середине. В неё только входят рёбра, у неё всё хорошо. Убираем их их по индукции всё хорошо.
 \end{proof}
 
+\section{Двусвязность}
+
+Рёберно-двуязный -- два пути не пересекающихся по рёбрам
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{лфлщштшигвкфзр}
+    \caption{лфлщштшигвкфзр}
+    \label{fig:лфлщштшигвкфзр}
+\end{figure}
+
+\begin{statement}
+    dfs обязательно пройдёт по всем мостам.
+\end{statement}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{sadfs}
+    \caption{sadfs}
+    \label{fig:sadfs}
+\end{figure}
+
+Если в поддереве вершины есть рёбро выше неё, то ребро с ней уже не мост.
+
+\begin{lstlisting}
+    dfs(v, p):
+        t_in[v] = T++
+        up[v] = t_in[v]
+        mark[v] = True
+        buf.push(v)
+        for u in out[v]:
+            if u = p:
+                continue
+            if !mark[u]:
+                dfs(u,v)
+                up[v] = min(up[v], up[u])
+            else:
+                up[v] = min(up[v], t_in[u])
+        if up[v] == t_in[v]:
+            while True:
+                x = buf.pop()
+                comp.add(x)
+                if x == v:
+                    break
+\end{lstlisting}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{лфкештлгрщсргтфкшыщмфе}
+    \caption{лфкештлгрщсргтфкшыщмфе}
+    \label{fig:лфкештлгрщсргтфкшыщмфе}
+\end{figure}
+
+\begin{statement}
+    $\forall u\in child[v]:\quad up[u] < t_{in}[v] \implies v$ -- не точка сочления
+
+    верно для всех вершин, кроме корня
+\end{statement}
+
+\begin{lstlisting}
+    dfs(v, p):
+        t_in[v] = T++
+        up[v] = t_in[v]
+        mark[v] = True
+        ok = False
+        c = 0
+        for u in out[v]:
+            if u = p:
+                continue
+            if !mark[u]:
+                dfs(u,v)
+                c++
+                up[v] = min(up[v], up[u])
+                if up[u] >= t_in[v]:
+                    ok = True
+            else:
+                up[v] = min(up[v], t_in[u])
+
+        if ok || p = None && c > 1:
+            v - точка сочленения
+\end{lstlisting}
+
+\begin{lstlisting}
+    dfs(v, p):
+        t_in[v] = T++
+        up[v] = t_in[v]
+        mark[u] = True
+        ok = False
+        for u in out[v]:
+            if u = p:
+                continue
+            if !mark[u]:
+                buf.push(vu)
+                dfs(u,v)
+                up[v] = min(up[v], up[u])
+                if up[u] >= t_in[v]
+                    while True:
+                        e = buf.pop()
+                        comp.add(e)
+                        if r = (vu):
+                            break
+            else:
+                up[v] = min(up[v], t_in[u])
+                if t_in[u] < t_in[v]:
+                    buf.push(vu)
+\end{lstlisting}
+
+\begin{problem}
+    Хотим найти эйлеров цикл.
+
+    Идём пока идём. Если не идётся, добавляем последнее ребро в циклс и смотрим идётся ли из предыдущей вершины... степени чётные, утыкаемся туда, откуда начали...
+
+    для ориентированного графа то же самое, та же логика..
+\end{problem} 
+
+\begin{lstlisting}
+    dfs(v):
+        vu -- любое непомеченное ребро из v
+        if vu = None:
+            return
+         пометить vu
+         dfs(u)
+         ans.add(vu)
+\end{lstlisting}
+
+Структура данных: умеет проверять пустая ли и брать любой элемент .. любая структура данных.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}
