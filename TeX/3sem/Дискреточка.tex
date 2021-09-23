@@ -480,4 +480,174 @@ $a, b\quad b, c$ вершинно двусвязны, но  $a, c$ явно не
     Рассмотрим матрицу инцидентности $A:\mathbb B^m \to \mathbb B^n$
 
     $\Ker A = \left\{ C|C\subset E, C \text{ -- дизъюнктное объединение циклов} \right\} $
+
+
+    \section{Эйлеровы и Гамильтоновы графы}
+
+    \begin{definition}
+        Цикл (путь) называется эйлеровым, если он проходит по каждому ребру в графе ровно один раз
+
+    \end{definition}
+
+    \begin{theorem}
+        Неориентированный граф содержит Эйлеров цикл тогда и только тогда, когда все вершины имеют чётную степень, граф связен (кроме конпонент связности из одной вершины -- пней) и есть хотя бы одно ребро.
+    \end{theorem}
+    \begin{proof}
+       \begin{statement}
+           $G$ -- граф, что все степени вершин чётные и любая компонента связности содержит больше одно ребра, тогда любая компонента содержит эйлеров цикл
+       \end{statement} 
+       \begin{proof}
+           Если рёбер 0, то все компоненты связности содержат эйлеров цикл (все ноль компонент связности)
+
+           Пусть рёбра есть. Возьмём одно ребро. т.к. степень чётная, то мы можем идти в одну из сторон. В какой-то момент из-за чётности мы успрёмся в вершину, в которй уже были, так мы найдём цикл, удалим его из графа и рассмотрим компоненты связности. По нидукционному предположению во всех них есть эйлеров цикл. Дальше обойдём цикл и когда попадаем в новую компоненту, выписываем подряд его цикл и идём дальше.
+       \end{proof}
+    \end{proof}
+       \begin{note}
+           Разрешим кратные рёбра и петли. Утверждение всё ещё верно. Если есть вершина степени хотя бы 2, возьмём два соседних с ней ребра, удалим их и совместим (если есть, то добавим ещё одно ребро) соответствующие вершины. Тогда по индукции в образовавшихся компонентах есть эйлеровы циклы и дальше мы заменяем ребро обратно на 2 ребра. Возможно при этом нужно будет включить эйлоров цикл компоненты связности, в которой находилась выбранная вершина
+       \end{note}
+
+       \begin{corollary}
+           Неориентированный граф содержит Эйлеров путь тогда и только тогда, когда все уго компоненты связности, кроме $\leqslant 1$ содержат хотя бы одну вершину и степени всех вершин чётны, кроме $\leqslant 2$
+       \end{corollary}
+
+       \begin{theorem}
+           В ориентированном графе существует Эйлеров цикл тогда и только тогда, когда $\forall u:\quad \deg^+ u = \deg^-u$
+       \end{theorem}
+
+       \begin{definition}
+           Гамильтонов цикл (путь) -- проходит по любой вершине ровно один раз
+       \end{definition}
+       
+       Поиск и проверка существования -- NP-полные задачи.
+
+       Критерии: связность, нет висячих рёбер, нет точек сочленения
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{gamil}
+    \caption{gamil}
+    \label{fig:gamil}
+\end{figure}
+
+\begin{statement}
+    В полном графе $(K_n, n\geqslant 3)$ есть гамильтонов цикл
+
+    Если степень любой вершины $\geqslant \frac{n}{2}$, то тоже (теорема Дирака)
+\end{statement}
+
+\begin{theorem}
+    [Критерий Хватала]
+
+    $[d](*) \implies \forall G[d]\quad\exists $ гамильтонов цикл
+
+    $\neg [d](*) \implies \exists G[d]: \nexists$ гамильтонова цикла
+
+    \hrule
+
+    Пусть $G$ содержит  $\geqslant 3$ вершин, степени вершин $d_1 \leqslant  d_2 \leqslant  \ldots \leqslant  d_n$.
+
+    И выполнено *: $d_k \leqslant k<\frac{n}{2} \implies d_{n-k}\geqslant n-k$ 
+
+    Тогда $G$ гамильтонов 
+
+    (Хватал $\implies $ Дирак)
+\end{theorem} 
+\begin{proof}
+    Пусть $G$ -- контпример к теореме Хватова. Среди всех контрпримеров возьмём минимальный по количеству вершин, в среди них возьмём тот, у которого максимальное число рёбер.
+
+     $G \neq  K_n$
+
+     \begin{lemma}
+         Если граф удовлетворяет * и $uv \not\in EG \implies G\cup uv$ удовлетворяет *
+         
+        Импликации могут только стать ``лучше'', истинность не поменяется
+     \end{lemma}
+     \begin{figure}[!ht]
+        \centering
+        \incfig{lem1}
+        \caption{lem1}
+        \label{fig:lem1}
+    \end{figure}
+     \begin{lemma}
+         $\sphericalangle uv\not\in EG]quad G\cup uv$ содержит гамильтонов цикл
+
+         (т.к. $G$ контрпример с максимальным числом рёбер,  $G\cup uv$ удовлетворяет * по предыдущей емме)
+     \end{lemma}
+     $\sphericalangle uv\not\in EG: \deg u + \deg v \to \max$. НУО $\deg u \leqslant \deg v$
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{numer}
+    \caption{numer}
+    \label{fig:numer}
+\end{figure}
+
+$S = \left\{ i| uu_{i+1}\in G  \right\} \subset \left\{ 1, 2, \ldots, n-1 \right\} $
+
+$T= {i| u_jv\in G} \subseteq \left\{ 1, 2, \ldots, n-1 \right\} $
+
+\begin{lemma}
+    $S \cap T = \O $ 
+
+\end{lemma}
+\begin{figure}[!ht]
+    \centering
+    \incfig{st}
+    \caption{st}
+    \label{fig:st}
+\end{figure}
+\begin{corollary}
+    $|S| = \deg u\quad |T| = \deg v \implies \deg u + \deg v \leqslant n-1$
+\end{corollary}
+     
+\begin{corollary}
+    $\deg u < \frac{n}{2}$
+\end{corollary}
+
+Вершины: $1, 2, 3, \ldots, k, \ldots,  p (\text{верш. }u), \ldots, n$
+
+$\sphericalangle i: i\in S\quad uu_{i+1}\in E$
+\begin{lemma}
+$\forall i\in S\quad \deg u_i \leqslant  \deg u< \frac{n}{2}$
+\end{lemma}
+\begin{proof}
+    $i\in S \implies i\not\in T \implies u_iv\not\in E\implies \deg u_i+\deg v\leqslant \deg u + \deg v$. 
+
+    $p\geqslant \deg u = d_p$
+    
+    $k = \deg u, k\leqslant p \implies d_k\leqslant d_p = \deg u = k < \frac{n}{2}$
+
+    По ($\ast$) $d_{n-k} \geqslant  n-k >  \frac{n}{2}$ 
+
+    \begin{lemma}
+        $\exists  \geqslant k+1$ вершин степени $ \geqslant  n-k$
+    \end{lemma}
+    \begin{corollary}
+        $\exists w: \deg w\geqslant n-k, w$ -- не сосед $u\quad uw\not\in E\quad \deg u + \deg w \geqslant  k+n-k=n > n-1 \geqslant  \deg u + \deg v$
+    \end{corollary}
+
+    $\left( \ast \right) \quad d_k\leqslant k<\frac{n}{2} \implies d_{n-k}>n-k$
+\end{proof}
+\end{proof}
+
+\begin{theorem}
+    [Оре]
+
+    $\forall uv\not\in E\quad\deg u + \deg v \geqslant n$, то $G$ содержит гамильтонов цикл
+\end{theorem}
+
+\begin{definition}
+    Ориентированный граф называется турниром, если между любой парой вершин существует ровно одно ребро (в одну из сторон)
+\end{definition}
+\begin{theorem}
+    [Редеи, Камеон]
+
+    $\forall $ турнир содержит гамильтонов путь
+
+    Любой сильно связный ткрнир содержит гамильтонов цикл
+\end{theorem}
+
+
+
+
 \end{document}

@@ -532,8 +532,201 @@ $y = 0, x\in \R$ -- особое решение. Имеются составны
 
         $P\in C(a, b)\quad Q\in C(c, d)$
 
-        $(x_0, y_0)$ -- не особая точка уравнения (т.е.  $P(x_0)\neq 0, Q(y_0)\neq 0) \implies $ уравнение \[\int_{x_0}^xP(t)dt + \int_{y_0}^yQ(t)dt = 0\]
+        $(x_0, y_0)$ -- не особая точка уравнения (т.е.  $P(x_0)\neq 0, Q(y_0)\neq 0) \implies $ уравнение \[\int_{x_0}^xP(t)dt + \int_{y_0}^yQ(t)dt = 0\])
 
         определяет единственное решение в некоторой окрестности точки $x_0$
     \end{theorem}
+    
+    \section{Некоторые типы уравнений, интегрируемых в квадратурах}
+
+    решение уравнения -- конечное число арифметических действий, суперпозиции и взятия интегралов от обеих частей
+
+    \subsection{Линейные уравнения}
+
+    \begin{definition}
+        $\p y = p(x)y + q(x)$ -- линейное уравнения (ЛУ)
+
+        $\p y = p(x)y$ -- однородное линейное уравнения (ЛОУ)
+    \end{definition}
+    \begin{lemma}
+        [Общее решение линейного однороднго уравнения]
+
+        $\sqsupset p\in C(a,b) \implies y = Ce^{\int p}, C\in \R, x\in (a,b)$ -- Общая запись решения ЛОУ
+    \end{lemma}
+    \begin{proof}
+        $dy = p(x)ydx$
+
+        $y=0$ -- решение
+
+        $\int \frac{dy}{y} = \int p(x)dx + C$
+
+        $\ln |u| = \int p + C$
+
+        При $y>0\quad y = Ae^{\int p}, A >0$
+
+        При $y<0\quad y = Ae^{\int p}, A <0$
+
+        $y = 0$ не особое по теореме об единственности из прошлой секции.
+    \end{proof}
+
+    \begin{theorem}
+        [Общее решение линейного уравнения]
+
+        $\sqsupset p, q\in C(a,b)$
+
+        $\implies y = \left( C + \int q e^{-\int p} \right) e^{\int p}\quad C\in \R\quad x\in (a,b) $
+    \end{theorem}
+    \begin{proof}
+        Подстановкой убеждаемся, что  все эти функции -- решения.
+
+        Пусть есть ещё решения $\varphi$ -- решение ЛУ на  $\left( \alpha, \beta \right) $, и оно не задаётся формулой из условия теоремы.
+
+        Возьмём любую точку, через которую проходит это решение, $(x_0, \varphi(x_0))$. Подставим в общую формулу эту точку, то выразим $C$
+
+        $y_0 = (C + E(x_0))F(x_0)\quad C = \frac{y_0}{F(x_0)} - E(x_0)$
+
+        По теореме об единственности новое решение совпадает с решение с константой $C$ везде, где оба определены --  на $(\alpha, \beta)$, а тогда  $\varphi$ задаётся формулой, противоречие
+    \end{proof}
+
+    \subsection{Метод вариации постоянной или Метод Лагранжа}
+
+    \begin{enumerate}
+        \item вместо ЛУ решаем соответствующее ЛОУ
+
+            $y\p y = p(x)y\quad t = Ce^{\int p}$
+
+        \item заменяе  $C$ на  $C(x)$ и подставляем $y = C(x)e^{\int p}$ в исходное ЛУ уравнение
+            
+            \begin{gather*}
+                \left( Ce^{\int p} \right) ^{\prime} = pCe^{\int p} + q\\
+                \p C e^{\int p} + Ce^{\int p}\cdot p = pCe^{\int p} + q\\
+                \p C = qe^{-\int p}
+           \end{gather*}                    
+       \item находим $C = \int qe^{-\int p} + C_1$
+       \item Подставляем $C(x)$ вместо  $C$  в решение (ЛОУ)
+
+           $y = \left( C_1 + \int q e^{-\int p} \right)e^{\int p} $
+    \end{enumerate}
+
+    \subsection{Уравнение Бернулли}
+
+    \begin{definition}
+        $\p y = p(x)y + q(x)y^{\alpha}\quad \alpha\not\in \left\{ 0,1 \right\} $
+    \end{definition}
+
+    Замена на $z = y^{1-\alpha}$ сводит его к ЛУ
+
+     \begin{gather*}
+         \frac{\p y}{y^{\alpha}} = p(x)y^{1-\alpha} + q(x)\\
+         \p z = (1-\alpha) \frac{\p y}{y^{\alpha}}\\
+         \p z = (1-\alpha)p(x)z + (1-\alpha)q\left( x \right) \\
+         f(x,y) = py + qy^{\alpha}\\
+         \p f_y = p + q y^{\alpha-1}\\
+    \end{gather*}
+    $\alpha \geqslant 1 \implies $ непрерывна, следовательно по теореме об единственности $y = 0$ -- не особое
+
+    \subsection{Уравнение Риккати}
+    \begin{definition}
+        $\p y = p(x)y^2 + q(x)y + r(x)$ -- квадратичная функция от $y$
+    \end{definition}
+    \begin{statement}
+        [Лиувилль] Уравнение \[\p y = y^2+x^{\alpha}\]
+        интегрируется в квадратурах $\iff \frac{\alpha}{2\alpha + 4}\in \Z $ или $\alpha = -2$
+    \end{statement}
+
+    Если известно решение $\varphi$, то подставновка  $y = z + \varphi$ сводится к уравнению Бернулли
+
+    \subsection{Уравнение в полных дифференциалах}
+
+    \begin{definition}
+        \[P(x,y)dx + Q(x,y)dy = 0\]
+
+        Если $\exists u: \p u_x = P\quad \p u_y = Q$
+    \end{definition}
+    \begin{theorem}
+        [Общее решение УПД]
+
+        $P, Q\in C(G)\quad G\subseteq \R^2$ -- область, $\p u_x = P, \p u_y = Q$
+
+        $y = \varphi(x)$ -- решение УПД  на $(a, b) \iff $ 
+        \begin{enumerate}
+            \item $\varphi\in C^1(a,b)$ 
+            \item $\exists C: \quad U(x, \varphi(x)) \equiv C$ на $(a,b)$ (т.е.  $\varphi$ неявно задано уравнением  $u(x,y) = C$)
+        \end{enumerate}
+    \end{theorem}
+    \begin{proof}
+        \begin{itemize}
+            \item []
+            \item [$\implies $]
+                \begin{enumerate}
+                    \item Выполняется по определению решения
+                    \item Имеем $P(x,\varphi(x)) + Q(x, \varphi(x))\p \varphi(x)\equiv 0$
+
+                        $P(x,\varphi(x)) + Q(x, \varphi(x))\p \varphi(x) = \left( u\left( x, \varphi(x) \right)  \right) ^{\prime} = 0 \implies u(x, \varphi\left( x \right) ) = C$
+
+                \end{enumerate}
+            \item[$\impliedby $] Имеем $u(x, \varphi(x)) \equiv C$, дифференцируем:
+                 \begin{gather*}
+                     \p u_x(x, \varphi(x)) + \p u_y(x, \varphi(x))\p \varphi(x) \equiv 0\\
+                     P(x, \varphi(x)) + Q(x, \varphi(x))\p \varphi(x) \equiv 0
+                \end{gather*}
+        \end{itemize}
+    \end{proof}
+
+    Предположим $u\in C^2(G)\quad \p u_x = P\quad \p u_y = Q\quad \p P_y = \p u_{xy} = \p u_{yx} =\p Q_x $
+    \begin{statement}
+    Условие $\p P_y = \p Q_x$  -- достаточное для того, чтобы уравнение было УПД, если $G$ -- односвязная область
+    \end{statement}
+
+    \begin{definition}
+        Область односвязна, если любая замкнутая кривая стягивается в точку (гомотопна точке)
+    \end{definition}
+
+    \begin{definition}
+        Функция $u:\quad \p u_x = P, \p u_y = Q$ называется потенциалом уравнения в полных дифференциальных (= потенциал поля  $(P,Q)$)
+    \end{definition}
+
+    Потенциал УПД находится по формуле:
+
+    $u(x,y) = C + \int_{\gamma}P(x,y)dx + Q(x,y)dy$
+
+    Если кривая  $\gamma \begin{cases}
+        x = x(t)\\
+        y = y(t)\\
+        t\in [\alpha,\beta]\\
+\end{cases} \implies  \int_{\gamma}P(x,y)dx + Q(x,y)dy = \int_{\alpha}^{\beta}\left( P( x(t), y(t))\p x(t) + Q(x(t), y(t))\p y(t)  \right) dt $
+
+\subsection{Интегрирующий множитель}
+
+\begin{definition}
+    $\sqsupset \mu(x,y)\neq 0\quad \forall x, y$ и \[\mu Pdx + \mu Qdy = 0\] -- УПД $\implies \mu$ -- интегральный множитель уравнения $Pdx + Qdy = 0$
+\end{definition}
+
+\begin{statement}
+    [Необходимое условие]
+
+    (если $\mu\in C^1(G))$ \[\left( \mu P \right)^{\prime}_y = \left( \mu Q \right) _x^{\prime} \]
+\end{statement}
+
+\begin{example}
+     \begin{gather*}
+         \p y = p(x)y + q(x) = 0\\
+         \left( p(x)y + q(x) \right) dx - dy = 0\\
+         \begin{matrix}
+             \p P_y = p(x)& \p Q_x = 0
+         \end{matrix}
+    \end{gather*}
+    Будем искать $\mu$ в виде  $\mu = \mu(x) \implies  0 \cdot  P + \mu P = \p \mu (-1) + 0 \implies \p \mu = -\mu p$
+
+    $\mu = Ce^{-\int p}$, пусть $C = 1\quad\mu = e^{-\int p}$
+
+    Умножим исходное уравнение на  $\mu = e^{-\int p}$
+     \begin{gather*}
+         \p y e^{-\int p} = pye^{-\int p} + qe^{-\int p}\\
+         \p ye^{-\int p} - pye^{-\int p} = qe^{\int p}\\
+         \left( ye^{-\int p} \right)^{\prime} = qe^{-\int p}\\
+         ye^{-\int p} = \int qe^{-\int p} + C\\
+         y = \left( C + \int qe^{-\int p} \right) e^{\int p}
+    \end{gather*}
+\end{example}
 \end{document}
