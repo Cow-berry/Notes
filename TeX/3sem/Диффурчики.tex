@@ -705,7 +705,7 @@ $y = 0, x\in \R$ -- особое решение. Имеются составны
 \begin{statement}
     [Необходимое условие]
 
-    (если $\mu\in C^1(G))$ \[\left( \mu P \right)^{\prime}_y = \left( \mu Q \right) _x^{\prime} \]
+    (если $\mu\in C^1(G))$ \[\left( \mu P \right)^{\prime}_y = \left( \mu Q \right) _x^{\prime} \])
 \end{statement}
 
 \begin{example}
@@ -728,5 +728,241 @@ $y = 0, x\in \R$ -- особое решение. Имеются составны
          ye^{-\int p} = \int qe^{-\int p} + C\\
          y = \left( C + \int qe^{-\int p} \right) e^{\int p}
     \end{gather*}
+\end{example}
+
+\section{Уравнения неразрешённые относительно производной}
+
+\begin{definition}
+    $F(x,y,\p y) = 0$ -- разрешённые относительно производной
+\end{definition}
+
+\subsection{Уравнения разрешимые относительно производной}
+
+\begin{example}
+    $\left( \p y - f_1(x,y) \right) \left( \p y - f_2(x,y) \right)  = 0$
+
+    Если $\varphi$ -- решение $\p y = f_1(x,y)$ или $\p y = f_2(x,y)$, то $\varphi$ -- решение исходного
+
+    Обратное неверно
+\end{example}
+
+\begin{example}
+    $y^{\prime 2} -4x^2 = 0$
+
+    \begin{align*}
+        \left( \p y - 2x \right) (\p y + 2) &= 0 \\
+        \p y = 2x &\implies y = x^2+C \\
+        \p y = -2x & \implies -x^2+C \\
+    .\end{align*}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{obrnev}
+    \caption{obrnev}
+    \label{fig:obrnev}
+\end{figure}
+
+Есть составные решения, где интегральные уравнения стыкуются в точках $\left( x_0, y_0 \right) \quad \p f_1(x_0,y_0) = f_2(x_0,y_0)$.
+\end{example}
+
+\subsection{Метод введения параметра}
+
+$x = \varphi(t)\quad y = \psi(t)\quad t\in \left( \alpha, \beta \right) $
+
+$\exists \varphi^{-1} \implies $ функция $\psi\circ\varphi^{-1}$ задана параметрически
+
+\subsubsection{Неполные уравнения}
+
+$\sphericalangle F(x,\p y) = 0$ -- уравнения множества на плоскости $\R^2_{x,\p y}$
+
+Пусть $x = \varphi(t)\quad \p y = \psi(t)$ -- гладкая параметризация  $\gamma$  и $\exists \varphi^{-1}$
+
+\begin{statement}
+    $x = \varphi(t), y = \int \psi(t)\p \varphi(t)dt$ -- параметрически заданное решение  $F(x,\p y) = 0$
+\end{statement}
+\begin{proof}
+    $F(x,\p y_x(x)) = F(\varphi(t), \frac{(\int \psi(t)\p \varphi(t)dt + C)^{\prime}}{\p \varphi(t)} = F\left( \varphi(t), \psi(t) \right) \equiv 0$
+\end{proof}
+
+Правило нахождения решений (некоторых) уравнения $F(x, \p y) = 0$:
+ \begin{enumerate}
+     \item Подобрать параметризацию множества $F(x, \p y)$ в  $\R^2_{x,\p y}$ \[x = \varphi(t)\quad \p y = \psi(t)\quad t\in \left( \alpha, \beta \right) \]
+     \item В основном соотношении метода введения параметризации \[dy = \p y_x dx\] сделать подстановки \[dy = \p y_t dt \quad \p y_x = \psi(t)\quad dx = \p x_t dt = \varphi^{-1} dt\]
+         \begin{align*}
+             \implies \p y_t dt &=  \psi(t)\p \varphi(t) dt\\
+             \p y_t &= \psi(t)\p \varphi (t)\\
+             \implies y &= \int \psi(t)\p \varphi(t)dt + C \\
+             x &= \varphi(t) \\
+         .\end{align*}
+        Так мы получили решения, заданное параметрически
+\end{enumerate}         
+
+\begin{example}
+    $e^{\p y_x} + \p y_x = x$
+
+    Пусть  $\p y_x = t$
+
+     $x = e^t + t$
+
+      $\sphericalangle dy = \p y_xdx$, заменим:
+      \begin{gather*}
+          dy = \p t_t dt\\
+          \p t_x = t\\
+          dx = \p x_t dt = (e^t+1)dt\\
+          \implies \p y_t = t\left( e^t +1 \right) \\
+          \implies y = \int t\left( e^t + 1 \right) dt = e^t\left( t-1 \right) +\frac{t^2}{2}+C
+      \end{gather*}
+
+      Ответ: $\begin{cases}
+          x = t + e^t\\
+          y = e^t\left( t-1 \right)  + \frac{t^2}{2}+C
+      \end{cases}$
+\end{example}
+            
+$\sphericalangle F(y,\p y) = 0$
+
+Сделать подстановки 
+\begin{align*}
+    dy &= \p ydt = \p \varphi dt \\
+    \p y_x &=  \psi(t)\\
+    dx &=  \p x_t dt\\
+    \implies \p \varphi(t) dt = \psi(t)\p x_{t} dt\\
+    \p\varphi(t) = \psi(t)\p x_t\\
+    \p x_t = \frac{\p \varphi(t)}{\psi(t)}\\
+    x = \int \frac{\p \varphi(t)}{\psi(t)}dt + C\\
+    \implies \begin{cases}
+        x = \int \frac{\p \varphi}{\psi} + C\\
+        y = \varphi\\
+    \end{cases}
+.\end{align*}
+-- решение заданное параметрически
+
+\subsection{Полное уравнение}
+
+$F(x,y,\p y) = 0$ --уравнение множества $\sigma$ в пространстве  $\R^3_{x, y, \p y}$.
+
+Пусть $\begin{cases}
+    x = \varphi(u,v)\\
+    y = \psi(u,v)\\
+    \p y = \chi(u,v)\\
+\end{cases}$ -- гладкая параметризация $\sigma$
+
+Правило нахождения решений (некоторых) полного уравнения:
+\begin{enumerate}
+    \item Подобрать параметризацию множества $F(x,y,\p y) = 0$ в  $\R^3_{x, y, \p y}$
+    \item В основном соотношении $dy = \p y_x dx$ поставить $\begin{cases}
+            dy = \p y_u du + \p y_v dv = \p \psi_u du + \p \psi_v dv\\
+            \p y_x = \chi(u,v)\\
+            dx = \p x_u du + \p x_v dv = \p \varphi_u du + \p\varphi_v dv
+    \end{cases}$ 
+    (Цель -- получить уравнение, содержащее только $u,v $)
+    \[\p \psi_u du  + \p \psi_v dv = \chi\cdot \left( \p \varphi_u du + \p \varphi_v dv \right) \]
+\item Если $v = g(u,C)$ -- решение  уравнения сверху, то $\begin{cases}
+        x = \varphi(u, g(u, C))\\
+        y = \psi(u, g(u,C))\\
+\end{cases}$ -- решение исходного уравнения, заданное параметрически
+
+\end{enumerate}
+
+\begin{example}
+    $x\p y - y = \frac{\p y}{2}\ln \frac{\p y}{2}$
+\end{example}
+\begin{proof}
+    Пусть $\begin{cases}
+        x = u\\
+        \p y = v\\
+        y = uv - \frac{v}{2}\ln \frac{v}{2}
+    \end{cases}$ 
+
+    $\sphericalangle $ основное соотношение $dy = \p y_x dx$
+     \begin{align*}
+         dy &= \p y_u du + \p y_v dv = vdu  + \left( u - \frac{1}{2}\ln  \frac{v}{2} - \frac{1}{2} \right) dv\\
+         \p y_x &=  v\\
+         dx &=  \p x_u du + \p x_v dv = du\\
+         vdu + \left( u - \frac{1}{2} \ln  \frac{v}{2} - \frac{1}{2} \right) dv = vdu\\
+    .\end{align*}
+
+    $\sphericalangle $ 2 уравнения:
+     \begin{align*}
+         u - \frac{1}{2}\ln v_2 - \frac{1}{2} = 0\\
+         dv = 0\\
+     .\end{align*}
+
+     \begin{align*}
+         v &= 2e^{2u-1} \\
+         v &= c \\
+     .\end{align*}
+
+     $x=\varphi\left( u, (u,C) \right)  = u$
+
+     $y = \psi\left( u, g(u,C) \right)  = u\cdot \left( 2 e^{2u-1} \right)  - \left( \frac{2 e^{2u-1}}{2} \right) \ln  \frac{2 e^{2u-1}}{2} = 2u e^{2u-1} - e^{2u-1}(2u-1) = e^{2u-1} =y = e^{2x-1}$ -- решение
+
+      \begin{align*}
+          x &= u \\
+          y&= u\cdot C - \frac{C}{2} \ln \frac{C}{2} \\
+          \implies y &=  Cx - \frac{C}{2}\ln \frac{C}{2} \\
+      .\end{align*} -- решение
+\end{proof}
+
+\subsection{Задача Коши для уравнения, разрешимого относительно производной}
+
+\begin{definition}
+    Задачей Коши для этого уравнения называются задачу нахождения его решений, удовлетворяюих начальным условиям:
+    $\begin{cases}
+        y(x_0) = y_0\\
+        \p y(x_0) = \p y_0
+    \end{cases}$
+\end{definition}
+
+Чтобы задача Коши имела хотя бы одно решение необходимо $F\left( x_0, y_0, \p y_0 \right)  = 0$ (согласование начальных данных)
+
+\begin{theorem}
+    [существование и единственность решени уравнения, разрешимого относительно производной]
+
+    $G\subset \R^3$ -- область
+
+    $F\in C^1(G)\quad \left( x_0, y_0, \p y_0 \right) \in G\quad F\left( x_0, y_0, \p y_0 \right)  = 0\quad \p F_{\p y}\left( x_0, y_0, \p y_0 \right) \neq 0$
+
+    $\implies $ в некоторой окрестности точки $x_0 \exists !$ решение задачи Коши. \[F\left( x,y, \p y \right) = 0 \quad y(x_0) = y_0\quad \p y(x_0) = \p y_0\]
+\end{theorem}
+
+\begin{definition}
+    Решение $\varphi$ на $\left( a,b \right) $ уравнения $F(x,y,\p y) = 0$ называется \underline{особым}, если $\forall x_0\in (a,b)\quad \exists \psi$ -- решение \[F(x,y,\p y) = 0\quad y(x_0) = \varphi(x_0)\quad \p y(x_0) = \varphi^{-1}(x_0)\], отличающееся от $\varphi$ в  $\forall $ сколь-угодно малой окрестности $x_0$
+\end{definition}
+
+\begin{definition}
+    Множество $D = \left\{ (x,y)|\exists \p y\in \R\quad F(x,y,\p y) = 0 \text{ и } \p F_{\p y}\left( x, y, \p y \right) = 0 \right\} $ называется дискриминанной кривой
+\end{definition}
+
+Алгоритм нахождения особого решения:
+\begin{enumerate}
+    \item найти общий интеграл
+    \item Найти дискриминантную кривую $D$, исключив $\p y$ из системы  $\begin{cases}
+            F\left( x, y, \p y \right)  = 0\\
+            \p F_y\left( x, y, \p y \right)  = 0
+    \end{cases}$ 
+\item Найти интегральные кривые, проходящие внутри.
+\item Проверить найденное решение на соответствие определению особого решения 
+\end{enumerate}
+
+\begin{example}
+    [Продолжение]
+
+    \begin{enumerate}
+        \item $y = e^{2x-1}\quad y = Cx - \frac{C}{2}\ln \frac{C}{2}$ 
+        \item $\begin{cases}
+            x\p y -y - \frac{\p y}{2}\ln  \frac{\p y}{2} = 0\\
+            x - \frac{1}{2}\ln \frac{\p y}{2} - \frac{1}{2} = 0\\
+        \end{cases}$ 
+    
+        $\ldots\implies t = e^{2x-1} \implies D = \left\{ (x,y) | y = e^{2x-1}\right\} $
+    \item Интегральная кривая $y = e^{2x-1}$ лежит в  $D$
+    \item Возьмём  $x_0\in \R\quad \exists ? C$ $\begin{cases}
+            Cx_0 - \frac{C}{2} \ln \frac{C}{2}  = e^{2x_0-1}\\
+            C = 2 e^{2x_0-1}
+        \end{cases} \implies  \psi = 2e^{2x_0-1}x - e^{2x_0-1}(2x_0-1)$ 
+
+        $\psi \not\equiv e^{2x-1}$
+    \end{enumerate}
 \end{example}
 \end{document}

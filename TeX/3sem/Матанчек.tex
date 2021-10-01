@@ -43,6 +43,7 @@
 \newcommand{\p}[1]{#1^{\prime}}
 \newcommand{\pp}[1]{#1^{\prime\prime}}
 \newcommand{\tl}[1]{\widetilde{#1}}
+\newcommand{\tll}[1]{\widetilde{\widetilde{#1}}}
 \newcommand{\ov}[1]{\overline{#1}}
 % Easily typeset systems of equations (French package) [like cases, but it aligns everything]
 \usepackage{systeme}
@@ -142,6 +143,7 @@
 \pgfplotsset{compat = newest}
 
 \DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\rang}{rang}
 
 \begin{document}
     \maketitle
@@ -598,12 +600,12 @@ $f\left(x_-, y_-  \right) = \min\limits_Kf $
 Такая точка у нас одна~---  $(x_+, y_+) = (2, 3)$.
         \end{problem}
 
-\begin{figure}[!ht]
-    \centering
-    \incfig{znaki}
-    \caption{znaki}
-    \label{fig:znaki}
-\end{figure}
+%\begin{figure}[!ht]
+%    \centering
+%    \incfig{znaki}
+%    \caption{znaki}
+%    \label{fig:znaki}
+%\end{figure}
         \section{Экстремумы и замена переменных}
         Определение точки экстремума непосредственно переносится на случай метрических пространств
 
@@ -672,12 +674,12 @@ $f\left(x_-, y_-  \right) = \min\limits_Kf $
                 y = b \cdot  \frac{4}{9}\cdot \frac{1}{\sqrt{2} } = \frac{2\sqrt{2} b}{9}
             \end{cases}$
 
-\begin{figure}[!ht]
-    \centering
-    \incfig{primer}
-    \caption{primer}
-    \label{fig:primer}
-\end{figure}
+%\begin{figure}[!ht]
+%    \centering
+%    \incfig{primer}
+%    \caption{primer}
+%    \label{fig:primer}
+%\end{figure}
         \end{proof}
 
         \begin{problem}
@@ -1126,6 +1128,376 @@ $f\left(x_-, y_-  \right) = \min\limits_Kf $
                     \end{enumerate}
             \end{enumerate}
         \end{theorem}
+
+    \section{Практика}
+
+    $f(x_1, x_2, \ldots, x_{n} )\quad \varphi_1, \ldots, \varphi_n$
+
+    $S = \left\{ \left( x_1, \ldots, x_{n}  \right) | \begin{cases}
+            \varphi_1(x_1, \ldots, x_{n} ) = 0\\
+            \vdots\\
+            \varphi_n(x_1, \ldots, x_{n} ) = 0\\
+    \end{cases} \right\} $ 
+
+    Задача -- найти экстремум $f$ на  $S$
+
+     \begin{theorem}
+         [Необходимое условие]
+
+         Пусть для $
+         \begin{vmatrix}
+             \frac{\partial \varphi_1}{\partial x_1}& \ldots & \frac{\partial \varphi_1}{\partial x_{n}}
+                 \vdots&&\\
+                 \frac{\partial \varphi_m}{\partial x_1} & \ldots & \frac{\partial \varphi_m}{\partial x_{n} }\\
+         \end{vmatrix}$ ранга $m$ 
+
+         $L :=f + \sum \lambda_i \varphi_i$
+
+         Тогда  $x^*$ -- условный экстремум, если  $\begin{cases}
+             \varphi_i(x^*) = 0 \forall i = 1, \ldots, m\\
+             \frac{\partial f}{\partial x_i}(x^*) = 0 \forall i = 1, \ldots, n\\
+         \end{cases}$
+\end{theorem}
+
+$f(x) - f(P) = (x-P)^TD^2f(x-P) + o\left( \ldots \right) $ 
+
+В случае поиска на поверхности, рассматриваем касатальные к поверхности, если она гладкая
+
+\begin{theorem}
+    [Достаточное условие]
+
+    Пусть $f, \varphi_i = C_2(x^*\in U)$
+
+    $\sum\limits_k \frac{\partial \varphi_i(x^*)}{\partial x_k}dx_k = 0\quad \forall i\quad \sum (dx_k)^2 >0$
+
+    $d^2\Lambda(x^*)$ знакоопределна для  $dx_k$, то  $x^*$ -- экстремум
+
+    Если  $\gtrless 0$, то экстремума нет
+\end{theorem}
+
+
+
+\section{Лекция}
+
+\begin{theorem}
+    [О неявном отображении]
+
+    $F(x, y) = \mathbb O \iff  \begin{cases}
+        F_1\left( x_1, \ldots, x_k, y_1, \ldots, y_m \right)  = 0\\
+        \vdots\\
+        F_m\left( x_1, \ldots, x_k, y_1, \ldots, y_m \right) = 0
+    \end{cases}$ 
+
+    $x = \left( x_1, \ldots, x_k \right) , y = \left( y_1, \ldots, y_m \right) , F = \left( F_1, \ldots, F_m \right) $
+
+    Если $F\in C^r(O), O$ -- открытое в  $\R^{k+m}$
+
+    ($r\in \Z ^+$)
+    \begin{enumerate}
+        \item $F(x^0, y^0) = 0$
+        \item $\p F_y(x^0, y^0)$ -- обратима ($\det \p F_y\neq 0$)
+    \end{enumerate}
+
+    Тогда $\exists $ открытое $U_{x_0}$ и $V_{y_0}$ и $g:U_{x_0}\to V_{y_0}$:
+    \begin{enumerate}
+        \item [I] $ \begin{cases}
+                (x,y)\in U_{x_0}\times V_{y_0}\\
+                F(x,y) = 0
+        \end{cases} \iff \begin{cases}
+        x\in U_{x_0}\\
+        y = g(x)
+        \end{cases}$ 
+    \item [II] $g\in C^r(U_{x_0})$
+    \item [III] $\p g(X) = \left( \p F_y(x,y) \right) ^{-1}\cdot \p F(x,y)$
+    \end{enumerate}
+\end{theorem}
+
+\begin{definition}
+    [Уточнение определения функции (отображения), заданной уравнением неявно]
+
+    $\sqsupset D\subseteq R^k\quad g: D\to \R^m$ Скажем, что отображение $g$ задаётся уравнением 
+    \begin{enumerate}
+        \item $F(x^0, y^0) = 0$
+        \item $\p F_y(x^0, y^0)$ -- обратима ($\det \p F_y\neq 0$)
+    \end{enumerate}
+    неявно, если \[F(x,g(x)) = 0 \quad \forall x\in D\]
+
+    (аналогично для $x = h(y)$)
+\end{definition}
+
+\begin{example}
+    $x^2+y^2+z^2=a^2\quad a>0$
+
+    $z = \sqrt{a^2-x^2-y^2} \quad z = -\sqrt{a^2-x^2-z^2}\quad y = \sqrt{a^2-x^2-z^2}\quad \ldots  $
+
+    $\begin{cases}
+        \p z_x = ?\\
+        \pp z_{xy} = ?\\
+    \end{cases}$ 
+
+    $x^2+y^2+z(x,y) \equiv a^2$
+
+    $g(x,y) = z(x,y)\quad F(x,y,z) = x^2+y^2+z^2-a^2$
+
+    $\p F_z = 2z\neq 0 \iff x^2+y^2<a^2$
+
+    $2\left( x+z\cdot \p z_x \right)  = 0 \implies \p z_x = -\frac{x}{z}$ 
+
+    $0+\p z_y \cdot \p z_x + z\cdot \pp z_{xy} = 0\qquad \p z_y = -\frac{y}{z} \implies \pp z_{xy} = -\frac{\p z_y \cdot  \p z_x}{z} = -\frac{xy}{z^3} = -\frac{xy}{\sqrt{a^2-x^2-y^2}^3 }$
+\end{example}
+Примеры нарушения условия 2 теоремы
+\begin{example}
+    $x = y^3\quad F(x,t) = x-y^3$
+
+    $\p F_y = -3y^2 = 0\quad y=0$
+\end{example}
+
+\begin{example}
+    $\left( x^2+y^2 \right) ^2 = x^2-y^2\quad \begin{cases}
+        x = r\cos\varphi\\
+        y = r\sin\varphi\\
+    \end{cases}$ 
+
+    $r^4 = r^2\left( \cos ^2\varphi - \sin^2 \varphi \right) \quad r = \sqrt{\cos 2\varphi} $
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{lemniscat}
+    \caption{lemniscat}
+    \label{fig:lemniscat}
+\end{figure}
+
+$F(x,y) = \left( x^2+y^2 \right) ^2-(x^2-y^2)$
+
+$\p F_y = 2\left( x^2+y^2 \right)\cdot 2y + 2y = 2y\left( 2(x^2+y^2)+1 \right)  $ 
+
+$\p F_y = 0 \iff y = 0$
+
+$\int g(x) = y$ -- функция, график которой -- график  $F$ в I-III четвертях
+
+ $\begin{cases}
+     y = r(\varphi)\sin \varphi\\
+     x = r\left( \varphi \right) \cos \varphi\\
+ \end{cases}$ 
+
+ $\varphi = \frac{\pi}{4} $ 
+
+ $\p x_{\varphi} = \p r\cos \varphi + r\sin \varphi$
+
+ $\p x(\frac{\pi}{4} = \frac{\sqrt{2} }{2}\left( \p r + r \right) = \frac{\sqrt{2} }{2}\left( \underbrace{\frac{-\sin 2\varphi}{\sqrt{\cos 2\varphi} }}_{\text{не опр. при} \varphi=\frac{\pi}{4} } + \sqrt{\cos 2\varphi}  \right)  $
+\end{example}
+
+\begin{note}
+    Если $f\in C\left( [a,b] \right) $ и $\exists \lim_{x \to a+} \p f(a)$, то $\exists \p f(a)$, и $\p f(a) = \lim_{x \to a+} \p f(x)$
+\end{note}
+
+\begin{example}
+    $y(x) = x^2\sin \frac{1}{x}$ 
+
+    $\varphi\in \left( 0, \frac{\pi}{4} \right) $
+
+    $\p y_x = \frac{\p y_{\varphi}}{\p x_{\varphi}} = \frac{\p r\sin \varphi + r\cos \varphi}{\p r\cos \varphi - r\sin \varphi}= \frac{\left( -\frac{\sin 2\varphi}{\sqrt{\cos 2\varphi} }\cdot \sin \varphi + \sqrt{\cos 2\varphi}\cdot \cos \varphi  \right) }{-\frac{\sin \varphi}{\sqrt{\cos 2\varphi}} \cdot \cos \varphi - \sqrt{\cos 2\varphi} \sin \varphi} \to \frac{-\frac{\sqrt{2} }{2}}{-\frac{\sqrt{2} }{2}} = 1\implies \p y_x(x_{\varphi = \frac{\pi}{4}) }$ 
+
+    $\p y_{+}(0) = 1$
+\end{example}
+
+\section{Поверхности в $\R^n$ ($k$-мерные)}
+
+Способы задания поверхности:
+\begin{enumerate}
+    \item Поверхность уровня
+
+        $F: \R^m \to \R\quad C\in \R$
+
+        $\left\{ x\in D(F):\quad F(x) = C \right\} $ -- линия уровня $C$
+
+        $F:D \text{ -- открытое }\subseteq \R^n \to \R^k\quad F = \left( F_1, \ldots, F_k \right) , C\in \R^k$
+
+        $\left( x\in D(F): F(x) = C \right) $ -- поверхность уровня $C$
+\end{enumerate}
+
+\begin{definition}
+    $\sqsupset f: O\to \R^m\quad O$ -- открытое в $\R^k\quad k, n\in \N $
+
+    $f$ называется регулярным в  $O$, если  $f$ Дифференцируема в  $O$ и в каждой точке  $x\in O\quad \p f(x)$ Имеет максимальный ранг ($\rang \p f(x) = \min(k,n)$)
+\end{definition}
+
+\begin{definition}
+    $\sqsupset C\in \R^m\quad F\in C^r(O\to \R^m), O$ -- открытое в $\R^n$
+
+    $r\in \Z _+$
+
+    $F$ регулярно в  $O$, тогда поверхность уровня  $C$ называется $r$-гладкой (класса $C^r$) $n-m$-мерной поверхностью
+\end{definition}
+
+\begin{example}
+    $x^2+y^2+z^2=a^2, a>0$
+
+    $F(x,y,z) = a^2\quad m = 1\quad n =3\quad \p F = \left( 2x, 2y, 2z \right) $
+
+    $S$ --  $3-1=2$-мерная поверхность
+\end{example}
+
+\begin{enumerate}
+    \item [2] Поверхности-графики
+
+        $\sqsupset g: D\subseteq \R^k \to \R^m\quad k<n\quad n = k + m$
+
+        $\Gamma_g = \left\{ (x,y) : x\in D, y = g(x) \right\}\in \R^n $
+
+        Если $D$ Ограничено в  $\R^k\quad g\in C^r\left( D \to \R^m \right) $, то говорят о графике отображения гладкости $r$ (класса  $C^r$)
+\end{enumerate}
+
+\begin{example}
+    Сфера -- объединение бесконечно гладких графиков
+\end{example}
+
+\begin{enumerate}
+    \item [3] Параметрическое задание
+
+        $\Phi: D\subseteq \R^k\to \R^n$
+
+        Если $D$ -- открытое,  $\Phi\in C^r(D)$ и $\Phi$ Регулярна в  $D$, то  $\Phi(D)$ -- $k$-мерная поверхность с параметризацией класса  $C^r$  (параметризованной поверхности)
+\end{enumerate}
+
+\begin{example}
+    $S \cap \left\{ x>0, y>0, z>0 \right\}  = \left\{ (x,y,z): 
+    \begin{matrix}
+        x = a\cos \varphi\cos \psi\\
+        y = a\sin\varphi\cos \psi\\
+        z = a\sin \psi\\
+\end{matrix}\quad \varphi, \psi\in (0, \frac{\pi}{2} \right\} $ 
+
+$\Phi: \left( \varphi, \psi \right) \to \left( x, y, z \right) $
+\end{example}
+
+\begin{theorem}
+    [О способах задания гладких поверхностей]
+
+    $\sqsupset r\in \Z _+, m, k\in \N  n = m+k$
+
+    $S \subseteq \R^n\quad a\in S$. Следующие утверждения равносильны:
+    \begin{enumerate}
+        \item $\exists$ окрестность $U_a: U_a \cap S$ -- $k$-мерный график класса  $C^r$
+        \item  $\exists $ окрестность $U_a: U_a\cap S$ -- $k$-мерная поверхность уровня класса  $C^r$
+        \item  $\exists $ окрестность $U_a: U_a\cap S$ -- $k$-мерная поверхность класса  $C^r$ заданная параметрически
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item []
+        \item [$1\implies 2$] $U_a\cap S = \left\{ (x,y): x\in D\quad y = g(x) \right\} $ (посе перенумерации, если требуется)
+
+            $=\left\{ (x,y): F(x,y) = 0 \right\} \quad F = y-g(x)$
+
+            $F$ определена на  $D\times \R^m\quad F: D\times \R^m \subseteq \R^n \to \R^m\quad F\in C^r\left( D\times R^m \right) $
+
+            $\p F_y = E_m\quad \p F $ содержит  $E$ как минор  $\implies $ ранг $\p F$ максимальный
+
+        \item [$2\implies 1$] $F(x,y) = C\quad C\in \R^m\quad F: O\subseteq \R^n \to  \R^m$
+
+            $U_a\cap S = \left\{ (x,y): (2) \right\} $ 
+
+            $\p F$ имеет максимальный ранг  $=m$. С точностью до нумерации координат можно считать, что  $\det \p F_y(a) \neq  0 $. В некоторой окрестности  $\det \p F_y(x,y) \neq 0 \implies $ по теореме о неявной функции $y = g(x)$
+        \item [$1\implies 3$] $S\cap U_a = \left\{ (x,g(x)):x\in D \right\} $
+
+            $\Phi: x\in D \subseteq \R^k\to  (x,g(x))\in \R^n$
+
+            $\p \Phi = \begin{bmatrix} &&\\&E_k&\\&&\\ \p g_{1x_1} & &\p g_{1x_k}\\ &&\\ &&\\ \end{bmatrix} \implies \rang \p \Phi = k \implies \Phi$ - регулярна в $D$
+        \item [$3\implies 1$] $ S\cap U_a = \left\{ (x,y) = \Phi(u):u\in D \text{ -- открытое в } \R^k \right\} \quad \Phi\in C^r(D), \rang \p\Phi=k$ -- максимальный 
+
+            Не умаляя общности $\det \p \Phi_x\neq 0\quad \tl \Phi(n) = \begin{bmatrix} \Phi_1(u)\\ \vdots\\ \Phi_k(u) \end{bmatrix} \qquad \Phi(n) = \begin{bmatrix} \Phi_1(u)\\ \vdots\\ \Phi_n(u) \end{bmatrix}$
+
+            $\det \begin{bmatrix} \nabla \Phi_1\\ \vdots\\ \nabla \Phi_k \end{bmatrix} \neq 0$
+
+            $\tl{\p \Phi} = \begin{bmatrix} \nabla \Phi_1 \\ \vdots \\ \nabla \Phi_k \end{bmatrix} $ -- обратима
+
+            $\Psi  = \tl{\Phi}^{-1}\quad \tl \Phi :\left( u_1, u_2, \ldots, u_k \right) \to \left( x_1, \ldots, x_k \right) $
+
+            $(x,y) = \Phi(u) = \left( \tl \Phi(u), \tll \Phi(u) = (x, \tll \Phi(\Psi(x))  \right) \in C^r \text{ по теореме об обратном отображении }\quad u = \Psi(x)\quad \Phi(u) = \Phi(\Psi(x))$
+
+    \end{itemize}
+
+    \begin{definition}
+        $r$-гладках  $k$-мерная поверхность -- поверхность, для которой справедливо одно из утверждений 1-3 предыдущей теоремы
+    \end{definition}
+
+    \begin{example}
+        $\gamma(t) = \begin{bmatrix} \gamma_1(t)\\ \vdots \\ \gamma_n(t) \end{bmatrix} :[a,b] \to \R^n$
+
+        $\gamma |_{(a,b)}\quad \gamma\in C^r(a,b)$
+
+        $\rang \p \gamma$ максимален  $\iff \p \gamma(t)\neq 0$
+    \end{example}
+
+    \begin{example}
+        в  $\R^n\quad D = \left\{ \left<v_1, x \right> + v_2 = 0 \right\} $, где $v_1, v_2\in \R^n$
+
+        $\p F = v_1$. Если $v_1\neq 0$ , то $S$ --  $n-1$-мерная поверхность (гиперплоскость, гперпространство в  $\R^n$)
+    \end{example}
+
+    \section{Условный экстремум функций нескольких переменных}
+
+    $f:E\subseteq R^n \to \R\quad E_0\subseteq E$
+
+    Условный экстремум $f$ на  $E_0\equiv$ экстремум $f |_{E_0}$
+
+    $\sqsupset E_0 = \left\{ x\in \R^n: \begin{cases}
+            F_1(x) = 0\\
+            \vdots\\
+            F_m(x) = 0\\
+    \end{cases}, m\in \N , m\leqslant n \right\} $ 
+
+    Эти уравнения называются уравнениями связи , функции $F_i$ называются функциями связи
+
+    Экстремум  $F|_{E_0}\equiv $ условный экстремум $F$ при условии  $\left<\text{система уравнений} \right>$
+\end{proof}
+
+\begin{theorem}
+    [Необходимое условие условного экстремума, геометрическая формулировка]
+
+    $\sqsupset O$ -- открыток $\subseteq \R^n\quad f, F_1, \ldots, F_m\in C^1(O\to \R), m<n$ и $F = \left( F_1, \ldots, F_m \right) $ -- регулярно в $O$.  $\sqsupset $ a -- точка локального условного экстремума для $f$ относительно $F(x) = 0$ 
+
+    Тогда в точке $a\quad \nabla f$ представимо в виде линейной комбинации $\nabla _aF_1, \ldots, \nabla F_m\quad \left( \nabla _1f\in \mathcal L_{in} \left\{ \nabla _aF_1, \ldots, \nabla _af_m \right\}  \right) $
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}
+        \item [случай 1:] $m = n-1$
+
+            От противного :  $\rang \begin{bmatrix} \p f(a)\\
+                \p F_1(a)\\
+                \vdots\\
+                \p F_m(a)\end{bmatrix} <n\quad \left( \iff \det \begin{bmatrix} \p f(a)\\ \p F_1(a)\\ \vdots \\ \p F_{n-1}(a) \end{bmatrix}  \right)  = 0 \impliedby  \p f(a), \ldots, \p F_{n-1}(a)$ -- линейно зависимы $ \implies  \exists \lambda_0, \ldots, \lambda_{n-1}:\quad \lambda_0\p f(a) + \sum_{k=0}^{\infty} \lambda_k\p F_k(a) = 0$ 
+
+                Если бы $\lambda_0 = 0 \implies \left\{ \p F_k(a) \right\} _{k=1}^{n-1}$ -- линейно зависимо $\rang\left( \p F_k(a) \right) _{k=1}^{n-1}<n-1$ -- не максимально
+
+                Значит $\lambda_0\neq 0 \implies \p f(a) = -\sum \frac{\lambda_k}{\lambda_0}\p F_k(a)$
+    
+                $\sphericalangle h(x) = \begin{bmatrix} f(x)\\ F_1(x) \\ \vdots \\ F_{n-1}(x) \end{bmatrix} : Oc\R^n \to \R^n$
+
+                Если неверно, что определитель матрицы производных  этого столбца функций равен нулю, то по теореме об обратном отображении $h(U_a)$ -- открытое множество  $\implies \exists \delta_0>0:\quad \forall \delta\in (0, \delta_0)\quad \begin{bmatrix} f(a)\pm \delta\\ F_1(a) \\ \vdots \\ F_{n-1}(a) \end{bmatrix} \in h(u_n)$
+
+                $\implies \forall $ Открытого $\tl U_a\quad \exists $ точка $x: F_1(x) = F(a) = 0, \ldots, F_{n-1} = F_{n-1}(a) = 0 \qquad f(x) > f(a)$ или $f(x) < f(a)$
+
+                Противоречие --  $x$ -- точка условного локального экстремума
+        \item [$m=1, \ldots, n-2$]
+
+            $\p F$ -- максимального ранга  $\sphericalangle \tl h(a) = \begin{bmatrix} f(x) \\ F_1(x)\\ \vdots \\  F_m\left( x \right)  \end{bmatrix} \quad $ Предположим, что $\rang \tl{\p h(x)}<m+1$
+
+            С точностью до нумерации координат $\tl {\p h_{x_1, \ldots, x_{m+1}}}(a)\neq 0$
+
+                $h(x) = \begin{bmatrix} \tl h(x)\\ x_{m+2} \\ \vdots \\ x_{n}  \end{bmatrix} \quad \p h(a) = \begin{bmatrix} \p h_{x_1, \ldots, x_{m+1} }&\ldots\\ \mathbb O\\ E_{n-(m+1)} \end{bmatrix} (a) \implies \exists $ окрестность $U_a\quad h|_{U_a}$
+
+                $a \ov h {\to } \begin{bmatrix} f(a)\\ 0 \\ \vdots \\ 0 \\ a_{m+2} \\ \vdots \\ a_n \end{bmatrix} $. Т.к. $h$ -- открытое, то  $\exists  \sigma>0 :\forall y\in \R^n: \|y - b\|<\sigma \implies y\in h(U_a)$
+
+                $\sphericalangle y = \begin{bmatrix} f(a)\pm \frac{b}{2}\\ 0 \\ \vdots \\ o \\ a_{m+2} \\ \vdots \\ a_n \end{bmatrix} \implies \exists x\in U_a: f(x) = y\quad F_1(x) = \ldots = F_m(x) = 0\quad f(x) f(a) \pm \frac{b}{2}$ 
+
+               Противоречие, ранг не меньше максимального
+    \end{enumerate}
+\end{proof}
+
+
+
 
 
 

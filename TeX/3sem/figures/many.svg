@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="240mm"
+   height="120mm"
+   viewBox="0 0 240 120"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.1 (1:1.1+202105261517+ce6663b3b7)"
+   sodipodi:docname="many.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs2">
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect2073"
+       is_visible="true"
+       lpeversion="1"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect1877"
+       is_visible="true"
+       lpeversion="1"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect1748"
+       is_visible="true"
+       lpeversion="1"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect1284"
+       is_visible="true"
+       lpeversion="1"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect1280"
+       is_visible="true"
+       lpeversion="1"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.7754878"
+     inkscape:cx="850.75214"
+     inkscape:cy="179.38733"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showborder="true"
+     width="200mm"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1050"
+     inkscape:window-x="0"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1"
+     inkscape:pagecheckerboard="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid815"
+       units="mm"
+       spacingx="10"
+       spacingy="10"
+       empspacing="4"
+       dotted="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-177)">
+    <text
+       style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"
+       id="text905"
+       y="239.2164"
+       x="96.950661"><tspan
+         sodipodi:role="line"
+         id="tspan903"
+         style="stroke-width:0.264583"
+         x="96.950661"
+         y="239.2164">Hardware</tspan></text>
+    <ellipse
+       style="fill:none;fill-opacity:0.913725;stroke:#00ff00;stroke-width:0.264999"
+       id="path1017"
+       cx="111.15926"
+       cy="237.18289"
+       rx="17.58057"
+       ry="10.86539" />
+    <ellipse
+       style="fill:none;fill-opacity:0.913725;stroke:#00ff00;stroke-width:0.361865"
+       id="path1017-3"
+       cx="111.31569"
+       cy="237.34869"
+       rx="24.006842"
+       ry="14.837045" />
+    <ellipse
+       style="fill:none;fill-opacity:0.913725;stroke:#00ff00;stroke-width:0.49963"
+       id="path1017-3-6"
+       cx="111.54598"
+       cy="237.71284"
+       rx="33.146473"
+       ry="20.485647" />
+    <ellipse
+       style="fill:none;fill-opacity:0.913725;stroke:#00ff00;stroke-width:0.662068"
+       id="path1017-3-6-7"
+       cx="112.18478"
+       cy="237.66695"
+       rx="43.922958"
+       ry="27.14588" />
+    <ellipse
+       style="fill:none;fill-opacity:0.913725;stroke:#00ff00;stroke-width:0.826569"
+       id="path1017-3-6-7-5"
+       cx="112.24092"
+       cy="237.67024"
+       rx="54.836288"
+       ry="33.89069" />
+    <ellipse
+       style="fill:none;fill-opacity:0.913725;stroke:#00ff00;stroke-width:0.920474"
+       id="path1017-3-6-7-5-3"
+       cx="112.84047"
+       cy="237.67189"
+       rx="61.066128"
+       ry="37.740944" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 132.00218,236.70351 c 7.942,-1.39801 15.88378,-2.79598 19.25106,-7.66447 3.36729,-4.8685 2.16029,-13.20752 3.47248,-17.47682 1.31219,-4.26931 5.14322,-4.46841 8.97407,-4.6675"
+       id="path1278"
+       inkscape:path-effect="#path-effect1280"
+       inkscape:original-d="m 132.00218,236.70351 c 7.94205,-1.39771 15.88383,-2.79568 23.82535,-4.19391 -1.20678,-8.33909 -2.41377,-16.67811 -3.62106,-25.01757 3.83145,-0.19884 7.66248,-0.39794 11.49332,-0.59731" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 136.85053,247.43433 c 9.51602,1.7826 19.03174,3.56514 23.67708,-0.0644 4.64534,-3.62957 4.42061,-12.67111 5.76964,-17.1618 1.34903,-4.49068 4.18829,-4.43179 7.06891,-4.37204"
+       id="path1282"
+       inkscape:path-effect="#path-effect1284"
+       inkscape:original-d="m 136.85053,247.43433 c 9.51598,1.78281 19.0317,3.56535 28.54716,5.34762 -0.22448,-9.04164 -0.44922,-18.08318 -0.67422,-27.12517 2.92282,0.06 5.76206,0.11978 8.64269,0.17927" />
+    <text
+       style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"
+       id="text1288"
+       y="206.57759"
+       x="169.23138"><tspan
+         sodipodi:role="line"
+         id="tspan1286"
+         style="stroke-width:0.264583"
+         x="169.23138"
+         y="206.57759">средства аппарaтной поддержки ядра</tspan></text>
+    <text
+       style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"
+       id="text1380"
+       y="227.74184"
+       x="181.41994"><tspan
+         sodipodi:role="line"
+         id="tspan1378"
+         style="stroke-width:0.264583"
+         x="181.41994"
+         y="227.74184">машинно-зависимые модули (HAL)</tspan><tspan
+         sodipodi:role="line"
+         style="stroke-width:0.264583"
+         x="181.41994"
+         y="231.04912"
+         id="tspan4545" /></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.318913px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 138.25635,256.71212 c 9.24449,0.77708 18.35206,1.54265 22.88473,-0.9077 4.53266,-2.45036 4.42256,-8.1224 6.24451,-10.82274 1.82196,-2.70033 5.84947,-2.40876 9.73963,-2.12714"
+       id="path1746"
+       inkscape:path-effect="#path-effect1748"
+       inkscape:original-d="m 138.25635,256.71212 c 9.24495,0.77158 18.35204,1.54289 27.5275,2.31393 -0.10973,-5.672 -0.21985,-11.34404 -0.33033,-17.01647 3.75329,0.28194 7.78152,0.56358 11.6717,0.84496" />
+    <text
+       style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"
+       id="text1752"
+       y="244.7952"
+       x="185.60965"><tspan
+         sodipodi:role="line"
+         id="tspan1750"
+         style="stroke-width:0.264583"
+         x="185.60965"
+         y="244.7952">базовые механизмы ядра</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 133.45475,266.90898 c 11.93589,0.76425 23.87149,1.52848 30.01239,-0.43505 6.1409,-1.96353 6.48739,-6.65485 8.01251,-8.77289 1.52512,-2.11805 4.23309,-1.66176 6.93849,-1.2059"
+       id="path1875"
+       inkscape:path-effect="#path-effect1877"
+       inkscape:original-d="m 133.45475,266.90898 c 11.93587,0.76449 23.87147,1.52872 35.80681,2.29269 0.34677,-4.69125 0.69325,-9.38257 1.03948,-14.07425 2.70602,0.44197 5.41166,0.91208 8.1171,1.36772" />
+    <text
+       style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"
+       id="text1881"
+       y="258.91541"
+       x="186.48158"><tspan
+         sodipodi:role="line"
+         id="tspan1879"
+         style="stroke-width:0.264583"
+         x="186.48158"
+         y="258.91541">менеджеры ресурсов</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 118.92266,274.07883 c 17.86669,0.76971 35.86967,1.5453 44.83688,0.63027 8.96721,-0.91502 8.96721,-3.51787 9.91291,-4.61846 0.94569,-1.10059 2.95359,-0.67385 4.90278,-0.25959"
+       id="path2071"
+       inkscape:path-effect="#path-effect2073"
+       inkscape:original-d="m 118.92266,274.07883 c 17.86655,0.77291 35.86966,1.54555 53.80409,2.31793 2.7e-4,-2.60268 2.7e-4,-5.20553 0,-7.80869 1.88871,0.4146 3.89925,0.82892 5.84848,1.24298" />
+    <text
+       style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"
+       id="text2077"
+       y="272.18771"
+       x="184.86879"><tspan
+         sodipodi:role="line"
+         id="tspan2075"
+         style="stroke-width:0.264583"
+         x="184.86879"
+         y="272.18771">системные вызовы, API</tspan></text>
+  </g>
+</svg>

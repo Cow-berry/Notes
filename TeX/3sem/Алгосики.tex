@@ -502,17 +502,113 @@ $A \implies B \iff  \neg B \implies \neg A $ -- кососимметричнос
 
 Структура данных: умеет проверять пустая ли и брать любой элемент .. любая структура данных.
 
+\section{дерево доминатор}
+
+\begin{definition}
+     $s$ -- помеченная вершина
+    
+    $u$ доминирует $v$, если любой путь от $s$ до  $v$ есть  $u$
+\end{definition}
 
 
+\begin{figure}[!ht]
+    \centering
+    \incfig{krasiv}
+    \caption{krasiv}
+    \label{fig:krasiv}
+\end{figure}
 
+\begin{property}
+    $u$ доминирует  $v$, $v$ доминирует  $w \implies u $ доминирует $w$ 
 
+    $u$ дом  $v$,  $w$ дом  $v \implies u$ дом $w$ (или наоборот в зависимости от порядка в пути от  $s$ до  $v$)
 
+    Доминаторы образуют цепочки. Нам достаточно знать ближайшего доминатора для всех вершин, чтобы выстроить полную цепочку
 
+    Дерево доминаторов -- дерево, в котором вершины подвешены к своим ближайшим додминаторам
 
+    Если граф ацикличен, то идём по топсорту и подвешиемся к лца своих ближайших предков
+\end{property}
 
+\begin{figure}[!ht]
+    \centering
+    \incfig{cicles}
+    \caption{cicles}
+    \label{fig:cicles}
+\end{figure}
 
+Все сравнения вершин дальше -- по времени входа в обходе в глубину
 
+\begin{lemma}
+    $u<v, \quad$ есть путь из  $u$ в  $v$. Тогда на этом пути мы обязательно встретим предком  $v$
+\end{lemma}
 
+План:
+\begin{enumerate}
+    \item DFS, $t_{in}$
+    \item $semi-dom[v]$
+    \item  $dom[v]$
+\end{enumerate}
 
+\begin{definition}
+    Полудоминатор
 
+    $u$ полудоминирует  $v$, если существует путь от  $u$ до $v$ все вершины которого $>v$
+\end{definition}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{semi}
+    \caption{semi}
+    \label{fig:semi}
+\end{figure}
+
+$sdom[v]$ -- минимальный (по времени входа) полудоминатор  $v$
+
+\begin{enumerate}
+    \item $u\to v$ путь из одного ребра, перебираем все входящие рёбра. Берём минимум по ним
+    \item $u\to \ldots\to w\to v$. Переберём последнюю промежуточную вершину, она должна быть $>v$
+
+        $x$ -- первая вершина на ветке между lca(u,w) и самой w
+
+         $u\to \ldots\to x\to \ldots\to w\to v$
+
+         $u$ -- полудоминатор  $x \implies u$ полудоминатор $v$
+
+          \begin{lstlisting}
+              sdom(v) = min(
+                u: есть ребро u->v sdom[x]
+                sdom[x]: x in ветке [w, lca(u,w)], w->v)
+          \end{lstlisting}          
+
+          Суммарное время: $O\left( m\log n \right) $. Если упороться в link-eval можно $O\left( m \alpha(m,n) \right) $. Ребята могут делать за линию, но там совсем плохо
+
+          $dom[s] \leqslant sdom[s]$
+
+          \begin{enumerate}
+              \item Пусть для всех $u\in [v, \ldots, sdom[v])\quad sdom[u] \geqslant  sdom[v]$
+
+                  пускай не так, значит можем обойти. Найдём первую вершину на этом пути ниже полудоминатора. $x$ -- предок  $u$ (есть по лемме) $ u\to x\to u\to v$, тогда $x$ дом  $u$ 
+
+              \item $\exists u:\quad sdom[u]<sdom[v]$. Пусть $u: sdom[u] $ -- минимальная. Тогда  $dom[v] = dom[u]$
+          \end{enumerate}
+
+\end{enumerate}
+Алгоритм: ищем минимум по полудоминаторм между вершиной и её полдомнатором.
+
+\begin{lstlisting}
+    for v = ...
+        u = min_sdom [v, ..., sdom[v])
+        if sdom[u] >= sdmo[v]
+            dom[v] = sdom[v]
+        else
+            dom[v] = dom[u] # u < v -- нужно считать доминаторы по возрастанию номеров. Но с LinkEval хочется считать по уменьшению. На самом деле приходиться запоминать равенство гиперссылкой и потом высстанавливать
+\end{lstlisting}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{semi2}
+    \caption{semi2}
+    \label{fig:semi2}
+\end{figure}
 \end{document}
