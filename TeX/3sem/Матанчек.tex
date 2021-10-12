@@ -144,6 +144,8 @@
 
 \DeclareMathOperator{\Int}{Int}
 \DeclareMathOperator{\rang}{rang}
+\DeclareMathOperator{\Cl}{Cl}
+
 
 \begin{document}
     \maketitle
@@ -395,7 +397,7 @@ $\|f - T_{N, a, f}\| \leqslant  \frac{1}{(N+1)!}\sup \ldots.$
 
             $\sqsupset f: E\to \R, \quad \underline{a\in \Int E}, d_a f = 0\quad \exists  d^2_a f$ 
 
-            Тогда, если $d^2_af>0$ (положительная квадратичная форма как функция дифференциалов  $dx_1, \ldots, dx_{n} )$, то $a$ это точка минимума (строгого)
+            Тогда, если $d^2_af>0$ (положительная квадратичная форма как функция дифференциалов  $dx_1, \ldots, dx_{n} $), то $a$ это точка минимума (строгого)
 
             Если  $d^2_af <0 \ldots.$
 
@@ -1498,14 +1500,593 @@ $\Phi: \left( \varphi, \psi \right) \to \left( x, y, z \right) $
 
 
 
+\section{Практика}
+
+$u$ -- непрерывная функция на компакте -- достигает наибольшего и наименьшего значения
+
+
+\section{Лекция. Дополнение : теорема об открытом отображении (общение)}
+
+\begin{theorem}
+    $\sqsupset k, n\in \N \quad k \leqslant  n\quad O$ -- открытое $\in \R^n\quad F:O\to \R^k$, регулярная ($\in C^1\quad$ ранг матрицы Якоби  $=k$)
+
+    Тогда  $F$ является открытом отображением.
+\end{theorem}
+
+Случай $n = k$ был установлен.
+
+\begin{proof}
+    $ n < k$
+
+     \begin{enumerate}
+         \item $F$ -- проекция.  \[F(x_1, x_2, \ldots, x_{n} ) = \left( x_{i_1}, \ldots, x_{i_k} \right) \] -- очевидно открытое
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{очевидно}
+    \caption{очевидно}
+    \label{fig:очевидно}
+\end{figure}
+
+$x, a\in \R^n\quad \|x-a\|<r \implies \|F(x) - F(a)\|\leqslant \|x-a\|<r$, т.е. $B_{r(a)} \overset F {\to } B_r\left(F(a)  \right) $ 
+        \item  $F$ -- регулярно.  $\p F = \begin{bmatrix} \nabla F_1\\ \vdots\\ \nabla F_k \end{bmatrix} $, матрица $n\times k$
+
+            После удаления $n-k$ столбцоы возникает ненулевой минор . Не умаляя общности удаляем последние столбцы (иначе перенумеруем переменные  $x_{1}, \ldots, x_{n} $) $\implies \p F_{\left( x_1, \ldots, x_{n}  \right) } = \begin{bmatrix} \p F_{1x_1} &\ldots & \p F_{1x_k}\\ \ldots & \ldots & \ldots\\ \p F_{kx_1} &\ldots & \p F_{kx_k} \end{bmatrix}\quad \det \p F_{\left( x_1, \ldots, x_{n}  \right) } \neq 0$
+
+            $\sphericalangle \phi(x) = \left( F_1, F_2, \ldots, F_k, x{k+1}, \ldots, x_{n}  \right)^T $
+
+            $\p \phi(x) = \begin{bmatrix} \p F_{\left( x_1, \ldots, xk \right) }& \p F_{\left( x_{k+1}, \ldots, x_{n}  \right) }\\ 0 & E_{n-k} \end{bmatrix} $ 
+
+            $\det \p \phi(x) = \det \p F_{\left( x_1, \ldots, x_k \right) } \cdot  \det \left( E_{n-k} \right) \neq 0\quad \phi$ регулярно в некоторой окрестности фиксированной точки $\implies F = \pi\circ \phi$ -- открытое в точке $a$  в силу произвольности  $a \implies F$ -- окткрыто
+    \end{enumerate}     
+\end{proof}
+
+\begin{theorem}
+    [Необходимое условие условного экстремума (геометрическая формулировка)]
+
+    $\sqsupset k, n\in \N\quad k < n\quad  O$ -- открытое в $\R^n$ 
+
+    $f, F_1, \ldots, F_k\in C^1(O\to \R), \quad F = \left( F_1, \ldots, F_k \right) $ -- регулярно в $O$
+
+    $E = \left\{ x\in O| F(x) = 0 \right\} ,  a\in E$
+
+    Если $a$ -- точка условного экстремума для  $f$ Относительно  \[F(x) = 0\], то \[\nabla_a f\in \mathcal Lin\left\{ \nabla _a F_1, \ldots, \nabla _a F_k \right\} \]
+
+    В частности, если $k=1$, то условие  $\iff \nabla_af $ -- коллинеарен $\nabla _aF$
+\end{theorem}
+
+\begin{example}
+    Найти наибольшее и наименьшее значение функции \[f(x,y) = (x^2  + (y-1)^2)\sqrt{x^2+y^2-2y} \] на криволинейном треугольнике -- границе множества \[ D = \left\{ (x,y)\mid (x+1)^2 + y^2\geqslant 1,\quad (x-1)^2+y^2\geqslant 1, x^2+y^2\leqslant 2\quad y\geqslant 0 \right\}  \]
+
+    $r = x^2+(y-1)^2$
+
+    $f = \underbrace{r\cdot \sqrt{r+1}}_{g(r)} $ 
+
+    $\nabla f = \p g(r) \cdot  \nabla r$
+
+    при $r = \sqrt{2} - 1 $ касание окружности уровня границы окружности 
+
+    Подозрительные точки: вершины. точки $T_1, T_2, T_3:\quad f(T_1) = f(T_2) = f(T_3)$
+\end{example}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{krivoyprimer}
+    \caption{krivoyPrimer}
+    \label{fig:krivoyprimer}
+\end{figure}
+
+$\p g(r) = \sqrt{r+1}  + \frac{r}{2\sqrt{r+1}} = \frac{2(r+1) + r}{2\sqrt{r+1} } = \frac{3r+2}{2\sqrt{r+1} }$ не обращается в ноль при $r\geqslant 0$
+
+$K$ -- граница  $D$, компакт $\implies \max, \min$ достижимы
+
+т.к. $g(r)$ стремится вверх и  $r(T_1) = r(T_2) = r(T_3) < g(V_1) = g(V_2) = g(V_3) \implies \min_k g = g(T_1)\quad \max_k g = g(V_1)$
 
 
 
+\begin{proof}
+    Не умаляя общности $a$ -- точка глобального условного экстремума для  $f$ относительно  $F(x) = 0$
+
+     \begin{note}
+         Если $v, v^{1}, \ldots, v^{k}\in \R^k$ и набор $v, v^{1}, v^{k}$ -- линейно зависим, а $v^{1}, \ldots, v^{k}$ -- ЛНЗ, то $v\in \mathcal Lin\left\{ v^1, \ldots, v^k \right\} $ 
+
+         $\implies \exists \lambda_1, \lambda_1, \ldots, \lambda_k:\quad \lambda v + \underbrace{\sum_{j=1}^{k} \lambda_jv_j}_{\neq 0} = 0\implies \lambda\neq 0 \implies v = -\sum_{j=1}^{k} \frac{\lambda_j}{\lambda}v_j$
+    \end{note}
+
+    По замечанию достаточно проверить, что $\left\{\nabla _af, \nabla _a F_1, \ldots, \nabla _a F_k\right\}$ -- линейно зависим, т.е. $\tl F = \left( f, F_1, \ldots, F_k \right) ^T$ -- не регулярна в точке $a$.
+
+    От противного: пусть  $\tl F$ -- регулряна в точке $a$, тогда существует окрестность  $U(a): \tl F$ -- регулярно в $U(a)$ 
+
+    По теореме об открытом отображении $\tl F$ -- открыто в  $U(a) \implies \exists \varepsilon >0: \tl F(U(a)) \supset B_{\varepsilon}\left( \tl F(a) \right)\quad \tl F(a) = \left( f(a), F_1(a), \ldots, F_k(a) \right)  = (f(a), 0, \ldots, 0)\quad F_i(a) = 0 $, т.к. $a$ -- точка, удовлетворяющая формулам связи.
+
+    $y_{\pm } = \left( f(a) \pm \frac{\varepsilon}{2}, 0, \ldots, 0 \right) $
+
+    $\|y_{\pm} - \tl F(a)\| = \frac{\varepsilon}{2} \implies y_{\pm}\in B_{\varepsilon}\left( \tl F(a) \right) \subseteq \tl F(U(a)) \implies \exists x_1\in U(a): \tl F(x_{\pm}) = y_{\pm} \iff  f(x_1) = f(a) \pm \frac{\varepsilon}{2}\quad F_1(x_{\pm}) = \ldots = F_k\left( x_{\pm} \right) \implies x_{\pm}\in E?!!  \implies $ точка $a$ не экстремум, что противоречит нашем предположению
+\end{proof}
+
+\section{Функция Лагранжа}
+
+\begin{definition}
+    [ ``большая'' функция Лагранжа]
+    $
+    \begin{matrix}
+        f\left( x_1, \ldots, x_{n}  \right) \\
+        F_1\left( x_1, \ldots, x_{n}  \right) =0\\
+        \ldots\ldots\ldots\\
+        F_k\left( x_1, \ldots, x_{n}  \right) =0
+    \end{matrix}\quad \mathcal L\left( x, \lambda \right)  = f(x) - \sum_{j=1}^{k} \lambda_iF_j(x)\quad \lambda = \left( \lambda_1, \ldots, \lambda_k \right) $
+
+    \[\nabla _af = \sum_{j=1}^{k} \lambda_j \nabla _aF_j\]
+\end{definition}
+
+\begin{theorem}
+    [Необходимое условие условного экстремума через дифференациал функции Лагранжа]
+
+    В условиях последней теоремы $\exists \lambda_1^*, \ldots, \lambda_k^*\in \R\quad \mathrm d_{\left( a, \lambda^* \right) } \mathcal J = 0$
+
+    В скалярной записи это запишется как:
+    $\begin{cases}
+        \frac{\partial \mathcal L}{\partial x_1}\left( a, \lambda^* \right)  = \p f_{x_1}(a) - \sum_{j=1}^{k} \lambda_j \p F_{jx_1}(a)\\
+        \vdots\\
+        \frac{\partial \mathcal L}{\partial x_n}\left( a, \lambda^* \right)  = \p f_{x_{n}}(a) - \sum_{j=1}^{k} \lambda_j^*\p F_{jx_{n} }(a)\\ \hline
+        \frac{\partial \mathcal L}{\partial \lambda_1}\left( a, \lambda^* \right) = 0 = F_1(a)\\
+        \vdots\\
+        \frac{\partial \mathcal L}{\partial \lambda_k}\left( a, \lambda^* \right) = 0 =F_k(a)
+    \end{cases} \iff  \begin{cases}
+        \nabla f = \sum_{j=1}^{k} \lambda_j \nabla _aF_jё
+    \end{cases}$
+\end{theorem}
+
+\section{Примеры приложения необходимого условия условного экстремума}
+
+\begin{problem}
+    Найти максимум и минимум квадратичной формы на сфере
+
+    \[Q(x) = \sum_{ki,j=1}^{n} q_{ij}x_ix_j\] -- $\forall $ квадратичная форма в $\R^n$
+
+    $x = \left( x_1, \ldots, x_{n}  \right) $
+
+    Продолжаем $[Q] = \left( q_{ij} \right) ^n_{i,j=1}$ -- симметричная
+
+    $S = \left\{ x\in \R^n:\|x\| = 1 \right\} \iff \sum_{i=1}^{n} x_i^2 = \|x\|^2 = 1 $ 
+
+    $F(x) = \|x\|^2-1$
+
+    $\mathcal L(x, \lambda) = Q(x) - \lambda F(x)$
+
+    $\nabla F = 2x$ ($F$ регулярно всюду в  $\R^n\setminus \left\{ 0 \right\} $)
+
+    <...>
+
+    Вывод: $\max_{x\in S}Q(x) = \max \left\{ \lambda: \lambda_i \text{ -- собственные числа } Q \right\} $ 
 
 
-
-
-
-
-
+\end{problem}
+$\sqsupset E\subseteq \R^n \quad f\in C\left( \Cl E \to  \R \right)  $. Тогда $\sup_E f = \sup _{\Cl E}$
 \end{document}
+\begin{proof}
+    $A = \sup _Ef\quad B = \sup_{\Cl E}f \implies B\geqslant A$ как $\sup$ по большему множеству.
+
+    $B\leqslant A$. От противного: существует последовательность $\left\{ y_k \right\} _{k=1}^{\infty } \subseteq f\left( \Cl E \right) $ 
+
+    $y_k\to B \implies \exists \left\{ x_k \right\} \subseteq \Cl E$ и $f(x_k) = y_k$
+
+     $\forall k\in \N  \exists \tl x_k \subseteq E\quad \|\tl x_k - x_k\|<\frac{1}{k}$
+
+     <..> вернёмся к этому доказательству позже
+\end{proof}
+
+\begin{statement}
+    $\sqsupset E$ -- замкнутое множество в $\R^n\quad f\in C(E)$ и $\lim_{\|x\| \to \infty} f = L$
+
+    Тогда \[\sup_E f \times f(E) \cup \{L\}\]
+\end{statement}
+\begin{proof}
+    По определению супремума существует $\left\{ y_j \right\}_{j=1}^{\infty }\subseteq f(E): \p y_j\to \sup_Ef \implies \exists  $ последовательность $\left\{ x_j \right\} \subseteq E: f(x_j) = y_j$. В силу обощённого принципа Больцано-Вейерштрасса $\exists $ подпоследовательность $\left\{ x_{j_i} \right\} _{i=1}^{\infty }: x_{j_i}\to x_*\in \hat \R_r$:
+    \begin{enumerate}
+        \item Если $x_* = \infty \quad \underbrace{f{x_{j_i}}}_{\to L} = y_{j_i} \underset{i\to \infty } \to \sup_E f$. Теорема о пределе композции
+        \item $x_*\neq \infty\quad x_*$ -- предельная точка для $E, E$ замкнуто   $\implies x_*\in E$
+
+             Т.к. $f$ непрерывно на  $E$
+
+             \[f(x_*) = \lim_{i \to \infty} f(x_{j_i} = \lim_{i \to \infty} y_{j_i} = \sup_Ef \implies \sup_E f \subseteq f(E)\]
+    \end{enumerate}
+\end{proof}
+
+\section{Касательные пространства к поверхностям}
+
+$\sqsupset S$ -- гладкая $k$-мерная поверхность пространства  $\R^n\quad q\in S$
+
+вектор $\tau\in \R^n$, для которого существует гладкий путь $\gamma: [a,b]\to S$ и существует $c\in [a,b]: \p \gamma(c) = \tau$ называется касательным в  $S$ в точке $q$ \[\gamma(c) = q\]
+
+$\Tq S$ -- набор всех касательных векторов к  $S$ в точке  $q$
+
+$\sqsupset \phi$ -- гладка локальная параметризация $S$ вблизи  $a$ ($\exists $ окрестность $U(0)$ в  $\R^n$ и $\exists $ Окрестность $V(q): \Phi(U(0)) = V(q)\cap S\quad \Phi(0) = q$) 
+
+$\gamma^1(t) = \left( t, 0, \ldots, 0 \right) ^T\quad \gamma^2(t) = \left( 0, t, 0, \ldots, 0 \right) ^T\quad \gamma^j:[0,1]\to \R^k\quad \tl \gamma^j = \phi(\gamma^j)$ -- гладкий путь в $S$
+
+$\tau^j = \left( \tl \gamma^j \right) ^{\prime}_t = \p \Phi \cdot  \left( \gamma^j \right) ^{\prime} = j$-ый столбец $\p\Phi$ 
+
+$\tau^1, \ldots, \tau^k$ -- канонические касательные векторам
+
+\begin{statement}
+    $\Tq S$ -- линейное пространство
+\end{statement}
+
+Локально $S$ также задаётся системой уравнений:
+
+ $\begin{cases}
+     F_1(x) = 0\\ \vdots \\ F_{n-k}(x) = 0\\
+ \end{cases}\quad \sqsupset \tau\in Tq(S)\quad \tau = \p\gamma(c)$, где $\gamma: [a,b]\to S\quad \gamma(c) = q$
+
+ \section{Лекция}
+
+ \begin{note}
+     $\exists \subseteq \R^n\quad f\in C\left( \Cl E \to \R \right) $
+
+     Тогда $A := \sup_E f = \inf_{\Cl E} f =: B$
+ \end{note}
+ \begin{proof}
+     Очевидно $A \leqslant B.\quad B\leqslant A$?
+
+     $\sqsupset x\in \Cl E \implies \exists \left\{ x_j \right\} _{j=1}^{\infty }\subseteq E: x_j\to x, j\to \infty $
+
+     $\forall j\in \N \quad f(x_j)\leqslant A, j\to \infty $
+
+     $f(x) = f\left( \lim_{j \to \infty} x_j \right)  = \lim_{j \to \infty} f(x_j) \leqslant A$
+
+     Перейдём к супремуму по $x: x\in \Cl E \implies B\leqslant A$
+ \end{proof}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{poverh}
+    \caption{poverh}
+    \label{fig:poverh}
+\end{figure}
+
+$S$-гладкая,  $k$-мерная поверхность.  $\gamma:[a,b]\to S\quad $-- гладкий путь в $S$
+
+$\p \gamma(c)$ для  $c\in [a,b]\quad \gamma(c) = p$
+
+$u = \left( u_1, u_2, \ldots, u_n \right) $
+
+$\p \phi_{u_1}(q)\quad \p \phi_{u_k}(q)\in \Tp S$ -- какнонические касательные векторы
+
+$\p \phi_{u_j}(q) = d_q\phi(e_j)$
+
+ $S$ локально задана как поверхность уровня
+
+ $\exists $ окрестность $U(p):$
+
+ \[S\cap \left( U(p) \right)  = \left\{ x\in U(p): F_1(x) =0, \ldots, F_{n-k}(x) = 0 \right\} \] 
+
+ $F = \left( F_1, \ldots, F_{n-k} \right) $ -- регулярно в $U(p)$
+
+  $\forall \tau\ini \Tp S\quad \forall j=1, \ldots, n-k\quad \tau \perp \nabla _p F_j$
+
+  \begin{statement}
+      Если $s$ -гладкая  $k$-мерная поверхность (в $\R^n$), $p\in S$, то  $\Tp S$ -- линейное подпространство  $\R^n$
+  \end{statement}
+  \begin{proof}
+\begin{figure}[!ht]
+    \centering
+    \incfig{skpoverh}
+    \caption{skpoverh}
+    \label{fig:skpoverh}
+\end{figure}
+
+Если $v_1, v_2\in \Tp S\quad c_1, c_2\in \R \implies v = c_1v_1 + c_2v_2\in \Tp S$
+
+Дополним набор $\nabla _pF_1, .., \nabla _pF_{n-k}$ до базиса ортогонального дополнения к $v\in \R^n$
+
+Добавляем $h^1 \ldots, h^{k-1}\quad \forall j\quad g^j\perp v$
+
+$\sphericalangle $ систему $n-1$ уравнений  $\begin{cases}
+    F_1(x) = 0\\
+    \vdots\\
+    F_{n-k}(x) = 0\\
+    \left<x-p, h^1 \right> = 0\\
+    \vdots\\
+    \left<x-p, h^{k-1} \right> = 0\\
+\end{cases}$
+
+Матрица $\begin{bmatrix} 
+        \nabla _pF_1\\
+        \vdots\\
+        \nabla _p F_{n-k}\\
+        h^1\\
+        \vdots\\
+        h^{k-1}
+    \end{bmatrix} $  имеет максимальный ранг $\implies $ система задёт (локально) гладкую $n - (n-1) = 1-$мерную поверхность 
+
+    По теореме о способах задания поверхности $\exists $ параметризация $\gamma: t\in \left( \alpha, \beta \right) \to \Gamma\quad 0\in \left( \alpha, \beta \right) ]quad \gamma(0) = p$
+
+    $\p \gamma \perp \nabla_p F_1, \ldots, \nabla _p F_{n-k}, h_1, \ldots, h_{k-1}$
+
+    $\implies \p \gamma(0)$ коллинеарна $v$
+
+    $\sphericalangle \tl \gamma(t) = \gamma(\Theta t)\quad \Theta \in \R\setminus \{0\}$
+
+    $\tl {\p \gamma}(t) = \Theta \p \gamma(\Theta t)$
+
+    $\tl {\p \gamma}(0) = \Theta \cdot  \p \gamma(0)$
+
+    Подбор $\Theta \implies \Theta \cdot  \p \gamma(0) = v$
+
+  \end{proof}
+
+  \begin{corollary}
+      $\dim \Tp S = k$
+
+      Т.к. канонические касательные линейно независимы,  $\in \Tp S, \implies \dim \Tp S \geqslant k$
+
+      С другой стороны $\dim \left( \Tp S \right) ^{\perp} \geqslant n-k$ (т.к. $\nabla _p F_j\in \left( \Tp S \right) ^{\perp} $)
+  \end{corollary}
+
+  $v\in \Tp S \iff  \begin{cases}
+      \left<\nabla _pF_1, v \right> = 0\\
+      \left<\nabla _p F_{n-k}, v \right> = 0\\
+  \end{cases} \iff  \begin{cases}
+  \frac{\partial F_1}{\partial x_1}(p)(v_1) + \ldots + \frac{\partial F_1}{\partial x_{n} }(p)v_n = 0\\
+  \ldots\\
+  \frac{\partial F_{n-k}}{\partial x_1}(p)(v_1) + \ldots + \frac{\partial F_{n-k}}{\partial x_{n} }(p)v_n = 0\\
+  \end{cases}\iff d_p F(v) = 0$
+
+  Можно считать, что дифференциалы $dx_1, \ldots, dx_{n} $ на касательном пространстве связаны системой возникающей при формальном дифференцировании системы $F(x) = 0$
+
+  $d_p F = 0\quad \begin{cases}
+  \frac{\partial F_1}{\partial x_1}(p)dx_1 + \ldots + \frac{\partial F_1}{\partial x_{n} }(p)dx_{n}  = 0\\
+  \ldots\\
+  \frac{\partial F_{n-k}}{\partial x_1}(p)dx_1 + \ldots + \frac{\partial F_{n-k}}{\partial x_{n} }(p)dx_{n}  = 0\\
+  dx_i(v) = v_i\\
+  \end{cases}$
+
+ \begin{corollary}
+     $\Tp S = d_q \Phi\left( \R^k \right) $ 
+
+     Оба объекты линейные подмножества $\R^n$ размерности $k$ и содержат  $d_q\Phi(e_1), \ldots, d_q\Phi(e^k)$
+ \end{corollary}
+
+ \begin{example}
+     $x^2+y^2+z^2 = R^2\quad S_2(\R)$
+
+     уравнение касательного пространства $2\left( xdx, ydy, zdz \right)  = 0$
+
+     $v\in T_{(x,y,z)}S_2(\R) \iff  xv_1, yv_2, zv_3 = 0$
+ \end{example}
+
+ $\Tp S$ -- касательное линейное пространство
+
+  $\Lp S$ -- афинное касательное пространство  $\Lp S = \Tp S + P$
+
+   $x\in \Lp S\quad x - p\in \Tp S$
+
+   $\Lp S = \left\{ x\in \R^n: d_pF(x-P) = 0 \right\} $ 
+
+   $d_pF(x-p) = 0 \iff \begin{cases}
+       \frac{\partial F_1}{\partial x_1}(p)(x_1-p_1) + \ldots + \frac{\partial F_1}{\partial x_{n} }(p)(x_{n} -p_n) = 0\\
+       \ldots\\
+       \frac{\partial F_{n-k}}{\partial x_1}(p)(x_1-p_1) + \ldots + \frac{\partial F_{n-k}}{\partial x_{n} }(p)(x_{n} -p_n) = 0\\
+   \end{cases}$ 
+
+   Если $k = n-1$, то  $\Tp S$ и  $\Lp S$ называются касательными (гипер)плоскостями
+
+   Касательная гиперплоскость к графику функции?
+
+   $S = \Gamma_f = \left\{ \left( x_1, \ldots, x_{n-1}, y \right) \in \R^n, \quad \left( x_1, .., x_{n-1}\inO \subseteq \R^{n-1} \right)  \right\} \quad y = f\left( x_1, \ldots, x_{n-1} \right) $ 
+
+   $f\in C^1(O)$
+
+   $F\left( x_1, \ldots, x_{n-1}, y \right)  = f\left( x_1, \ldots, x_{n-1} \right)  - y$
+
+   $\sphericalangle F$ в $O\times \R$
+
+   $\nabla_{p,y}F = \left( \p f_{x_1}(p), \ldots, \p f_{x_{n-1}}(p), -1 \right) $ 
+
+   $x\in \Lp \Gamma_f \iff \p f_{x_1}(p)(x_1-p_1) + \ldots + \p f_{x_{n-1}}(p)(x_{n-1}-p_{n-1}) - \left( y - p_y \right)  = 0$
+
+   $y = f\left( p_1, \ldots, p_{n-1} \right)  + \left<\nabla _{p_1, \ldots, p_{n-1}}f, (x-p_x) \right>$
+
+   \begin{statement}
+       [Достаточное условие условного экстремума]
+
+       $\sqsupset O$ -- открытое в $\R^n\quad f, F_1, \ldots, F_{n-k}\in C^2\left( O\to \R \right) \quad F = \left( F_1, \ldots, F_{n-k} \right) , p$ -- решение системы \[F(x) = 0\]
+
+       $\sqsupset $ в точке $p$ выполнено необходимое условие условного экстремума для  $f$ относительно $F(x) = 0$.  $L\left( x_1, .., x_{n}  \right)  = \mathcal L\left( x_1, \ldots, x_{n}, \lambda_1^*, \ldots, \lambda_{n-k}^*  \right) $
+
+       Тогда:
+       \begin{itemize}
+           \item  Короткий вариант
+
+               Если  $d^2_pL >0 $, то $p$ -- условный минимум
+
+               Если  $d^2_pL<0$, то  $p$ -- условный максимум
+
+               Из $d^2_pL \gtrless 0$, то НЕ следует, что $p$ не точка условного экстремума
+           \item Подробный вариант:
+
+               Если $d^2_pL|_{\Tp S}>0$, то $p$ -- точка условного минимума
+
+               Если  $d^2_pL|_{\Tp S}<0$, то $p$ -- точка условного максимума
+
+               Если  $d^2_pL|_{\Tp S}\gtrless$, то $p$ -- седловая точка (условного экстремума нет)
+       \end{itemize}
+   \end{statement}
+
+   \begin{example}
+       $f(x,y) = x^2+y^2$ на $x + y = 1$. найти условный экстремум.
+
+       1-ый способ:  $y = 1-x\quad g(x) = f(x,1-x) = x^2+(1-x)^2 = 2x^2-2x+1$
+
+       $g(x)$ имеет минимум в точке $x = \frac{1}{2}$ (глобальный) $\implies f(x,y)$ имеет условный (глобальный) минимум в точке $(\frac{1}{2}, \frac{1}{2})$ 
+
+       2-ой способ: $\mathcal J\left( x, y, \lambda \right)  = x^2+y^2-\lambda \left( x+y-1 \right) $
+
+       $\begin{cases}
+           0 = \mathcal J_x^{\prime} = 2x - \lambda\\
+           0 = \mathcal J_y^{\prime} = 2y-\lambda\\
+           x+y = 1\\
+       \end{cases} \implies   \begin{cases}
+           x = y = \frac{1}{2}\\
+           \lambda = 2x = 1\\
+       \end{cases}$
+
+       $L(x,y) = x^2+y^2-(x+y-1)$
+
+       $\pp L \iff  \begin{bmatrix} 2&0\\0^2\\ \end{bmatrix} $
+
+       $d^2 L > 0$ по короткому  $\quad p = \left( \frac{1}{2}, \frac{1}{2} \right) $ -- условный минимум
+   \end{example}
+
+   Наводящие соображения по достаточному условию условного экстремума:
+   \begin{enumerate}
+       \item $S = \left\{ x\in O\quad F(x) = 0 \right\} $. Исседуется $f|_S$
+
+           $\mathcal L(x) = f(x) - \sum \lambda_kF_k(x)$
+
+           $L = \mathcal L(x, \lambda^*)$
+
+            $L|_S = f_L$,  таким образом условный экстремум  $f \leftrightarrow $ условный экстремум $L$
+
+             $\phi$ -- локально гомеомофризм
+
+             $p$ -- точка условного экстремума для  $L|_S \iff  $ Для $L\circ \phi$ точка  $\phi^{-1}(p) = q$ -- безусловный экстремум
+
+             $d^2(L\circ \phi) \leftrightarrow d^2_pL(d_q\phi) + d_pL\left( d^2_q \phi \right) $ -- одномерная формула 
+
+   \end{enumerate}
+
+   \section{О задача отыскания наибольшего и наименьшего значения функции на множестве.}
+
+   $K$ -- компакт,  $f\in C(K)$
+
+   $f_k$ не имеет экстремума на $K \setminus  K^* \implies \max_K f = \max _{K^*}f, \min..$
+
+
+    Если $K = S_1\cup \ldots\cup S_N$, где $S_1, \ldots, S_N$ -- поверхности различных размерностей, $S_j\cap S_k \neq 0$
+
+    $\left( S_j \right) _*$ -- множество точек, в которых выполняется НУУЭ (необходимое условие условного экстремума) относительно $x\in S_j$ (либо нарушается ранг системы, задающей нашу поверхность  $S_j$)
+
+    $K_* = \left( S_1 \right) _* \cup \ldots \cup \left( S_N \right) _*$ -- если это конечное множество, то можно их уже просто сравнить
+
+    \begin{example}
+        Найти наибольшее и наименьшее значение функции $f(x,y,z)$ на компактном множестве $K$ ограниченном поверхностями  $z = 1$ и  $z = x^2+y^2$
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{paraplane}
+    \caption{paraplane}
+    \label{fig:paraplane}
+\end{figure}
+
+$S_0 = \Int K\quad S_1 = \left\{ z = 1, x^2+y^2<1 \right\} \quad S_2 = \left\{ \left( x, y, z \right) : z = x^2+y^2, x^2+y^2<1 \right\} \quad S_3 = \left\{ \left( x,y,z\right): z = 1, x^2+y^2=1  \right\} $ 
+
+на $S_0$ необходимое условие безусловного экстремума: \[dF = 0 \iff  \begin{cases}
+     0 = \p f_x = y\\
+     0 = \p f_y = x+z\\
+     0 = \p f_z = y\\
+\end{cases} \implies   \begin{cases}
+    y = 0\\
+    z = -x\\
+\end{cases}\quad \left( x,0,-x \right) \quad f\left( x,0,-x \right)  = 0\]
+
+На $S_1\quad g(x,y):= f\left( x,y,1 \right)  = y(x+1)\quad  \begin{cases}
+    \p g_x = 0 = y\\
+    \p g_y = 0 = x+1\\
+    x^2+y^2<1
+\end{cases} \iff (-1,0)??\quad \O $
+
+на $S_2\quad f(x,y,z) = xy + y\left( x^2+y^2 \right)  = x^2y+xy+y^3 = h(x,y)\quad x^2+y^2 <1$
+
+\[\begin{cases}
+    \p h_x  = 0 = 2xy+y\\
+    \p h_y = 0 = x^2+x+2y^2\\
+    x^2+y^2<1
+\end{cases} \]
+
+на $S_3\quad f = (xy+y)_{x^2+y^2=1} = \sin \varphi\left( \cos \varphi + 1 \right) = \varkappa(\varphi)\quad \varphi\in[-\pi, \pi ] $
+
+\begin{align*}
+    \p \varkappa(\varphi) &= \cos \varphi\left( \sin \varphi \right)  -\sin ^2\varphi\\
+                          &= \cos ^2\varphi + \cos \varphi - \left( 1-\cos ^2\varphi \right)  \\
+                          &= 2\cos ^2\varphi + \cos \varphi - 1  \\
+                          &= 2t^2+t-1 =: \mu(t) \\
+.\end{align*}
+
+$(2t^2+t)^{\prime} = 4t+1$
+
+$\varkappa(t=-1) = 0\quad \varkappa(t = \frac{1}{2} = \pm \frac{\sqrt{3} }{2}\left( \frac{1}{2} + 1 \right) = \pm \frac{3\sqrt{3} }{4}$
+
+    Подозрительные значения: $0, \pm \frac{\sqrt{12} }{72}\quad \pm \frac{3\sqrt{3} }{4}$ 
+
+    $\max_K f = \frac{3\sqrt{3} }{4}\quad \min _K f = -\frac{3\sqrt{3} }{4}$
+    \end{example}
+
+    \begin{example}
+        Найти $\sup_Ef\quad E = \left\{ (x,y,z)\in \R^3\quad x,y,z>0 \right\} $ 
+
+        $f(x,y,z) = (x+2y+3z)e^{-(x+y+z)}$
+
+        $g(t) = te^{-t}$
+
+        $f(x,y,z)\leqslant (3x+3y+3z)e^{(x+y+z)} = 3g(t)\leqslant 3\cdot \sup_{t\geqslant 0} g(t) = \frac{3}{e}$ 
+
+        $f(0,0,1) = 3 \cdot  e^{-1} = \frac{3}{e}\leqslant \sup_{\Cl E}f \implies \sup_{\Cl E}f = \sup_Ef = \frac{3}{e}$
+    \end{example}
+
+    \section{Функциональная последовательности и ряды}
+
+    $\exists \subseteq \R^n\quad f: E\to \R$ (или $f:E\to \C$)
+
+    $\left\{ f_k(x) \right\} _{k=1}^{\infty };\quad f_k: E\to \C$
+
+    \begin{definition}
+        Говорят, что функциональная последовательность $\left\{ f_k(x) \right\} $ сходиться к $f(x)$ поточечно на множестве  $E$, если  $\forall x_0\in E\quad$ числовая последовательность $\left\{ f_k(x_0) \right\} $ сходиться к $f(x_0)$ 
+    \end{definition}
+
+    Примеры:
+    \begin{enumerate}
+        \item $f_k(x) = x^k\quad E = [0,1]\quad f(x) = \begin{cases}
+                0, x \in [0,1)\\
+                1, x = 1\\
+        \end{cases}$
+    \end{enumerate}
+
+    \begin{definition}
+        [Поточечная сходимость] $d_k(x) \to  f\left(x \right) $ на $E \iff \forall x\in E\forall \varepsilon>0 \exists N = N(\varepsilon, x)>0:\quad \forall k\geqslant N\quad f_k(x) - f(x)<\varepsilon $
+    \end{definition}
+
+    \begin{definition}
+        [Равномерная сходимость]
+
+        $\sqsupset f, f_k: E\to \C$. Говорят, что $\left\{ f_k \right\} $ сходится к $f$ \underline{равномерно}, если \[\forall \varepsilon>0 \exists N = N(\varepsilon): \forall k\geqslant N \forall x\in E\quad |f_k(x)-f(x)| <\varepsilon\]
+    \end{definition}
+
+    \begin{note}
+        $\rho_k = \sup_E \left| f_k(x \right| $, то $d_k(x) \rightrightarrows f(x)$ на  $\iff \rho_k\to 0$ при $k\to \infty $
+    \end{note}
+    \begin{proof}
+        \begin{itemize}
+            \item []
+            \item [$\implies $] $\forall k\geqslant n \implies \rho_k \leqslant \varepsilon \implies \rho_k\to 0$ при $k\to \infty $
+            \item [$\impliedby $] $\rho_k\to 0 \implies \forall \varepsilon > 0\exists  N: \forall k\geqslant N\quad 0\leqslant \rho_k<\varepsilon \implies \forall x\in E\quad \left| f_k(x) - f(x) \right| \leqslant \rho_k<\varepsilon$
+        \end{itemize}
+    \end{proof}
+
+    \begin{example}
+        $f_k(x) = x^k\quad \rho_k = \sup_{x\in [0,1]} \left| f_k(x) - f(x)\right|= \max\left\{ \sup_{x\in [0,1)}|f_k - f|, |f_k(0) - f(0)| \right\} = \sup_{x\in [0,1)} \left| f_k(x) - f(x) \right|  = \sup_{[0,1)} x^k = \sup_{[0,1]}x^k = 1$
+
+        $\rho_k \equiv 1 \not\to 0 \implies  f_k\not\rightrightarrows f(x)$ на $E$
+
+        \begin{note}
+            $f_k\not\rightrightarrows f$ и на  $[0,1)$
+
+        \end{note}
+            $E_{\delta} = [0,\delta], \delta < 1\quad \rho_k = \sup_{x\in [0,\delta]} \left| f_k(x) - f(x) \right| = \sup _{x\in [0,\delta]}x^k = \delta^k \implies  \rho_k\to 0, k\to \infty  \implies  f_k\rightrightarrows f$ на $E_{\delta}$
+            \begin{note}
+                Если $\forall j\in \N \quad f_k\rightrightarrows f$ на $E_j$, то из этого не слудет, что  $f_k\rightrightarrows f$ на  $\bigcup\limits_{j=1}^{\infty }E_j $, но это становится верным при конечном количестве $E$
+            \end{note}
+    \end{example}
+
+ \end{document}

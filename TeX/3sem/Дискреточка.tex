@@ -140,6 +140,7 @@
 \DeclareMathOperator{\Beg}{Beg}
 \DeclareMathOperator{\len}{len}
 \DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Chi}{Chi}
 \begin{document}
     \maketitle
     \chapter{Графы, неалгоритмические свойства}
@@ -785,4 +786,117 @@ $6 + 3E - 3V \leqslant  2E$
     \label{fig:rasdelat}
 \end{figure}
 \end{proof}
+
+
+
+\section{Раскраски графов}
+
+Все графы здесь будут неориентированы.
+
+\begin{definition}
+    Раскраской графа в $k$ цветов -- отображение $\varphi$, сопоставляющее каждой вершине число от $1$ до $k$, так что для любых двух смежных вершин  $uv\in E\quad \varphi(u)\neq \varphi(v)$
+\end{definition}
+
+\begin{example}
+    $k = 2$
+\end{example}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{k2}
+    \caption{k2}
+    \label{fig:k2}
+\end{figure}
+
+\begin{statement}
+    Раскраска в два цвета существует $\iff $ в $G$ нет нечётных циклов
+\end{statement}
+\begin{proof}
+    \begin{itemize}
+        \item []
+        \item [$\implies $] Очевидно (картинка)
+        \item [$\impliedby $] $dist(1,v) \% 2 = 0 \implies \varphi(v) =1\quad$ иначе $\varphi(v) = 2$
+    \end{itemize}
+\end{proof}
+
+В 3 цвета и дальше уже NP-полная задача
+
+\begin{note}
+    $G, x$ цветов
+
+    $P(G, x)$ -- хроматический многочлен графа G --  количество раскрасок  $G$ в  $x$ цветов
+
+     \begin{enumerate}
+         \item $P(O_n, x) - x^n$
+         \item  $P(K_n, x) = A_x^n = x(x-1)(x-2)\ldots (x-n+k + 1)$ 
+         \item $P(T_n, x) = P\left( T_{n-1}, x \right) \cdot (x-1) = P\left( T_1, x \right) \cdot (x-1)^{n-1} = x\left( x-1 \right) ^{n-1}$
+    \end{enumerate}
+\end{note}
+
+\begin{statement}
+    $\forall G\quad P(G, *)$ -- многочлен и $\deg P(G, *) = n$
+\end{statement}
+\begin{proof}
+    Если убрать одно ребро, то ограничений станет меньше, раскрасок больше и мы посчитаем лишние. Какие? Те, в которых две вершины, соединённые тем ребром имеют один цвет. Найдём количество раскрасок, в которых две фиксированные смежные вершины имеют один цвет. Для этого стянем эти две вершины
+
+    $P(G, x) = P\left( G\setminus \{uv\}, x \right) - P\left( G / uv,x \right)  $ 
+
+    База: $P(O_n, x) = x^n$
+
+    Переход:  $P(G,x)$ -- разность многочленов степени  $n$ и  $n-1$
+\end{proof}
+
+\begin{note}
+    $P(O_n, x) = x^n + 0\cdot x^{n-1}$
+
+    $P(T_n,x) = x(x-1)^{n-1} = x^n - (n+1)x^{n-1} + \ldots$
+
+    $P(K_n, x) = (x-0)(x-1)\ldots(x-(n-1)) = x^n - \binom n 2 x^{n-1} + \ldots$
+
+    $P(G_n, x) = x^n - |E|x^{n-1} + \ldots$
+
+    $P(G, x) = P\left( G\setminus uv, x \right)  - P\left( G / uv, x \right)  = x^n - (|E|-1)x^{n-1} + \ldots - x^{n-1} + \ldots = x^n - |E|x^{n-1} + \ldots$
+\end{note}
+
+\begin{definition}
+    $\Chi(G)$ -- минимальное число цветов, для которых сущесвует раскраска графа  $G$ -- хроматическое число графа  $G$
+\end{definition}
+
+\begin{note}
+    $\gamma(G)\leqslant k \implies \exists $ раскраска в $k+1$ цветов,  $\Chi(G)\leqslant \Delta(G) + 1$
+\end{note}
+
+\begin{theorem}
+    [Брукс]
+
+    $G$ -- связный,  $G\neq K_n$ или $C_{2n+1} \implies \Chi(G) \leqslant \Delta(G) = k$
+\end{theorem}
+\begin{proof}
+    $k = 0\quad G = K_1$
+
+    $k = 1\quad G = K_2$
+
+    $k=2\quad G$ -- путь или чётный цикл, его можно раскрасить в два цвета
+
+     $k\geqslant 3$
+
+     Берём вершину с $\deg < k$, запускаем dfs, жадно красим
+
+     $G$ --  $k$-регулярный, все вершины имеют степень  $k.\quad k < n-1$, иначе граф был бы полным. Между какими-то двумя вершинами нет ребра.  $uxv\quad uv$ ребра нет. Жадно продлеваем путь, не заходя в посещённые вершины:  $uxv v_4 v_5 \ldots v_r$
+     \begin{enumerate}
+         \item Мы получили гамильтонов путь. У вершины $x$ степень как минимум 3, значит у неё есть ещё какой-то сосед. Пусть у  $u,v$ -- цвет 1.
+     \end{enumerate}
+\end{proof}
+
+\begin{statement}
+    Любой планарный граф можно покрасить в 5 цветов
+\end{statement}
+\begin{proof}
+    $\deg V_{min}\leqslant 4 \implies $ есть свободный цвет
+\end{proof}
+
+\begin{theorem}
+    
+\end{theorem}
+
 \end{document}

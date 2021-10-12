@@ -965,4 +965,183 @@ $F(x,y,\p y) = 0$ --уравнение множества $\sigma$ в прост
         $\psi \not\equiv e^{2x-1}$
     \end{enumerate}
 \end{example}
+
+\section{Уравнения высшего порядка}
+\subsection{Основные понятия}
+\begin{definition}
+    [Уравнение n-го порядка]
+    \[F(x,y,\p y, \ldots, y^{(n)} = 0\]
+\end{definition}
+
+\begin{definition}
+    Функция $\varphi$ на интервале $\left( a, b \right) $ -- решение такого уравнения, если:
+    \begin{enumerate}
+        \item $\varphi\in C^n(a,b)$
+        \item Подстановка обращает уравнение в тождество \[F(x,\varphi, \p \varphi, \ldots, \varphi^{(n)}) \equiv 0\]
+            на $(a,b)$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    [Каноническое уравнение $n$-го порядка]
+    \[y^{(n)} = f\left( x, y, \p y, \ldots, y^{n-1} \right) \]
+\end{definition}
+
+\begin{definition}
+    Задаче Коши для канонического уравнения $n$-го порядка называют задачу нахождения его решения, удовлетворяющего начальным условиям:
+     $\begin{cases}
+         y(x_0) = y_0\\
+         y\left( x_0 \right) =y_1\\
+         \vdots\\
+         y\left( x_{0} \right) =y_{n-1}\\
+     \end{cases}$
+
+     Числа $\left( x_0, y_0, \ldots, y_0^{n-1} \right) $ -- начальные данные 
+\end{definition}
+
+\begin{note}
+    [Геометрический смысл задачи Коши на уравнениях второго порядка]
+    $\begin{cases}
+        \pp y = f\left( x, y, \p y \right)\\
+        y(x_0) = y_0\\
+        \p y(x_0) = \p y_0\\
+    \end{cases}$        
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{geokasha}
+    \caption{geokasha}
+    \label{fig:geokasha}
+\end{figure}
+\end{note}
+\begin{note}
+    [Механический смысл]
+
+    $x$ -- координата точки,  $t$ -- время
+
+     $\frac{dx}{dt} = \overset \cdot x$
+
+     $\begin{cases}
+     \ddot x = f\left( t, x, \dot x \right)\\
+     x\left( t_0 \right)  = x_0\\
+     \dot x \left( t_0 \right)  = v_0\\
+     \end{cases}$
+\end{note}
+
+\begin{theorem}
+    [Сущетсвование решения Задачи Коши для канонического уравнения $n$-го порядка]
+
+    $G$ -- область в  $\R^{n+1}\quad f\in C(G)\quad \left( x_0, y_0, \ldots, y_0^{(n-1)} \right) \implies  $ в некоторой окрестности точки $x_0\ \exists $ решение
+\end{theorem}
+
+\begin{theorem}
+    [Единственность решения Задачи Коши для канонического уравнения $n$-го порядка]
+
+    $G$ -- область в  $\R^{n+1}_{x, y, \p y, \ldots, y^{n-1}}$
+
+    $f, \p f_y, \p f_{\p y}, \ldots, \p g_{y^{(n-1)}}\in C(G)\quad \left( x_0, y_0, \ldots, y_0^{n-1} \right) \in G$
+
+    $\varphi_1, \varphi_2$ -- решение Задачи Коши на $(a,b) \implies \varphi_1 \equiv \varphi_2$ на $\left( a,b \right) $
+\end{theorem}
+
+\begin{definition}
+    Решение $\varphi$ на $(a,b)$ называется \underline{особым}, если для любой точки $x_0\in (a,b)$ найдётся другое решение $\psi$, т.ч. \[\psi(x_0) = \varphi(x_0)\quad \p \psi(x_0) = \p \varphi(x_0), \ldots, \psi^{(n-1)}(x_0) = \varphi^{n-1}(x_0)\], при этом $\varphi\neq \psi$ в любой сколько угодно малой окрестности $x_0$
+\end{definition}
+\subsection{Методы понижения}
+
+ \begin{enumerate}
+     \item $F(x, y^{(k)}, \ldots, y^{(n)} = 0$ (нет $y, \p y, \ldots, y^{(k-1)}$ )
+
+         Простейший случай $y^{(n)} = f(x)\quad \left( y^{(n-1)} \right) ^{\prime} = f(x) \implies y^{(n-1)} = \int f(x)dx + C$
+
+         \begin{example}
+             \[\pp y = \sin x\]
+             \begin{gather*}
+                 \p y = \int \sin xdx + C_1 = -\cos x + C_1\text{ -- первый интеграл }\\
+                 y = \int\left( -\cos x+C_1 \right) dx + C_2 = -\sin x + C_1x + C_2 \text{ -- второй интеграл }\\
+             \end{gather*}
+         \end{example}
+
+         В общем случае делаем замену $z = y^{(k)}$, понижаем порядок уравнения на $k$ единиц
+     \item  \[F(y, \p y, \ldots, y^{(n)} = 0\] (нет $x$) Подстановка  $\p y = z(y)$ понижает порядок уравнения на  $1$
+
+         Допустим  $y$ -- решение такого уравнения и сущесвует  $y^{-1} \implies \p y(x) = \p y\left( y^{-1}\left( y(x) \right)  \right) $, т.е. $\p y (x) = z(y(x))\quad z = \p y \circ y$
+
+         Получим уравнение, которому удовлетворяет функция  $z$. Далее не пишем  $x$ для краткости
+
+         $\p y  = z(y)\quad \pp y = \p {z(y)} = \p z(y)\p y \implies y^{(3)} = \ldots = \pp z(y) \cdot  z(y)^2 + \left( \p z(y) \right) ^2 \cdot  z(y)$
+        
+         $F(y, z(y), \p z(y)z(y), \pp z(y)z(y)^2 + \p z(y)^2z(y))\equiv 0$ при $x\in (a,b)$ или при  $y\in (A,B)$
+
+         Таким образом  $z$ -- решение уравнения  $F(y, z, \p z z, \pp zz^2+ z^{\prime 2}z = 0$
+
+         \begin{example}
+             $\pp y + y\p y = 0\quad y(0) = 2\quad \p y(0) = -2$
+
+             решаем  $\pp y = -y\p y$
+
+             т.е.  $f(x,y, \p y) = -y\p y $
+
+             $f\in C\left( \R^3_{x, y, \p y} \right) \implies \forall $ Задачи Коши имеется решение
+
+             $\p f_y = -\p y\quad \p f_{\p y} = -y$
+
+             $\p f_y, \p f_{\p y}\in C\left( \R^3_{x, y, \p y} \right) \implies \forall $ Задачи Коши имеет единственно решение
+
+             Сделаем подстановку $\p y = z(y) \implies \pp y = \p z(y)\p y = \p zz \implies \p zz+yz = 0\quad z\left( \p z + y \right) = 0$
+
+             $z = 0$, т.е.  $\p y = 0$ не даёт решения Задачи Коши
+
+             $\sphericalangle \p z = -y\quad z = \int (-y)dy + C = -\frac{y^2}{2}+C_1$
+
+             Воспользуемся начальными данными:
+
+             $\p y(0) = \frac{-y_0^2}{2}+C_1\quad -2 = -\frac{2^2}{2} + C_1 \implies C_1 = 0$ 
+
+             $\p y = - \frac{y^2}{2}$ и $y = 0$ -- не решение,  $-\int \frac{2dy}{y^2} = \int dx \implies \frac{2}{y} = x+C_2$ 
+
+             начальные данные $\implies \frac{2}{2} = 0+C_2 \implies C_2 = 1$ 
+
+             $y = \frac{2}{x+1}$ 
+         \end{example}
+\end{enumerate}
+\subsection{}
+
+\begin{definition}
+    \[F(x, y, \p y, \ldots, y^{(n)} = 0\]-- уравнение однородное отночительно $y, \ldots, y^{(n)}$, если $\forall t\quad F(x,ty, t\p y, \ldots, ty^{(n)} = t^{\alpha} F(x, y, \p y, \ldots, y^{(n)})$
+
+    Замена $z = \frac{\p y}{y}$ понижает порядок уравнения
+\end{definition}
+\subsection{ Уравнение в точных производных}
+
+\begin{definition}
+    Уравнение $F(x,y, \p y, \ldots, y^{(n)}) = 0$ -- уравнение в точных производных, если $\exists \phi = \phi(x,y,\p y, \ldots, y^{(n-1)}$, что \[\frac{d}{dx}\phi(x,y,\p y, \ldots, y^{(n-1)}) = F\left( x, y, \p y, \ldots, y^{(n)} \right)  \]
+\end{definition}
+
+\begin{statement}
+    Пусть $F(x,y, \ldots, y^{(n)})$ -- уравнение в точных производных и функция $\phi$ удовлетворяет определению. Тогда  $y$ -- решение  \[\iff \exists C:\quad \phi\left( x, y, \p y, \ldots, y^{(n-1)} \right) = C\]
+\end{statement}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}
