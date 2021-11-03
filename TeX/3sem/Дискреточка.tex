@@ -141,6 +141,7 @@
 \DeclareMathOperator{\len}{len}
 \DeclareMathOperator{\Ker}{Ker}
 \DeclareMathOperator{\Chi}{Chi}
+\DeclareMathOperator{\Def}{Def}
 \begin{document}
     \maketitle
     \chapter{Графы, неалгоритмические свойства}
@@ -896,7 +897,280 @@ $6 + 3E - 3V \leqslant  2E$
 \end{proof}
 
 \begin{theorem}
-    
+..    
 \end{theorem}
 
+\section{Паросочетания}
+
+\begin{definition}
+    Паросочетание -- множество рёбер $M\subseteq E$, такое что никакие два ребра не имеют общих вершин \[\forall e, f\in M\quad e, f \text{не имееют общих концов}\]
+
+    $\p \alpha(G)$ -- максимальное паросочетание в графе  $G$
+\end{definition}
+
+\begin{definition}
+    $I \subseteq V$ -- независимое множество, если никакие две вершины из него не связаны ребром.
+
+    $\alpha(G)$ -- максимальное независимое множество.
+\end{definition}
+
+\begin{definition}
+    Вершинное покрытие -- множество вершин, такое что у каждого ребра хотя бы один конец в этом множестве.
+
+    $\beta(G)$ -- минимальное вершинное покрытие
+\end{definition}
+
+\begin{definition}
+    Рёберное покрытие -- множество рёбер, чтобы любая вершина являлась концом хотя бы одного ребра из этого множества
+
+    $\p \beta(G)$ -- минимальное рёберное покрытие
+\end{definition}
+
+\begin{note}
+    $\Chi(G)$ -- минимальное количестве цветов для вершинной покраски
+
+    $\p \Chi(G)$ -- минимальное количество цветов для рёберной покраски
+\end{note}
+
+\begin{statement}
+    $I$ -- независимое  $\iff V \setminus I$ -- вершинное покрытие
+\end{statement}
+
+\begin{corollary}
+    $\alpha(G) + \beta(G) = n$
+\end{corollary}
+
+\begin{definition}
+    Клика в графе -- множество вершин, в котором каждая пара вершин связана ребром.
+
+    Изолированное множество иногда называют антикликой
+
+    Размер максимальной клики в графе -- $\omega(G)$
+\end{definition}
+
+\begin{statement}
+    $\alpha(G) = \omega(G)$
+\end{statement}
+
+\begin{definition}
+    Паросочетание называется совершенным, если оно покрывает все вершины (является рёберным покрытием).
+\end{definition}
+
+\begin{corollary}
+    $n$ -- нечётно  $\implies $ нет совершенного паросочетания
+\end{corollary}
+
+\begin{note}
+    В еже на 4 вершины ($K_{1,3}$) совершенного паросочетания нет, значит условие не необходимое-и-достаточное.
+\end{note}
+
+\begin{definition}
+    $o(G)$ -- числа нечётных компонент связности
+\end{definition}
+
+\begin{statement}
+    Если $\exists A\subseteq V: |A| < o(G\setminus A)$, то в $G$ нет совершенных паросочетаний
+\end{statement}
+
+\begin{definition}
+    Множество Татта -- множество, удалив которое в графе получается больше нечётных компонент связности, чем вершин в этом множестве
+\end{definition}
+
+\begin{theorem}
+    [Татта]
+
+    $G$ содержит совершенное парочочетание  $\iff \forall A \subseteq V\quad |A| \geqslant o(G\setminus A)$
+\end{theorem}
+\begin{proof}
+   \begin{itemize}
+       \item []
+       \item [$\implies $] предыдущее утверждение
+       \item [$\impliedby $]
+
+           $A = \O  \implies  0\geqslant o(G) \implies $ количестве вершин в $G$ -- чётно 
+
+           Предположим есть контрпример. Среди всех котрпримеров выберем с минимальным числом вершин, а среди них с максимальным числом рёбер.
+
+           $G$ -- не полный граф, т.к. при чётном количестве вершин в нём было бы паросочетание.
+
+            $\sphericalangle uv\not\in E\quad \sphericalangle G\cup uv = \p G$, может ли после такой опреации появиться множество Татта? Нет, не может.
+
+            $o\left( \p G\setminus  A \right) = O(G\setminus A)$, если в $A$ одна из вершин  $u$ или $v$
+
+             Если $u$ и $v$  в одной компоненте, то тоже равны
+
+             Если в разных и одна из компонент нечётная, то равны. Если обе компоненты нечётны, то левая меньше
+
+             Итого: $o\left( \p G\setminus A \right) \leqslant o\left( G \setminus  A \right) \leqslant |A|$
+
+             Множества Татта появиться не могло, а значит добавление любого ребра приводит у полному паросочетанию
+
+             $\forall uv\not\in E\quad G\cup uv$ содрежит совершенное паросочетание.
+
+            $U = \left\{ u: deg u = n-1 \right\} $
+
+            $U \neq  V$ (иначе он был бы полным)
+
+             \begin{lemma}
+                 $G\setminus U$ -- объединение полных графов
+             \end{lemma}
+             \begin{proof}
+                 Предположим, что это не так. Значит в графе $G\setminus U$ есть хотя бы одна компонента, которая не полный граф. В ней хотя бы три вершины, т.к. две вершины соединённый ребром это полный граф.
+
+                 Рассмострим три вершины $xyz$, т.ч.  есть рёбра  $xy$ И  $yz$, но не  $xz$ (если таких нет, то отношение соединённости рёбром транзитивно и граф полон).
+
+                 Т.к.  $y\not\in U$, значит $\exists w: yw\not\in E$
+
+                 $\sphericalangle G\cup xz$. По предыдущей лемме он содержит совершенное паросочетание $M_1$
+
+               $\sphericalangle G\cup yw$. По лемме он содержит совершенное паросочетание $M_2$
+
+               $\sphericalangle M_1 \bigoplus M_2$
+             \end{proof}
+   \end{itemize}
+\end{proof}
+....
+
+
+\begin{definition}
+    Граф называется фактор-критическим, если для любой его вершины граф $G\setminus u$ содержит совершенное паросочетание
+
+    $K_{2n+1}\quad C_{2n+1}$
+
+    $\p \alpha(G) = \p \alpha(G\setminus u) = \left\lfloor \frac{n}{2} \right\rfloor$
+\end{definition}
+
+\begin{theorem}
+    [Галлаи]
+    $G$ -- связный 
+
+    $G$ -- фактор критический  $\iff \forall u\in v\quad \p \alpha(G\setminus u) = \p \alpha(G)$
+\end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item []
+        \item [$\implies $] \checkmark
+        \item [$\impliedby $] $G$ не содержит совершенного паросочетания  $\implies G$ содержит множество Татта $S$
+             \begin{enumerate}
+                 \item $S = \O \quad \deg G = (G) - 0 = 1 \implies \p\alpha(G) = \left\lfloor \frac{n}{2} \right\rfloor$
+                 \item $\exists S\neq \O $ Выберем то, для которого $o\left( G\setminus S \right)  - |S| \to \max = \deg G = k$
+
+                     $\sphericalangle v\in S\quad \p G = G \setminus v\quad \p S = S \setminus v$
+
+                     $\deg \left( G\setminus v \right)  = \deg \p G \geqslant o\left( \p G \setminus  \p S \right) - \left| \p S \right|  = o\left( G\setminus S \right)  - |S| + 1 = k +1 \implies \p \alpha(G\setminus v) \leqslant \p \alpha(G) - 1$
+            \end{enumerate}
+     \end{itemize}
+\end{proof}
+
+\begin{definition}
+    $D(G) = \left\{ u|\p \alpha\left( G\setminus u \right) = \p \alpha(G) \right\} $
+
+    (для $u\quad \exists $ максимальное паросочетание $H$ не покрывающее  $u$)
+
+    $A(G) = \left\{ u|u\not\in D(G), \exists v\in D(G): uv\in E \right\} = N(D)$
+
+    $C(G) = V \setminus \left( D(G) \cup A(G) \right) $
+\end{definition}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{fac}
+    \caption{FAC}
+    \label{fig:fac}
+\end{figure}
+
+\begin{lemma}
+    [О стабильности]
+
+    $a\in A(G)$. Тогда  $\begin{cases}
+        A(G\setminus a) = D(G)\\
+        A(G\setminus a) = A\left(G \right) \setminus a\\
+        C(G\setminus a) = C(G)\\
+        \p\alpha(G\setminus a) = \p \alpha(G) - 1
+    \end{cases}$
+\end{lemma}
+\begin{proof}
+    $\sphericalangle u\in D(G)\quad \exists M$ -- максимальное паросочетание $G$,  $u$ не покрывается  $M$.  $\exists ax\in M\quad M\setminus ax$ -- паросочетание $G\setminus a$, не покрывающее $u$
+
+    $v\not\in D(G)$. $\sqsupset \exists $ максимальное парочсочетание графа $G\setminus a$, не покрываюшее $v$. $\exists w$ -- сосед $a$ в  $D(G)$
+
+    $M_{w}$ -- максимальное паросочетание $G$, не покрывающее $w$,  $M_w$ покрывает  $v$
+
+     $\p M \bigoplus M_w$
+
+      \begin{enumerate}
+          \item $v$ -- конец пути чётной длины  $P$, тогда $M_w\bigoplus P$ -- паросочетание того же размера, не покрывающее  $r \implies  r\in D(G)$
+          \item $v$ и  $a$ -- концы одного пути.  $M_w \bigoplus P \cup aw$ -- паросочетание того же размера, не покрывающее $v \implies v\in D(G)$
+          \item $v$ -- конец нечётного пути  $P$, второй конец не  $a$. Тогда  $\p M \bigoplus P$ -- паросочетание в  $G\setminus a$, имеющее больший размер
+     \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    [Галлаи, Эдмондс]
+
+    $G$ -- граф,  $D_1, \ldots, D_k$ -- к. св. $D(G)$
+     \begin{enumerate}
+         \item $C(G)$ имеет совершенное паросочетание
+         \item  $D_1, D_2, .., D_k$ -- фактор-критические
+         \item $\forall $ максимальное паросочетние $G$ :
+             \begin{itemize}
+                 \item совершенное паросочетание $C(G)$
+                 \item почти совершенное паросочетание в  $D_1, \ldots, D_k$
+                 \item $\forall $ вершина из $A(G)$  покрывается ребром в $D(G)$
+             \end{itemize}
+         \item $\Def G  = k - |A|$
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    $\begin{cases}
+        D(G\setminus A) = D(G)\\
+        A(G\setminus A) = \O \\
+        C(G\setminus A) = C(G)\\
+        \p\alpha\left( G\setminus A \right)  = \p \alpha(G) - |A|
+    \end{cases}$ 
+
+    $C(G)$ имеет совершенное паросочетание
+
+    $\p\alpha(D_i \setminus  u) = \p \alpha(D_i)$ для любого $u\in D-i \implies $ по теореме Галлаи $D_i$ -- фактор-критические графы
+
+     $\sphericalangle M$ -- максимальное паросочетание в $G$
+
+     $\left| \p M \right| \geqslant \left| M \right|  - |A| = \p \alpha(G) - |A| = \p \alpha(G\setminus A) \implies \p M$ -- максмальное паросочетание в $G \setminus A \implies \p M = M_C \cup \bigcup\limits_{u=1}^k M_{D_i}$
+\end{proof}
+
+\begin{problem}
+    [Задача о факторе в графе]
+
+    $G, k$-фактор
+
+     $V, E_k\subseteq E$
+
+     $\forall v\quad \deg_{E_k}v = k$
+
+     1-фактор -- совершенное паросочетание
+
+     2-фактор -- разбиение на циклы
+
+     3-фактор -- кубическая декомпозиция
+\end{problem}
+
+\begin{definition}
+    [$f$-фактор]
+    $f = \left( f_1, \ldots, f_n \right) $
+
+    $V, E_f\subseteq E$
+
+    $\deg_{E_f}v = f_v$
+
+    $k$-фактор --  $f$-фактор,  $f_i = k$
+\end{definition}
+
+%\begin{figure}[!ht]
+%    \centering
+%    \incfig{excess}
+%    \caption{excess}
+%    \label{fig:excess}
+%\end{figure}
+
+Для каждого ребра создаём копию вершин и создаём вершины избытка. Находим совершенное паросочетание.
 \end{document}
