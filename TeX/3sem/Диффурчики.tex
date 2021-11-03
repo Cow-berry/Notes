@@ -1123,14 +1123,437 @@ $F(x,y,\p y) = 0$ --уравнение множества $\sigma$ в прост
 \end{statement}
 
 
+\section{Системы дифферецниальных уравнений}
+
+\subsection{Нормальная система}
+
+\begin{definition}
+    [Нормальная система дифферецниальных уравнений порядка $n$]
+
+    \[\begin{cases}
+        \p y_1 = f_1\left( x, y_1, \ldots, y_{n}  \right)\\
+        \p y_2 = f_2\left( x, y_1, y_2, \ldots, y_{n}  \right) \\
+        \ldots\\
+        \p y_{n}  = f_n\left( x, y_1, \ldots, y_{n}  \right) \\
+    \end{cases}\]
+
+    Положим $Y = \left( y_1 \ldots y_{n}  \right) ^T\quad F(x,Y) = \left( f_1(x,Y), \ldots, f_n\left( x, Y \right) \right)^T $
+\end{definition}
+
+\begin{definition}
+    [Нормальное $n$-мерное уравнение]
+
+    \[\p Y = F(,Y)\]
+\end{definition}
+
+\begin{definition}
+    Вектор-функция $\varphi$ называется решением нормального  $n$-мерного уравнения, если
+     \begin{enumerate}
+         \item $\varphi\in C^1\left( (a,b)\to \R^n \right) $
+         \item $\p\varphi(x) \equiv F(x,\varphi(x))$ на  $\left( a, b \right) $
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Интегральная кривая нормального $n$-мерного уравнения -- графики его решений
+\end{definition}
+
+\begin{definition}
+    Задача Коши для нормального уравнения $n$-мерного порядка называется задача нахождения его решени, удовлетворяющего начальному условию  $Y(x_0) = Y_0\quad \left( Y_0\in \R^n \right) $
+\end{definition}
+
+\subsection{Сведение уравнения к системе}
+
+\begin{definition}
+    Пусть $\Lambda_n: C^{n-1} \to \left( C(a,b) \right) ^n$ \[\Lambda_n y = \left( y, \p y, \ldots, y^{(n-1)} \right) ^T\]
+\end{definition}
+
+\begin{theorem}
+    [об эквивалентной системе]
+
+    Пусть $\varphi$ -- решение на  $(a,b)$ уравнения  \[y^{(n)} = f\left( x, y, \p y, \ldots, y^{(n-1)} \right) \]
+
+    Тогда функция $\Phi = \Lambda_n \varphi$ -- решение на  $(a,b)$ системы
+    $\begin{cases}
+        \p y_1 = y_2\\
+        \p y_2 = y_3\\
+        \ldots\\
+        \p y_{n-1} = y_{n} \\
+        \p y_n = f\left( x,y_1,\ldots, y_n \right) 
+    \end{cases}$ 
+
+    И наоборот: Пусть $\Phi = \left( \varphi_1, \ldots, \varphi_n \right) ^T$ -- решение на $\left( a,b \right) $ системы уравнений сверху. Тогда $\varphi_1$ -- решение на $(a,b)$ уравнения \[y^{(n)} = f\left( x, y, \p y, \ldots, y^{(n-1)} \right) \]
+\end{theorem}
+\begin{proof}
+    Пусть $\varphi$ -- решение уравнения.
+
+    $\sphericalangle \varphi_k := \varphi^{(k-1)}\quad k = \overline{1,n}$
+
+    Подставсим их в систему:
+    $\begin{cases}
+        \p \varphi_1 = \p \varphi = \varphi_2\\
+        \p \varphi_2 = \left( \p \varphi \right)^{\prime}  = \pp \varphi = \varphi_3\\
+        \ldots\\
+        \p \varphi_{n-1} = \left( \varphi^{(n-2)} \right)^{\prime} = \varphi^{(n-1)}=\varphi_n\\
+        \p \varphi_n = \left( \varphi^{(n-1)} \right) ^{\prime} = \varphi^{(n)} = f\left( x, \varphi(x), \ldots, \varphi^{(n-1)}\left( x \right)  \right) = f\left( x, \varphi_1(x), \ldots, \varphi_n(x) \right) 
+    \end{cases}$
+
+    И в обратную сторону: Пусть дано решение системы $\Phi = \left( \varphi_1, \ldots, \varphi_n \right) ^T \implies $
+
+    $\begin{cases}
+        \p \varphi_1 = \varphi_2\\
+        \p \varphi_2 = \varphi_3\\
+        \ldots\\
+        \p \varphi_{n-1} = \varphi_n\\
+        \p\varphi_n = f\left( x, \varphi_1, \ldots, \varphi_n \right) 
+    \end{cases}$ 
+
+    \begin{gather*}
+        \pp \varphi_1 = \p \varphi_2 = \varphi_3\\
+        \varphi^{(3)} = \p \varphi_3 = \varphi_4\\
+        \ldots\\
+        \varphi^{(n-1)} = \p \varphi_{n-1} = \varphi_n\\
+        \varphi^{(n)} = \p \varphi_n = f\left( x, \varphi_1, \ldots, \varphi_n \right) = f\left( x, \varphi_1, \p \varphi_1, \pp \varphi_1 , \ldots, \varphi_1^{(n-1)} \right) 
+    \end{gather*} $\implies \varphi_1$ -- решение уравнения и $\Phi = \Lambda_n \varphi_1$
+\end{proof}
+
+\subsection{Вспомогательные сведения}
+
+\begin{definition}
+    Пусть $r = \left( x_1, \ldots, x_{n}  \right) ^T\in \R^n$
+
+    Тогда $|r| = \max_{i\in [1:n]} |x_i|$
+\end{definition}
+
+\begin{lemma}
+$f\in C\left( \left[ a,b \right] \to \R^n \right) \implies $ \[\left| \int_a^b f\right| \leqslant \int _a^b |f| \]
+\end{lemma}
+\begin{proof}
+    $\int_a^b f = \left( \int_a^bf_1, \ldots, \int_a^b f_n \right)^T $
+
+    Левая часть: $\left| \int_a^bf \right| = \max_i \left| \int_a^bf_i \right|  $
+
+    $\left| \int _a^b f_i \right| \leqslant \int_a^b |f_i|$ 
+
+    Правая часть: $\int_a^b \left| f(t) \right| dt = \int_a^b \max_j \left| f_j(t) \right| dt$
+
+    Рассмотрим неравенство для левой части для $t\in[a,b]\quad \left| f_i(t) \right| \leqslant \max_j \left| f_j(t) \right| \implies \int_a^b \left| f_i(t) \right| dt \leqslant \int_a^b \left| \max_j|f_j(t)| \right| dt = \int_a^b |f| \implies \max_i \int_a^b |f_i(t)|dt \leqslant \int |f|$
+
+    \[\max_i \left| \int_a^b f_i\right| \leqslant \max_j \int_a^b |f_i| \leqslant \int_a^b|f| \]
+\end{proof}
+
+\begin{definition}
+    пусть $A = \left( \alpha_{ij} \right) \in M_{n\times m}\left( \R \right) \quad \left( i\in [1:n]\quad j\in [1:m] \right) $
+
+    Тогда $|A| = \max_{ij} |\alpha_{ij}|$
+\end{definition}
+
+\begin{lemma}
+    $A\in M_{n\times m}(\R)\quad B\in M_{m\times k}(\R) \implies |AB| \leqslant m\cdot |A|\cdot |B|$
+\end{lemma}
+\begin{proof}
+    $A\cdot B = \left( \gamma_{ij} \right) \quad \gamma_[ij] = \sum_{l = 1}^{m} \alpha_{il} \cdot  \beta_{lj} $ 
+
+    $\left| \gamma_{ij} \right| \leqslant \sum_{l=1}^{m} |\alpha_{il}| \cdot  |\beta_{lj}| \leqslant \sum_{k=1}^{m} |A| \cdot  |B| = m|A|\cdot |B|$ 
+
+    $|AB| = \max \left| \gamma_{ij} \right| \leqslant m\cdot |A|\cdot |B|$
+\end{proof}
+
+\begin{definition}
+    Пусть $X,Y$ -- нормированные пространства и дана функция  $f:X\to Y$
+
+    Тогда $\omega\left( f, h \right)  = \sup_{\|x_1-x_2\|_X\leqslant h}\|f(x_1) - f(x_2)\|_Y$ -- модуль (непрерывности) функции $f$  с шагом  $h$
+\end{definition}
+
+\begin{property}
+    Пусть $X,Y$ -- нормированные пространства.  $f:X\to Y$. Тогда:
+     \begin{enumerate}
+         \item $\omega(f,0) = 0$
+         \item  $\omega(f,h)\uparrow $ по  $h$
+         \item  $f$ равномерно непрерывна на  $X \iff w\left( f,h \right) \to_0\quad h\to 0$
+    \end{enumerate}
+\end{property}
+
+\begin{definition}
+    Множество функций $\left\{ f_n \right\} $, где $f_n: [a,b] \to \R^m$ равностепенно непрерывное $\iff  \sup_n\omega(f_g,h)\to 0\quad h\to 0$ 
+\end{definition}
+
+\begin{note}
+    Если $\left\{ f_n \right\} $ равностепенно непрерывно, то функции в нём равномерно непрерывны
+
+    Обратное неверно. $\sphericalangle f_k(x) = kx, k>0$, они равномерно непрерывны, но супремум это $\infty $
+\end{note}
+
+\begin{theorem}
+    [Арцела-Асколи]
+
+    Пусть функции последовательности $\left( f_n \right) _{n\in \N }$  равностепенно непрерывны $\left( f_n\in C[a,b] \right) $ и $\exists M\forall n\forall x\quad \left| f_n(x)\leqslant M \right| $ 
+
+    Тогда $\exists f\in C[a,b]$ И $\exists \left( f_{n_k} \right) $
+
+    $f_{n_k}\rightrightarrows f$ при $k\to \infty $
+\end{theorem}
+
+\section{Теорема о существовании}
+\subsection{Теорема существования}
+\begin{definition}
+    Функция $\varphi$ -- решение на отрезке  $[a,b]$ уравнения \[r(t) = r_0 + \int_{t_0}^t f\left( \tau, r\left( \tau \right)  \right) d\tau\] -- Эквивалентное интегральное уравнение
+
+    Если:
+    \begin{enumerate}
+        \item $\varphi\in C\left( [a,b]\to \R^n \right) $
+        \item $\varphi(t) \equiv r_0 + \int_{t_0}^t f\left( \tau, \varphi(\tau) \right) d\tau $ на $[a,b]$
+    \end{enumerate}
+\end{definition}
+
+
+\begin{lemma}
+    [О равносильном интегральном уравнении]
+    $f\in C\left( G \to \R^n \right) , G$ -- область в $\R^{n+1}$
+
+    $\left( t_0, r_0 \right) $
+
+    Тогда $\varphi$ -- решение на $[a,b]$ Задачи Коши \[\dot r = f(t,r)\quad r(t_{0}) = r_0\] $\iff \varphi$ -- решение на $[a,b]$ эквивалентного интегрального уравнения
+\end{lemma}
+\begin{proof}
+    \begin{itemize}
+        \item []
+        \item [$\implies $]
+            $\varphi$ -- решение Задачи Коши. Проинтегрируем условие и получаем  \[\int_{t_0}^t \dot \varphi(\tau)d\tau = \int_{t_0}^t f\left( \tau, \varphi\left( \tau \right)  \right) d\tau\]
+
+            $\varphi(t) = \underbrace{\varphi(t_0)}_{r_0} + \int _{t_0}^t f\left( \tau, \varphi(\tau) \right) d\tau$ -- верно на $[a,b]$
+
+            $\varphi$ -- непрерывная, потому что является решением Задачи Коши.
+        \item [$\impliedby $] $\varphi$ -- решение эквивалентного интегрального уравнения ($\implies \varphi\in C^1\left( [a,b] \to \R^n \right) $). Продифференцируем условие и получим $\dot \varphi(t) = f\left( t, \varphi(t) \right) $ на $[a,b]$
+
+            И кроме того  $\varphi(t_0) = r_0 + \int_{t_0}^{t_0} = r_0$
+
+            А тогда $\varphi$ -- решение Задачи Коши
+    \end{itemize}
+\end{proof}
+\begin{figure}[!ht]
+    \centering
+    \incfig{peano}
+    \caption{peano}
+    \label{fig:peano}
+\end{figure}
+\begin{definition}
+    [Отрезок Пеано]
 
 
 
+$\Pi\subseteq G\quad M = \max_{(t,r)\in \Pi} \left| f\left( t, r \right)  \right| $
+
+$\Pi = \left\{ \left( t, r \right) \in G \mid~ \left| t-t_0 \right| \leqslant a\quad \left| r-r_0 \right| \leqslant b \right\} \quad h = \min\left\{ a, \frac{b}{M} \right\} $ 
+
+$[t_0-h, t_0+h]$ -- отрезок Пеано
+\end{definition}
+
+\begin{definition}
+    [Ломаная Эйлера $E_N$]
+
+    $E_N(t_0) = r_0$
+
+    $E_N(t) = E(t_K) + f\left( t_K, E_N(t_K) \right) \left( t-t_K \right) $, если $t\in  \left( t_K, t_{K+1} \right] $ 
+
+    $t_K = t_0 + \frac{kh}{N}$
+\end{definition}
+
+\begin{lemma}
+    [Свойства $E_N$]
+
+    $\sqsupset t\in [t_0, t_0+h]$
+
+    \begin{enumerate}
+        \item $E_N$ определена в  $t$
+        \item  $\left| E_N(t) - r_0 \right| \leqslant M\left( t-t_0 \right) $
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    База индукции: Пусть $k=1 \implies E_N$ определена на $[t_0,t_1]$ и \[\left| E_N(t) - r_0 \right|  = \left| f\left( t_0, E_N(t_0) \right) \cdot \left( t - t_K \right)  \right| \leqslant M\left( t-t_0 \right) \]
+
+    Переход: Пусть в выполнено на $[t_0, t_K]$ для $k\in [1,N-1]$ 
+
+    $\sphericalangle [t_K, t_{K+1}]$
+
+    Верно ли, что $[t_K, E_N(t_K)]\in G$
+
+    \[\left| E_N(t_K) - E_N(t_0) \right| \leqslant M\left( t_K - t_0 \right) \] по индукционному предположению
+
+    $E_N(t) = E_N(t_K) + f\left( t_K, E_N(t_K) \right) \left( t-t_K \right) $
+
+    $\implies \left| t_K - t_0 \right| \leqslant h\leqslant a;\quad \left| E_n(t_K) - E_N(t_0) \right| \leqslant b \implies \left( t_K, E_N(t_K)\in \Pi \subseteq G \right) $
+
+    $t\in (t_K, t_{K+1}] \implies $
+
+    \begin{align*}
+        \left| E_N(t) - r_0 \right| \leqslant \left| E_N(t) = E_N(t_k) \right| + \left| E_N(t_K) - r_0 \right| \\
+        &= \left| f\left( t_K, E_N(t_K)\left( t-t_K) \right)  \right)  \right|  + \left| E_N(t_K) - r_0 \right|  \\
+        &\leqslant M\left( t-t_K \right)  + M\left( t_K - t_0 \right)  = M\left( t-t_0 \right)  \\
+    .\end{align*}
+
+\end{proof}
+
+\begin{theorem}
+    [Пеано, Существования решения Задачи Коши]
+
+    $G \subseteq \exists ^{n+1}$ -- область, $f\in C\left( G \to \R^n \right) \quad \left( t_0, r_0 \right) \in G \implies $ Задача Коши \[\dot r = f\left( t, r \right) \quad r(t_0) = r_0\] имеет решение на отрезке Пеано 
+\end{theorem}
+\begin{proof}
+    План:
+    \begin{itemize}
+        \item Последовательность ломанных Эйлера $\left( E_N \right) _{N\geqslant 1}$
+        \item По теореме Арцела-Асколи выберем подпоследовательность $E_{N_m} \to \varphi$ 
+        \item Докажем, что $\varphi$ -- решение эквивалентного интегрального уравнения
+        \item По лемме будет следовать, что  $\varphi$ одновременно и решение задачи Коши
+    \end{itemize}
+
+    Перенесём точку в начало координат (всегда можно сделать заменой перменной). НУО $t_0 = 0, r_0 = 0$
+
+    Также будем рассматривать только правую половину отрезка Пеано. Слева доказательство аналогичное.
+
+    На $[0,h]$ построим последовательность  $\left( E_N \right) _{N\geqslant 1}$ ломанных Эйлера
+
+    $\left( E_N \right) $ равностепенно ограничены, $\left( E_N \right) $ равностепенно непрерывны?
+
+    $\left| E_N(t) \right| \leqslant \left| E_N(t) - r_0 \right|  + \left| r_0 \right| \leqslant M\left( t-t_0 \right)  + \left| r_0 \right| \leqslant Mh + 0 = Mh$. Переход к M по лемме.
+
+    $\left| E_N(t_2) - E_N(t_1) \right| = \left| \int_{t_1}^{t_2}\p E_N(\tau)d\tau \right| \leqslant \int _{t_1}^{t_2} \left| \p E_N(\tau) \right| \tau \quad \left( t_1, t_2\in [0,h\, t_1 < t_2 \right) $
+
+    $\p E_N\left( \tau \right)  = f\left( t_K, E_N(t_K) \right) $, если $\tau \in \left( t_K, t_{K+1} \right) \implies \left| \p E_N(\tau) \right| \leqslant M$
+
+    $\implies \int_{t_1}{t_2} \left| \p E_N(\tau) \right| d\tau \leqslant  \int _{t_1}^{t_2}Md\tau = M\left( t_2-t_1 \right) $
+
+    $\implies \omega\left( E_n, u \right) \leqslant Mu$
+
+    $\implies \sup_{n\in \N } \omega\left( E_N, u \right) \leqslant M\cdot u \to 0\quad u\to 0$
+
+    $\left( E_N \right) $ -- равномерно ограничено и равностепенно непрерывно, следовательно, по теореме Арцела-Асколи $\exists \left( E_{N_m} \right) _{m\geqslant 1}:\quad E_{N_m}\rightrightarrows \varphi$ на $[0,h]$ 
+
+    $\varphi$ непрерывна на  $[a,b]$ по теореме Стокса-Зейделя
+
+    Надо:  $\varphi(t) \equiv \int_0^t f\left( \tau, f\left( \tau \right)  \right) d\tau$ на $[a,b]$
+
+    Имеем  $E_{N_m}(t) = \int_0^t \p E_{N_m}(\tau)d\tau$ 
+
+    при  $m\to \infty \quad \varphi(t) = \lim_{m \to \infty} \int_0^t \p E_{N_m}(\tau)d\tau  $
+
+    НУО $N_m = m$
+
+    \begin{align*}
+    \left|\int_0^t \p E_N(\tau)d\tau - \int_0^tf\left( \tau, \varphi(\tau) \right) d\tau \right|\\
+    &= \left| \int_0^t\left( \p E_N(\tau) - f\left( \tau, \varphi(\tau) \right)  \right) d\tau \right|  \\
+    &\leqslant \int_0^t \left| \p E_N(\tau) - f\left( \tau, \varphi(\tau) \right) d\tau \right|   \\
+    &\leqslant \int_0^h \left| \p E_N(\tau) - f\left( \tau, \varphi(\tau) \right)  \right| d\tau  \\
+    &= \sum_{k=0}^{N-1} \int_{t_K}^{t_{K+1}} \left| f\left( t_K, E_N(t_K)) - f\left( \tau, \varphi(\tau) \right)  \right)  \right| d\tau \\
+    &\leqslant  \sum_{k=0}^{N-1} \int_{t_K}^{t_{K+1}} \omega\left( f, \left| \left( t_K, E_N(t_K) \right)  - \left( \tau, \varphi(\tau) \right)  \right|  \right) d\tau  \\
+    .\end{align*}
+
+    \begin{align*}
+        \sphericalangle \left| \left( t_K,E_N(t_K) \right)  - \left( \tau, \varphi(\tau) \right)  \right| \\
+        &= \left| \left( t_K - \tau, E_N\left( t_K \right)  - \varphi(\tau) \right)  \right|  \\
+        &= \max\left\{ \left| t_K - \tau \right| , \left| E_N(t_K) - \varphi(t) \right|  \right\}  \\
+    .\end{align*}
+
+    $\left| t_K - \tau \right| \leqslant \frac{h}{N}$
+
+    $\left| E_N(t_K) - \varphi(\tau) \right| \leqslant \left| E_N\left( t_K \right)  - \varphi\left( t_K \right)  \right|  + \left| \varphi(t_K) - \varphi(\tau) \right| \leqslant \|E_N - \varphi\| + \omega\left( \varphi, \frac{h}{N} \right) $ 
+
+    $\implies \left| \left( t_K, E_N(t_K) \right)  - \left( \tau, \varphi(\tau) \right)  \right| \leqslant \max \left\{ \frac{h}{N}, \|E_N - \varphi\| + \omega\left( \varphi, \frac{h}{N} \right)  \right\}  = S_N \to 0$ при $N\to \infty $
+
+    А тогда звершая цепочку
+    \begin{align*}
+    &\leqslant  \sum_{k=0}^{N-1} \int_{t_K}^{t_{K+1}} \omega\left( f, \left| \left( t_K, E_N(t_K) \right)  - \left( \tau, \varphi(\tau) \right)  \right|  \right) d\tau  \\
+    &\leqslant \sum_{k=0}^{N-1} \int_{t_K}^{t_{K+1}}\omega(f, S(N)) d\tau  \\
+    &= \omega\left( f, S(N) \right)  \sum_{k=0}^{N-1} \frac{h}{N} \\
+    &= \omega\left( f, S(N) \right) \cdot h \\
+    .\end{align*}
+
+    $f$ равномерно непрерывна на компакте  $\Pi$
+
+    $\implies \omega\left( f, S(N) \right) \to 0\quad N\to \infty $, т.к. $S(N)\to 0$
+\end{proof}
+
+\section{Случайные графы}
+
+$\Omega, p:\Omega \to \exists \quad p(\omega) \geqslant 0\quad \sum_{\omega\in \Omega} p(\omega) = 1$ 
+
+Идея: Многие процессы, свойства объектов, дороги, соединения сетевые, беспроводные, могут в определённом смысле считать случайными.
+
+\begin{definition}
+    [модель Эрдон-Реньи]
+
+    $1\ldots n$ -- вершины $\begin{pmatrix} n\\2 \end{pmatrix} $ возможных рёбер
+
+    $p(n)$ -- с такой вероятностью мы берём каждое ребро и не берём с  $q = 1-p = 1- p(n)$
+
+    $G(n, p)\quad \left| \Omega \right|  = 2^{n\choose 2}$
+
+    Вероятность конкретного графа $p(G) = p^m\left( 1-p \right) ^{{n\choose 2} - m}$
+\end{definition}
+
+Изучаем события и случайные величины.
+
+Рассмотрим случайную величину -- количество рёбер. $m: \Omega \to \R\quad Em = p {n\choose 2}\quad Em = \sum_{u,v}E\chi_{uv} = \sum _{u,v}p = p \frac{n(n-1)}{2}$
+
+Интересно изучать поведение величин при $n\to \infty $
+
+\begin{example}
+    $p = \frac{1}{n^3}\quad Em = \frac{1}{n^3}\frac{n^2-n}{2}~ \frac{1}{n} \to 0$
+
+    $P\left( \xi \geqslant k\cdot E\xi \right) \leqslant \frac{1}{k}$ 
+
+    $P\left( m\geqslant 1 \right)  = P\left( m\geqslant n \cdot  \frac{1}{n} \right) \leqslant n$
+
+    $ p = \frac{1}{n^2}\quad Em \to \frac{1}{2}$ 
+
+    $p = o\left( \frac{1}{n^2} \right) \quad Em = o(1) \to 0$
+
+    $P\left( m\geqslant 1 \right)  = P\left( m\geqslant \frac{1}{Em}Em \right) \leqslant Em \to 0$ -- метод первого момента
+\end{example}
+
+ \begin{theorem}
+     $A \subseteq G(n, p)$. $A$ асимптотически почти наверное (апн) выполнена, $p(A) \to 1$ при $n\to \infty $
+\end{theorem}
+
+$G, \xi: G(n, o) \to \N_0 $ -- количество гаджетов
+
+$A \subseteq G(n, p)\quad \xi \geqslant 1$
+
+\begin{lemma}
+    $E\xi \to 0 \implies A$ апн ложно
+\end{lemma}
 
 
+\begin{statement}
+    $p = o\left(\frac{1}{n}  \right) \implies G(n, p)$ апн не содержит $\triangle$
+\end{statement}
+\begin{proof}
+    $\xi$ -- количество  $\triangle$
 
+    $E\xi = {n\choose 3} E_{\chi_{\triangle}} = {n\choose 3} p^3 = {n\choose 3} o\left( \frac{1}{n^3} \right) \to 0$
+\end{proof}
 
+$p = \frac{1}{n}\quad P(m=0) = (1-p)^{n\choose 2} = \left( 1 - \frac{1}{n} \right) ^{\frac{n(n-1)}{2}} \to  \left( \frac{1}{e} \right) ^{\frac{n-1}{2}} \to 0$
 
+$p = o\left( \frac{1}{n^2} \right) \to $ апн рёбер нет
+
+$p = \omega\left( \frac{1}{n^2} \right) $ -- апн рёбра есть
+
+$P(m=0) = \left( 1-p \right) ^{n\choose 2} = \left( 1-p \right) ^{\frac{1}{p}\cdot {n\choose 2}\cdot p} \to e^{-p {n\choose 2}} = e^{-\omega(1)} \to 0$
+
+$p = \frac{c}{n^2}\quad Em = \frac{c}{2}\quad P(m=0) = (1-p)^{n\choose 2}\sim e^{- {n\choose 2}p} = e^{-\frac{c}{2}}$
+
+\begin{lemma}
+    [Метод вторых моментов]
+
+    $\frac{D\xi}{\left( E\xi \right) ^2}\to 0\implies $ апн $A$ истинно
+\end{lemma}
+\begin{proof}
+    Неравенство Чебышёва
+
+    $E\xi^2 = \left( E\xi \right) ^2\left( 1 + o(1) \right)  \implies A$ апн истинно
+\end{proof}
 
 
 
