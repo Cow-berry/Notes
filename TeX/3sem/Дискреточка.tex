@@ -1173,4 +1173,85 @@ $6 + 3E - 3V \leqslant  2E$
 %\end{figure}
 
 Для каждого ребра создаём копию вершин и создаём вершины избытка. Находим совершенное паросочетание.
+
+\section{Случайные графы}
+
+$\Omega, p:\Omega \to \exists \quad p(\omega) \geqslant 0\quad \sum_{\omega\in \Omega} p(\omega) = 1$ 
+
+Идея: Многие процессы, свойства объектов, дороги, соединения сетевые, беспроводные, могут в определённом смысле считать случайными.
+
+\begin{definition}
+    [модель Эрдон-Реньи]
+
+    $1\ldots n$ -- вершины $\begin{pmatrix} n\\2 \end{pmatrix} $ возможных рёбер
+
+    $p(n)$ -- с такой вероятностью мы берём каждое ребро и не берём с  $q = 1-p = 1- p(n)$
+
+    $G(n, p)\quad \left| \Omega \right|  = 2^{n\choose 2}$
+
+    Вероятность конкретного графа $p(G) = p^m\left( 1-p \right) ^{{n\choose 2} - m}$
+\end{definition}
+
+Изучаем события и случайные величины.
+
+Рассмотрим случайную величину -- количество рёбер. $m: \Omega \to \R\quad Em = p {n\choose 2}\quad Em = \sum_{u,v}E\chi_{uv} = \sum _{u,v}p = p \frac{n(n-1)}{2}$
+
+Интересно изучать поведение величин при $n\to \infty $
+
+\begin{example}
+    $p = \frac{1}{n^3}\quad Em = \frac{1}{n^3}\frac{n^2-n}{2}~ \frac{1}{n} \to 0$
+
+    $P\left( \xi \geqslant k\cdot E\xi \right) \leqslant \frac{1}{k}$ 
+
+    $P\left( m\geqslant 1 \right)  = P\left( m\geqslant n \cdot  \frac{1}{n} \right) \leqslant n$
+
+    $ p = \frac{1}{n^2}\quad Em \to \frac{1}{2}$ 
+
+    $p = o\left( \frac{1}{n^2} \right) \quad Em = o(1) \to 0$
+
+    $P\left( m\geqslant 1 \right)  = P\left( m\geqslant \frac{1}{Em}Em \right) \leqslant Em \to 0$ -- метод первого момента
+\end{example}
+
+ \begin{theorem}
+     $A \subseteq G(n, p)$. $A$ асимптотически почти наверное (апн) выполнена, $p(A) \to 1$ при $n\to \infty $
+\end{theorem}
+
+$G, \xi: G(n, o) \to \N_0 $ -- количество гаджетов
+
+$A \subseteq G(n, p)\quad \xi \geqslant 1$
+
+\begin{lemma}
+    $E\xi \to 0 \implies A$ апн ложно
+\end{lemma}
+
+
+\begin{statement}
+    $p = o\left(\frac{1}{n}  \right) \implies G(n, p)$ апн не содержит $\triangle$
+\end{statement}
+\begin{proof}
+    $\xi$ -- количество  $\triangle$
+
+    $E\xi = {n\choose 3} E_{\chi_{\triangle}} = {n\choose 3} p^3 = {n\choose 3} o\left( \frac{1}{n^3} \right) \to 0$
+\end{proof}
+
+$p = \frac{1}{n}\quad P(m=0) = (1-p)^{n\choose 2} = \left( 1 - \frac{1}{n} \right) ^{\frac{n(n-1)}{2}} \to  \left( \frac{1}{e} \right) ^{\frac{n-1}{2}} \to 0$
+
+$p = o\left( \frac{1}{n^2} \right) \to $ апн рёбер нет
+
+$p = \omega\left( \frac{1}{n^2} \right) $ -- апн рёбра есть
+
+$P(m=0) = \left( 1-p \right) ^{n\choose 2} = \left( 1-p \right) ^{\frac{1}{p}\cdot {n\choose 2}\cdot p} \to e^{-p {n\choose 2}} = e^{-\omega(1)} \to 0$
+
+$p = \frac{c}{n^2}\quad Em = \frac{c}{2}\quad P(m=0) = (1-p)^{n\choose 2}\sim e^{- {n\choose 2}p} = e^{-\frac{c}{2}}$
+
+\begin{lemma}
+    [Метод вторых моментов]
+
+    $\frac{D\xi}{\left( E\xi \right) ^2}\to 0\implies $ апн $A$ истинно
+\end{lemma}
+\begin{proof}
+    Неравенство Чебышёва
+
+    $E\xi^2 = \left( E\xi \right) ^2\left( 1 + o(1) \right)  \implies A$ апн истинно
+\end{proof}
 \end{document}
