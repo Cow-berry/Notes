@@ -774,4 +774,368 @@ $O\left( m\log n \right) $
 
     Класть себе петли плохо. Храним минимальное ребро среди нужных и поддерживаем, что в фиббоначиевой куче лежат правильные рбра. Нужна операция перекладывания из одной фиббоначивое й кучи в другую за единицу. Мы так не можем (следствие -- сортировка за 1), но если очень-очень хотим, то можем. Там некоторая магия с тем, что какие-то кучи валидные, а какие-то нет и вцелом всё работает..?..
 \end{statement}
+
+\section{Кратчайшие пути}
+
+Есть граф, хотим дойти из одной вершины в другую кратчайшим путём.
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{short}
+    \caption{short}
+    \label{fig:short}
+\end{figure}
+
+\begin{enumerate}
+    \item $w_{uv} = 1$
+    \item  $w_{uv} \geqslant 0$
+    \item $w_{uv}$
+\end{enumerate}
+
+Решим для ориентированного. Неориентированный -- ориентированный с рёбрами в обе стороны.
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{shortex}
+    \caption{shortex}
+    \label{fig:shortex}
+\end{figure}
+
+\begin{lstlisting}
+    bd[0] = s
+    d[s] = 0 // d[v] = -1, v != s
+    for k = 0 .. n-2: // k -> k+1
+        for v in bd[k]
+            for all vu:
+                if d[u] = -1:
+                    d[u] = k+1
+                    bd[k+1].add(u)
+\end{lstlisting}
+
+$O\left( m \right) $ 
+
+Вместо списка списков можно использовать одну очередь.
+
+\begin{lstlisting}
+    q.add(s)
+    d[s] = 0 // d[v] = -1, v != s
+    while !q.empty():
+        v = q.remove()
+            for allvu:
+                if d[u] = -1:
+                    d[u] = d[v] + 1
+                    q.add(u)
+    for k = 0 .. n-2: // k -> k+1
+        for v in bd[k]
+            for all vu:
+                if d[u] = -1:
+                    d[u] = k+1
+                    bd[k+1].add(u)
+\end{lstlisting}
+
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{both-sides}
+    \caption{both sides}
+    \label{fig:both-sides}
+\end{figure}
+
+Можно идти с двух сторонинайти вершину, где мы встретимся, так можно тоже найти кратчайший путь
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{poslozhnee}
+    \caption{poslozhnee}
+    \label{fig:poslozhnee}
+\end{figure}
+
+Можно построить граф, куда мы будем добавлять ребро, если при нм увеличивается расстояние. Он ацикличен и любой путь в нём кратчайший. Друг человека.
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{kak-len}
+    \caption{kak len'}
+    \label{fig:kak-len}
+\end{figure}
+
+\begin{lstlisting}
+    A = {s}, d[s] = 0
+    repeat (n-1)
+        v: v not in A, d[u] + w_{uv} -> min
+        d[v] = d[u] + w_{uv}
+        A = A U {v}
+\end{lstlisting}
+
+Инвариант: $v\in A \implies  d[v] = dist(s,v)$
+
+\begin{lstlisting}
+    v not in A => d[v] = min(d[u] + w_{uv})
+    d[s] = 0, A = empty
+    for i = 0 .. n-1:
+        PQ.add(i)
+    while !PQ.empty():
+        v = PQ.remove_min()
+        A = A U {v}
+        for all vu:
+            d[u] = min(d[u], d[v] + w_{vu})
+            PQ.update(u)
+\end{lstlisting}
+
+Двоичная куча -- $O\left( m\log n \right) $ 
+
+Массив -- $O\left( n^2 + m \right) $
+
+Фиббоначиева куча -- $O\left( n\log n + m\right) $
+
+\begin{statement}
+    [A*]
+
+    $\rho(u,v) \leqslant dist(v,u)$
+
+    $\rho(u,t) \leqslant  \rho(v,t) + w_{vu}$
+
+    $h[v] = \rho(v,t)$
+
+    $\min d[v] \to \min \left( d[v] + h[v] \right) $
+\end{statement}
+
+\begin{lstlisting}
+    w'_{vu} = w_{vu} + h[v] - h[u]
+
+\end{lstlisting}
+
+\begin{statement}
+    Кратчайший путь не содержит циклов (если все циклы неотрицательные).
+\end{statement}
+
+\begin{statement}
+    [Форда-Беллмана]
+
+    Д.П.
+
+    d[v,k] -- кр. путь из S в v, состоит из k рёбер
+
+    $d[v,0] = \begin{cases}
+        0, v=s\\
+        +\infty m v\neq s\\
+    \end{cases}
+    d[v,k] = \min\left( d[u, k-1] + \omega_{uv} \right) $
+
+    \begin{lstlisting}
+        for  k = 1 .. n-1:
+            for v = 0 .. n-1:
+                d[v,k] = min(...)
+    \end{lstlisting}
+
+
+
+По времени плохо $O(nm)$. По памяти можно хранить только предыдущую строку, а для минимума считать  $d[v,k]$ -- из k или меньше рёбер.
+
+ \begin{lstlisting}
+    d[s] = 0, d[v] = infinity forall v != u
+
+    for k  0 ... n-1
+        for uv in E:
+            d[v] = min(d[v], d[u] + w_{uv})
+\end{lstlisting}
+
+На $k$-ой итерации  $d[v]$ - длина какого-то пути  $\leqslant $ кр пути из $\leqslant k$ рёбер.
+
+Если на какой-то итерации ничего не срелаксировалось, можно сделать брейк.
+\end{statement}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{ford-bellman}
+    \caption{ford-bellman}
+    \label{fig:ford-bellman}
+\end{figure}
+
+\begin{statement}
+    $d[ij]$ -- кратчайший путь между  $i$ и $j$, такой что все вершины на этом пути имеют номера  $\leqslant k$
+
+    $d[ij] = \begin{cases}
+        0& i = j\\
+        \omega_{ij} & \text{есть ребро}\\
+        \infty  & \text{нет ребра}
+    \end{cases}$ 
+
+    \begin{enumerate}
+        \item Вершины $k$ нет, тогда  $d[ij]$ при  $k-1$
+        \item Вершина  $k$ есть, тогда  $d[ik] + d[kj]$
+    \end{enumerate}
+
+    Как понять, а не дали ли нам случайно отрицательный цикл? на диагонали появятся отрицательные числа
+\end{statement}
+
+Если нет неотрицательных циклов $\implies $ можно подобрать $\varphi(v)\qquad \p \omega_{uv} = \omega_{uv} + \varphi(u) - \varphi(v)\quad \p \omega_{uv}$
+
+Это преобразование сохраняет кратчайшесть пути.
+
+$\sum \p w = \sum w + \left( \left( \varphi_1 - \varphi_2 \right) + \left( \varphi_2 - \varphi_3 \right) +\ldots \right)  = \sum w + \varphi(s) - \varphi(t)$
+
+На самом деле отсутствие отриц. циклов эквивалентно тому, что мы такие можем подобрать.
+
+
+\section{Строки и алгоритмы}
+
+\begin{definition}
+    Строка -- набор из буковок
+
+    $sL abaabcab$
+
+    Буквы из  $\Sigma$
+
+    Буквы строки индексируются  $s[i]$ -- i-ая буква
+
+    Можно взять префикс или суффиксс строки $s[0 .. i-1] \quad s[i .. n-1]$
+
+    Подстрока  $s[l .. r-1]$
+\end{definition}
+
+\subsection{Поиск подстроки}
+
+$T$ -- большая строка.  $s$ - маленькая строка. Ищем подстроку в  $T$ равную  $s$
+
+\begin{lstlisting}
+    for i = 0 .. n-m:
+        if T[i .. i+m-1] = S
+            print(i)
+
+    O(n*m)
+\end{lstlisting}
+
+\begin{theorem}
+    [Алгоритм Рабина-Карпа]
+
+    Хотим найти одно вхождение. Большинство времени тратим на проверку, что две строки неравны
+
+    \begin{lstlisting}
+        for i = 0 .. n-m:
+            if hash(T[i .. i+m-1]) != has(S):
+                continue
+            if T[i .. i+m-1] = S:
+                print(i)
+                break
+    \end{lstlisting}
+
+\end{theorem}
+
+    Если научимся быстро считать хэши, то наступит счастье.
+
+    $hash(s) = (s_0 x^{n-1} + s_1 x^{n-2} + \ldots + s_{n-1}x^0)\%M$
+
+    $M$ -- случайное большое простое.  $x$ -- случайное
+
+    $P(hash(A) = hash(B))\quad A \neq B\quad \leqslant \frac{n}{M}$
+
+    $\sum a_ix^i = \sum b_i x^i\quad \sum (a_i - b_i)x^i = 0 (mod\ M)$ 
+
+    $x$ -- корень многочлена, таких максимум $n$
+
+    $H = T_ix^{m-1} + T_{i+1}x^{m-2} + \ldots + T_{i+m-1}x^0$
+
+    $\p H = Y_{i+1}x^{m-1} + \ldots + T_{i+m-1}x^1 + T_{i+m}x^0$
+
+    $\p H = H * x - T_i x^m + T_{i + m}$
+
+     \begin{lstlisting}
+        H = hash(T[0 .. m-1])
+        Hs = hash(S)
+        for i = 0 .. n-m:
+            if H = Hs:
+                if T[i .. i+m-1] = S:
+                    print i
+                    break
+            H = (H*x - T[i]x^m + T[i+m]) % M
+    \end{lstlisting}
+
+    Все вычисления везде по модулю.
+    \begin{lstlisting}
+        hash(l,r) = hash(S[l .. r-1]) -- O(1) хочется
+        P[i] -- полином для i-го префикса
+        P[i] = hash(S[0 .. i-1]) = s_0x^{i-1} + ... + s_{i-1}x^0
+        P[i] = P[i-1]*x + s_{i-1}
+
+        hash(S[l..r-1]) = s_l * x^{r-l-1} + .. + s_{r-1}x^0
+        P[r] = s_0x^{r-1} + .. + s_{r-1}x^0
+        hash(l,r) = P[r] - P[l] * x^{l-r}
+    \end{lstlisting}
+
+    \begin{theorem}
+        [Кнута-Морриса-Пратта]
+
+        Есть текст. Идём слева направо, ищем строчку $s$. Дошли до  $i$-ой позиции, встретили сколько-то символов из начала строки  $s$. Встречаем новый символ. Если такой же в  $s$ -- радуемся. Если нет, то я явно столько символов  $s$ мы не нашли, мы нашли меньше и надо найти сколько. 
+
+        Префикс-функция. $pref(s)$ -- максимальная строка, которая является и префиксом и суффиксом и при этом меньше всей строки.
+
+         \begin{lstlisting}
+            P[i] = pref(S[0 .. i-1])
+
+            S = abbababb
+            P =-00012123
+        \end{lstlisting}
+    \end{theorem}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{prefpref}
+    \caption{prefpref}
+    \label{fig:prefpref}
+\end{figure}
+
+\begin{lstlisting}
+    p[0] = 1
+    for i = 0 .. n-1:
+        k = p[i-1]
+        while k != -1 and s[k] != s[i-1]:
+            k = p[k]
+        p[i] = k+1
+
+    O(n) -- n раз можем понизить значение k
+\end{lstlisting}
+
+Приписываем $s$ к  $T$ слева и дописываем между ними левый символ. Ищем префикс функцию в ней и если она равна длине строки  $s$, то мы нашли вхождение.
+
+ \begin{theorem}
+    $z[i]$ -- максимальное $k$, что  $s[0..k-1] = s[i .. i+k-1]$
+\end{theorem}
+
+\begin{lstlisting}
+    for i = 1 .. n-1:
+        z[i] = 0
+        while s[i+z[i] = s[z[i]:
+            z[i]++
+\end{lstlisting}        
+
+\begin{lstlisting}
+    for i = 1 .. n-1:
+        if i > 1:
+            z[i] = min(z[i-l], l + z[l]-i)
+            z[i] = max(z[i], 0)
+        while s[z[i] = s[i+z[i]]:
+            z[i]++
+        if i = 1 or i + z[i] > l + z[l]:
+            l = i
+
+        z[i] = min(z[i-l], l + )
+        while s[i+z[i] = s[z[i]:
+            z[i]++
+
+O(n) -- в вайле увеличиваем сумму l + z[l]
+\end{lstlisting}        
+
+
+
+
+
+
+
+
+
+
+
+
+
 \end{document}

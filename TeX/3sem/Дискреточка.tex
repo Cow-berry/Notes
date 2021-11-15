@@ -136,6 +136,7 @@
     \import{./figures/}{#1.pdf_tex}
 }
 \usepackage{tikz}
+\newcommand{\tl}[1]{\widetilde{#1}}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\Beg}{Beg}
 \DeclareMathOperator{\len}{len}
@@ -1254,4 +1255,81 @@ $p = \frac{c}{n^2}\quad Em = \frac{c}{2}\quad P(m=0) = (1-p)^{n\choose 2}\sim e^
 
     $E\xi^2 = \left( E\xi \right) ^2\left( 1 + o(1) \right)  \implies A$ апн истинно
 \end{proof}
+
+\begin{theorem}
+    $G$ имеет диаметр 2, имеет строгий порог  $t(n) = \sqrt{\frac{2\ln n}{n}} $
+\end{theorem}
+
+$A \iff \exists $ объект $\alpha \implies E n_{\alpha}$
+
+$E n_{\alpha} \to 0 \implies A$ а.п.н не выполнено
+
+$E n_{\alpha} \to \infty \quad E\left( n_{\alpha} \right) ^2 = \left( En_{\alpha} \right) ^2\left( 1 + o(1) \right) \implies A $ а.п.н выполнено -- правило вторых моментов
+
+$(u,v)$ -- плохая, если
+ \begin{enumerate}
+    \item $uv \not\in E$
+    \item $N(u) \cap N(0) = \O $
+\end{enumerate}
+
+i, j, $I_{ij} = \begin{cases}
+    1, (i,j)\in Bad\\
+    0, (i,j)\not\in Bad\\
+\end{cases}$ 
+
+$E I_{ij} = P\left( (i,s)\in Bad \right) = (1-p)(1-p^2)^{n-2}$
+
+$E B = E \sum_{i<j}I_{ij} = {n\choose 2}(1-p)(1-p^2)^{n-2} = {n\choose 2}\left( 1- \sqrt{C \frac{\ln  n}{n}}  \right) \left( 1 - \frac{C\ln  n}{n} \right)^{n-2}\approx \frac{n^2}{2}\left( 1 - \sqrt{C}\frac{\ln n}{n}  \right) \left( 1 - \frac{C\ln n}{n} \right) ^n \approx \frac{n^2}{2}e^{-c\ln n} = \frac{n^2\cdot n^{-c}}{2} = \frac{1}{2}n^{2-c} $ 
+
+$C$ -- константа $>2$ или  $C = \omega(1)$, то  $EB \to 0$ и $G$ апн имеет диаметр 2
+
+$EB^2 = E\left( \sum_{i<j}I_{ij} \right) ^2 = E\left( \sum_{\substack{i<j\\k<l\\}}I_{ij}I_{kl} \right) $ 
+\begin{enumerate}
+    \item $\left| \left\{ i, j, k, l \right\} \right| =4$
+
+        $I_{ij}I_{kl} = 1  \iff (i,j)\in Bad,(k,l)\in Bad$
+
+        $(1-p)^2(1-p^2)^{2(n-2)}$
+
+        $E\left( \sum_{\substack{i<j\\k<l\\|ijkl|=4}}I_{ij}I_{kl} \right) \approx \frac{n^{4}}{4}\left( 1 - \sqrt{C} \frac{\ln n}{n}  \right) \left( 1 - \frac{C\ln n}{n} \right) ^{2(n-2)} = \frac{n^{4 - 2C}}{4}\left( 1 + o(1) \right) = \left( EB \right) ^2\left( 1 + o(1) \right) $
+
+    \item 3. $(1-p)^2(1-2p^2+p^3)^{n-3}$
+
+        $E \approx \alpha n^{3-2C} = o\left( \left( EB \right) ^2 \right) $
+    \item 2 $I{ij}I{kl} = I{ij}^2 = I{ij}$
+
+        $E = EB = o\left( \left( EB \right) ^2 \right) $, т.к. $EB \to \infty , C <2$ или $C = o(1)$
+\end{enumerate}
+
+Как понять какой порог? Возьмём из предыдущего примера $E \approx n^2(1-p^2)^n \to z$
+
+$n^2\left( 1 - \frac{p_2n}{n} \right) ^n 0\to z$
+
+$n^2r^{-p^2n} \to z$
+
+$e^{2\ln n - p_2n} \to z$
+
+$2\ln n - p^2n \to \tl z$
+
+$p_2n = 2\ln  n$
+
+$p = \sqrt{\frac{2\ln n}{n}} $
+
+
+
+\section{Распределение степеней}
+
+$E\deg = (n-1)p$
+
+ \begin{theorem}
+     $P\left( \left| \deg u - np \right| >\lambda \sqrt{np}  \right) \leqslant 3 e^{-\frac{\lambda^2}{8}}$ (Chernoff Bound)
+
+     $E \deg u = \sum_v I\left( \exists \text{ ребра }uv \right)  = \sum_{i=1}^{n-1} B(P)$
+\end{theorem}
+
+Рассмотрим $p = \frac{d}{n}$ 
+
+$P(\deg u = k) = {n\choose k}\frac{d^k}{n^k}\left( 1 - \frac{d}{n} \right) ^{n-k} = \frac{n!}{k!(n-k)!} \frac{d^k}{n^k}\left( 1 - \frac{d}{n} \right) ^{n-k} = \frac{\sqrt{2\pi n} n^nd^k}{ \sqrt{2\pi (n-k)} n^{n-k}(1 - \frac{k}{n}^{n-k}n^k e^k}\left( 1 - \frac{d}{n} \right) ^{n-k} = $
+
+$\approx \frac{n^k}{k!}\frac{d^k}{n^k}\left( 1 - \frac{d}{n} \right) ^n = d^\frac{k}{k!}e^{-d}$ -- распределение Пуассона.
 \end{document}

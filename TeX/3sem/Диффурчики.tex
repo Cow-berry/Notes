@@ -137,6 +137,7 @@
 }
 \usepackage{tikz}
 \DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\Lip}{Lip}
 \begin{document}
     \maketitle
     %
@@ -1474,89 +1475,202 @@ $[t_0-h, t_0+h]$ -- отрезок Пеано
     $\implies \omega\left( f, S(N) \right) \to 0\quad N\to \infty $, т.к. $S(N)\to 0$
 \end{proof}
 
-\section{Случайные графы}
-
-$\Omega, p:\Omega \to \exists \quad p(\omega) \geqslant 0\quad \sum_{\omega\in \Omega} p(\omega) = 1$ 
-
-Идея: Многие процессы, свойства объектов, дороги, соединения сетевые, беспроводные, могут в определённом смысле считать случайными.
+\subsection{Условие Липшица по части переменных}
 
 \begin{definition}
-    [модель Эрдон-Реньи]
-
-    $1\ldots n$ -- вершины $\begin{pmatrix} n\\2 \end{pmatrix} $ возможных рёбер
-
-    $p(n)$ -- с такой вероятностью мы берём каждое ребро и не берём с  $q = 1-p = 1- p(n)$
-
-    $G(n, p)\quad \left| \Omega \right|  = 2^{n\choose 2}$
-
-    Вероятность конкретного графа $p(G) = p^m\left( 1-p \right) ^{{n\choose 2} - m}$
+    Полный модуль непрерывности функции $f:G \to \R^n,\quad G \subseteq \R^{n+1}_{t,r}$ \[\omega(f, u, v) = \sup_{\substack{\left| t_2-t_1 \right| \leqslant u\\ \left| r_2-r_1 \right| \leqslant v\\ \left( t_1,r_1 \right) , \left( t_2,r_2 \right) \in G}} \left| f\left( t_2, r_2 \right) - f\left( t_1, r_1 \right)  \right| \]
 \end{definition}
 
-Изучаем события и случайные величины.
+\begin{definition}
+    Частный модуль непрерывности: $\omega\left( f, 0, v \right) \quad \omega\left( f, u, 0 \right) $
+\end{definition}
 
-Рассмотрим случайную величину -- количество рёбер. $m: \Omega \to \R\quad Em = p {n\choose 2}\quad Em = \sum_{u,v}E\chi_{uv} = \sum _{u,v}p = p \frac{n(n-1)}{2}$
+\begin{definition}
+    $f\in \Lip_r(G) \iff  \exists L\quad \omega\left( f, 0, h \right) \leqslant Lh$
+\end{definition}
 
-Интересно изучать поведение величин при $n\to \infty $
+\begin{definition}
+    $f\in \Lip_{r, loc}(G) \iff \forall (t,r)\in G \quad \exists u$ -- окрестность точки $\left( t,r\quad f\in \Lip_r\left( U\cap G \right)  \right) $
+\end{definition}
 
-\begin{example}
-    $p = \frac{1}{n^3}\quad Em = \frac{1}{n^3}\frac{n^2-n}{2}~ \frac{1}{n} \to 0$
+\begin{lemma}
+    $G\subseteq \R^{n+1}_{t,r}$
 
-    $P\left( \xi \geqslant k\cdot E\xi \right) \leqslant \frac{1}{k}$ 
+    $\p f_r\in M_n\left( C(G) \right) ,\ f\in C\left( G \to \R^n \right) $
 
-    $P\left( m\geqslant 1 \right)  = P\left( m\geqslant n \cdot  \frac{1}{n} \right) \leqslant n$
+    $K\subseteq G$ -- выпыклый компакт $\implies \omega(f,0,h)\leqslant h\cdot \|\p f_r\|h$
+\end{lemma}
+\begin{proof}
+    $\sphericalangle g_t(r) = f(t,r)$
 
-    $ p = \frac{1}{n^2}\quad Em \to \frac{1}{2}$ 
+    При фиксированном $t$ функция  $g_t$ удовлетворяет условию предыдущей леммы  $\implies \omega\left( g_t, h \right) \leqslant h \|\p f_r\|h$
 
-    $p = o\left( \frac{1}{n^2} \right) \quad Em = o(1) \to 0$
+    $\sup_t \omega\left( g_t, h \right)  = \omega\left( f, 0, h \right) $
 
-    $P\left( m\geqslant 1 \right)  = P\left( m\geqslant \frac{1}{Em}Em \right) \leqslant Em \to 0$ -- метод первого момента
-\end{example}
+    $\p f_r = \left( g_t \right) ^{\prime}$
 
- \begin{theorem}
-     $A \subseteq G(n, p)$. $A$ асимптотически почти наверное (апн) выполнена, $p(A) \to 1$ при $n\to \infty $
+    (додоказать в качестве упражнения)
+\end{proof}
+
+\begin{lemma}
+    $G\subseteq \R^{n+1}_{t,r}$ -- область, $\p f_r\in M_n\left( C(G) \right) , f\in C\left( G \to \R^n \right) $
+
+    $\implies f_7in \Lip_{r,loc}(G)$
+\end{lemma}
+
+\begin{lemma}
+    $G\subseteq \R^{n+1}_{t,r}$ -- область
+
+    $f\in C\left( G \to \R^n \right) \cap  \Lip_{r,loc}(G),K\subseteq G$ -- компакт $f\in \Lip_r(K)$
+\end{lemma}
+
+\section{Теорема Единственности}
+\subsection{Теорема Единственности}
+\begin{lemma}
+    [Тромуом]
+
+    $\varphi\in C\left[a,b \right] \quad t_0\in \left[ a,b \right]\quad \lambda, \mu \geqslant 0  $ \[\forall t\in [a,b]\quad 0\leqslant \varphi(t) \leqslant \lambda + \mu \left| \int_{t_0}^t\varphi(\tau)d\tau \right| \] $\implies \forall t\in [a,b]\quad \varphi(t)\leqslant \lambda e^{\mu\left( t-t_0 \right) }$
+\end{lemma}
+\begin{proof}
+    Докажем при $t \geqslant  t_0$ (при $t<t_0$ аналогично)
+
+    $\varphi(t) \leqslant \lambda + \mu \int_{t_0}^t \varphi(\tau)d\tau =: v(t)$
+
+    $\p v(t) = \mu \varphi(t) \leqslant \mu v$
+
+    $\lambda > 0 \implies v(t) >0$, разделим неравенство на $v$
+
+    $\frac{\p v(t)}{v(t)}\leqslant M$ -- проинтегрируем по $[t_0,t]$
+
+    $\int_{t_0}^t\frac{\p v(\tau)}{v(\tau)}d\tau \leqslant \mu\left( t-t_0 \right) $
+
+    $\ln \frac{v(t)}{v(t_0)} \leqslant  \mu(t-t_0)$ 
+
+    $\frac{v(t)}{v(t_0)} \leqslant e^{\mu\left( t-t_0 \right) }$ 
+
+    $v(t) \leqslant \lambda e^{\mu\left( t-t_0 \right)}$ 
+
+    $\varphi(t) \leqslant v(t) \implies \varphi(t) \leqslant \lambda e^{\mu\left( t-t_0 \right) }$
+
+    $\lambda = 0\quad \varphi(t) \leqslant \mu \int_{t_0}^t\varphi(\tau)d\tau<\varepsilon + \mu \int_{t_0}^t \varphi(\tau)d\tau$
+
+    $\implies $ по доказанному $\varphi(t) \leqslant \varepsilon e^{\mu\left( t-t_0 \right) }$
+
+    При $\varepsilon \to 0$ будет $\varphi(t) \leqslant 0$
+\end{proof}
+
+\begin{theorem}
+    [Пикар, Существование единственного решения Задачи Коши]
+
+    $G\subseteq \R^{n+1}_{t,r}$ -- область, $\left( t_0,r_0 \right) \in G$
+
+    $f\in C\left( G \to \R^n \right) \cap  \Lip_{r, loc}(G)$
+
+    $\implies $
+    \begin{enumerate}
+        \item [(i)] на отрезке Пеано $\exists $ решение \[r = f(t,r)\quad r\left( t_0 \right) =r_0\]
+        \item [(ii)] $\psi_1, \psi_2$ -- решение Задачи Коши на $\left( a,b \right) \implies  \psi_1\equiv \psi_2$ на $\left( a,b \right) $
+    \end{enumerate}
 \end{theorem}
-
-$G, \xi: G(n, o) \to \N_0 $ -- количество гаджетов
-
-$A \subseteq G(n, p)\quad \xi \geqslant 1$
-
-\begin{lemma}
-    $E\xi \to 0 \implies A$ апн ложно
-\end{lemma}
-
-
-\begin{statement}
-    $p = o\left(\frac{1}{n}  \right) \implies G(n, p)$ апн не содержит $\triangle$
-\end{statement}
 \begin{proof}
-    $\xi$ -- количество  $\triangle$
+\begin{figure}[!ht]
+    \centering
+    \incfig{plankapkan}
+    \caption{plankapkan}
+    \label{fig:plankapkan}
+\end{figure}
 
-    $E\xi = {n\choose 3} E_{\chi_{\triangle}} = {n\choose 3} p^3 = {n\choose 3} o\left( \frac{1}{n^3} \right) \to 0$
+НУО $\left( t_0,r_0 \right)  = 0$
+
+$\Pi = \left\{ \left( t,r \right) | \left| t \right| \leqslant A\quad \left| r \right| \leqslant B \right\} $ 
+
+$h = \min \left\{ A, \frac{B}{\|f\|_{C(\Pi)}} \right\} $ 
+
+$\|f\|_{C(\Pi)} = \sup_{(t,r)\in \Pi} \left| f(t,r) \right| $
+
+Докажем существование на $[a,b]$
+
+$\varphi_0(t)\equiv 0\quad \varphi_{k+1}(t) = \int_0^t f\left( \tau, \varphi_k(\tau) \right) d\tau, k\in \Z ^+ $
+
+План:
+\begin{enumerate}
+    \item Докажем, что $\left( t, \varphi_k(t) \right) \in \Pi\quad \forall k, \forall t\in [0,h]$
+    \item $\exists \varphi:\quad \varphi_k\rightrightarrows\varphi, k\to \infty $ на $[0,h]$
+    \item  $\varphi$ -- решение Задачи Коши
+    \item Единственность
+\end{enumerate}
+
+\begin{enumerate}
+    \item База: $\varphi_0(t)\in \Pi$ -- верно
+
+        Пусть $\forall t\in [0,h]\quad \left( t, \varphi_k(t) \right) \in \Pi$
+
+        $t\in [0,h] \implies |t|\leqslant A$
+
+        \begin{align*}
+            \left| \varphi_{k+1}(t) \right| &\leqslant \int_0^t \left| f\left( \tau, \varphi_k(\tau) \right)  \right| d\tau\\
+            &\leqslant \int_0^t \|f\|d\tau = \|f\|\cdot t \leqslant \|f\|h \leqslant\\
+            &\leqslant \|f\|\frac{B}{\|f\|}\leqslant B \implies \left( t, \varphi_{k+1}(t) \right) \in \Pi  \\
+        .\end{align*}
+    \item Докажем: \[\forall \varepsilon > 0\quad \exists N\in \N \quad \forall m\geqslant N, k\in \N \quad \|\varphi_{m+k} - \varphi_m\|\leqslant \varepsilon\]
+
+        Докажем индукцией по $m$, что \[\forall t\in [0,h]\quad \left| \varphi_{m+k}(t) - \varphi_{m}(t) \right| \frac{\|f\|_{C(\Pi)}L^mt^{m+1}}{(m+1)!}\] 
+
+        $\left( f\in \Lip_r(\Pi) \text{ по лемме } \implies 7omega\left( f|_{\Pi}, 0, h \right) \leqslant Lh \right) $
+
+        При $m = 0\quad \left| \varphi_k(t) \right|  \leqslant  \|f\|t$
+
+        $\varphi_k(t) = \int_0^t f\left( \tau, \varphi_{k-1}(\tau) \right) d\tau$
+
+        $\left| \varphi_k(t) \right|  \leqslant \|f\|\cdot \int_0^{t}d\tau = \|f\|t$ 
+
+        Пусть при некотором $m\in \Z _+$ верно.
+        \begin{align*}
+            \sphericalangle \left| \varphi_{m+1+k} - \varphi_{m+1}(t) \right| =\\
+            &= \left| \int_0^t f\left( \tau, \varphi_{m+k}(\tau) \right)d\tau - \int_0^t f\left( \tau, \varphi_m(\tau) \right) d\tau  \right| = \\
+            &= \int_0^t \left| f\left( \tau, \varphi_{m+k}\left( \tau \right)  \right)  - f\left( \tau, \varphi_m(\tau) \right)  \right| d\tau \leqslant  \\
+            &\leqslant \int_0^t \omega\left( f, 0, \left| \varphi_{m+k}(\tau) - \varphi\left( \tau \right)  \right|  \right) d\tau \leqslant  \\
+            &\leqslant \int_0^t L \left| \varphi_{m+k}\left( \tau \right)  - \varphi_m\left(\tau  \right)  \right| d\tau \leqslant \text{ по индукции }  \\
+            &\leqslant \int_0^t \frac{L\|f\cdot L^n\tau^{m+1}\|}{(m+1)!}d\tau = \\
+            &= \frac{L^{m+1}\|f\|t^{m+1}}{(m+2)!} \\
+        .\end{align*}
+
+        $\implies \left| \varphi_{m+k}\left( t \right)  - \varphi_m(t) \right|  \leqslant \frac{\|f\|\cdot L^mh^{m+1}}{(m+1)!}$ 
+
+        $\implies \|\varphi_{m+k} - \varphi_m\| \leqslant \left( \frac{\|f\|h}{m+1} \right) \cdot \frac{\left( Lh \right) ^m}{m!} -), m\to \infty $
+
+        $\implies \left( \varphi_k \right) _{k\geqslant 1}$ фундаментальная
+
+        $\varphi:= \lim_{k \to \infty} \varphi_k\quad \varphi\in C[0,h]$
+
+    \item $\varphi_{k+1}(t) \equiv \int_0^t f\left( \tau, \varphi_k(t) \right) d\tau$
+
+        $\lim_{k \to \infty} \varphi_{k+1}(t) = \lim_{k \to \infty} \int_0^t f\left( \tau \varphi_k(\tau \right) d\tau$
+
+        $\varphi(t) = \lim_{k \to \infty} \int_0^t f\left( \tau, \varphi_K(\tau) \right) d\tau $
+
+        \begin{align*}
+            \sphericalangle \left| \int_0^t f\left( \tau, \varphi(\tau) \right)  - f\left( \tau, \varphi_k(\tau) \right)d\tau  \right| \leqslant \\
+            &\leqslant  \int_0^t \left| f\left( \tau, \varphi(\tau) - f\left( \tau, \varphi_k(\tau) \right)  \right)  \right| d\tau \leqslant \\
+            &\leqslant \int_0^t \omega\left( f, 0, \left| \varphi(\tau) - \varphi_k(\tau) \right|  \right) d\tau \leqslant   \\
+            &\leqslant \int_0^t L \left| \varphi(\tau) - \varphi_k(\tau) \right| d\tau\leqslant   \\
+            &\leqslant \|\varphi - \varphi_k\|\int_0^t Ld\tau \leqslant   \\
+            &\leqslant Lh \|\varphi - \varphi_k\| \to 0, k\to \infty   \\
+            \implies \varphi(t) = \int_0^t f\left( \tau, \varphi(\tau) \right) d\tau \text{ эквивалентное интегральное уравнение }
+        .\end{align*}
+
+    \item $\psi_1, \psi_2$ -- решения на $(a,b)$ 
+
+        $\implies \begin{cases}
+            \psi_1(t) = \int_0^t f\left( \tau, \psi_1(\tau) \right)d\tau \\
+            \psi_2(t) = \int_0^t f\left( \tau, \psi_2(\tau) \right) d\tau\\
+        \end{cases}$ 
+
+        $\sphericalangle \chi = \left| a \right| $ 
+
+        .....
+\end{enumerate}
 \end{proof}
-
-$p = \frac{1}{n}\quad P(m=0) = (1-p)^{n\choose 2} = \left( 1 - \frac{1}{n} \right) ^{\frac{n(n-1)}{2}} \to  \left( \frac{1}{e} \right) ^{\frac{n-1}{2}} \to 0$
-
-$p = o\left( \frac{1}{n^2} \right) \to $ апн рёбер нет
-
-$p = \omega\left( \frac{1}{n^2} \right) $ -- апн рёбра есть
-
-$P(m=0) = \left( 1-p \right) ^{n\choose 2} = \left( 1-p \right) ^{\frac{1}{p}\cdot {n\choose 2}\cdot p} \to e^{-p {n\choose 2}} = e^{-\omega(1)} \to 0$
-
-$p = \frac{c}{n^2}\quad Em = \frac{c}{2}\quad P(m=0) = (1-p)^{n\choose 2}\sim e^{- {n\choose 2}p} = e^{-\frac{c}{2}}$
-
-\begin{lemma}
-    [Метод вторых моментов]
-
-    $\frac{D\xi}{\left( E\xi \right) ^2}\to 0\implies $ апн $A$ истинно
-\end{lemma}
-\begin{proof}
-    Неравенство Чебышёва
-
-    $E\xi^2 = \left( E\xi \right) ^2\left( 1 + o(1) \right)  \implies A$ апн истинно
-\end{proof}
-
-
-
 
 
 
