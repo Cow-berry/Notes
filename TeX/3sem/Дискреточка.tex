@@ -131,6 +131,36 @@
 \usepackage{xifthen}
 \usepackage{pdfpages}
 \usepackage{transparent}
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{myStyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    extendedchars=\true
+}
+
+\lstset{style=myStyle}
+
+\lstset{language=Python}
+
 \newcommand{\incfig}[1]{%
     \def\svgwidth{\columnwidth}
     \import{./figures/}{#1.pdf_tex}
@@ -143,6 +173,7 @@
 \DeclareMathOperator{\Ker}{Ker}
 \DeclareMathOperator{\Chi}{Chi}
 \DeclareMathOperator{\Def}{Def}
+\DeclareMathOperator{\Good}{Good}
 \begin{document}
     \maketitle
     \chapter{Графы, неалгоритмические свойства}
@@ -1332,4 +1363,372 @@ $E\deg = (n-1)p$
 $P(\deg u = k) = {n\choose k}\frac{d^k}{n^k}\left( 1 - \frac{d}{n} \right) ^{n-k} = \frac{n!}{k!(n-k)!} \frac{d^k}{n^k}\left( 1 - \frac{d}{n} \right) ^{n-k} = \frac{\sqrt{2\pi n} n^nd^k}{ \sqrt{2\pi (n-k)} n^{n-k}(1 - \frac{k}{n}^{n-k}n^k e^k}\left( 1 - \frac{d}{n} \right) ^{n-k} = $
 
 $\approx \frac{n^k}{k!}\frac{d^k}{n^k}\left( 1 - \frac{d}{n} \right) ^n = d^\frac{k}{k!}e^{-d}$ -- распределение Пуассона.
+
+\section{Связность $G(n, p)$}
+
+Строгий порог $\frac{\ln }{n}$
+
+\begin{theorem}
+    \begin{enumerate}
+        \item []
+        \item $\forall c<1\quad G(n, \frac{c\ln n}{n})$ а.п.н. не связен
+        \item $\forall c > 1 G\left( n, \frac{c\ln n}{n} \right) $ а.п.н. связен
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}
+        \item [] 
+        \item $T_n = $ количество изолированных вершин
+
+            $E T_n = n\cdot p\left( \text{вершина 1 изолирована} \right) = n\cdot \left( 1- p\right)^{n-1} = n\left( 1 - \frac{c\ln }{n} \right) ^{n-1} \sim n\left( 1- \frac{c\ln n}{n} \right) ^n \sim n \cdot  e^{-c\ln n} =n^{1-c} \to \infty \quad 1-c>0 $ 
+        
+            $\frac{DT_n}{\left( ET_n \right) ^2} \to 0\qquad E\left[ T_n \right] ^2 = \left( ET_n \right) ^2\left( 1 + o(1) \right) $
+
+            $E\left[ T_n^2 \right] = E\left[\left( \sum_{i=1}^{n} X_i \right) ^2\right] = E\left[ \sum_{ij} X_iX_j \right] = \sum_{ij}EX_iX_j $ 
+
+            \begin{enumerate}
+                \item $i = j:\quad E\left( X_i \right)^2 = EX_i\quad\sum _i E X_I = ET_n $
+                \item $i\neq j:\quad E X_iX_j = (1-p)^{1 + 2(n-2)} = (1-p)^{2n-3}$ -- нет ребра между ними и рёбер с оставшимися $n-2$
+            \end{enumerate}
+
+            $E\left[ T_n^2 \right]  = ET_n + n(n-1)(1 -p)^{2n-3}$
+
+            $\sphericalangle \frac{n(n-1)(1-p)^{2n-3}}{\left( n(1-p)^{n-1} \right) ^2} \sim \frac{1}{1-p} \to 1$ 
+
+            $\frac{DT_n}{\left( ETn \right) ^2}\to 0 \implies T_n$ -- сконцентрировано вокруг матожидания, которое $\to \infty $
+
+        \item Если $p = \frac{c\ln }{n}\quad c>1\implies G(n, p)$ а.п.н. связен
+
+            $ET_n = n\left( 1-p \right) ^{n-1}\sim n^{1-c} \to 0$
+
+            \begin{problem}
+                G -- связен $\iff \forall S$ между $S$ и  $V \setminus S$ есть ребро
+            \end{problem}
+
+            $S_n$ -- количество множеств  $T$, что между  $T$ и $V\setminus T$ нет рёбер
+
+            $=\sum_{\substack{T\subseteq V\\ T\neq \O }}S_{n, T}\quad ES_n = \sum_{\substack{T\subseteq V\\ T\neq \O }} E S_{n, t} = \sum_{i=1}^{n-1} {n\choose i}(1-p)^{i(n-i)} \to 0?$ 
+
+            $i = 1\quad \to 0$
+
+            $q_i = {n\choose i}(1-p)^{i(n-i)}$
+
+            Т.к. всё симметрично, будем считать сумму до $\frac{n}{2}$ 
+
+            $\frac{q_{i+1}}{1_i} = \frac{{n\choose i+1}\left( 1-p \right) ^{(i+1)(n-i-1)}}{{n\choose i}\left( 1-p \right) ^{i(n-i)}} = \frac{n-i}{i+1}(1-p)^{n-2i-1}$ 
+
+            $\sum_{i=1}^{\frac{n}{\ln \ln n}} q_i + \sum_{\frac{n}{\ln \ln n}}^{\frac{n}{2}} q_i$ 
+
+            $i\leqslant \frac{n}{\ln \ln n}$ 
+
+            $\leqslant n(1-p)^{n(1+o(1)} \sim \underbrace{n^{(1-c)(1+o(1))}}_b \to 0$ 
+
+            $q_i \leqslant q_1\cdot b^{i-1}$
+
+             $\sum_{i=1}^{\frac{n}{\ln \ln n}} q_i \leqslant \sum_{i=1}^{\frac{n}{\ln \ln n}} q_1b^{i-1} \leqslant \frac{q_1}{1-b}$
+
+             Теперь рассмотрим вторую сумму
+
+             $\sum_{\frac{n}{\ln \ln n}}^{\frac{n}{2}} \underbrace{{n\choose i}}_{\leqslant 2^n}(1-P)^{i(n-i)}$ 
+
+             \begin{enumerate}
+                 \item ${n\choose i} \leqslant 2^n$
+                 \item $i\geqslant \frac{n}{\ln \ln n}\quad n-i \geqslant  \frac{n}{2}$ 
+
+                     $i(n-i) \geqslant \frac{n}{2}\cdot \frac{n}{\ln \ln n}$ 
+
+                     $\implies \left( 1-p \right) ^{i(n-i)} \leqslant (1-p)^{\frac{n}{2}\cdot \frac{n}{\ln \ln n}}$ 
+             \end{enumerate}
+
+             $\sum_{\frac{n}{\ln \ln n}}^{\frac{n}{2}} q_i \leqslant n\cdot 2^n(1-p)^{\frac{n}{2}\cdot \frac{n}{\ln \ln n}}$
+
+             $\ln \left( \ldots \right) \to -\infty $
+
+             $\ln n + n\ln 2 + \underbrace{\ln (1-p)}_{\sim -p} \frac{n^2}{2\ln \ln n} = \ln n + n\ln 2 - \frac{c\ln n}{n}\cdot \frac{n^2}{2\ln \ln n} \to -\infty $ 
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{vereb}
+    \caption{vereb}
+    \label{fig:vereb}
+\end{figure}
+    \end{enumerate}
+\end{proof}
+
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{c|n}
+    \caption{c|n}
+    \label{fig:c|n}
+\end{figure}
+
+\section{BFS in $G\left( n, p \right) $}
+
+$B_k + G_k + W_k = n$
+
+ $B_k = k\quad EB_k = k$
+
+  $G_k + W_k = n - k$
+
+  $EW_k = \sum_{i=2}^{n} P\left( v_i\in W \text{ после } k \text{ шагов } \right) = (n-1)P_W = (n-1)(1-\frac{d}{n})^k \approx n\left( 1-\frac{dk}{n} \right) = n-dk $ 
+
+  $EG_k = n - k - n + dk = dk - k < 0$
+
+  Если  $d < 1$, то оно отрицательно и убываетс
+
+  Если  $d > 1$, то   $EG_k = \left( d-1 \right) k >0$ и растёт
+
+  Попробуем оценить более точно:
+
+  $EW_k = \left( n-1 \right) \left( 1-\frac{d}{n} \right) ^k \approx ne^{-\frac{dk}{n}}$ 
+
+  $EG_k = n - k - ne^{-\frac{dk}{n}} = n\left( 1 - e^{-\frac{dk}{n}} \right) -k$
+
+  $1 - e^{-\frac{dk}{n}} \sim \frac{k}{n}$ 
+
+  *здесь мог бы быть матан, но пропустим и перейдём к сути*
+
+  $P\left( v_i\not\in W \right)  = 1 -\left( 1 - \frac{d}{n} \right) ^k \approx \frac{dk}{n}$
+
+  $P = \frac{dk}{n}\quad Binom\left( n, \frac{dk}{n} \right) $
+
+  $D_k = B_k  + G_k$ -- discovered --  $P\left( D_k = i \right)  = {n\choose i} \left( \frac{dk}{n} \right) ^i \left( 1 - \frac{dk}{n} \right) ^{n-i} \approx \frac{n^i}{i!} \frac{d^ik^i}{n^i}\left( 1 - \frac{dk}{n} \right) ^n \approx \frac{d^ik^i}{i!}e^{-dk}$ 
+
+  $P(D_k = k) = \frac{d^kk^k}{k!}e^{-dk} \sim \frac{d^kk^ke^k}{\sqrt{2\pi k}k^k }e^{-dk} = \frac{d^ke^{k\left( 1-d \right) }}{\sqrt{2\pi k} }=\frac{1}{\sqrt{2\pi k} } e^{k\ln d+k-kd} = \frac{1}{\sqrt{2\pi k} }e^{k\left( 1 - d + \ln d \right) }  = \frac{1}{\sqrt{2\pi k} }e^{-dk}$
+
+  $k >  \frac{\ln n}{n}\gamma \quad P(D_k = k) < \frac{1}{\sqrt{2\pi k} } e^{-\ln n\gamma} \sim \left( \frac{1}{n} \right) ^{\gamma}$
+
+
+  $\gamma > 1\quad P\left( \exists k > \frac{\ln n}{\alpha}\gamma: D_k = k \right) \leqslant  n P\left( D_k = k \right)  = \left( \frac{1}{n} \right) ^{\gamma -1} \to 0$
+
+  \subsection{гигантская компонента }
+
+    $P = \frac{d}{n} = \frac{1+\varepsilon}{n}\quad 0 < \varepsilon < \frac{1}{8}$ 
+
+    \begin{lstlisting}
+        DFS(u):
+            for c in W:
+                if rnd <= p:
+                    move v to G
+                    DFS(v)
+            move u to B
+    \end{lstlisting}
+
+    \begin{lemma}
+        После $\frac{\varepsilon n^2}{2}$ запросов (rnd)  рёбер \[\left| B \right| \leqslant \frac{n}{3}\]
+
+        В момент $t\quad \left| B \right| =\frac{n}{3}$ 
+
+        $E|G| \leqslant \left( \frac{1+\varepsilon}{n} \right) t \leqslant \frac{\varepsilon n^2}{2} \frac{\left( 1+\varepsilon \right) }{n} = \frac{\varepsilon^2+\varepsilon}{2}n \leqslant \frac{\frac{1}{64} + \frac{1}{8}}{2} = \frac{9}{128}n$ 
+
+        а.п.н. $|G| \leqslant  \frac{1}{3}n$ 
+
+         В момент $t$ -- $\left| W \right|  = n - \left| G \right|  - \left| B \right|  \geqslant \frac{n}{3}$ 
+
+         $\left| B \right|  = \frac{n}{3}\quad \left| W \right|  \geqslant  \frac{n}{3}$ 
+
+         $\frac{n^2}{9}$ отсутствующих рёбер. Но $ t \leqslant \frac{n^2}{16}$??
+
+         Поэтому а.п.н $\left| B \right| \leqslant \frac{n}{3}$
+    \end{lemma}
+
+    \begin{lemma}
+        После $\frac{\varepsilon n^2}{2}$ заппросов а.п.н \[\left| G \right| \geqslant \frac{\varepsilon^2n}{30}\]
+    \end{lemma}
+
+    \begin{theorem}
+        $d > 1 \implies $ а.п.н $G$ содержит гигантскую компоненту
+    \end{theorem}
+
+    \begin{lemma}
+        $G(n,p)$ Имеет вероятность $\geqslant \delta$ иметь $\geqslant 2$ компонент размера $\omega\left( \ln n \right) \quad \varepsilon>0\implies $ Тогда вероятность, что среди вершин $\left\{ 1, 2, \ldots, \frac{\varepsilon n}{2} \right\} $ есть две такие компоненты $ \geqslant \frac{\delta}{2}$
+    \end{lemma}
+
+    \begin{corollary}
+        $\exists $ не более одной компоненты размера $\Omega\left( n \right) $
+    \end{corollary}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{beeg}
+    \caption{beeg}
+    \label{fig:beeg}
+\end{figure}
+
+
+\section{Матроиды}
+
+\begin{definition}
+    $x$ -- носитель.
+
+     $A\subseteq X$
+
+     Поделим все подмножестве $X$ на ``хорошие'' и  ``плохие''
+
+     Потребуем, что подмножество хорошего множества хорошее. Добавление элемента может только ухудшить. Это свойство называется наследуемостью. (Предматроид)
+
+      $\O \in \Good$
+
+      Добавим вспомогательную метрику -- ценность $\omega: X\to \R$
+
+      Задача -- найти $A\in Good\quad \omega(A) = \sum_{a\in A} \omega(a) \to \max$ 
+
+      Жадный алгоритм -- брать каждый раз самое ценное и добавлять такие пока можно.
+
+      Такой алгоритм иногда работает, например Караскал.
+
+      Такой алгоритм иногда не работает, поиск максимального паросочетания, независимые множества.
+
+
+\end{definition}
+
+\begin{definition}
+    $M$ -- матроид
+
+     $M = \left<X, I\subseteq 2^X \right>\quad X$ -- конечно
+
+     $I$ -- независимые множества.
+      \begin{enumerate}
+          \item $\O \in I$ -- аксиома нетривиальности (нужен хотя бы один допустимый объект)
+         \item $A\in I\quad B\subseteq A \implies B\in I$ -- аксиома наследования
+         \item $A, B\in I\quad |A| > |B| \implies \exists x\in A\setminus B:\quad B\cup \{x\} \in I$ -- аксиома замены
+     \end{enumerate}
+\end{definition}
+
+\begin{example}
+    [Матричный матроид]
+
+    $\mathbb F^m$
+
+    $X = \left\{ x_1, x_2, \ldots, x_{n}  \right\}\quad x_i\in \mathbb F^m $ (обычно $\mathbb F = \R, \C$ или $\mathbb F_{p^k}$, особенно  $\mathbb F_2$)
+
+    $I = \left\{ A | A \text{лнз} \right\} $
+
+    $\sphericalangle \mathscr L\left( B \right) \quad \dim \mathscr L\left( B \right)  = |B|$
+
+    $|A| > |B|\quad A$ лнз,  $\exists x\in A: x\not\in \mathscr L\left( B \right) \quad B\cup \{x\}$ -- лнз
+
+    Матричный, потому что набор векторов $X$ легко представить как матрицу, где вектора это столбцы
+\end{example}
+
+\begin{example}
+    [Равномерный (uniform) или универсальный (universal) матроид]
+
+    $X = \left\{ x_1, \ldots, x_{n}  \right\} $
+
+    $I = \left\{ A| \left| A \right| \leqslant k \right\} $
+
+    $U_{n,k}$ -- обозначение
+\end{example}
+\begin{example}
+    [Rainbow, Разноцветный]
+
+    $X = \left\{ \left( i, c_i \right) | i = 1 \ldots n, \quad c_i\in C \right\} \quad c_i$ -- цвет
+
+    $I = \left\{ A | \text{в } A \text{ все элементы разного цвета} \right\} $ 
+
+
+\end{example}
+
+\begin{example}
+    [Графовый матроид]
+
+    $G$ -- неориентированный граф  $\left<V, E \right>$ 
+
+    $X = E$
+
+     $I = \left\{ A| A \text{ -- ацикл.} \right\} $ 
+
+     $A, B\quad |A| > |B|\quad |V| = n\quad |B| = b$ 
+
+     В графк $\left<V, B \right>\quad n-b$ компонент связности
+
+     В графе $\left<V, A \right>\quad n-a$ компонент связности
+
+     $n-a < n-b \implies \exists $ ребро $e\in A:$ концы  $e$ в разных компонентах связности  $B \implies B \cup \{e\}\in I$
+\end{example}
+
+\begin{example}
+    [Матроид паросочетаний, трансверсальный матроид]
+
+    $G$ -- двудольный граф  $\left<X, Y, E \right>$
+
+    $X$ -- Носитель
+
+     $I = \left\{ A| \exists \text{ паросочетание } M \text{, что все вершины } A \text{ покрыты } M \right\} $ 
+
+     $A$ покрыто  $M_A\quad |M_A| = a$
+
+     $B$ покрыто  $M_B\quad |M_B| = b$ 
+
+     $M_A \oplus M_B$
+
+     $u\in A\setminus B\quad B \cup \{u\}$ покрывает $M_B\oplus P$
+\end{example}
+
+$M = \left<X, I \right>$
+
+Базы -- максимальные по включению независимые множества $\mathcal B$
+
+ \begin{lemma}
+     Все базы имеют равную мощность (очевидно по аксиоме замены. Если в одном элементов меньше, можно добавить)
+\end{lemma}
+
+$\sphericalangle $ взвешенный матроид $\omega: X \to \R$
+
+\begin{problem}
+    Найти базу минимального веса
+\end{problem}
+\begin{theorem}
+    [Рада, Эдмундса]
+
+    $M = \left<X, I \right>$ -- матрид
+
+    $\sqsupset A_k\in I$, $|A_k| = k\quad \omega(A_k) \to \min$   
+
+    $\sqsupset y\not\in A_k : \quad A_k \cup \{y\}\in I\quad \omega(y) \to \min$
+
+    Тогда $A_k \cup \{y\}$ -- независимое множество минимального веса мощности $k+1$
+\end{theorem}
+\begin{proof}
+    $A_{k+1}\quad |A_{k+1}| = k+1\quad \omega(A_{k+1}) \to \min$
+
+    По аксиоме 3 $\exists x\in A_{k+1} \setminus A_k:\quad A_k \cup \{x\}\in I$
+
+    $\omega(x) \geqslant \omega(y)$, т.к. $y$ -- мин
+
+    $\omega(A_k) \leqslant \omega(A_{k+1} \setminus \{x\})$
+
+    $\omega(y) \leqslant  \omega x$
+
+    $\omega(A_k \cup \{y\}) \leqslant \omega(A_{k+1}) \implies \omega(A_k\cup \{y\}) = \omega(A_{k+1})$
+\end{proof}
+
+\begin{definition}
+    Оракул независимости -- может по множество говорить независимо ли оно
+\end{definition}
+
+\begin{statement}
+    [Алгоритм Рада-Эдмундса]
+
+    $\omega: X\to \R$
+    \begin{enumerate}
+        \item $X = \left[ x1, ..., x_n \right] $
+
+            sort X by $\omega(x_i)\uparrow$
+        \item .
+
+            \begin{lstlisting}
+                A = {}
+                for x in X:
+                    if A U {x} in I:
+                        A U= {x}
+            \end{lstlisting}
+    \end{enumerate}
+
+    $O\left( n\log n + nQ \right) \quad Q$ -- время работы оракула независимости
+\end{statement}
+
+
 \end{document}

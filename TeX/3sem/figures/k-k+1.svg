@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="240mm"
+   height="120mm"
+   viewBox="0 0 240 120"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.1.1 (1:1.1+202109281949+c3084ef5ed)"
+   sodipodi:docname="k-k+1.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs2">
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect1407"
+       is_visible="true"
+       lpeversion="1"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect1403"
+       is_visible="true"
+       lpeversion="1"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.99437388"
+     inkscape:cx="497.29786"
+     inkscape:cy="183.53258"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showborder="true"
+     width="200mm"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:pagecheckerboard="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid815"
+       units="mm"
+       spacingx="10"
+       spacingy="10"
+       empspacing="4"
+       dotted="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-177)">
+    <rect
+       style="fill:none;stroke:#00d98e;stroke-width:0.465;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect867"
+       width="198.42369"
+       height="10.443353"
+       x="28.083208"
+       y="190.34509" />
+    <rect
+       style="fill:none;stroke:#00d98e;stroke-width:0.465;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect867-3"
+       width="198.42369"
+       height="10.443353"
+       x="28.08321"
+       y="223.53139" />
+    <text
+       style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"
+       id="text1346"
+       y="199.9014"
+       x="16.159153"><tspan
+         sodipodi:role="line"
+         id="tspan1344"
+         style="stroke-width:0.264583"
+         x="16.159153"
+         y="199.9014">$A$</tspan></text>
+    <text
+       style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"
+       id="text1358"
+       y="230.90092"
+       x="12.983809"><tspan
+         sodipodi:role="line"
+         id="tspan1356"
+         style="stroke-width:0.264583"
+         x="12.983809"
+         y="230.90092">$B$</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 125.08249,190.53248 c 0,3.55339 0,7.10651 0,10.65937"
+       id="path1401"
+       inkscape:path-effect="#path-effect1403"
+       inkscape:original-d="m 125.08249,190.53248 c 2.6e-4,3.55339 2.6e-4,7.10651 0,10.65937" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 125.1806,223.02834 c 0,3.89979 0,7.79931 0,11.69857"
+       id="path1405"
+       inkscape:path-effect="#path-effect1407"
+       inkscape:original-d="m 125.1806,223.02834 c 2.6e-4,3.89979 2.6e-4,7.79931 0,11.69857" />
+    <text
+       style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"
+       id="text1433"
+       y="185.35886"
+       x="70.83532"><tspan
+         sodipodi:role="line"
+         id="tspan1431"
+         style="stroke-width:0.264583"
+         x="70.83532"
+         y="185.35886">$A_1$</tspan></text>
+    <text
+       style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"
+       id="text1525"
+       y="184.49577"
+       x="170.29668"><tspan
+         sodipodi:role="line"
+         id="tspan1523"
+         style="stroke-width:0.264583"
+         x="170.29668"
+         y="184.49577">$A_2$</tspan></text>
+    <text
+       style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"
+       id="text1537"
+       y="218.42633"
+       x="69.898346"><tspan
+         sodipodi:role="line"
+         id="tspan1535"
+         style="stroke-width:0.264583"
+         x="69.898346"
+         y="218.42633">$B_1$</tspan></text>
+    <text
+       style="font-size:2.64583px;font-family:monospace;-inkscape-font-specification:'monospace, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       xml:space="preserve"
+       id="text1549"
+       y="219.35942"
+       x="168.46368"><tspan
+         sodipodi:role="line"
+         id="tspan1547"
+         style="stroke-width:0.264583"
+         x="168.46368"
+         y="219.35942">$B_2$</tspan></text>
+  </g>
+</svg>

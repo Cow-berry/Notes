@@ -3131,7 +3131,82 @@ $f(x)$ -- ступенчатая функция, т.е.  $\exists  \left\{ E_1, 
 \end{proof}
 
 
+\begin{statement}
+    $\nu\left( A\times B \right)  = \nu(A) \cdot \nu(B)$
+\end{statement}
 
+\begin{theorem}
+    Классический объём $\nu_n$ есьть мера не  $\mathcal P_n$ (т.е.  $\nu_n$ -- счётно-аддитивна)
+\end{theorem}
+\begin{proof}
+    По теореме о свойствах объёмов $\coprod_{k=1}^{\infty }P_k\subseteq P \implies \sum_{k=1}^{\infty } \nu(P_k) \leqslant \nu(P)$ 
+
+    Если $P, P_k\in \mathcal P$ и  $P = \coprod_{k=1}^{\infty}P_k \implies \mu_n(P) = \sum_{k=1}^{\infty } \mu_n(P_k)A$. Неравенство $ \leqslant $ происходит из прошлого абзаца
+
+    Свойство в другую сторону называется счётной полуаддитивностью
+
+    $\sphericalangle \varepsilon >0\quad P = \prod_{j=1}^{n}[a_j, b_j)\quad \sphericalangle K = \prod_{j=1}^{n}[a_j, \tl b_j]\quad \tl P = \prod_{j=1}^{n}[a_j, \tl b_j)$, где $\tl b_j\in \left( a_j, b_j \right) :\quad \nu(\tl P) > \nu(P) - \frac{\varepsilon}{2}$
+
+    $\tl P_k = [\tl a_j, b_j)\quad \tl a_j < a_j\quad \nu_k(\tl P_k) < \nu(P_k) + \frac{\varepsilon}{2}$
+
+    $O_k = \prod (a_j, b_j)\quad P_k \subseteq  O_k \subseteq  \tl P_k\qquad \tl P \subseteq  K \subseteq  P = \bigcup P_k \subseteq \cup _kO_k $, т.о. $\left\{ O_k \right\} _{k=1}^{\infty}$ образует открытое покрытие компакта $K$, а значит можно выбрать конечное подпокрытие  $\left\{ O_1, \ldots, O_N \right\} $ -- покрытие $K$
+
+    $\tl P \subseteq K \subseteq \cup _{k=1}^NO_k \subseteq \cup _{k=1}^{N} \tl P_k$. В силу конечной аддитивности $\nu_n(\tl P) \leqslant  \sum_{k=1}^{N} \nu_n(\tl P_k) \leqslant \sum_{k=1}^{\infty } \nu_n(\tl P_k) \leqslant \sum_{k=1}^{\infty } \left( \nu(P_k) + \frac{\varepsilon}{2^{k+1}} \right) =\sum_{k=1}^{\infty } \nu_n(P_k) + \frac{\varepsilon}{2}$ 
+
+        $\nu_n(P) \leqslant \sum_{k=1}^{\infty } \nu_n(P_k) + \varepsilon\quad \varepsilon \to 0\qquad \nu_n(P) \leqslant \sum_{k=1}^{\infty } \nu_n(P_k)$
+\end{proof}
+
+\begin{definition}
+    $\lambda_n$ -- стандартное продолжение  $\nu_n$ (с  $\mathcal P_n$)
+
+     $\mathcal A_n$ -- область определения мер  $\lambda_n$
+
+     $E \in \mathcal A_n \overset{\text{def}} \iff E$ -- измеримо по Лебегу
+
+     $\mathcal N = \left\{  \right\}  $
+\end{definition}
+...
+
+\begin{definition}
+    Если $H$ -- гиперплоскость, параллельная координатному подпространству.  \[H = \left\{ x\in \R^n: x_i = c \right\} \] $\implies \lambda_n(H) = 0$
+\end{definition}
+\begin{proof}
+    $H = \cup_j H_j\quad H_j = H \cap [-j,j]^n$
+
+    Н.у.о $j = n$.  $H = \R^{n-1}\times \{c\}$
+
+    $H_j = [-j,j)^{n-1} \times \{c\} = \bigcap\limits_{l=1} ^{\infty } [-j,j)^{n-1}\times [c,c+\frac{1}{2}) \implies \lambda_n(H_j) = \lim_{l \to \infty} \lambda_n(H_{jl}) = 0$
+\end{proof}
+
+\begin{note}
+    $\mu$ -- полная мера.  $A$ -- измеримо,  $e$ -- нуль-множество.  $B \triangle A \subseteq e \implies B$ измеримо и $\mu(A) = \mu(B) = \mu(A\cap B)$ 
+
+    $\left( A\cap B \right)  = A\setminus \left( A\setminus B \right) $ -- измеримо $\quad B = \left( A\cap B \right) \coprod \left( B \setminus A \right) $
+\end{note}
+
+\begin{statement}
+    $\Pi = \left<a_1, b_1 \right> \times \left<a_2, b_2 \right>\times  \ldots \times \left<a_n, b_n \right>\quad -\infty  \leqslant a_k,b_k \leqslant +\infty $
+
+    $\implies \Pi\in \mathcal A$ и $\lambda_n(\Pi) = \prod \left( b_k-a_k \right) $
+\end{statement}
+
+\begin{statement}
+    $\lambda_n$ --  $\sigma$-конечная мера,  $\R^n = \bigcup\limits_{N=1}^{\infty}[-N, N)^n\quad \lambda\left( [-N, N)^n \right) =\left( 2N \right) ^n < +\infty  $
+\end{statement}
+
+\begin{statement}
+    $\forall E\subseteq \R^n\quad \nu_{n*}(E) = \inf \left\{ \lambda_n(G): G \text{ -- откр. }, E\subseteq G \right\}$
+
+    В частности, если $E\in \mathcal A_n$ \[\lambda_n(E) = \inf\left\{ \lambda_n(G): G \text{ -- откр. }, E\subseteq G \right\} \]
+\end{statement}
+
+\begin{statement}
+    $\forall E \in \mathcal\quad \lambda_n(E) = \sup\{\lambda_n(F): F \text{ -- замкн}, F\subseteq E\} = \sup \left\{ \lambda_n(K): K \text{ -- комп }, K \subseteq E \right\} $
+\end{statement}
+
+\begin{statement}
+    $\forall E \in \mathcal A_n \exists $ окр $E \subseteq G$: 
+\end{statement}
 
 
 

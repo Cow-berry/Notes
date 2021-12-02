@@ -1126,16 +1126,309 @@ $T$ -- большая строка.  $s$ - маленькая строка. Ищ
 O(n) -- в вайле увеличиваем сумму l + z[l]
 \end{lstlisting}        
 
+\section{Минимизация автоматов}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{aluto1}
+    \caption{aluto1}
+    \label{fig:aluto1}
+\end{figure}
+
+Количество допускающихся строк можно посчитать динамикой примерно как в Форде-Беллмане.
+
+\begin{lstlisting}
+    for i = 1 .. n:
+        for c in Sigma:
+            k = i
+            while k >= 0 and s[k] != c:
+                k = p[k]
+            delta[i,c]=k+1
+\end{lstlisting}
+
+Но это медленно
+
+\begin{lstlisting}
+    for i = 1 .. n:
+        p[i] = delta[p[i-1], s[i-1]
+        for c in Sigma:
+            if c = s [i]:
+                delta[i,c] = i + 1
+            else:
+                delta[i,c] = delta[p[i], c]
+
+    O(n*|E|)
+\end{lstlisting}
+
+\begin{problem}
+    Хочется построить автомат, чтобы он принимал только конкретный заданный набор строк
+\end{problem}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{aluto}
+    \caption{aluto}
+    \label{fig:aluto}
+\end{figure}
+
+Минимизация ДКА
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{aluto3}
+    \caption{aluto3}
+    \label{fig:aluto3}
+\end{figure}
+
+\begin{lstlisting}
+    for u in T:
+        for v not in T:
+            Q.add(u,v)
+            A[u,v] = 'x'
+
+    while !Q.empty():
+        (u,v) = Q.remove()
+        for c in Sigma:
+            for u' : delta[u', c] = u:
+                for v' : delta[v', c] = v:
+                    if A[u', v'] != 'x':
+                        A[u', v'] = 'x':
+                        Q.add(u'v')
+
+        O(n^2 * Sigma)
+\end{lstlisting}
+
+\begin{problem}
+    Проверить эквивалентность ДКА
+
+    Возьмём два автомата и будем считать, что один. Несвязный с двумя стартовым состояниями, но неважно Запускаем алгоритм сверху и проверяем эквивалентный ли начальные состояния.
+\end{problem}
+
+zzz...
+
+\begin{lstlisting}
+    Q.add(T)
+    Q.add(не T)
+    while !Q.empty:
+        A = Q.remove()
+        for c in Sigma:
+            for c in A:
+                for u: delta[u,c] = v
+                    B = set[u]
+                    S.insert(B)
+                    M[B].add(u)
+            for B in S:
+                B1 = M[B], B2 = B \ B1
+                if B1 = empty || B2 = empty: continue
+                if B in Q:
+                    заменить B на B1 и B2
+                else:
+                    Q.add(min(B1, B2))
+\end{lstlisting}
 
 
+\section{Ахо-Корсик}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{karas}
+    \caption{karas}
+    \label{fig:karas}
+\end{figure}
+
+$suflink[v]=$ ссылка на  $\max$ суффикс  $V$, который есть в боре
+
+$\delta[v,c] $ -- переход из  $v$ по символу  $c$
+
+ \begin{lstlisting}
+    for v in BFS:
+        suflink[v] = delta[suflink[parent[v]], char(v)]
+        for c in Sigma:
+            if delta[v,c] = null:
+                delta[v,c] = delta[suflikn[v], c]
+\end{lstlisting}            
+
+Длина $suflink$ от  $v$ всегда меньше, чем  $v$. Для динамики надо, чтобы родитель и его  $suflink$ посчитались, чем вершина. Для этого запустим bfs и будем идти по нему
+
+$O\left( \left( \sum S_i \right) \cdot \left| \Sigma \right|  \right) $
+
+Хотим проверить если ли в тексте одно из слов из конкретного набора (ругательства например). Помечаем терминальными вершины, из которых суффиксная ссылка ведёт в терминальное.
+
+\begin{note}
+    Суффиксные ссылки образуют дерево. Из каждой вершины есть ссылка на вершину меньшего размера
+\end{note}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{karasik}
+    \caption{karasik}
+    \label{fig:karasik}
+\end{figure}
 
 
+А как делать без построения автомата (он большой, а хочется наверное просто suflink и хватит)
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{noauto}
+    \caption{noauto}
+    \label{fig:noauto}
+\end{figure}
+
+ \begin{lstlisting}
+ for v in BFS:
+    k = suflink[parent[v]]
+    while k != null && delta[k,v] != null:
+        k = subflink[k]
+
+    if k = null:
+        suflink[v] = root
+    else 
+        suflink[v] = delta[k,x]
+\end{lstlisting}    
+
+На каждой итерации фора длина строки увеличивается, а в вайле умеьшается. Увеличивается она длину строки раз, значит и уменьшается не больше, чем столько $O\left( |S_i| \right) $
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{break}
+    \caption{break}
+    \label{fig:break}
+\end{figure}
+
+\section{Суффиксный массив}
+
+$s = abbaab$
+
+Выпишем суффиксы в лексикографическом порядке -- $p$
+
+ \begin{table}[htpb]
+    \centering
+    \caption{}
+    \label{tab:}
+    \begin{tabular}{c}
+    6 $\cdot$\\
+    3 aab
+    4 ab
+    0 abbaab
+    5 b
+    2 baab
+    1 bbaab
+    \end{tabular}
+\end{table}
+
+$s[p[i]+j]$ --  $j$ символ  $i$ суффикса
+
+\subsection{Зачем}
+
+Искать в  $s$ подстроку  $T_i$. Любая подстрока это префикс какого-то суффикса. Найдём в суффиксном массиве бинпоиском нужную подстроку. 
+
+\subsection{Как}
+
+ \begin{statement}
+     [Простая идея]
+
+     Взять все суффиксы и отсортировать. $O\left( n\log n \cdot \left| comp \right|  \right) $ 
+
+     Худший случай $O\left( n^2\log n \right) $ 
+
+     На практике нормальный метод, можно жить, если достаточно рандомные  строки.
+\end{statement}
+
+Задача -- научиться нормально сравнивать суффиксы. Нужно найти общий префикс и сравнить следующие два символа. 
+
+С хэшами $O\left( n\log ^2n \right) $ 
+
+Сортировать строки неприятно. В конце строки ещё надо ифать случай, что строка заканчивается. Пусть каждая строка заканчивается долларом, который меньше, чем любой символ. По техническим причинам после доллара есть смысл писать дальше строку по циклу. А потом ещё запишем ещё один символов по циклу, чтобы довести до $2^n$
+
+Символы после доллара не влияют на порядок, потому на первом же сравнение оканчивается.
+
+\begin{table}[htpb]
+    \centering
+    \caption{caption}
+    \label{tab:label}
+    \begin{tabular}{c}
+    \$abbaab\$
+    aab\$abba
+    ab\$abbaa
+    abbaab\$a
+    b\$abbaab
+    baab\$abb
+    bbaab\$ab
+    \end{tabular}
+\end{table}         
+
+На итерации $k$ сортируем строки  $s[i .. i + 2^k - 1]$ (цикл)
+\begin{enumerate}
+    \item $k = 0\quad s[i..i]$ -- $O\left( n\log n \right) $ любой сортировкой
+    \item $k\to k+1$ $A<B \iff A_1 < B_1 \lor \left( A_1 = B_1 \land A_2 < B_2 \right) $ 
+
+        Осталось научиться сравнивать $A_1$ и $B_1$
+\end{enumerate}
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{k-k+1}
+    \caption{k-k+1}
+    \label{fig:k-k+1}
+\end{figure}
+
+\begin{table}[htpb]
+    \centering
+    \caption{ex}
+    \label{tab:ex}
+    \begin{tabular}{ccccccccc}
+        \$ & 6 & 0 & ab & 0 & 12 & 01 & 6 & 0\\
+        a & 0 & 1 & bb & 1 & 22 & 11 & 3 & 1\\
+        a & 3 & 1 & ba & 2 & 21 & 12 & 0 & 2\\
+        a & 4 & 1 & aa & 3 & 11 & 12 & 4 & 2\\
+        b & 1 & 2 & ab & 4 & 12 & 20 & 5 & 3\\
+        b & 2 & 2 & b\$ & 5 & 20 & 21 & 2 & 4\\
+        b & 5 & 2 & \$a & 6 & 01 & 22 & 1 & 5\\
+          & p & c &    &   &    &    & p & c\\
+    \end{tabular}
+\end{table}
+
+$O\left( \log n \cdot  n\log n \right)  = O\left( n\log ^2n \right) $ 
+
+Но в моменте, когда мы сравниваем пары целых чисел, можно использовать radix sort.
+
+$O\left( \log n \cdot  n \right)  = O\left( n\log n \right) $ 
+
+Вместо сортировки можно получать список отсортированный по левой половине сразу. Для этого к отсортированным строкам $2^k$ допишем по циклу следующую половину
 
 
+\begin{lstlisting}
+    while 2^k < n:
+        for i = 0 .. n-1:
+            p[i] = (p[i] - 2^k)%n
+        count_sort(p,c)
+        c'[p[0]=0
+        for i  = 1 .. n-1:
+            if c[p[i]] = c[p[i-1]] and c[p[i]] + 2^k] = c[p[i-1] + 2^k]:
+                c'[p[i]] = c'[p[i-1]]
+            else:
+                c'[p[i]] = c'[p[p-1]]+1
+        c = '
+        k++
+\end{lstlisting}
 
+$lcp(i,j) = lcp(s[i..n], s[j..n])$
 
+$lcp[i] = lcp\left( p[i], p[i+1] \right) $
 
+$lcp(i,j) = \min_{k = c[i]..c[j]-1} l[k]$
 
+как искать $l[i]$
 
+\begin{lstlisting}
+    fori = 0 .. n-1:
+        x = c[i] -- позция в суф. мас.
+        if k > 0:
+            k--
+        while s[p[i-1]+k] = s[p[x]+k]:
+            k++
+        l[x-1] = k
+\end{lstlisting}
 
 \end{document}

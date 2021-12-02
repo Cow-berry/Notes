@@ -42,6 +42,7 @@
 \renewcommand\C{\ensuremath{\mathbb{C}}}
 \newcommand{\p}[1]{#1^{\prime}}
 \newcommand{\pp}[1]{#1^{\prime\prime}}
+\newcommand{\tl}[1]{\widetilde{#1}}
 % Easily typeset systems of equations (French package) [like cases, but it aligns everything]
 \usepackage{systeme}
 \usepackage{lipsum}
@@ -138,6 +139,7 @@
 \usepackage{tikz}
 \DeclareMathOperator{\Dom}{Dom}
 \DeclareMathOperator{\Lip}{Lip}
+\DeclareMathOperator{\dom}{dom}
 \begin{document}
     \maketitle
     %
@@ -1672,13 +1674,306 @@ $\varphi_0(t)\equiv 0\quad \varphi_{k+1}(t) = \int_0^t f\left( \tau, \varphi_k(\
 \end{enumerate}
 \end{proof}
 
+\begin{corollary}
+    [Теорема Пикара с простыми условиями]
+
+    $G\subseteq \R^{n+1}_{t,r}$ -- область, $\left( t_0, r_0 \right) \in G$
+
+    $f\in C\left( G \to \R^n \right) , \p f_r \in M_n\left( C\left( G \right)  \right) $
+
+    $\implies $ верно (1), (2) из оригинальной теоремы (существования и единственность)
+\end{corollary}
+\begin{proof}
+    лемма из пред. раздела + оригинальная теорема
+\end{proof}
+
+\begin{definition}
+    Пусть $\varphi_0(t)\equiv r_0\quad \varphi_{k+1} = r_0 + \int_{t_0}^tf(\tau, \varphi_k(\tau))d\tau$
+
+    $\implies \left( \varphi_k \right) _{k\geqslant 0}$ -- приближение Пикара для Задачи Коши $\begin{cases}
+        \dot r = f(t,r)\\
+        z(t_0) = r_0\\
+    \end{cases}$
+\end{definition}
+
+\begin{corollary}
+    В условиях предыдущего следствия: $\|\varphi - \varphi_m\|_{[t_0-h, t_0+h]} \leqslant \frac{\|f\|\left( n\|\p f_r\| \right) ^mh^{m+1}}{(m+1)!}$, где $\varphi_m$ --  $m$-е приближение Пикара
+
+    $\|\cdot \| = \|\cdot \|_{C(\Pi)}$
+\end{corollary}
+\begin{proof}
+    В основном неравенстве последней теоремы сделаем предельный переход при $R\to \infty $ и возьмём супремум по $t$ 
+
+    По лемме можно взять $L = h\|\p f_r\|$
+\end{proof}
+
+\begin{corollary}
+    [Теорема Пикара для $n$-го порядка.]
+
+    $G\subseteq \R^{n+1}_{x, y, \p y, \ldots, y^{(n-1)}}$ -- область, $\left( x_0, y_0, \p y_0, \ldots, y^{(n-1)}_0 \right) \in G$ 
+
+    $f\in C(G) \cap \Lip_{\left( y, \ldots, y^{(n-1)} \right), loc(G)}$
+
+    $\implies$
+    \begin{enumerate}
+        \item $\exists $ окрестность точки $x_0$ на которое $\exists $ решение Задачи Коши:
+            $\begin{cases}
+                y^{(n)} = f\left( x, y, \p y, \ldots, y^{(n-1)} \right) \\
+                y(x_0) = y_0\\
+                \p y(x_0) = \p y_0, \ldots,  y^{(n-1)}(x_0) = y^{(n-1)}_0
+            \end{cases}$ 
+        \item  $\psi_1, \psi_2$ -- решение на $\left( a, b \right) $ Задачи Коши выше, то $\psi_1 \equiv \psi_2$ на $(a,b)$
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    $y_1:=y\quad y_2:=\p y\qquad y_n = y^{(n-1)}$ 
+
+    $\begin{cases}
+        \p y_1 = y_2\\
+        \p y_2 = y_3\\
+        \ldots\\
+        \p y_n = f\left( x, y, \p y, \ldots, y^{(n-1)} \right) 
+    \end{cases}$
+\end{proof}
 
 
+\section{Продолжение решений}
+\subsection{--||--}
+\begin{definition}
+    $\sqsupset \varphi$ -- решение $\dot r = f\left( t, r \right) $ на $\left<a, b \right> \psi$ -- на $\left<A, B \right>$
+
+    $\left<a,b \right>\subsetneq \left<A, B \right>\quad \psi\equiv \varphi$ на $\left<a, b \right>$
+
+    $\implies \psi$ -- продолжение $\varphi$, а  $\varphi$ -- продолжимое решение
+\end{definition}
+
+\begin{definition}
+    Если решение $\varphi$ не имеет продолжения, то  $\varphi$ -- максимальное решение, а  $\dom \varphi$ -- максимальный промежуток задания решения.
+\end{definition}
+
+\begin{example}
+    $\dot x = 1+x^2$
+
+    $x(t) = \tg t$ -- решение на  $\left( -\frac{\pi}{2}, \frac{\pi}{2} \right) $ 
+
+    $x:\left( -\frac{\pi}{2}, \frac{\pi}{2} \right) \to \R $ -- максимальное решение
+
+    $x: [-\frac{\pi}{4}, \frac{\pi}{4}]\to \R$ -- продолжимое решение
+\end{example}
+
+\begin{theorem}
+    [Критерий продолжимости]
+
+    $G\subseteq \R^{n+1}_{t, r}$ -- область, $f\in C\left( G \to \R^n \right) $
+
+    $\varphi$ -- решение на  $[a,b)$ 
+
+    Тогда $\varphi$ продолжимо на некотором промежутке  $[a,c], b<c \iff $
+     \begin{enumerate}
+         \item $\exists \varphi\left( b - 0 \right)  = \tl r$ 
+         \item $\left( b, \tl r \right) \in G$
+     \end{enumerate}
+\end{theorem}
+\begin{proof}
+     \begin{itemize}
+         \item []
+         \item [$\implies $] $\exists \psi$ -- продолжение на $[a,c]\ni b \implies \varphi\left( b-0 \right)  = \psi(b-0)$ -- $\exists $, т.к. $\psi\in C[a,c) \implies (1)$
+
+             $\varphi$ -- решение на  $[a,c)$, то  $\left( b, \psi(b) \right) \in G \implies (2)$
+         \item [$\impliedby $]
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{conti}
+    \caption{conti}
+    \label{fig:conti}
+\end{figure}
+
+    Доопределим $\varphi$ на  $\left[ a,b \right] $ по непрерывности:
+
+    $\sphericalangle t, t_1\in [a,b)\quad \varphi$ решение $\begin{cases}
+        \dot r = f(t, r)\\
+        r(t_1) = \varphi(t_1)
+    \end{cases} \iff \varphi(t) = \varphi(t_1) + \int_{t_1}^t f\left( \tau, \varphi(\tau) \right) d\tau$
+
+    При $t_1\to b$ \[\varphi(t) = \varphi(b) + \int_b^t f\left( \tau, \varphi( \tau)\right)d\tau \]
+
+    $\iff \begin{cases}
+        \dot r = f\left( t, r \right) \\
+        r(b) = \tl r \left( =\varphi(b \right) 
+    \end{cases}$
+
+    $\implies \varphi$ -- решение на $[a,b]$
+
+    По теореме Пеано на отрезке Пеано  $[b-h, b + h]\quad \exists $ решение $\chi$ задачаи  $\begin{cases}
+        \dot r = f(t, r)\\
+        r(b) = \tl r\\
+    \end{cases}$
+
+    $\sphericalangle \chi = \begin{cases}
+        \varphi(t)&, t\in [a,b)\\
+        \chi(t)&, t\in [b, b+h)\\
+    \end{cases}$ 
+
+    $\psi$ непрерывно дифференцируема на множестве $[a, b+h] \setminus \{b\}$, т.к. таковы $\varphi$ и $\chi$
+
+    $\psi(b-0) = \varphi(b-0) = \varphi(b) = \tl r = \chi(b) = \chi(b+0) = \psi(b+0) \implies \psi$ непрерывна в точке $b$
+
+    $\p \psi_-(b) = \p \varphi_-(b) = f\left( b, \tl r \right) = \p \chi_+(b) = \p \psi_+(b) \implies \psi$ непрерывно дифференцируема в точке $b$
+
+    $\psi(t)\equiv f(t, \psi(t))$ на  $\left[ a, b+h \right] \setminus \left\{ b \right\} $, поскольку таковы $\varphi$ и  $\chi$
+
+    $\sphericalangle t = b\quad \dot \psi(b) = \dot \chi(b) = f\left( b, \chi(b) \right)  = f\left( b, \psi(t) \right) $
+    \end{itemize}
+\end{proof}
+
+    \begin{theorem}
+        [Существование единственного максимального решения]
+
+        $G\subseteq \R^{n+1}_{t,r}$ -- область, $\left( t_0, r_0 \right) \in G$
+
+        $f\in C\left( G \to \R^n \right) \cap \Lip_{r, loc\left( G \right) } \implies $
+        \begin{enumerate}
+            \item Задача $\dot r = f\left( t, r \right) \quad r\left( t_0 \right)  = r_0$ имеет максимальное решение
+            \item $\psi_1, \psi_2$ -- максимальные решения $\implies \dom \psi_1 = \dom \psi_2 = \left( a, b \right)  $ и $\psi_1\equiv \psi_2 $ на $\left( a, b \right) $
+        \end{enumerate}
+    \end{theorem}
+
+\begin{proof}
+    $\sqsupset \left<a_{\varphi}, b_{\varphi} \right>$ -- область определения решения.
+
+    $S$ -- множество всех решений на промежутках любого типа
+
+    $a:= \inf_{\varphi \in S}a_{\varphi}\quad b:= \sup_{\varphi\in S}b_{\varphi}$
+
+    На интервалах $\left( a,b \right) $ определим функцию $\psi:$
+
+    Пусть  $t\in \left( a, b \right) $. НУО $t \geqslant t_0$
+
+    По определению $b\quad \exists \varphi$, заданное на $\left<a_{\varphi}, b_{\varphi} \right>$, где $t < b_{\varphi} \implies \varphi$ определено в $t$
+
+    Положим  $\psi(t) = \varphi(t)$. По теореме Пикара все такие функцию  $\varphi$ совпадают на общей области определения, поэтому определение в точке  $t$ корректно
+
+    Таким образом задана $\psi: \left( a,b \right) \to \R^n$
+
+    Докажем, что $\psi$ -- решение \[\forall \varphi\in S\quad \psi(t_0) = \varphi(t_0) = r_0 \]
+
+    $\forall t\in \left( a, b \right) $ функция $\psi$ совпадает с некоторым  $\varphi\in S$ в некоторой оарестности  $t$
+
+     $\implies \varphi$ непрерывно дифференцируема в $t$, поскольку такова  $\varphi$
+
+     По той же причине $\dot \psi(t) = f\left( t, \psi(t) \right) \implies \chi$ -- решение на $\left( a, b \right) $
+
+     Допустим $\psi$ продолжимо. Тогда  $\psi$ продолжимо на \underline{интервал} $\left( a,c \right) $, где $c>b$ (в силу последней теоремы) 
+
+     $\implies b \neq \sup_{\varphi\in S}b_{\varphi}$
+
+     $\implies \psi$ -- максимальное $\implies (1)$
+
+     Пусть $\psi_2$ ещё одно максимальное. $\implies \psi_2\in S, \psi_2:\left( \tl a, \tl b \right) \to \R^n$
+
+     $\tl b\leqslant b, \tl a \geqslant  a$ (по определению) $\implies \left( \tl a, \tl b \right) \subseteq \left( a, b \right) \implies $ имеем решение $\psi, \psi_2$ на $\left( \tl a, \tl b \right) $
+
+     Тогда по теореме Пикара $\psi\equiv \psi_2$ на $\left( \tl a, \tl b \right) $
+
+     Если $\tl > a, \tl b < b$, то  $\psi_2$ продолжимо $\implies \tl a = a, \tl b = b$
+\end{proof}
 
 
+\begin{figure}[!ht]
+    \centering
+    \incfig{exit}
+    \caption{exit}
+    \label{fig:exit}
+\end{figure}
+\begin{theorem}
+    [О выходе интегральной прямой за предел компакта]
 
+    $G \subseteq \R^{n+1}_{t, r}$ -- область, $f\in C\left( G \to \R^n \right) \cap \Lip_{r, loc}(G)$
 
+    $\varphi$ -- максимальное решение на  $\left( a, b \right) $ системы $\dot r = f(t,r)\quad K$ -- компакт,  $K\subseteq G$
+    
+    $\implies \exists \Delta > 0: \forall t\in \left( a, a+\Delta \right) \cup \left( b - \Delta, b \right) \quad \left( t, \varphi(t) \right) \not\in K$
+\end{theorem}
 
+\begin{proof}
+    Предположим, что \[\exists t: (t, \varphi(t))\in K\]
 
+    Пусть $\rho$ -- расстояние от  $K$ до  $G$. Заметим, что  $\rho > 0\quad \left( \rho(K, \partial G \right)  = \inf_{\substack{r_1\in K\\ r_2\in \partial G}} \rho(r_1, r_2)$
+
+    $c:= \frac{\rho}{2}$ (или $c = 1$, если  $\rho = \infty $)
+
+    Вокруг каждой точки $(\p t, \p r)\in K $ построим параллелепипед  $\Pi\left( \p t, \p r \right)  = \left\{ \left( t, r \right) \in G | \left| t - \p t \right| \leqslant C\quad \left| r-\p r \right| \leqslant C \right\} $
+
+\begin{figure}[!ht]
+    \centering
+    \incfig{comp}
+    \caption{comp}
+    \label{fig:comp}
+\end{figure}
+
+Заметим, что $\Pi\left( \p t, \p r \right) \subseteq G$
+
+$K_C:= \cup _{\left( \p t, \p r \right) \in K} \Pi\left( \p t, \p r \right)  \implies K_C \subseteq  G$
+
+Докажем, что $K_C$ -- компакт  $\iff \begin{cases}
+    K_C & \text{ограничено}\\
+    K_C & \text{замкнуто}
+\end{cases}$ 
+
+\begin{enumerate}
+    \item $K$ -- ограничена $\implies \exists d:\quad \forall \left( t, r \right) \in K\quad \left| \left( t,r \right)  \right| \leqslant d$
+
+        $\sqsupset \left( t, r \right) \in K_C \implies \exists \left( \p t, \p r \right) \quad \left( t, r \right) \in \Pi\left( \p t, \p r \right) $ 
+
+        \begin{align*}
+            \left| \left( t,r \right)  \right| & \leqslant  \left| \left( t, r \right)  - \left( \p t, \p r \right) \right| + \left|\left( \p t, \p r \right)  \right| \\
+            \leqslant c + d \implies \text{ ограниченность }
+        .\end{align*}
+
+        ..
+
+        $\sqsupset \left( t, r \right) $ -- предельная точка $K_C \implies \exists $ последовательность точек $\left( t_m, r_m \right) \to \left( t, r \right) \quad m\to \infty $
+
+        Каждой точке $\left( t_m, r_m \right) $ соответствует $\left( \p t_m, \p t_r \right) :$
+        \begin{align*}
+            \left( t_m, r_m \right) \in \Pi\left( \p t_m, \p r_m \right) \\
+            \left( \left( \p t_m, \p r_m \right)  \right) _{m\geqslant 1}\subseteq K \implies \exists \text{ подпоследовательность}:\\
+        \left| t_{m_k} - \p t_{m_k} \right| \leqslant C\\
+        \left| r_{m_k} - \p r_{m_k} \right| \leqslant C\\
+        k \to \infty \\
+        \begin{cases}
+            \left| t - t' \right| \leqslant C\\
+            \left| r - r' \right| \leqslant C
+        \end{cases} \implies \left( t, r \right) \in \Pi\left( \p t, \p r \right) \\
+        \implies \left( t, r \right) \in K_C \implies \text{ замкнуто}
+        .\end{align*}
+
+        Допустим, что $\forall \Delta > 0 \quad \exists t\in \left( a, a+\Delta \right) \cup \left( b - \Delta, b \right)\quad \left( t, \varphi(t) \right) \in K $
+
+        В частности при $\Delta = \frac{h}{2}$, где $h = \max\left\{  \right\}$
+
+        (...)
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    [о системе, сравнимой с линейной]
+
+    $G = \left( a, b \right) \times \R\quad f\in C\left( G \to \R^n \right) \cap \Lip_{r, loc}(G)$ 
+    
+    $\exists u, v\in C\left( a, b \right) $ \[\left| f\left( t, r \right) \leqslant u(t) \cdot  |r| + v(t) \right| \] $\implies $ Задача Коши для системы $\dot r = f(t,r)$ имеет единственное максимальное решение, заданное на  $\left( a, b \right) $
+\end{theorem}
+\begin{proof}
+    Предположим противное: $\varphi$ -- макисмальное решение Задачаи Коши \[\dot r = f(t,r)\quad r(t_0) = r_0\] определено на $\left( \alpha, \beta \right) $, где не умаляя общности $b < \beta$
+
+    задача Коши  $\iff \varphi(t) = \varphi(t_0) + \int _{t_0}^t f(\tau, \varphi(\tau))d\tau$
+
+    $\sphericalangle t ?= t_0$
+
+    \begin{align*}
+        \left| \varphi(t) \right| &\leqslant  \left| \varphi(t_0) \right| + \int_{t_0}^t \left| f\left( \tau, \varphi(\tau) \right) d\tau \right| 
+    .\end{align*}
+\end{proof}
 
 \end{document}
