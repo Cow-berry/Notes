@@ -148,6 +148,9 @@
 \DeclareMathOperator{\Tq}{Tq}
 \DeclareMathOperator{\Tp}{Tp}
 \DeclareMathOperator{\Lp}{Lp}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\diag}{diag}
+
 
 \begin{document}
     \maketitle
@@ -3208,7 +3211,307 @@ $f(x)$ -- ступенчатая функция, т.е.  $\exists  \left\{ E_1, 
     $\forall E \in \mathcal A_n \exists $ окр $E \subseteq G$: 
 \end{statement}
 
+\section{Много чего}
 
+\section{Продолжение}
+
+ \begin{statement}
+     $E$ -- измеримо, то \[\lambda_n(E) = \inf \left\{ \lambda_n(G): E\subseteq G, \ G \text{ -- откр. } \right\} \]
+\end{statement}
+
+\begin{corollary}
+    $\forall \varepsilon>0 \forall \left( \text{ измерим } \right) E \in \mathcal A_n\quad \exists  \text{ откр } G:\quad G \supset E$ \[\lambda_n\left( G \setminus E \right) <\varepsilon\]
+\end{corollary}
+
+\begin{proof}
+    Если $\lambda_n(E) <  + \infty  \implies  \exists $ откр. $G \supset E:\quad \lambda_n(G) < \lambda_n(E) + \varepsilon\qquad \lambda_n(G) = \lambda_n(E) + \lambda_n(G \setminus  E)$
+
+    $G = E \coprod \left( G \setminus E \right) $
+
+    Если $\lambda_n(E) = +\infty $
+
+    $E_k = E \cap B_0\left( k \right) $
+
+    $\bigcup\limits_{k=1} ^{\infty } = E \cap \left( \coprod\limits_{x = 1}^{\infty } B_0(k) \right)  = E$
+
+    $\lambda_n\left( E_k \right) \leqslant \lambda_n\left( B_0\left( k \right)  \right)<+\infty  $
+
+    $\forall k$ по 1) $\exists $ откр $G_k \supset E_k: \quad \lambda_n\left( G_k \setminus  E_k \right) < \frac{\varepsilon}{2^{k+1}}$
+
+    $G = \bigcup\limits_{k=1}^{\infty }G_k $ -- откр $\quad G \supset \bigcup\limits_{k=1}^{\infty } E_k = E $ 
+
+    $\lambda_n\left( G \setminus  E \right)  = \lambda_n\left( \bigcup\limits_{k=1} ^{\infty }G_k \setminus  E \right) \leqslant \sum_{k=1}^{\infty } \lambda_n\left( G_k\setminus E \right) \leqslant \sum_{k=1}^{\infty } \lambda_n\left( G_k \setminus  E_k \right) \leqslant \sum_{k=1}^{\infty } \frac{\varepsilon}{2^{k+1}}<\varepsilon$
+\end{proof}
+
+\begin{corollary}
+    $\forall \varepsilon >0\forall E\in \mathcal A\quad \exists $ замкн. $F \subseteq E:$ \[\lambda_n\left( E \setminus F \right) <\varepsilon\]
+
+    И $E\in\mathcal A \implies   \lambda_n(E) = \sup \left\{ \lambda_n\left( F \right) :\ F\subseteq E, F = \overline{F} \right\} $
+\end{corollary}
+\begin{proof}
+    $\lambda_n(E) = \lambda_n(F) + \underbrace{\lambda_n(E\setminus F)}_{<\varepsilon}$
+
+    $\forall \varepsilon >0\quad $ для $E^C\quad \exists $ откр. $G: G \supset E^C$  и $\lambda_n\left( G \setminus  E^C \right) <\varepsilon$
+
+    $F = G^C$ -- замкн,  $F \subseteq E\quad G \setminus E^C = G \cap \left( E^\C \right)  = G \cap E$
+
+    $E\setminus F = E\cap \left( F^C \right)  = E\cap G$
+\end{proof}
+
+\begin{definition}
+    $\sqsupset \mu$ -- мера на $\mathcal A\quad \mathcal A \quad \mathcal A \subseteq 2^X$
+
+    $\left( X, \mathcal A, \mu \right) $ -- пространство с мерой
+
+    $X$ -- топологическое пространство
+\end{definition}
+
+\begin{definition}
+    Если $\forall E\in \mathcal A$ \[\mu(F) = \sup \left\{ \mu(F):\quad F = \overline{F}\quad F \subseteq E \right\}  = \inf \left\{ \mu(G): G \text{ -- откр }, E\subseteq G \right\} \], то мера называется регулярной.
+\end{definition}
+
+\begin{example}
+    $E = \Q\cap [0,1]\quad \mu = \lambda_1$
+
+    $\lambda_1(E) = 0\quad F = \overline{F}\quad F \supset E \implies \overline{F}\supset \overline {E} = [0,1]$
+
+    $\forall $ замкн $F:\quad F \supset E\quad \lambda_n\left( F \right) \geqslant \lambda_n\left( [0,1] \right)  = 1$ 
+\end{example}
+
+\begin{corollary}
+    $\forall E\in \mathcal A\quad \exists F_{\sigma}$ -- множество $F\quad G_{\sigma}$ -- множество  $G$: \[F\subseteq E\subseteq G \text{ и } \lambda_n\left( G \setminus  F \right) =0\], т.е.
+
+    $\exists$ множества меры нуль $e_1, e_2$ : \[E = F \cup e_1 \text{ и } E = G \setminus  e_2\]
+\end{corollary}
+\begin{proof}
+    $\forall k\quad \exists $ замкн $F_k$ и откр  $G_k:\quad F_k \subseteq E\subseteq G_k$ и $\lambda_n\left( G_k\setminus E \right) <\frac{1}{2k}\quad \lambda_n\left( E \setminus  F_k \right) < \frac{1}{2k}$ 
+
+    $\implies \lambda_n\left( G_k \setminus  F_k \right) \leqslant \frac{1}{2k} + \frac{1}{2k} = \frac{1}{k}$ 
+
+    $G = \bigcap\limits_{k=1}^{\infty} G_k\qquad F = \bigcup\limits_{k=1} ^{\infty} F_k$
+
+    $\lambda_n\left( G\setminus F \right) \leqslant \lambda_n\left( G_k\setminus F_k \right) <\frac{1}{k}\quad \forall k$ 
+
+    $\implies \lambda_n\left( G\setminus F \right) =0$
+
+    $e_1 = E\setminus F\subseteq G\setminus F$
+\end{proof}
+
+\begin{corollary}
+    $\forall E\in \mathcal A\quad \exists $ возрастающая последовательность компактов $\{K_j\}\quad K_{j+1} \supset K_j\quad \forall j$: 
+    \[E = \bigcup\limits_{j=1} ^{\infty }K_j\cup e \text{ и } e  \text{ меру нуль } \left( \lambda_n(e) = 0 \right) \]
+\end{corollary}
+\begin{proof}
+    $\sqsupset \left\{ F_k \right\} $ -- из следствия 2, замкнутые, $E = \bigcup\limits_{k=1}^{\infty }\cup e_2 $ 
+
+    $F_k = \bigcup\limits_{j=1}^{\infty }F_{kj}\qquad F_{kj} = F \cap\overline{B_j(0)} $ -- комп.
+
+    $\bigcup\limits_{k=1}^{\infty }F_k = \bigcup\limits_{k=1}^{\infty }\bigcup\limits_{j=1}^{\infty } = \bigcup\limits_{l=1}^{\infty }F_l    $ -- объединение компактов
+\end{proof}
+
+\begin{theorem}
+    [сохранение измеримости при гладком отображении]
+
+    $\sqsupset  \phi\in C^1\left( O\subseteq \R^n \to \R^n \right)\quad O$ -- откр   Если $E\subseteq G \text{ и } E \in \mathcal E$ Тогда $\forall E \subseteq G$ \[\Phi(E)\in \mathcal E\]
+
+    $\forall e\subseteq G$ и $\lambda_n(e) = 0 \implies \lambda_n\left( \Phi\left( e \right)  \right) =0$
+\end{theorem}
+\begin{proof}
+    $E\in \mathcal E\quad E = \bigcup\limits_{j=1}^{\infty }K_j \cup e $ 
+
+    $\Phi(E) = \bigcup\limits_{j=1}^{\infty } \cup \Phi(e) $  -- объединение объединение компактов и множества меры ноль
+
+    переходя ко второму: По теореме о представлении открытых множеств $\exists \quad \left\{ P_k \right\} _{k=1}^{\infty }$ -- последовательность кубических ячеек
+
+    $G = \cup P_k\quad \forall k\ \overline{P_k}\subseteq G$
+
+    \begin{enumerate}
+        \item $e\subseteq P_{k_0}$ для некоторого $k_0$. Гладкое отображение на компакте $\implies \Phi$ липшецево на $\overline{P}$, т.е.  $\exists C:\ \forall x, y\in \overline{P}\quad \|\Phi(x) - \Phi(y)\|\leqslant C\cdot \|x-y\|$
+
+            $\sphericalangle \varepsilon >0\quad \exists $ откр $G:\quad G \geqslant e$ и $\lambda_n(G) <\varepsilon$
+
+            По теореме о представлении открытого $\exists $ последовательность кубических ячеек  $\left\{ Q_j \right\} _{j=1}^{\infty }\quad G = \coprod_{j=1}^{\infty }Q_j\quad  \implies e\subseteq \bigcup\limits_{j=1}^{\infty }\left( Q_j\cap P \right) \implies \Phi(e) \subseteq \bigcup\limits_{j=1}^{\infty }\Phi\left( Q_j \cap P \right) $ 
+
+            $\diam\left( \Phi\left( Q_j\cap P \right)  \right) \leqslant C\quad \diam \left( Q_j \cap P \right) \leqslant C\diam\left( Q_j \right) =C\sqrt{n} \left( \lambda_n\left( Q_j) \right)  \right) $
+
+             *Там много возни с ячейками*
+    \end{enumerate}
+\end{proof}
+
+\begin{lemma}
+    [об единственности меры на $\mathcal A$]
+
+    $\sqsupset \mu, \nu$ -- две регулярные меры на $\mathcal A_n$
+
+    Если $\forall $ кубических ячеек $Q$ \[\mu(Q) = \nu(Q)\], то  $\mu$ и  $\nu$ совпадают (на $\mathcal A_n$)
+\end{lemma}
+\begin{proof}
+    Точно верно на открытых, т.к. открытые можно выразить через кубические ячейки.
+
+    Для компакта верно, потому что $K = B \setminus  \left(B\setminus K  \right) $
+\end{proof}
+
+\begin{corollary}
+    Если $\Phi: \R^m \to \R^n$ -- инъекция и $\forall E\in \mathcal A_m\quad \Phi\left( E \right) \in \mathcal E$ и $\exists c\geqslant 0\quad \forall $ кубической ячейки $Q$ \[\lambda_n\left( \Phi(Q) \right)=C\lambda_m(Q) \]
+
+    Тогда $\forall E\in \mathcal A_n$ \[\lambda_n\left( \Phi(E) \right) = C\lambda_m(E)\]
+\end{corollary}
+\begin{proof}
+    $\mu = c\lambda_n\quad \nu = \lambda n\left( \Phi(E) \right) \forall E\in \mathcal A_n$
+
+    Первая очевидно мера, вторая мера, потому что $\Phi$ биекция
+\end{proof}
+
+\begin{definition}
+    $T(x) = x + v$ -- сдвиг на  $v\quad x, v\in \R^n$
+\end{definition}
+
+\begin{statement}
+    Мера Лебега инвариантна относительно любого сдвига.
+\end{statement}
+\begin{proof}
+    $\Phi(x) = T_v(x)$
+
+    \[\lambda\left( \Phi(Q) \right) =\lambda_n\left( T_v\left( Q \right)  \right) \]
+
+    Ячейка передвинется поточечно, длины рёбер не изменятся, 
+
+    А тогда по лемме $\lambda_n\left( T(E) \right)  = \lambda_n(E)$
+\end{proof}
+
+\begin{definition}
+    $D:\R^n \to \R^n$ называется диагональным (относительно стандартного базиса) если в этом базисе, если она представляется как диагональная матрица.
+\end{definition}
+\begin{statement}
+    Если $l_1, \ldots, l_n >0$ -- числа на диагонали, то \[\lambda_n\left( D(Q) \right)  = l_1l_2\ldots l_n \lambda_n(Q)\]
+
+    $\implies \lambda_n\left( D(E) \right)  = l_1l_2\ldots l_n \lambda_n(E)$
+\end{statement}
+
+\begin{note}
+    [Напоминание]
+
+    $U: \R^n \to \R^n$ -- линейное, сохраняет скалярное произведение $\left<Ux, Uy \right> = \left<x, y \right>$ называется ортогональным
+
+    Или по-другому:
+
+    \begin{enumerate}
+        \item $U$ ортогонально
+        \item $U$ изометрия
+        \item  $U^{-1} = U^T$
+    \end{enumerate}
+\end{note}
+
+\begin{statement}
+    $\forall $ линейного $A: \R^n \to \R^n:\quad \det A \neq  0\quad \exists $ ортогональные операторы $U_1, U_2$ и диагональный $D = diag\left( l_1, \ldots, l_n \right) \quad l_i >0:$ \[A = U_2DU_1\]
+\end{statement}
+\begin{proof}
+    $A^TA$ симметричный, положительный
+    
+    $\left<A^TAx, x \right> = \left<Ax, Ax \right> = \|Ax\|^2 \geqslant 0\quad =0 \iff x = 0$
+
+    Тогда он приводится к диагональному виду. $A^TA  =Q\tl DQ^{-1}\quad Q$ -- ортогональный,  $\tl D = diag\left( m_1, \ldots, m_n \right)\quad m_i >0 $ -- диагональный
+
+    $D = diag\left( \sqrt{m_1}, \ldots, \sqrt{m_n} \right) \quad D\cdot D = \tl D$
+
+    $U_1 = Q^{-1}\quad U_2 = AU_1^{-1}D^{-1}$
+
+    $U_2U_2^T = \left( AU_1^{-1}D^{-1} \right)\left( AU_1^{-1}D^{-1} \right)^T  = AU_1^{-1}D^{-1}D^{-1T}U_1^{-1T}A^T  = AQ\tl D^{-1}QA^T = $
+
+    $\tl D = Q^TA^TAQ\quad \tl D^{-1} = Q^TA^{-1}A^{-1T}Q$
+
+    $= AQQ^TA^{-1}(A^T)^{-1}Q Q^TA^T = Id$
+\end{proof}
+
+\begin{theorem}
+    $\sqsupset L$ -- лин из $\R^n\to \R^n$ Тогда $\forall E\in \mathcal A$ \[\lambda_N\left( L(E) \right)  = \left| \det \left[ L \right]  \right| \cdot \lambda_n(E)\]
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}
+        \item Если $\det L \neq 0 \implies $ по лемме $\exists $ ортогональные $U_1, U_2$ и диаг. $D:\quad L = U_2DU_1$
+            \begin{enumerate}
+                \item $L = U$ ортогональное
+
+                    $C = \frac{\lambda_n\left( U\left( Q_* \right)  \right) }{\lambda_n\left( Q_* \right) } = \lambda_n\left( U\left( Q_* \right)  \right) \qquad Q_* = [0,1]^n$ 
+
+                    $\sqsupset Q$ -- произвольная кубическая ячейка.
+
+                    $Q = b\cdot Q_* + a = T_a\left( bQ_* \right) $
+
+                    $U\left( x+y \right)  = U(x)  + U(y)$
+
+                   $U\left( T_y(x) \right)  = T_{U\left( y \right) }\left( U(x) \right) $ или $U\cdot T_y = T_{U(y)}\cdot U$
+
+                    $\lambda_n\left( U(Q) \right) = \lambda_n\left( U\left( T_a\left( bQ_* \right)  \right)  \right)  = \lambda_n\left( T_{U(a)}U\left( bQ_* \right)  \right) = \lambda_n\left( bU\left( Q_* \right)  \right) =b^n\lambda_n\left( U\left( Q_* \right)  \right)  = b^nC = \lambda_n(Q)C $ 
+
+                    $\lambda_n\left( UQ \right) =C\lambda_n\left( Q \right) $
+
+                    Тогда по лемме $\lambda_n\left( Q(E) \right) \equiv C\cdot \lambda_n(E)\quad \forall E\in \mathcal A_n$
+
+                    $E = B_R(0)\quad \lambda_n(B) = \lambda_n(U(B)) = C\lambda_n(B) \implies C = 1 \implies \forall  $ ортогональное преобразование сохраняет меру.
+            \end{enumerate}
+        \item $\det L = 0\implies L\left( \R^n \right) $ подпространство размерности $k<n$ в  $\R^n$
+
+            $X = \left\{ x = \left( x_1, \ldots, x_{n}  \right) \in \R^n\quad x_{k+1} = \ldots = x_{n}  = 0 \right\} $
+
+            $\lambda_n(X) = 0\quad \sqsupset v^1, \ldots v^k$ -- базис в $L\left( \R^n \right) $ 
+
+            $v^{k+1}, \ldots, v^n$ -- базис $\left( L\left( \R^n \right)  \right) ^{\perp}$
+
+            $e^k = \left( 0, 0, \ldots, 1, \ldots, 0 \right) $ -- $1$ на $k$  месте
+
+            $A:e^k \to v^k;\quad A:X \to L\left( \R^n \right) $ -- гладкое отображение, которое переводит множество меры ноль в множество меры ноль $\lambda\left( L\left( \R^n \right)  \right) $
+
+            
+    \end{enumerate}
+\end{proof}
+
+\section{Измеримые множества}
+
+$\sqsupset \left( X, \mathcal A, \mu \right) $ -- пространство с мерой
+\begin{definition}
+    
+$\sqsupset E\subseteq X\quad f: E \to \overline R$
+
+$f$ называется \underline{измеримой} на множестве  $E\quad \left( f\in S(E) \right) $, если $\forall a\in \R$ измеримы ($\in \mathcal A$):
+\begin{itemize}
+    \item $E\left\{ f< a \right\} $
+    \item $E\left\{ f> a \right\} $
+    \item $E\left\{ f\leqslant  a \right\} $
+    \item $E\left\{ f\geqslant  a \right\} $
+\end{itemize}
+
+Здесь $E\left\{ f<a \right\}  = \left\{ x\in R:\quad f(x) < a \right\} $
+\end{definition}
+
+\begin{note}
+    Если $S(E)\neq 0$, то $E\in \mathcal E$
+
+    $E = E\left\{ f<a \right\} \cup E\left\{ f\geqslant a \right\} $
+\end{note}
+
+\begin{statement}
+    $\sqsupset E\in \mathcal A\quad f: E \to \overline R$. Следующие утверждения равносильны:
+    \begin{enumerate}
+        \item $\forall a\in \R\quad E\left\{ f > a \right\} \in \mathcal A$
+        \item $\forall a\in \R\quad E\left\{ f \leqslant  a \right\} \in \mathcal A$
+        \item $\forall a\in \R\quad E\left\{ f < a \right\} \in \mathcal A$
+        \item $\forall a\in \R\quad E\left\{ f \geqslant  a \right\} \in \mathcal A$
+    \end{enumerate}
+
+    Кстати, эти множества называется множествами Лебега, если вы ещё не наслышаны о нём.
+\end{statement}
+\begin{note}
+    $E$ Неизмеримо  $f(x) \equiv +\infty \quad E\left\{ f<a \right\}  = \O \in \mathcal A\qquad E\left\{ f>a \right\}  = E\not\in \mathcal A$
+\end{note}
+\begin{proof}
+    \begin{itemize}
+        \item []
+        \item [$1\implies 2$] $E\left\{ f\leqslant a \right\}  = E \setminus E\left\{ f>a \right\} $
+        \item [$2\implies 3$] $E\left\{ f<a \right\} = \bigcup\limits_{k=1}^{\infty }E\left\{ f\leqslant a - \frac{1}{k} \right\}  $ 
+        \item [$4\implies 2$] $E\left\{  \right\} $
+    \end{itemize}
+\end{proof}
 
 
 
