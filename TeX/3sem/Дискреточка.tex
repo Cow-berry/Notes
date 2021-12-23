@@ -174,6 +174,14 @@
 \DeclareMathOperator{\Chi}{Chi}
 \DeclareMathOperator{\Def}{Def}
 \DeclareMathOperator{\Good}{Good}
+\newcommand{\declare}[1]{
+    \expandafter\DeclareMathOperator\csname #1\endcsname{#1}
+}
+\declare{basis}
+\declare{rank}
+\let\r\undefined
+\declare{r}
+\declare{Span}
 \begin{document}
     \maketitle
     \chapter{Графы, неалгоритмические свойства}
@@ -1729,6 +1737,202 @@ $\sphericalangle $ взвешенный матроид $\omega: X \to \R$
 
     $O\left( n\log n + nQ \right) \quad Q$ -- время работы оракула независимости
 \end{statement}
+
+
+\section{Структуры связанные с матроидами}
+
+\begin{definition}
+    $\mathcal B\subseteq I$ -- множество баз.
+
+    Они все равномощны.
+\end{definition}
+\begin{theorem}
+    [Слабая теорема о базах]
+$\sphericalangle B_1, B_2\in \mathcal B$
+
+$\sphericalangle x\in B_1\setminus B_2$
+
+$B_1\setminus x\in I$
+
+$\forall x\in B_2\setminus B_1\quad \exists y\in B_2\setminus B_1:\quad B_1\setminus x\cup y\in \mathcal B$
+\end{theorem}
+
+\begin{definition}
+    [цикл, circuts]
+    Зависимые множества минимальные по включению
+\end{definition}
+
+\begin{example}
+    цикл в графовом матроиде это цикл for real
+
+    Цикл в $U_{n,k}$ -- множества  $k-1$
+
+    в  $U_{n,n}$ нет циклов.
+\end{example}
+
+\begin{lemma}
+    $A\not\in I \implies \exists $ цикл $C\subseteq A$
+\end{lemma}
+\begin{proof}
+    возьмём наименьшее по мощности подмножество $A$, оно цикл
+\end{proof}
+
+\begin{note}
+    цикл мощности $1$ называется петлёй.
+\end{note}
+\begin{lemma}
+    [о единственном цикле]
+        $A\in I\quad A\cup x\not\in I \implies \exists !$ цикл $C\subseteq A\cup x$
+\end{lemma}
+\begin{theorem}
+    [Усиленная теорема о базах]
+
+    $\forall y\in B_1\setminus B_2\quad \exists x\in B_2\setminus B_1:\quad B_2\cup y\setminus x\in \mathcal B$
+\end{theorem}
+
+\begin{definition}
+    $A\subseteq X$
+
+    $\basis A = B\quad B\in I\quad B\subseteq A\quad |B|\to \max$
+    
+    $\rank A = \r A$ -- мощность  $B$ 
+
+    $\r(X)$ -- ранг матроида
+\end{definition}
+
+\begin{example}
+    ранг матричного матроида это ранг матрицы
+\end{example}
+
+\begin{theorem}
+    [Субмодулярность ранга]
+
+    $\r\left( A\cup B \right)  + \r\left( A\cap B \right) \leqslant \r A + \r B$
+\end{theorem}
+\begin{proof}
+\begin{figure}[!ht]
+    \centering
+    \incfig{submodrg}
+    \caption{submodrg}
+    \label{fig:submodrg}
+\end{figure}
+\end{proof}
+
+\begin{lemma}
+    [О достройке до базы]
+
+    $S\subseteq T\quad B_S$ -- база $S$
+
+    тогда  $\exists $ База $T:\quad B_T:B_S\subseteq B_T$
+\end{lemma}
+\begin{proof}
+    $Z_{A\cap B}\cap B = Y_B$
+
+    $Y_B \subseteq Z_{A\cup B} \implies Y_B\in I \implies \left| Y_B \right| \leqslant \delta(B)$
+
+    $\left| Z_{A\cup B} \right| = \left| Z_A \right|  + \left| Y_B \right|  - \left| Z_{A\cap B} \right| $ 
+
+    $\r\left( A\cup B \right) \leqslant \r(A) + \r(B) - \r\left( A\cap B \right) $
+\end{proof}
+
+\begin{theorem}
+    [О циклах]
+
+    $C_1 \neq  C_2$ -- два цикла
+
+    $\forall x\in C_1\cap C_2\quad \exists C\subseteq C_1\cup C_2\setminus x\quad C$ -- цикл
+\end{theorem}
+\begin{proof}
+    $C_1\setminus x\quad C_2\setminus x$ -- независимые
+
+    $\r\left( C_1\setminus x \right)  = \left| C_1\setminus x \right| $
+
+    $\r\left( C_2\setminus x \right)  = \left| C_2\setminus x \right| $
+
+    $\r(C_1) = |C_1| - 1\quad \r\left(C_2  \right)  = |C_2| -1 $
+
+    $r\left( C_1\cup C_2 \right) \leqslant r(C_1) + r(C_2) - r\left( C_1\cap C_2 \right)  = |C_1| - 1 + |C_2| - 1 - |C_1\cap C_2| = |C_1\cup C_2| - 2$
+
+    $\left| \left( C_1\cup C_2)\setminus x \right)  \right|  = \left| C_1\cup C_2 \right|   -1 \implies \left( C_1\cup C_2 \right) \setminus x\not\in I$
+\end{proof}
+
+\begin{lemma}
+    [Об единственном цикле]
+
+    $A\in I\quad x\not\in A\quad A\cup x\not\in I \implies \exists !$ цикл $C: C\subseteq A\cup x$
+\end{lemma}
+\begin{proof}
+\end{proof}
+
+\begin{definition}
+    $\Span A = \left<A \right> = \left\{ x|r\left( A\cup x \right)  = r(A) \right\} \cup A$    
+\end{definition}
+
+\begin{example}
+    Матричный матроид  $\Span A = \left\{ x|x\in \mathcal L(A) \right\} $ 
+
+    Графовый матроид $\Span A = A\cup \left\{ uv|u\to v \text{ по } A \right\} $ 
+
+    $U_{n,k}\quad \begin{cases}
+        |A| < k \implies \Span A = A\\
+        |A| \geqslant k \implies \Span A = X
+    \end{cases}$
+
+    $X = \left\{ a, b, c, d, e, f \right\} \quad \left\{ a, b, c \right\} \quad \left\{ c, d, e \right\} $-- базы, такого быть не может.
+
+
+\end{example}
+
+\section{Аксиоматизации матроидов}
+
+$\mathcal B\neq \O $ -- претендует на то, что бы быть множеством баз матроида
+ \begin{enumerate}
+     \item $B_1\subseteq B_2\quad B_1, B_2\in \mathcal B \implies B_1 = B_2$
+     \item $\forall x\in B_1\setminus B_2\quad \exists y\in B_2\setminus B_1\quad B_1\setminus x\cup y\in \mathcal B$
+\end{enumerate}
+
+Тогда утверждается, что $\mathcal B$ множество баз некоторого матроида.
+ \begin{enumerate}
+    \item $I = \left\{ A| \exists B\in \mathcal B: A\subseteq B \right\} $
+    \item Базы построенного матроида это $\mathcal B$
+\end{enumerate}
+
+\begin{enumerate}
+    \item $\O \in I$
+    \item $A\in I, S\subseteq A \implies S\in T$
+
+        $\exists B\in \mathcal B\quad A\subseteq B\quad S\subseteq A\subseteq B \implies S\subseteq B \implies S\in I$
+    \item $P, Q\in I\quad |P| > |Q|\quad \exists x\in P\setminus Q: Q\cup x\in I$ 
+\end{enumerate}
+
+\section{Аксиоматизации циклами}
+
+$\mathcal C\subseteq 2^X$
+
+\begin{enumerate}
+    \item $\O \in \mathcal C$
+    \item $C_1, C_2\in\mathcal C\quad C_1\subseteq C_2 \implies C_1 = C_2$ 
+\item $C_1\neq C_2\quad x\in C_1 \cap C_2 \implies \exists C_3\in \mathcal C:C_3\subseteq C_1\cup C_2\setminus  B\in \mathcal B\quad A\subseteq B\quad S\subseteq A\subseteq B \implies S\subseteq B \implies S\in I$
+\end{enumerate}
+
+\section{Аксиоматизация рангами}
+
+$r: 2^X \to \N \cup \{0\}$
+\begin{enumerate}
+    \item $0\leqslant r(A) \leqslant |A|$
+    \item $A\subseteq B \implies r(A) \leqslant r(B)$
+    \item $r\left( A\cap B \right)  + r\left( A\cup B \right) \leqslant r(A) + r(B)$
+\end{enumerate}
+
+\begin{enumerate}
+    \item $I = \left\{ A| r(A) = |A| \right\} $
+\end{enumerate}
+
+
+
+
+
+
 
 
 \end{document}
