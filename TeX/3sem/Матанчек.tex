@@ -3513,23 +3513,570 @@ $f$ называется \underline{измеримой} на множестве 
     \end{itemize}
 \end{proof}
 
+\begin{statement}
+    $E\subseteq X$, то \[E\in \mathcal A \iff \chi_E \text{ измерима на } X\]
 
+    $\chi_E(x) = \begin{cases}
+        1&x\in E\\
+        0&x\not\in E
+    \end{cases}$
+\end{statement}
 
+\begin{note}
+    $\forall x\in \R\quad X\left\{ \chi_{E_0}<a \right\}  = \begin{cases}
+        X&a>1\\
+        X\setminus E_0&0<a\leqslant 1\\
+        \O &a\leqslant 0\\ 
+    \end{cases}$
 
+    $X\setminus E_0\in\mathcal A \iff E_0\in\mathcal A$
+\end{note}
 
+\begin{statement}
+    $f\in S(E)\quad E_0\in \mathcal A\quad E_0\subseteq E \implies f\in S(E_0)$
+\end{statement}
+\begin{proof}
+    $\forall a\in \R$
+    $E_0\left\{ f<a \right\}  = E\left\{ f<a \right\} \N E_0$
+\end{proof}
 
+\begin{statement}
+    Если  $\forall k\in \N \quad f\in S(E_k), E= \bigcup\limits_{k=1}^{\infty } E_k \implies f\in S(E)$         
+\end{statement}
+\begin{note}
+    $\forall a\in \R\quad $
 
+    \begin{align*}
+        E\left\{ f< a \right\}  = \left( \cup E_k \right) \left\{ f<a \right\} \\
+        &= \bigcup\limits_{k=1}^{\infty }\left( E_k\left\{ f<a \right\}  \right) \in \mathcal A  \\
+    .\end{align*}
+\end{note}
 
+\begin{example}
+    Примеры измеримых:
+    \begin{enumerate}
+        \item $f\equiv C \implies f = C$
 
+            $X\left\{ f<a \right\}  = \begin{cases}
+                X&C<a\\
+                \O &C\geqslant a
+            \end{cases}$
 
+            $f\in S(X)\quad \forall E\in \mathcal A \implies f\in S(E)$
+        \item $\chi_{E_0}\in S(E)\forall E|in \mathcal A$
+    \end{enumerate}
+\end{example}
 
+\begin{statement}
+    Если $d\in S(E)\quad f:E \to \overline \R$, тогда $f^{-1}\left( \left<a,b \right> \right) \in\mathcal A$
+\end{statement}
+\begin{proof}
+    \begin{align*}
+        f^{-1}\left( \left( a,b \right)  \right)  = \left\{ x\in E:\quad f(x)\in \left( a,b \right)  \right\}\\
+        &= E\left\{ f<b \right\} \cap  E\left\{ f > a \right\}  \in\mathcal A\\
+    .\end{align*}
+\end{proof}
 
+\begin{statement}
+    Если $\mathcal A = \mathcal A_n$ -- сигма-алгебра измеримых по Лебегу множеств,  $E\in \mathcal A_n$
 
+    $f\in C\left( E \right) \implies f\in S(E)$
+\end{statement}
+\begin{proof}
+    $E\left\{ f<a \right\}  = f^{-1}\left( [-\infty ,a) \right) $ -- открытое в $E \implies E\left\{ f<a \right\}  = E\cap  O, O$ -- открытое в $\R\quad \in \mathcal A_n$
+\end{proof}
 
+\begin{statement}
+    $\sqsupset \mu$ -- полная, $\mu(e) = 0$
 
+    Тогда  $\forall f: e\to \overline \R \implies f$ измерима на $E$
+\end{statement}
+\begin{proof}
+    $\begin{cases}
+    e\left\{ f<a \right\} \subseteq e\\
+    \mu \text{ -- полная }
+\end{cases} \implies e\left\{ f<a \right\} \in \mathcal A \implies f\in S(e)$
+\end{proof}
 
+\begin{definition}
+    $\sqsupset \left( X, \mathcal A, \mu \right) $ -- пространство с мерой
 
+    $P(x)$ -- утверждение зависящее от  $x\in E$.
 
+    Говорят, что $P(X)$ почти везде на  $E$, если  $\exists e\subseteq E\quad \mu\left(  = 0 \right) $ и $P(X)$ верно для  $\forall x\in E\setminus e$
+\end{definition}
+
+\begin{note}
+    Если $f: E\to \overline \R\quad E\subseteq \tl E\quad \mu\left( \tl E\setminus E \right) =0$
+
+    $\mu$ полная  $f\in S(E)$ и  $\tl f$ -- продолжение на  $\tl E$, тогда  $\tl f\in S(E)$
+\end{note}
+\begin{proof}
+    $\tl f|_{E}$ измерима, $\tl f|_{\tl E\setminus E}$ измерима
+
+    $\implies \tl f$ измерима и на $E \cup \left( \tl E\setminus E \right)  = \tl E$
+\end{proof}
+
+\begin{statement}
+    Если $f$ определена почти везде на  $E$ и измерима на  $D(f)\subseteq E$, то полагают $f$  измеримой и на $E$ (т.к. любое продолжение измеримо)
+\end{statement}
+
+\begin{theorem}
+    $\sqsupset \left( X, \mathcal A, \mu \right) $ -- пространство с мерой
+
+    $\sqsupset \left( f_k \right) _{k=1}^{\infty }\subseteq S(E)$, Тогда
+    \begin{enumerate}
+        \item $\sup_k f_k,\quad \inf_k f_k\quad \in S(E)$
+        \item  $\limsup_{k->\infty } f_k, \liminf_{k\to \infty}f_k\quad \in S(E)$ 
+        \item Если существует поточечный $\lim_{k \to \infty} f_k(x)$ на $E$, то $\lim_{k \to \infty} f_k(x)\in S(E)$ 
+
+            Если $\mu$ -- полная и  $\lim_{k \to \infty} f_k(x)  $ существует п.в. (почти везде), то $\lim_{k \to \infty} f_k(x)\in S(E)$ 
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}
+        \item $a\in \R\quad E\left\{ \sup_k f_k\leqslant a \right\} = \bigcap\limits_{k=1}^{\infty }E\left\{ f_k\leqslant a \right\} \in \mathcal A  $ 
+
+            $E\left\{ \inf_k f_k \geqslant a \right\}  = \cap E\left\{ f_k\geqslant a \right\} \in S(E)$
+        \item $\tl f_k(x) = \sup_{j\geqslant k}\left\{ f_i \right\} \in S(E)$
+
+            $\limsup_{k-\infty }f_k = \inf _k \tl f_k \in S(E)$
+    \end{enumerate}
+\end{proof}
+
+\begin{statement}
+    \begin{enumerate}
+        \item 
+        $f\in S(E) \iff f_+, f_\in S(E)$, где $\begin{cases}
+            f_+(x) = \max\left\{f(x), 0\right\}\\
+            f_-{x} = \max\left\{ -f(x), 0 \right\} 
+        \end{cases}$
+    \item $f(x)\in S(E) \implies |f|\in S(E)$
+    \end{enumerate}
+\end{statement}
+\begin{proof}
+    \begin{enumerate}
+        \item []
+        \item [$\implies $] из  теоремы
+        \item [$\impliedby $] $\forall a\in \R\quad E\left\{ f<a \right\}  = \begin{cases}
+                E\left\{ f_+<a \right\} &a>0\\
+                E\left\{ f_-:-a \right\} &a\leqslant 0\\
+        \end{cases}$
+
+        $f<a \iff  -f > -a$
+    \item [2] $|f| = \max\left\{ f_+, f_- \right\} $
+    \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    $\left( X, \mathcal A, \mu \right) $ -- пространство с мерой
+
+    $f: X\to \R$ называется ступенчатой (или простой), если:
+    \begin{enumerate}
+        \item $f\in S(X)$
+        \item  $f(X)$ конечно
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    $\left( X, \mathcal A, \mu \right) \quad E\in \mathcal A$ 
+
+    $\left\{ E_{\alpha} \right\} _{\alpha\in A}$ называется (измеримым) разбиением множества $E$, если:
+    \begin{enumerate}
+        \item $E = \coprod_{\alpha\in A}E_{\alpha}$
+        \item  $\forall \alpha\in A\quad E_{\alpha}\in\mathcal A$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    $\sqsupset \mathcal B \subseteq 2^X\quad X\in \mathcal B$
+
+    Пусть $\left\{ E_{\alpha} \right\} _{\alpha\in A}$ -- разиение $X$
+
+    Разбиение  $\left\{ E_{\alpha} \right\} _{\alpha\in A}$ \underline{вписано} в $\mathcal B$, если \[\forall \alpha\in A \forall B\in \mathcal B \text{ либо } E\subseteq B \text{ либо } E\cap B = \O \]
+\end{definition}
+
+\begin{example}
+    $X = \left\{ 1, 2, 3 \right\} \quad B = \left\{ X, \left\{ 2 \right\}  \right\} $
+
+    Разбиение $\left\{ \left\{ 2 \right\} , \left\{ 2, 3 \right\}  \right\} $
+\end{example}
+
+\begin{lemma}
+    Пусть  $\mathcal B = \left\{ X = D_0, D_1, \ldots, D_m \right\} \subseteq \mathcal A$. Тогда существует конечное разбиение $X$, вписанное в  $\mathcal B$
+\end{lemma}
+
+\begin{proof}
+    Индукция по $m$.  $\mathcal b_*$ -- вписанное разбиение
+
+     \begin{enumerate}
+         \item [$m = 0$] $\mathcal B = \left\{ X \right\} \quad \mathcal B_* = \left\{ X \right\} $ 
+         \item [$m\to m+1$] $m\in \Z _+$
+
+             $\mathcal B = \left\{ X = D_0, D_1, \ldots, D_{m+1} \right\} $
+
+             $\tl {\mathcal B} = \left\{ X = D_0, D_1, \ldots, D_m \right\} $ по индукционному предположению
+
+            $\exists \tl {\mathcal B_*} = \left\{ E_1, \ldots, E_n \right\} :\quad \forall i = 1 \ldots n\quad \forall j = 0, \ldots, m$
+
+            $D_j\subseteq E_i$ либо $D_j\cap E_j = \O $
+
+            $\mathcal B_* = \left\{ E_1\cap D_{m+1}, E_1\cap D_{m+1}^{C}, \ldots, E_n \cap D_{m+1}, E_n\cap D_{m+1}^C \right\} $
+
+            $\left( E_i\cap E_{m+1}^{\pm} \right) \cap \left( E_j\cap D_{m+1}^{\pm} \right) $ -- не пересекается, если $i\neq j$ или $D_{m+1}^{\pm} = D_{m+1}^{\mp}$-- правые и левые
+
+            $\left( E_1 \cap D_{m+1} \right) \cup \left( E_1\cap D_{m+1}^C \right) \cup  \ldots \cup  = E_1\cup E_2\cup \ldots\cup E_n = X$
+
+            Если $\left( E_i \cap D_{m+1}^{\pm} \right) \bigcap\limits_{1\leqslant j\leqslant m}  D_j\subseteq E_i\cap D_j$ либо $E_i \subseteq D_j$, либо  $E_i \cap D_j = \O $
+    \end{enumerate}     
+\end{proof}
+
+\begin{statement}
+    [критерий ступенчатых функций]
+
+    $\left( X, \mathcal A, \mu \right) $ 
+
+    Следующие утверждения равносильны:
+    \begin{enumerate}
+        \item $f$ -- ступенчатая
+        \item  $\exists $ разбиение $\left\{ E_1, \ldots, E_N \right\} $ пространства $X$ и набор чисел  $b_1, b_2, .., b_N$: \[f(x) = \sum_{j=1}^{N} b_j\chi_{E_j}(x)\]
+        \item $\exists $ набор измеримых множеств $\left\{ D_1, \ldots, D_m \right\} $ в $X$ и чисел  $c_1, \ldots, c_m$: \[f\left(x \right) =\sum_{k=1}^{m} c_k\chi_{D_k}\]
+    \end{enumerate}
+\end{statement}
+\begin{proof}
+     \begin{itemize}
+         \item []
+         \item [$I\implies II$] по условию функция $f$ принимает конечное множество значений. Пусть это  $b_1 < \ldots < b_N$
+
+             $E_k = X\left\{ f = b_k \right\} $ -- измеримо
+
+             $X\left\{ f< b_{k+1} \right\} \cap X\left\{ f > b_{k-1} \right\} $
+
+             $X = \coprod E_k = \sum_{k=1}^{N} b_k \chi{E_k}(x)$
+             ...
+    \end{itemize}
+\end{proof}
+
+\begin{statement}
+    $\sqsupset f, g$ -- ступенчатые функции, $F: \R\to \R$ -- произвольная функция
+
+    Тогда:
+    \begin{enumerate}
+        \item $F\circ f$ -- ступенчатая функция
+        \item $f + g$ -- ступенчатая функция
+    \end{enumerate}
+\end{statement}
+
+\begin{note}
+    В частности $\forall \alpha\in \R\quad \alpha \cdot  f$ -- ступенчатая, $|f|$ -- ступенчатая
+\end{note}
+
+\begin{proof}
+    \begin{enumerate}
+        \item По утверждению $f = \sum_{j=1}^{N} b_j\chi_{E_i}$, где $E_1, \ldots, E_N$ -- разбиение
+
+    $F\circ f = \sum_{j=1}^{N} F\circ (b_j)\cdot \chi_{E_j}(x)$ -- стуенчатая
+\item $f = \sum_{j=1}^{N} b_j\chi_{E_j}\quad g = \sum_{k=1}^{K} \tl b_k \chi_{\tl E_k}$ 
+
+    Пусть $\left\{ D_1, \ldots, D_M \right\} $ -- разбиение $X$, вписанное в  $\left\{ E_1, \ldots, E_N, \tl E_1, \ldots, \tl E_k, X \right\} $, но не вписанное в $\left\{ E_1, .., E_N, \tl E_1, \ldots, \tl E_k \right\} \implies  \chi_{E_j}, \chi_{\tl E_j}$ постоянна на $D_m\quad \forall j, m$ 
+
+    \begin{align*}
+        f = \sum_{j=1}^{N} b_j\chi_{E_j} = \sum_{j=1}^{N} \sum_{m: D_m\subseteq E_j} b_j\chi_{D_m} \\
+        &= \sum_{m=1}^{M} C_m\chi_{D_m} \\
+    .\end{align*}
+
+    Для $g = \sum_{m=1}^{M} \tl C_k \chi_{D_m} \implies f + g = \sum_{m=1}^{M} \left( C_m + \tl C_m \right) \chi_{D_m}$
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    [теорема об аппроксимации измеримых функций]
+
+    $\sqsupset \left( X, \mathcal A, \mu \right) $-- любое пространство с мерой
+
+    $\sqsupset f\in S(X), f \geqslant 0$ (всюду на $X$)
+
+    Тогда  $\exists $ возрастающая последовательность неотрицательных ступенчатых $\left\{ f_i \right\} _{i=1}^{\infty }$ 
+
+    $f_i(x) \to f(x)$ поточечно. А если $f$ ограничена (на $X$), то  $f_i \rightrightarrows f$ на  $X$
+\end{theorem}
+\begin{corollary}
+    Если $f\in S(X)$, то  $f$-- последовательность ступенчатых  $\left\{ f_i \right\} $
+
+    $\forall x\in X\quad \forall j\in \N \quad \left| f_i(x) \right| \leqslant \left| f_{i+1}(x) \right| \leqslant \left| f(x) \right| $
+
+    и $f_j(x) \to f(x)$, а если $f$ ограничено, то  $f_i \rightrightarrows f$
+\end{corollary}
+\begin{proof}
+    [Доказательство следствия]
+
+    Для $f_+, f_-\quad \exists $ последовательности ступенчатых функций $\left\{ \left( f_+ \right)_j \right\} \quad f_{\pm_j}M=f_{\pm_{j +1}}$
+    ..
+\end{proof}
+\begin{proof}
+    [теоремы]
+\begin{figure}[!ht]
+    \centering
+    \incfig{approxmeasure}
+    \caption{approxmeasure}
+    \label{fig:approxmeasure}
+\end{figure}
+$\forall n\in \N \quad \forall k = 0  .. n^2-1\quad \Delta_k = \left[ \frac{k}{n}, \frac{k+1}{n} \right) \quad \Delta_{n^2} = [n, +\infty )$
+
+$\left\{ \Delta_0, \ldots, \Delta_{n^2} \right\} $ -- разбиение $[0, +\infty ]$
+
+$E_k = f^{-1}\left( \Delta_k \right) \quad \left\{ E_k \right\} _{k=0}^{n^2}$ -- разбиение $X$
+
+$g_n(x) = \sum_{k=0}^{n^2} \frac{k}{n}\chi_{E_k}(x)\quad \sphericalangle x\in X \implies k = 1 : n^2: x\in E_k$ 
+
+$f(x) \in \Delta_k \implies \frac{k}{n} <f(x)\quad g_n(x) = \frac{k}{n}$ 
+
+Если $k < n^2$, то $f(x) , \frac{k+1}{n} = g_n(x) + \frac{1}{n}$ 
+
+$g_n(x)$ -- ступенчатая. $f_n(x) = \max\left\{ g_1(x), \ldots, g_n\left( x \right)  \right\} $ (упражнение проверить, что $f_n$ ступенчатая. Делается аналогично сумме)
+
+$\forall n\in \N \quad g_n(x) \leqslant f(x)$. Перейдём к максимуму $f_n(x)\leqslant f(x)\quad f_n(x)\leqslant f_{n+1}(x)$
+
+Если $f(x) = +\infty \implies \forall n\in \N \quad f(x) \in \Delta_{n^2} \implies x\in E_{n^2}\quad g_n(x) n;\quad f_n(x) = n \to +\infty , n\to +\infty  = f(x) $
+
+Если $f(x) < + \infty \implies $ НСНН $n\quad f\left( x \right) \leqslant n \implies x\in E_{kn}$ для $k < n^2\implies $ Для всех до статистически больших $n$ \[_n(x) \leqslant f(x) \leqslant g_n(x) + \frac{1}{n} \leqslant f_n(x) + \frac{1}{n}\] 
+
+$\forall n\in \N \quad f_n(x) \leqslant f(x) \leqslant f_n(x) + \frac{1}{n}$ 
+
+$\left| f(x) - f_n(x) \right|  = f(x) - f_n(x) \leqslant f_n(x) + \frac{1}{n} -f_n(x) \leqslant \frac{1}{n} \to 0, n\to \infty $ 
+
+Если $f$ ограничено на  $X$, то утверждение для больших $n$ не зависит от  $X$
+
+$\sup_{x\in X}\left| f(x) - f_n(x) \right| \leqslant \frac{1}{n}$ начиная с некоторого номера
+\end{proof}
+
+\begin{corollary}
+    $\left( X, \mathcal A, \mu \right) $
+
+    $f, g\in S(X)\quad F\in C\left( \R \to \R \right) $ -- возрастающая . Тогда:
+    \begin{enumerate}
+        \item $F\circ f\in S(E)$
+        \item Если  $f\pm g, f\cdot g, \frac{f}{g}$ определена на $E$, то соответствующая функция также измерима на  $E$
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    \begin{enumerate}
+        \item $\exists $ последовательность ступенчатых $f_i(x) \to f(x)$ поточечно
+
+            $F\left( f_j(x) \right) \to F\left( f(x) \right) $, если $f(x) < +\infty $. Продолжим $F$ на $\overline \R$: $F\left( \pm \infty  \right)  = \lim_{x \to \pm \infty } F(x) \implies F$ непрерывна из $\overline \R \to \overline \R$
+        \item $f_j \to f\quad g_j \to g$
+
+            $f_j \pm g_j \to f\pm g$ по теореме об арифметических действиях над пределами
+     \end{enumerate}
+\end{proof}
+
+\section{Интеграл по мере -- определение и простейшие свойства}
+
+$\sqsupset \left( X, \mathcal A, \mu \right) $ -- пространство с мерой
+
+$E\subseteq \mathcal A$
+
+\begin{enumerate}
+    \item $f$ -- ступенчатая неторицательная функция.  $f(x) = \sum_{k=1}^{k} C_k\chi_k$, где $\left\{ E_1, \ldots, E_k \right\} $ -- разбиение $X$
+
+        $\int_E fd\mu = \int_E f(x)d\mu(x) = \sum_{k=1}^{K} C_k \mu(E_k \cap E)$ 
+    \item $f\in S_+(E)$ -- неотрицательная измеримая функция.
+
+        $\int_E fd\mu = \sup\left\{ \int_Egd\mu: g \text{ -- неотр, ступенча и } g(x) \leqslant f(x) \forall x\in E \right\} $ 
+    \item $f\in S(E)\quad (f:E \to \R)$
+
+        $\int _E fd\mu = \int_E f_+d\mu - \int_Ef_-d\mu$ -- при условии, что сумма в правой части определена
+
+        Если оба интеграла справа конечны, то и результат конечен (и наоборот). Такие функции называются суммируемыми.
+
+        $\mathcal L(\mu, E)$ -- набор суммируемых функция по мере  $\mu$ на множестве  $E$ функций 
+    \item Если $f=u+iv\quad u = \Re f\quad v = \Im f$
+
+         $f$ измерима  $\iff  u, v$ измеримы
+
+         $\int_E fd\mu = \int_E ud\mu + i \int_E vd\mu$, если $u, v\in \mathcal L(E, \mu)$
+\end{enumerate}
+
+\begin{statement}
+    Определение интеграла корректно, интеграл монотонно зависит от функции
+\end{statement}
+\begin{proof}
+    \begin{enumerate}
+        \item Если $f = \sum_{k=1}^{K} C_k\chi_{E_k} = \sum_{j=1}^{J} b_j\chi_{D_j}$. $\left\{ E_k\cap D_j \right\}_{k,j} $ -- разбиение $X$, допустимое для  $f$ ( $f|_{E_k} = C_k\quad f|_{D_j} = b_j\quad f_{E_k\cap D_j = C_k = b_j}$)
+
+            $\int_Efd\mu = \sum_{k=1}^{K} C_k\mu\left( E_k\cap E \right)  = \sum_{k=1}^{K} C_k \sum_{j=1}^{J} \mu\left( E_k\cap E\cap D_j \right)  = \sum_{k,j} = C_k\mu\left( E_k\cap E\cap D_j \right) $
+
+            $\sum_{j=1}^{J} b_j\mu\left( D_j\cap E \right)  = \sum_{j=1}^{J} b_j \sum_{k=1}^{K} \mu\left( D_j\cap E\cap E_k \right)  = \sum_{k,j}b_j \mu\left( E_k\cap E\cap D_j \right) $ 
+
+            $c_k = f|_{E_k\cap E\cap D_j} = b_j \implies c_k = b_j$
+
+            Если $f, g$ -- ступенчатые нетрицательные и  $\forall x\in E\quad f(x)\leqslant g(x) \implies \int_Edd\mu \leqslant \int_Egd\mu$
+
+            Существует общее допустимое разбиение для $f$ и $g$, т.о \[f = \sum_{k=1}^{K} C_k\chi_{E_k}\qquad g = \sum_{k=1}^{K} b_k\chi_{E_k}\] 
+            $x\in E_k \implies f(x) = c_k \leqslant  g(x) = b_k$
+
+            $\int_E fd\mu = \sum_{k=1}^{K} c_k\mu\left( E_k\cap E \right) \leqslant \sum_{k=1}^{K} b_k\mu\left( E_k\cap E \right)  = \int_Egd\mu$ 
+
+            Значит интеграл из этого пункта обладает свойством конечной аддитивности. 
+        \item Если $f\in S_+\quad f$ -- ступенчатая, равны ли интегралы в смыслах первого и второго пунктов
+
+            Если  $g\in S_+$ ступенчатая и $g\leqslant f$ на $E \implies $ второе больше первого ..
+        \item Если $f\in S_+(E)$
+
+             $f_+ = f\quad f_- = 0\quad \int_E f_- $
+
+              $\int_E f = \int_E f_+ - \int_E f_- = \int_Ef_+$ -- во смысле второго пункта. 
+
+         Монотонность интеграла из пункта 3.  $f\leqslant g$
+
+         $f_+ = \max\left( f, 0 \right) \leqslant \max\left( g, 0 \right)  = g_+$
+
+         $f_- = \max\left( -f, 0 \right) \geqslant \max\left( -g, 0 \right)  = g_-$
+
+         $\int_Ef_+ \leqslant \int_Eg\quad \int_Ef_-$
+    \end{enumerate}
+\end{proof}
+
+\begin{example}
+    $f_D = \chi_{\Q}$
+
+    \begin{enumerate}
+        \item $\int_{[0,1]}f_Dd\lambda_1 = 1\cdot \lambda\left( Q\cap [0,1] \right)  = 0$
+        \item $\int_{[0,1]}f_D = 1\cdot \delta_0\left( Q\cap [0,1] \right)  = 1$
+    \end{enumerate}
+\end{example}
+
+\begin{statement}
+    $\sqsupset e_0\subseteq E\quad E_0, E\in \mathcal A\quad f_{E_0} = 0$ Тогда \[\int_E fd\mu = \int_{E\setminus E_0} fd\mu \]
+
+    Существуют или нет одновременно. В случае существования равны.
+\end{statement}
+\begin{proof}
+    $f = \sum_{k=1}^{K} c_k\chi_{E_k} = \sum_{k=1}^{K} c_k \chi_{E_k\cap (X\setminus E_0)} + o \cdot \chi_{E_0}$ 
+
+    $\int_Ef = \sum_{k=1}^{K} c_k\cdot \mu\left( E_k\cap \left( X\setminus E_0 \right) \cap E \right) + 0 = \sum_{k=1}^{K} c_k\mu\left( E_k\cap \left( X\setminus E_0 \cap \left( E\setminus E_0 \right)  \right)  \right) = \int_{E\setminus E_0}f$ 
+\end{proof}
+
+\begin{note}
+    Если $f|E = 0\quad f\in S(E) \implies \int_Efd\mu = 0$
+\end{note}
+
+\begin{corollary}
+    $\int_E f = \int_X f \cdot  \chi_{E}\quad \forall f\in S(E)$
+\end{corollary}
+
+\begin{corollary}
+    [Монотонность интеграла неорицательной функции от множества.]
+
+    Если $f\in S_+(X)\quad E_0\subseteq E$
+
+$E_0, E\in \mathcal A \implies \int_{E_0}f \leqslant \int _E f$
+\end{corollary}
+\begin{proof}
+    $\int_{E_0}f = \int_X f \cdot  \chi_{E_0} \leqslant \int_Xf\cdot \chi_E = \int_Ef$
+\end{proof}
+
+\begin{theorem}
+    [Леви]
+
+    $\sqsupset \left( X, \mathcal A, \mu \right)$ -- пространство с мерой. $E\in \mathcal A\quad \left\{ f_j \right\} _j\in S(E)\quad f: E \to \overline \R$
+
+    $\forall x\in E\forall j\in \N \quad 0\leqslant f_j(x) \leqslant f_{j+1}(x)\quad f = \lim_{j \to \infty} f_j$
+
+    Тогда \[\int fd\mu = \lim_{E} \int f_jd\mu\]
+
+    $\left( f_j\geqslant 0\quad f_i\uparrow f \implies \int_E \lim fd\mu = \lim\int_Efd\mu  \right) $
+\end{theorem}
+\begin{proof}
+    $\sqsupset q\in \left( 0,1 \right) \quad \sphericalangle \forall $ ступенч $g:\quad 0\leqslant g\leqslant 1$ на К
+
+    $\forall j\in \N \quad E_j = \left\{ x\in E: \quad  f_j(x) \geqslant q\cdot g(x) \right\}\quad \bigcup\limits_{j=1}^{\infty }E_j = E?  $ 
+
+    $\sphericalangle \forall x\in E\quad f(x) = 0 \implies f_j(x) = 0 \implies x\in E \forall j\in \N $ 
+
+    Если $f(x)>0 \implies qg(x) < f(x)$. Т.к. $f_j\to f$ поточечно, то НСНН $j_0\quad f_j(x)> <..> $
+\end{proof}
+
+\begin{statement}
+    $\forall f, g\in S(E)$ \[\int_E f + g = \int_E f + \int_E g\], если определена правая часть
+
+    Для ступенчатых -- как выше с помощью общего разбиения
+
+    Если $f, g\in S_+$, по теореме об аппроксимации
+
+    $\exists \left\{f_j\right\} _{j=1}^{\infty}, \left\{ g_j \right\} _{j=1}^{\infty }$ ступенч, $ \begin{cases}
+        0\leqslant f_j \leqslant  f_{j+1} \leqslant  f\\
+        0\leqslant g_j \leqslant g_{j+1}\leqslant  g
+    \end{cases}$ 
+
+    $\begin{cases}
+        f_j\to f\\
+        g_j\to g
+    \end{cases}\implies f_j + g_j \to f + g$
+
+    $\int_E\left( f + g \right) d\mu = \int_E \lim_{j \to \infty} \left( f_j + g_j \right)  = \lim_{j \to \infty} \int_E\left( f_j + g_j \right)  = \lim_{j \to \infty} \left( \int_E f_jd\mu + \int_Eg_jd\mu \right)  = \int_Ef + \int_E g$
+
+    $f, g\in S(E)\quad  f+g = h$
+
+     $\int_E h_+ - \int_E h_- \ov ? = \int_E f_+ - \int_Ef_- + \int_Eg_+ - \int_Eg_-$
+
+     $\int_E h_+ + \int_E f_- + \int_E g_- = \int_E h_- + \int_E f_+ + \int_E g_+ $
+
+      $h_+ + f_- + g_- = h_- + f_+ + g_+$
+
+     $(h_+ - h_-) = h = f + g = \left( f_+ - f_- \right) + \left( g_+ - g_- \right) $
+\end{statement}
+
+\begin{note}
+    Если $\int_E fd\mu$ -- конечен (функция суммируема), то $f$ конечно почти везде на  $E$
+\end{note}
+\begin{proof}
+    Достаточно доказать для $f\in S_+$
+
+    $E_{\infty } = E\left\{ f = +\infty  \right\} $
+
+    $\forall N\quad N \cdot  \mu(E_{\infty }) = \int_{E_{\infty }}f \leqslant \int_E fd\mu <+\infty  \implies \mu\left( E_{\infty } \right)  = 0$
+\end{proof}
+
+\begin{statement}
+    $\forall C\in \C\quad \forall f\in \mathcal L(E)\quad f:E \to \C$ или $f:E \to \overline \R$ \[\int_E Cfd\mu = C\int_Ed\mu \]
+\end{statement}
+\begin{proof}
+    \begin{enumerate}
+        \item $C>0$ -- для частей суммируемых функций можем вынести положительное $C$
+        \item  $C = -1$  $(-f)_+ = f_-\quad (-f)_- = f_+$
+        \item  $C = i\quad if = -v + iu\quad \int_E if  = \int_E -v + i\int u = i\left( i\int_E v + \int u \right)  = i\int_E f$
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    [Нравенство Чебышёва]
+
+    $f\in \mathcal L\left( E, \mu \right) \quad \forall t>0$ \[\mu\left( E\left\{ |F|\geqslant t \right\}  \right) \leqslant \frac{1}{t} \int_E |f|d\mu \]
+\end{theorem}
+
+\begin{note}
+    Если $f\in S(E)\quad g\in \mathcal L\left( E, \mu \right) \quad |f| \leqslant g \implies f\in\mathcal L\left( E, \mu \right) $
+
+\end{note}
+\begin{proof}
+    $f_{\pm} <+|f| \leqslant g \implies \int_Ef_{\pm} \leqslant \int_E g <+\infty  \implies f\in \mathcal L\left( E, \mu \right) $
+\end{proof}
+
+\begin{note}
+    $f\in \mathcal L\left( E, \mu \right) \iff |F|\in \mathcal l\left( E, \mu \right) \iff \int_E f_{\pm} <+\infty $
+\end{note}
+\begin{proof}
+    \begin{itemize}
+        \item []
+        \item [$\impliedby $] Из предыдущего замечания
+        \item [$\implies $ ] $\int_E fd\mu = \int_Ef_+ + \int_Ef_-d\mu < + \infty $
+    \end{itemize}
+\end{proof}
+
+\begin{problem}
+    $\mu$ -- считающая мера на  $\N $
+\end{problem}
 
 
 
